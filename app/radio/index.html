@@ -27,7 +27,7 @@
     grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
     margin:1em auto;
 } 
-div.links a{
+div.links a, a.btn{
   background-color: #369;
   color: #fff;
   padding:0.3em;
@@ -181,17 +181,14 @@ document.addEventListener("DOMContentLoaded",function(){
 
 <div id="app" class="wrap">
   <h3>#RADIO</h3> 
-<div class="col links">
-  <a href="app/meteo">Meteo</a>
-  
-</div>  
-  
+
   
   
     <p>cartoonTunnel</p> 
     <p><b>[<span id="name"></span>, <span id="rsid"></span>dB]</b></p> 
     <div id="info"></div> 
     <div class="col">
+      <a href="../../" class="btn">dom</a>
         <button onClick='refreshInfo(0);' class="navy">Info()</button> 
         <button onClick='radioFETCH("v=m");refreshInfo(2);'class="gitt">Vol --</button> 
             <span id="vol">0</span>  
