@@ -23,7 +23,17 @@
 }  
 .col {
     grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
-}   
+} 
+div.links a{
+  background-color: #246;
+  color: #fff;
+  padding:0.3em;
+  margin:0.5em;
+  border: 1px solid #002;
+  border-radius: 0.8em;
+  cursor: pointer;
+  box-shadow:3px 3px 3px 3px gray inset;
+}  
 button {
   padding: 10px 20px;
   border: 1px solid #ddd;
@@ -67,6 +77,9 @@ small {font-size:0.6em;}
     margin: 0.5em auto;  
   }
   div.eq button {font-size:0.8em;padding: 0.5em;background:#e06;}
+  
+
+  
 </style>
 
 <script>
@@ -157,6 +170,13 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 <div id="app" class="wrap">
+  
+<div class="col links">
+  <a href="app/meteo">Meteo</a>
+</div>  
+  
+  
+  
     <p>cartoonTunnel</p> 
     <p><b>[<span id="name"></span>, <span id="rsid"></span>dB]</b></p> 
     <div id="info"></div> 
