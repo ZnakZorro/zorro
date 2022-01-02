@@ -1,7 +1,7 @@
 {
-	"name": "#DOM",
-	"short_name": "DOM",
-	"description": "DOM",
+	"name": "gitDOM",
+	"short_name": "gitDOM",
+	"description": "gitDOM",
 	"start_url": "index.html",
 	"display": "standalone",
 
