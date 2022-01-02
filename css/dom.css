@@ -15,7 +15,7 @@
     grid-template-columns: repeat(auto-fit,minmax(120px,1fr));
     margin:1em auto;
 } 
-div.links a , a.btn {
+div.links a , .btn, a.btn {
     background-color: #369;
     color: #fff;
     padding: 0.5em 0.6em;
