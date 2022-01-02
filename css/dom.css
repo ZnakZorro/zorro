@@ -1,0 +1,14 @@
+
+
+div.links a {
+    background-color: #369;
+    color: #fff;
+    padding: 0.5em 0.6em;
+    margin: 0.3em;
+    /* border: 1px solid #002; */
+    border-radius: 0.66em;
+    cursor: pointer;
+    /* box-shadow: 3px 3px 3px 3px gray inset; */
+    text-decoration: none;
+    display: inline-block;
+}
