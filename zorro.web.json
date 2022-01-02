@@ -10,14 +10,14 @@
 	"icons": [
 		{
 			"src": "./img/dom.webp",
-			"sizes": "507x512",
+			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
 			"src": "./img/dom.webp",
-			"sizes": "507x512",
+			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	]
