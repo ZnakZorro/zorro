@@ -59,7 +59,7 @@ const opisYRNO=(obj)=>{
 
 
   let html = '<!--pogoda-->';
-  html += '<div class="grid fon-10">'+dataType+', '+updated_at+', '+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</div>';
+  html += '<div class="grid fon-10">'+dataType+', '+updated_at+'<br />'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</div>';
   html += '<div class="grid fon-9">';
    
     html += '<span>'+temp01+'&degC<br />'+rain01+'mm<br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</span>';
