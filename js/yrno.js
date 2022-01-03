@@ -31,15 +31,22 @@ const opisYRNO=(obj)=>{
   let next01 = data[0].data.next_1_hours;
   let next06 = data[0].data.next_6_hours;
   let next12 = data[0].data.next_12_hours;
+  let rain01 = data[0].data.next_1_hours.details.precipitation_amount ;
+  let rain06 = data[0].data.next_6_hours.details.precipitation_amount;
+  //let rain12 = "0";
+  //if (data[0].data.next_12_hours.details) rain12 = data[0].data.next_12_hours.details.precipitation_amount;
+  let rain12 = (data[0].data.next_12_hours.details) ? data[0].data.next_12_hours.details.precipitation_amount : "0";
+
+  
   console.log(teraz);
   console.log(next01.summary.symbol_code);
   console.log(next06);
   console.log(next12);
   let html = '<!--pogoda-->';
   html += '<div class="grid">';
-    html += '<span>'+symbolTR(next01.summary.symbol_code)+'</span>';
-    html += '<span>'+symbolTR(next06.summary.symbol_code)+'</span>';
-    html += '<span>'+symbolTR(next12.summary.symbol_code)+'</span>';
+    html += '<span>['+rain01+'mm]<br />'+symbolTR(next01.summary.symbol_code)+'</span>';
+    html += '<span>['+rain06+'mm]<br />'+symbolTR(next06.summary.symbol_code)+'</span>';
+    html += '<span>['+rain12+'mm]<br />'+symbolTR(next12.summary.symbol_code)+'</span>';
   html += '</div>';
   container.insertAdjacentHTML('afterbegin', html);
   //newDiv.innerHTML += ;
