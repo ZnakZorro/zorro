@@ -1,5 +1,6 @@
-let dataType = "compact"; //  compact  complete   classic
-let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
+let _city = "Szczecin-Dąbie";
+let _dataType = "compact"; //  compact  complete   classic
+let _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 //let yrnoPL={};
 
 const getYRNO=(url)=>{  
@@ -29,11 +30,12 @@ const zapiszYRNO=(obj)=>{
   let json = JSON.stringify(obj.properties.timeseries);
   //console.log(updated_at)
   //console.log(data)
+      localStorage.setItem("yrnoCITY", _city);
       localStorage.setItem("yrnoTIME", timeNow);
       localStorage.setItem("yrnoDATA", json);
        
 }
-getYRNO(urlYRNO);
+getYRNO(_urlYRNO);
 
 /*
     fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
@@ -43,7 +45,7 @@ getYRNO(urlYRNO);
     })
     .then(obj => {
         yrnoPL = obj;
-        getYRNO(urlYRNO);
+        getYRNO(_urlYRNO);
         //console.log(yrnoPL);
     })
     .catch(e => {console.log(e)});
