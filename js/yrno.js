@@ -5,7 +5,7 @@ console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
 //let gfxSVG = "https://api.met.no/images/weathericons/svg/clearsky_day.svg";
 let gfxSVG = "https://api.met.no/images/weathericons/svg/";
 
-let dataType = "complete"; //  compact  complete   classic
+let dataType = "compact"; //  compact  complete   classic
 //let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
@@ -55,8 +55,10 @@ const opisYRNO=(obj)=>{
   //if (data[0].data.next_12_hours.details) rain12 = data[0].data.next_12_hours.details.precipitation_amount;
   let rain01 = (data[0].data.next_1_hours.details?.precipitation_amount)  ? data[0].data.next_1_hours.details.precipitation_amount : "0";
   let rain06 = (data[0].data.next_6_hours.details?.precipitation_amount)  ? data[0].data.next_6_hours.details.precipitation_amount : "0";
-  //let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) ? data[0].data.next_12_hours.details.precipitation_amount : "0";
-  let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) || "0";
+  let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) ? data[0].data.next_12_hours.details.precipitation_amount : "0";
+  //let rain01 = (data[0].data.next_01_hours.details?.precipitation_amount) || "?";
+  //let rain06 = (data[0].data.next_06_hours.details?.precipitation_amount) || "?";
+  //let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) || "?";
    
   
   let temp01 = data[1].data.instant.details.air_temperature || teraz.air_temperature;
