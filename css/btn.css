@@ -13,8 +13,8 @@ div.links a , .btn, a.btn {
 
 button {
   padding: 10px 20px;
-  border: 1px solid #ddd;
-  background-color: #50bfff;
+  /*border: 1px solid #ddd;*/
+  background-color: #369;
   color: #fff;
   margin:0.2em;
   border-radius: 0.8em;
