@@ -1,5 +1,11 @@
-console.log("yrno.js 3");
-let dataType = "compact"; //  compact  complete
+console.log("yrno.js");
+console.log("https://api.met.no/weatherapi/locationforecast/2.0/");
+console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
+
+//let gfxSVG = "https://api.met.no/images/weathericons/svg/clearsky_day.svg";
+let gfxSVG = "https://api.met.no/images/weathericons/svg/";
+
+let dataType = "complete"; //  compact  complete   classic
 //let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
@@ -21,6 +27,10 @@ const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 const symbolTR=(tx)=>{
   tx = tx.split("_")[0];
   return (yrnoPL[tx].pl);
+}
+const ronda=(tx)=>{
+  let int = parseInt(tx);
+  return int.toString();
 }
 
 const opisYRNO=(obj)=>{
@@ -49,22 +59,26 @@ const opisYRNO=(obj)=>{
   let temp06 = data[6].data.instant.details.air_temperature || teraz.air_temperature;
   let temp12 = data[12].data.instant.details.air_temperature || teraz.air_temperature;
 
-  let press01 = data[1].data.instant.details.air_pressure_at_sea_level;
-  let press06 = data[6].data.instant.details.air_pressure_at_sea_level;
-  let press12 = data[12].data.instant.details.air_pressure_at_sea_level;
+  let press01 = ronda(data[1].data.instant.details.air_pressure_at_sea_level);
+  let press06 = ronda(data[6].data.instant.details.air_pressure_at_sea_level);
+  let press12 = ronda(data[12].data.instant.details.air_pressure_at_sea_level);
   
   let wind01 = data[1].data.instant.details.wind_speed;
   let wind06 = data[6].data.instant.details.wind_speed;
   let wind12 = data[12].data.instant.details.wind_speed;
-
+  
+  let icon_01 = '<img src="'+gfxSVG+next01.summary.symbol_code+'.svg" />';
+  let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
+  let icon_12 = '<img src="'+gfxSVG+next12.summary.symbol_code+'.svg" />';
 
   let html = '<!--pogoda-->';
-  html += '<div class="grid fon-10">'+dataType+', '+updated_at+'<br />'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</div>';
-  html += '<div class="grid fon-9">';
+  html += '<div class="grid pogoda-1"><small>'+dataType+', '+updated_at+'</small></div>';
+  html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
+  html += '<div class="grid pogoda pogoda-3">';
    
-    html += '<span>'+temp01+'&degC<br />'+rain01+'mm<br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</span>';
-    html += '<span>'+temp06+'&degC<br />'+rain06+'mm<br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</span>';
-    html += '<span>'+temp12+'&degC<br />'+rain12+'mm<br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</span>';
+    html += '<div>'+icon_01+'<span>'+temp01+'&degC</span><br /><span>'+rain01+'mm</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
+    html += '<div>'+icon_06+'<span>'+temp06+'&degC</span><br /><span>'+rain06+'mm</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
+    html += '<div>'+icon_12+'<span>'+temp12+'&degC</span><br /><span>'+rain12+'mm</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
   container.insertAdjacentHTML('afterbegin', html);
