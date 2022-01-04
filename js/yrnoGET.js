@@ -3,7 +3,7 @@ let _dataType = "compact"; //  compact  complete   classic
 let _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 //let yrnoPL={};
 
-const getYRNO=(url)=>{  
+const _getYRNO=(url)=>{  
   fetch(url)
     .then(function(response) {
           if (!response.ok) {throw Error(response.statusText);}
@@ -35,7 +35,7 @@ const zapiszYRNO=(obj)=>{
       localStorage.setItem("yrnoDATA", json);
        
 }
-getYRNO(_urlYRNO);
+_getYRNO(_urlYRNO);
 
 /*
     fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
@@ -45,7 +45,7 @@ getYRNO(_urlYRNO);
     })
     .then(obj => {
         yrnoPL = obj;
-        getYRNO(_urlYRNO);
+        _getYRNO(_urlYRNO);
         //console.log(yrnoPL);
     })
     .catch(e => {console.log(e)});
