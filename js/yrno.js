@@ -37,12 +37,23 @@ const tosm=(tx,miano="&deg;C")=>{
   let arr = flo.toFixed(1).split(".")
   return arr[0]+"<small>."+arr[1]+miano+'</small>';
 }
+const dateFrom=(updated_at)=>{
+    let newFrom  = (new Date()).getTime();
+    let timeFrom = (new Date(updated_at)).getTime();
+    console.log(newFrom,timeFrom);
+    let delta = newFrom - timeFrom;
+    let minutes = Math.round(delta/(60*1000));
+    let hours   = "00";
+    return hours+":"+minutes;
+}
 const opisYRNO=(obj)=>{
   let container = document.querySelector("div.container");
   console.log(obj);
   let updated_at = obj.properties.meta.updated_at;
-  updated_at = (new Date(updated_at)).toLocaleString();
-  console.log(updated_at);
+  let timeFrom = dateFrom(updated_at);
+  
+  //updated_at = (new Date(updated_at)).toLocaleString();
+  //console.log(updated_at);
   let data = obj.properties.timeseries;
   console.log(data);
   let teraz = data[0].data.instant.details;
@@ -82,7 +93,7 @@ const opisYRNO=(obj)=>{
   //console.log(temp12,tosm(temp12));
   
   let html = '<!--pogoda-->';
-  html += '<div class="grid pogoda-1"><small>'+dataType+', '+updated_at+'</small></div>';
+  html += '<div class="grid pogoda-1">'+timeFrom+' <small>'+dataType+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
