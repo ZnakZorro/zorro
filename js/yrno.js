@@ -32,7 +32,11 @@ const ronda=(tx)=>{
   let int = parseInt(tx);
   return int.toString();
 }
-
+const tosm=(tx,miano="&deg;C")=>{
+  let flo = parseFloat(tx);
+  let arr = flo.toFixed(1).split(".")
+  return arr[0]+"<small>."+arr[1]+miano+'</small>';
+}
 const opisYRNO=(obj)=>{
   let container = document.querySelector("div.container");
   console.log(obj);
@@ -71,14 +75,18 @@ const opisYRNO=(obj)=>{
   let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
   let icon_12 = '<img src="'+gfxSVG+next12.summary.symbol_code+'.svg" />';
 
+  //console.log(temp01,tosm(temp01));
+  //console.log(temp06,tosm(temp06));
+  //console.log(temp12,tosm(temp12));
+  
   let html = '<!--pogoda-->';
   html += '<div class="grid pogoda-1"><small>'+dataType+', '+updated_at+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
-    html += '<div>'+icon_01+'<span>'+temp01+'&degC</span><br /><span>'+rain01+'mm</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
-    html += '<div>'+icon_06+'<span>'+temp06+'&degC</span><br /><span>'+rain06+'mm</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
-    html += '<div>'+icon_12+'<span>'+temp12+'&degC</span><br /><span>'+rain12+'mm</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
+    html += '<div>'+icon_01+'<span>'+tosm(temp01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
+    html += '<div>'+icon_06+'<span>'+tosm(temp06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
+    html += '<div>'+icon_12+'<span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
   container.insertAdjacentHTML('afterbegin', html);
