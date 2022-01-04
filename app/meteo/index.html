@@ -27,8 +27,8 @@
     background: #2f2f30;
     color: #eee; 
   }
-  button {
-      margin: 0.25em;
+  button, .btn {
+    margin: 0.25em;
     min-width: 6.0em;
     padding: 0.33em;
     border-radius: 0.5em;
@@ -578,7 +578,7 @@ Meteogram.prototype.getChartOptions = function () {
             endOnTick: false,
             minPadding: 0,
             maxPadding: 0,
-            offset: 30,
+            offset: 10,
             showLastLabel: true,
             labels: {
                 format: '{value:%H}'
