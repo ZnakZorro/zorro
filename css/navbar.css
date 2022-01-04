@@ -51,11 +51,11 @@ a {
 }
 
 .nav-item {
-    margin-left: 5rem;
+    margin-left: 2rem;
 }
 
 .nav-link{
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 300;
     color: #475569;
 }
@@ -90,7 +90,7 @@ a {
     }
 
     .nav-item {
-        margin: 2.5rem 0;
+        margin: 1.0rem 0;
     }
 
     .hamburger {

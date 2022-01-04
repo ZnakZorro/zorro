@@ -27,7 +27,11 @@ div.pogoda div span { font-size:17pt; font-weight:bold;}
 
 div.pogoda-1 {font-size:16pt;}
 div.pogoda-3 {font-size:10pt;}
-div.pogoda-3 img {width: 12vw;max-width: 84px;}
+div.pogoda-3 img {
+    width: 12vw;
+    max-width: 84px;
+    vertical-align: middle;
+}
 
 @media (max-width: 768px) {
 
