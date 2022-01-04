@@ -53,9 +53,21 @@ const dateFrom=(updated_at)=>{
     let hours   = "00";
     return hours+":"+minutes;
 }
+
+String.prototype.pad2 = function()  {return ("0" + this).slice(-2);}
+
 const opisYRNO=(data)=>{
   let container = document.querySelector("div.container");
-
+      let timeCache = parseInt(localStorage.getItem("yrnoTIME") || 0); 
+      let timeNow   = (new Date()).getTime();
+      let timeDelta =  timeNow - timeCache;
+      let minuteDelta = Math.round(timeDelta / 60000);
+      let hourDelta = 0;
+      if (minuteDelta>60){
+          hourDelta = Math.floor(minuteDelta/60);
+          minuteDelta = minuteDelta - (hourDelta * 60);
+      }
+      let deltaDelta = hourDelta.toString().pad2()+":"+minuteDelta.toString().pad2();
   console.log(data);
   let teraz = data[0].data.instant.details;
   let next01 = data[0].data.next_1_hours;
@@ -94,7 +106,7 @@ const opisYRNO=(data)=>{
   //console.log(temp12,tosm(temp12));
   
   let html = '<!--pogoda-->';
-  html += '<div class="grid pogoda-1">'+'timeFrom'+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid pogoda-1">'+deltaDelta+' <small>'+dataType+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
