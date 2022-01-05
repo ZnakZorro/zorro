@@ -9,15 +9,22 @@ let dataType = "compact"; //  compact  complete   classic
 //let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
+let cacheTimeMinutes=99;
 let counter=0;
+
+
+
 
 const getYRNO=(url=urlYRNO)=>{ 
   console.log("getYRNO=====",counter);
   counter++;
-  let lastTime = localStorage.getItem("yrnoTIME")
-  let json = localStorage.getItem("yrnoDATA")
+  let lastTime = localStorage.getItem("yrnoTIME") || "0";
+  cacheTimeMinutes = Math.round(((new Date()).getTime() - parseInt(lastTime))/60000);
+  console.log("1 cacheTimeMinutes=====",cacheTimeMinutes);
+  let json = localStorage.getItem("yrnoDATA");
+  
   let obj  = JSON.parse(json);
-  console.log(obj)
+  console.log(obj);
   opisYRNO(obj);
   return;
 /*  
@@ -154,7 +161,8 @@ document.addEventListener("DOMContentLoaded",function(){
         yrnoPL = obj;
         getYRNO(urlYRNO);
         console.log(yrnoPL);
-        setTimeout(()=>{getYRNO()},3000); 
+        console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
+        if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
     })
     .catch(e => {console.log(e)});
   
