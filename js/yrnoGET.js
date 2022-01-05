@@ -1,5 +1,5 @@
 let _city = "Szczecin-Dąbie";
-let _dataType = "compact"; //  compact  complete   classic
+let _dataType = "complete"; //  compact  complete   classic
 let _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 //let yrnoPL={};
 
@@ -28,12 +28,10 @@ const zapiszYRNO=(obj)=>{
       if (minuteDelta < 30) return;
   let data = obj.properties.timeseries;
   let json = JSON.stringify(obj.properties.timeseries);
-  //console.log(updated_at)
-  //console.log(data)
       localStorage.setItem("yrnoCITY", _city);
       localStorage.setItem("yrnoTIME", timeNow);
       localStorage.setItem("yrnoDATA", json);
-       
+      localStorage.setItem("yrnoTYPE", _dataType);     
 }
 
 const getYRNO2Cache=()=>{

@@ -5,7 +5,13 @@ console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
 //let gfxSVG = "https://api.met.no/images/weathericons/svg/clearsky_day.svg";
 let gfxSVG = "https://api.met.no/images/weathericons/svg/";
 
-let dataType = "compact"; //  compact  complete   classic
+//let dataType = "compact"; //  compact  complete   classic
+let dataType = localStorage.getItem("yrnoTYPE") || "???";
+console.log("dataType=====",dataType);
+let nic = localStorage.getItem("nic") || "***";
+console.log("nic=====",nic);
+
+
 //let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
@@ -65,8 +71,15 @@ const dateFrom=(updated_at)=>{
     let hours   = "00";
     return hours+":"+minutes;
 }
-
 String.prototype.pad2 = function()  {return ("0" + this).slice(-2);}
+
+const hoursTime=(dd)=>{
+  let d = (new Date(dd));
+  let godzina = (d.getHours()).toString().pad2();
+  let minuta  = (d.getMinutes()).toString().pad2();
+  return godzina+":"+minuta;
+}
+
 
 const opisYRNO=(data)=>{
   let container = document.querySelector("div.container");
@@ -113,19 +126,21 @@ const opisYRNO=(data)=>{
   let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
   let icon_12 = '<img src="'+gfxSVG+next12.summary.symbol_code+'.svg" />';
 
-  //console.log(temp01,tosm(temp01));
-  //console.log(temp06,tosm(temp06));
-  //console.log(temp12,tosm(temp12));
+  let time00 = hoursTime(data[0].time);
+  let time01 = hoursTime(data[1].time);
+  let time06 = hoursTime(data[6].time);
+  let time12 = hoursTime(data[12].time);
+  
   
   let html = '<!--pogoda-->';
 
-  html += '<div class="grid pogoda-1">'+deltaDelta+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid pogoda-1">'+deltaDelta+'; '+time00+' <small>'+dataType+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
-    html += '<div>'+icon_01+'<span>'+tosm(temp01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
-    html += '<div>'+icon_06+'<span>'+tosm(temp06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
-    html += '<div>'+icon_12+'<span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
 
@@ -148,6 +163,7 @@ const insertWeatherReport=()=>{
 }
 
 document.addEventListener("DOMContentLoaded",function(){
+  
     insertWeatherReport();
     getYRNO2Cache();
    
