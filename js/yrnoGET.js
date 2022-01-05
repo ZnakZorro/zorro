@@ -35,6 +35,10 @@ const zapiszYRNO=(obj)=>{
       localStorage.setItem("yrnoDATA", json);
        
 }
+
+const getYRNO2Cache=()=>{
+  _getYRNO(_urlYRNO);
+}
 _getYRNO(_urlYRNO);
 
 /*

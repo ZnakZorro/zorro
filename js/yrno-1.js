@@ -9,18 +9,8 @@ let dataType = "compact"; //  compact  complete   classic
 //let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
-let counter=0;
 
-const getYRNO=(url=urlYRNO)=>{ 
-  console.log("getYRNO=====",counter);
-  counter++;
-  let lastTime = localStorage.getItem("yrnoTIME")
-  let json = localStorage.getItem("yrnoDATA")
-  let obj  = JSON.parse(json);
-  console.log(obj)
-  opisYRNO(obj);
-  return;
-/*  
+const getYRNO=(url)=>{  
   fetch(url)
     .then(function(response) {
           if (!response.ok) {throw Error(response.statusText);}
@@ -30,13 +20,11 @@ const getYRNO=(url=urlYRNO)=>{
         opisYRNO(obj);
     })
     .catch(e => {console.log(e)})
-*/
 };
 
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 
 const symbolTR=(tx)=>{
-  console.log("symbol=",tx);
   tx = tx.split("_")[0];
   return (yrnoPL[tx].pl);
 }
@@ -58,21 +46,15 @@ const dateFrom=(updated_at)=>{
     let hours   = "00";
     return hours+":"+minutes;
 }
-
-String.prototype.pad2 = function()  {return ("0" + this).slice(-2);}
-
-const opisYRNO=(data)=>{
+const opisYRNO=(obj)=>{
   let container = document.querySelector("div.container");
-      let timeCache = parseInt(localStorage.getItem("yrnoTIME") || 0); 
-      let timeNow   = (new Date()).getTime();
-      let timeDelta =  timeNow - timeCache;
-      let minuteDelta = Math.round(timeDelta / 60000);
-      let hourDelta = 0;
-      if (minuteDelta>60){
-          hourDelta = Math.floor(minuteDelta/60);
-          minuteDelta = minuteDelta - (hourDelta * 60);
-      }
-      let deltaDelta = hourDelta.toString().pad2()+":"+minuteDelta.toString().pad2();
+  console.log(obj);
+  let updated_at = obj.properties.meta.updated_at;
+  let timeFrom = dateFrom(updated_at);
+  
+  //updated_at = (new Date(updated_at)).toLocaleString();
+  //console.log(updated_at);
+  let data = obj.properties.timeseries;
   console.log(data);
   let teraz = data[0].data.instant.details;
   let next01 = data[0].data.next_1_hours;
@@ -111,8 +93,7 @@ const opisYRNO=(data)=>{
   //console.log(temp12,tosm(temp12));
   
   let html = '<!--pogoda-->';
-  html += '<div class="insert">';
-  html += '<div class="grid pogoda-1">'+deltaDelta+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid pogoda-1">'+timeFrom+' <small>'+dataType+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
@@ -121,9 +102,7 @@ const opisYRNO=(data)=>{
     html += '<div>'+icon_12+'<span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
-  html += '</div>';
-  document.getElementById("WeatherReport").innerHTML = html;
-  //container.insertAdjacentHTML('afterbegin', html);
+  container.insertAdjacentHTML('afterbegin', html);
   //newDiv.innerHTML += ;
   
 }
@@ -135,15 +114,8 @@ relative_humidity: 89.4
 wind_from_direction: 241
 wind_speed: 5.2
 */
-const insertWeatherReport=()=>{
-  if (!document.getElementById("WeatherReport"))
-      document.querySelector("div.container").insertAdjacentHTML('afterbegin', '<div id="WeatherReport"></div>');
-}
 
 document.addEventListener("DOMContentLoaded",function(){
-    insertWeatherReport();
-    getYRNO2Cache();
-   
   
     fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
     .then(function(response) {
@@ -154,7 +126,6 @@ document.addEventListener("DOMContentLoaded",function(){
         yrnoPL = obj;
         getYRNO(urlYRNO);
         console.log(yrnoPL);
-        setTimeout(()=>{getYRNO()},3000); 
     })
     .catch(e => {console.log(e)});
   
