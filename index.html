@@ -31,10 +31,14 @@ body {
     padding: 0.3em;
     margin: 0.3em;
 }
-
- 
+ .icon1 {max-width:32px;}
 </style>
-   
+<script>
+const refresh=()=>{
+   console.log("refresh()");
+   document.location.reload();
+}
+</script>
    
 </head>
 
@@ -42,6 +46,7 @@ body {
     <header class="header">
         <nav class="navbar">
             <a href="/" class="nav-logo">gitZorro</a>
+           <img src="./css/icon/refresh.svg" onClick="refresh()" class="icon1"/>
             <ul class="nav-menu">
                 <li class="nav-item"><a href="app/meteo/" class="nav-link">Meteo</a></li>
                 <li class="nav-item"><a href="app/radio/" class="nav-link">Radio</a></li>
