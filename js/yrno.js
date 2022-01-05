@@ -19,6 +19,23 @@ let cacheTimeMinutes=99;
 let counter=0;
 
 
+/*
+// Apparent temperature calculation
+// accepts temperature [C], humidity [%], wind speed [m/s]
+// returns apparent temperature [C]
+function apparent($apparentT,$apparentH,$apparentW){
+  $e = ($apparentH/100)*6.105*pow(2.71828, ((17.27*$apparentT)/(237.7+$apparentT)));
+  $calcA = round(($apparentT + 0.33*$e-0.7*$apparentW-4),1);
+  return $calcA;
+}
+*/
+//T: temperature in degrees Celsius
+//V: wind velocity in kilometers per hour
+const windChillCelsius = (temperature, windSpeed) =>
+  13.12 +
+  0.6215 * temperature -
+  11.37 * windSpeed ** 0.16 +
+  0.3965 * temperature * windSpeed ** 0.16;
 
 
 const getYRNO=(url=urlYRNO)=>{ 
@@ -110,17 +127,28 @@ const opisYRNO=(data)=>{
   //let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) || "?";
    
   
+  let temp00 = data[0].data.instant.details.air_temperature || teraz.air_temperature;
   let temp01 = data[1].data.instant.details.air_temperature || teraz.air_temperature;
   let temp06 = data[6].data.instant.details.air_temperature || teraz.air_temperature;
   let temp12 = data[12].data.instant.details.air_temperature || teraz.air_temperature;
+  
 
   let press01 = ronda(data[1].data.instant.details.air_pressure_at_sea_level);
   let press06 = ronda(data[6].data.instant.details.air_pressure_at_sea_level);
   let press12 = ronda(data[12].data.instant.details.air_pressure_at_sea_level);
   
+  let wind00 = data[0].data.instant.details.wind_speed;
   let wind01 = data[1].data.instant.details.wind_speed;
   let wind06 = data[6].data.instant.details.wind_speed;
   let wind12 = data[12].data.instant.details.wind_speed;
+  
+  //console.log(typeof(temp01),typeof(wind01));
+  let Chill00 = windChillCelsius(temp00, wind00 * 3.6).toFixed(1); 
+  let Chill01 = windChillCelsius(temp01, wind01 * 3.6).toFixed(1); 
+  let Chill06 = windChillCelsius(temp06, wind06 * 3.6).toFixed(1); 
+  let Chill12 = windChillCelsius(temp12, wind12 * 3.6).toFixed(1); 
+  console.log(typeof(Chill01),"Chill01=====",Chill00,Chill01,Chill06,Chill12);
+  
   
   let icon_01 = '<img src="'+gfxSVG+next01.summary.symbol_code+'.svg" />';
   let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
@@ -135,12 +163,12 @@ const opisYRNO=(data)=>{
   let html = '<!--pogoda-->';
 
   html += '<div class="grid pogoda-1">'+deltaDelta+'; '+time00+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
+  html += '<div class="grid pogoda-1"><b>'+tosm(temp01)+' / '+tosm(Chill00)+', '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
    
-    html += '<div><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
-    html += '<div><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
-    html += '<div><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'<br />'+tosm(Chill01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'<br />'+tosm(Chill06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
+    html += '<div><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'<br />'+tosm(Chill12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
 
