@@ -118,7 +118,7 @@ const opisYRNO=(data)=>{
   //console.log(temp12,tosm(temp12));
   
   let html = '<!--pogoda-->';
-  html += '<div class="insert">';
+
   html += '<div class="grid pogoda-1">'+deltaDelta+' <small>'+dataType+'</small></div>';
   html += '<div class="grid pogoda-1"><b>'+teraz.air_temperature+'&deg;C, '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
   html += '<div class="grid pogoda pogoda-3">';
@@ -128,7 +128,7 @@ const opisYRNO=(data)=>{
     html += '<div>'+icon_12+'<span>'+tosm(temp12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
-  html += '</div>';
+
   document.getElementById("WeatherReport").innerHTML = html;
   //container.insertAdjacentHTML('afterbegin', html);
   //newDiv.innerHTML += ;
