@@ -119,4 +119,20 @@ const refresh=()=>{
 
 <script src="./js/navbar.js"></script>
 <script type="text/javascript" src="./js/yrno.js"></script> 
+
+<script>
+document.addEventListener("visibilitychange", function() {
+    console.log( document.visibilityState );
+    if (document.visibilityState == 'hidden'){
+      console.log('visibilityState == hidden');
+
+    }
+    if (document.visibilityState == 'visible'){
+      console.log('visibilityState == visible','getYRNO');
+      getYRNO();
+    }
+});
+</script>				  
+
+
 </html>
