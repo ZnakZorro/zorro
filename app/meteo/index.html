@@ -810,7 +810,7 @@ Meteogram.prototype.parseYrData = function () {
             nextHours = node.data.next_1_hours || node.data.next_6_hours,
             symbolCode = nextHours && nextHours.summary.symbol_code,
             to = node.data.next_1_hours ? x + 36e5 : x + 6 * 36e5;
-
+	console.log(to,pointStart + 48 * 36e5);
         if (to > pointStart + 48 * 36e5) {
             return;
         }
