@@ -1,0 +1,75 @@
+
+<a href="https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/">https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/</a>
+
+
+<div id="container"></div>
+
+
+
+
+
+
+
+
+<script>
+
+
+  
+  
+const load = (apiEndpoint, elementToNotify, eventTitle) => {
+  fetch(apiEndpoint)
+    .then( result => result.json() )
+    .then( data => {
+       // here's where we do this: we want to create that custom event
+       const customEvent = new CustomEvent(eventTitle, {
+         detail: {
+           data
+         }
+       });
+       // now, we simply tell the element to do its thing:
+      elementToNotify.dispatchEvent(customEvent)
+     })
+};
+  
+// a function to create the Todo element in the DOM...
+//const createTodo = ({id, title, completed}) => {
+const createTodo = (todo) => {
+  const todoEl = document.createElement("div");
+  todoEl.classList.add("todo");
+
+  const todoTitle = document.createElement("h3");
+  todoTitle.classList.add("todo-title");
+  todoTitle.textContent=todo.title;
+
+  const todoStatus = document.createElement("div");
+  todoStatus.classList.add("todo-status");
+  todoStatus.textContent = todo.done ? "Complete" : "Incomplete";
+
+  todoEl.append(todoTitle, todoStatus);
+    
+  return todoEl;
+}
+
+// and when that load event gets fired, we want this to be
+//  the event listener.
+const handleLoad = (event)=>{
+  // pull the data out of the custom event...
+  const data = event.detail.data;
+  // and create a new todo for each object
+  data.forEach( todo => {
+    event.target.append( createTodo(todo) )
+  })
+}
+
+// finally, we wire in our custom event!
+container.addEventListener("todo.load", handleLoad)  
+  
+// remember, the parameters we defined were:
+// apiEndpoint: url,
+// elementToNotify: HTMLDomNode,
+// eventTitle: string
+load("https://jsonplaceholder.typicode.com/todos", container, 'todo.load');  
+  
+  
+
+</script>
