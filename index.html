@@ -124,18 +124,19 @@ body {
 
 <script>
 if (location.protocol==="file:") {
-   document.title="FILE::git";
+  document.title="FILE::git";
   
-   let link = document.querySelector("link[rel~='icon']");
-     console.log(link);
-      if (!link) {
-          link = document.createElement('link');
-          link.rel = 'icon';
-          document.getElementsByTagName('head')[0].appendChild(link);
-      }
-      //link.href = 'https://stackoverflow.com/favicon.ico';
-      link.href = './css/icon/red.ico';
-} 
+  let link = document.querySelector("link[rel~='icon']");
+    console.log(link);
+  if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  }
+  //link.href = 'https://stackoverflow.com/favicon.ico';
+  link.href = './css/icon/red.ico';
+}
+  
   
 </script>				  
 
