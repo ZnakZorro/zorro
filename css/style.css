@@ -6,6 +6,15 @@ div.grid {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(100px,1fr));
 }
+div.grid2 {   
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+}
+
+
+div.pogoda { 
+  cursor:pointer;
+}
 div.pogoda div { 
     border: 1px solid #ddd;
     background-color: #ffffff;
@@ -14,14 +23,10 @@ div.pogoda div {
     border-radius: 0.2em;
     margin: 0.3em 0.1em;
     text-align:center;
-    font-size:12pt;
     position:relative;
 }
 
-div.pogoda div span { 
-  /*font-size:17pt;*/ 
-  /*font-weight:bold;*/
-}
+
 div.pogoda div span:nth-child(1) {
     font-size: 9pt;
     font-weight: 900;
@@ -44,16 +49,20 @@ div.pogoda div span:nth-child(5) {
     font-size: 17pt;
    
 }
- 
+.fon-600 {font-weight:600;} 
 .fon-7 {font-size:7pt;}
 .fon-8 {font-size:8pt;}
 .fon-9 {font-size:9pt;}
 .fon-10 {font-size:10pt;}
 .fon-11 {font-size:11pt;}
+.fon-12 {font-size:12pt;}
+.fon-14 {font-size:14pt;}
+.fon-16 {font-size:16pt}
+.fon-17 {font-size:17pt}
+.fon-18 {font-size:18pt}
 
-div.pogoda-1 {font-size:16pt;}
-div.pogoda-3 {font-size:10pt;}
-div.pogoda-3 img {
+
+div.pogoda img {
     width: 12vw;
     max-width: 84px;
     vertical-align: top;
