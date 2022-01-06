@@ -1,3 +1,84 @@
+/**
+https://github.com/nicolasgrancher/weather-js
+ * Get apparent temperature. Use wind chill or heat index.
+ *
+ * @param Tc temperature in celsius
+ * @param Vkmh wind speed in km/h
+ * @param R relative humidity
+ * @param P pressure
+ * @returns {number}
+ */
+function apparentTemperature(Tc, Vkmh, R, P) {
+    Vkmh = Vkmh * 3.6;
+    if (Tc < 10) {
+        return this.windChill(Tc, Vkmh);
+    }
+
+    return this.heatIndex(Tc, R, P);
+}
+
+/**
+ * Wind chill calculation.
+ * @see https://en.wikipedia.org/wiki/Wind_chill
+ *
+ * @param Tc temperature in celsius
+ * @param Vkmh wind speed in km/h
+ * @returns {number}
+ */
+function windChill(Tc, Vkmh) {
+    if (Tc >= 10)
+        return Tc;
+
+    var Rc;
+
+    if (Vkmh >= 4.8 && Vkmh <= 177) {
+        Rc = 13.12 + 0.6215 * Tc + (0.3965 * Tc - 11.37) * Math.pow(Vkmh, 0.16);
+    } else if (Vkmh < 4.8) {
+        Rc = Tc + 0.2 * (0.1345 * Tc - 1.59) * Vkmh;
+    } else {
+        Rc = Tc;
+    }
+
+    return Rc;
+}
+
+/**
+ * Heat index calculation.
+ * @see https://en.wikipedia.org/wiki/Heat_index
+ *
+ * @param Tc temperature in celsius
+ * @param R relative humidity
+ * @param P pressure
+ * @returns {number}
+ */
+function heatIndex(Tc, R, P) {
+    if (P < 16) {
+        return Tc;
+    }
+
+    if (Tc < 27 || R < 0.40 || dewPoint(Tc, R) < 12) {
+        return Tc;
+    }
+
+    var c1 = -8.784695;
+    var c2 = 1.61139411;
+    var c3 = 2.338549;
+    var c4 = -0.14611605;
+    var c5 = -1.2308094 * 0.01;
+    var c6 = -1.6424828 * 0.01;
+    var c7 = 2.211732 * 0.001;
+    var c8 = 7.2546 * 0.0001;
+    var c9 = -3.582 * 0.000001;
+
+    var HI = c1 + c2 * Tc + c3 * R + c4 * Tc * R + c5 * Tc * Tc + c6 * R * R + c7 * Tc * Tc * R + c8 * Tc * R * R + c9 * Tc * Tc * R * R;
+
+    return HI;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 console.log("yrno.js");
 console.log("https://api.met.no/weatherapi/locationforecast/2.0/");
 console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
@@ -138,22 +219,35 @@ const opisYRNO=(data)=>{
   let temp12 = data[12].data.instant.details.air_temperature || teraz.air_temperature;
   
 
+  let press00 = ronda(data[0].data.instant.details.air_pressure_at_sea_level);
   let press01 = ronda(data[1].data.instant.details.air_pressure_at_sea_level);
   let press06 = ronda(data[6].data.instant.details.air_pressure_at_sea_level);
   let press12 = ronda(data[12].data.instant.details.air_pressure_at_sea_level);
+  console.log(typeof(press01),"press01=====",press00,press01,press06,press12);
   
   let wind00 = data[0].data.instant.details.wind_speed;
   let wind01 = data[1].data.instant.details.wind_speed;
   let wind06 = data[6].data.instant.details.wind_speed;
   let wind12 = data[12].data.instant.details.wind_speed;
   
-  //console.log(typeof(temp01),typeof(wind01));
-  let Chill00 = windChillCelsius(temp00, wind00 * 3.6).toFixed(1); 
-  let Chill01 = windChillCelsius(temp01, wind01 * 3.6).toFixed(1); 
-  let Chill06 = windChillCelsius(temp06, wind06 * 3.6).toFixed(1); 
-  let Chill12 = windChillCelsius(temp12, wind12 * 3.6).toFixed(1); 
-  console.log(typeof(Chill01),"Chill01=====",Chill00,Chill01,Chill06,Chill12);
+  let humid00 = data[0].data.instant.details.relative_humidity;
+  let humid01 = data[1].data.instant.details.relative_humidity;
+  let humid06 = data[6].data.instant.details.relative_humidity;
+  let humid12 = data[12].data.instant.details.relative_humidity;
+  console.log(typeof(humid01),"humid01=====",humid00,humid01,humid06,humid12);
   
+  //console.log(typeof(temp01),typeof(wind01));
+  //let Chill00 = windChillCelsius(temp00, wind00 * 3.6).toFixed(1); 
+  //let Chill01 = windChillCelsius(temp01, wind01 * 3.6).toFixed(1); 
+  //let Chill06 = windChillCelsius(temp06, wind06 * 3.6).toFixed(1); 
+  //let Chill12 = windChillCelsius(temp12, wind12 * 3.6).toFixed(1); 
+  //console.log(typeof(Chill01),"1Chill01=====",Chill00,Chill01,Chill06,Chill12);
+  
+  let Chill00 = apparentTemperature(temp00, wind00, humid00, press00).toFixed(1); 
+  let Chill01 = apparentTemperature(temp01, wind01, humid01, press01).toFixed(1); 
+  let Chill06 = apparentTemperature(temp06, wind06, humid06, press06).toFixed(1); 
+  let Chill12 = apparentTemperature(temp12, wind12, humid12, press12).toFixed(1); 
+  //console.log(typeof(Chill01),"2Chill01=====",Chill00,Chill01,Chill06,Chill12);
   
   let icon_01 = '<img src="'+gfxSVG+next01.summary.symbol_code+'.svg" />';
   let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
