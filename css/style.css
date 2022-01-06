@@ -8,7 +8,7 @@ div.grid {
 }
 div.grid2 {   
     display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(200px,1fr));
+    grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
 }
 
 
@@ -21,7 +21,7 @@ div.pogoda div {
     padding: 0.5em 0.1em 0.1em 0.1em;
     word-break: break-all;
     border-radius: 0.2em;
-    margin: 0.3em 0.1em;
+    margin: 0.2em 0;
     text-align:center;
     position:relative;
 }
@@ -60,6 +60,7 @@ div.pogoda div span:nth-child(5) {
 .fon-16 {font-size:16pt}
 .fon-17 {font-size:17pt}
 .fon-18 {font-size:18pt}
+.fon-20 {font-size:20pt}
 
 
 div.pogoda img {
@@ -83,3 +84,24 @@ div.card img {
         
     }
 }   
+
+
+/*scroll to top*/
+.top {
+  --offset: 50px;
+  position: sticky;
+  bottom: 20px;
+  margin-right: 10px;
+  place-self: end;
+  margin-top: calc(100vh + var(--offset));
+
+  /* visual styling */
+  text-decoration: none;
+  padding: 10px;
+  /*font-family: sans-serif;*/
+  color: #fff;
+  background: #000;
+  border-radius: 100px;
+  white-space: nowrap;
+  float:right;
+}
