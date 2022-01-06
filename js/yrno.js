@@ -18,6 +18,9 @@ let yrnoPL={};
 let cacheTimeMinutes=99;
 let counter=0;
 
+const winClick=(w)=>{
+  console.log("winClick=",w);
+}
 
 /*
 // Apparent temperature calculation
@@ -76,8 +79,10 @@ const ronda=(tx)=>{
 }
 const tosm=(tx,miano="&deg;C")=>{
   let flo = parseFloat(tx);
-  let arr = flo.toFixed(1).split(".")
-  return arr[0]+"<small>."+arr[1]+miano+'</small>';
+  let arr = flo.toFixed(1).split(".");
+  let plus="";
+  if (flo>=0) plus="+";
+  return plus+arr[0]+"<small>."+arr[1]+miano+'</small>';
 }
 const dateFrom=(updated_at)=>{
     let newFrom  = (new Date()).getTime();
@@ -162,21 +167,25 @@ const opisYRNO=(data)=>{
   
   let html = '<!--pogoda-->';
 
-  html += '<div class="grid pogoda-1">'+deltaDelta+'; '+time00+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid pogoda-1"><b>'+tosm(temp01)+' / '+tosm(Chill00)+', '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</b></div>';
-  html += '<div class="grid pogoda pogoda-3">';
-   
-    html += '<div><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'<br />'+tosm(Chill01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
-    html += '<div><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'<br />'+tosm(Chill06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
-    html += '<div><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'<br />'+tosm(Chill12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
+  html += '<div class="grid pogoda">'+deltaDelta+'; '+time00+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid2 pogoda fon-16 fon-600" id="ev0"><div>'+tosm(temp01)+' / '+tosm(Chill00)+',</div><div> '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</div></div>';
+  html += '<div class="grid pogoda fon-14">';  
+    html += '<div id="ev1"><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'<br />'+tosm(Chill01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
+    html += '<div id="ev2"><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'<br />'+tosm(Chill06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
+    html += '<div id="ev3"><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'<br />'+tosm(Chill12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
   
   html += '</div>';
 
   document.getElementById("WeatherReport").innerHTML = html;
-  //container.insertAdjacentHTML('afterbegin', html);
-  //newDiv.innerHTML += ;
+  // eventy
+  document.getElementById("ev0").addEventListener('click', ((e)=>{window.location.href="./app/meteo/"}), false);
+  document.getElementById("ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
+  document.getElementById("ev2").addEventListener('click', ((e)=>{winClick(2);}), false);
+  document.getElementById("ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
   
 }
+
+
 /*
 air_pressure_at_sea_level: 1004
 air_temperature: 7.7
