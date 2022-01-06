@@ -131,8 +131,14 @@ const getYRNO=(url=urlYRNO)=>{
   let json = localStorage.getItem("yrnoDATA");
   
   let obj  = JSON.parse(json);
-  console.log(obj);
+  //console.log(obj);
+  console.log(0,obj[0]);
+  console.log(1,obj[1]);
+  console.log(6,obj[6]);
+  console.log(12,obj[12]);
+
   opisYRNO(obj);
+  
   return;
 /*  
   fetch(url)
@@ -196,7 +202,7 @@ const opisYRNO=(data)=>{
           minuteDelta = minuteDelta - (hourDelta * 60);
       }
       let deltaDelta = hourDelta.toString().pad2()+":"+minuteDelta.toString().pad2();
-  console.log(data);
+  //console.log(data);
   let teraz = data[0].data.instant.details;
   let next01 = data[0].data.next_1_hours;
   let next06 = data[0].data.next_6_hours;
@@ -223,7 +229,7 @@ const opisYRNO=(data)=>{
   let press01 = ronda(data[1].data.instant.details.air_pressure_at_sea_level);
   let press06 = ronda(data[6].data.instant.details.air_pressure_at_sea_level);
   let press12 = ronda(data[12].data.instant.details.air_pressure_at_sea_level);
-  console.log(typeof(press01),"press01=====",press00,press01,press06,press12);
+  //console.log(typeof(press01),"press01=====",press00,press01,press06,press12);
   
   let wind00 = data[0].data.instant.details.wind_speed;
   let wind01 = data[1].data.instant.details.wind_speed;
@@ -234,7 +240,7 @@ const opisYRNO=(data)=>{
   let humid01 = data[1].data.instant.details.relative_humidity;
   let humid06 = data[6].data.instant.details.relative_humidity;
   let humid12 = data[12].data.instant.details.relative_humidity;
-  console.log(typeof(humid01),"humid01=====",humid00,humid01,humid06,humid12);
+  //console.log(typeof(humid01),"humid01=====",humid00,humid01,humid06,humid12);
   
   //console.log(typeof(temp01),typeof(wind01));
   //let Chill00 = windChillCelsius(temp00, wind00 * 3.6).toFixed(1); 
@@ -307,11 +313,31 @@ document.addEventListener("DOMContentLoaded",function(){
     .then(obj => {
         yrnoPL = obj;
         getYRNO(urlYRNO);
-        console.log(yrnoPL);
-        console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
+        //console.log(yrnoPL);
+        //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
     })
     .catch(e => {console.log(e)});
   
     
+});
+
+
+
+
+
+
+document.addEventListener("visibilitychange", function() {
+    console.log( document.visibilityState );
+    if (document.visibilityState == 'hidden'){
+      //console.log('visibilityState == hidden');
+
+    }
+    if (document.visibilityState == 'visible'){
+      //console.log('visibilityState == visible','getYRNO');
+      //getYRNO();
+        console.log("visibilityState cacheTimeMinutes=====",cacheTimeMinutes);
+        if (cacheTimeMinutes>30) {getYRNO()}; 
+      
+    }
 });
