@@ -339,19 +339,17 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 document.addEventListener("visibilitychange", function() {
-    console.log( document.visibilityState );
+    //console.log( document.visibilityState );
     if (document.visibilityState == 'hidden'){
       //console.log('visibilityState == hidden');
-
     }
     if (document.visibilityState == 'visible'){
-      document.getElementById("logo").classList.add("loader");
-      //console.log('visibilityState == visible','getYRNO');
-      //getYRNO();
         console.log("visibilityState cacheTimeMinutes=====",cacheTimeMinutes);
-        if (cacheTimeMinutes>30) {getYRNO()}; 
-      
+        if (cacheTimeMinutes>30) {
+          document.getElementById("logo").classList.add("loader");
+          getYRNO();
+        };       
     }
 });
 
-if (location.protocol==="file:") document.title="FILE::git";
+//if (location.protocol==="file:") document.title="FILE::git";
