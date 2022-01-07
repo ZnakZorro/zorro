@@ -11,7 +11,7 @@ button, div.links a , .btn, a.btn {
     min-width:6em;
 }
 
-
+button.btn-sm {font-size:0.75rem; padding:0.4em;}
 button.succ {
   background-color: #13ce66;
   color: #fff;
@@ -24,9 +24,10 @@ button.navy {
   background-color: darkviolet;
   color: white;
 }
-button.red {
+button.red, .btn-red {
   background-color: red;
-  color: white;
+  color: black;
+  border-color: black;
 }
 button.info {
   background-color: #369;
