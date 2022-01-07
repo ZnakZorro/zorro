@@ -139,38 +139,45 @@ const windChillCelsius = (temperature, windSpeed) =>
     if (w===0) window.location.href="./app/meteo/";
     if (w===1) window.location.href="./app/radar/";
     if (w===2) getYRNOhour(3,"ev2");
-    if (w===3) getYRNOhour(15,"ev3");
+    if (w===3) getYRNOhour(9,"ev3");
+    if (w===4) getYRNOhour(16,"ev4");
     
   }
   //qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+  const getOBJhour=(nr=0)=>{ 
+    let json = localStorage.getItem("yrnoDATA");
+    let obj  = JSON.parse(json);
+    let time = obj[nr].time;
+    let data = obj[nr].data.instant.details;
+    //console.log(data);
+    //console.log(obj[nr].data.next_1_hours.summary.symbol_code);
+    let rain = obj[nr].data.next_1_hours.precipitation_amount || 0;
+    let rain01 = (obj[nr].data.next_1_hours.details?.precipitation_amount)  ? obj[nr].data.next_1_hours.details.precipitation_amount : 0;
+    let w={};
+    w.time = hoursTime(obj[nr].time);
+    w.t = data.air_temperature;
+    w.temp = tosm(data.air_temperature);
+    w.press = Math.round(data.air_pressure_at_sea_level);
+    w.wind  = data.wind_speed;
+    w.humi  = data.relative_humidity;
+    w.rain  = tosm(rain,"mm");
+    w.rain01  = rain01;
+    w.chill = tosm(apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1));
+    w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
+    w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
+    w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
+    return w;
+} 
   const getYRNOhour=(nr=0,id)=>{ 
-      console.log(nr,id)
-      let json = localStorage.getItem("yrnoDATA");
-      let obj  = JSON.parse(json);
-      console.log(obj);
-      let time = obj[nr].time;
-      let data = obj[nr].data.instant.details;
-      console.log(data);
-      //console.log(obj[nr].data.next_1_hours.summary.symbol_code);
-      let w={};
-      w.time = hoursTime(obj[nr].time);
-      w.t = data.air_temperature;
-      w.temp = tosm(data.air_temperature);
-      w.press = Math.round(data.air_pressure_at_sea_level);
-      w.wind  = data.wind_speed;
-      w.humi  = data.relative_humidity;
-      w.rain  = 0;
-      w.chill = tosm(apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1));
-      w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
-      w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
-      w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
-      console.log(w);
+      let w = getOBJhour(nr);
+      //console.log("wwwwwwwwwwwwww");
+      console.log("wwwwww=",w);
       let container = _$("#"+id);
-      console.log(container);
       let zapas = container.innerHTML;
-      container.innerHTML = `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}mm</span><br /><span>${w.press}hPa</span><br /><span>${w.wind}m/s</span><br /><span>${w.pl}</span>`;
+      container.innerHTML = `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${w.press}hPa</span><br /><span>${w.wind}m/s</span><br /><span>${w.pl}</span>`;
       setTimeout(()=>{container.innerHTML = zapas},5000);
   }
+//zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 
 const getYRNO=(url=urlYRNO)=>{ 
   console.log("getYRNO=====",counter);
@@ -182,10 +189,10 @@ const getYRNO=(url=urlYRNO)=>{
   
   let obj  = JSON.parse(json);
   //console.log(obj);
-  console.log(0,obj[0]);
-  console.log(1,obj[1]);
-  console.log(6,obj[6]);
-  console.log(12,obj[12]);
+  //console.log(0,obj[0]);
+  //console.log(1,obj[1]);
+  //console.log(6,obj[6]);
+  //console.log(12,obj[12]);
   opisYRNO(obj);
 };
 
@@ -210,7 +217,7 @@ const tosm=(tx,miano="&deg;C")=>{
 const dateFrom=(updated_at)=>{
     let newFrom  = (new Date()).getTime();
     let timeFrom = (new Date(updated_at)).getTime();
-    console.log(newFrom,timeFrom);
+    //console.log(newFrom,timeFrom);
     let delta = newFrom - timeFrom;
     let minutes = Math.round(delta/(60*1000));
     let hours   = "00";
@@ -237,89 +244,36 @@ const opisYRNO=(data)=>{
           hourDelta = Math.floor(minuteDelta/60);
           minuteDelta = minuteDelta - (hourDelta * 60);
       }
-      let deltaDelta = hourDelta.toString().pad2()+":"+minuteDelta.toString().pad2();
-  //console.log(data);
-  let teraz = data[0].data.instant.details;
-  let next01 = data[0].data.next_1_hours;
-  let next06 = data[0].data.next_6_hours;
-  let next12 = data[0].data.next_12_hours;
-  //let rain01 = data[0].data.next_1_hours.details.precipitation_amount ;
-  //let rain06 = data[0].data.next_6_hours.details.precipitation_amount;
-  //let rain12 = "0";
-  //if (data[0].data.next_12_hours.details) rain12 = data[0].data.next_12_hours.details.precipitation_amount;
-  let rain01 = (data[0].data.next_1_hours.details?.precipitation_amount)  ? data[0].data.next_1_hours.details.precipitation_amount : "0";
-  let rain06 = (data[0].data.next_6_hours.details?.precipitation_amount)  ? data[0].data.next_6_hours.details.precipitation_amount : "0";
-  let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) ? data[0].data.next_12_hours.details.precipitation_amount : "0";
-  //let rain01 = (data[0].data.next_01_hours.details?.precipitation_amount) || "?";
-  //let rain06 = (data[0].data.next_06_hours.details?.precipitation_amount) || "?";
-  //let rain12 = (data[0].data.next_12_hours.details?.precipitation_amount) || "?";
-   
-  
-  let temp00 = data[0].data.instant.details.air_temperature || teraz.air_temperature;
-  let temp01 = data[1].data.instant.details.air_temperature || teraz.air_temperature;
-  let temp06 = data[6].data.instant.details.air_temperature || teraz.air_temperature;
-  let temp12 = data[12].data.instant.details.air_temperature || teraz.air_temperature;
-  
+  let deltaDelta = hourDelta.toString().pad2()+":"+minuteDelta.toString().pad2();
 
-  let press00 = ronda(data[0].data.instant.details.air_pressure_at_sea_level);
-  let press01 = ronda(data[1].data.instant.details.air_pressure_at_sea_level);
-  let press06 = ronda(data[6].data.instant.details.air_pressure_at_sea_level);
-  let press12 = ronda(data[12].data.instant.details.air_pressure_at_sea_level);
-  //console.log(typeof(press01),"press01=====",press00,press01,press06,press12);
-  
-  let wind00 = data[0].data.instant.details.wind_speed;
-  let wind01 = data[1].data.instant.details.wind_speed;
-  let wind06 = data[6].data.instant.details.wind_speed;
-  let wind12 = data[12].data.instant.details.wind_speed;
-  
-  let humid00 = data[0].data.instant.details.relative_humidity;
-  let humid01 = data[1].data.instant.details.relative_humidity;
-  let humid06 = data[6].data.instant.details.relative_humidity;
-  let humid12 = data[12].data.instant.details.relative_humidity;
-  //console.log(typeof(humid01),"humid01=====",humid00,humid01,humid06,humid12);
-  
-  //console.log(typeof(temp01),typeof(wind01));
-  //let Chill00 = windChillCelsius(temp00, wind00 * 3.6).toFixed(1); 
-  //let Chill01 = windChillCelsius(temp01, wind01 * 3.6).toFixed(1); 
-  //let Chill06 = windChillCelsius(temp06, wind06 * 3.6).toFixed(1); 
-  //let Chill12 = windChillCelsius(temp12, wind12 * 3.6).toFixed(1); 
-  //console.log(typeof(Chill01),"1Chill01=====",Chill00,Chill01,Chill06,Chill12);
-  
-  let Chill00 = apparentTemperature(temp00, wind00, humid00, press00).toFixed(1); 
-  let Chill01 = apparentTemperature(temp01, wind01, humid01, press01).toFixed(1); 
-  let Chill06 = apparentTemperature(temp06, wind06, humid06, press06).toFixed(1); 
-  let Chill12 = apparentTemperature(temp12, wind12, humid12, press12).toFixed(1); 
-  //console.log(typeof(Chill01),"2Chill01=====",Chill00,Chill01,Chill06,Chill12);
-  
-  let icon_01 = '<img src="'+gfxSVG+next01.summary.symbol_code+'.svg" />';
-  let icon_06 = '<img src="'+gfxSVG+next06.summary.symbol_code+'.svg" />';
-  let icon_12 = '<img src="'+gfxSVG+next12.summary.symbol_code+'.svg" />';
-
-  let time00 = hoursTime(data[0].time);
-  let time01 = hoursTime(data[1].time);
-  let time06 = hoursTime(data[6].time);
-  let time12 = hoursTime(data[12].time);
-  
+  let w00 = getOBJhour(0);
+  let w01 = getOBJhour(1);
+  let w06 = getOBJhour(6);
+  let w12 = getOBJhour(12);
+  //console.log("w00=",w00);
+  //console.log("w01=",w01);
+  //console.log("w06=",w06);
+  //console.log("w12=",w12);
   
   let html = '<!--pogoda-->';
 
-  html += '<div class="grid pogoda">'+deltaDelta+'; '+time00+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid2 pogoda fon-20 fon-600" id="ev0"><div>'+tosm(temp01)+' / '+tosm(Chill00)+',</div><div> '+teraz.air_pressure_at_sea_level+'hPa, '+teraz.wind_speed+'m/s</div></div>';
-  html += '<div class="grid pogoda fon-14">';  
-    html += '<div id="ev1"><span>'+time01+'</span><span>'+icon_01+'</span><span>'+tosm(temp01)+'<br />'+tosm(Chill01)+'</span><br /><span>'+tosm(rain01,"mm")+'</span><br />'+press01+'hPa<br />'+wind01+'m/s<br />'+symbolTR(next01.summary.symbol_code)+'</div>';
-    html += '<div id="ev2"><span>'+time06+'</span><span>'+icon_06+'</span><span>'+tosm(temp06)+'<br />'+tosm(Chill06)+'</span><br /><span>'+tosm(rain06,"mm")+'</span><br />'+press06+'hPa<br />'+wind06+'m/s<br />'+symbolTR(next06.summary.symbol_code)+'</div>';
-    html += '<div id="ev3"><span>'+time12+'</span><span>'+icon_12+'</span><span>'+tosm(temp12)+'<br />'+tosm(Chill12)+'</span><br /><span>'+tosm(rain12,"mm")+'</span><br />'+press12+'hPa<br />'+wind12+'m/s<br />'+symbolTR(next12.summary.symbol_code)+'</div>';
-  
+  html += '<div class="grid pogoda" id="ev0">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid2 pogoda fon-20 fon-600" id="ev1"><div>'+w00.temp+' / '+w00.chill+',</div><div> '+w00.press+'hPa, '+w00.wind+'m/s</div></div>';
+  html += '<div class="grid pogoda fon-14">'; 
+    html += `<div id="ev2"><span>${w01.time}</span><span>${w01.icon}</span><span>${w01.temp}<br />${w01.chill}</span><br /><span>${w01.rain}</span><br /><span>${w01.press}hPa</span><br /><span>${w01.wind}m/s</span><br /><span>${w01.pl}</span></div>`;
+    html += `<div id="ev3"><span>${w06.time}</span><span>${w06.icon}</span><span>${w06.temp}<br />${w06.chill}</span><br /><span>${w06.rain}</span><br /><span>${w06.press}hPa</span><br /><span>${w06.wind}m/s</span><br /><span>${w06.pl}</span></div>`;
+    html += `<div id="ev4"><span>${w12.time}</span><span>${w12.icon}</span><span>${w12.temp}<br />${w12.chill}</span><br /><span>${w12.rain}</span><br /><span>${w12.press}hPa</span><br /><span>${w01.wind}m/s</span><br /><span>${w01.pl}</span></div>`; 
   html += '</div>';
 
-  document.getElementById("WeatherReport").innerHTML = html;
+  _$("#WeatherReport").innerHTML = html;
   // eventy
-  document.getElementById("ev0").addEventListener('click', ((e)=>{winClick(0);}), false);
-  document.getElementById("ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
-  document.getElementById("ev2").addEventListener('click', ((e)=>{winClick(2);}), false);
-  document.getElementById("ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
+  _$("#ev0").addEventListener('click', ((e)=>{winClick(0);}), false);
+  _$("#ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
+  _$("#ev2").addEventListener('click', ((e)=>{winClick(2);}), false);
+  _$("#ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
+  _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
   
-  setTimeout(()=>{document.getElementById("logo").classList.remove("loader");},500);
+  setTimeout(()=>{_$("#logo").classList.remove("loader");},500);
 }
 
 
@@ -363,30 +317,26 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 
-let licznik=0;
+//let licznik=0;
 document.addEventListener("visibilitychange", function() {
   
     //console.log( document.visibilityState );
     if (document.visibilityState == 'hidden'){
-      licznik++;
+      //licznik++;
       //console.log('visibilityState == hidden');
     }
     if (document.visibilityState == 'visible'){
-      licznik++;
-      _$("#licznik").textContent = licznik;
+      //licznik++;
+      //_$("#licznik").textContent = licznik;
         console.log("visibilityState cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) {
           _$("#logo").classList.add("loader");
           getYRNO();
         };       
     }
-
-
-
-
-    
 },false);
 
+/*
 let liczFlag=0;
 const handleVisibilityChange=(flag)=>{
     console.log("handleVisibilityChange=",flag)
@@ -402,3 +352,4 @@ window.addEventListener('focus', function() {
 window.addEventListener('blur', function() {
   handleVisibilityChange(false);
 }, false);
+*/
