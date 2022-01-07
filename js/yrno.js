@@ -135,7 +135,6 @@ const windChillCelsius = (temperature, windSpeed) =>
 
 
   const winClick=(w)=>{
-    console.log("winClick=",w);
     if (w===0) window.location.href="./app/meteo/";
     if (w===1) window.location.href="./app/radar/";
     if (w===2) getYRNOhour(3,"ev2");
@@ -259,8 +258,8 @@ const opisYRNO=(data)=>{
   
   let html = '<!--pogoda-->';
 
-  html += '<div class="grid pogoda" id="ev0">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid2 pogoda fon-20 fon-600" id="ev1"><div>'+w00.temp+' / '+w00.chill+',</div><div> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
+  html += '<div class="grid pogoda">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid2 pogoda fon-20 fon-600"><div id="ev0">'+w00.temp+' / '+w00.chill+',</div><div id="ev1"> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
   html += '<div class="grid pogoda fon-14">';   
     html += `<div id="ev2">${formatLine(w01)}</div>`;
     html += `<div id="ev3">${formatLine(w06)}</div>`;
