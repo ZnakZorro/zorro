@@ -1,5 +1,5 @@
 let _city = "Szczecin-Dąbie";
-let _dataType = "complete"; //  compact  complete   classic
+let _dataType = "compact"; //  compact  complete   classic
 let _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 //let yrnoPL={};
 

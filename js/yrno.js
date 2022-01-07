@@ -156,11 +156,11 @@ const windChillCelsius = (temperature, windSpeed) =>
       w.time = hoursTime(obj[nr].time);
       w.t = data.air_temperature;
       w.temp = tosm(data.air_temperature);
-      w.press = data.air_pressure_at_sea_level;
+      w.press = Math.round(data.air_pressure_at_sea_level);
       w.wind  = data.wind_speed;
       w.humi  = data.relative_humidity;
       w.rain  = 0;
-      w.chill = apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1);
+      w.chill = tosm(apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1));
       w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
       w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
       w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
@@ -168,7 +168,7 @@ const windChillCelsius = (temperature, windSpeed) =>
       let container = _$("#"+id);
       console.log(container);
       let zapas = container.innerHTML;
-      container.innerHTML = `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}/${w.chill}</span><br /><span>${w.press}hPa</span><br /><span>${w.rain}</span><br /><span>${w.pl}</span>`;
+      container.innerHTML = `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}mm</span><br /><span>${w.press}hPa</span><br /><span>${w.wind}m/s</span><br /><span>${w.pl}</span>`;
       setTimeout(()=>{container.innerHTML = zapas},5000);
   }
 
