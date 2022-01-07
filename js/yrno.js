@@ -168,13 +168,15 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
     return w;
 } 
+const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${w.pl}</span>`;
+
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
       //console.log("wwwwwwwwwwwwww");
-      console.log("wwwwww=",w);
+      //console.log("wwwwww=",w);
       let container = _$("#"+id);
       let zapas = container.innerHTML;
-      container.innerHTML = `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${w.press}hPa</span><br /><span>${w.wind}m/s</span><br /><span>${w.pl}</span>`;
+      container.innerHTML = formatLine(w);
       setTimeout(()=>{container.innerHTML = zapas},5000);
   }
 //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
@@ -211,7 +213,7 @@ const tosm=(tx,miano="&deg;C")=>{
   let flo = parseFloat(tx);
   let arr = flo.toFixed(1).split(".");
   let plus="";
-  if (flo>=0) plus="+";
+  if (flo>=0 && miano==="&deg;C") plus="+";
   return plus+arr[0]+"<small>."+arr[1]+miano+'</small>';
 }
 const dateFrom=(updated_at)=>{
@@ -258,11 +260,11 @@ const opisYRNO=(data)=>{
   let html = '<!--pogoda-->';
 
   html += '<div class="grid pogoda" id="ev0">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid2 pogoda fon-20 fon-600" id="ev1"><div>'+w00.temp+' / '+w00.chill+',</div><div> '+w00.press+'hPa, '+w00.wind+'m/s</div></div>';
-  html += '<div class="grid pogoda fon-14">'; 
-    html += `<div id="ev2"><span>${w01.time}</span><span>${w01.icon}</span><span>${w01.temp}<br />${w01.chill}</span><br /><span>${w01.rain}</span><br /><span>${w01.press}hPa</span><br /><span>${w01.wind}m/s</span><br /><span>${w01.pl}</span></div>`;
-    html += `<div id="ev3"><span>${w06.time}</span><span>${w06.icon}</span><span>${w06.temp}<br />${w06.chill}</span><br /><span>${w06.rain}</span><br /><span>${w06.press}hPa</span><br /><span>${w06.wind}m/s</span><br /><span>${w06.pl}</span></div>`;
-    html += `<div id="ev4"><span>${w12.time}</span><span>${w12.icon}</span><span>${w12.temp}<br />${w12.chill}</span><br /><span>${w12.rain}</span><br /><span>${w12.press}hPa</span><br /><span>${w01.wind}m/s</span><br /><span>${w01.pl}</span></div>`; 
+  html += '<div class="grid2 pogoda fon-20 fon-600" id="ev1"><div>'+w00.temp+' / '+w00.chill+',</div><div> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
+  html += '<div class="grid pogoda fon-14">';   
+    html += `<div id="ev2">${formatLine(w01)}</div>`;
+    html += `<div id="ev3">${formatLine(w06)}</div>`;
+    html += `<div id="ev4">${formatLine(w12)}</div>`;
   html += '</div>';
 
   _$("#WeatherReport").innerHTML = html;
