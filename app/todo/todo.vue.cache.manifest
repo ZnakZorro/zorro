@@ -1,0 +1,23 @@
+CACHE MANIFEST
+#2019-11-23:v04 todo
+
+CACHE:
+/todo/vue/index.html
+/todo/vue/dist/todo.js
+/todo/vue/dist/bundle.js
+/todo/vue/node_modules/todomvc-common/base.js
+/todo/vue/node_modules/todomvc-common/base.css
+/todo/vue/node_modules/todomvc-app-css/index.css
+/todo/todo.png
+/todo/todo-230.png
+/todo/todo-434.png
+/todo/todo-630.png
+
+
+NETWORK:
+/todo/vue/index.html
+
+
+FALLBACK:
+/todo/vue/index.html
+
