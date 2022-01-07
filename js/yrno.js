@@ -363,18 +363,42 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 
-
+let licznik=0;
 document.addEventListener("visibilitychange", function() {
+  
     //console.log( document.visibilityState );
     if (document.visibilityState == 'hidden'){
+      licznik++;
       //console.log('visibilityState == hidden');
     }
     if (document.visibilityState == 'visible'){
+      licznik++;
+      _$("#licznik").textContent = licznik;
         console.log("visibilityState cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) {
-          document.getElementById("logo").classList.add("loader");
+          _$("#logo").classList.add("loader");
           getYRNO();
         };       
     }
-});
 
+
+
+
+    
+},false);
+
+let liczFlag=0;
+const handleVisibilityChange=(flag)=>{
+    console.log("handleVisibilityChange=",flag)
+    liczFlag++;
+    let f= flag? "+":"-";
+    _$("#flag").textContent = ", "+liczFlag+f;
+    _$("#flag2").textContent += f+" ";
+}
+window.addEventListener('focus', function() {
+  handleVisibilityChange(true);
+}, false);
+
+window.addEventListener('blur', function() {
+  handleVisibilityChange(false);
+}, false);
