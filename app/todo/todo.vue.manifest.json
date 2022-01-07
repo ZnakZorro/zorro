@@ -2,36 +2,21 @@
 	"name": "ToDo Vue", 
 	"short_name": "ToDo Vue",
 	"description": "Remenber the milk",
-	"start_url": "/todo/vue/index.html",
+	"start_url": "/zorro/app/todo/index.html",
 	"display": "standalone",	
 	"theme_color": "#246", 
 	"background_color": "#246", 
-	"appcache_path": "/todo/vue/todo.vue.cache.manifest",
+	"appcache_path": "/zorro/app/todo/todo.vue.cache.manifest",
 	"icons": [	
 	{ 
-		"src": "/todo/todo.png", 
-		"sizes": "128x128", 
-		"type": "image/png" 
-	},
-	{ 
-		"src": "/todo/todo-230.png", 
-		"sizes": "230x230", 
-		"type": "image/png" 
-	},
-	{ 
-		"src": "/todo/todo-434.png", 
-		"sizes": "434x434", 
-		"type": "image/png" 
-	},
-	{ 
-		"src": "/todo/todo-630.png", 
-		"sizes": "630x630", 
+		"src": "/zorro/app/todo/todo.png", 
+		"sizes": "512x512", 
 		"type": "image/png" 
 	}
 	],
   "screenshots": [{ 
-		"src": "/todo/todo-630.png", 
-		"sizes": "630x630", 
+		"src": "/zorro/app/todo/todo.png", 
+		"sizes": "512x512", 
 		"type": "image/png" 
 	}]	
 }
