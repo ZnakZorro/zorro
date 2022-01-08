@@ -806,6 +806,7 @@ Meteogram.prototype.parseYrData = function () {
     // Loop over hourly (or 6-hourly) forecasts 
 console.log(this.json.properties.timeseries);
     this.json.properties.timeseries.forEach((node, i) => {
+	    if (i>80) return;
         const x = Date.parse(node.time),
             nextHours = node.data.next_1_hours || node.data.next_6_hours,
             symbolCode = nextHours && nextHours.summary.symbol_code,
@@ -815,10 +816,10 @@ console.log(this.json.properties.timeseries);
 	/*if (to > pointStart + 5*48 * 36e5) {
             return;
         }*/
-	 if (i>80) return;
-        if (to > pointStart + 5*48 * 36e5) {
+	 
+        /*if (to > pointStart + 5*48 * 36e5) {
             return;
-        }
+        }*/
 	if (!nextHours?.summary) return;
 	    
 	console.log(nextHours);
