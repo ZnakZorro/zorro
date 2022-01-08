@@ -803,14 +803,14 @@ Meteogram.prototype.parseYrData = function () {
         return this.error();
     }
 
-    // Loop over hourly (or 6-hourly) forecasts
+    // Loop over hourly (or 6-hourly) forecasts qqqqqqqqqqqqqqq
     this.json.properties.timeseries.forEach((node, i) => {
-
         const x = Date.parse(node.time),
             nextHours = node.data.next_1_hours || node.data.next_6_hours,
             symbolCode = nextHours && nextHours.summary.symbol_code,
             to = node.data.next_1_hours ? x + 36e5 : x + 6 * 36e5;
-	console.log(to,pointStart + 48 * 36e5);
+	console.log(i,to,pointStart + 48 * 36e5);
+	//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq    
         if (to > pointStart + 48 * 36e5) {
             return;
         }
