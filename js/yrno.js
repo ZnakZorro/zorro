@@ -85,8 +85,8 @@ function heatIndex(Tc, R, P) {
 
 
 console.log("yrno.js");
-console.log("https://api.met.no/weatherapi/locationforecast/2.0/");
-console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
+//console.log("https://api.met.no/weatherapi/locationforecast/2.0/");
+//console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
 
 //let gfxSVG = "https://api.met.no/images/weathericons/svg/clearsky_day.svg";
 let gfxSVG = "https://api.met.no/images/weathericons/svg/";
@@ -95,10 +95,9 @@ let gfxSVG = "https://api.met.no/images/weathericons/svg/";
 let dataType = localStorage.getItem("yrnoTYPE") || "???";
 console.log("dataType=====",dataType);
 let nic = localStorage.getItem("nic") || "***";
-console.log("nic=====",nic);
 
 
-//let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.378773&lon=14.665842&altitude=25";
+
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
 let cacheTimeMinutes=99;
@@ -137,9 +136,9 @@ const windChillCelsius = (temperature, windSpeed) =>
   const winClick=(w)=>{
     if (w===0) window.location.href="./app/meteo/";
     if (w===1) window.location.href="./app/radar/";
-    if (w===2) getYRNOhour(3,"ev2");
-    if (w===3) getYRNOhour(9,"ev3");
-    if (w===4) getYRNOhour(16,"ev4");
+    if (w===2) getYRNOhour(1+2,"ev2");
+    if (w===3) getYRNOhour(6+3,"ev3");
+    if (w===4) getYRNOhour(12+6,"ev4");
     
   }
   //qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
@@ -176,9 +175,11 @@ const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.te
       let container = _$("#"+id);
       let zapas = container.innerHTML;
       container.innerHTML = formatLine(w);
-      setTimeout(()=>{container.innerHTML = zapas},5000);
+      container.classList.add("active");
+      setTimeout(()=>{container.innerHTML = zapas; container.classList.remove("active");},5000);
   }
 //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
+const countCacheTimeMinutes = () => Math.round(((new Date()).getTime() - parseInt(localStorage.getItem("yrnoTIME") || "0"))/60000);
 
 const getYRNO=(url=urlYRNO)=>{ 
   console.log("getYRNO=====",counter);
@@ -295,6 +296,11 @@ document.addEventListener("DOMContentLoaded",function(){
   
     insertWeatherReport();
     getYRNO2Cache();
+    setInterval(()=>{
+      cacheTimeMinutes = countCacheTimeMinutes();
+      console.log(cacheTimeMinutes);
+
+    },60000)
    
   
     fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
@@ -354,3 +360,110 @@ window.addEventListener('blur', function() {
   handleVisibilityChange(false);
 }, false);
 */
+
+/*
+fetch("https://www.yr.no//api/v0/locations/2-3083828/celestialevents")
+    .then(function(response) {
+          if (!response.ok) {throw Error(response.statusText);}
+          return response.json();
+    })
+    .then(obj => {
+        console.log(obj);
+    })
+    .catch(e => {console.log(e)});
+*/
+
+fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
+.then(function(response) {
+  if (!response.ok) {throw Error(response.statusText);}
+  return response.json();
+})
+.then(data => {
+  console.log(data,new Date(Date.parse(data.results.sunrise)))
+  let sunrise = (new Date(data.results.sunrise)).toLocaleString('pl-PL').split(" ").pop();
+  let sunset  = (new Date(data.results.sunset)).toLocaleString('pl-PL').split(" ").pop();
+    _$("#sun").innerHTML  = `<div>Sunrise: ${sunrise}</div>`;
+    _$("#sun").innerHTML += `<div>Sunset:&nbsp; ${sunset}</div>`;
+});
+/*
+results:
+astronomical_twilight_begin: "5:05:49 AM"
+astronomical_twilight_end: "5:07:41 PM"
+civil_twilight_begin: "6:34:38 AM"
+civil_twilight_end: "3:38:52 PM"
+day_length: "07:42:58"
+nautical_twilight_begin: "5:48:55 AM"
+nautical_twilight_end: "4:24:35 PM"
+solar_noon: "11:06:45 AM"
+sunrise: "7:15:16 AM"
+sunset: "2:58:14 PM"
+*/
+
+///////////////////////
+
+/*
+console.log((new Date()).toLocaleString('pl-PL'));
+
+const date = new Date();
+
+console.log(date.toLocaleDateString('pl-PL'));
+
+const dateOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+console.log(date.toLocaleDateString('pl-PL', dateOptions));
+
+console.log(
+  date.toLocaleDateString('pl-PL', {
+    month: 'short',
+    day: 'numeric',
+  }),
+);
+
+console.log(
+  date.toLocaleDateString('pl-PL', {
+    month: 'long',
+  }),
+);
+
+console.log(date.toLocaleTimeString('pl-PL'));
+
+const timeOptions = {
+  //hour12: true,
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+};
+
+console.log(date.toLocaleTimeString('pl-PL', timeOptions));
+// 11:30:33 PM
+
+console.log(
+  date.toLocaleTimeString('pl-PL', {
+    timeZone: 'Europe/Warsaw',
+  }),
+);
+*/
+
+/*
+const dateOptions = {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+};
+const timeOptions = {
+  //hour12: true,
+  hour: 'numeric',
+  minute: '2-digit',
+  second: '2-digit',
+};
+const date = new Date();
+console.log( date.toLocaleString('pl-PL', { ...timeOptions, ...dateOptions }));
+console.log( date.toLocaleString('pl-PL'));
+console.log(date.toLocaleString('pl-PL'));
+*/
+ 
