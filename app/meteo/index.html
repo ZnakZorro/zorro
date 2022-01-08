@@ -35,6 +35,12 @@
     height: 320px;
     margin: 0 auto;
 }
+div.klawisze {margin:0.5em auto;}
+div.klawisze a, div.klawisze button {min-width:7em; font-size:15pt; padding:0.45em;}
+a.btn-info, button.btn-info, .btn-info {
+  background-color: #69b;
+  color: #000;
+}
 
 #loading {
     margin-top: 1px;
@@ -108,9 +114,9 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 <div class="klawisze" class="col" style="max-width:100vw;">
-    <a href="../../" class="btn">DOM</a>
-    <button id="meteoMaxDays1" onclick="meteoSetDay(1)">10</button>
-    <button id="meteoMaxDays0" onclick="meteoSetDay(0)">3</button>
+    <a href="../../" class="btn btn-info">DOM</a>
+    <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10</button>
+    <button id="meteoMaxDays0" class="btn btn-info" onclick="meteoSetDay(0)">3</button>
 </div>  
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
   
