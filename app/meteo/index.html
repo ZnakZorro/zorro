@@ -815,10 +815,10 @@ console.log(this.json.properties.timeseries);
 	/*if (to > pointStart + 5*48 * 36e5) {
             return;
         }*/
-        if (to > pointStart + 5*48 * 36e5) {
+        if (to > pointStart + 2*48 * 36e5) {
             return;
         }
-
+	console.log(nextHours);
         // Populate the parallel arrays
         this.symbols.push(nextHours.summary.symbol_code);
 
