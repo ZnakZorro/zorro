@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-   <meta http-equiv="refresh" content="1800">
+   <meta http-equiv="refresh" content="18000">
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -34,7 +34,7 @@ body {
     margin: 0.3em;
 }
  .icon1 {max-width:32px; cursor:pointer;}
-
+ div.pogoda div.active {background-color:lightgoldenrodyellow;}
 </style>
 <script>
 
@@ -50,7 +50,6 @@ body {
              <ul class="nav-menu">
                 <li class="nav-item"><a href="app/meteo/" class="nav-link">Meteo</a></li>
                 <li class="nav-item"><a href="app/radar/" class="nav-link">Radar</a></li>
-                <li class="nav-item"><a href="app/todo/" class="nav-link">ToDo</a></li>
                 <li class="nav-item"><a href="html/" class="nav-link">Link</a></li>
                 <li class="nav-item"><a href="app/radio/" class="nav-link">Radio</a></li>
                 <li class="nav-item"><a href="app/580/" class="nav-link">580</a></li>
@@ -66,10 +65,13 @@ body {
         </nav>
     </header>
    
-   
+  
  <div class="wrapper">
       <div class="container">
-      <span id="flag2"></span>
+        <div class="card">
+          <div id="sun"></div>
+        <span id="flag2"></span>
+      </div>
       </div>
    
    
@@ -134,13 +136,11 @@ if (location.protocol==="file:") {
   document.title="FILE::git";
   
   let link = document.querySelector("link[rel~='icon']");
-    console.log(link);
   if (!link) {
       link = document.createElement('link');
       link.rel = 'icon';
       document.getElementsByTagName('head')[0].appendChild(link);
   }
-  //link.href = 'https://stackoverflow.com/favicon.ico';
   link.href = './css/icon/red.ico';
 }
   
