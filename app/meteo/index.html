@@ -803,7 +803,7 @@ Meteogram.prototype.parseYrData = function () {
         return this.error();
     }
 
-    // Loop over hourly (or 6-hourly) forecasts qqqqqqqqqqqqqqq
+    // Loop over hourly (or 6-hourly) forecasts 
 console.log(this.json.properties.timeseries);
     this.json.properties.timeseries.forEach((node, i) => {
         const x = Date.parse(node.time),
@@ -812,9 +812,9 @@ console.log(this.json.properties.timeseries);
             to = node.data.next_1_hours ? x + 36e5 : x + 6 * 36e5;
 	console.log(i,to,pointStart + 48 * 36e5);
 	//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq    
-        if (to > pointStart + 48 * 36e5) {
+        /*if (to > pointStart + 48 * 36e5) {
             return;
-        }
+        }*/
 
         // Populate the parallel arrays
         this.symbols.push(nextHours.summary.symbol_code);
