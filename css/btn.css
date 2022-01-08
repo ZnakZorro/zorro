@@ -41,3 +41,14 @@ button.info {
 button.active{
   background-color:red!important;
 }   
+ 
+button.active{
+  background-color:red!important;
+}   
+
+div.klawisze {margin:0.5em auto;}
+div.klawisze a, div.klawisze button {min-width:7em; font-size:15pt; padding:0.45em;}
+a.btn-info, button.btn-info, .btn-info {
+  background-color: #69b;
+  color: #000;
+}
