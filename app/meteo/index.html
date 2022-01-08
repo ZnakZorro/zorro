@@ -35,6 +35,12 @@
     height: 320px;
     margin: 0 auto;
 }
+div.klawisze {margin:0.5em 0;}
+div.klawisze a, div.klawisze button {min-width:6em; font-size:13pt; padding:0.45em;}
+a.btn-info, button.btn-info, .btn-info {
+  background-color: #69b;
+  color: #000;
+}
 
 #loading {
     margin-top: 1px;
@@ -108,21 +114,11 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 <div class="klawisze" class="col" style="max-width:100vw;">
-    <a href="../../" class="btn btn-info">DOM</a>
-    <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10</button>
-    <button id="meteoMaxDays0" class="btn btn-info" onclick="meteoSetDay(0)">3</button>
+    <a href="../../" class="btn btn-info">gitZorro</a>
+    <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10 dni</button>
+    <button id="meteoMaxDays0" class="btn btn-info" onclick="meteoSetDay(0)">3 dni</button>
 </div>  
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
-  
-<!--div style="width: 800px; margin: 0 auto">
-    <a href="#http://www.yr.no/place/United_Kingdom/England/London/forecast_hour_by_hour.xml">London</a>,
-    <a href="#http://www.yr.no/place/France/Rhône-Alpes/Val_d\'Isère~2971074/forecast_hour_by_hour.xml">Val d'Isère</a>,
-    <a href="#http://www.yr.no/place/United_States/California/San_Francisco/forecast_hour_by_hour.xml">San Francisco</a>,
-    <a href="#http://www.yr.no/place/Norway/Vik/Vikafjell/forecast_hour_by_hour.xml">Vikjafjellet</a>
-</div-->
-
-
- 
   
   
 <script>
@@ -811,23 +807,27 @@ Meteogram.prototype.parseYrData = function () {
     //console.log("0 meteoMaxDays=",meteoMaxDays)
     // Loop over hourly (or 6-hourly) forecasts 
     //console.log(this.json.properties.timeseries);
- 
+    //console.log(this.json);
+    this.lastTime=Date.parse(this.json.properties.timeseries[0].time);
     this.json.properties.timeseries.forEach((node, i) => {
+        
 	    //if (i>80) return;
         const x = Date.parse(node.time),
             nextHours = node.data.next_1_hours || node.data.next_6_hours,
             symbolCode = nextHours && nextHours.summary.symbol_code,
             to = node.data.next_1_hours ? x + 36e5 : x + 6 * 36e5;
-
+            let delta = Math.round((x-this.lastTime)/3600000);
+            this.lastTime = x;
         //console.log(i,meteoMaxDays);
         if (meteoMaxDays===1){
-            //console.log("1=",meteoMaxDays)
+            //console.log("1=",x,"d=",delta,meteoMaxDays)
+            if (delta===1 && (i%3===1 || i%3===2)) return;
 	        if (!nextHours?.summary) return;           
         } else {
             //console.log("0=",meteoMaxDays)
             if (to > pointStart + 48 * 36e5) return;
         }
-	    
+	    //qqqqqqqqqqqqqqqqqqqqqqqqq
 	//console.log(nextHours);
         // Populate the parallel arrays
         this.symbols.push(nextHours.summary.symbol_code);
