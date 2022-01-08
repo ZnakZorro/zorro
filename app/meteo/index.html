@@ -804,6 +804,7 @@ Meteogram.prototype.parseYrData = function () {
     }
 
     // Loop over hourly (or 6-hourly) forecasts qqqqqqqqqqqqqqq
+console.log(this.json.properties.timeseries);
     this.json.properties.timeseries.forEach((node, i) => {
         const x = Date.parse(node.time),
             nextHours = node.data.next_1_hours || node.data.next_6_hours,
