@@ -11,7 +11,10 @@
   <link rel="stylesheet" type="text/css" href="../../css/btn.css" />
   
 <style>
-  .one {background-color: linen; border:1px solid #ddd; padding:0.3em;;}
+  body {font-size:13pt;}
+  .one {background-color: linen; border:1px solid #ddd; padding:0.3em; margin: 0.3em 0;}
+  .one a {text-decoration: none;}
+  #dadaj div {margin:0.75em 0;}
 </style>
 
 <script>
@@ -20,19 +23,34 @@ const _$$=e=>document.querySelectorAll(e);
 
 let IOThosty = {}
 const usunRadio=(ten)=>{
-  console.log(IOThosty);
+  console.log(ten.dataset.name);
+  //console.log(IOThosty);
+    let text = "Usunąć!\n OK lub Anuluj";
+    if (confirm(text) == true) {
+        //console.log(IOThosty);
+          let usuniety = false;
+          for(let n in IOThosty){
+              if (IOThosty[n].name === ten.dataset.name) {
+                delete IOThosty[n];
+                usuniety = true;
+              }
+          }
+        if (usuniety) localStorage.setItem("IOThosty", JSON.stringify(IOThosty));
+        IOTview(IOThosty);
+    }
 }
+
 const dodajRadio=(ten)=>{
   let dodaj = ten.parentNode.id;
   let url  =_$("#"+dodaj+" input#url").value;
   let name =_$("#"+dodaj+" input#name").value;
   if (!url || !name) return;
   if (!IOThosty[name]) IOThosty[name] = {};
-  let uurl = url;
-  let nname = name;
-  IOThosty[name].name = nname;
-  IOThosty[name].url  = uurl;
-  console.log(IOThosty);
+  
+  
+  IOThosty[name].name = name;
+  IOThosty[name].url  = url;
+  
   localStorage.setItem("IOThosty", JSON.stringify(IOThosty));
   IOTview(IOThosty);
 }
@@ -41,17 +59,20 @@ const IOTview=(IOThosty)=>{
   _$("#radios").innerHTML ="";
     for(let n in IOThosty){
       let r = IOThosty[n];
-      let del = '<button onclick="usunRadio(this)" class="btn btn-warn btn-mini">[-]</button>';
-      console.log(r);
-      _$("#radios").innerHTML += `<div class="one"><a href="${r.url}" target="_blank">${r.name} - ${r.url}</a> ${del}</div>`;
+      let del = '<button data-name="'+r.name+'" title="Usuń" onclick="usunRadio(this)" class="btn btn-def btn-mini">{-}</button>';
+      
+      let uurl = r.url.replace("http:","").replaceAll("/","");
+      //console.log(uurl,r);
+      _$("#radios").innerHTML += `<div class="one">${del} <a href="${r.url}" target="_blank">${r.name} - ${uurl}</a></div>`;
     }
-
+    console.log(JSON.stringify(IOThosty,null,"\t"));
 }
 document.addEventListener("DOMContentLoaded",function(){
     if (localStorage.getItem("IOThosty")){
         let strHosty = localStorage.getItem("IOThosty");
         if (strHosty)  IOThosty = JSON.parse(strHosty);
         IOTview(IOThosty);
+
     }
 });
   
@@ -67,14 +88,34 @@ document.addEventListener("DOMContentLoaded",function(){
 
   <hr />
     <div id="dadaj">
-     <div><span>Name:</span> <span><input id="name"/></span></div>
-     <div><span>URL:</span>&nbsp;  &nbsp; <span><input id="url"/></span></div>
-     <button onclick="dodajRadio(this)">Dodaj</button>
+      <h4>Dodaj radio IOT</h4>
+      <div><span>Name:</span> <span><input id="name"/></span></div>
+      <div><span>URL:</span>&nbsp;  &nbsp; <span><input id="url"/></span></div>
+      <button class="btn" onclick="dodajRadio(this)">Dodaj</button>
       
     </div>
   
   
     
 </div>
+
+<script>
+/*
+{
+	"Cartoon": {
+		"name": "Cartoon",
+		"url": "http://192.168.31.115/"
+	},
+	"Salon": {
+		"name": "Salon",
+		"url": "http://192.168.31.215/"
+	}
+}
+
+
+*/
+
+
+</script>
 </body>
 </html>
