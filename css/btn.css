@@ -51,4 +51,8 @@ a.btn-info, button.btn-info, .btn-info {
 a.btn-warn, button.btn-warn, .btn-warn {
   background-color: orange;
   color: #000;
+}a.btn-def, button.btn-def, .btn-def {
+  background-color: gray;
+  color: #fff;
+  border:none;
 }
