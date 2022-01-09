@@ -1,0 +1,24 @@
+{
+	"name": "Radio#IOT",
+	"short_name": "Radio#IOT",
+	"description": "Radio#IOT",
+	"start_url": "index.html",
+	"display": "standalone",
+
+	"theme_color": "#624",
+	"background_color": "#936",
+	"icons": [
+		{
+			"src": "./img/radio.svg",
+			"sizes": "512x512",
+			"type": "image/svg"
+		}
+	],
+	"screenshots": [		
+		{
+			"src": "./img/dom.svg",
+			"sizes": "512x512",
+			"type": "image/svg"
+		}
+	]
+}
