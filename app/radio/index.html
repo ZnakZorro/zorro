@@ -63,7 +63,7 @@ const IOTview=(IOThosty)=>{
       
       let uurl = r.url.replace("http:","").replaceAll("/","");
       //console.log(uurl,r);
-      _$("#radios").innerHTML += `<div class="one">${del} <a href="${r.url}" target="_blank">${r.name} - ${uurl}</a></div>`;
+      _$("#radios").innerHTML += `<div class="one">${del} <a href="${r.url}" target="_blank">${r.name} &rArr; ${uurl}</a></div>`;
     }
     console.log(JSON.stringify(IOThosty,null,"\t"));
 }
