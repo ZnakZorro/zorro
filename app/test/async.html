@@ -1,21 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <title>async events</title>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
 
-<a href="https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/">https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/</a>
+<style>
+    body {margin:0.5em; padding:0.5em; font-size: 11pt;}
+</style>
+<script>
+    const _$=e=>document.querySelector(e);
+    const _$$=e=>document.querySelectorAll(e);
+</script>
+   
+</head>
+
+<body>
+  <h1>async events</h1>
+<a class="small" href="https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/">https://www.freecodecamp.org/news/how-to-handle-async-callbacks-in-javascript/</a>
 
 
 <div id="container"></div>
 
-
-
-
-
-
-
-
 <script>
 
-
-  
-  
 const load = (apiEndpoint, elementToNotify, eventTitle) => {
   fetch(apiEndpoint)
     .then( result => result.json() )
@@ -73,3 +84,6 @@ load("https://jsonplaceholder.typicode.com/todos", container, 'todo.load');
   
 
 </script>
+
+</body>
+</html>
