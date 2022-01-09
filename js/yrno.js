@@ -397,9 +397,9 @@ fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
   let sunrise = (new Date(data.results.sunrise)).toLocaleString('pl-PL').split(" ").pop();
   let sunset  = (new Date(data.results.sunset)).toLocaleString('pl-PL').split(" ").pop();
   let dayLen  = dayL(data.results.day_length);
-    _$("#sun").innerHTML  = `<div><span>Sunrise:</span> <span>${sunrise}</span></div>`;
-    _$("#sun").innerHTML += `<div><span>Sunset:</span> <span>${sunset}</span></div>`;
-    _$("#sun").innerHTML += `<div><span>Day len:</span> <span>${dayLen}</span></div>`;
+    _$("#sun").innerHTML  = `<div><span><small>Wschód:</small></span> <span>${sunrise}</span></div>`;
+    _$("#sun").innerHTML += `<div><span><small>Zachód:</small></span> <span>${sunset}</span></div>`;
+    _$("#sun").innerHTML += `<div><span><small>Dzień:</small></span> <span>${dayLen}</span></div>`;
 });
 /*
 results:
