@@ -37,9 +37,9 @@ body {
  div.pogoda div.active {background-color:lightgoldenrodyellow;}
  div#sun  {}
  div#sun div span {}
- .row  {}
- .fild { }
-  .fild div {
+ div.row  {}
+ div.fild { }
+  div.fild div {
     border: 1px solid #ddd;
     background-color: #ffffff;
     padding: 0.5em 0.1em 0.1em 0.1em;
@@ -48,6 +48,10 @@ body {
     margin: 0.2em 0;
     text-align: center;
     position: relative;
+}
+div.field div span:nth-child(2) { 
+    padding-top: 1em;
+    display: inline-block;
 }
 @media (max-width: 768px) {
     .fild div span:nth-child(1) {
@@ -92,7 +96,7 @@ body {
  <div class="wrapper">
       <div class="container">
         <div class="row">
-          <div id="sun" class="grid fild"></div>
+          <div id="sun" class="grid pogoda field"></div>
         <span id="flag2"></span>
       </div>
       </div>
