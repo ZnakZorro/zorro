@@ -372,6 +372,20 @@ fetch("https://www.yr.no//api/v0/locations/2-3083828/celestialevents")
     })
     .catch(e => {console.log(e)});
 */
+function pad2(s) { return ("0"+s.toString()).slice(-2); }
+
+const dateHM=(date)=>{
+  let d = (new Date(date));
+  let H = pad2(d.getHours());
+  let M = pad2(d.getMinutes());  
+  return H+":"+M;
+}
+
+const dayL=(time)=>{
+  let H = Math.floor(time/3600);
+  let M = Math.round((time-(3600*H)) / 60); 
+  return pad2(H)+":"+pad2(M);
+}
 
 fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
 .then(function(response) {
@@ -382,21 +396,23 @@ fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
   console.log(data,new Date(Date.parse(data.results.sunrise)))
   let sunrise = (new Date(data.results.sunrise)).toLocaleString('pl-PL').split(" ").pop();
   let sunset  = (new Date(data.results.sunset)).toLocaleString('pl-PL').split(" ").pop();
-    _$("#sun").innerHTML  = `<div>Sunrise: ${sunrise}</div>`;
-    _$("#sun").innerHTML += `<div>Sunset:&nbsp; ${sunset}</div>`;
+  let dayLen  = dayL(data.results.day_length);
+    _$("#sun").innerHTML  = `<div><span>Sunrise:</span> <span>${sunrise}</span></div>`;
+    _$("#sun").innerHTML += `<div><span>Sunset:</span> <span>${sunset}</span></div>`;
+    _$("#sun").innerHTML += `<div><span>Day len:</span> <span>${dayLen}</span></div>`;
 });
 /*
 results:
-astronomical_twilight_begin: "5:05:49 AM"
-astronomical_twilight_end: "5:07:41 PM"
-civil_twilight_begin: "6:34:38 AM"
-civil_twilight_end: "3:38:52 PM"
-day_length: "07:42:58"
-nautical_twilight_begin: "5:48:55 AM"
-nautical_twilight_end: "4:24:35 PM"
-solar_noon: "11:06:45 AM"
-sunrise: "7:15:16 AM"
-sunset: "2:58:14 PM"
+astronomical_twilight_begin: "2022-01-09T05:05:27+00:00"
+astronomical_twilight_end: "2022-01-09T17:08:53+00:00"
+civil_twilight_begin: "2022-01-09T06:34:07+00:00"
+civil_twilight_end: "2022-01-09T15:40:13+00:00"
+day_length: 27906
+nautical_twilight_begin: "2022-01-09T05:48:30+00:00"
+nautical_twilight_end: "2022-01-09T16:25:50+00:00"
+solar_noon: "2022-01-09T11:07:10+00:00"
+sunrise: "2022-01-09T07:14:37+00:00"
+sunset: "2022-01-09T14:59:43+00:00"
 */
 
 ///////////////////////
