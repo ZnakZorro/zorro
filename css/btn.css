@@ -1,7 +1,7 @@
 button, div.links a , .btn, a.btn {
     background-color: #369;
     color: #fff;
-    padding: 0.5em 0.6em;
+    padding: 0.3em;
     margin: 0.2em;
     border-radius: 0.66em;
     cursor: pointer;
@@ -12,14 +12,16 @@ button, div.links a , .btn, a.btn {
 }
 
 button.btn-sm {font-size:0.75rem; padding:0.4em;}
+button.btn-mini {    font-size: 0.75rem;
+  padding: 0.3em 0.5em;
+  width: auto;
+  min-width: auto;}
+
 button.succ {
   background-color: #13ce66;
   color: #fff;
 }
-button.warn {
-  background-color: orange;
-  color: #000;
-}
+
 button.navy {
   background-color: darkviolet;
   color: white;
@@ -29,10 +31,7 @@ button.red, .btn-red {
   color: black;
   border-color: black;
 }
-button.info {
-  background-color: #369;
-  color: #fff;
-}
+
   button.gitt {
   background-color: #2da44e;
   color: #fff;
@@ -44,7 +43,12 @@ button.active{
 
 div.klawisze {margin:0.5em 0;}
 div.klawisze a, div.klawisze button {min-width:7em; font-size:13pt; padding:0.45em;}
+
 a.btn-info, button.btn-info, .btn-info {
   background-color: #69b;
+  color: #000;
+}
+a.btn-warn, button.btn-warn, .btn-warn {
+  background-color: orange;
   color: #000;
 }
