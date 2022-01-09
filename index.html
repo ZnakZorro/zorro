@@ -35,6 +35,27 @@ body {
 }
  .icon1 {max-width:32px; cursor:pointer;}
  div.pogoda div.active {background-color:lightgoldenrodyellow;}
+ div#sun  {}
+ div#sun div span {}
+ .row  {}
+ .fild { }
+  .fild div {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    padding: 0.5em 0.1em 0.1em 0.1em;
+    word-break: break-all;
+    border-radius: 0.2em;
+    margin: 0.2em 0;
+    text-align: center;
+    position: relative;
+}
+@media (max-width: 768px) {
+    .fild div span:nth-child(1) {
+      display: grid;
+      justify-content: space-around;
+      justify-items: center;
+    }
+}   
 </style>
 <script>
 
@@ -68,8 +89,8 @@ body {
   
  <div class="wrapper">
       <div class="container">
-        <div class="card">
-          <div id="sun"></div>
+        <div class="row">
+          <div id="sun" class="grid fild"></div>
         <span id="flag2"></span>
       </div>
       </div>
