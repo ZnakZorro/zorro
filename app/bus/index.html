@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>BUS</title>
+  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/navbar.css">
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/btn.css" />
+   <style>
+    .tablica iframe {
+        width:100%;
+        min-height: 62vw;
+    }
+    
+    body {
+        font-family: "Verdana", sans-serif;
+        font-size: 14pt;
+        font-weight: 300;
+        background-color: #f4f4f4;
+    }
+    .wrapper {
+        padding: 0.25em;
+        margin: 0.25em;
+    }
+     .container {
+        padding-top: 0.5em;
+        
+        background-color:white;
+    }
+    
+</style>
+<script>
+    const backHome=()=>{window.location.href="../";}
+    document.addEventListener("DOMContentLoaded",function(){
+
+    /*let u = "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539";
+
+    fetch("u")
+    .then(function(response) {
+          if (!response.ok) {throw Error(response.statusText);}
+          return response.json();
+    })
+    .then(obj => {
+        yrnoPL = obj;
+        getYRNO(urlYRNO);
+        //console.log(yrnoPL);
+        //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
+        if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
+    })
+    .catch(e => {console.log(e)});
+
+
+
+
+
+        //document.getElementById("info").textContent = "info";
+        
+        fetch(u)
+        .then(r => {return r.json()})
+        .then(o => {console.log(o)})
+        .catch(e => {console.log(e)})
+        */
+
+
+    })
+        
+</script>
+          
+</head>
+
+<body>
+    <div class="wrapper">
+        <h3>
+            <img src="../../css/icon/back.svg" onClick="backHome()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
+            &nbsp; BUS
+          </h3>
+        <div class="container">
+
+            <div class="tablica">
+                <h3><span>66</span> na Jaśminową</h3>
+                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539"></iframe>
+            </div>
+
+            <div class="tablica">
+                <h3><span>Tramwaje</span> z Jaśminowej do centrum</h3>
+                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1297"></iframe>
+            </div>
+            
+            <div class="tablica">
+                <h3><span>B,71</span> z Łubinowej</h3>
+                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1273"></iframe>
+            </div>
+            
+            <div class="tablica">
+                <h3><span>Końcowy</span>Słoneczne</h3>
+                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1260"></iframe>
+            </div>
+            
+        </div>
+    </div>
+
+</body>
+</html>
