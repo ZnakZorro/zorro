@@ -166,7 +166,10 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
     return w;
 } 
-const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${w.pl}</span>`;
+
+//fffffffffffffffffffffffffffffffffffffff
+//const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${w.pl}</span>`;
+const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${tosm(w.humi,"%")}</span>`;
 
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
@@ -298,9 +301,9 @@ document.addEventListener("DOMContentLoaded",function(){
     getYRNO2Cache();
     setInterval(()=>{
       cacheTimeMinutes = countCacheTimeMinutes();
-      console.log(cacheTimeMinutes);
+      //console.log(cacheTimeMinutes);
 
-    },60000)
+    },300000)
    
   
     fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
@@ -396,6 +399,9 @@ fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
   console.log(data,new Date(Date.parse(data.results.sunrise)))
   let sunrise = (new Date(data.results.sunrise)).toLocaleString('pl-PL').split(" ").pop();
   let sunset  = (new Date(data.results.sunset)).toLocaleString('pl-PL').split(" ").pop();
+  sunrise = sunrise.replace(/(\:\d\d)$/,"");
+  sunset  =  sunset.replace(/(\:\d\d)$/,"");
+  //console.log(sunrise,sunset)
   let dayLen  = dayL(data.results.day_length);
     _$("#sun").innerHTML  = `<div><span>Wschód:</span> <span>${sunrise}</span></div>`;
     _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
