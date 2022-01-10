@@ -169,7 +169,7 @@ const windChillCelsius = (temperature, windSpeed) =>
 
 //fffffffffffffffffffffffffffffffffffffff
 //const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${w.pl}</span>`;
-const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${tosm(w.humi,"%")}</span>`;
+const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humi,"%")}</span>`;
 
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
@@ -208,9 +208,13 @@ const symbolTR=(tx)=>{
   tx = tx.split("_")[0];
   return (yrnoPL[tx].pl);
 }
-const ronda=(tx)=>{
-  let int = parseInt(tx);
-  return int.toString();
+const ronda=(tx,miano=null)=>{
+  let inte = Math.round(parseFloat(tx));
+  let out = inte.toString()
+  if (miano){
+    out = out+"<small>"+miano+"</small>";
+  }
+  return out;
 }
 const tosm=(tx,miano="&deg;C")=>{
   let flo = parseFloat(tx);
