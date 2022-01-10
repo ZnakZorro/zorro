@@ -14,6 +14,7 @@
    <link rel="stylesheet" href="../../css/navbar.css">
    <link rel="stylesheet" href="../../css/style.css" />
    <link rel="stylesheet" href="../../css/btn.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
    <style>
     .tablica iframe {
         width:100%;
@@ -26,7 +27,7 @@
         font-weight: 300;
         background-color: #f4f4f4;
     }
-    .wrapper {
+    /*.wrapper {
         padding: 0.25em;
         margin: 0.25em;
     }
@@ -34,12 +35,42 @@
         padding-top: 0.5em;
         
         background-color:white;
-    }
+    }*/
     
 </style>
+<script src="../../all.js"></script>
 <script>
     const backHome=()=>{window.location.href="../../";}
     document.addEventListener("DOMContentLoaded",function(){
+
+    /*let u = "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539";
+
+    fetch("u")
+    .then(function(response) {
+          if (!response.ok) {throw Error(response.statusText);}
+          return response.json();
+    })
+    .then(obj => {
+        yrnoPL = obj;
+        getYRNO(urlYRNO);
+        //console.log(yrnoPL);
+        //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
+        if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
+    })
+    .catch(e => {console.log(e)});
+
+
+
+
+
+        //document.getElementById("info").textContent = "info";
+        
+        fetch(u)
+        .then(r => {return r.json()})
+        .then(o => {console.log(o)})
+        .catch(e => {console.log(e)})
+        */
+
 
     })
         
@@ -50,7 +81,7 @@
 <body>
     <div class="wrapper">
         <h3>
-            <img src="../../css/icon/back.svg" onClick="backHome()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
+            <img src="../../css/icon/back.svg" onClick="backFromAPP()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
             &nbsp; BUS
           </h3>
         <div class="container">
