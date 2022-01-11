@@ -496,24 +496,25 @@ const betaInput=(t)=>{
 </head>
 <body>
 <div class="col">
-  <!--button onclick='location.href="../../";'>&larr;&laquo;&ndash;</button-->
   <button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button>
+  <!--
   <button onclick='location.href="./";'>X</button>
   <button onclick='location.href="./?type=1d";'>1D</button>
   <button onclick='location.href="./?type=2d";'>2D</button>
   <button onclick='location.href="./?type=3d";'>3D</button>
+  -->
 </div>
 
   
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
     <div id="container"></div>
 </figure>
-<div class="col">
+<!--div class="col">
   A:<input type="range" min="-100" max="100" step="5" value="10" onInput="alphaInput(this)" /><br />
   B:<input type="range" min="-100" max="100" step="5" value="20" onInput="betaInput(this)" />
-</div>
+</div-->
 <div class="col">
-	<h3 style="font-weight:normal; cursor:pointer;" title="Kasuj wybrane kraje"><span id="dn" onClick="kasuj()">@Attractor COVID</span> <span id="dd"></span></h3>
+	<!--h3 style="font-weight:normal; cursor:pointer;" title="Kasuj wybrane kraje"><span id="dn" onClick="kasuj()">@Attractor COVID</span> <span id="dd"></span></h3-->
     <div id="info"></div>
     <pre id="pre"></pre>
 </div>
