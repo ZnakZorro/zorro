@@ -184,13 +184,13 @@ if (location.protocol==="file:") {
 console.log(APPconfig);
 console.log(APPconfig.city[APPcity]);
 
-
-var data = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
-console.log(data)
-console.log(data.sunrise)
-console.log(data.sunset)
-      let dSunrise = new Date(data.sunrise);
-      let dSunset  = new Date(data.sunset);
+//https://github.com/mourner/suncalc
+let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
+console.log(SUNdata)
+console.log(SUNdata.sunrise)
+console.log(SUNdata.sunset)
+      let dSunrise = new Date(SUNdata.sunrise);
+      let dSunset  = new Date(SUNdata.sunset);
       let dateSunrise = dSunrise.getTime();
       let dateSunset  = dSunset.getTime();
       let dateDelta = dateSunset - dateSunrise;
