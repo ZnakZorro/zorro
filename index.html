@@ -16,7 +16,7 @@
    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
    <link rel="stylesheet" href="./css/navbar.css">
    <link rel="stylesheet" href="./css/style.css" />
-
+   <script src="./js/all.js"></script>
    
    
    
@@ -177,9 +177,41 @@ if (location.protocol==="file:") {
   }
   link.href = './css/icon/red.ico';
 }
-  
-  
 </script>				  
 
+<script src="./js/suncalc.js"></script>
+<script>
+console.log(APPconfig);
+console.log(APPconfig.city[APPcity]);
 
+
+var data = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
+console.log(data)
+console.log(data.sunrise)
+console.log(data.sunset)
+      let dSunrise = new Date(data.sunrise);
+      let dSunset  = new Date(data.sunset);
+      let dateSunrise = dSunrise.getTime();
+      let dateSunset  = dSunset.getTime();
+      let dateDelta = dateSunset - dateSunrise;
+      console.log("date=",  dateSunrise,dateSunset,dateDelta)
+      let sunrise = dSunrise.toLocaleString('pl-PL').split(" ").pop();
+      let sunset  = dSunset.toLocaleString('pl-PL').split(" ").pop();
+      sunrise = sunrise.replace(/(\:\d\d)$/,"");
+      sunset  =  sunset.replace(/(\:\d\d)$/,"");
+      console.log(sunrise,sunset)
+      let dayLen  = dayL(dateDelta/1000);
+        _$("#sun").innerHTML  = `<div><span>Wschód:</span> <span>${sunrise}</span></div>`;
+        _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
+        _$("#sun").innerHTML += `<div><span>Dzień:</span> <span>${dayLen}</span></div>`;
+/*
+var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+console.log(sunriseStr)
+
+var sunrisePos = SunCalc.getPosition(times.sunrise, 54.6,14.6);
+console.log(sunrisePos)
+var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
+console.log(sunriseAzimuth);
+*/
+</script>
 </html>
