@@ -2,7 +2,34 @@
 
 
 <script>
-let u = "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tabliczka,2,1297,p"
+let u = "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tabliczka,2,1297,p";
+
+
+fetch(u)
+    .then(function(response) {
+          if (!response.ok) {throw Error(response.statusText);}
+          return response.text();
+    })
+    .then(obj => {
+        console.log(obj);
+    })
+    .catch(e => {console.log(e)});
+
+
+
+
+
+const getF = async () => {
+  const r = await fetch(u)
+  const o = await r.text()
+  return o
+}
+getF().then((re) => console.log(re))
+
+
+
+
+
 fetch(u)
 .then(r => {return r.text()})
 .then(o => {console.log(o)})
