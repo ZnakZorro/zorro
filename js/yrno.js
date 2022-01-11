@@ -2,6 +2,29 @@
 const _$=e=>document.querySelector(e);
 const _$$=e=>document.querySelectorAll(e);
 
+let config={
+	"city": {
+		"Dabie": {
+			"lat": "53.3788",
+			"lon": "14.666",
+			"altitude": "25"
+		},
+		"Szczecin": {
+			"lat": "53.380",
+			"lon": "14.662",
+			"altitude": "25"
+		}
+	}
+}
+console.log(config);
+/*
+Szczecin
+https://www.google.pl/maps/@53.380588,14.6628268,21z?hl=pl&expflags=__data_rollout__Tactile.IsDogfoodRollout__launched__%3Afalse%2C__data_rollout__Tactile.IsFishfoodRollout__launched__%3Afalse
+dabie
+https://www.google.pl/maps/@53.3787806,14.66581,21z?hl=pl&expflags=__data_rollout__Tactile.IsDogfoodRollout__launched__%3Afalse%2C__data_rollout__Tactile.IsFishfoodRollout__launched__%3Afalse
+
+
+*/
 
 /**
 https://github.com/nicolasgrancher/weather-js
@@ -394,7 +417,7 @@ const dayL=(time)=>{
   return pad2(H)+":"+pad2(M);
 }
 
-fetch("https://api.sunrise-sunset.org/json?lat=54.2694&lng=14.9804&formatted=0")
+fetch("https://api.sunrise-sunset.org/json?lat=53.37883&lng=14.6660&formatted=0")
 .then(function(response) {
   if (!response.ok) {throw Error(response.statusText);}
   return response.json();
