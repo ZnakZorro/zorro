@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta http-equiv="refresh" content="3600">
-<title>Atractor COVID</title>
+<title>git::COVID</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#db5945">
@@ -104,7 +104,7 @@ const weekMiddle=(datas,times,country)=>{
 
 const describe=(data,country)=>{
   let population = data.countries[country].population;
-  console.log(country,population);
+  //console.log(country,population);
   //console.log(type,data.countries);
   //console.log(data.countries.Poland.cases);
   //console.log(data.countries[country].cases.length,data.series.length);
@@ -208,7 +208,7 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
         },            
 		},
 		title: {
-			text: 'Attractor COVID - '+country
+			text: 'COVID - '+country
 		},
 		subtitle: {
 			text: null
@@ -496,7 +496,8 @@ const betaInput=(t)=>{
 </head>
 <body>
 <div class="col">
-  <button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button>
+    <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
+  <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
   <!--
   <button onclick='location.href="./";'>X</button>
   <button onclick='location.href="./?type=1d";'>1D</button>
