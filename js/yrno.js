@@ -2,7 +2,7 @@
 const _$=e=>document.querySelector(e);
 const _$$=e=>document.querySelectorAll(e);
 
-let config={
+let APPconfig={
 	"city": {
 		"Dabie": {
 			"lat": "53.3788",
@@ -16,7 +16,11 @@ let config={
 		}
 	}
 }
-console.log(config);
+
+let APPcity = "Dabie"
+//console.log(APPconfig);
+//console.log(APPconfig[APPcity]);
+
 /*
 Szczecin
 https://www.google.pl/maps/@53.380588,14.6628268,21z?hl=pl&expflags=__data_rollout__Tactile.IsDogfoodRollout__launched__%3Afalse%2C__data_rollout__Tactile.IsFishfoodRollout__launched__%3Afalse
@@ -402,21 +406,9 @@ fetch("https://www.yr.no//api/v0/locations/2-3083828/celestialevents")
     })
     .catch(e => {console.log(e)});
 */
-function pad2(s) { return ("0"+s.toString()).slice(-2); }
 
-const dateHM=(date)=>{
-  let d = (new Date(date));
-  let H = pad2(d.getHours());
-  let M = pad2(d.getMinutes());  
-  return H+":"+M;
-}
 
-const dayL=(time)=>{
-  let H = Math.floor(time/3600);
-  let M = Math.round((time-(3600*H)) / 60); 
-  return pad2(H)+":"+pad2(M);
-}
-
+/*
 fetch("https://api.sunrise-sunset.org/json?lat=53.37883&lng=14.6660&formatted=0")
 .then(function(response) {
   if (!response.ok) {throw Error(response.statusText);}
@@ -434,6 +426,9 @@ fetch("https://api.sunrise-sunset.org/json?lat=53.37883&lng=14.6660&formatted=0"
     _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
     _$("#sun").innerHTML += `<div><span>Dzień:</span> <span>${dayLen}</span></div>`;
 });
+*/
+
+
 /*
 results:
 astronomical_twilight_begin: "2022-01-09T05:05:27+00:00"
