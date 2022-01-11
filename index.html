@@ -186,20 +186,20 @@ console.log(APPconfig.city[APPcity]);
 
 //https://github.com/mourner/suncalc
 let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
-console.log(SUNdata)
-console.log(SUNdata.sunrise)
-console.log(SUNdata.sunset)
+  //console.log(SUNdata)
+  //console.log(SUNdata.sunrise)
+  //console.log(SUNdata.sunset)
       let dSunrise = new Date(SUNdata.sunrise);
       let dSunset  = new Date(SUNdata.sunset);
       let dateSunrise = dSunrise.getTime();
       let dateSunset  = dSunset.getTime();
       let dateDelta = dateSunset - dateSunrise;
-      console.log("date=",  dateSunrise,dateSunset,dateDelta)
+      //console.log("date=",  dateSunrise,dateSunset,dateDelta)
       let sunrise = dSunrise.toLocaleString('pl-PL').split(" ").pop();
       let sunset  = dSunset.toLocaleString('pl-PL').split(" ").pop();
       sunrise = sunrise.replace(/(\:\d\d)$/,"");
       sunset  =  sunset.replace(/(\:\d\d)$/,"");
-      console.log(sunrise,sunset)
+      //console.log(sunrise,sunset)
       let dayLen  = dayL(dateDelta/1000);
         _$("#sun").innerHTML  = `<div><span>Wschód:</span> <span>${sunrise}</span></div>`;
         _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
