@@ -49,8 +49,49 @@
 <script src="../../js/all.js"></script>
 
 <script>
+const busy ={
+	"66 Lidl na Jaśminową":     "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539",
+	"B,71 Łubinowa":            "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1273",
+	"Końcowy Słoneczne":        "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1260",
+	"Tramwaj ZUS do centrum ":  "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1297",
+	"66,71 z ZUS do domu ":     "https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1299"
+}    
     const backHome=()=>{window.location.href="../../";}
+
+    const getTabliczka=(t)=>{
+        let d = t.dataset;
+        console.log(d);
+        document.getElementById("tabliczki").innerHTML = `
+            <div class="tablica">
+                <h3><span>${d.bus}</span> ${d.name}</h3>
+                <iframe src="${d.iurl}"></iframe>
+            </div>
+            `;  
+    }
+
     document.addEventListener("DOMContentLoaded",function(){
+        let html = "";
+        let klaw = "";
+        for (let b in busy){
+            let a = b.split(" ");
+            let bus = a[0];
+            a.shift();
+            let name = a.join(" ");
+            let iurl = busy[b];
+            //console.log(bus,name,iurl);
+            html += `
+            <div class="tablica">
+                <h3><span>${bus}</span> ${name}</h3>
+                <iframe src="${iurl}"></iframe>
+            </div>
+            `;  
+            klaw += `
+                <button data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
+            `;          
+        }
+        document.getElementById("tabliczki").innerHTML = html;
+        document.getElementById("klawisze").innerHTML = klaw;
+
     })
         
 </script>
@@ -63,8 +104,9 @@
             <img src="../../css/icon/back.svg" onClick="backFromAPP()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
             &nbsp; BUS
           </h3>
-        <div class="container busgrid">
-
+        <div class="container busgrid" id="klawisze"></div>
+        <div class="container busgrid" id="tabliczki">
+<!--
             <div class="tablica">
                 <h3><span>66</span> Lidl na Jaśminową</h3>
                 <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539"></iframe>
@@ -89,7 +131,7 @@
                 <h3><span>66,71</span> z ZUS do domu</h3>
                 <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1299"></iframe>
             </div>
-            
+-->            
             
         </div>
     </div>
