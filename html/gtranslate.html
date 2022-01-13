@@ -1,0 +1,79 @@
+
+			
+		<!DOCTYPE html>
+<html>
+<head>
+<title>rssAA</title>
+<meta charset="utf-8"> 
+	<meta name="viewport" content="width=device-width,initial-scale=1"> 
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<!--link rel="icon" type="image/png" size="128x128" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAACVBMVEUAAAAAAAAAAACDY+nAAAAAAnRSTlMAgJsrThgAAADpSURBVFjD7dHBCQMxDERR70VFpJrUo2pURC5SlcEszkCEfwPruRn9wwOPv13vwbMYvNdn8Dz5flUxwqqCCVWM8KpkQjHCZhBMYITPIJHACLuDIAIj/A4SCIywFQQQEOErSCAQwhQEEADhChIIQgBBiEYQAghCNAIgRBACCEI0ghBAEAIIQjSCEEgQQgRGWA+iERDhPUggCAEEIUQAhAgNIQIgRGgIEQAhQkeIwAjbBSECI3wXpAiIsH0QIhDC90GKAAijIBaBEE5BLgIgjIOYBESIQN+xu87bCZ4brPcJTnCCE5zgfp/99gV7t1BMVMeE7wAAAABJRU5ErkJggg=="-->
+
+
+</head>
+
+
+
+
+
+
+<body id="bodydemo">
+    <div id="google_translate_element"></div>
+    
+<div style="width:100%;">
+    <textarea style="width:90%; height:20em; margin:auto;></textarea>
+</div>
+
+
+
+
+<script type="text/javascript">
+console.log(location)
+//document.cookie = "googtrans=/ru/pl";
+document.cookie = "googtrans=/en/pl; path="+location.pathname;///app/DOM/jsons/rssa";
+function googleTranslateElementInit() {
+   setTimeout(function(){
+      var opt = document.querySelector(".goog-te-combo");
+      console.log(opt)
+      opt.value='pl';
+      
+      //opt.style.display='none';
+   },300);
+new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
+}
+</script>
+<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+<script>
+var dni = 31
+var inputy = document.querySelectorAll('input[name=dni]');
+//console.log('dni=',dni,inputy)
+inputy.forEach(function(x,i){
+   //console.log(parseInt(x.value),dni,i,x,parseInt(x.value))
+   if (dni===parseInt(x.value)) x.checked=true;else x.checked=false;
+});
+
+//input type="radio" name="dni" value="1" checked>1 dzień 
+
+// DOM READY
+document.addEventListener('DOMContentLoaded', function() {
+	var active = ""
+;
+	var aul = document.querySelectorAll("ul#ulmenu li a");
+	//console.log("#391=",aul,aul.length)
+	//aul.forEach(function(i,x){
+		//console.log("#393=",i,x)
+	//})
+	for(var u in aul){
+		if (typeof(aul[u])==='object'){
+			//console.log(active,"#396=",typeof(aul[u]),u,aul[u]);
+			var id= "aid_"+u;
+			//aul[u].id=id;
+			aul[u].href += "&id="+u;
+			if (active===u) aul[u].classList.add('active');
+		}
+	}
+});// dom ready
+</script>
+
+</body>
+</html>
