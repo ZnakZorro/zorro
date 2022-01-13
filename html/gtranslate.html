@@ -14,14 +14,18 @@ body {
     background-color:#eee;
 }
 p {margin:0.3em 0;}
-textarea {font-size: 12pt;}
- div,textarea {
+textarea {
+    font-size: 12pt;
+    margin: auto;
+    display: block;
+}
+ div.o,textarea {
     background-color: rgb(255, 255, 255);  
     margin:1em auto;
     width: 98%;
     padding: 1%;
     border: 1px solid gray;
-    max-width: 50em;
+    max-width: 40rem;
  }
  </style>
 </head>
@@ -35,8 +39,8 @@ textarea {font-size: 12pt;}
     <div id="google_translate_element"></div>
     
     <div style="width:100%;">
-        <div id="out"></div>
-        Tu wklej:
+        <div class="o" id="out"></div>
+        <p>Tu wklej:</p>
         <textarea></textarea>
     </div>
 
