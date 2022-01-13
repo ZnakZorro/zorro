@@ -10,6 +10,16 @@
             <link rel="icon" type="image/png" size="128x128" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACAAgMAAAC+UIlYAAAACVBMVEUAAAAAAAAAAACDY+nAAAAAAnRSTlMAgJsrThgAAADpSURBVFjD7dHBCQMxDERR70VFpJrUo2pURC5SlcEszkCEfwPruRn9wwOPv13vwbMYvNdn8Dz5flUxwqqCCVWM8KpkQjHCZhBMYITPIJHACLuDIAIj/A4SCIywFQQQEOErSCAQwhQEEADhChIIQgBBiEYQAghCNAIgRBACCEI0ghBAEAIIQjSCEEgQQgRGWA+iERDhPUggCAEEIUQAhAgNIQIgRGgIEQAhQkeIwAjbBSECI3wXpAiIsH0QIhDC90GKAAijIBaBEE5BLgIgjIOYBESIQN+xu87bCZ4brPcJTnCCE5zgfp/99gV7t1BMVMeE7wAAAABJRU5ErkJggg==">
         <script src="../js/all.js"></script>
         <link rel="stylesheet" href="../css/all.css" />
+        <style>
+            body {
+                font-size: 14pt;
+                background-color:#eee;
+            }
+            textarea {
+                font-size: 12pt;
+            }
+            textarea,div{background-color: rgb(255, 255, 255);  margin:1em auto;}
+        </style>
         </head>
         
 
@@ -23,7 +33,7 @@
             <div id="google_translate_element"></div>
             
         <div style="width:100%;">
-          <div id="out" style="width:98%;padding:1%;  margin:1em auto; border:1px solid silver;"></div>
+          <div id="out" style="width:98%;padding:1%; border:1px solid silver;"></div>
             <textarea style="width:98%; height:10em; margin:auto;"></textarea>
         </div>
         
@@ -78,10 +88,14 @@
     
           
         document.querySelector("textarea").addEventListener("input", function(event) {
-            console.log(event)
-            console.log(event.target)
-            console.log(event.target.value)
-          document.getElementById("out").textContent=event.target.value
+            //console.log(event)
+            //console.log(event.target)
+            //console.log(event.target.value);
+            let text = event.target.value.trim();
+            let arr = text.split("\n");
+            let html = "<p>"+arr.join("</p><p>")+"</p>";
+            console.log(html)
+          document.getElementById("out").innerHTML = html;
         });
  
           
