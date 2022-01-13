@@ -8,19 +8,22 @@
     <link rel="icon" type="image/png" size="640x400" href="../img/pl_flag.svg">
     <script src="../js/all.js"></script>
     <link rel="stylesheet" href="../css/all.css" />
-    <style>
-        body {
-            font-size: 14pt;
-            background-color:#eee;
-        }
-        p {
-            margin:0.3em 0;
-        }
-        textarea {
-            font-size: 12pt;
-        }
-        textarea,div{background-color: rgb(255, 255, 255);  margin:1em auto;}
-    </style>
+<style>
+body {
+    font-size: 14pt;
+    background-color:#eee;
+}
+p {margin:0.3em 0;}
+textarea {font-size: 12pt;}
+ div,textarea {
+    background-color: rgb(255, 255, 255);  
+    margin:1em auto;
+    width: 98%;
+    padding: 1%;
+    border: 1px solid gray;
+    max-width: 50em;
+ }
+ </style>
 </head>
 
 <body id="bodydemo">
@@ -32,69 +35,40 @@
     <div id="google_translate_element"></div>
     
     <div style="width:100%;">
-        <div id="out" style="width:98%;padding:1%; border:1px solid silver;"></div>
+        <div id="out"></div>
         Tu wklej:
-        <textarea style="width:98%; height:10em; margin:auto;"></textarea>
+        <textarea></textarea>
     </div>
 
 
-<script type="text/javascript">
-//console.log(location)
-//document.cookie = "googtrans=/ru/pl";
-document.cookie = "googtrans=/en/pl; path="+location.pathname;///app/DOM/jsons/rssa";
+<script>
+
+//document.cookie = "googtrans=/en/pl; path="+location.pathname;
+    
 function googleTranslateElementInit() {
     setTimeout(function(){
         let opt = document.querySelector(".goog-te-combo");
-        //console.log(opt)
         opt.value='pl';
         //opt.style.display='none';
     },500);
 new google.translate.TranslateElement({pageLanguage: 'en'}, 'google_translate_element');
 }
-</script>
-<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-<script>
-/*var dni = 31
-var inputy = document.querySelectorAll('input[name=dni]');
-inputy.forEach(function(x,i){
-    if (dni===parseInt(x.value)) x.checked=true;else x.checked=false;
-});*/
-
-//input type="radio" name="dni" value="1" checked>1 dzień 
 
 // DOM READY
 document.addEventListener('DOMContentLoaded', function() {
-    /*var active = "";
-    var aul = document.querySelectorAll("ul#ulmenu li a");
-    console.log("#67=",aul,aul.length)
-    //aul.forEach(function(i,x){
-        //console.log("#393=",i,x)
-    //})
-    for(var u in aul){
-        if (typeof(aul[u])==='object'){
-            //console.log(active,"#396=",typeof(aul[u]),u,aul[u]);
-            var id= "aid_"+u;
-            //aul[u].id=id;
-            aul[u].href += "&id="+u;
-            if (active===u) aul[u].classList.add('active');
-        }
-    }*/
+    
 });// dom ready
 
     
 document.querySelector("textarea").addEventListener("input", function(event) {
-    //console.log(event)
-    //console.log(event.target)
-    //console.log(event.target.value);
     let text = event.target.value.trim();
     let arr = text.split("\n");
     let html = "<p>"+arr.join("</p><p>")+"</p>";
-    //console.log(html)
     document.getElementById("out").innerHTML = html;
 });
 
     
 </script>
-
+<script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
