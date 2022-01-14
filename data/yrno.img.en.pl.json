@@ -153,7 +153,7 @@
 		"en": "Clear sky",
 		"tr": "Czyste niebo",
 		"pl": "Czyste niebo",
-		"img": "pogoda.jpg"
+		"img": "czysteNiebo.jpg"
 	},
 	"heavyrain": {
 		"en": "Heavy rain",
@@ -183,7 +183,7 @@
 		"en": "Fair",
 		"tr": "Czyste niebo",
 		"pl": "Czyste niebo",
-		"img": "pogoda.jpg"
+		"img": "czysteNiebo.jpg"
 	},
 	"sleetshowersandthunder": {
 		"en": "Sleet showers and thunder",
