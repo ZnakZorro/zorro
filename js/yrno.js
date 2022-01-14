@@ -169,9 +169,13 @@ const windChillCelsius = (temperature, windSpeed) =>
     
   }
   //qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
+  let symbolNOW = null;
+
   const getOBJhour=(nr=0)=>{ 
+    
     let json = localStorage.getItem("yrnoDATA");
     let obj  = JSON.parse(json);
+    if(nr === 0) symbolNOW = obj[0].data.next_1_hours.summary.symbol_code;
     let time = obj[nr].time;
     let data = obj[nr].data.instant.details;
     //console.log(data);
@@ -310,6 +314,12 @@ const opisYRNO=(data)=>{
   _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
   
   setTimeout(()=>{_$("#logo").classList.remove("loader");},500);
+  console.log(yrnoPL);
+  console.log("symbolNOW=",symbolNOW);
+  
+  let pogodaSRC = yrnoPL[symbolNOW].img || "pogoda.jpg";
+  console.log("pogodaSRC=",pogodaSRC);
+  _$("#pogoda").src="./img/meteo/"+pogodaSRC;
 }
 
 
@@ -337,7 +347,7 @@ document.addEventListener("DOMContentLoaded",function(){
     },300000)
    
   
-    fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
+    fetch("https://znakzorro.github.io/zorro/data/yrno.img.en.pl.json")
     .then(function(response) {
           if (!response.ok) {throw Error(response.statusText);}
           return response.json();
