@@ -235,8 +235,8 @@ const getYRNO=(url=urlYRNO)=>{
 const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 
 const symbolTR=(tx)=>{
-  console.log("symbol=",tx);
   tx = tx.split("_")[0];
+  console.log("symbol=",tx,yrnoPL[tx].pl);
   return (yrnoPL[tx].pl);
 }
 const ronda=(tx,miano=null)=>{
@@ -336,6 +336,22 @@ const insertWeatherReport=()=>{
       document.querySelector("div.container").insertAdjacentHTML('afterbegin', '<div id="WeatherReport"></div>');
 }
 
+const testn=(obj)=>{
+  let out = {}
+  for (let o in obj){
+    out[obj[o].pl] = 0;
+  }
+  let arr=[];
+  let pll=[];
+  for (let o in out){
+    //console.log(o);
+    arr.push(o);
+    pll.push(o.replaceAll(" ","_"));
+  }
+  arr.sort();
+  console.log(arr);
+  //console.log(pll)
+}
 document.addEventListener("DOMContentLoaded",function(){
   
     insertWeatherReport();
@@ -354,6 +370,7 @@ document.addEventListener("DOMContentLoaded",function(){
     })
     .then(obj => {
         yrnoPL = obj;
+        testn(obj);
         getYRNO(urlYRNO);
         //console.log(yrnoPL);
         //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
