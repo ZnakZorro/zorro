@@ -151,8 +151,8 @@
 	},
 	"clearsky": {
 		"en": "Clear sky",
-		"tr": "Czyste Niebo",
-		"pl": "Czyste Niebo",
+		"tr": "Czyste niebo",
+		"pl": "Czyste niebo",
 		"img": "pogoda.jpg"
 	},
 	"heavyrain": {
@@ -181,8 +181,8 @@
 	},
 	"fair": {
 		"en": "Fair",
-		"tr": "Sprawiedliwy",
-		"pl": "Czysto",
+		"tr": "Czyste niebo",
+		"pl": "Czyste niebo",
 		"img": "pogoda.jpg"
 	},
 	"sleetshowersandthunder": {
@@ -229,8 +229,8 @@
 	},
 	"snowandthunder": {
 		"en": "Snow and thunder",
-		"tr": "Śnieg i grzmot",
-		"pl": "Śnieg i grzmot",
+		"tr": "Śnieg i grzmoty",
+		"pl": "Śnieg i grzmoty",
 		"img": "snieg.jpg"
 	},
 	"heavyrainshowersandthunder": {
