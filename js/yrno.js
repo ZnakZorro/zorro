@@ -175,7 +175,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     
     let json = localStorage.getItem("yrnoDATA");
     let obj  = JSON.parse(json);
-    if(nr === 0) symbolNOW = obj[0].data.next_1_hours.summary.symbol_code;
+    if(nr === 0) symbolNOW = obj[0].data.next_1_hours.summary.symbol_code.split("_")[0];
     let time = obj[nr].time;
     let data = obj[nr].data.instant.details;
     //console.log(data);
