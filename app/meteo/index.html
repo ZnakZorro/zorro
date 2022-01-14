@@ -99,7 +99,10 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-
+    <h3>
+        <img src="../css/icon/back.svg" onClick='location.href="../../";' style="width:38px;vertical-align: middle; cursor:pointer;"/>
+        &nbsp; Meteo
+    </h3>
 
 <div id="info"></div>
 
@@ -114,9 +117,11 @@ document.addEventListener("DOMContentLoaded",function(){
 
 
 <div class="klawisze" class="col" style="max-width:100vw;">
-    <a href="../../" class="btn btn-info">gitZorro</a>
-    <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10 dni</button>
+    <a href="../../" class="btn btn-info">Back</a>
+    <a href="../radar/" class="btn btn-info">Radar</a>
+    
     <button id="meteoMaxDays0" class="btn btn-info" onclick="meteoSetDay(0)">3 dni</button>
+    <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10 dni</button>
 </div>  
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
   
