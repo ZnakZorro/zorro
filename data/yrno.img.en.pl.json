@@ -110,7 +110,7 @@
 	"heavysnowshowersandthunder": {
 		"en": "Heavy snow showers and thunder",
 		"tr": "Obfite opady śniegu i grzmoty",
-		"pl": "Obfite opady śniegu i grzmoty",
+		"pl": "Śnieżyca i grzmoty",
 		"img": "snieg.jpg"
 	},
 	"lightrainshowersandthunder": {
@@ -224,7 +224,7 @@
 	"heavysnow": {
 		"en": "Heavy snow",
 		"tr": "Duże opady śniegu",
-		"pl": "Duże opady śniegu",
+		"pl": "Śnieżyca",
 		"img": "snieg.jpg"
 	},
 	"snowandthunder": {
