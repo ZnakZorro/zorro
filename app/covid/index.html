@@ -15,7 +15,7 @@
 let coronus = {
   "country":"Poland",
   "dataType":"cases",
-  "population":"0",
+  "population":0,
   "populTXT":" ",
   "perHow":"all"
 }
@@ -74,30 +74,35 @@ let url = u;
 let countries = [];
 
 const weekMiddle=(datas,times,country)=>{
-  //console.log(datas,times);
-  let outData = [];
-  let outTime = [];
-  let ile = 0;
-  let suma = 0;
-  let lastD = datas[0];
-  let lastI   = datas.length-1;
-  let actualI = 0;
-  datas.forEach((dat,i)=>{
-    let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
-    ile++;
-    suma += dat - lastD;
-    lastD = dat;
-    if(dow===0){
-      let mid = Math.round((suma/ile));
-      outData.push(mid);
-      outTime.push(moment(times[i]).valueOf());
-      //console.log(dow,ile,suma,mid);
-      suma = 0;
-      ile = 0;
-      actualI = i;
-    }
-  });
-  
+    //console.log(datas,times);
+    let outData = [];
+    let outTime = [];
+    let ile = 0;
+    let suma = 0;
+    let lastD = datas[0];
+    let lastI   = datas.length-1;
+    let actualI = 0;
+    datas.forEach((dat,i)=>{
+      let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
+      ile++;
+      suma += dat - lastD;
+      lastD = dat;
+      if(dow===0){
+          let mid = Math.round((suma/ile));
+          //qqqqqqqqqqqqqqqqqq
+          if (coronus.perHow==="1M") {
+              mid = (mid*coronus.population)/1000000000;
+              console.log(mid)
+          }
+          outData.push(Math.round(mid));
+          outTime.push(moment(times[i]).valueOf());
+          //console.log(dow,ile,suma,mid);
+          suma = 0;
+          ile = 0;
+          actualI = i;
+      }
+    });
+    
   //console.log(lastI,actualI,lastI-actualI,actualI<lastI);
 
   if (actualI<lastI){
@@ -105,8 +110,10 @@ const weekMiddle=(datas,times,country)=>{
       for (let i=actualI; i<lastI; i++){
           suma += datas[i] - datas[i-1];
           //console.log(i,times[i],datas[i], datas[i] - datas[i-1]); 
-      }
-          outData.push(Math.round(suma/(lastI-actualI-1)));
+      } 
+          mid = suma/(lastI-actualI-1)
+          mid = (mid*coronus.population)/1000000000;
+          outData.push(Math.round(mid));
           outTime.push(moment(times[lastI-1]).valueOf());
   }
   //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
@@ -119,8 +126,9 @@ const weekMiddle=(datas,times,country)=>{
 const describe=(data,country)=>{
   document.getElementById("ctype").textContent = coronus.dataType;
   console.log(coronus);
-  coronus.population = parseFloat(data.countries[country].population)/1000000; 
-  coronus.populTXT   = '['+(coronus.population).toFixed(2)+'M]'
+  coronus.population = parseFloat(data.countries[country].population); 
+
+  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]'
   document.getElementById("population").textContent = coronus.populTXT;
   let datas = data.countries[country][coronus.dataType]; 
   
@@ -542,7 +550,7 @@ const perWhat=(ten)=>{
 </div>
 <div class="col check">
   <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> all </span>
-  <span><input type="radio" name="perHow" value="100k" onChange="perWhat(this)" /> 100k </span>
+  <span><input type="radio" name="perHow" value="1M" onChange="perWhat(this)" /> 1M </span>
 </div>
   
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
