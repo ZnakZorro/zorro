@@ -17,7 +17,8 @@ let coronus = {
   "dataType":"cases",
   "population":0,
   "populTXT":" ",
-  "perHow":"all"
+  "perHow":"all",
+  "distance": "all"
 }
 function getURLParameter(name) {
 	return decodeURIComponent(
@@ -55,11 +56,16 @@ input[type="range" i] {
     margin: 1%;
 }
 .check span {
-  width: 6em;
-    border: 1px solid gray;
-    background-color: #eee;
+    width: 5.5em;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
     display: inline-block;
-    margin: 0.35em;
+    margin: 0.35em 0.1em;
+}
+.check span:nth-child(1){
+    border: none;
+    background-color: #f8f8f8;
+    width:4em;
 }
 </style> 
 
@@ -74,6 +80,7 @@ let url = u;
 let countries = [];
 
 const weekMiddle=(datas,times,country)=>{
+  let okolo=(v)=> Math.round(v*10)/10;
     //console.log(datas,times);
     let outData = [];
     let outTime = [];
@@ -88,13 +95,13 @@ const weekMiddle=(datas,times,country)=>{
       suma += dat - lastD;
       lastD = dat;
       if(dow===0){
-          let mid = Math.round((suma/ile));
+          let mid = ((suma/ile));
           //qqqqqqqqqqqqqqqqqq
           if (coronus.perHow==="1M") {
-              mid = (mid*coronus.population)/1000000000;
+              mid = (mid/coronus.population)*1000000;
               //console.log(mid)
           }
-          outData.push(Math.round(mid));
+          outData.push(okolo(mid));
           outTime.push(moment(times[i]).valueOf());
           //console.log(dow,ile,suma,mid);
           suma = 0;
@@ -112,8 +119,8 @@ const weekMiddle=(datas,times,country)=>{
           //console.log(i,times[i],datas[i], datas[i] - datas[i-1]); 
       } 
           mid = suma/(lastI-actualI-1)
-          mid = (mid*coronus.population)/1000000000;
-          outData.push(Math.round(mid));
+          if (coronus.perHow==="1M") mid = (mid/coronus.population)*1000000;
+          outData.push(okolo(mid));
           outTime.push(moment(times[lastI-1]).valueOf());
   }
   //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
@@ -529,6 +536,12 @@ const perWhat=(ten)=>{
   coronus.perHow = ten.value;
   countryChart({"textContent":coronus.country});
 }
+
+const newDistance=(ten)=>{
+  coronus.distance = ten.value;
+  countryChart({"textContent":coronus.country});
+}
+
 </script>  
   
 </head>
@@ -545,12 +558,19 @@ const perWhat=(ten)=>{
   -->
 </div>
 <div class="col check">
+  <span>Typ:</span>
   <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases </span>
   <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths </span>
 </div>
 <div class="col check">
+  <span>Rodzaj:</span>
   <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> all </span>
-  <span><input type="radio" name="perHow" value="1M" onChange="perWhat(this)" /> 1M </span>
+  <span><input type="radio" name="perHow" value="1M"   onChange="perWhat(this)" /> 1M </span>
+</div>
+<div class="col check">
+  <span>Czas:</span>
+  <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"checked /> all </span>
+  <span><input type="radio" name="distance" value="3m"   onChange="newDistance(this)" /> 3mies. </span>
 </div>
   
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
