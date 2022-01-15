@@ -12,7 +12,13 @@
 <script src="https://zszczech.zut.edu.pl/app/autobusy/js/pl.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script>
-
+let coronus = {
+  "country":"Poland",
+  "dataType":"cases",
+  "population":"0",
+  "populTXT":" ",
+  "perHow":"all"
+}
 function getURLParameter(name) {
 	return decodeURIComponent(
 		(location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
@@ -92,7 +98,8 @@ const weekMiddle=(datas,times,country)=>{
     }
   });
   
-  console.log(lastI,actualI,lastI-actualI,actualI<lastI);
+  //console.log(lastI,actualI,lastI-actualI,actualI<lastI);
+
   if (actualI<lastI){
       suma =0;
       for (let i=actualI; i<lastI; i++){
@@ -108,16 +115,14 @@ const weekMiddle=(datas,times,country)=>{
   return [outTime,outData];
 }
 
-const describe=(data,country,ctype="cases")=>{
-  document.getElementById("ctype").textContent = ctype.toString();
-  //console.log(data);
-  //console.log(country,ctype);
-  let population = parseFloat(data.countries[country].population)/1000000; 
-      let popul = (population).toFixed(2)
-  document.getElementById("population").textContent = "["+popul+" mln]";
-  //console.log(population);
-  //console.log(data.countries[country]);
-  let datas = data.countries[country][ctype]; 
+
+const describe=(data,country)=>{
+  document.getElementById("ctype").textContent = coronus.dataType;
+  console.log(coronus);
+  coronus.population = parseFloat(data.countries[country].population)/1000000; 
+  coronus.populTXT   = '['+(coronus.population).toFixed(2)+'M]'
+  document.getElementById("population").textContent = coronus.populTXT;
+  let datas = data.countries[country][coronus.dataType]; 
   
   //console.log(datas);
     let times = data.series;
@@ -163,16 +168,16 @@ const describe=(data,country,ctype="cases")=>{
   }
 }
 
-let getAsyncFetch=async(u,callback=null,country="Poland",ctype)=>{
+let getAsyncFetch=async(u,callback=null,country="Poland")=>{
   const config = {
     headers: {'Accept':'application/json'}
   }
   const res = await fetch(u,config)
   const data = await res.json();
   let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
-  console.log(lastUpdated);
+  //console.log(lastUpdated);
   document.getElementById("lastUpdated").textContent = lastUpdated.toString();
-  if (callback) callback(data,country,ctype);
+  if (callback) callback(data,country);
 }
   
 document.addEventListener("DOMContentLoaded",function(){
@@ -221,7 +226,7 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
         },            
 		},
 		title: {
-			text: 'COVID - '+country
+			text: 'COVID - '+country+' - '+coronus.populTXT
 		},
 		subtitle: {
 			text: null
@@ -239,7 +244,7 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
 				year: '%b'
 			},*/
 			title: {
-				text: 'Przyrosty'
+				text: 'Przyrosty ' + coronus.dataType
 			}
 		},
 		yAxis: {
@@ -329,12 +334,11 @@ const testIfIs = (query,eleActive)=>{
    return ret;
 }
 
-let actualCountry = "Poland";
 
-const countryChart=(t,ctype)=>{
-  console.log(t.ctype);
-  actualCountry = t.textContent;
-  getAsyncFetch(url,describe,t.textContent,t.ctype);
+
+const countryChart=(t)=>{
+  coronus.country = t.textContent;
+  getAsyncFetch(url,describe,t.textContent);
   
   if (t.parentNode){  
     if (t.parentNode.id === "klawisze"){
@@ -509,10 +513,13 @@ const betaInput=(t)=>{
 }
 
 const newType=(ten)=>{
-  if(actualCountry) countryChart({"textContent":actualCountry,"ctype":ten.value});
-  console.log("#510===",actualCountry,ten.value);
-  //if(actualCountry) countryChart({"textContent":actualCountry,"type":ten.value});
-  
+  coronus.dataType = ten.value;
+  countryChart({"textContent":coronus.country});
+}
+
+const perWhat=(ten)=>{
+  coronus.perHow = ten.value;
+  countryChart({"textContent":coronus.country});
 }
 </script>  
   
@@ -532,6 +539,10 @@ const newType=(ten)=>{
 <div class="col check">
   <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases </span>
   <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths </span>
+</div>
+<div class="col check">
+  <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> all </span>
+  <span><input type="radio" name="perHow" value="100k" onChange="perWhat(this)" /> 100k </span>
 </div>
   
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
