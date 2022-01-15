@@ -1,603 +1,251 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<meta charset="utf-8">
-<meta http-equiv="refresh" content="3600">
-<title>git::COVID</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#db5945">
-<link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/fractal1.svg">
-<script src="https://zszczech.zut.edu.pl/app/autobusy/js/moment.min.js"></script>
-<script src="https://zszczech.zut.edu.pl/app/autobusy/js/pl.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-let coronus = {
-  "country":"Poland",
-  "dataType":"cases",
-  "population":0,
-  "populTXT":" ",
-  "perHow":"all",
-  "distance": "all"
-}
-function getURLParameter(name) {
-	return decodeURIComponent(
-		(location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
-	);
-}
-let type=getURLParameter("type");
-console.log("#22 type=",type);
-</script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-3d.js"></script>
-<script src="https://code.highcharts.com/modules/series-label.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>  
-<!-- optional -->  
-<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>  
-<script src="https://code.highcharts.com/modules/export-data.js"></script>  
+   <meta http-equiv="refresh" content="18000">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>git::zorro</title>
+   <script type="text/javascript" src="./js/yrnoGET.js"></script>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/dom.svg"> 
+   <link rel="manifest" href="./zorro.web.json"> 
+
+   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
+   <link rel="stylesheet" href="./css/navbar.css">
+   <link rel="stylesheet" href="./css/style.css" />
+   <script src="./js/all.js"></script>
+   
+   
+   
 <style>
-body {font:normal 14pt verdana}
-
-button {
-    margin: 0.25em 0.18em;
-    min-width: 3em;
-}
-.active {
-    color: red;
-    text-shadow: 1px 1px #888;
-    box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
-    opacity: 2.4;
-    filter: sepia(0.1);
-}
-#container {width:100%;}
-input[type="range" i] {
-    width: 88%;
-    padding: 1%;
-    margin: 1%;
-}
-.check span {
-    width: 5.5em;
-    border: 1px solid #ddd;
+  /*@import url('https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&display=swap');*/
+body {
+    font-family: 'Roboto', "Verdana", sans-serif;
+    /*font-family: 'PT Sans Narrow', sans-serif;*/
+    font-size: 14pt;
+    font-weight: 300;
     background-color: #f4f4f4;
+}
+
+.wrapper {
+    padding: 0;
+    margin: 0;
+}
+ .container {
+    padding: 0.3em;
+    margin: 0.3em;
+}
+ .icon1 {max-width:32px; cursor:pointer;}
+ div.pogoda div.active {background-color:lightgoldenrodyellow;}
+ div#sun  {}
+ div#sun div span {}
+ div.row  {}
+ div.fild { }
+  div.fild div {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    padding: 0.5em 0.1em 0.1em 0.1em;
+    word-break: break-all;
+    border-radius: 0.2em;
+    margin: 0.2em 0;
+    text-align: center;
+    position: relative;
+}
+div.field div span:nth-child(2) { 
+    padding-top: 1em;
     display: inline-block;
-    margin: 0.35em 0.1em;
 }
-.check span:nth-child(1){
-    border: none;
-    background-color: #f8f8f8;
-    width:4em;
-}
-</style> 
-
-
+@media (max-width: 768px) {
+    .fild div span:nth-child(1) {
+      display: grid;
+      justify-content: space-around;
+      justify-items: center;
+    }
+}   
+</style>
 <script>
-
-//let u   = "https://zszczech.zut.edu.pl/app/COV/data.json";
-let u   = "https://zszczech.zut.edu.pl/app/COV/data.php";
-
-let url = u;
-
-let countries = [];
-
-const weekMiddle=(datas,times,country)=>{
-  let okolo=(v)=> Math.round(v*10)/10;
-    //console.log(datas,times);
-    let outData = [];
-    let outTime = [];
-    let ile = 0;
-    let suma = 0;
-    let lastD = datas[0];
-    let lastI   = datas.length-1;
-    let actualI = 0;
-    datas.forEach((dat,i)=>{
-      let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
-      ile++;
-      suma += dat - lastD;
-      lastD = dat;
-      if(dow===0){
-          let mid = ((suma/ile));
-          //qqqqqqqqqqqqqqqqqq
-          if (coronus.perHow==="1M") {
-              mid = (mid/coronus.population)*1000000;
-              //console.log(mid)
-          }
-          outData.push(okolo(mid));
-          outTime.push(moment(times[i]).valueOf());
-          //console.log(dow,ile,suma,mid);
-          suma = 0;
-          ile = 0;
-          actualI = i;
-      }
-    });
-    
-  //console.log(lastI,actualI,lastI-actualI,actualI<lastI);
-
-  if (actualI<lastI){
-      suma =0;
-      for (let i=actualI; i<lastI; i++){
-          suma += datas[i] - datas[i-1];
-          //console.log(i,times[i],datas[i], datas[i] - datas[i-1]); 
-      } 
-          mid = suma/(lastI-actualI-1)
-          if (coronus.perHow==="1M") mid = (mid/coronus.population)*1000000;
-          outData.push(okolo(mid));
-          outTime.push(moment(times[lastI-1]).valueOf());
-  }
-  //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
-  //
-  rysujWykres2D([outData],outTime,country);
-  return [outTime,outData];
-}
-
-
-const describe=(data,country)=>{
-  document.getElementById("ctype").textContent = coronus.dataType;
-  console.log(coronus);
-  coronus.population = parseFloat(data.countries[country].population); 
-
-  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]'
-  document.getElementById("population").textContent = coronus.populTXT;
-  let datas = data.countries[country][coronus.dataType]; 
-  
-  //console.log(datas);
-    let times = data.series;
-    let week = [];
-    let sumaW=0;
-    let lastW = 0;
-    let dane = [];
-    let last = datas[0];
-    let dataA=[];
-    let dataD=[];
-    let j=0;
-    let datas7 = weekMiddle(datas,times,country);
-    //console.log(datas7);
-  
-  /*
-  datas.forEach((dat,i)=>{
-      if (dat>1){
-          //let time = (new Date(Date.parse(times[i]))).getTime();
-          let time = (new Date((times[i]))).getTime();
-          let delta = dat - last;
-          sumaW += delta;
-          dane.push([time,delta]);
-          last = dat;
-          if (i % 7===6){
-            let deltaW = sumaW/7;
-            sumaW = 0;
-            week.push([time,deltaW]);
-            dataA.push([Math.round(deltaW-lastW),Math.round(deltaW)]);
-            dataD.push([Math.round(deltaW-lastW), Math.round(deltaW), j]);
-            lastW=deltaW;
-            j++;
-          }
-      }
-  });
-  if (type==="3d") rysujWykres3D([dataD],null,country);
-  else             rysujWykres2D([dataA],null,country);
-  */
-
-  
-  if (countries.length===0){
-    for (let c in data.countries){countries.push(c);}
-    rysujKlawisze(countries);
-  }
-}
-
-let getAsyncFetch=async(u,callback=null,country="Poland")=>{
-  const config = {
-    headers: {'Accept':'application/json'}
-  }
-  const res = await fetch(u,config)
-  const data = await res.json();
-  let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
-  //console.log(lastUpdated);
-  document.getElementById("lastUpdated").textContent = lastUpdated.toString();
-  if (callback) callback(data,country);
-}
-  
-document.addEventListener("DOMContentLoaded",function(){
-    getAsyncFetch(url,describe,"Poland");
-});
-
-
-
-Highcharts.setOptions({
-	time: {
-		timezoneOffset: 2 * 60,
-		useUTC:false
-	},
-	lang:{
-		shortWeekdays:  ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pnt', 'Sob'],
-		weekdays:       ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
-		shortMonths:    ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
-		months:         ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"]
-	}	
-});
-
-let wykres2D = null;
-let wykres3D = null;
-	
-let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
-	//console.log(data,kategorie);
-	let wykres2D = Highcharts.chart('container', {
-		chart: {
-			type: 'spline',
-       events: {
-            /*redraw: function () {
-              console.log("redraw");
-            },*/
-            load: function () {
-              return;
-              let dats = data[0];//.sort(function(a, b){return a[0]-b[0]});
-              let last0 = dats.length-1;
-              let i=0;
-              console.log(i,last0,dats);
-             let inter0 = setInterval(()=>{
-                  this.series[0].addPoint([dats[i][0], dats[i][1]]);
-                  i++;
-                  if (i>last0) clearInterval(inter0);
-              },50);
-            }
-        },            
-		},
-		title: {
-			text: 'COVID - '+country+' - '+coronus.populTXT
-		},
-		subtitle: {
-			text: null
-		},
-		xAxis: {
-        type:'datetime',
-        dateTimeLabelFormats: {day: '%e  %b'},
-      	labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
-			  dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
-        categories: kategorie,      
-   //type: 'logarithmic',
-			//type: 'linear',
-			/*dateTimeLabelFormats: { // don't display the dummy year
-				month: '%e. %b',
-				year: '%b'
-			},*/
-			title: {
-				text: 'Przyrosty ' + coronus.dataType
-			}
-		},
-		yAxis: {
-   // type: 'logarithmic',
-			title: {text: 'Dziennie'},
-      //left: 2,
-      /*labels: {
-				//align: 'right',
-				//opposite: true,
-				x: -135,
-				y: 4
-			},*/
-			//min: 0
-		},
-		tooltip: {
-			shared: true,
-			crosshairs: true,
-			//headerFormat: '<b>{point.x:%A, %b %e, %H:%M}</b><br>',
-			headerFormat: '<b>{point.x:%e %b, %Y}</b><br />',
-		},
-		plotOptions: {
-			series: {
-				marker: {
-					enabled: true
-				}
-			}
-		},
-
-		colors: ['#008', '#800', '#080', '#036', '#000'],
-
-		series: [
-			{
-      type:'spline',
-      //color: '#0000aa',
-			name:country,
-			data: data[0]
-			}
-      /*,{
-        type:'spline',
-        color: '#0000aa',
-        fillOpacity: 0.3,
-			name:country,
-			data: data[1]
-			}*/
-		],
-
-		responsive: {
-			rules: [{
-				condition: {
-					maxWidth: 500
-				},
-				chartOptions: {
-					plotOptions: {
-						series: {
-							marker: {
-								radius: 2.5
-							}
-						}
-					}
-				}
-			}]
-		}
-	});
-  /*data[0].forEach((dat)=>{
-      console.log(data)
-      //wykres.series[0].setData([dat]);
-      dat[0]+=2000
-      dat[1]+=2000
-      wykres.series[1].addPoint([dat]);
-      
-  })
-  //wykres.series[0].setData([111,2222]);
-  */
-}
-
-
-const removeAddActive = (query,eleActive)=>{
-    document.querySelectorAll(query).forEach((b)=>{b.classList.remove("active");});
-    eleActive.classList.add("active");
-}
-
-const testIfIs = (query,eleActive)=>{
-    let ret=false;
-    document.querySelectorAll(query).forEach((b)=>{
-      if (b.textContent === eleActive.textContent) ret=true;
-    });
-   return ret;
-}
-
-
-
-const countryChart=(t)=>{
-  coronus.country = t.textContent;
-  getAsyncFetch(url,describe,t.textContent);
-  
-  if (t.parentNode){  
-    if (t.parentNode.id === "klawisze"){
-      removeAddActive("#klawisze button",t);
-      let clon = t.cloneNode(true);
-      if(!testIfIs("#klawiszePlus button",t)) {
-         let clon = t.cloneNode(true);
-         document.getElementById("klawiszePlus").appendChild(clon);  
-      }
-    }   
-    removeAddActive("#klawiszePlus button",t);
-  }
-
-}
-
-const rysujKlawisze=(countries)=>{
-  countries.sort();
-  let html = "";
-  countries.forEach((c)=>{    
-    html += '<button onClick="countryChart(this)">'+c+'</button>';
-  })
-  document.getElementById("klawisze").innerHTML = html;
-}
-
-const kasuj=()=>{
-  document.getElementById("klawiszePlus").innerHTML = '<button onclick="countryChart(this)" class="active">Poland</button>';
-}
 
 </script>
-
-  
-  
- 
-<script>
-  // Give the points a 3D feel by adding a radial gradient
-  Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
-    return {
-      radialGradient: {
-        cx: 0.4,
-        cy: 0.3,
-        r: 0.5
-      },
-      stops: [
-        [0, color],
-        [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
-      ]
-    };
-  });  
-  
-  
-  
-const rysujWykres3D=(dane,kategorie=null,kraj="Wykres")=>{
-  // Set up the chart
-  wykres3D = new Highcharts.Chart({
-    chart: {
-      renderTo: 'container',
-      margin: 70,
-      type: 'scatter',
-      options3d: {
-        enabled: true,
-        alpha: 10,
-        beta: 80,
-        depth: 400,
-        viewDistance: 15,
-
-        frame: {
-          bottom: {
-            size: 1,
-            color: 'rgba(0,0,0,0.02)'
-          },
-          back: {
-            size: 1,
-            color: 'rgba(0,0,0,0.04)'
-          },
-          side: {
-            size: 1,
-            color: 'rgba(0,0,0,0.06)'
-          }
-        }
-      }
-    },
-    title: {
-      text: kraj+' Draggable box'
-    },
-    subtitle: {
-      text: 'Click and drag the plot area to rotate in space'
-    },
-    plotOptions: {
-      scatter: {
-        width: 10,
-        height: 10,
-        depth: 10
-      }
-    },
-    tooltip: {
-      enabled:!false
-    },
-    yAxis: {
-      //min: 0,
-      //max: 10,
-      title: "Ycov"
-    },
-    xAxis: {
-      //min: 0,
-      //max: 10,
-      gridLineWidth: 1,
-      title: "Xcov"
-    },
-    zAxis: {
-      //min: 0,
-      //max: 10,
-      title: "Zcov"
-    },
-    legend: {
-      enabled: false
-    },
-    series: [{
-      lineWidth: 2,
-      name: 'Attractor',
-      data: dane[0]
-    }]
-  });
-
-
-  // Add mouse events for rotation
-  $(wykres3D.container).bind('mousedown.hc touchstart.hc', function(e) {
-    e = wykres3D.pointer.normalize(e);
-
-    var posX = e.pageX,
-      posY = e.pageY,
-      alpha = wykres3D.options.chart.options3d.alpha,
-      beta = wykres3D.options.chart.options3d.beta,
-      newAlpha,
-      newBeta,
-      sensitivity = 5; // lower is more sensitive
-
-    $(document).bind({
-      'mousemove.hc touchdrag.hc': function(e) {
-        // Run beta
-        newBeta = beta + (posX - e.pageX) / sensitivity;
-        newBeta = Math.min(100, Math.max(-100, newBeta));
-        wykres3D.options.chart.options3d.beta = newBeta;
-
-        // Run alpha
-        newAlpha = alpha + (e.pageY - posY) / sensitivity;
-        newAlpha = Math.min(100, Math.max(-100, newAlpha));
-        wykres3D.options.chart.options3d.alpha = newAlpha;
-  console.log(newAlpha,newBeta);  //10 80
-        wykres3D.redraw(false);
-      },
-      'mouseup touchend': function() {
-        $(document).unbind('.hc');
-      }
-    });
-  });  
-  
-}
-
-
-const alphaInput=(t)=>{
-    let newAlpha = t.value;
-    console.log("in=",newAlpha)
-    wykres3D.options.chart.options3d.alpha = newAlpha;
-    wykres3D.redraw(false);
-}
-
-const betaInput=(t)=>{
-    let newBeta = 100-t.value;
-    console.log("in=",newBeta)
-    wykres3D.options.chart.options3d.beta = newBeta;
-    wykres3D.redraw(false);
-}
-
-const newType=(ten)=>{
-  coronus.dataType = ten.value;
-  countryChart({"textContent":coronus.country});
-}
-
-const perWhat=(ten)=>{
-  coronus.perHow = ten.value;
-  countryChart({"textContent":coronus.country});
-}
-
-const newDistance=(ten)=>{
-  coronus.distance = ten.value;
-  countryChart({"textContent":coronus.country});
-}
-
-</script>  
-  
+   
 </head>
+
 <body>
-<div class="col">
-    <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
-    <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b> <span id="population"></span>
-  <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
-  <!--
-  <button onclick='location.href="./";'>X</button>
-  <button onclick='location.href="./?type=1d";'>1D</button>
-  <button onclick='location.href="./?type=2d";'>2D</button>
-  <button onclick='location.href="./?type=3d";'>3D</button>
-  -->
-</div>
-<div class="col check">
-  <span>Typ:</span>
-  <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases </span>
-  <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths </span>
-</div>
-<div class="col check">
-  <span>Rodzaj:</span>
-  <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> all </span>
-  <span><input type="radio" name="perHow" value="1M"   onChange="perWhat(this)" /> 1M </span>
-</div>
-<div class="col check">
-  <span>Czas:</span>
-  <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"checked /> all </span>
-  <span><input type="radio" name="distance" value="3m"   onChange="newDistance(this)" /> 3mies. </span>
-</div>
+    <header class="header">
+        <nav class="navbar">            
+           <img id="logo" src="./css/icon/refresh.svg" onClick="refresh()" class="icon1 loader"/>
+           <a href="https://github.com/ZnakZorro/zorro" class="nav-logo">gitZorro <span id="licznik"></span><span id="flag"></span></a>
+             <ul class="nav-menu">
+                <!--li class="nav-item"><a href="app/meteo/" class="nav-link">Meteo</a></li-->
+                <!--li class="nav-item"><a href="app/radar/" class="nav-link">Radar</a></li-->
+                
+                <li class="nav-item"><a href="app/todo/index.html" class="nav-link">ToDo</a></li>
+                <li class="nav-item"><a href="app/radio/index.html" class="nav-link">LINKI</a></li>
+                <!--li class="nav-item"><a href="app/580/" class="nav-link">580</a></li-->
+                <!--li class="nav-item"><a href="app/bus/" class="nav-link">BUS</a></li-->
+                <li class="nav-item"><a href="app/covid/index.html" class="nav-link">COVID</a></li>
+               
+               <li class="nav-item"><a href="html/index.html" class="nav-link">Inne</a></li>
+               <li class="nav-item"><a href="app/admin/index.html" class="nav-link">Admin</a></li>
+               <li class="nav-item"><a href="app/test/index.html" class="nav-link">Test</a></li>
+                <!--li class="nav-item"><a href="#" class="nav-link">About</a></li-->
+                <!--li class="nav-item"><a href="#" class="nav-link">Contact</a></li-->
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </nav>
+    </header>
+   
   
-<figure class="highcharts-figure" style="max-width:640px; margin:auto;">
-    <div id="container"></div>
-</figure>
-<!--div class="col">
-  A:<input type="range" min="-100" max="100" step="5" value="10" onInput="alphaInput(this)" /><br />
-  B:<input type="range" min="-100" max="100" step="5" value="20" onInput="betaInput(this)" />
-</div-->
-<div class="col">
-	<!--h3 style="font-weight:normal; cursor:pointer;" title="Kasuj wybrane kraje"><span id="dn" onClick="kasuj()">@Attractor COVID</span> <span id="dd"></span></h3-->
-    <div id="info"></div>
-    <pre id="pre"></pre>
-</div>
-<div id="klawiszePlus"><button onclick="countryChart(this)" class="">Poland</button><button onclick="countryChart(this)" class="">United States</button><button onclick="countryChart(this)" class="">Canada</button><button onclick="countryChart(this)" class="">United Kingdom</button><button onclick="countryChart(this)" class="">Germany</button></div>
-<!--div id="klawiszePlus"><button onclick="countryChart(this)" class="active">Poland</button></div-->
-  <hr />
-<div id="klawisze"></div>
+ <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div id="sun" class="grid pogoda field"></div>
+        <span id="flag2"></span>
+      </div>
+      </div>
+   
+   
+   
+      <div class="container">
+            
+  <!--card-->
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="./app/meteo/index.html">
+          <img id="pogoda" src="./img/meteo/pogoda.jpg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Prognoza pogody</h5>
+        <p class="card-text">Wykresy i radary</p>
+        <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
+    </div> 
+  <!--card-->
+
+  <!--card-->
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="./app/bus/index.html">
+          <img src="./img/menu/bus.jpg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Autobusy i tramwaje</h5>
+        <p class="card-text">Tablice odjazdów</p>
+        <a href="./app/bus/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
+    </div> 
+  <!--card-->
+
+  <!--card-->
+       <div class="card">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <a href="./app/580/index.html">
+            <img src="./img/menu/czeresnie.jpg" class="img-fluid" />
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Teren 580</h5>
+          <p class="card-text">Obok Puszczy</p>
+          <a href="./app/580/index.html" class="btn btn-primary">Otwórz</a>
+        </div>
+      </div> 
+  <!--card-->
+ 
+  <!--card-->
+  <div class="card">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <a href="./app/puszcza/index.html">
+        <img src="./img/menu/puszcza.jpg" class="img-fluid" />
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+      </a>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">Puszcza Bukowa</h5>
+        <p class="card-text">Blisko miasta</p>
+      <a href="./app/puszcza/index.html" class="btn btn-primary">Otwórz</a>
+    </div>
+  </div> 
+<!--card-->
+  
+        
+      </div>
+  
+  
+      <div class="container">
+          
+      </div>
+      
+  <a href="#" class="top">Back to Top &#8593;</a>  
+  
+ </div>
+
+   
+
+ 
+  
 </body>
+
+<script src="./js/navbar.js"></script>
+<script type="text/javascript" src="./js/yrno.js"></script> 
+
+<script>
+if (location.protocol==="file:") {
+  document.title="FILE::git";
+  
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  }
+  link.href = './css/icon/red.ico';
+}
+</script>				  
+
+<script src="./js/suncalc.js"></script>
+<script>
+console.log(APPconfig);
+console.log(APPconfig.city[APPcity]);
+
+//https://github.com/mourner/suncalc
+let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
+  //console.log(SUNdata)
+  //console.log(SUNdata.sunrise)
+  //console.log(SUNdata.sunset)
+      let dSunrise = new Date(SUNdata.sunrise);
+      let dSunset  = new Date(SUNdata.sunset);
+      let dateSunrise = dSunrise.getTime();
+      let dateSunset  = dSunset.getTime();
+      let dateDelta = dateSunset - dateSunrise;
+      //console.log("date=",  dateSunrise,dateSunset,dateDelta)
+      let sunrise = dSunrise.toLocaleString('pl-PL').split(" ").pop();
+      let sunset  = dSunset.toLocaleString('pl-PL').split(" ").pop();
+      sunrise = sunrise.replace(/(\:\d\d)$/,"");
+      sunset  =  sunset.replace(/(\:\d\d)$/,"");
+      //console.log(sunrise,sunset)
+      let dayLen  = dayL(dateDelta/1000);
+        _$("#sun").innerHTML  = `<div><span>Wschód:</span> <span>${sunrise}</span></div>`;
+        _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
+        _$("#sun").innerHTML += `<div><span>Dzień:</span> <span>${dayLen}</span></div>`;
+/*
+var sunriseStr = times.sunrise.getHours() + ':' + times.sunrise.getMinutes();
+console.log(sunriseStr)
+
+var sunrisePos = SunCalc.getPosition(times.sunrise, 54.6,14.6);
+console.log(sunrisePos)
+var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
+console.log(sunriseAzimuth);
+*/
+</script>
 </html>
-<!--
-http://jsfiddle.net/4Lpz3cuj/
-https://jsfiddle.net/1rowmsv2/
-
-
-https://jsfiddle.net/eww77685/
-
--->
-
-
