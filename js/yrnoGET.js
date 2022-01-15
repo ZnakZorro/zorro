@@ -16,7 +16,7 @@ const _getYRNO=(url)=>{
 };
 
 const zapiszYRNO=(obj)=>{
-  //console.log(obj)
+  console.log(obj)
   let updated_at = obj.properties.meta.updated_at;
       let timeNow   = (new Date()).getTime();
       let timeFrom  = (new Date(updated_at)).getTime();
