@@ -22,10 +22,28 @@
 </style>
 <script src="../../js/all.js"></script>
 <script>
-    
-
 console.log(APPconfig);
-console.log(APPconfig.city[APPcity]);
+
+// dom ready
+document.addEventListener("DOMContentLoaded",function(){
+    APPcity = localStorage.getItem("APPcity") || APPcity;
+    console.log("APPcity=",APPcity)
+    let html = "";
+    for (let city in APPconfig.city){
+        let name = APPconfig.city[city].name;
+        console.log(APPcity,city,name);
+        let checked="";
+        if (APPcity===city) checked="checked"
+        html += '<p><input name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
+    }
+    _$("#radioCity").innerHTML = html;
+});
+// domready
+
+const cityClick=(ten)=>{
+    APPcity = ten.value;
+    localStorage.setItem("APPcity", APPcity);
+}
 
 </script>
    
@@ -37,12 +55,10 @@ console.log(APPconfig.city[APPcity]);
         :: admin
     </h3>
     <div class="wrapper">
-        <div class="container">
-            
-          <div class="row grid field">
-            <div>
-                <h3>Miasto</h3>
-                <p><input type="radio" /> Szczecin</p>
+        <div class="container">           
+          <div class="row grid field">           
+            <h3>Miasto</h3>
+            <div id="radioCity">
                 <p><input type="radio" /> Szczecin</p>
                 <p><input type="radio" /> Szczecin</p>
                 <p><input type="radio" /> Szczecin</p>
