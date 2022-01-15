@@ -108,29 +108,29 @@ const weekMiddle=(datas,times,country)=>{
   return [outTime,outData];
 }
 
-
-const describe=(data,country)=>{
-  console.log(data,country)
-  let population = data.countries[country].population;
-  //console.log(country,population);
-  //console.log(type,data.countries);
-  //console.log(data.countries.Poland.cases);
-  //console.log(data.countries[country].cases.length,data.series.length);
+const describe=(data,country,ctype="cases")=>{
+  document.getElementById("ctype").textContent = ctype.toString();
+  //console.log(data);
+  //console.log(country,ctype);
+  let population = parseFloat(data.countries[country].population)/1000000; 
+      let popul = (population).toFixed(2)
+  document.getElementById("population").textContent = "["+popul+" mln]";
+  //console.log(population);
+  //console.log(data.countries[country]);
+  let datas = data.countries[country][ctype]; 
   
-  let datas = data.countries[country].cases;
-  //let datas = data.countries[country].deaths;
-  
-  let times = data.series;
-  let week = [];
-  let sumaW=0;
-  let lastW = 0;
-  let dane = [];
-  let last = datas[0];
-  let dataA=[];
-  let dataD=[];
-  let j=0;
-  let datas7 = weekMiddle(datas,times,country);
-  console.log(datas7);
+  //console.log(datas);
+    let times = data.series;
+    let week = [];
+    let sumaW=0;
+    let lastW = 0;
+    let dane = [];
+    let last = datas[0];
+    let dataA=[];
+    let dataD=[];
+    let j=0;
+    let datas7 = weekMiddle(datas,times,country);
+    //console.log(datas7);
   
   /*
   datas.forEach((dat,i)=>{
@@ -163,7 +163,7 @@ const describe=(data,country)=>{
   }
 }
 
-let getAsyncFetch=async(u,callback=null,country="Poland")=>{
+let getAsyncFetch=async(u,callback=null,country="Poland",ctype)=>{
   const config = {
     headers: {'Accept':'application/json'}
   }
@@ -172,7 +172,7 @@ let getAsyncFetch=async(u,callback=null,country="Poland")=>{
   let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
   console.log(lastUpdated);
   document.getElementById("lastUpdated").textContent = lastUpdated.toString();
-  if (callback) callback(data,country);
+  if (callback) callback(data,country,ctype);
 }
   
 document.addEventListener("DOMContentLoaded",function(){
@@ -329,20 +329,25 @@ const testIfIs = (query,eleActive)=>{
    return ret;
 }
 
-const countryChart=(t)=>{
-  //console.log(t.parentNode);
-  //console.log();
-  getAsyncFetch(url,describe,t.textContent);
+let actualCountry = "Poland";
+
+const countryChart=(t,ctype)=>{
+  console.log(t.ctype);
+  actualCountry = t.textContent;
+  getAsyncFetch(url,describe,t.textContent,t.ctype);
   
-  if (t.parentNode.id === "klawisze"){
+  if (t.parentNode){  
+    if (t.parentNode.id === "klawisze"){
       removeAddActive("#klawisze button",t);
       let clon = t.cloneNode(true);
       if(!testIfIs("#klawiszePlus button",t)) {
          let clon = t.cloneNode(true);
          document.getElementById("klawiszePlus").appendChild(clon);  
       }
-  }   
-  removeAddActive("#klawiszePlus button",t);
+    }   
+    removeAddActive("#klawiszePlus button",t);
+  }
+
 }
 
 const rysujKlawisze=(countries)=>{
@@ -504,7 +509,10 @@ const betaInput=(t)=>{
 }
 
 const newType=(ten)=>{
-  console.log(ten.value)
+  if(actualCountry) countryChart({"textContent":actualCountry,"ctype":ten.value});
+  console.log("#510===",actualCountry,ten.value);
+  //if(actualCountry) countryChart({"textContent":actualCountry,"type":ten.value});
+  
 }
 </script>  
   
@@ -512,7 +520,7 @@ const newType=(ten)=>{
 <body>
 <div class="col">
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
-    <span id="lastUpdated"></span>
+    <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b> <span id="population"></span>
   <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
   <!--
   <button onclick='location.href="./";'>X</button>
