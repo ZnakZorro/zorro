@@ -157,8 +157,10 @@ let getAsyncFetch=async(u,callback=null,country="Poland")=>{
     headers: {'Accept':'application/json'}
   }
   const res = await fetch(u,config)
-  const data = await res.json()
-  //console.log(data);
+  const data = await res.json();
+  let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
+  console.log(lastUpdated);
+  document.getElementById("lastUpdated").textContent = lastUpdated.toString();
   if (callback) callback(data,country);
 }
   
@@ -497,6 +499,7 @@ const betaInput=(t)=>{
 <body>
 <div class="col">
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
+    <span id="lastUpdated"></span>
   <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
   <!--
   <button onclick='location.href="./";'>X</button>
