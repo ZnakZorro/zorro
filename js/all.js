@@ -5,11 +5,13 @@ const _$$=e=>document.querySelectorAll(e);
 let APPconfig={
 	"city": {
 		"Dabie": {
+			"name": "Szczecin-Dąbie",
 			"lat": "53.3788",
 			"lon": "14.666",
 			"altitude": "25"
 		},
 		"Szczecin": {
+			"name": "Szczecin",
 			"lat": "53.380",
 			"lon": "14.662",
 			"altitude": "25"
