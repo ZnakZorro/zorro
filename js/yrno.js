@@ -128,7 +128,7 @@ let nic = localStorage.getItem("nic") || "***";
 let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
 let yrnoPL={};
 let cacheTimeMinutes=99;
-let counter=0;
+//let counter=0;
 
 
 const refresh=()=>{
@@ -169,13 +169,13 @@ const windChillCelsius = (temperature, windSpeed) =>
     
   }
   //qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq
-  let symbolNOW = null;
+  
 
   const getOBJhour=(nr=0)=>{ 
     
     let json = localStorage.getItem("yrnoDATA");
     let obj  = JSON.parse(json);
-    if(nr === 0) symbolNOW = obj[0].data.next_1_hours.summary.symbol_code.split("_")[0];
+    let symbol = obj[nr].data.next_1_hours.summary.symbol_code.split("_")[0];
     let time = obj[nr].time;
     let data = obj[nr].data.instant.details;
     //console.log(data);
@@ -195,6 +195,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
     w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
     w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
+    w.symbol = symbol;
     return w;
 } 
 
@@ -204,31 +205,30 @@ const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.te
 
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
-      //console.log("wwwwwwwwwwwwww");
-      //console.log("wwwwww=",w);
+      setNewPogodaFoto(0,w);
+      //console.log("wwwwwwwwww=",w);
       let container = _$("#"+id);
       let zapas = container.innerHTML;
       container.innerHTML = formatLine(w);
       container.classList.add("active");
-      setTimeout(()=>{container.innerHTML = zapas; container.classList.remove("active");},5000);
+      setTimeout(()=>{
+        container.innerHTML = zapas; 
+        container.classList.remove("active");
+        let w0 = getOBJhour(0);
+        setNewPogodaFoto(0,w0);
+      },5000);
   }
 //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 const countCacheTimeMinutes = () => Math.round(((new Date()).getTime() - parseInt(localStorage.getItem("yrnoTIME") || "0"))/60000);
 
 const getYRNO=(url=urlYRNO)=>{ 
-  console.log("getYRNO=====",counter);
-  counter++;
+  //console.log("getYRNO=====",counter);
+  //counter++;
   let lastTime = localStorage.getItem("yrnoTIME") || "0";
   cacheTimeMinutes = Math.round(((new Date()).getTime() - parseInt(lastTime))/60000);
-  console.log("1 cacheTimeMinutes=====",cacheTimeMinutes);
-  let json = localStorage.getItem("yrnoDATA");
-  
+  //console.log("1 cacheTimeMinutes=====",cacheTimeMinutes);
+  let json = localStorage.getItem("yrnoDATA"); 
   let obj  = JSON.parse(json);
-  //console.log(obj);
-  //console.log(0,obj[0]);
-  //console.log(1,obj[1]);
-  //console.log(6,obj[6]);
-  //console.log(12,obj[12]);
   opisYRNO(obj);
 };
 
@@ -236,7 +236,7 @@ const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 
 const symbolTR=(tx)=>{
   tx = tx.split("_")[0];
-  console.log("symbol=",tx,yrnoPL[tx].pl);
+  //console.log("symbol=",tx,yrnoPL[tx].pl);
   return (yrnoPL[tx].pl);
 }
 const ronda=(tx,miano=null)=>{
@@ -272,6 +272,12 @@ const hoursTime=(dd)=>{
   return godzina+":"+minuta;
 }
 
+const setNewPogodaFoto=(nr,obj)=>{
+  //console.log("setNewPogodaFoto=",nr,obj);
+  let pogodaSRC = yrnoPL[obj.symbol].img || "pogoda.jpg";
+  //console.log("pogodaSRC=",pogodaSRC);
+  _$("#pogoda").src="./img/meteo/"+pogodaSRC;  
+}
 
 const opisYRNO=(data)=>{
   let container = document.querySelector("div.container");
@@ -290,15 +296,12 @@ const opisYRNO=(data)=>{
   let w01 = getOBJhour(1);
   let w06 = getOBJhour(6);
   let w12 = getOBJhour(12);
-  //console.log("w00=",w00);
-  //console.log("w01=",w01);
-  //console.log("w06=",w06);
-  //console.log("w12=",w12);
-  
+  setNewPogodaFoto(0,w00);
+
   let html = '<!--pogoda-->';
 
-  html += '<div class="grid pogoda">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
-  html += '<div class="grid2 pogoda fon-20 fon-600"><div id="ev0">'+w00.temp+' / '+w00.chill+',</div><div id="ev1"> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
+  //html += '<div class="grid pogoda">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
+  html += '<div class="grid2 pogoda fon-20 fon-600"><div id="ev0"><span>'+w00.time+'</span>'+w00.temp+' / '+w00.chill+',</div><div id="ev1"> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
   html += '<div class="grid pogoda fon-14">';   
     html += `<div id="ev2">${formatLine(w01)}</div>`;
     html += `<div id="ev3">${formatLine(w06)}</div>`;
@@ -314,12 +317,7 @@ const opisYRNO=(data)=>{
   _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
   
   setTimeout(()=>{_$("#logo").classList.remove("loader");},500);
-  console.log(yrnoPL);
-  console.log("symbolNOW=",symbolNOW);
   
-  let pogodaSRC = yrnoPL[symbolNOW].img || "pogoda.jpg";
-  console.log("pogodaSRC=",pogodaSRC);
-  _$("#pogoda").src="./img/meteo/"+pogodaSRC;
 }
 
 
@@ -336,7 +334,7 @@ const insertWeatherReport=()=>{
       document.querySelector("div.container").insertAdjacentHTML('afterbegin', '<div id="WeatherReport"></div>');
 }
 
-const testn=(obj)=>{
+const testNazw=(obj)=>{
   let out = {}
   for (let o in obj){
     out[obj[o].pl] = 0;
@@ -352,6 +350,8 @@ const testn=(obj)=>{
   console.log(arr);
   //console.log(pll)
 }
+
+
 document.addEventListener("DOMContentLoaded",function(){
   
     insertWeatherReport();
@@ -369,9 +369,9 @@ document.addEventListener("DOMContentLoaded",function(){
           return response.json();
     })
     .then(obj => {
-        yrnoPL = obj;
-        testn(obj);
+        yrnoPL = obj;      
         getYRNO(urlYRNO);
+        testNazw(obj);
         //console.log(yrnoPL);
         //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
