@@ -2,7 +2,8 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="./../img/dom.svg"> 
+   <link rel="manifest" href="./../zorro.web.json"> 
 <title>git::RSS</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
@@ -16,7 +17,7 @@
     a {text-decoration: none;}
     p {margin:0;}
     h4 {margin: 0.5em 0 0 0;}
-    article {display:grid; margin-bottom: 1em;}
+    article {display:grid; margin-bottom: 0.5em;}
     article img {width:128px;}
 </style>
 </head>
@@ -40,13 +41,12 @@
 
     return str;
   }
-  function decodeHTML(str) {
+  
+const decodeHTML=(str)=> {
     if(str && typeof str === 'string') {
         str = str.replaceAll("&gt;",">");
         str = str.replaceAll("&lt;","<");
         str = str.replaceAll("�","ó");
-        
-
     }
     return str;
   }
@@ -55,48 +55,61 @@
 const RSS_URL = [
     "https://rss.gazeta.pl/pub/rss/szczecin.xml",
     "https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml",
-    "https://rss.gazeta.pl/pub/rss/wiadomosci.xml",
-    "https://rss.gazeta.pl/pub/rss/kraj.xml",
-    "https://tvn24.pl/najnowsze.xml" 
+    "https://radioszczecin.pl/rss.php",
+    "https://www.engadget.com/rss.xml",
+    "https://www.wi.zut.edu.pl/pl/wydzial/informacje-o-wydziale/aktualnosci?format=feed" 
 ];
 
-fetch(RSS_URL[0])
-//fetch("https://wiadomosci.gazeta.pl/pub/rss/wiadomosci.htm")
-  .then(response => response.text())
-  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
-  .then(data => {
-    console.log(data);
-    const title = data.querySelector("channel title").textContent;
-    const link = data.querySelector("channel link").textContent;
-    console.log(title,link)
-    const items = data.querySelectorAll("item");
-    let html = `<h3><a href="${link}" target="_blank">${title}</a></h3>`;
-    items.forEach(el => {
-        //console.log(el)
-        //console.log(el.querySelector("description").innerHTML)
-        let czas = (new Date(el.querySelector("pubDate").textContent)).toLocaleString('pl-PL');
-        let desc = decodeHTML(el.querySelector("description").innerHTML);
-        console.log(desc)
-        //document.getElementById("txt").value += desc+"\n\n"
-        //decodeURIComponent(el.querySelector("description").innerHTML)
-      html += `
-        <article>
-          <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
-            <h4>
-                <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
-                ${decodeHTML(el.querySelector("title").innerHTML)}
-                </a>
-            </h4>
-            <p><span>${czas}</span><br />
-            ${desc}</p>
-        </article>
-      `;
+const readRSS=(nr)=>{
+    fetch(RSS_URL[nr])
+    //fetch("https://wiadomosci.gazeta.pl/pub/rss/wiadomosci.htm")
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+        console.log(data);
+        const title = data.querySelector("channel title").textContent;
+        const link = data.querySelector("channel link").textContent;
+        console.log(title,link)
+        const items = data.querySelectorAll("item");
+        let html = `<h3><a href="${link}" target="_blank">${title}</a></h3>`;
+        items.forEach((el,i) => {
+            let j=i+1;
+            if (i>5) return;
+            //console.log(el)
+            //console.log(el.querySelector("description").innerHTML)
+            let czas = (new Date(el.querySelector("pubDate").textContent)).toLocaleString('pl-PL');
+            let desc = decodeHTML(el.querySelector("description").innerHTML);
+            console.log(i,desc)
+            //document.getElementById("txt").value += desc+"\n\n"
+            //decodeURIComponent(el.querySelector("description").innerHTML)
+        html += `
+            <article>
+            <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
+                <h4> 
+                    <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
+                    ${j}. ${decodeHTML(el.querySelector("title").innerHTML)}
+                    </a>
+                </h4>
+                <p><span>${czas}</span><br />
+                ${desc}</p>
+            </article>
+        `;
+        });
+        //document.body.insertAdjacentHTML("beforeend", html);
+        document.getElementById("gazeta").innerHTML = html;
     });
-    document.body.insertAdjacentHTML("beforeend", html);
-  });
+}
+readRSS(0);
+</script>
 
-  </script>
+<div class="klawisze">
+    <button onclick="readRSS(0)" >Szczecin</button>
+    <button onclick="readRSS(1)" >Wyborcza</button>
+    <button onclick="readRSS(2)" >2</button>
+    <button onclick="readRSS(3)" >3</button>
+    <button onclick="readRSS(4)" >4</button>
+</div>
+<div id="gazeta"></div>
 
-<!--textarea id="txt"></textarea-->
 </body>
 </html>
