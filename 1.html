@@ -15,6 +15,7 @@
     }
     a {text-decoration: none;}
     p {margin:0;}
+    h4 {margin: 0.5em 0 0 0;}
 </style>
 </head>
 <body>
@@ -49,16 +50,15 @@ fetch(RSS_URL[0])
         let czas = (new Date(el.querySelector("pubDate").textContent)).toLocaleString('pl-PL')
       html += `
         <article>
-            <p>${czas}</p>
           <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
-          <h4>
-            <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
-              ${el.querySelector("title").innerHTML}
-            </a>
-          </h4>
-            <p>
-                ${el.querySelector("description").innerHTML}
-            </p>
+            <h4>
+                
+                <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
+                ${el.querySelector("title").innerHTML}
+                </a>
+            </h4>
+            <p>${czas}</p>
+            <p>${decodeURIComponent(el.querySelector("description").innerHTML)}</p>
         </article>
       `;
     });
