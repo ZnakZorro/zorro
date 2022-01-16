@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<meta http-equiv="refresh" content="3600">
+
 <title>git::RSS</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
@@ -19,18 +19,30 @@
 </head>
 <body>
 <script>
+    /*
+Dla przykładu:
+http://rss.gazeta.pl/pub/rss/wiadomosci.xml - jest w UTF8, nie ma zdjęć i działa
+http://rss.gazeta.pl/pub/rss/kraj.xml - jest w UTF8, ale ma osadzone zdjęcia i nie działa
+http://www.sony.pl/rss/pl_PL/Televisions.rss - jest w UTF8, nie ma osadzonych zdjęć, ma tylko linki do zdjęć i w tej postaci działa
+*/    
 const RSS_URL = [
-    "http://rss.gazeta.pl/pub/rss/szczecin.xml",
-    "http://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml"
+    "https://rss.gazeta.pl/pub/rss/szczecin.xml",
+    "https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml",
+    "https://rss.gazeta.pl/pub/rss/wiadomosci.xml",
+    "https://rss.gazeta.pl/pub/rss/kraj.xml",
+    "https://tvn24.pl/najnowsze.xml" 
 ];
 
-fetch(RSS_URL[1])
+fetch(RSS_URL[0])
+//fetch("https://wiadomosci.gazeta.pl/pub/rss/wiadomosci.htm")
   .then(response => response.text())
   .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
   .then(data => {
     console.log(data);
+    const title = data.querySelector("channel title").textContent;
+    console.log(title)
     const items = data.querySelectorAll("item");
-    let html = ``;
+    let html = `<h3>${title}</h3>`;
     items.forEach(el => {
         console.log(el)
         console.log(el.querySelector("description").innerHTML)
