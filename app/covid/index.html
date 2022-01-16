@@ -11,23 +11,7 @@
 <script src="https://zszczech.zut.edu.pl/app/autobusy/js/moment.min.js"></script>
 <script src="https://zszczech.zut.edu.pl/app/autobusy/js/pl.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-let coronus = {
-  "country":"Poland",
-  "dataType":"cases",
-  "population":0,
-  "populTXT":" ",
-  "perHow":"all",
-  "distance": "all"
-}
-function getURLParameter(name) {
-	return decodeURIComponent(
-		(location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
-	);
-}
-let type=getURLParameter("type");
-console.log("#22 type=",type);
-</script>
+
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/highcharts-3d.js"></script>
 <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -56,7 +40,7 @@ input[type="range" i] {
     margin: 1%;
 }
 .check span {
-    width: 5.5em;
+    width: 6.5em;
     border: 1px solid #ddd;
     background-color: #f4f4f4;
     display: inline-block;
@@ -71,6 +55,22 @@ input[type="range" i] {
 
 
 <script>
+  let coronus = {
+    "country":"Poland",
+    "dataType":"cases",
+    "population":0,
+    "populTXT":" ",
+    "perHow":"all",
+    "distance": "1y"
+  }
+  function getURLParameter(name) {
+    return decodeURIComponent(
+      (location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
+    );
+  }
+  let type=getURLParameter("type");
+  console.log("#22 type=",type);
+ 
 
 //let u   = "https://zszczech.zut.edu.pl/app/COV/data.json";
 let u   = "https://zszczech.zut.edu.pl/app/COV/data.php";
@@ -89,8 +89,15 @@ const weekMiddle=(datas,times,country)=>{
     let lastD = datas[0];
     let lastI   = datas.length-1;
     let actualI = 0;
+    let timeFrom = (new Date().getTime()) - 12*31*24*3600*1000;
+    if (coronus.distance==="all") timeFrom = 0;
     datas.forEach((dat,i)=>{
       let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
+      let time = times[i];
+      let delta = (new Date(times[i]).getTime())-timeFrom;
+      //console.log(delta)
+     
+      
       ile++;
       suma += dat - lastD;
       lastD = dat;
@@ -101,8 +108,10 @@ const weekMiddle=(datas,times,country)=>{
               mid = (mid/coronus.population)*1000000;
               //console.log(mid)
           }
-          outData.push(okolo(mid));
-          outTime.push(moment(times[i]).valueOf());
+          if (delta>0){
+              outData.push(okolo(mid));
+              outTime.push(moment(times[i]).valueOf());
+          }
           //console.log(dow,ile,suma,mid);
           suma = 0;
           ile = 0;
@@ -558,19 +567,19 @@ const newDistance=(ten)=>{
   -->
 </div>
 <div class="col check">
-  <span>Typ:</span>
-  <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases </span>
-  <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths </span>
+  <span>Rodzaj:</span>
+  <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases</span>
+  <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths</span>
 </div>
 <div class="col check">
-  <span>Rodzaj:</span>
-  <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> all </span>
-  <span><input type="radio" name="perHow" value="1M"   onChange="perWhat(this)" /> 1M </span>
+  <span>Ile:</span>
+  <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> wszyscy</span>
+  <span><input type="radio" name="perHow" value="1M"   onChange="perWhat(this)" /> per 1M</span>
 </div>
 <div class="col check">
   <span>Czas:</span>
-  <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"checked /> all </span>
-  <span><input type="radio" name="distance" value="3m"   onChange="newDistance(this)" /> 3mies. </span>
+  <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"  /> wszystko</span>
+  <span><input type="radio" name="distance" value="1y"   onChange="newDistance(this)" checked /> rok</span>
 </div>
   
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
@@ -585,9 +594,18 @@ const newDistance=(ten)=>{
     <div id="info"></div>
     <pre id="pre"></pre>
 </div>
-<div id="klawiszePlus"><button onclick="countryChart(this)" class="">Poland</button><button onclick="countryChart(this)" class="">United States</button><button onclick="countryChart(this)" class="">Canada</button><button onclick="countryChart(this)" class="">United Kingdom</button><button onclick="countryChart(this)" class="">Germany</button></div>
-<!--div id="klawiszePlus"><button onclick="countryChart(this)" class="active">Poland</button></div-->
-  <hr />
+<div id="klawiszePlus">
+    <button onclick="countryChart(this)" class="">Poland</button>   
+    <button onclick="countryChart(this)" class="">Germany</button>
+    <button onclick="countryChart(this)" class="">United Kingdom</button>
+    <button onclick="countryChart(this)" class="">United States</button>
+    
+    <button onclick="countryChart(this)" class="">Denmark</button>
+    <button onclick="countryChart(this)" class="">Sweden</button>    
+</div>
+
+<hr />
+
 <div id="klawisze"></div>
 </body>
 </html>
