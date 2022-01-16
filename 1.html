@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>git::RSS</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+<style>
+    body {
+    font-family: 'Roboto', "Verdana", sans-serif;
+    font-size: 14pt;
+    font-weight: 300;
+    }
+    a {text-decoration: none;}
+    p {margin:0;}
+</style>
+</head>
+<body>
+<script>
+const RSS_URL = [
+    "http://rss.gazeta.pl/pub/rss/szczecin.xml",
+    "http://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml"
+];
+
+fetch(RSS_URL[1])
+  .then(response => response.text())
+  .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+  .then(data => {
+    console.log(data);
+    const items = data.querySelectorAll("item");
+    let html = ``;
+    items.forEach(el => {
+        console.log(el)
+        console.log(el.querySelector("description").innerHTML)
+        let czas = (new Date(el.querySelector("pubDate").textContent)).toLocaleString('pl-PL')
+      html += `
+        <article>
+            <p>${czas}</p>
+          <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
+          <h4>
+            <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
+              ${el.querySelector("title").innerHTML}
+            </a>
+          </h4>
+            <p>
+                ${el.querySelector("description").innerHTML}
+            </p>
+        </article>
+      `;
+    });
+    document.body.insertAdjacentHTML("beforeend", html);
+  });
+
+  </script>
+
+
+</body>
+</html>
