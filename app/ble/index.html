@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>BLE-1</title>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
+  </head>
+  
+  <body>
+<div id="info"></div>
+<script>
+let info = document.getElementById("info");
+  
+navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+.then(device => device.gatt.connect())
+.then(server => {
+  // Getting Battery Service…
+  return server.getPrimaryService('battery_service');
+})
+.then(service => {
+  // Getting Battery Level Characteristic…
+  return service.getCharacteristic('battery_level');
+})
+.then(characteristic => {
+  // Reading Battery Level…
+  return characteristic.readValue();
+})
+.then(value => {
+  console.log(`Battery percentage is ${value.getUint8(0)}`);
+})
+.catch(error => { console.error(error); });
+  
+</script>
+    
+    
+    
+    
+    
+  </body>
+</html>
