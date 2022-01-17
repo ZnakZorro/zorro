@@ -213,7 +213,7 @@ function onDisconnected() {
 }
 
 
-/*
+
 navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
 .then(device => device.gatt.connect())
 .then(server => {
@@ -232,7 +232,7 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
   console.log(`Battery percentage is ${value.getUint8(0)}`);
 })
 .catch(error => { console.error(error); });
-  */
+  
 </script>
     
 <h3>Live Output</h3>
