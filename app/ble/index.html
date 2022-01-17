@@ -8,10 +8,58 @@
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#214960">
+   <style>
+
+*,*::before,*::after {box-sizing: border-box;}    
+* {
+    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
+    color-adjust: exact !important;                 /*Firefox*/
+}
+
+
+button:focus, button:active {outline: none; border-color:white;}
+button:focus {opacity:0.65}
+
+button {
+    display: inline-block;
+    background:#369;
+    color:white;
+	padding: 0.2em 0.4em;
+	font-size: 1.0em;
+    margin: 0.333em;
+    line-height: 1.35;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 2px solid transparent;
+    border-radius: 0.35em;
+	box-shadow: 1px 2px 3px #000;	
+	white-space: normal;
+}
+
+.btn-lg{
+	padding: 0.4em 0.8em;
+	font-size: 1.1em;
+}
+
+
+
+   </style>
   </head>
   
   <body>
-<div id="info"></div>
+    <button>Button</button>
+    <button>Button</button>
+    <button>Button</button>
+    <div id="info"></div>
 <script>
 let info = document.getElementById("info");
   
@@ -38,7 +86,9 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
     
     
     
-    
+ <!--
+     https://web.dev/bluetooth/
+ -->   
     
   </body>
 </html>
