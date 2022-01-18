@@ -2,6 +2,24 @@
 home sweet home
 
 
+Syntax highlighted code block
+
+# Header 1
+## Header 2
+### Header 3
+
+- Bulleted
+- List
+
+1. Numbered
+2. List
+
+**Bold** and _Italic_ and `Code` text
+
+[Link](url) and ![Image](src)
+===========================
+
+
 <div class="highlight highlight-source-gfm position-relative overflow-auto"><pre>Syntax highlighted code block
 
 <span class="pl-mh"><span class="pl-mh">#</span><span class="pl-mh"> </span>Header 1</span>
