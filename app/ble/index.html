@@ -8,18 +8,14 @@
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#214960">
-   <style>
-
+<style>
 *,*::before,*::after {box-sizing: border-box;}    
 * {
     -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
     color-adjust: exact !important;                 /*Firefox*/
 }
-
-
 button:focus, button:active, .btn:focus, .btn:active {outline: none; border-color:white;}
 button:focus, .btn:focus {opacity:0.65}
-
 button,.btn {
     display: inline-block;
     background:#369;
@@ -44,18 +40,13 @@ button,.btn {
 	box-shadow: 1px 2px 3px #000;	
 	white-space: normal;
 }
-	   .btn {background:#258;}
-.btn-lg{
-	padding: 0.4em 0.8em;
-	font-size: 1.1em;
-}
-
-
-
-   </style>
-  </head>
+.btn {background:#258;}
+.btn-lg {padding: 0.4em 0.8em;font-size: 1.1em;}
+</style>
+	
+</head>
   
-  <body>
+<body>
 
 
     <button>Button</button>
@@ -70,7 +61,7 @@ button,.btn {
     <button id="reset">Reset Bluetooth Device</button>
     
     <script>
-        //https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html
+
       var ChromeSamples = {
         log: function() {
           var line = Array.prototype.slice.call(arguments).map(function(argument) {
@@ -243,8 +234,8 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
 </div>  
     
  
-	<p><a href="https://web.dev/bluetooth/" class="bbtn">https://web.dev/bluetooth</a></p>
-   	<p><a href="https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html" class="bbtn">https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html</a></p>
+	<p><a href="https://web.dev/bluetooth/" class="btn">https://web.dev/bluetooth</a></p>
+   	<p><a href="https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html" class="btn">https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html</a></p>
    
     
   </body>
