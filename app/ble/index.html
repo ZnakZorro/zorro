@@ -17,10 +17,10 @@
 }
 
 
-button:focus, button:active {outline: none; border-color:white;}
-button:focus {opacity:0.65}
+button:focus, button:active, .btn:focus, .btn:active {outline: none; border-color:white;}
+button:focus, .btn:focus {opacity:0.65}
 
-button {
+button,.btn {
     display: inline-block;
     background:#369;
     color:white;
@@ -44,7 +44,7 @@ button {
 	box-shadow: 1px 2px 3px #000;	
 	white-space: normal;
 }
-
+	   .btn {background:#258;}
 .btn-lg{
 	padding: 0.4em 0.8em;
 	font-size: 1.1em;
@@ -242,9 +242,10 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
   <pre id="log"></pre>
 </div>  
     
- <!--
-     https://web.dev/bluetooth/
- -->   
+ 
+	<p><a href="https://web.dev/bluetooth/" class="bbtn">https://web.dev/bluetooth</a></p>
+   	<p><a href="https://web.dev/bluetooth/" class="bbtn">https://web.dev/bluetooth</a></p>
+   
     
   </body>
 </html>
