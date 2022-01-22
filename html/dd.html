@@ -1,3 +1,19 @@
+<html lang="pl">
+<head>
+  <meta charset="utf-8">
+  <title>dd-1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <meta name="theme-color" content="#800">
+
+
+
+
+
+
+
+
 <style>
 /* Copyright 2018 Google LLC.
 SPDX-License-Identifier: Apache-2.0 */
@@ -35,9 +51,23 @@ body {
 
 
 <script>
+
+const zamiana=(from,to)=>{
+  let from1 = from.innerHTML;
+  let to1 = to.innerHTML;
+  console.log(from,to)
+  console.log(from1,to1)
+ 
+  from.innerHTML = to1;
+  to.innerHTML   = from1;
+
+}
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
 
     var dragSrcEl = null;
+    var dragOver = null;
     
     function handleDragStart(e) {
         console.log("+++start",e.target);
@@ -49,7 +79,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   
     function handleDragOver(e) {
-        console.log("over")
+      dragOver = this;
+        //console.log("over")
       if (e.preventDefault) {
         e.preventDefault();
       } 
@@ -58,12 +89,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
   
     function handleDragEnter(e) {
-        console.log("enter")
+        //console.log("enter",this)
       this.classList.add('over');
     }
   
     function handleDragLeave(e) {
-        console.log("leave")
+        //console.log("leave",this)
       this.classList.remove('over');
     }
   
@@ -85,13 +116,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         console.log("---end")
         e.preventDefault();
       this.style.opacity = '1';
-                    console.log(this)
-                    console.log(e)
-                    console.log(dragSrcEl)
-                    console.log(this.innerHTML,dragSrcEl.innerHTML)
-                    console.log(e.dataTransfer.getData('text/html'))
-                    console.log(this.target)
-                    console.log(dragSrcEl.target)
+      zamiana(dragSrcEl,dragOver)
+                    //console.log(dragOver,dragSrcEl)
+                    console.log(dragSrcEl.innerHTML,'=>',dragOver.innerHTML)
+                    //console.log(e.dataTransfer.getData('text/html'))
+                    //console.log(this.target)
+                    //console.log(dragSrcEl.target)
                     /*if (dragSrcEl != this) {
                         dragSrcEl.innerHTML = this.innerHTML;
                         this.innerHTML = e.dataTransfer.getData('text/html');
@@ -102,7 +132,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     
     function handleDrag(e) {
-        console.log("drag")
+        //console.log("drag",this)
     }
 
     let items = document.querySelectorAll('.container .box');
