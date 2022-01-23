@@ -152,8 +152,16 @@ document.addEventListener('DOMContentLoaded', (event) => {
       item.addEventListener('drop',      handleDrop, false);
       item.addEventListener('dragend',   handleDragEnd, false);
       item.addEventListener('drag',   handleDrag, false);
+
+      item.addEventListener("touchstart", handleDragStart, false);
+      item.addEventListener("touchend", handleDragEnd, false);
+      //item.addEventListener("touchcancel", handleCancel, false);
+      item.addEventListener("touchmove", handleDragOver, false);
+
     });
   });
+
+
 
 </script>
 
