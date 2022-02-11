@@ -21,8 +21,8 @@
     article {display:grid; margin-bottom: 0.5em;}
     article img {width:128px;}
 </style>
-</head>
-<body>
+
+
 <script>
  function htmlencode(str) {
     return str.replace(/[&<>"']/g, function($0) {
@@ -102,6 +102,10 @@ const readRSS=(nr)=>{
 }
 readRSS(0);
 </script>
+</head>
+
+<body>
+<img src="../css/icon/back.svg" onClick='location.href="../";' style="width:38px;vertical-align: middle; cursor:pointer;"/>
 
 <div class="klawisze">
     <button onclick="readRSS(0)" >Szczecin</button>
