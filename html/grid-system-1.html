@@ -1,0 +1,142 @@
+
+<style>
+.grid-container {
+  /**
+   * User input values.
+   */
+  --grid-layout-gap: 10px;
+  --grid-column-count: 8; /* This gets overridden by an inline style. */
+  --grid-item--min-width: 200px; /* This gets overridden by an inline style. */
+
+  /**
+   * Calculated values.
+   */
+  --gap-count: calc(var(--grid-column-count) - 1);
+  --total-gap-width: calc(var(--gap-count) * var(--grid-layout-gap));
+  --grid-item--max-width: calc(
+    (100% - var(--total-gap-width)) / var(--grid-column-count)
+  );
+
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(max(var(--grid-item--min-width), var(--grid-item--max-width)), 1fr)
+  );
+  grid-gap: var(--grid-layout-gap);
+}
+
+/*
+ Unrelated styling
+*/
+
+* {
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+.expander {
+  float: left;
+  background: pink;
+  height: 200px;
+  min-width: 100px;
+  margin-right: 10px;
+  padding: 5px;
+  resize: both;
+  overflow: auto;
+}
+.controls {
+  display: flex;
+  gap: 20px;
+  background: #eee;
+  padding: 10px;
+  margin: 20px 0;
+}
+
+input {
+  font-size: 20px;
+  width: 70px;
+  padding: 5px;
+}
+
+.grid-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 50px;
+  background: lightblue;
+  font-size: 13px;
+}
+
+
+
+</style>
+
+
+
+
+<div class="controls">
+  <label>Max Columns: <input class="max-cols" type="number" value="8"></label>
+  <label>Min Grid Cell Width: <input class="max-width" type="number" step="50" value="200"> px</label>
+</div>
+<div class="expander">Drag me wider</div>
+<div class="grid-container">
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+</div>
+
+<script>
+const grid = document.querySelector(".grid-container");
+const controlsMaxCols = document.querySelector(".max-cols");
+const controlsMaxWidth = document.querySelector(".max-width");
+
+controlsMaxCols.addEventListener("change", (e) => {
+  const value = e.target.value;
+  grid.style.setProperty("--grid-column-count", value);
+});
+
+controlsMaxWidth.addEventListener("change", (e) => {
+  const value = e.target.value;
+  grid.style.setProperty("--grid-item--min-width", value + "px");
+});
+
+// Output width of each grid-item as text.
+const gridItems = document.querySelectorAll(".grid-item");
+const resizeObserver = new ResizeObserver((entries) => {
+  for (let entry of entries) {
+    const width = Math.floor(entry.contentBoxSize[0].inlineSize);
+    entry.target.textContent = `${width}px`;
+  }
+});
+
+gridItems.forEach((el) => resizeObserver.observe(el));
+
+
+</script>
