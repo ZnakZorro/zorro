@@ -147,11 +147,15 @@ const weekMiddle=(datas,times,country)=>{
 const describe=(data,country)=>{
   document.getElementById("ctype").textContent = coronus.dataType;
   document.getElementById("country").textContent = coronus.country;
-  console.log(coronus);
+console.log(data);
+  
   coronus.population = parseFloat(data.countries[country].population); 
-
-  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]'
-  document.getElementById("population").textContent = coronus.populTXT;
+	if (coronus.population){
+	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]'
+	  document.getElementById("population").textContent = coronus.populTXT;
+	}
+console.log(coronus);
+	
   let datas = data.countries[country][coronus.dataType]; 
   
   //console.log(datas);
