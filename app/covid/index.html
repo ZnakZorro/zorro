@@ -204,7 +204,8 @@ let getAsyncFetch=async(u,callback=null,country="Poland")=>{
   const res = await fetch(u,config)
   const data = await res.json();
   let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
-  //console.log(lastUpdated);
+  console.log(data);
+  document.getElementById("contry").textContent = "countrytoo".toString();
   document.getElementById("lastUpdated").textContent = lastUpdated.toString();
   if (callback) callback(data,country);
 }
@@ -555,6 +556,44 @@ const newDistance=(ten)=>{
   coronus.distance = ten.value;
   countryChart({"textContent":coronus.country});
 }
+/*
+const recache = ()=>{
+	//https://zszczech.zut.edu.pl/app/COV/cache.php?token=457687
+}
+let getToken = ()=>{return(new Date()).getTime();}
+
+let cccc=async()=>{
+	await cc();
+	
+}
+
+let refresh=async()=>{
+	await cc();
+	window.location.href="./";//?token="+getToken();
+}
+
+let cc = async()=>{
+	caches.keys()
+	.then((names)=> {
+		console.log(names)
+    for (let name of names)
+		caches.delete(name);
+	})
+	.then(r=>{console.log(r)});
+}
+*/
+
+let testCache=(d)=>{
+	console.log("#178=",d);
+	console.log("#179=",parseInt(d[0]));
+}
+let token = Math.round(((new Date()).getTime())/(3600 * 1000));
+console.log("token=",token)
+
+fetch("https://zszczech.zut.edu.pl/app/COV/cache.php?token="+token, {cache: "no-store"})
+.then(r => {return r.text()})
+.then(o => {testCache(o)})
+.catch(e => {console.log(e)})
 
 </script>  
   
@@ -562,7 +601,7 @@ const newDistance=(ten)=>{
 <body>
 <div class="col">
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
-    <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b> <span id="population"></span>
+    <span id="country"> &nbsp; <span id="population"> &nbsp; <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b> </span>
   <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
   <!--
   <button onclick='location.href="./";'>X</button>
@@ -586,7 +625,10 @@ const newDistance=(ten)=>{
   <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"  /> wszystko</span>
   <span><input type="radio" name="distance" value="1y"   onChange="newDistance(this)" checked /> rok</span>
 </div>
-  
+<div class="col check">
+  <button onclick="refresh()" class="btn" style="">refresh()</button>
+</div>
+	
 <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
     <div id="container"></div>
 </figure>
