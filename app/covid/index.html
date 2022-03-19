@@ -146,6 +146,7 @@ const weekMiddle=(datas,times,country)=>{
 
 const describe=(data,country)=>{
   document.getElementById("ctype").textContent = coronus.dataType;
+  document.getElementById("contry").textContent = coronus.country;
   console.log(coronus);
   coronus.population = parseFloat(data.countries[country].population); 
 
@@ -205,7 +206,7 @@ let getAsyncFetch=async(u,callback=null,country="Poland")=>{
   const data = await res.json();
   let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
   console.log(data);
-  document.getElementById("contry").textContent = "countrytoo".toString();
+  //document.getElementById("contry").textContent = "countrytoo".toString();
   document.getElementById("lastUpdated").textContent = lastUpdated.toString();
   if (callback) callback(data,country);
 }
