@@ -151,7 +151,9 @@ console.log(data);
   
   coronus.population = parseFloat(data.countries[country].population); 
 	if (coronus.population){
-	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]'
+	console.log(coronus.population);
+	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]';
+	console.log(coronus.populTXT);
 	  document.getElementById("population").textContent = coronus.populTXT;
 	}
 console.log(coronus);
@@ -607,7 +609,7 @@ const newDistance=(ten)=>{
 <body>
 <div class="col">
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
-    <span id="country"> &nbsp; <span id="population"> &nbsp; <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b> </span>
+    <span id="country"></span> &nbsp; <span id="population"> </span> &nbsp; <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b>
   <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
   <!--
   <button onclick='location.href="./";'>X</button>
