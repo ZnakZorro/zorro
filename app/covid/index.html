@@ -146,7 +146,7 @@ const weekMiddle=(datas,times,country)=>{
 
 const describe=(data,country)=>{
   document.getElementById("ctype").textContent = coronus.dataType;
-  document.getElementById("contry").textContent = coronus.country;
+  document.getElementById("country").textContent = coronus.country;
   console.log(coronus);
   coronus.population = parseFloat(data.countries[country].population); 
 
@@ -557,44 +557,45 @@ const newDistance=(ten)=>{
   coronus.distance = ten.value;
   countryChart({"textContent":coronus.country});
 }
-/*
-const recache = ()=>{
-	//https://zszczech.zut.edu.pl/app/COV/cache.php?token=457687
-}
-let getToken = ()=>{return(new Date()).getTime();}
 
-let cccc=async()=>{
-	await cc();
-	
-}
 
-let refresh=async()=>{
-	await cc();
-	window.location.href="./";//?token="+getToken();
-}
+			const recache = ()=>{
+				//https://zszczech.zut.edu.pl/app/COV/cache.php?token=457687
+			}
+			let getToken = ()=>{return(new Date()).getTime();}
 
-let cc = async()=>{
-	caches.keys()
-	.then((names)=> {
-		console.log(names)
-    for (let name of names)
-		caches.delete(name);
-	})
-	.then(r=>{console.log(r)});
-}
-*/
+			let cccc=async()=>{
+				await cc();
 
-let testCache=(d)=>{
-	console.log("#178=",d);
-	console.log("#179=",parseInt(d[0]));
-}
-let token = Math.round(((new Date()).getTime())/(3600 * 1000));
-console.log("token=",token)
+			}
 
-fetch("https://zszczech.zut.edu.pl/app/COV/cache.php?token="+token, {cache: "no-store"})
-.then(r => {return r.text()})
-.then(o => {testCache(o)})
-.catch(e => {console.log(e)})
+			let refresh=async()=>{
+				await cc();
+				window.location.href="./";//?token="+getToken();
+			}
+
+			let cc = async()=>{
+				caches.keys()
+				.then((names)=> {
+					console.log(names)
+			    for (let name of names)
+					caches.delete(name);
+				})
+				.then(r=>{console.log(r)});
+			}
+
+
+			let testCache=(d)=>{
+				console.log("#178=",d);
+				console.log("#179=",parseInt(d[0]));
+			}
+			let token = Math.round(((new Date()).getTime())/(3600 * 1000));
+			console.log("token=",token)
+
+			fetch("https://zszczech.zut.edu.pl/app/COV/cache.php?token="+token, {cache: "no-store"})
+			.then(r => {return r.text()})
+			.then(o => {testCache(o)})
+			.catch(e => {console.log(e)})
 
 </script>  
   
