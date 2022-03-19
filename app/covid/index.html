@@ -153,7 +153,7 @@ const describe=(data,country)=>{
 	if (coronus.population){
 	//console.log(coronus.population);
 	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]';
-	console.log(coronus.populTXT);
+	//console.log(coronus.populTXT);
 	  document.getElementById("population").textContent = coronus.populTXT;
 	}
 //console.log(coronus);
@@ -592,11 +592,10 @@ const newDistance=(ten)=>{
 
 
 			let testCache=(d)=>{
-				console.log("#178=",d);
-				console.log("#179=",parseInt(d[0]));
+				console.log("#595 TestCache=",d,parseInt(d[0]));
 			}
 			let token = Math.round(((new Date()).getTime())/(3600 * 1000));
-			console.log("token=",token)
+			//console.log("token=",token)
 
 			fetch("https://zszczech.zut.edu.pl/app/COV/cache.php?token="+token, {cache: "no-store"})
 			.then(r => {return r.text()})
