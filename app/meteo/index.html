@@ -653,14 +653,16 @@ Meteogram.prototype.getChartOptions = function () {
             },
             labels: {
                 style: {
-                    fontSize: '8px',
-                    color: Highcharts.getOptions().colors[2]
+                    fontSize: '9px',
+                    color: Highcharts.getOptions().colors[1]
                 },
                 y: 2,
                 x: 3
             },
             gridLineWidth: 0,
             opposite: true,
+	    min:970,
+	    max:1050,
             showLastLabel: false
         }],
 
