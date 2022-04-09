@@ -272,7 +272,7 @@ Meteogram.dictionary = {
     },
     fair: {
         symbol: '02',
-        text: 'Fair'
+        text: 'Ładna pogoda'
     },
     partlycloudy: {
         symbol: '03',
@@ -280,7 +280,7 @@ Meteogram.dictionary = {
     },
     cloudy: {
         symbol: '04',
-        text: 'Cloudy'
+        text: 'Pochmurno'
     },
     lightrainshowers: {
         symbol: '40',
@@ -308,7 +308,7 @@ Meteogram.dictionary = {
     },
     lightsleetshowers: {
         symbol: '42',
-        text: 'Light sleet showers'
+        text: 'Przelotne deszczyk ze śniegiem'
     },
     sleetshowers: {
         symbol: '07',
@@ -324,35 +324,35 @@ Meteogram.dictionary = {
     },
     sleetshowersandthunder: {
         symbol: '20',
-        text: 'Sleet showers and thunder'
+        text: 'Deszcz ze śniegiem i grzmoty'
     },
     heavysleetshowersandthunder: {
         symbol: '27',
-        text: 'Heavy sleet showers and thunder'
+        text: 'Ulewa ze śniegiem i grzmoty'
     },
     lightsnowshowers: {
         symbol: '44',
-        text: 'Light snow showers'
+        text: 'Śnieżek'
     },
     snowshowers: {
         symbol: '08',
-        text: 'Snow showers'
+        text: 'Śnieg'
     },
     heavysnowshowers: {
         symbol: '45',
-        text: 'Heavy show showers'
+        text: 'Śnieżyca'
     },
     lightsnowshowersandthunder: {
         symbol: '28',
-        text: 'Light snow showers and thunder'
+        text: 'Śnieżek i grzmoty'
     },
     snowshowersandthunder: {
         symbol: '21',
-        text: 'Snow showers and thunder'
+        text: 'Śnieg i grzmoty'
     },
     heavysnowshowersandthunder: {
         symbol: '29',
-        text: 'Heavy snow showers and thunder'
+        text: 'Śnieżyca i grzmoty'
     },
     lightrain: {
         symbol: '46',
@@ -380,15 +380,15 @@ Meteogram.dictionary = {
     },
     lightsleet: {
         symbol: '47',
-        text: 'Light sleet'
+        text: 'Śnieżeg z deszczem'
     },
     sleet: {
         symbol: '12',
-        text: 'Sleet'
+        text: 'Śnieg z deszczem'
     },
     heavysleet: {
         symbol: '48',
-        text: 'Heavy sleet'
+        text: 'Śnieżyca z deszczem'
     },
     lightsleetandthunder: {
         symbol: '31',
@@ -404,15 +404,15 @@ Meteogram.dictionary = {
     },
     lightsnow: {
         symbol: '49',
-        text: 'Light snow'
+        text: 'Śnieżek'
     },
     snow: {
         symbol: '13',
-        text: 'Snow'
+        text: 'Śnieg'
     },
     heavysnow: {
         symbol: '50',
-        text: 'Heavy snow'
+        text: 'Śnieżyca'
     },
     lightsnowandthunder: {
         symbol: '33',
@@ -917,7 +917,19 @@ document.addEventListener("DOMContentLoaded",function(){
 
 </script> 
   
-  
+<div id="colorsArr"></div>
+<script>
+let colorsArr = "#2b908f #90ee7e #f45b5b #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee #ffffff".split(" ");
+console.log(colorsArr)
+let t=""
+colorsArr.forEach((c,i)=>{
+    console.log(i,c)
+    t += `<div style="padding: 0.25em; display:inline-block;width:8em; height:1.2em; background:${c}">${i}. ${c}</div>`;
+    t += `<div style="padding: 0.25em; display:inline-block;width:8em; height:1.2em; color:${c}; background:black">${i}. ${c}</div>`;
+    t+="<br />";
+})
+document.getElementById('colorsArr').innerHTML = t;
+</script>  
 
     
 </body>
