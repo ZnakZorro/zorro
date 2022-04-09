@@ -678,7 +678,7 @@ Meteogram.prototype.getChartOptions = function () {
 
 
         series: [{
-            name: 'Temperature',
+            name: 'Temperatura',
             data: this.temperatures,
             type: 'spline',
             marker: {
@@ -697,7 +697,7 @@ Meteogram.prototype.getChartOptions = function () {
             color: '#FF3333',
             negativeColor: '#48AFE8'
         }, {
-            name: 'Precipitation',
+            name: 'Opady',
             data: this.precipitationsError,
             type: 'column',
             color: 'url(#precipitation-error)',
@@ -723,7 +723,7 @@ Meteogram.prototype.getChartOptions = function () {
                 }
             }
         }, {
-            name: 'Precipitation',
+            name: 'Opady',
             data: this.precipitations,
             type: 'column',
             color: '#68CFE8',
@@ -747,7 +747,7 @@ Meteogram.prototype.getChartOptions = function () {
                 valueSuffix: ' mm'
             }
         }, {
-            name: 'Air pressure',
+            name: 'Ćiśnienie',
             color: Highcharts.getOptions().colors[2],
             data: this.pressures,
             marker: {
@@ -760,7 +760,7 @@ Meteogram.prototype.getChartOptions = function () {
             dashStyle: 'shortdot',
             yAxis: 2
         }, {
-            name: 'Wind',
+            name: 'Wiatr',
             type: 'windbarb',
             id: 'windbarbs',
             color: Highcharts.getOptions().colors[1],
