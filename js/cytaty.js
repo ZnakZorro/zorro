@@ -1,7 +1,7 @@
 
 console.log("cytaty.js");
 
-fetch("/data/cytaty.txt)
+fetch("./data/cytaty.txt")
 .then(r => {return r.text()})
 .then(txt => {
     console.log(txt);
