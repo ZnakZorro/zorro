@@ -1,7 +1,7 @@
 
 console.log("==================cytaty.js");
 
-//document.addEventListener("DOMContentLoaded",function(){
+document.addEventListener("DOMContentLoaded",function(){
     
     fetch("./data/cytaty.txt")
     .then(r => {return r.text()})
@@ -19,4 +19,4 @@ console.log("==================cytaty.js");
     })
     .catch(e => {console.log(e)})
     
-//}); // EOF DOM ready
+}); // EOF DOM ready
