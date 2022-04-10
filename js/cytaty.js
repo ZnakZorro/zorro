@@ -1,24 +1,23 @@
 
 console.log("==================cytaty.js");
 
-document.addEventListener("DOMContentLoaded",function(){
-    
+const setCytat=()=>{
     fetch("./data/cytaty.txt")
     .then(r => {return r.text()})
     .then(txt => {
-        console.log(txt);
         let arr = txt.split("\n");
-        console.log(arr,arr.length);
         let los = Math.ceil(Math.random() * (arr.length-1));
         let elem = document.createElement("div");
         let cytat = arr[los];
-        console.log(los,cytat);
-        elem.style.cssText = "font-weight: 400; font-style: italic; font-size: 1.1rem; color:#800";
+        elem.style.cssText = "font-weight: 400; font-style: italic; font-size: 1.05rem; color:#888";
         elem.className = "container";
-
         elem.innerHTML = '"'+cytat+'"';
         if (cytat) document.body.appendChild(elem);  
     })
-    .catch(e => {console.log(e)})
+    .catch(e => {console.log(e)})    
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    setCytat();
     
 }); // EOF DOM ready
