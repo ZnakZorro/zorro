@@ -14,6 +14,8 @@ document.addEventListener("DOMContentLoaded",function(){
         let cytat = arr[los];
         console.log(los,cytat);
         elem.style.cssText = "color:#800";
+        elem.className = "container";
+
         elem.innerHTML = "cytat: "+cytat;
         if (cytat) document.body.appendChild(elem);  
     })
