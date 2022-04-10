@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded",function(){
         elem.style.cssText = "font-weight: 400; font-style: italic; font-size: 1.1rem; color:#800";
         elem.className = "container";
 
-        elem.innerHTML = "cytat: "+cytat;
+        elem.innerHTML = '"'+cytat+'"';
         if (cytat) document.body.appendChild(elem);  
     })
     .catch(e => {console.log(e)})
