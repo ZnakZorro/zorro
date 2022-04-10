@@ -94,7 +94,8 @@ div.card img {
   bottom: 20px;
   margin-right: 10px;
   place-self: end;
-  margin-top: calc(100vh + var(--offset));
+  /*margin-top: calc(100vh + var(--offset));*/
+    margin-top: 5vh;
 
   /* visual styling */
   text-decoration: none;
