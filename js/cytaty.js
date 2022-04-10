@@ -1,5 +1,5 @@
 
-console.log("cytaty.js");
+console.log("==================cytaty.js");
 
 document.addEventListener("DOMContentLoaded",function(){
     
