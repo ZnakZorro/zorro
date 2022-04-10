@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded",function(){
         let elem = document.createElement("div");
         let cytat = arr[los];
         console.log(los,cytat);
-        elem.style.cssText = "color:#800";
+        elem.style.cssText = "font-weight: 400; font-style: italic; font-size: 1.1rem; color:#800";
         elem.className = "container";
 
         elem.innerHTML = "cytat: "+cytat;
