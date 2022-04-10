@@ -6,7 +6,7 @@ const setCytat=()=>{
     .then(r => {return r.text()})
     .then(txt => {
         let arr = txt.split("\n");
-        let los = Math.ceil(Math.random() * (arr.length-1));
+        let los = Math.ceil(Math.random() * (arr.length-2));
         let elem = document.createElement("div");
         let cytat = arr[los];
         elem.style.cssText = "font-weight: 400; font-style: italic; font-size: 1.05rem; color:#888";
