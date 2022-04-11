@@ -100,6 +100,7 @@ const weekMiddle=(datas,times,country)=>{
     // coronus.distance==="1y"
     let timeFrom = (new Date().getTime()) - 12*31*24*3600*1000;					// coronus.distance==="1y"
     if (coronus.distance==="1m")  timeFrom = (new Date().getTime()) - 1*31*24*3600*1000;	// coronus.distance==="1m"
+    if (coronus.distance==="1q")  timeFrom = (new Date().getTime()) - 3*31*24*3600*1000;	// coronus.distance==="1q"
     if (coronus.distance==="all") timeFrom = 0;							// coronus.distance==="all"				
     datas.forEach((dat,i)=>{
       let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
@@ -636,6 +637,7 @@ const newDistance=(ten)=>{
   <span>Czas:</span>
   <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"  /> wszystko</span>
   <span><input type="radio" name="distance" value="1y"   onChange="newDistance(this)" checked /> rok</span>
+  <span><input type="radio" name="distance" value="1q"   onChange="newDistance(this)"  /> kwartał</span>
   <span><input type="radio" name="distance" value="1m"   onChange="newDistance(this)"  /> miesiąc</span>
 </div>
 <div class="col check">
