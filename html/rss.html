@@ -56,6 +56,9 @@ const decodeHTML=(str)=> {
 const RSS_URL = [
     "https://rss.gazeta.pl/pub/rss/szczecin.xml",
     "https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml",
+   "https://www.theguardian.com/news/series/todayinfocus/podcast.xml",
+   "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
+   "https://feeds.a.dj.com/rss/RSSWSJD.xml",
     "https://radioszczecin.pl/rss.php",
     "https://www.engadget.com/rss.xml",
     "https://www.wi.zut.edu.pl/pl/wydzial/informacje-o-wydziale/aktualnosci?format=feed" 
@@ -110,6 +113,11 @@ readRSS(0);
 <div class="klawisze">
     <button onclick="readRSS(0)" >Szczecin</button>
     <button onclick="readRSS(1)" >Wyborcza</button>
+   <button onclick="readRSS(2)" >Guardian</button>
+   <button onclick="readRSS(3)" >World</button>
+   <button onclick="readRSS(4)" >Tech</button>
+   
+   
    <!--
     <button onclick="readRSS(2)" >2</button>
     <button onclick="readRSS(3)" >3</button>
