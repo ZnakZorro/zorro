@@ -99,7 +99,7 @@ const weekMiddle=(datas,times,country)=>{
     let actualI = 0;
     // coronus.distance==="1y"
     let timeFrom = (new Date().getTime()) - 12*31*24*3600*1000;					// coronus.distance==="1y"
-    if (coronus.distance==="1m") let timeFrom = (new Date().getTime()) - 1*31*24*3600*1000;	// coronus.distance==="1m"
+    if (coronus.distance==="1m")  timeFrom = (new Date().getTime()) - 1*31*24*3600*1000;	// coronus.distance==="1m"
     if (coronus.distance==="all") timeFrom = 0;							// coronus.distance==="all"				
     datas.forEach((dat,i)=>{
       let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
