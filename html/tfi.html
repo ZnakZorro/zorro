@@ -1,0 +1,305 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+	<title>TFI</title>
+	<meta http-equiv='refresh' content='909'/>
+	
+<style>
+	body {font:normal 1em Verdana; margin:0; padding:0;}
+	#czas {margin:1em;}
+	button {margin:0.5em;}
+	#container0,#container3 {
+		width: 100%;
+		max-width: 900px;
+		height: 400px;
+		margin: 0 auto;	
+	}
+a.btn {
+    margin: 0.15em;
+    padding: 0.15em;
+    text-align: center;
+    width: 8em;
+    background: #eee;
+    text-decoration: none;
+    line-height: 2em;
+    display: inline-block;
+    color: navy;
+	border:1px solid gray;
+}
+a.mini {
+    padding: 0.05em;
+    width: 6em;
+    font-size: 0.8em;
+}
+</style>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+</head>
+
+<body>
+<!--
+	<button onClick='location.href="./?time=0"'>D</button>
+	<button onClick='location.href="./?time=1"'>T</button>
+	<button onClick='location.href="./?time=2"'>M</button>
+	<button onClick='location.href="./?time=3"'>R</button>
+-->
+	<div id="container0" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="container1" style="">
+		<div>
+			<a href="https://www.pkotfi.pl/fundusze-inwestycyjne/fundusze-inwestycyjne-otwarte/pko-bursztynowy/" class="btn" target="blank">Bursztynowy</a> 
+			<a href="https://www.pkotfi.pl/fundusze-inwestycyjne/fundusze-inwestycyjne-otwarte/pko-szafirowy/"   class="btn" target="blank">Szafirowy</a>
+			<a href="https://www.pkotfi.pl/fundusze-inwestycyjne/fundusze-inwestycyjne-otwarte/pko-obligacji-samorzadowych/"   class="btn" target="blank">Samorządowy</a>
+			<a href="https://www.pkotfi.pl/fundusze-inwestycyjne/fundusze-inwestycyjne-otwarte/pko-obligacji-skarbowych/"   class="btn" target="blank">Skarbowy</a>
+		</div>	
+	</div>
+	<div id="container3" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+	<div id="czas"></div>
+
+
+<script>
+
+let tfiURL[
+	'https://www.pkotfi.pl/_ajax/rest/v2/tfi/fund/103/values/?format=json&ajax=1&lang=pl&date__gte=2021-04-12&date__lte=2022-04-12&division=daily&unit=A',
+	'https://www.pkotfi.pl/_ajax/rest/v2/tfi/fund/104/values/?format=json&ajax=1&lang=pl&date__gte=2021-04-12&date__lte=2022-04-12&division=daily&unit=A',
+    'https://www.pkotfi.pl/_ajax/rest/v2/tfi/fund/127/values/?format=json&ajax=1&lang=pl&date__gte=2021-04-12&date__lte=2022-04-12&division=weekly&unit=A',
+    'https://www.pkotfi.pl/_ajax/rest/v2/tfi/fund/127/values/?format=json&ajax=1&lang=pl&date__gte=2021-04-12&date__lte=2022-04-12&division=weekly&unit=A',
+	'https://www.pkotfi.pl/_ajax/rest/v2/tfi/fund/2/values/?format=json&ajax=1&lang=pl&date__gte=2021-04-12&date__lte=2022-04-12&division=daily&unit=A',
+
+	];
+  console.log(tfiURL);
+
+
+function getURLParameter(name) {
+	return decodeURIComponent(
+		(location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,0])[1]
+	);
+}
+var time = getURLParameter('time');
+//console.log(time);
+
+	function _$(id){return document.getElementById(id);}
+	function _$$(sel) {return document.querySelectorAll(sel);}
+	function ajxGET(url,callback){fetch(url).then(res => res.text()).then(res => callback(res)).catch(error => console.error('Error:', error));}
+
+	//let wig20URL = 'https://www.bankier.pl/new-charts/get-data?symbol=WIG20&intraday=true&today=true&type=area';
+	
+	let showData = function(ret){
+		let obj = JSON.parse(ret);
+		// today main volumeintraday interval
+		//console.log(obj.main);
+		obj.main.forEach(function(v,x){
+			console.log(v[0],v[1]);
+		});
+		
+	}
+	
+	
+function convert(obj){
+	let ret = [];
+	obj.forEach(function(o){
+		//console.log(o.date,o.value);
+		ret.push([(new Date(o.date)).getTime(),o.value]);//,o.value+100*Math.random()]);
+	});
+	return ret;
+}	
+
+function collect(arrs){
+	let ret = [];
+	arrs.forEach(function(arr,y){
+		//console.log(arr);
+		//console.log(y,arr.length);
+		//ret = ret.concat(arr);
+		arr.forEach(function(o,x){
+			if (y>0){
+				//console.log(x,o);
+				ret[x].push(o[1])
+			} else {
+				ret.push(o);
+			}
+			//console.log(o[0],o[1]);
+			//ret[x].push(o[1]);
+		});
+		//ret.push([(new Date(o.date)).getTime(),o.value]);//,o.value+100*Math.random()]);
+	});
+	return ret;
+}	
+
+Highcharts.setOptions({
+	time: {
+		timezoneOffset: 2 * 60,
+		useUTC:false
+	},
+	lang:{
+		shortWeekdays:  ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pnt', 'Sob'],
+		weekdays:       ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+		shortMonths:    ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
+		months:         ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"]
+	}	
+});	
+
+function wykres(container,seryjne,names){
+	
+        Highcharts.chart(container, {
+            chart: {
+                zoomType: 'x'
+            },
+            title: {
+                text: 'TFI '+ names
+            },
+            xAxis: {
+                type: 'datetime'
+            },   
+			yAxis: {title: {text: 'PLN',x:10}, labels: {x: 30,y:-4} },
+            legend: {
+                enabled: false
+            },
+			
+				tooltip: {
+						split: false,
+						enabled: true,
+						crosshairs: true,				
+						headerFormat: '<b>{series.name}</b><br>',
+						pointFormat: '{point.x:%e. %b}: <b>{point.y:.2f}</b>',
+						xDateFormat: '%a, %e %b, %H:%M',
+				},	
+
+			
+            plotOptions: {
+                area: {
+                    fillColor: {
+                        linearGradient: {
+                            x1: 0,
+                            y1: 0,
+                            x2: 0,
+                            y2: 1
+                        },
+                        stops: [
+                            [0, Highcharts.getOptions().colors[0]],
+                            [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]
+                        ]
+                    },
+                    marker: {
+                        radius: 3,
+						color:'#ffffff'
+                    },
+					//colors: ['#ff7ed8', '#0d23ff', '#8bbc21', '#910000', '#1aadce','#492970', '#f28f43', '#77a1e5', '#c42525', '#a6c96a'],
+                    lineWidth: 1,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
+            },
+			
+			series: seryjne
+			
+        });
+}
+	
+
+function wykres3(container,dane){
+	Highcharts.chart(container, {
+	type: 'spline',
+	height:500,
+	title: {text: "TFI"},
+	subtitle: {text: null},
+	yAxis: {title: {text: 'Val%',x:10}, labels: {x: 30,y:-4}, allowNegativeLog:true },
+	colors: ['#ffbf00', '#0f52ba'],
+    lineWidth: 1,
+	tooltip: {
+			shared: true,
+			crosshairs: true,
+			headerFormat: '{point.x:%e. %b. %Y}<br>',
+			//pointFormat: '{series.name} {point.x:%e. %b}: <b>{point.y:.2f}</b><br />',
+			pointFormat: '<b>{point.y:.2f}</b> {series.name} <br />',
+			//xDateFormat: '%a, %e %b, %H:%M',
+		},
+	xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {day: '%e  %b'},
+			categories: dane.categories,
+			labels: {formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
+		},
+	series: dane.series
+	});
+}
+
+	
+var ktory =0;	
+
+var u = './TFI.porta.json.php';
+$.getJSON(
+    u,
+    function (ret) {
+		//console.log(ret)
+		var seryjne=[];
+		var names='';
+		var colors=['#a40','#04a'];
+		ret.forEach(function(v,x){
+			//console.log(v);
+			var ob = convert(v.objects);
+			let nam = v.meta.name;
+			names+=nam+' ';
+			seryjne.push({data:ob,name:nam,type:'line',lineColor: colors[x]});
+		});
+		//console.log(seryjne)
+		//wykres('container3',seryjne,names);	
+		
+		let times=[];
+		let anames=[];
+		let datas=[];
+		
+		seryjne.forEach(function(seria,i){
+			anames[i]=seria.name.substring(0, 10)
+			//console.log(seria,i);
+			datas[i]=[];
+			seria.data.forEach(function(d,x){
+				//console.log(d);
+				times[x]=d[0];
+				datas[i].push(d[1])
+			})
+		})
+		let dane = {"categories":times,"series":[{"name":anames[0],"data":datas[0]},{"name":anames[1],"data":datas[1]}]};
+		//console.log(dane)
+		wykres3('container0',dane,names);	
+    }
+);
+
+</script>
+
+
+
+<script>
+/*Favicon*/
+var canvas = document.createElement('canvas');canvas.width=16;canvas.height=16;
+    var ctx = canvas.getContext('2d');
+    var img = new Image();
+    img.src = '/favicon.ico';
+    img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+        ctx.fillStyle = "#F00";
+        ctx.fillRect(0, 0, 16, 16);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.font = 'bold 9px sans-serif';
+        ctx.fillText('TFI', 0, 12);
+        var link = document.createElement('link');
+        link.type = 'image/x-icon';
+        link.rel = 'shortcut icon';
+        link.href = canvas.toDataURL("image/x-icon");
+        document.getElementsByTagName('head')[0].appendChild(link);
+    }
+/*Favicon*/
+</script>
+<script>
+console.log();if (window.top != window.self) document.body.insertAdjacentHTML('afterbegin', '<div style="margin:0.75em"><a href="'+location.href+'" target="_blank" class="btn mini btn-info">_blank</a></div>');
+</script>
+
+
+
+</body>
+</html>
