@@ -1,0 +1,28 @@
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+<table>
+	<tbody>
+        <tr><td>A</td><td>A</td><td>A</td></tr>
+        <tr><td>B</td><td>B</td><td>B</td></tr>
+        <tr><td>Z</td><td>Z</td><td>Z</td></tr>
+		
+	</tbody>
+</table>
+
+
+
+
+
+
+<script>
+$(function(){
+    $("tbody").each(function(elem,index){
+      var arr = $.makeArray($("tr",this).detach());
+      arr.reverse();
+        $(this).append(arr);
+    });
+});    
+</script>       
