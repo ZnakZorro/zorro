@@ -23,15 +23,16 @@
 body {font:normal 14pt verdana}
 
 button {
+    font-size:0.85rem;
     margin: 0.25em 0.18em;
     min-width: 3em;
 }
 .active {
     color: red;
     text-shadow: 1px 1px #888;
-    box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
+    /*box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
     opacity: 2.4;
-    filter: sepia(0.1);
+    filter: sepia(0.1);*/
 }
 #container {width:100%;}
 input[type="range" i] {
@@ -108,8 +109,10 @@ let dataInit=()=>{
 const WykresWalut=(ret)=>{
     let stockData = [];
     country.map(c=>{
+        let vis = true;
+        if (c==="cad" || c==="aud") vis=false;
         let cc = c.toUpperCase();
-        stockData.push({"name":cc,   "data":[]});
+        stockData.push({"name":cc,   "data":[], visible: vis});
     });
     //console.log(stockData);
     
@@ -126,6 +129,9 @@ const WykresWalut=(ret)=>{
     opiszWaluty(stockData,categories);
 }
 
+
+
+/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
 let rysujWykres = (dane,categories=null)=>{
     //console.log(categories);
     //console.log(dane);
@@ -134,19 +140,27 @@ let rysujWykres = (dane,categories=null)=>{
 		subtitle: {text: null},
         xAxis: {
 			type: 'datetime',
+            title: {text: 'Dni'},
 			dateTimeLabelFormats: {day: '%e  %b'},
 			categories: categories,
 			labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
 			dateTimeLabelFormats: {month: '%e. %b',year: '%b'}
 		},
+        yAxis: {title: {text: 'PLN'},},
 		tooltip: {
 			shared: true,
 			crosshairs: true,
 			headerFormat: '<b>{point.x:%e. %b. %Y}</b><br>',
 		},
+        colors: ['#080', '#008', '#c00', '#cc0', '#0aa','#a0a'],
+        //visibility: [1,1,1,0,0],
         series : dane,
     });
 }
+/*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
+
+
+
 
 let rysujWykresProsty = (dane)=>{
     //console.log(dane);
@@ -167,7 +181,15 @@ let opiszWaluty = (dane,categories)=>{
     dane.forEach(d=>{
         names.push(d.name);
     });
-    let tim = categories.pop();
+    let stamp = categories.pop();
+    let tim = new Intl.DateTimeFormat('pl-PL').format(stamp);
+    console.log(stamp,tim);
+/*
+    var czasPL =new Intl.DateTimeFormat('pl-PL', {year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',hour12:false,timeZone:'Europe/Warsaw'}).format(new Date(1650931200000));
+console.log('czasPL=',czasPL);
+console.log(new Intl.DateTimeFormat('pl-PL').format(stamp));
+console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
+*/
     let dat=[];
     dat[0]=dane[0].data.pop();
     dat[1]=dane[1].data.pop();
@@ -201,8 +223,71 @@ let opiszWaluty = (dane,categories)=>{
 
 }
 
+let getWalutaData=()=>{
+    Promise.all(urlsWalut.map(url => fetch(url)))
+    .then(resp => Promise.all( resp.map(r => r.json()) ))
+    .then(result => {
+        WykresWalut(result);    
+    });
+}
 
-    let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
+let getTableData=()=>{
+    fetch(urlTableA)
+    .then(r => {return r.json()})
+    .then(o => {
+        console.log(o)
+        console.log(o[0])
+        console.log(o[0].rates)
+    })
+    .catch(e => {console.log(e)})
+
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    dataInit();
+    //getTableData();
+    getWalutaData();
+    
+});
+
+</script>
+</head>
+<body>
+
+    <div class="col"></div>
+    <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
+    <span id="country">Waluty</span>
+    <img src="./refresh.svg" onclick="window.location.reload(true);" style="float: right;margin: 0.5em; width:38px;vertical-align: middle; cursor:pointer;">
+    
+    </div> 
+    <div class="col zmianydni">
+        <button onclick="zmianaDni(this,30)" class="active">1 miesiąc</button>
+        <button onclick="zmianaDni(this,60)">2 miesiące</button>
+        <button onclick="zmianaDni(this,90)">3 miesiące</button>
+    </div>
+    
+
+    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+        <div id="container">
+            <img style="display: flex; margin:2em auto;" src="./spiner.gif" />
+        </div>
+        <div id="info2"></div>
+    </figure>
+    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+        <div id="container1"></div>
+    </figure>
+
+    <div id="info"></div>
+    <div id="info2"></div>
+
+
+</body>
+</html>
+
+<script>
+
+
+let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
 	//console.log(data,kategorie);
 	let wykres2D = Highcharts.chart('container', {
 		chart: {
@@ -320,59 +405,5 @@ let opiszWaluty = (dane,categories)=>{
   */
 }
 
-let getWalutaData=()=>{
-    Promise.all(urlsWalut.map(url => fetch(url)))
-    .then(resp => Promise.all( resp.map(r => r.json()) ))
-    .then(result => {
-        WykresWalut(result);    
-    });
-}
-
-let getTableData=()=>{
-    fetch(urlTableA)
-    .then(r => {return r.json()})
-    .then(o => {
-        console.log(o)
-        console.log(o[0])
-        console.log(o[0].rates)
-    })
-    .catch(e => {console.log(e)})
-
-}
-
-document.addEventListener("DOMContentLoaded",function(){
-    dataInit();
-    //getTableData();
-    getWalutaData();
-    
-});
 
 </script>
-</head>
-<body>
-
-    <div class="col"></div>
-        <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
-        <span id="country">Waluty</span>
-    </div> 
-    <div class="col zmianydni">
-        <button onclick="zmianaDni(this,30)" class="active">1 miesiąc</button>
-        <button onclick="zmianaDni(this,60)">2 miesiące</button>
-        <button onclick="zmianaDni(this,90)">3 miesiące</button>
-    </div>
-    
-
-    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
-        <div id="container"></div>
-        <div id="info2"></div>
-    </figure>
-    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
-        <div id="container1"></div>
-    </figure>
-
-    <div id="info"></div>
-    <div id="info2"></div>
-
-
-</body>
-</html>
