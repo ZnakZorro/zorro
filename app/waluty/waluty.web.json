@@ -5,8 +5,8 @@
 	"start_url": "index.html",
 	"display": "standalone",
 
-	"theme_color": "#246",
-	"background_color": "#369",
+	"theme_color": "#033500",
+	"background_color": "#033500",
 	"icons": [
 		{
 			"src": "./dolar.svg",
