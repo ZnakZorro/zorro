@@ -7,7 +7,7 @@
 <link rel="manifest" href="./waluty.web.json"> 
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#db5945">
+<meta name="theme-color" content="#033500">
 <link rel="shortcut icon" type="image/svg+xml" size="any" href="dolar.svg"> 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js" integrity="sha512-4Hra0ugHwC1jKVrS6cwYQu47pRQxNoZZNT/KKLraGJb4csT6rxfba0jpIxKE1O7N5ImwPKqbYv875hXN5h0tqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
@@ -79,47 +79,51 @@ div#info div span {background-color: #aaa;}
     );
   }
 
+const zmianaDni=(ten,ile)=>{
+    document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"))
+    periodDays = ile;
+    //console.log(ten,periodDays,ile)
+    ten.classList.add("active")
+    dataInit();
+    getWalutaData();    
+}
 
+let periodDays = 30;
+let urlsToday = [];
+let urlsWalut = [];
 
-const urls = [
-    'https://api.nbp.pl/api/exchangerates/rates/a/usd/last/30/?format=json',
-    'https://api.nbp.pl/api/exchangerates/rates/a/eur/last/30/?format=json',
-    'https://api.nbp.pl/api/exchangerates/rates/a/chf/last/30/?format=json'
-];
+const urlTableA = 'https://api.nbp.pl/api/exchangerates/tables/a/?format=json';
+let     country = ["usd","eur","chf","cad","aud"];//,"jpy"];
+
+let dataInit=()=>{
+    urlsWalut.length=0;
+    urlsToday.length=0;
+    country.map(c=>{
+        let cc = c.toUpperCase();
+        urlsWalut.push('https://api.nbp.pl/api/exchangerates/rates/a/'+c+'/last/'+periodDays+'/?format=json');
+        urlsToday.push('https://api.nbp.pl/api/exchangerates/rates/c/'+c+'/today/?format=json');
+    });
+}
 
 const WykresWalut=(ret)=>{
-    let stockData = [
-				{name: "USD",   data:[]},
-				{name: "EUR",   data:[]},
-				{name: "CHF",   data:[]}
-				];
+    let stockData = [];
+    country.map(c=>{
+        let cc = c.toUpperCase();
+        stockData.push({"name":cc,   "data":[]});
+    });
+    //console.log(stockData);
+    
     let categories = [];
-
-    let stockData1 = [
-				{name: "USD",   data:[]},
-				{name: "EUR",   data:[]},
-				{name: "CHF",   data:[]}
-				];
-
     ret.forEach((w,v) => {
-        //console.log(i,w.code);
-        //console.log(w.currency);
-        //console.log(v,w.rates);
         w.rates.forEach(r=>{
-            let tim = r.effectiveDate;
+            let stamp = Date.parse(r.effectiveDate);
             let val = r.mid;
-            //console.log(tim,val);
-            stockData1[v].data.push( [tim,val]);
-
             stockData[v].data.push( val);
-            categories.push(tim);
+            categories.push(stamp);
         })
     });
     rysujWykres(stockData,categories);
     opiszWaluty(stockData,categories);
-    //rysujWykresProsty(stockData1);
-    //opiszWaluty(stockData,categories);
-    
 }
 
 let rysujWykres = (dane,categories=null)=>{
@@ -156,28 +160,19 @@ let rysujWykresProsty = (dane)=>{
 
 
 let opiszWaluty = (dane,categories)=>{
-    console.log(categories);
-    console.log(dane);
-    /*
-    let html="<div>";
-    dane.forEach(c=>{
-        //console.log(c);
-        let name = c.name;
-        let last = c.data.pop();
-        //console.log(name,last[0],last[1]);
-        html+=`<div><span>${last[0]}</span> <span>${name}</span> = <span>${last[1]}</span> </div>`;
+    //console.log(categories);
+    //console.log(dane);
+
+    let names = [];
+    dane.forEach(d=>{
+        names.push(d.name);
     });
-    html+="</div>";
-*/
     let tim = categories.pop();
-    let name0 = dane[0].name;
-    let name1 = dane[1].name;
-    let name2 = dane[2].name;
     let dat=[];
     dat[0]=dane[0].data.pop();
     dat[1]=dane[1].data.pop();
     dat[2]=dane[2].data.pop();
-    console.log(dat);
+    //console.log(dat);
     html = `
     <div class="highcharts-data-table" style="display: block;">
     <table id="highcharts-data-table-0">
@@ -185,9 +180,9 @@ let opiszWaluty = (dane,categories)=>{
     <thead>
         <tr>
             <th class="text" scope="col">DateTime</th>
-            <th class="text" scope="col">${name0}</th>
-            <th class="text" scope="col">${name1}</th>
-            <th class="text" scope="col">${name2}</th>
+            <th class="text" scope="col">${names[0]}</th>
+            <th class="text" scope="col">${names[1]}</th>
+            <th class="text" scope="col">${names[2]}</th>
         </tr>
     </thead>
     <tbody>
@@ -325,23 +320,47 @@ let opiszWaluty = (dane,categories)=>{
   */
 }
 
-
-document.addEventListener("DOMContentLoaded",function(){
-    Promise.all(urls.map(url => fetch(url)))
+let getWalutaData=()=>{
+    Promise.all(urlsWalut.map(url => fetch(url)))
     .then(resp => Promise.all( resp.map(r => r.json()) ))
     .then(result => {
         WykresWalut(result);    
     });
+}
+
+let getTableData=()=>{
+    fetch(urlTableA)
+    .then(r => {return r.json()})
+    .then(o => {
+        console.log(o)
+        console.log(o[0])
+        console.log(o[0].rates)
+    })
+    .catch(e => {console.log(e)})
+
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    dataInit();
+    //getTableData();
+    getWalutaData();
+    
 });
 
 </script>
 </head>
 <body>
 
-     <div class="col">
+    <div class="col"></div>
         <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
         <span id="country">Waluty</span>
-    </div>  
+    </div> 
+    <div class="col zmianydni">
+        <button onclick="zmianaDni(this,30)" class="active">1 miesiąc</button>
+        <button onclick="zmianaDni(this,60)">2 miesiące</button>
+        <button onclick="zmianaDni(this,90)">3 miesiące</button>
+    </div>
+    
 
     <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
         <div id="container"></div>
