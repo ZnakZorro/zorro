@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>@WALUTY</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="dolar.svg"> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js" integrity="sha512-4Hra0ugHwC1jKVrS6cwYQu47pRQxNoZZNT/KKLraGJb4csT6rxfba0jpIxKE1O7N5ImwPKqbYv875hXN5h0tqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>  
+<!-- optional -->  
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>  
+<script src="https://code.highcharts.com/modules/export-data.js"></script>  
+<style>
+body {font:normal 14pt verdana}
+
+button {
+    margin: 0.25em 0.18em;
+    min-width: 3em;
+}
+.active {
+    color: red;
+    text-shadow: 1px 1px #888;
+    box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
+    opacity: 2.4;
+    filter: sepia(0.1);
+}
+#container {width:100%;}
+input[type="range" i] {
+    width: 88%;
+    padding: 1%;
+    margin: 1%;
+}
+.check span {
+    width: 6.5em;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    display: inline-block;
+    margin: 0.35em 0.1em;
+}
+.check span:nth-child(1){
+    border: none;
+    background-color: #f8f8f8;
+    width:4em;
+}
+#klawiszePlus button {font-size:0.93em;margin: 0.12em;}
+
+div#info {margin:auto; background-color: #eee;}
+div#info div {background-color: #ddd;}
+div#info div span {background-color: #aaa;}
+</style> 
+
+
+<script>
+    Highcharts.setOptions({
+        time: {
+            timezoneOffset: 2 * 60,
+            useUTC:false
+        },
+        lang:{
+            shortWeekdays:  ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pnt', 'Sob'],
+            weekdays:       ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+            shortMonths:    ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
+            months:         ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"]
+        }	
+    });
+
+  function getURLParameter(name) {
+    return decodeURIComponent(
+      (location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
+    );
+  }
+
+
+
+const urls = [
+    'https://api.nbp.pl/api/exchangerates/rates/a/usd/last/30/?format=json',
+    'https://api.nbp.pl/api/exchangerates/rates/a/eur/last/30/?format=json',
+    'https://api.nbp.pl/api/exchangerates/rates/a/chf/last/30/?format=json'
+];
+
+const WykresWalut=(ret)=>{
+    let stockData = [
+				{name: "USD",   data:[]},
+				{name: "EUR",   data:[]},
+				{name: "CHF",   data:[]}
+				];
+    let categories = [];
+
+    let stockData1 = [
+				{name: "USD",   data:[]},
+				{name: "EUR",   data:[]},
+				{name: "CHF",   data:[]}
+				];
+
+    ret.forEach((w,v) => {
+        //console.log(i,w.code);
+        //console.log(w.currency);
+        //console.log(v,w.rates);
+        w.rates.forEach(r=>{
+            let tim = r.effectiveDate;
+            let val = r.mid;
+            //console.log(tim,val);
+            stockData1[v].data.push( [tim,val]);
+
+            stockData[v].data.push( val);
+            categories.push(tim);
+        })
+    });
+    rysujWykres(stockData,categories);
+    opiszWaluty(stockData,categories);
+    //rysujWykresProsty(stockData1);
+    //opiszWaluty(stockData,categories);
+    
+}
+
+let rysujWykres = (dane,categories=null)=>{
+    //console.log(categories);
+    //console.log(dane);
+    Highcharts.chart('container', {
+        title: {text: 'WALUTY'},
+		subtitle: {text: null},
+        xAxis: {
+			type: 'datetime',
+			dateTimeLabelFormats: {day: '%e  %b'},
+			categories: categories,
+			labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
+			dateTimeLabelFormats: {month: '%e. %b',year: '%b'}
+		},
+		tooltip: {
+			shared: true,
+			crosshairs: true,
+			headerFormat: '<b>{point.x:%e. %b. %Y}</b><br>',
+		},
+        series : dane,
+    });
+}
+
+let rysujWykresProsty = (dane)=>{
+    //console.log(dane);
+    Highcharts.chart('container1', {
+        title: {text: 'WALUTY'},
+		subtitle: {text: null},
+        series : dane,
+    });
+}
+
+
+
+let opiszWaluty = (dane,categories)=>{
+    console.log(categories);
+    console.log(dane);
+    /*
+    let html="<div>";
+    dane.forEach(c=>{
+        //console.log(c);
+        let name = c.name;
+        let last = c.data.pop();
+        //console.log(name,last[0],last[1]);
+        html+=`<div><span>${last[0]}</span> <span>${name}</span> = <span>${last[1]}</span> </div>`;
+    });
+    html+="</div>";
+*/
+    let tim = categories.pop();
+    let name0 = dane[0].name;
+    let name1 = dane[1].name;
+    let name2 = dane[2].name;
+    let dat=[];
+    dat[0]=dane[0].data.pop();
+    dat[1]=dane[1].data.pop();
+    dat[2]=dane[2].data.pop();
+    console.log(dat);
+    html = `
+    <div class="highcharts-data-table" style="display: block;">
+    <table id="highcharts-data-table-0">
+    <caption class="highcharts-table-caption">WALUTY</caption>
+    <thead>
+        <tr>
+            <th class="text" scope="col">DateTime</th>
+            <th class="text" scope="col">${name0}</th>
+            <th class="text" scope="col">${name1}</th>
+            <th class="text" scope="col">${name2}</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th class="text" scope="row">${tim}</th>
+            <td class="number">${dat[0]}</td>
+            <td class="number">${dat[1]}</td>
+            <td class="number">${dat[2]}</td>
+        </tr>
+    </tbody>
+    </table>
+</div>
+    `;
+
+    document.getElementById("info2").innerHTML=html;
+
+}
+
+
+    let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
+	//console.log(data,kategorie);
+	let wykres2D = Highcharts.chart('container', {
+		chart: {
+			type: 'spline',
+       events: {
+            /*redraw: function () {
+              console.log("redraw");
+            },*/
+            load: function () {
+              return;
+              let dats = data[0];//.sort(function(a, b){return a[0]-b[0]});
+              let last0 = dats.length-1;
+              let i=0;
+              console.log(i,last0,dats);
+             let inter0 = setInterval(()=>{
+                  this.series[0].addPoint([dats[i][0], dats[i][1]]);
+                  i++;
+                  if (i>last0) clearInterval(inter0);
+              },50);
+            }
+        },            
+		},
+		title: {
+			text: 'COVID - '+country+' - '+coronus.populTXT
+		},
+		subtitle: {
+			text: null
+		},
+		xAxis: {
+        type:'datetime',
+        dateTimeLabelFormats: {day: '%e  %b'},
+      	labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
+			  dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
+        categories: kategorie,      
+   //type: 'logarithmic',
+			//type: 'linear',
+			/*dateTimeLabelFormats: { // don't display the dummy year
+				month: '%e. %b',
+				year: '%b'
+			},*/
+			title: {
+				text: 'Przyrosty ' + coronus.dataType
+			}
+		},
+		yAxis: {
+   // type: 'logarithmic',
+			title: {text: 'Dziennie'},
+      //left: 2,
+      /*labels: {
+				//align: 'right',
+				//opposite: true,
+				x: -135,
+				y: 4
+			},*/
+			//min: 0
+		},
+		tooltip: {
+			shared: true,
+			crosshairs: true,
+			//headerFormat: '<b>{point.x:%A, %b %e, %H:%M}</b><br>',
+			headerFormat: '<b>{point.x:%e %b, %Y}</b><br />',
+		},
+		plotOptions: {
+			series: {
+				marker: {
+					enabled: true
+				}
+			}
+		},
+
+		colors: ['#008', '#800', '#080', '#036', '#000'],
+
+		series: [
+			{
+      type:'spline',
+      //color: '#0000aa',
+			name:country,
+			data: data[0]
+			}
+      /*,{
+        type:'spline',
+        color: '#0000aa',
+        fillOpacity: 0.3,
+			name:country,
+			data: data[1]
+			}*/
+		],
+
+		responsive: {
+			rules: [{
+				condition: {
+					maxWidth: 500
+				},
+				chartOptions: {
+					plotOptions: {
+						series: {
+							marker: {
+								radius: 2.5
+							}
+						}
+					}
+				}
+			}]
+		}
+	});
+  /*data[0].forEach((dat)=>{
+      console.log(data)
+      //wykres.series[0].setData([dat]);
+      dat[0]+=2000
+      dat[1]+=2000
+      wykres.series[1].addPoint([dat]);
+      
+  })
+  //wykres.series[0].setData([111,2222]);
+  */
+}
+
+
+document.addEventListener("DOMContentLoaded",function(){
+    Promise.all(urls.map(url => fetch(url)))
+    .then(resp => Promise.all( resp.map(r => r.json()) ))
+    .then(result => {
+        WykresWalut(result);    
+    });
+});
+
+</script>
+</head>
+<body>
+
+  
+
+    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+        <div id="container"></div>
+        <div id="info2"></div>
+    </figure>
+    <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+        <div id="container1"></div>
+    </figure>
+
+    <div id="info"></div>
+    <div id="info2"></div>
+
+
+</body>
+</html>
