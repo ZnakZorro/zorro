@@ -94,7 +94,7 @@ let urlsToday = [];
 let urlsWalut = [];
 
 const urlTableA = 'https://api.nbp.pl/api/exchangerates/tables/a/?format=json';
-let     country = ["usd","eur","chf","cad","aud"];//,"jpy"];
+let     country = ["usd","eur","gbp","chf","cad","aud"];//,"jpy"];
 
 let dataInit=()=>{
     urlsWalut.length=0;
@@ -110,7 +110,7 @@ const WykresWalut=(ret)=>{
     let stockData = [];
     country.map(c=>{
         let vis = true;
-        if (c==="cad" || c==="aud") vis=false;
+        if (c==="cad" || c==="aud" || c==="chf") vis=false;
         let cc = c.toUpperCase();
         stockData.push({"name":cc,   "data":[], visible: vis});
     });
@@ -152,7 +152,7 @@ let rysujWykres = (dane,categories=null)=>{
 			crosshairs: true,
 			headerFormat: '<b>{point.x:%e. %b. %Y}</b><br>',
 		},
-        colors: ['#080', '#008', '#c00', '#cc0', '#0aa','#a0a'],
+        colors: ['#080', '#008', '#c00', '#cc0', '#0aa','#aaa'],
         //visibility: [1,1,1,0,0],
         series : dane,
     });
@@ -407,3 +407,5 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
 
 
 </script>
+
+
