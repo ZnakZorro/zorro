@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>dniTygodnia</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js" integrity="sha512-4Hra0ugHwC1jKVrS6cwYQu47pRQxNoZZNT/KKLraGJb4csT6rxfba0jpIxKE1O7N5ImwPKqbYv875hXN5h0tqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script-->	
+<script>
+const $=e=>document.querySelector(e);
+const $$=e=>document.querySelectorAll(e);
+
+    let wykluczone = [
+        "2022-03-01","2022-03-02","2022-03-03","2022-03-04","2022-03-05","2022-03-06","2022-03-07","2022-03-08","2022-03-09",
+        "2022-04-17", "2022-04-18",
+        "2022-05-01", "2022-05-02", "2022-05-03","2022-05-09",
+        "2022-06-05", "2022-06-16","2022-06-17",
+        "2022-08-15",
+        "2022-11-01","2022-11-11",
+        "2022-12-25","2022-12-26",
+    ];
+    
+    let dajMiesiac=(ten,miesiac,rok=2022,ileDni=120, delta=0)=>{
+        if (ten){
+            document.querySelectorAll("#klawisze button").forEach(b=>{b.classList.remove("active");})
+            ten.classList.add("active");
+        }
+        console.log(rok,miesiac,ileDni,"==================")
+        document.getElementById("info").innerHTML = `<p>${rok}, ${miesiac}, ${ileDni}, ${delta}</p>`;
+        let nr=0;
+        let html = "";
+        let suma = 0;
+        let godzin = 6;
+        html +='<table clas="cal" cellpadding="0" cellspacing="0">';
+            html +='<tr><th class="th1">Dzień</th><th class="th2">Liczba godz.</th><th class="th3">Podpis</th></tr>';
+        for (let d=1; d<366; d++){
+            let day = moment().year(rok).dayOfYear(d);
+            let cal = moment(day).format("YYYY-MM-DD");
+            let m  = parseInt(moment(day).format("M"));   // 1,2
+            let dn = moment(day).format("d");
+            if (m===miesiac && (dn != "0" && dn != "6" ) && !wykluczone.includes(cal)) {
+                nr++;
+                let dw = moment(day).format("dddd"); // poniedziałek
+                let ddd = moment(day).format("ddd"); // pon.
+                //let mmm  = moment(day).format("MMM"); // mar,kwi
+                let mmmm  = moment(day).format("MMMM"); // marzec, kwiecień
+                console.log(nr,d,cal,dn,dw,m,mmmm);
+                //html +=`<p>${nr},${cal},${dw},${mmmm} </p>`;
+                let ileGodzin = godzin;
+                if (nr % 2 == 0 && delta>0){
+                    ileGodzin++;
+                    delta--;
+                }
+                html +=`<tr><td>${cal}, <small>${ddd}</small></td><td>${ileGodzin}</td><td>&nbsp;</td></tr>`;
+                suma += ileGodzin;
+                
+            }
+        }
+        html +=`<tr><th>Suma</th><th>${suma}</th><th>&nbsp;</th></tr>`;
+        html +='</table>';
+        //console.log(html)
+        document.getElementById("pole").innerHTML = html;
+        //return html;
+    }
+    //document.getElementById("pole").innerHTML += dajMiesiac(3,2022);
+    //document.getElementById("pole").innerHTML += dajMiesiac(4,2022);
+    
+    document.addEventListener("DOMContentLoaded",function(){
+        let mStart=5;
+        dajMiesiac(null,mStart,2022,120,6);
+        $("#btn"+mStart).classList.add("active");
+    });
+    
+    </script>
+    
+<style>
+    body {font-family: 'Courier New', Courier, monospace; font-size:12pt;}
+    table {font-family:'Courier New', Courier, monospace; font-size:1em; margin-left:2em;}
+    table,table td,table th {border:1px solid #aaa;}
+    table td, table th {padding:0.3em;}
+    table th.th3 {min-width:10em;}
+    table td:nth-child(2) {text-align:center;}
+    .active, button:active,button:focus {background-color: orange;}
+    .hidden {display:none;}
+    .show {display:block;}
+</style>
+</head>
+
+
+<body>
+    <div id="klawisze">
+        <button id="btn3" onclick='dajMiesiac(this,3,2022,102,6)'>2022-03</button>
+        <button id="btn4" onclick='dajMiesiac(this,4,2022,120,0)'>2022-04</button>
+        <button id="btn5" onclick='dajMiesiac(this,5,2022,120,6)'>2022-05</button>
+        <button id="btn6" onclick='dajMiesiac(this,6,2022)'>2022-06</button>
+        <button id="btn7" onclick='dajMiesiac(this,7,2022)'>2022-07</button>
+        <button id="btn8" onclick='dajMiesiac(this,8,2022)'>2022-08</button>
+    </div>
+    
+    <div id="info"></div>
+    
+    <div id="pole"></div>
+    
+
+</body>
+
+
+<div id="karta" class="hidden">
+<h2>Zatrudniony na stanowisku - Webmaster</h2>
+
+<h2>mgr inż. Zbigniew Szczęch</h2>
+
+<h2>Zakres czynności pracownika</h2>
+
+<ol>
+	<li>
+	<p align="left">Administrowanie stroną internetową i aplikacjami webowymi Wydziału Informatyki.</p>
+	</li>
+	<li>
+	<p align="left">Udzielanie wsparcia z zakresu poligrafii pracownikom WI.</p>
+	</li>
+</ol>
+
+<p align="left">ad 1.</p>
+
+<p align="left">Czynności związane z obsługą stron internetowych oraz aplikacjami webowymi Wydziału Informatyki:</p>
+
+<ul>
+	<li>
+	<p align="left">instalacja i aktualizacja oprogramowania zarządzającego gł&oacute;wną stroną internetową WI,</p>
+	</li>
+	<li>
+	<p align="left">przygotowanie i utrzymanie specjalistycznego oprogramowania webowego ułatwiającego procesy dydaktyczne i naukowe Wydziału Informatyki,</p>
+	</li>
+	<li>
+	<p align="left">wsparcie informatyczne dla stron internetowych organizowanych na Wydziale konferencji,</p>
+	</li>
+</ul>
+
+<p align="left">ad 2.</p>
+
+<p align="left">Czynności związane z obsługą poligraficzną Wydziału Informatyki:</p>
+
+<ul>
+	<li>
+	<p align="left">projektowanie, skład i przygotowanie do druku dokument&oacute;w administracyjnych,</p>
+	</li>
+	<li>
+	<p align="left">projekty graficzne plakat&oacute;w, okładek, wizyt&oacute;wek, certyfikat&oacute;w, list&oacute;w gratulacyjnych, innych materiał&oacute;w promocyjno-reklamowych,</p>
+	</li>
+	<li>
+	<p align="left">pomoc poligraficzna przy organizacji konferencji.</p>
+	</li>
+	<li>
+	<p align="left">organizacja obsługi fotograficznej wydarzeń wydziałowych,</p>
+	</li>
+</ul>
+</div>
+</body>
+</html>
