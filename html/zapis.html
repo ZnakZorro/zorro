@@ -84,17 +84,26 @@ function copyTXT() {
   
 }
   
-function savechangeText(txt){
+/*function savechangeText(txt){
   console.log("savechangeText=",txt); 
-}
+}*/
 function saveinputText(txt){
   console.log("saveinputText=",txt); 
+   //localStorage.setItem("name", "val");
+   //var val = localStorage.getItem("val");
+   //localStorage.removeItem("val");	
+   localStorage.setItem("___zapis", txt);
+   
 }
 
  //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
    document.getElementById("editor").addEventListener('input', saveinputText, false); 
-   document.getElementById("editor").addEventListener('change', savechangeText, false); 
+   //document.getElementById("editor").addEventListener('change', savechangeText, false); 
+   if (localStorage.getItem("___zapis")){
+      let txt =localStorage.getItem("___zapis");
+      document.getElementById("editor").value = txt;
+   }
 })
 //---DOM READY----------------------------------
  
