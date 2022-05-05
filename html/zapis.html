@@ -90,14 +90,10 @@ function copyTXT() {
 function saveinputText(ev){
    //console.log("saveinputText=",ev); 
    //let element = ev.target;
+   //console.log(element); 
    
    let txt = document.getElementById("editor").value;
-   console.log(element); 
-  
-   //localStorage.setItem("name", "val");
-   //var val = localStorage.getItem("val");
-   //localStorage.removeItem("val");	
-   if (txt) localStorage.setItem("___zapis", txt);
+   if (txt) localStorage.setItem("z___zapis", txt);
    
 }
 
@@ -105,8 +101,8 @@ function saveinputText(ev){
 document.addEventListener("DOMContentLoaded",function(){
    document.getElementById("editor").addEventListener('input', saveinputText, false); 
    //document.getElementById("editor").addEventListener('change', savechangeText, false); 
-   if (localStorage.getItem("___zapis")){
-      let txt =localStorage.getItem("___zapis");
+   if (localStorage.getItem("z___zapis")){
+      let txt =localStorage.getItem("z___zapis");
       document.getElementById("editor").value = txt;
    }
 })
