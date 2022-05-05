@@ -38,7 +38,10 @@ button, div.links a, .btn, a.btn {
     min-width: 7.0em;
     background-color: #9bf;
     color: black;
-}    
+}   
+span.blue {background-color: #9bf;}
+span.red {background-color: #fb9;}
+span.green {background-color: #bf9;}
 </style>
 <script>
     const backHome=()=>{window.location.href="../";}
@@ -56,19 +59,23 @@ button, div.links a, .btn, a.btn {
             &nbsp; git::link
           </h3>
         <div class="container">
-            
+           <span class="blue">
             <a href="./reformat.html" class="btn">reFormat</a>
-           <a href="./grid-system.html" class="btn">gridSystem</a>
+            <a href="./grid-system.html" class="btn">gridSystem</a>
             <a href="./gtranslate.html" class="btn">gTranslate</a>
             <a href="../app/editor/" class="btn">Editor</a>
-            
-           <a href="./rss.html" class="btn">RSS</a>
+            <a href="./rss.html" class="btn">RSS</a>
+           </span>
             <hr />
-           <a href="./format/" class="btn">Formats</a>
-            <p><a href="reverseTable.html">reverseTable</a></p>
-            <p><a href="sortTable.html">sortTable</a></p>
-            <p><a href="sortTableFragDrop.html">sortTableFragDrop</a></p>
-
+           <span class="green">
+              <a href="reverseTable.html">reverseTable</a>
+           </span>
+           <span class="red">
+              <a href="./format/" class="btn">Formats</a>
+              
+              <a href="sortTable.html">sortTable</a>
+              <a href="sortTableFragDrop.html">sortTableFragDrop</a>
+           </span>
             <!--
             <a href="./gtranslate/index.html" class="btn">gtranslate1</a>
             -->
