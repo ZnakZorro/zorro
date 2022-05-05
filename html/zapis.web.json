@@ -1,0 +1,24 @@
+{
+	"name": "Zapis",
+	"short_name": "Zapis",
+	"description": "Zapis",
+	"start_url": "index.html",
+	"display": "standalone",
+
+	"theme_color": "#246",
+	"background_color": "#369",
+	"icons": [
+		{
+			"src": "../img/dom.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	],
+	"screenshots": [		
+		{
+			"src": "../img/dom.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	]
+}
