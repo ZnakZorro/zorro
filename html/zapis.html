@@ -1,0 +1,108 @@
+
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>ZAPIS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="HandheldFriendly" content="true">
+<meta name="mobile-web-app-capable" content="yes"> 
+<meta name="theme-color" content="#214960">
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="../img/dom.svg"> 
+   <link rel="manifest" href="../zorro.web.json"> 
+<link rel="stylesheet" href="../css/normalize.css" />
+<link rel="stylesheet" href="../css/style.css" />
+<link rel="stylesheet" href="../css/btn.css" />
+  
+<style>
+ 
+*,*::before,*::after {box-sizing: border-box;} 
+body {overflow-x: hidden; background:#36b;}
+  body,textarea {
+    font-family: Verdana;
+    font-size: 12pt;
+    padding: 0.2em;
+    margin: 0.2em; 
+  }
+  textarea {width:99%; min-height:28vh;margin-top:1em; font-size:1.5em;}
+</style>
+
+
+</head>
+  
+<body>
+
+  <div class="wrapper">
+    <h3>
+      <img src="../css/icon/back.svg" onClick="backHome()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
+      &nbsp; git::linki
+    </h3>
+    <div class="container">
+      <button onClick="copyTXT()" class="btn-sm btn-red" id="copy" style="float:left;">Kopiuj</button>
+      <textarea id="editor"></textarea>
+</div>
+</div>
+
+
+
+
+
+<script>
+  const $=e=>document.querySelector(e);
+  const $$=e=>document.querySelectorAll(e);
+  const backHome=()=>{window.location.href="../";}
+  
+
+const reformatTXT=()=>{
+    let txt = document.getElementById("editor").value;
+    let out = txt.replaceAll( /\n\n/g, "#XXX#" )
+    out = out.replaceAll( /\n/g, ' ' )
+    out = out.replaceAll("#XXX#", "\n\n")
+    //out = out.replaceAll(/\s\s+/g, ' ')
+    out = out.replaceAll(/  +/g, ' ')
+    document.getElementById("editot").value=out;
+    document.getElementById("copyx").style.display="inline";
+}
+
+
+function copyTXTref() {
+  let copyText = document.getElementById("editot");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  navigator.clipboard.writeText(copyText.value);
+  document.getElementById("alert").textContent="Skopiowano!";
+  setTimeout(()=>{
+    document.getElementById("copyx").style.display="none";
+    document.getElementById("alert").textContent="";
+  },5000);
+}
+function copyTXT() {
+  let copyText = document.getElementById("editor");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  navigator.clipboard.writeText(copyText.value);
+  document.getElementById("alert").textContent="Skopiowano!";
+  
+}
+  
+function savechangeText(txt){
+  console.log("savechangeText=",txt); 
+}
+function saveinputText(txt){
+  console.log("saveinputText=",txt); 
+}
+
+ //---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+   document.getElementById("editor").addEventListener('input', saveinputText, false); 
+   document.getElementById("editor").addEventListener('change', savechangeText, false); 
+})
+//---DOM READY----------------------------------
+ 
+  
+  
+</script>
+
+
+
+</body>
+</html>
