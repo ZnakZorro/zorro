@@ -87,12 +87,17 @@ function copyTXT() {
 /*function savechangeText(txt){
   console.log("savechangeText=",txt); 
 }*/
-function saveinputText(txt){
-  console.log("saveinputText=",txt); 
+function saveinputText(ev){
+   //console.log("saveinputText=",ev); 
+   //let element = ev.target;
+   
+   let txt = document.getElementById("editor").value;
+   console.log(element); 
+  
    //localStorage.setItem("name", "val");
    //var val = localStorage.getItem("val");
    //localStorage.removeItem("val");	
-   localStorage.setItem("___zapis", txt);
+   if (txt) localStorage.setItem("___zapis", txt);
    
 }
 
