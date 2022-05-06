@@ -61,6 +61,13 @@ button{
   const $$=e=>document.querySelectorAll(e);
   const backHome=()=>{window.location.href="../";}
   
+  const _alert(txt)=>{
+    document.getElementById("alert").textContent="Skopiowano!";
+    setTimeout(()=>{
+       document.getElementById("copyx").style.display="none";
+       document.getElementById("alert").textContent="";
+     },3000);  
+}
 
 const reformatTXT=()=>{
     let txt = document.getElementById("editor").value;
@@ -79,18 +86,22 @@ function copyTXTref() {
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
   navigator.clipboard.writeText(copyText.value);
+  alert("Skopiowano");
+   /*
   document.getElementById("alert").textContent="Skopiowano!";
   setTimeout(()=>{
     document.getElementById("copyx").style.display="none";
     document.getElementById("alert").textContent="";
   },5000);
+  */
 }
 function copyTXT() {
   let copyText = document.getElementById("editor");
   copyText.select();
   copyText.setSelectionRange(0, 99999); /* For mobile devices */
   navigator.clipboard.writeText(copyText.value);
-  document.getElementById("alert").textContent="Skopiowano!";
+  _alert("Skopiowano");
+  //document.getElementById("alert").textContent="Skopiowano!";
   
 }
 
@@ -102,11 +113,13 @@ function zanotujTXT(){
       if (txt) {
          localStorage.setItem("z___zanotuj", txt);
          document.getElementById("notatki").value = txt;
+         _alert("Zanotowano");
       }
 }
 function zapiszTXT(){
    let txt = document.getElementById("notatki").value;  
    if (txt) localStorage.setItem("z___zanotuj", txt);
+   _alert("Zapisano");
 }
    
 /*function savechangeText(txt){
