@@ -23,8 +23,8 @@ body {overflow-x: hidden; background:#025;}
     padding: 0.2em;
     margin: 0.2em; 
   }
-button.btn-sm {
-    font-size: 1.1em;
+button{
+    font-size: 1.2em;
     padding: 0.4em;
 }   
   textarea {width:99%; min-height:40vh;margin-top:1em; font-size:1.5em;}
@@ -47,6 +47,7 @@ button.btn-sm {
        <button onClick="zanotujTXT()" class="btn-blue" id="zanotuj" style="float:right;">Zanotuj</button>
       <textarea id="editor"></textarea>
        <textarea id="notatki"></textarea>
+       <button onClick="zapiszTXT()" class="btn-red" id="copy" style="float:left;">Zapisz notatki</button>
 </div>
 </div>
 
@@ -92,7 +93,7 @@ function copyTXT() {
   
 }
 
-   function zanotujTXT(){
+function zanotujTXT(){
       let txt = document.getElementById("editor").value;  
       console.log(1,txt)
       if (localStorage.getItem("z___zanotuj")){
@@ -101,7 +102,11 @@ function copyTXT() {
       } 
       console.log(3,txt)
       if (txt) localStorage.setItem("z___zanotuj", txt);
-   }
+}
+function zapiszTXT(){
+   let txt = document.getElementById("notatki").value;  
+   if (txt) localStorage.setItem("z___zanotuj", txt);
+}
    
 /*function savechangeText(txt){
   console.log("savechangeText=",txt); 
