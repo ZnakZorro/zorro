@@ -27,7 +27,8 @@ button.btn-sm {
     font-size: 1.1em;
     padding: 0.4em;
 }   
-  textarea {width:99%; min-height:60vh;margin-top:1em; font-size:1.5em;}
+  textarea {width:99%; min-height:40vh;margin-top:1em; font-size:1.5em;}
+  textarea#notatki {min-height:40vh;font-size:0.95em;}
 </style>
 
 
@@ -43,7 +44,9 @@ button.btn-sm {
     <div class="container">
       <button onClick="copyTXT()" class="btn-red" id="copy" style="float:left;">Kopiuj</button>
        <span id="alert" style="margin-left:2em; margin-right:2em; color:orange; "></span>
+       <button onClick="zanotujTXT()" class="btn-blue" id="zanotuj" style="float:right;">Zanotuj</button>
       <textarea id="editor"></textarea>
+       <textarea id="notatki"></textarea>
 </div>
 </div>
 
@@ -88,7 +91,15 @@ function copyTXT() {
   document.getElementById("alert").textContent="Skopiowano!";
   
 }
-  
+
+   function zanotujTXT(){
+      let txt = document.getElementById("editor").value;      
+      if (localStorage.getItem("z___zanotuj")){
+         txt =txt+"\r\n"+localStorage.getItem("z___zanotuj");
+      } 
+      if (txt) localStorage.setItem("z___zanotuj", txt);
+   }
+   
 /*function savechangeText(txt){
   console.log("savechangeText=",txt); 
 }*/
@@ -109,6 +120,10 @@ document.addEventListener("DOMContentLoaded",function(){
    if (localStorage.getItem("z___zapis")){
       let txt =localStorage.getItem("z___zapis");
       document.getElementById("editor").value = txt;
+   }
+   if (localStorage.getItem("z___zanotuj")){
+      let txx =localStorage.getItem("zanotuj");
+      document.getElementById("notatki").value = txx;
    }
 })
 //---DOM READY----------------------------------
