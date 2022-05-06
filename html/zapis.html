@@ -93,10 +93,13 @@ function copyTXT() {
 }
 
    function zanotujTXT(){
-      let txt = document.getElementById("editor").value;      
+      let txt = document.getElementById("editor").value;  
+      console.log(1,txt)
       if (localStorage.getItem("z___zanotuj")){
          txt =txt+"\r\n"+localStorage.getItem("z___zanotuj");
+         console.log(2,txt)
       } 
+      console.log(3,txt)
       if (txt) localStorage.setItem("z___zanotuj", txt);
    }
    
