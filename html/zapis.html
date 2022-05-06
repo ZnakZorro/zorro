@@ -42,7 +42,7 @@ button{
        <span style="color:white">&nbsp; git::NOTA</span>
     </h3>
     <div class="container">
-       <span id="alert" style="text-align:center;display:block; color:orange; "></span>
+       <span id="alert" style="height:1.5em;text-align:center;display:block; color:orange; "></span>
       <button onClick="copyTXT()" class="btn-red" id="copy" style="float:left;">Kopiuj</button>
        
        <button onClick="zanotujTXT()" class="btn-blue" id="zanotuj" style="float:right;">Zanotuj</button>
@@ -62,7 +62,7 @@ const $$=e=>document.querySelectorAll(e);
 const backHome=()=>{window.location.href="../";}
   
 const _alert=(txt)=>{
-    document.getElementById("alert").textContent="Skopiowano!";
+    document.getElementById("alert").textContent=txt;
     setTimeout(()=>{
        //document.getElementById("copyx").style.display="none";
        document.getElementById("alert").textContent="";
