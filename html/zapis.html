@@ -64,7 +64,7 @@ const backHome=()=>{window.location.href="../";}
 const _alert=(txt)=>{
     document.getElementById("alert").textContent="Skopiowano!";
     setTimeout(()=>{
-       document.getElementById("copyx").style.display="none";
+       //document.getElementById("copyx").style.display="none";
        document.getElementById("alert").textContent="";
      },3000);  
 }
@@ -77,7 +77,7 @@ const reformatTXT=()=>{
     //out = out.replaceAll(/\s\s+/g, ' ')
     out = out.replaceAll(/  +/g, ' ')
     document.getElementById("editot").value=out;
-    document.getElementById("copyx").style.display="inline";
+    //document.getElementById("copyx").style.display="inline";
 }
 
 
@@ -90,7 +90,7 @@ function copyTXTref() {
    /*
   document.getElementById("alert").textContent="Skopiowano!";
   setTimeout(()=>{
-    document.getElementById("copyx").style.display="none";
+    //document.getElementById("copyx").style.display="none";
     document.getElementById("alert").textContent="";
   },5000);
   */
