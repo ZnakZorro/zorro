@@ -1,7 +1,7 @@
 {
-	"name": "Zapis",
-	"short_name": "Zapis",
-	"description": "Zapis",
+	"name": "NOTA",
+	"short_name": "NOTA",
+	"description": "NOTA",
 	"start_url": "index.html",
 	"display": "standalone",
 
