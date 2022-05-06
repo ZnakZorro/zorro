@@ -94,14 +94,14 @@ function copyTXT() {
 }
 
 function zanotujTXT(){
-      let txt = document.getElementById("editor").value;  
-      console.log(1,txt)
+      let txt = document.getElementById("editor").value;
       if (localStorage.getItem("z___zanotuj")){
          txt =txt+"\r\n"+localStorage.getItem("z___zanotuj");
-         console.log(2,txt)
-      } 
-      console.log(3,txt)
-      if (txt) localStorage.setItem("z___zanotuj", txt);
+      }
+      if (txt) {
+         localStorage.setItem("z___zanotuj", txt);
+         document.getElementById("notatki").value = txt;
+      }
 }
 function zapiszTXT(){
    let txt = document.getElementById("notatki").value;  
