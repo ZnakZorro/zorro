@@ -80,6 +80,35 @@ div#info div span {background-color: #aaa;}
     );
   }
 
+let dataStart="2022-04-26";
+
+const countWeekdays=(date, days)=> {
+  date = moment(dataStart); // use a clone
+  let weekDays=0;
+  while (days > 0) {
+    date = date.add(1, 'days');
+    if (date.isoWeekday() === 6 || date.isoWeekday() === 7) {
+        weekDays++;
+    }
+    days -= 1;
+  }
+  return weekDays;
+}
+
+const zmianaStart=(ten)=>{
+    let b = moment(dataStart);
+    let a = moment();
+    //console.log(a,b)
+    let ile = a.diff(b, 'days') // 1
+    let weekdays=countWeekdays(dataStart, ile);
+    ile -= weekdays;
+    //console.log(ile)
+    zmianaDni(ten,ile)
+}
+
+
+
+
 const zmianaDni=(ten,ile)=>{
     document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"))
     periodDays = ile;
@@ -261,6 +290,7 @@ document.addEventListener("DOMContentLoaded",function(){
     
     </div> 
     <div class="col zmianydni">
+        <button onclick="zmianaStart(this)" class="start">Start</button>
         <button onclick="zmianaDni(this,30)" class="active">1 miesiąc</button>
         <button onclick="zmianaDni(this,60)">2 miesiące</button>
         <button onclick="zmianaDni(this,90)">3 miesiące</button>
@@ -407,5 +437,4 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
 
 
 </script>
-
 
