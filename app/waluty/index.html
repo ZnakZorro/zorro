@@ -81,6 +81,8 @@ div#info div span {background-color: #aaa;}
   }
 
 let dataStart="2022-04-26";
+let timeStart = 1650931200000;
+let startDayPosition=0;
 
 const countWeekdays=(date, days)=> {
   date = moment(dataStart); // use a clone
@@ -100,8 +102,8 @@ const zmianaStart=(ten)=>{
     let a = moment();
     //console.log(a,b)
     let ile = a.diff(b, 'days') // 1
-    let weekdays=countWeekdays(dataStart, ile);
-    ile -= weekdays;
+    //let weekdays=countWeekdays(dataStart, ile);
+    //ile -= weekdays;
     //console.log(ile)
     zmianaDni(ten,ile)
 }
@@ -110,7 +112,9 @@ const zmianaStart=(ten)=>{
 
 
 const zmianaDni=(ten,ile)=>{
-    document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"))
+    document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"));
+    let weekdays=countWeekdays(dataStart, ile);
+    ile -= weekdays;
     periodDays = ile;
     //console.log(ten,periodDays,ile)
     ten.classList.add("active")
@@ -118,7 +122,7 @@ const zmianaDni=(ten,ile)=>{
     getWalutaData();    
 }
 
-let periodDays = 30;
+let periodDays = 30-countWeekdays(dataStart, 31);
 let urlsToday = [];
 let urlsWalut = [];
 
@@ -135,6 +139,9 @@ let dataInit=()=>{
     });
 }
 
+function isBigEnough(element) {
+  return element >= timeStart;
+}
 const WykresWalut=(ret)=>{
     let stockData = [];
     country.map(c=>{
@@ -154,6 +161,9 @@ const WykresWalut=(ret)=>{
             categories.push(stamp);
         })
     });
+    //console.log(categories);    
+    startDayPosition = categories.findIndex(isBigEnough);
+    //console.log(startDayPosition);
     rysujWykres(stockData,categories);
     opiszWaluty(stockData,categories);
 }
@@ -163,7 +173,7 @@ const WykresWalut=(ret)=>{
 /*wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww*/
 let rysujWykres = (dane,categories=null)=>{
     //console.log(categories);
-    //console.log(dane);
+    //
     Highcharts.chart('container', {
         title: {text: 'WALUTY'},
 		subtitle: {text: null},
@@ -173,9 +183,18 @@ let rysujWykres = (dane,categories=null)=>{
 			dateTimeLabelFormats: {day: '%e  %b'},
 			categories: categories,
 			labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
-			dateTimeLabelFormats: {month: '%e. %b',year: '%b'}
+			dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
+            plotLines: [{
+                    color: '#0000FF',
+                    width: 2,
+                    value: startDayPosition
+                }]
+                
 		},
-        yAxis: {title: {text: 'PLN'},},
+        yAxis: {
+            title: {text: 'PLN'},
+                
+        },
 		tooltip: {
 			shared: true,
 			crosshairs: true,
@@ -212,7 +231,7 @@ let opiszWaluty = (dane,categories)=>{
     });
     let stamp = categories.pop();
     let tim = new Intl.DateTimeFormat('pl-PL').format(stamp);
-    console.log(stamp,tim);
+    //console.log(stamp,tim);
 /*
     var czasPL =new Intl.DateTimeFormat('pl-PL', {year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',hour12:false,timeZone:'Europe/Warsaw'}).format(new Date(1650931200000));
 console.log('czasPL=',czasPL);
