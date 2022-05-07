@@ -82,7 +82,11 @@ div#info div span {background-color: #aaa;}
 
 let dataStart="2022-04-26";
 let timeStart = 1650931200000;
-let startDayPosition=0;
+let timeBay   = moment(dataStart).format("x");
+let timeNow   = moment().format("x");
+
+let startDayPosition = 0;
+let lastDayPosition  = 0;
 
 const countWeekdays=(date, days)=> {
   date = moment(dataStart); // use a clone
@@ -150,20 +154,27 @@ const WykresWalut=(ret)=>{
         let cc = c.toUpperCase();
         stockData.push({"name":cc,   "data":[], visible: vis});
     });
-    //console.log(stockData);
-    
+    console.log(stockData);
+    console.log(ret);
     let categories = [];
     ret.forEach((w,v) => {
         w.rates.forEach(r=>{
             let stamp = Date.parse(r.effectiveDate);
             let val = r.mid;
             stockData[v].data.push( val);
-            categories.push(stamp);
+            if (v===0) categories.push(stamp);
         })
     });
-    //console.log(categories);    
-    startDayPosition = categories.findIndex(isBigEnough);
-    //console.log(startDayPosition);
+    console.log(categories); 
+    //console.time("t1");
+    lastDayPosition  = categories.length-1;
+    startDayPosition = categories.indexOf(timeStart);   // faster 3x    
+    console.log(startDayPosition,lastDayPosition); 
+    //console.timeEnd("t1");
+    //console.time("t2");
+    //startDayPosition = categories.findIndex(isBigEnough);    // slower 3x
+    //console.timeEnd("t2");
+    //console.log(startDayPosition,s);
     rysujWykres(stockData,categories);
     opiszWaluty(stockData,categories);
 }
@@ -184,11 +195,16 @@ let rysujWykres = (dane,categories=null)=>{
 			categories: categories,
 			labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
 			dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
+            plotBands: [{ 
+                color: '#ffa',
+                from: startDayPosition,   //1650931200000,//Date.UTC(2022, 3, 25),
+                to:   lastDayPosition      //1651708800000//Date.UTC(2022, 3, 27)
+            }],
             plotLines: [{
-                    color: '#0000FF',
+                    color: '#f00',
                     width: 2,
                     value: startDayPosition
-                }]
+                }],
                 
 		},
         yAxis: {
