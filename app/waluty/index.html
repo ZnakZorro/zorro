@@ -101,7 +101,7 @@ const countWeekdays=(date, days)=> {
   return weekDays;
 }
 
-const zmianaStart=(ten)=>{
+const zmianaStart=(ten=null)=>{
     let b = moment(dataStart);
     let a = moment();
     //console.log(a,b)
@@ -115,13 +115,13 @@ const zmianaStart=(ten)=>{
 
 
 
-const zmianaDni=(ten,ile)=>{
-    document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"));
+const zmianaDni=(ten=null,ile)=>{
+    if(ten) document.querySelectorAll("div.zmianydni button").forEach(b=>b.classList.remove("active"));
     let weekdays=countWeekdays(dataStart, ile);
     ile -= weekdays;
     periodDays = ile;
     //console.log(ten,periodDays,ile)
-    ten.classList.add("active")
+    if (ten) ten.classList.add("active")
     dataInit();
     getWalutaData();    
 }
@@ -311,7 +311,7 @@ document.addEventListener("DOMContentLoaded",function(){
     dataInit();
     //getTableData();
     getWalutaData();
-    
+    zmianaStart(null);
 });
 
 </script>
@@ -325,8 +325,8 @@ document.addEventListener("DOMContentLoaded",function(){
     
     </div> 
     <div class="col zmianydni">
-        <button onclick="zmianaStart(this)" class="start">Start</button>
-        <button onclick="zmianaDni(this,30)" class="active">1 miesiąc</button>
+        <button onclick="zmianaStart(this)" class="active">class="start">Start</button>
+        <button onclick="zmianaDni(this,30)" 1 miesiąc</button>
         <button onclick="zmianaDni(this,60)">2 miesiące</button>
         <button onclick="zmianaDni(this,90)">3 miesiące</button>
     </div>
