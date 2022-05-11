@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>days.js</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+<style>
+    body {font:normal 12pt verdana}
+</style>
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+    //document.getElementById("info").textContent = "info";
+});
+</script>
+</head>
+<body>
+    <a href="https://day.js.org/docs/en/parse/string-format">https://day.js.org/docs/en/parse/string-format</a>
+    <div id="info"></div>
+    <div id="info1"></div>
+    <div id="info2"></div>
+
+
+<hr />
+<!--script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script-->
+
+<script src="./dayjs.min.js"></script>
+<script src="./days.pl.js"></script>
+
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+
+    dayjs.locale("pl")
+    let d = dayjs().format();
+    console.log(d);
+    console.log(dayjs().format('YYYY MMMM DD'));
+    console.log(dayjs().format('YYYY-MM-DD;  DD MMM d dd ddd dddd'));
+    
+    $("#info").innerHTML += `<p>${dayjs().format('YYYY MMMM DD')}</p>`;
+    $("#info").innerHTML += `<p>${dayjs().format('d, dd, ddd, dddd, YYYY MMMM DD')}</p>`;
+    $("#info").innerHTML += `<p>${dayjs().format('YYYY-MM-DD HH:mm:ss' )}</p>`;
+
+    setInterval(()=>{
+        $("#info2").innerHTML = `<p>${dayjs().format('YYYY-MM-DD HH:mm:ss' )}</p>`;
+    },1000)
+</script>
+
+
+
+<table>
+    <thead>
+    <tr><th>Input</th><th>Example</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+    <tr><td><code>YY</code></td><td>01</td><td>Two-digit year</td></tr>
+    <tr><td><code>YYYY</code></td><td>2001</td><td>Four-digit year</td></tr>
+    <tr><td><code>M</code></td><td>1-12</td><td>Month, beginning at 1</td></tr>
+    <tr><td><code>MM</code></td><td>01-12</td><td>Month, 2-digits</td></tr>
+    <tr><td><code>MMM</code></td><td>Jan-Dec</td><td>The abbreviated month name</td></tr>
+    <tr><td><code>MMMM</code></td><td>January-December</td><td>The full month name</td></tr>
+    <tr><td><code>D</code></td><td>1-31</td><td>Day of month</td></tr>
+    <tr><td><code>DD</code></td><td>01-31</td><td>Day of month, 2-digits</td></tr>
+    <tr><td><code>H</code></td><td>0-23</td><td>Hours</td></tr>
+    <tr><td><code>HH</code></td><td>00-23</td><td>Hours, 2-digits</td></tr>
+    <tr><td><code>h</code></td><td>1-12</td><td>Hours, 12-hour clock</td></tr>
+    <tr><td><code>hh</code></td><td>01-12</td><td>Hours, 12-hour clock, 2-digits</td></tr>
+    <tr><td><code>m</code></td><td>0-59</td><td>Minutes</td></tr>
+    <tr><td><code>mm</code></td><td>00-59</td><td>Minutes, 2-digits</td></tr>
+    <tr><td><code>s</code></td><td>0-59</td><td>Seconds</td></tr>
+    <tr><td><code>ss</code></td><td>00-59</td><td>Seconds, 2-digits</td></tr>
+    <tr><td><code>S</code></td><td>0-9</td><td>Hundreds of milliseconds, 1-digit</td></tr>
+    <tr><td><code>SS</code></td><td>00-99</td><td>Tens of milliseconds, 2-digits</td></tr>
+    <tr><td><code>SSS</code></td><td>000-999</td><td>Milliseconds, 3-digits</td></tr>
+    <tr><td><code>Z</code></td><td>-05:00</td><td>Offset from UTC</td></tr>
+    <tr><td><code>ZZ</code></td><td>-0500</td><td>Compact offset from UTC, 2-digits</td></tr>
+    <tr><td><code>A</code></td><td>AM PM</td><td>Post or ante meridiem, upper-case</td></tr>
+    <tr><td><code>a</code></td><td>am pm</td><td>Post or ante meridiem, lower-case</td></tr>
+    <tr><td><code>Do</code></td><td>1st... 31st</td><td>Day of Month with ordinal</td></tr>
+    <tr><td><code>X</code></td><td>1410715640.579</td><td>Unix timestamp</td></tr>
+    <tr><td><code>x</code></td><td>1410715640579</td><td>Unix ms timestamp</td></tr>
+    </tbody>
+    </table>
+
+    <script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+    <script>
+      // VConsole will be exported to `window.VConsole` by default.
+      var vConsole = new window.VConsole();
+    </script>
+
+
+
+    </body>
+    </html>
