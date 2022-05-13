@@ -150,7 +150,7 @@ const WykresWalut=(ret)=>{
     let stockData = [];
     country.map(c=>{
         let vis = true;
-        if (c==="cad" || c==="aud" || c==="chf") vis=false;
+        if (c==="cad" || c==="aud" || c==="chf" || c==="jpy") vis=false;
         let cc = c.toUpperCase();
         stockData.push({"name":cc,   "data":[], visible: vis});
     });
