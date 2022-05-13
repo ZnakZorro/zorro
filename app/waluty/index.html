@@ -131,7 +131,7 @@ let urlsToday = [];
 let urlsWalut = [];
 
 const urlTableA = 'https://api.nbp.pl/api/exchangerates/tables/a/?format=json';
-let     country = ["usd","eur","gbp","chf","cad","aud"];//,"jpy"];
+let     country = ["usd","eur","gbp","chf","cad","aud","jpy"];
 
 let dataInit=()=>{
     urlsWalut.length=0;
@@ -216,7 +216,7 @@ let rysujWykres = (dane,categories=null)=>{
 			crosshairs: true,
 			headerFormat: '<b>{point.x:%e. %b. %Y}</b><br>',
 		},
-        colors: ['#080', '#008', '#c00', '#cc0', '#0aa','#aaa'],
+        colors: ['#080', '#008', '#c00', '#cc0', '#0aa','#aaa','#0f0'],
         //visibility: [1,1,1,0,0],
         series : dane,
     });
