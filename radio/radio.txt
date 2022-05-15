@@ -1,4 +1,4 @@
-Start.txt
-Classic.txt
-Jazz.txt
-Top.txt
+https://znakzorro.github.io/zorro/radio/Start.txt
+https://znakzorro.github.io/zorro/radio/Classic.txt
+https://znakzorro.github.io/zorro/radio/Jazz.txt
+https://znakzorro.github.io/zorro/radio/Top.txt
