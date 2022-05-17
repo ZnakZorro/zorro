@@ -1,6 +1,5 @@
 {
-	"start": [
-        {
+	"start": [{
 			"n": "TOK-FM",
 			"s": "http://pl-play.adtonos.com/tok-fm"
 		},
@@ -19,20 +18,35 @@
 		{
 			"n": "Classic",
 			"s": "http://stream.srg-ssr.ch/m/rsc_de/aacp_96"
+		},
+		{
+			"n": "Classic",
+			"s": "http://stream.srg-ssr.ch/m/rsc_de/aacp_96"
 		}
 	],
-	"top": [
-        {
+	"top": [{
 			"n": "SwissTop",
 			"s": "https://stream.srg-ssr.ch/m/rsp/mp3_128"
 		},
-        {
+		{
 			"n": "Top40",
 			"s": "https://strm112.1.fm/top40_mobile_mp3"
 		},
-        {
+		{
+			"n": "TAntyradio Hard",
+			"s": "https://an02.cdn.eurozet.pl/ANTHAR.mp3"
+		},
+		{
+			"n": "TAntyradio Hard",
+			"s": "https://an02.cdn.eurozet.pl/ANTHAR.mp3"
+		},
+		{
+			"n": "TAntyradio Hard",
+			"s": "https://an02.cdn.eurozet.pl/ANTHAR.mp3"
+		},
+		{
 			"n": "TAntyradio Hard",
 			"s": "https://an02.cdn.eurozet.pl/ANTHAR.mp3"
 		}
-    ]
+	]
 }
