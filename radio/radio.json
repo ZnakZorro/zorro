@@ -1,5 +1,5 @@
 {
-	"START": [{
+	"TOP": [{
 			"n": "TOK-FM",
 			"s": "http://pl-play.adtonos.com/tok-fm"
 		},
@@ -24,7 +24,7 @@
 			"s": "http://stream.srg-ssr.ch/m/rsc_de/aacp_96"
 		}
 	],
-	"TOP": [{
+	"POP": [{
 			"n": "SwissTop",
 			"s": "https://stream.srg-ssr.ch/m/rsp/mp3_128"
 		},
@@ -50,28 +50,28 @@
 		}
 	],
 	"JAZZ": [{
-			"title": "Smoothjazz.com.pl",
-			"stream": "http://stream15.shoutcastsolutions.com:8090/128stream"
+			"n": "Smoothjazz.com.pl",
+			"s": "http://stream15.shoutcastsolutions.com:8090/128stream"
 		},
 		{
-			"title": "SmoothCom",
-			"stream": "http://sj256.hnux.com/stream?type=http"
+			"n": "SmoothCom",
+			"s": "http://sj256.hnux.com/stream?type=http"
 		},
 		{
-			"title": "Smooth97",
-			"stream": "http://janus.cdnstream.com:5014/stream?type=http"
+			"n": "Smooth97",
+			"s": "http://janus.cdnstream.com:5014/stream?type=http"
 		},
 		{
-			"title": "Chilout",
-			"stream": "http://panel.nadaje.com:9004"
+			"n": "Chilout",
+			"s": "http://panel.nadaje.com:9004"
 		},
 		{
-			"title": "RFM-Chillout",
-			"stream": "http://195.150.20.242:8000/rmf_chillout"
+			"n": "RFM-Chillout",
+			"s": "http://195.150.20.242:8000/rmf_chillout"
 		},
 		{
-			"title": "Sax4ever",
-			"stream": "http://sc-sax4ever.1.fm:10148/"
+			"n": "Sax4ever",
+			"s": "http://sc-sax4ever.1.fm:10148/"
 		}
 	]
 }
