@@ -156,8 +156,8 @@ const WykresWalut=(ret)=>{
         let cc = c.toUpperCase();
         stockData.push({"name":cc,   "data":[], visible: vis});
     });
-    console.log(stockData);
-    console.log(ret);
+    //console.log(stockData);
+    //console.log(ret);
     let categories = [];
     ret.forEach((w,v) => {
         w.rates.forEach(r=>{
@@ -167,11 +167,11 @@ const WykresWalut=(ret)=>{
             if (v===0) categories.push(stamp);
         })
     });
-    console.log(categories); 
+    //console.log(categories); 
     //console.time("t1");
     lastDayPosition  = categories.length-1;
     startDayPosition = categories.indexOf(timeStart);   // faster 3x    
-    console.log(startDayPosition,lastDayPosition); 
+    //console.log(startDayPosition,lastDayPosition); 
     //console.timeEnd("t1");
     //console.time("t2");
     //startDayPosition = categories.findIndex(isBigEnough);    // slower 3x
