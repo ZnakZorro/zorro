@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>YAMAHA</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+<style>
+    body {font:normal 1em verdana}
+</style>
+<script>
+
+let yamahaIP = "http://192.168.31.155/";
+    let xml1 = "http://192.168.31.155:49154/MediaRenderer/desc.xml";
+    let urls = [
+        "http://192.168.31.155/YamahaExtendedControl/v1/system/getDeviceInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/system/getFeatures",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/getStatus",
+
+        "http://192.168.31.155//YamahaExtendedControl/v1/main/setVolume?volume=20",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setToneControl?mode=manual&bass=3&treble=3",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setClearVoice?enable=false",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/getSignalInfo",
+
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPresetInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPlayInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getListInfo?input=usb&index=32&size=8&lang=en",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getRecentInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=airplay&mode=autoplay_disabled",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=http://sc-sax4ever.1.fm:10148",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://sc-sax4ever.1.fm:10148/",
+]
+
+
+const getInfo=()=>{
+    fetch("http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPlayInfo")
+	.then(resp => {return resp.json()})
+	.then(obj => {
+		console.log(obj)
+	})
+	.catch(err => {console.log(err);});    
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    getInfo();
+    //document.getElementById("info").textContent = "info";
+});
+</script>
+</head>
+<body>
+<h3>@app-mini</h3>
+<div class="col">
+<h3>PianoCraft</h3>
+<div id="info"></div>
+</div>
+</body>
+</html>
+
+
+
