@@ -14,31 +14,6 @@
     body {font:normal 1em verdana; background:#222; color:#fff;}
 </style>
 <script>
-
-let yamahaIP = "http://192.168.31.155/";
-    let xml1 = "http://192.168.31.155:49154/MediaRenderer/desc.xml";
-    let urls = [
-        "http://192.168.31.155/YamahaExtendedControl/v1/system/getDeviceInfo",
-        "http://192.168.31.155/YamahaExtendedControl/v1/system/getFeatures",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/getStatus",
-
-        "http://192.168.31.155//YamahaExtendedControl/v1/main/setVolume?volume=20",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/setToneControl?mode=manual&bass=3&treble=3",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/setClearVoice?enable=false",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/getSignalInfo",
-
-        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPresetInfo",
-        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPlayInfo",
-        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getListInfo?input=usb&index=32&size=8&lang=en",
-        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getRecentInfo",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=airplay&mode=autoplay_disabled",
-        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=http://sc-sax4ever.1.fm:10148",
-        "http://192.168.31.155/",
-        "http://192.168.31.155/",
-        "http://192.168.31.155/",
-        "http://192.168.31.155/",
-        "http://sc-sax4ever.1.fm:10148/",
-]
 ////////////////////////////////////////////////
 onmessage = evt => {
   const port = evt.ports[0]
@@ -145,6 +120,38 @@ document.addEventListener("DOMContentLoaded",function(){
 	test();
     //document.getElementById("info").textContent = "info";
 });
+	
+	
+	
+	
+	
+	
+//======================
+let yamahaIP = "http://192.168.31.155/";
+    let xml1 = "http://192.168.31.155:49154/MediaRenderer/desc.xml";
+    let urls = [
+        "http://192.168.31.155/YamahaExtendedControl/v1/system/getDeviceInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/system/getFeatures",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/getStatus",
+
+        "http://192.168.31.155//YamahaExtendedControl/v1/main/setVolume?volume=20",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setToneControl?mode=manual&bass=3&treble=3",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setClearVoice?enable=false",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/getSignalInfo",
+
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPresetInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPlayInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getListInfo?input=usb&index=32&size=8&lang=en",
+        "http://192.168.31.155/YamahaExtendedControl/v1/netusb/getRecentInfo",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=airplay&mode=autoplay_disabled",
+        "http://192.168.31.155/YamahaExtendedControl/v1/main/setInput?input=http://sc-sax4ever.1.fm:10148",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://192.168.31.155/",
+        "http://sc-sax4ever.1.fm:10148/",
+]	
+	
 </script>
 </head>
 <body>
