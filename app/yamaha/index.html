@@ -7,8 +7,11 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#db5945">
+<meta name="HandheldFriendly" content="true">
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/dom.svg"> 
+<link rel="manifest" href="../../zorro.web.json"> 	
 <style>
-    body {font:normal 1em verdana}
+    body {font:normal 1em verdana; background:#222; color:#fff;}
 </style>
 <script>
 
@@ -39,6 +42,15 @@ let yamahaIP = "http://192.168.31.155/";
 
 
 const getInfo=()=>{
+// test only------------------------
+    fetch("http://192.168.31.247/radio?n=0")
+	.then(resp => {return resp.json()})
+	.then(obj => {
+		console.log(obj)
+	})	
+	.catch(err => {console.log(err);});    
+// test only------------------------
+	
     fetch("http://192.168.31.155/YamahaExtendedControl/v1/netusb/getPlayInfo")
 	.then(resp => {return resp.json()})
 	.then(obj => {
@@ -54,10 +66,10 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-<h3>@app-mini</h3>
+
 <div class="col">
-<h3>PianoCraft</h3>
-<div id="info"></div>
+	<h3>PianoCraft</h3>
+	<div id="info"></div>
 </div>
 </body>
 </html>
