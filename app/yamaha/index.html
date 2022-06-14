@@ -21,6 +21,8 @@
 	<div id="info"></div>
 	<iframe id="popup" name="popup"></iframe>
 	<button onclick="pop();">pop</button>
+	<button onclick="xxf();">xxf</button>
+	
 </div>	
 	
 	
@@ -28,9 +30,9 @@
 <script>
 ////////////////////////////////////////////////
 	//https://stackoverflow.com/questions/4032104/http-ajax-request-via-https-page
-	window.popup = window.open("proxy.html")
+	window.popup = window.open("proxy.html","popup")
 let pop=()=>{	
-window.popup = window.open("proxy.html")
+window.popup = window.open("proxy.html","popup")
 //let popup = document.getElementById("popup");
 }
 			   
@@ -95,11 +97,12 @@ function xfetch(...args) {
     }
   })
 }	
-	
+
+let xxf=()=>{	
 xfetch('http://192.168.31.247/radio?n=0')
   .then(res => res.text())
   .then(console.log)	
-	
+}	
 	
 ///////////////////////////////////
 
@@ -135,6 +138,7 @@ xhr.addEventListener("readystatechange", processRequest, false);
 }
 
 document.addEventListener("DOMContentLoaded",function(){
+	xxf();
     getInfo();
 	test();
     //document.getElementById("info").textContent = "info";
