@@ -20,6 +20,7 @@
 	<h3>PianoCraft</h3>
 	<div id="info"></div>
 	<iframe id="popup" name="popup"></iframe>
+	<button onclick="pop();">pop</button>
 </div>	
 	
 	
@@ -27,9 +28,11 @@
 <script>
 ////////////////////////////////////////////////
 	//https://stackoverflow.com/questions/4032104/http-ajax-request-via-https-page
-	
-window.popup = window.open(proxy.html)
+	window.popup = window.open("proxy.html")
+let pop=()=>{	
+window.popup = window.open("proxy.html")
 //let popup = document.getElementById("popup");
+}
 			   
 onmessage = evt => {
   const port = evt.ports[0]
