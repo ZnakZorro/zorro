@@ -59,12 +59,17 @@ const getInfo=()=>{
 	.catch(err => {console.log(err);});    
 }
 
+let processRequest=(r)=>{
+	console.log(r);
+}
+
 
 let test =()=>{
 var xhr = new XMLHttpRequest();
 xhr.open('GET', 'http://192.168.31.247/radio?n=0');
 xhr.setRequestHeader('Host', 'https://znakzorro.github.io/zorro/');
 xhr.send();
+xhr.addEventListener("readystatechange", processRequest, false);	
 }
 
 document.addEventListener("DOMContentLoaded",function(){
