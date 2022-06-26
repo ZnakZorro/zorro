@@ -1,6 +1,6 @@
 
 /**
-a
+b - remoove chill temperature
  * Dew point calculation.
  * @see https://en.wikipedia.org/wiki/Dew_point
  *
