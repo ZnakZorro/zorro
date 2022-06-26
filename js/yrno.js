@@ -9,7 +9,10 @@
  */
 function dewPoint(Tc, R) {
     console.log("#11 dewPoint=", Tc, R)
-    if (!Tc || !R ) return Tc;
+    if (!Tc || !R )                             {console.log(6); return Tc;}
+    if (Tc ==="undefined" || R==="undefined" )  {console.log(7); return Tc;}
+    if (Tc ===undefined   || R=== undefined  )  {console.log(8); return Tc;}
+    
     if (Tc < 0 || Tc > 60) {
         return Tc;
     }
