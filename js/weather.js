@@ -1,4 +1,11 @@
 /**
+From
+https://raw.githubusercontent.com/nicolasgrancher/weather-js/master/js/weather.js
+https://github.com/nicolasgrancher/weather-js
+*/
+
+
+/**
  * Get apparent temperature. Use wind chill or heat index.
  *
  * @param Tc temperature in celsius
