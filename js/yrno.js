@@ -1,8 +1,4 @@
 
-
-
-
-
 /**
  * Dew point calculation.
  * @see https://en.wikipedia.org/wiki/Dew_point
@@ -12,7 +8,8 @@
  * @returns {number}
  */
 function dewPoint(Tc, R) {
-    console.log("#542 int=", R)
+    console.log("#11 dewPoint=", Tc, R)
+    if (!Tc || !R ) return Tc;
     if (Tc < 0 || Tc > 60) {
         return Tc;
     }
@@ -31,7 +28,7 @@ function dewPoint(Tc, R) {
     if (Tr < 0 || Tr > 50) {
         return Tc;
     }
-    console.log("#61 oint=",Tr)
+    console.log("#30 dewPoint=",Tr)
     return Tr;
 }
 
