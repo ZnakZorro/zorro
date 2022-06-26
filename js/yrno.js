@@ -11,8 +11,8 @@
 function dewPoint(Tc, R) {
     console.log("#11 dewPoint=", Tc, R)
     if (!Tc || !R )                             {console.log(6); return Tc;}
-    if (Tc ==="undefined" || R==="undefined" )  {console.log(7); return Tc;}
-    if (Tc ===undefined   || R=== undefined  )  {console.log(8); return Tc;}
+    //if (Tc ==="undefined" || R==="undefined" )  {console.log(7); return Tc;}
+    //if (Tc ===undefined   || R=== undefined  )  {console.log(8); return Tc;}
     
     if (Tc < 0 || Tc > 60) {
         return Tc;
@@ -103,7 +103,7 @@ function windChill(Tc, Vkmh) {
  * @returns {number}
  */
 function heatIndex(Tc, R, P) {
-   
+   console.log("#106 heatIndex(Tc, R, P)=",Tc, R, P)
     if (!window.dewPoint) {       
         return Tc; 
     }
@@ -219,6 +219,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
     w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
     w.symbol = symbol;
+    console.log("#222 w=",w);
     return w;
 } 
 
