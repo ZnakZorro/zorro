@@ -72,7 +72,7 @@ function heatIndex(Tc, R, P) {
         console.log("00000000000000");
         return Tc; 
     }
-    if (!dewPoint) {
+    if (!window.dewPoint) {
         console.log("1111111111111111");
         return Tc; 
     }
