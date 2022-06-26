@@ -62,10 +62,10 @@ https://github.com/nicolasgrancher/weather-js
 function apparentTemperature(Tc, Vkmh, R, P) {
     Vkmh = Vkmh * 3.6;
     if (Tc < 10) {
-        return this.windChill(Tc, Vkmh);
+        return windChill(Tc, Vkmh);
     }
 
-    return this.heatIndex(Tc, R, P);
+    return heatIndex(Tc, R, P);
 }
 
 /**
