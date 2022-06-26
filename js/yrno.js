@@ -68,6 +68,14 @@ function windChill(Tc, Vkmh) {
  * @returns {number}
  */
 function heatIndex(Tc, R, P) {
+    if (typeof dewPoint !== "undefined") { 
+        console.log("00000000000000");
+        return Tc; 
+    }
+    if (!dewPoint) {
+        console.log("1111111111111111");
+        return Tc; 
+    }
     if (P < 16) {
         return Tc;
     }
