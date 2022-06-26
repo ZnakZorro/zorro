@@ -2,6 +2,40 @@
 
 
 
+
+/**
+ * Dew point calculation.
+ * @see https://en.wikipedia.org/wiki/Dew_point
+ *
+ * @param Tc temperature in celsius
+ * @param R relative humidity
+ * @returns {number}
+ */
+function dewPoint(Tc, R) {
+    console.log("#542 int=", R)
+    if (Tc < 0 || Tc > 60) {
+        return Tc;
+    }
+
+    if (R < 0.01 || R > 1) {
+        return Tc;
+    }
+
+    var a = 17.27;
+    var b = 237.7;
+
+    var alphaTR = ((a * Tc) / (b + Tc)) + Math.log(R);
+
+    var Tr = (b * alphaTR) / (a - alphaTR);
+
+    if (Tr < 0 || Tr > 50) {
+        return Tc;
+    }
+    console.log("#61 oint=",Tr)
+    return Tr;
+}
+
+
 //console.log(APPconfig);
 //console.log(APPconfig[APPcity]);
 
@@ -527,36 +561,3 @@ console.log( date.toLocaleString('pl-PL'));
 console.log(date.toLocaleString('pl-PL'));
 */
  
-
-
-
-/**
- * Dew point calculation.
- * @see https://en.wikipedia.org/wiki/Dew_point
- *
- * @param Tc temperature in celsius
- * @param R relative humidity
- * @returns {number}
- */
-function dewPoint(Tc, R) {
-    if (Tc < 0 || Tc > 60) {
-        return Tc;
-    }
-
-    if (R < 0.01 || R > 1) {
-        return Tc;
-    }
-
-    var a = 17.27;
-    var b = 237.7;
-
-    var alphaTR = ((a * Tc) / (b + Tc)) + Math.log(R);
-
-    var Tr = (b * alphaTR) / (a - alphaTR);
-
-    if (Tr < 0 || Tr > 50) {
-        return Tc;
-    }
-
-    return Tr;
-}
