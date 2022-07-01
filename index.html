@@ -117,6 +117,7 @@ div.field div span:nth-child(2) {
    
    
       <div class="container">
+         <div id "sow_YRNO" style="width:100%;"></div>
             
   <!--card-->
     <div class="card">
@@ -137,7 +138,7 @@ div.field div span:nth-child(2) {
   <!--card-->
     <div class="card">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-        <a href="./app/meteo/index.html">
+        <a href="#" onClick="pogoda_YRNO()">
           <img id="pogodayrno" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />
           <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
         </a>
@@ -283,6 +284,17 @@ console.log(sunrisePos)
 var sunriseAzimuth = sunrisePos.azimuth * 180 / Math.PI;
 console.log(sunriseAzimuth);
 */
+   
+let close_YRNO=()=>{
+   document.getElementById("sow_YRNO").innerHTML = "";
+}
+let pogoda_YRNO = () =>{
+      console.log("-----------------");  
+   let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
+   document.getElementById("sow_YRNO").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" />';
+   
+}
+   
 </script>
    
  <script src="./js/cytaty.js"></script>
