@@ -35,7 +35,6 @@ div.pogoda div span:nth-child(1) {
     left:5px;
     top:2px;
     z-index:3;
-  
 }
 div.pogoda div span:nth-child(2) {
 
@@ -47,9 +46,22 @@ div.pogoda div span:nth-child(3) {
 }
 
 div.pogoda div span:nth-child(5) {
-    font-size: 17pt;
-   
+    font-size: 17pt;   
 }
+
+div#sun {
+    font-size: 14pt;
+    font-weight: 400;
+    z-index:3;  
+}
+
+div#sun span {
+    font-size: 14pt;
+    font-weight: 400;
+    z-index:3;  
+}
+
+
 .fon-600 {font-weight:600;} 
 .fon-7 {font-size:7pt;}
 .fon-8 {font-size:8pt;}
