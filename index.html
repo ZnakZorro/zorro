@@ -130,7 +130,7 @@ div.field div span:nth-child(2) {
             
          
   <!--card-->
-    <div class="card">
+    <div class="card" id="yrnoCard">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
         <a href="#" onClick="pogoda_YRNO()">
           <img id="pogodayrno" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />
@@ -301,12 +301,15 @@ console.log(sunriseAzimuth);
 let close_YRNO=()=>{
    //document.getElementById("modal").innerHTML = "";
    document.getElementById("druga").style.display="block";
+   document.getElementById("yrnoCard").style.width="50%";
    document.getElementById("pogodayrno").classList.remove("bum trans");
 }
 let pogoda_YRNO = () =>{
    console.log("-----------------");  
    document.getElementById("druga").style.display="none";
    document.getElementById("pogodayrno").classList.add("bum trans");
+   document.getElementById("yrnoCard").style.width="100%";
+   
    //let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
    //document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
    
