@@ -73,6 +73,11 @@ div.field div span:nth-child(2) {
   transition-property: width;
   transition-duration: 1s;  
  }
+.re-trans {
+   width: initial;
+  transition-property: width;
+  transition-duration: 1s;  
+ }   
 </style>
 <script>
 
@@ -307,6 +312,7 @@ let pogoda_YRNO = () =>{
    if (document.getElementById("yrnoCard").classList.contains("bum-trans")){
       console.log("has");
       document.getElementById("yrnoCard").classList.remove("bum-trans");
+      document.getElementById("yrnoCard").classList.add("re-trans");
    } else {
       console.log("no");
       document.getElementById("yrnoCard").classList.add("bum-trans");
