@@ -336,8 +336,8 @@ const opisYRNO=(data)=>{
 
   _$("#WeatherReport").innerHTML = html;
   // eventy
-  _$("#ev0").addEventListener('click', ((e)=>{winClick(0);}), false);
-  _$("#ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
+  //_$("#ev0").addEventListener('click', ((e)=>{winClick(0);}), false);
+  //_$("#ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
   _$("#ev2").addEventListener('click', ((e)=>{winClick(2);}), false);
   _$("#ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
   _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
