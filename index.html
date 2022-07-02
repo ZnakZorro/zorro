@@ -307,11 +307,12 @@ let close_YRNO=()=>{
 let pogoda_YRNO = () =>{
    console.log("pogoda_YRNO----------------");  
    if (document.getElementById("yrnoCard").classList.contains("bum-trans")){
-      console.log("has");
+      console.log("contains-bum-trans-");
       document.getElementById("yrnoCard").classList.remove("bum-trans");
       document.getElementById("yrnoCard").classList.add("re-trans");
    } else {
       console.log("no");
+      document.getElementById("yrnoCard").classList.remove("re-trans");
       document.getElementById("yrnoCard").classList.add("bum-trans");
    }
    //document.getElementById("pogodayrno").addEventListener("click", close_YRNO, false);
