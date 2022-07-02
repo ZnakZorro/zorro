@@ -68,10 +68,10 @@ div.field div span:nth-child(2) {
 }  
 .bum-trans {
    cursor:pointer; 
-   width: 94vw!important;
+   width: 150%!important;
    max-width:782px!important;
   transition-property: width;
-  transition-duration: 2s;  
+  transition-duration: 1s;  
  }
 </style>
 <script>
@@ -297,6 +297,7 @@ console.log(sunriseAzimuth);
 */
    
 let close_YRNO=()=>{
+   console.log("close-----------------");  
    //document.getElementById("modal").innerHTML = "";
    //document.getElementById("druga").style.display="block";
    //document.getElementById("yrnoCard").style.width="50%";
@@ -305,7 +306,7 @@ let close_YRNO=()=>{
    document.getElementById("pogodayrno").removeEventListener("click", close_YRNO, false);
 }
 let pogoda_YRNO = () =>{
-   console.log("-----------------");  
+   console.log("open-----------------");  
    document.getElementById("yrnoCard").classList.add("bum-trans");
    document.getElementById("pogodayrno").addEventListener("click", close_YRNO, false);
    
