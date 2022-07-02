@@ -10,8 +10,6 @@ div.grid2 {
     display: grid;
     grid-template-columns: repeat(auto-fit,minmax(240px,1fr));
 }
-
-
 div.pogoda { 
   cursor:pointer;
 }
@@ -29,7 +27,7 @@ div.pogoda div {
 
 
 div.pogoda div span:nth-child(1) {
-    font-size: 12pt;
+    font-size: 11pt;
     z-index:3;
 }
 div.pogoda div span:nth-child(2) {
@@ -38,24 +36,18 @@ div.pogoda div span:nth-child(2) {
 div.pogoda div span:nth-child(3) {
     font-size: 17pt;
     font-weight: bold;
-  display:inline-block;
+    display:inline-block;
 }
-
 div.pogoda div span:nth-child(5) {
     font-size: 17pt;   
 }
-
 div#sun div {
     font-size: 14pt;
     z-index:3;
 }
-
-div#sun span {
-    
+div#sun span {    
     z-index:3;  
-    padding:0.2em;
 }
-
 
 .fon-600 {font-weight:600;} 
 .fon-7 {font-size:7pt;}
