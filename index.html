@@ -66,12 +66,10 @@ div.field div span:nth-child(2) {
       justify-items: center;
     }
 }  
-.bum  {
+.bum-trans {
    cursor:pointer; 
    width: 94vw!important;
    max-width:782px!important;
- }
-.trans {
   transition-property: width;
   transition-duration: 2s;  
  }
@@ -302,12 +300,13 @@ let close_YRNO=()=>{
    //document.getElementById("modal").innerHTML = "";
    //document.getElementById("druga").style.display="block";
    //document.getElementById("yrnoCard").style.width="50%";
-   //document.getElementById("pogodayrno").classList.remove("bum trans");
+   //document.getElementById("pogodayrno").classList.remove("bum-trans");
    document.getElementById("yrnoCard").classList.remove("bum trans");
 }
 let pogoda_YRNO = () =>{
    console.log("-----------------");  
-   document.getElementById("yrnoCard").classList.add("bum trans");
+   document.getElementById("yrnoCard").classList.add("bum-trans");
+   
    //document.getElementById("druga").style.display="none";
    //document.getElementById("pogodayrno").classList.add("bum trans");
    //document.getElementById("yrnoCard").style.width="100%";
