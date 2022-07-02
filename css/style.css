@@ -29,11 +29,7 @@ div.pogoda div {
 
 
 div.pogoda div span:nth-child(1) {
-    font-size: 14pt;
-    font-weight: 400;
-    /*position:absolute;*/
-    left:5px;
-    top:2px;
+    font-size: 12pt;
     z-index:3;
 }
 div.pogoda div span:nth-child(2) {
