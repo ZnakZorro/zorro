@@ -49,10 +49,11 @@ div.pogoda div span:nth-child(5) {
     font-size: 17pt;   
 }
 
-div#sun {
+div#sun div {
     font-size: 14pt;
     font-weight: 400;
     z-index:3;  
+    padding:0.2em;
 }
 
 div#sun span {
