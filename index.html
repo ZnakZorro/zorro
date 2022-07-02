@@ -302,16 +302,18 @@ let close_YRNO=()=>{
    //document.getElementById("yrnoCard").style.width="50%";
    //document.getElementById("pogodayrno").classList.remove("bum-trans");
    document.getElementById("yrnoCard").classList.remove("bum trans");
+   document.getElementById("pogodayrno").removeEventListener("click", close_YRNO, false);
 }
 let pogoda_YRNO = () =>{
    console.log("-----------------");  
    document.getElementById("yrnoCard").classList.add("bum-trans");
+   document.getElementById("pogodayrno").addEventListener("click", close_YRNO, false);
    
    //document.getElementById("druga").style.display="none";
    //document.getElementById("pogodayrno").classList.add("bum trans");
    //document.getElementById("yrnoCard").style.width="100%";
    //let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
-   //document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
+   //document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" />';
 }
    
 </script>
