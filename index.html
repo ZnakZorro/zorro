@@ -301,12 +301,15 @@ console.log(sunriseAzimuth);
 let close_YRNO=()=>{
    //document.getElementById("modal").innerHTML = "";
    document.getElementById("druga").style.display="block";
+   document.getElementById("pogodayrno").classList.remove("bum trans");
 }
 let pogoda_YRNO = () =>{
    console.log("-----------------");  
    document.getElementById("druga").style.display="none";
-   let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
-   document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
+   document.getElementById("pogodayrno").classList.add("bum trans");
+   //let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
+   //document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
+   
    
 }
    
