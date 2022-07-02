@@ -65,7 +65,16 @@ div.field div span:nth-child(2) {
       justify-content: space-around;
       justify-items: center;
     }
-}   
+}  
+.bum  {
+   cursor:pointer; 
+   width: 94vw;
+   max-width:782;
+ }
+.trans {
+  transition-property: width;
+  transition-duration: 2s;  
+ }
 </style>
 <script>
 
@@ -117,23 +126,8 @@ div.field div span:nth-child(2) {
    
    
       <div class="container">
-         <div id="sow_YRNO" style="width:100%;"></div>
+         <div id="modal" style="width:100%;"></div>
             
-  <!--card-->
-    <div class="card">
-      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-        <a href="./app/meteo/index.html">
-          <img id="pogoda" src="./img/meteo/pogoda.jpg" class="img-fluid" />
-          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
-        </a>
-      </div>
-      <div class="card-body">
-        <h5 class="card-title">Prognoza pogody</h5>
-        <p class="card-text">Wykresy i radary</p>
-        <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
-      </div>
-    </div> 
-  <!--card-->
          
   <!--card-->
     <div class="card">
@@ -150,7 +144,24 @@ div.field div span:nth-child(2) {
       </div>
     </div> 
   <!--card-->         
+         
+  <!--card-->
+    <div class="card" id="druga">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="./app/meteo/index.html">
+          <img id="pogoda" src="./img/meteo/pogoda.jpg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Prognoza pogody</h5>
+        <p class="card-text">Wykresy i radary</p>
+        <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
+    </div> 
+  <!--card-->
 
+         
   <!--card-->
     <div class="card">
       <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
@@ -288,12 +299,14 @@ console.log(sunriseAzimuth);
 */
    
 let close_YRNO=()=>{
-   document.getElementById("sow_YRNO").innerHTML = "";
+   //document.getElementById("modal").innerHTML = "";
+   document.getElementById("druga").style.display="block";
 }
 let pogoda_YRNO = () =>{
-      console.log("-----------------");  
+   console.log("-----------------");  
+   document.getElementById("druga").style.display="none";
    let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
-   document.getElementById("sow_YRNO").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" style="cursor:pointer; width: 94vw;max-width:800px;" />';
+   document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
    
 }
    
