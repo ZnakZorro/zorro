@@ -68,8 +68,8 @@ div.field div span:nth-child(2) {
 }  
 .bum  {
    cursor:pointer; 
-   width: 94vw;
-   max-width:782;
+   width: 94vw!important;
+   max-width:782px!important;
  }
 .trans {
   transition-property: width;
@@ -300,20 +300,19 @@ console.log(sunriseAzimuth);
    
 let close_YRNO=()=>{
    //document.getElementById("modal").innerHTML = "";
-   document.getElementById("druga").style.display="block";
-   document.getElementById("yrnoCard").style.width="50%";
-   document.getElementById("pogodayrno").classList.remove("bum trans");
+   //document.getElementById("druga").style.display="block";
+   //document.getElementById("yrnoCard").style.width="50%";
+   //document.getElementById("pogodayrno").classList.remove("bum trans");
+   document.getElementById("yrnoCard").classList.remove("bum trans");
 }
 let pogoda_YRNO = () =>{
    console.log("-----------------");  
-   document.getElementById("druga").style.display="none";
-   document.getElementById("pogodayrno").classList.add("bum trans");
-   document.getElementById("yrnoCard").style.width="100%";
-   
+   document.getElementById("yrnoCard").classList.add("bum trans");
+   //document.getElementById("druga").style.display="none";
+   //document.getElementById("pogodayrno").classList.add("bum trans");
+   //document.getElementById("yrnoCard").style.width="100%";
    //let src="https://www.yr.no/en/content/2-3083829/meteogram.svg";
    //document.getElementById("pogodayrno").innerHTML = '<img src="'+src+'" onClick="close_YRNO()" class="bum trans" />';
-   
-   
 }
    
 </script>
