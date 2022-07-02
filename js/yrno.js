@@ -219,7 +219,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
     w.icon  = '<img src="'+gfxSVG+w.info+'.svg" />';
     w.symbol = symbol;
-    console.log("#222 w=",w);
+    //console.log("#222 w=",w);
     return w;
 } 
 
@@ -232,7 +232,7 @@ const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.te
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
       setNewPogodaFoto(0,w);
-      console.log("198 obj wwwwwwwwww=",w);
+      //console.log("235 obj wwwwwwwwww=",w);
       let container = _$("#"+id);
       let zapas = container.innerHTML;
       container.innerHTML = formatLine(w);
