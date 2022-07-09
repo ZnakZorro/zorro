@@ -18,12 +18,12 @@ document.addEventListener("DOMContentLoaded",function(){
     
     setTimeout(()=>{
         console.log("dust_remote.js");
-        $("#info").innerHTML = "timeOut dust_remote.js";
+        $("#info").innerHTML = "timeOut dust_remote.js 6s";
         $("#chart-container").style.width = "100%!important";
         $("div.highcharts-container").style.width = "100%!important";
         $("svg").style.width = "100%!important";
         $("svg").width = "100%!important";
         
-    },3000)
+    },6000)
 })
 //---DOM READY----------------------------------
