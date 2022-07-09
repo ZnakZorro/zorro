@@ -49,7 +49,25 @@ iframe {height:320px; width:48%;display: initial;}
 <body>
     <iframe src="https://thingspeak.com/channels/71180/charts/1/?dynamic=true&results=240&title=PM2.5"></iframe>
     <iframe src="https://thingspeak.com/channels/71180/charts/2/?dynamic=true&results=240&title=PM10"></iframe>
+    <h3 id="alarminfo">?</h3>
+    
+<script>
+let alarmURLtxt= "https://api.thingspeak.com/channels/71180/fields/2/last.txt";
 
+    let alarm=()=>{
+        fetch(alarmURLtxt)
+            .then(r => {return r.text()})
+            .then(o => {
+                console.log(o)
+                var czas = (new Date()).toLocaleString();
+                document.getElementById("alarminfo").innerHTML = o+"<br />"+czas;
+            })
+            .catch(e => {console.log(e)})
+    }
+
+    alarm();
+    setInterval(alarm,60000);
+    </script>    
 </body>
 </html>
 
