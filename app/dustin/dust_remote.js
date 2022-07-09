@@ -11,9 +11,9 @@ document.body.appendChild(elem);
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-    document.getElementById("chart-container").style.width = "100%";
-    document.querySelector("div.highcharts-container").style.width = "100%";
-    document.querySelector("svg").style.width = "100%";
-    document.querySelector("svg").width = "100%";
+    $("#chart-container").style.width = "100%";
+    $("div.highcharts-container").style.width = "100%";
+    $("svg").style.width = "100%";
+    $("svg").width = "100%";
 })
 //---DOM READY----------------------------------
