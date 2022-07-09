@@ -17,13 +17,13 @@ document.addEventListener("DOMContentLoaded",function(){
         $("svg").width = "100%!important";
     
     setTimeout(()=>{
-        console.log("dust_remote.js");
-        $("#info").innerHTML = "timeOut dust_remote.js 6s";
+        console.log("dust_remote.js 16");
+        $("#info").innerHTML = "timeOut dust_remote.js 16s";
         $("#chart-container").style.width = "100%!important";
         $("div.highcharts-container").style.width = "100%!important";
         $("svg").style.width = "100%!important";
         $("svg").width = "100%!important";
         
-    },6000)
+    },16000)
 })
 //---DOM READY----------------------------------
