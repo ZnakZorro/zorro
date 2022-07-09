@@ -9,7 +9,6 @@ elem.style.cssText = "padding:0.25em;background:#006; color:#fff";
 elem.innerHTML = "<p>dust_remote.js</p>";
 document.body.appendChild(elem);
 
-
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
         $("#chart-container").style.width = "100%!important";
