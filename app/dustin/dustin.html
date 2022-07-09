@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>dustIN</title>
+<link rel="manifest" href="dust.web.json">
+<!--meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="true">
+<meta name="mobile-web-app-capable" content="yes"> 
+<meta name="theme-color" content="#4564a4">
+
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="dust.svg"> 
+<link rel="icon" type="image/svg+xml" href="dust.svg">  
+
+<style>
+body {font:normal 14pt Verdana; margin:0; padding:1%;}
+p {margin:0;}
+.wrap {width:100%; margin:auto;}
+.active {background:red; color:white;}
+#alarm {
+    display: inline-block;
+    width: 5em;
+    height: 2em;
+    text-align: center;
+    border-radius: 2em;
+    padding-top: 0.75em;
+    font-weight: bold;
+    font-size: 1.25rem;
+}
+.alarm {
+    background: red;
+    color: white;
+}
+.hide {
+    background:silver;
+    color: black;
+}
+.hidenn  {display:none;}
+iframe {height:360px; width:48%;display: initial; border:none;}
+@media (max-width: 576px) {
+    iframe {width:98%;}
+}
+</style>    
+<script>
+    //https://thingspeak.com/channels/71180/charts/2?color=blue&days=1&dynamic=true&title=P10+Volume&type=line
+</script>    
+</head>
+<body>
+    <iframe src="https://thingspeak.com/channels/71180/charts/1"></iframe>
+    <iframe src="https://thingspeak.com/channels/71180/charts/2"></iframe>
+
+</body>
+</html>
+
