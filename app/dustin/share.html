@@ -1,0 +1,24 @@
+<div class="grid place-items-center min-h-screen">
+  <button id="share-button" class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Share me</button>
+</div>
+
+<script>
+  const shareButton = document.getElementById("share-button");
+
+shareButton.addEventListener("click", (event) => {
+  if ("share" in navigator) {
+    navigator
+      .share({
+        title: "dustIN on GitHub",
+        url:
+          "https://znakzorro.github.io/zorro/app/dustin/"
+      })
+      .then(() => {
+        console.log("Callback after sharing");
+      })
+      .catch(console.error);
+  } else {
+    alert(`Sorry this browser doesn't have native share`);
+  }
+});
+</script>
