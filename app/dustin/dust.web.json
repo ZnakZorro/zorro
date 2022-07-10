@@ -9,7 +9,7 @@
     "icons": [ 
         {
             "src": "dust.svg",
-            "sizes": "48x48 72x72 96x96 128x128 150x150 256x256 512x512 1024x1024",
+            "sizes": "150x150",
             "type": "image/svg+xml",
             "purpose": "any"
         }
