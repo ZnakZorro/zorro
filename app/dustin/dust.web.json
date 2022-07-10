@@ -1,4 +1,4 @@
-.{
+{
     "name": "Dust",
     "short_name": "Dust",
     "description": "Dust",
@@ -12,7 +12,13 @@
             "sizes": "150x150",
             "type": "image/svg+xml",
             "purpose": "any"
+        },
+        {
+            "src": "dust.jpg",
+            "sizes": "266x189",
+            "type": "image/jpg",
+            "purpose": "any"
         }
-    
+     
     ]
 }
