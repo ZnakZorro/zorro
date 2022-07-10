@@ -1,11 +1,11 @@
-{
+.{
     "name": "Dust",
     "short_name": "Dust",
     "description": "Dust",
-    "start_url": "/",
+    "start_url": "index.html",
     "display": "standalone",
-    "background_color": "#f00",
-    "theme_color": "#f00",
+    "background_color": "#080",
+    "theme_color": "#080",
     "icons": [ 
         {
             "src": "dust.svg",
