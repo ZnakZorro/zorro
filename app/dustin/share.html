@@ -31,8 +31,8 @@ shareButton2.addEventListener("click", (event) => {
   if ("share" in navigator) {
     const file = new File([blob], 'dust.jpg', { type: 'image/jpeg' });
     navigator.share({
-        title: 'Web Share',
-        text: 'Testing out the web share API',
+        title: 'Web Share JPG',
+        text: 'dust.jpg 266x189',
         url: 'https://daily-dev-tips.com/posts/using-the-native-web-share-javascript-api/',
         files: [file],
       }) 
