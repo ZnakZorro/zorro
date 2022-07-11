@@ -2,7 +2,7 @@
 <html lang="pl">
 <head>
 <meta charset="utf-8">
-<title>F</title>
+<title>F2</title>
 <link rel="manifest" href="dust.web.json">
 <!--meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"-->
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,7 +25,7 @@ button {margin:0.25em 0.15em; min-width:2em;}
 </style>
 </head>
 <body>
-
+<title>F2</title>
 <div id="container"></div>
 
 <script>
@@ -39,7 +39,7 @@ console.log(u);
 fetch(u, {
     method: 'GET', 
     mode: 'no-cors',
-    credentials: "omit", // include, same-origin, *omit
+    credentials: "*omit", // include, same-origin, *omit
     
 }).then(function(response) {
     console.log(response);
@@ -50,12 +50,12 @@ fetch(u, {
     console.log(err);
 });
 
-/*
-fetch(urlTS1)
+
+fetch(u)
 .then(r => {return r.json()})
 .then(o => {console.log(o)})
 .catch(e => {console.log(e)})
-*/
+
 </script>
     
 </body>    
