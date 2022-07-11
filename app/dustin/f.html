@@ -1,0 +1,40 @@
+
+<style>
+#container {
+    min-width: 310px;
+    max-width: 800px;
+}
+
+</style>
+
+<div id="container"></div>
+
+<script>
+
+let urlTS1 = "https://thingspeak.com/channels/71180/field/1.json?&offset=0&results=240";
+let urlTS2 = "https://thingspeak.com/channels/71180/field/2.json?&offset=0&results=240";
+
+let u = "https://thingspeak.com/channels/71180/field/1.json?&offset=0&results=240";
+console.log(u);
+
+fetch(u, {
+    method: 'GET', 
+    mode: 'no-cors',
+    credentials: "omit", // include, same-origin, *omit
+    
+}).then(function(response) {
+    console.log(response);
+    return response.text();
+}).then(function(tx) {
+    console.log(tx);
+}).catch(function(err) {
+    console.log(err);
+});
+
+/*
+fetch(urlTS1)
+.then(r => {return r.json()})
+.then(o => {console.log(o)})
+.catch(e => {console.log(e)})
+*/
+</script>

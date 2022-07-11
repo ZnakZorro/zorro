@@ -1,0 +1,110 @@
+
+<style>
+#container {
+    min-width: 310px;
+    max-width: 800px;
+}
+
+</style>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<div id="container"></div>
+
+<button id="large">Large</button>
+<button id="small">Small</button>
+<button id="auto">Auto</button>
+
+<script>
+let url = "https://demo-live-data.highcharts.com/aapl-c.json";
+url = "https://demo-live-data.highcharts.com/aapl-c.json";
+//url = "https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=1";
+
+let wykres = null;
+chart = wykres;
+
+let onFinish=(ten)=>{
+    console.log(ten);
+    //console.log(ten.data.getData());
+    console.log(ten.getData());
+    //console.log(ten.series[0].getData());
+    //console.log(ten.series[0].categories);
+
+    //for (let i=0; i<10; i++) ten.series[0].data.push(parseFloat(i));
+    ten.addSeries({
+        data: [1,2,3,4,5,6,7,8,9],
+        category: [1649251800000, 1649338200000, 1649424600000, 1649683800000, 1649770200000, 1649856600000, 1649943000000, 1650288600000, 1650375000000],
+    });
+    ten.redraw(); 
+    //wykres.redraw();
+}
+
+wykres = Highcharts.getJSON(url, data => {
+    const chart = Highcharts.stockChart('container', {
+        chart: {
+            height: 400,
+            events: {
+                load: function () {
+                    onFinish(this);
+                }
+            }
+        },
+
+        title: {
+            text: 'Highcharts Stock Responsive Chart'
+        },
+
+        subtitle: {
+            text: 'Click small/large buttons or change window size to test responsiveness'
+        },
+
+        rangeSelector: {
+            selected: 1
+        },
+
+        series: [{
+            name: 'AAPL Stock Price',
+            data: data,
+            type: 'area',
+            threshold: null,
+            tooltip: {
+                valueDecimals: 2
+            }
+        }],
+
+        responsive: {
+            rules: [{
+                condition: {
+                    maxWidth: 500
+                },
+                chartOptions: {
+                    chart: {
+                        height: 300
+                    },
+                    subtitle: {
+                        text: null
+                    },
+                    navigator: {
+                        enabled: false
+                    }
+                }
+            }]
+        }
+    });
+
+    document.getElementById('small').addEventListener('click', () => {
+        chart.setSize(400);
+    });
+
+    document.getElementById('large').addEventListener('click', () => {
+        chart.setSize(800);
+    });
+
+    document.getElementById('auto').addEventListener('click', () => {
+        chart.setSize(null);
+    });
+});
+
+
+</script>
