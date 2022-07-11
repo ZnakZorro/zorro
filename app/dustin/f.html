@@ -36,6 +36,14 @@ let urlTS2 = "https://thingspeak.com/channels/71180/field/2.json?&offset=0&resul
 let u = "https://thingspeak.com/channels/71180/field/1.json?&offset=0&results=240";
 console.log(u);
 
+fetch(u)
+.then(r => {return r.json()})
+.then(o => {console.log(o)})
+.catch(e => {console.log(e)})
+
+    
+    
+    
 fetch(u, {
     method: 'GET', 
     mode: 'no-cors',
@@ -50,11 +58,6 @@ fetch(u, {
     console.log(err);
 });
 
-
-fetch(u)
-.then(r => {return r.json()})
-.then(o => {console.log(o)})
-.catch(e => {console.log(e)})
 
 </script>
     
