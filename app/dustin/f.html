@@ -1,11 +1,30 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<title>F</title>
+<link rel="manifest" href="dust.web.json">
+<!--meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"-->
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="HandheldFriendly" content="true">
+<meta name="mobile-web-app-capable" content="yes"> 
+<meta name="theme-color" content="#4564a4">
 
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="dust.svg"> 
+<link rel="icon" type="image/svg+xml" href="dust.svg">  
+    
 <style>
+body {font-family:Verdana; font-size:12pt;}
+button {margin:0.25em 0.15em; min-width:2em;}
+
 #container {
     min-width: 310px;
     max-width: 800px;
 }
 
 </style>
+</head>
+<body>
 
 <div id="container"></div>
 
@@ -38,3 +57,6 @@ fetch(urlTS1)
 .catch(e => {console.log(e)})
 */
 </script>
+    
+</body>    
+</html>
