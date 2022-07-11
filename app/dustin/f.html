@@ -25,7 +25,7 @@ button {margin:0.25em 0.15em; min-width:2em;}
 </style>
 </head>
 <body>
-<title>F2</title>
+
 <div id="container"></div>
 
 <script>
@@ -33,7 +33,7 @@ button {margin:0.25em 0.15em; min-width:2em;}
 let urlTS1 = "https://thingspeak.com/channels/71180/field/1.json?&offset=0&results=240";
 let urlTS2 = "https://thingspeak.com/channels/71180/field/2.json?&offset=0&results=240";
 
-let u = "https://thingspeak.com/channels/71180/field/1.json?&offset=0&results=240";
+let u = "https://thingspeak.com/channels/71180/field/1.json";//?&offset=0&results=240";
 console.log(u);
 
 fetch(u)
@@ -47,7 +47,7 @@ fetch(u)
 fetch(u, {
     method: 'GET', 
     mode: 'no-cors',
-    credentials: "*omit", // include, same-origin, *omit
+    //credentials: "*omit", // include, same-origin, *omit
     
 }).then(function(response) {
     console.log(response);
@@ -60,6 +60,6 @@ fetch(u, {
 
 
 </script>
-    
+<h4>F3</h4>    
 </body>    
 </html>
