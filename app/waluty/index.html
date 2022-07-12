@@ -242,7 +242,7 @@ let rysujWykresProsty = (dane)=>{
 let opiszWaluty = (dane,categories)=>{
     //console.log(categories);
     //console.log(dane);
-
+    let procenty = "delta%<br />"
     let names = [];
     dane.forEach(d=>{
         names.push(d.name);
@@ -260,7 +260,19 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     dat[0]=dane[0].data.pop();
     dat[1]=dane[1].data.pop();
     dat[2]=dane[2].data.pop();
-    //console.log(dat);
+    let start = {dolar:4.3469,euro:4.6405,funt:5.5299};
+    let last  = {dolar:dat[0],euro:dat[1],funt:dat[2]};
+    let delta = {dolar:last.dolar-start.dolar,euro:last.euro-start.euro,funt:last.funt-start.funt};
+    let procent = {dolar:(100*delta.dolar/start.dolar), euro:(100*delta.euro/start.euro), funt:(100*delta.funt/start.funt), };
+    
+    console.log(start);
+    console.log(last);
+    console.log(delta);
+    console.log(procent);
+    procenty += `USD: ${procent.dolar.toFixed(2)}% <br />`;
+    procenty += `EUR: ${procent.euro.toFixed(2)}% <br />`;
+    procenty += `GBR: ${procent.funt.toFixed(2)}% <br />`;
+
     html = `
     <div class="highcharts-data-table" style="display: block;">
     <table id="highcharts-data-table-0">
@@ -286,6 +298,7 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     `;
 
     document.getElementById("info2").innerHTML=html;
+    document.getElementById("procenty").innerHTML=procenty;
 
 }
 
@@ -339,14 +352,17 @@ document.addEventListener("DOMContentLoaded",function(){
             <img style="display: flex; margin:2em auto;" src="./spiner.gif" />
         </div>
         <div id="info2"></div>
+        <div id="procenty"></div>
     </figure>
+<!--
     <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
         <div id="container1"></div>
     </figure>
 
     <div id="info"></div>
-    <div id="info2"></div>
-
+    <div id="info3"></div>
+    
+-->
 
 </body>
 </html>
