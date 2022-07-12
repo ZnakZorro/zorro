@@ -265,6 +265,7 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     let delta = {dolar:last.dolar-start.dolar,euro:last.euro-start.euro,funt:last.funt-start.funt};
     let procent = {dolar:(100*delta.dolar/start.dolar), euro:(100*delta.euro/start.euro), funt:(100*delta.funt/start.funt), };
     
+    /*
     console.log(start);
     console.log(last);
     console.log(delta);
@@ -272,29 +273,36 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     procenty += `USD: ${procent.dolar.toFixed(2)}% <br />`;
     procenty += `EUR: ${procent.euro.toFixed(2)}% <br />`;
     procenty += `GBR: ${procent.funt.toFixed(2)}% <br />`;
+    */
 
     html = `
     <div class="highcharts-data-table" style="display: block;">
-    <table id="highcharts-data-table-0">
-    <caption class="highcharts-table-caption">WALUTY</caption>
-    <thead>
-        <tr>
-            <th class="text" scope="col">DateTime</th>
-            <th class="text" scope="col">${names[0]}</th>
-            <th class="text" scope="col">${names[1]}</th>
-            <th class="text" scope="col">${names[2]}</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th class="text" scope="row">${tim}</th>
-            <td class="number">${dat[0]}</td>
-            <td class="number">${dat[1]}</td>
-            <td class="number">${dat[2]}</td>
-        </tr>
-    </tbody>
-    </table>
-</div>
+        <table id="highcharts-data-table-0" border=1 cellpadding=6 cellspacing=0>
+        <caption class="highcharts-table-caption">WALUTY</caption>
+        <thead>
+            <tr>
+                <th class="text" scope="col">Czas</th>
+                <th class="text" scope="col">${names[0]}</th>
+                <th class="text" scope="col">${names[1]}</th>
+                <th class="text" scope="col">${names[2]}</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th class="text" scope="row">${tim}</th>
+                <td class="number">${dat[0]}</td>
+                <td class="number">${dat[1]}</td>
+                <td class="number">${dat[2]}</td>
+            </tr>
+            <tr>
+                <th class="text" scope="row">%</th>
+                <td class="number">${procent.dolar.toFixed(2)}</td>
+                <td class="number">${procent.euro.toFixed(2)}</td>
+                <td class="number">${procent.funt.toFixed(2)}</td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
     `;
 
     document.getElementById("info2").innerHTML=html;
