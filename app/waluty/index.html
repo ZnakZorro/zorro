@@ -340,7 +340,8 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-
+	<div id="menu"></div>
+	
     <div class="col"></div>
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
     <span id="country">Waluty</span>
@@ -496,6 +497,14 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
   */
 }
 
+
+fetch("/menu.html")
+.then(r => {return r.text()})
+.then(o => {
+	console.log(o)
+	document.getElementById("menu").innerHTML = o;
+})
+.catch(e => {console.log(e)})
 
 </script>
 
