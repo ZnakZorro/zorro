@@ -498,13 +498,25 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
 }
 
 
-fetch("/menu.html")
+fetch("https://znakzorro.github.io/zorro/menu.html")
 .then(r => {return r.text()})
 .then(o => {
 	console.log(o)
 	document.getElementById("menu").innerHTML = o;
 })
 .catch(e => {console.log(e)})
+
+	
+//------------------	
+fetch("../../menu.html")
+.then(r => {return r.text()})
+.then(o => {
+	console.log(o)
+	//document.getElementById("menu").innerHTML = o;
+})
+.catch(e => {console.log(e)})
+
+
 
 </script>
 
