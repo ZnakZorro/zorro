@@ -3,8 +3,8 @@ class GreetingMessage extends HTMLElement {
 	constructor () {
 		super();
 		let btnText = this.innerHTML.trim();
-		let link   = this.hasAttribute('link') ? this.getAttribute('link') : '';
-		let title  = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
+		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
+		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
 		console.log("______link=",link);
 		this.innerHTML =
 `<!--p>
@@ -45,24 +45,22 @@ class GreetingMessage extends HTMLElement {
 		let name = host.getAttribute('name');
 		target.textContent = `Hi there, ${name ? name : 'friend'}! Hope you're having a great day!`;
 		setTimeout(function () {
+			console.log(timqout 1");
 			//target.textContent = '';
 		}, 15000);
 	}
 
 	connectedCallback () {
-        //console.log(this)
-        console.log(this.dataset)
-        //console.log(this.dataset.link)
-        //console.log(this.title)
-		let btn = this.querySelector('button');
-		if (!btn) return;
-		btn.addEventListener('click', this.clickHandler);
+       
+		//let btn = this.querySelector('button');
+		//if (!btn) return;
+		//btn.addEventListener('click', this.clickHandler);
 	}
 
 	disconnectedCallback () {
-		let btn = this.querySelector('button');
-		if (!btn) return;
-		btn.removeEventListener('click', this.clickHandler);
+		//let btn = this.querySelector('button');
+		//if (!btn) return;
+		//btn.removeEventListener('click', this.clickHandler);
 	}
 
 	static get observedAttributes () {
@@ -76,6 +74,8 @@ class GreetingMessage extends HTMLElement {
 	 * @param  {String} newValue The new attribute value
 	 */
 	attributeChangedCallback (name, oldValue, newValue) {
+		console.log(name, oldValue, newValue);
+		/*
 		let btn = this.querySelector('button');
 		if (btn) {
 			btn.removeEventListener('click', this.clickHandler);
@@ -88,6 +88,7 @@ class GreetingMessage extends HTMLElement {
 			let name = this.getAttribute('name');
 			target.textContent = `Bye, ${name ? name : 'friend'}! See you next time.`;
 		}
+		*/
 	}
 }
 
@@ -100,6 +101,7 @@ let greeting = document.querySelector('app-menu');
 greeting.setAttribute('hello', 'you');
 
 setTimeout(function () {
+	console.log(timqout 2);
     //greeting.setAttribute('logout', true);
 }, 15000);
 
@@ -109,6 +111,7 @@ setTimeout(function () {
 
 
 ///////////++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+/*
 document.addEventListener("my-custom-event", function (event) {
     console.log(event.detail);
   });
@@ -119,7 +122,7 @@ document.addEventListener("my-custom-event", function (event) {
     cancelable: true,
     detail: "This is awesome. I could also be an object or array."
   });
-  
+  */
   // Emit the event
   document.dispatchEvent(event);
   
