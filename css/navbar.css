@@ -90,4 +90,6 @@ a {text-decoration: none;}
 .icon1 {
     max-width: 32px;
     cursor: pointer;
+    vertical-align: middle; 
+    cursor:pointer;
 }
