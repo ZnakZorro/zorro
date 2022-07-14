@@ -35,12 +35,9 @@ button{
 </head>
   
 <body>
+<app-menu title="Noty" name="ZnakZorro" link="../"></app-menu>
 
   <div class="wrapper">
-    <h3>
-      <img src="../css/icon/back.svg" onClick="backHome()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
-       <span style="color:white">&nbsp; git::NOTA</span>
-    </h3>
     <div class="container">
        <span id="alert" style="height:1.5em;text-align:center;display:block; color:orange; "></span>
       <button onClick="copyTXT()" class="btn-red" id="copy" style="float:left;">Kopiuj</button>
@@ -154,7 +151,7 @@ document.addEventListener("DOMContentLoaded",function(){
   
 </script>
 
-
+<script src="../appMenu.js"></script>
 
 </body>
 </html>
