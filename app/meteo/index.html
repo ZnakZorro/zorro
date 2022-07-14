@@ -2,7 +2,6 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-
 <meta charset="utf-8">
 <meta http-equiv="refresh" content="3600">
 <title>MetegramYRno</title>
@@ -28,7 +27,6 @@
     background: #2f2f30;
     color: #fff; 
   }
-  
 #container {
     max-width: 800px;
     min-width: 380px;
@@ -41,12 +39,10 @@ a.btn-info, button.btn-info, .btn-info {
   background-color: #69b;
   color: #000;
 }
-
 #loading {
     margin-top: 1px;
     text-align: center;
 }
-
 .highcharts-figure,
 .highcharts-data-table table {
     min-width: 350px;
@@ -54,7 +50,6 @@ a.btn-info, button.btn-info, .btn-info {
     margin: 0;
   min-height: 320px;
 }
-
 .highcharts-data-table table {
     font-family: Verdana, sans-serif;
     border-collapse: collapse;
@@ -64,29 +59,24 @@ a.btn-info, button.btn-info, .btn-info {
     width: 100%;
     max-width: 500px;
 }
-
 .highcharts-data-table caption {
     padding: 1em 0;
     font-size: 1.2em;
     color: #555;
 }
-
 .highcharts-data-table th {
     font-weight: 600;
     padding: 0.5em;
 }
-
 .highcharts-data-table td,
 .highcharts-data-table th,
 .highcharts-data-table caption {
     padding: 0.5em;
 }
-
 .highcharts-data-table thead tr,
 .highcharts-data-table tr:nth-child(even) {
     background: #f8f8f8;
 }
-
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
 }
@@ -100,10 +90,7 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-    <h3>
-        <img src="../../css/icon/back.svg" onClick='location.href="../../";' style="margin:0 1.5em; width:38px;vertical-align: middle; cursor:pointer;"/>
-        &nbsp; Meteo
-    </h3>
+    <app-menu title="Pogoda" name="ZnakZorro" link="../../"></app-menu>
 
 <div id="info"></div>
 
@@ -954,7 +941,7 @@ console.log(beaufortName)
 */
 	
 </script>  
-
+<script src="../../appMenu.js"></script>
     
 </body>
 </html>
