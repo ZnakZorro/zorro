@@ -3,6 +3,7 @@
 * {margin: 0;padding: 0;box-sizing: border-box;font-family: 'Roboto', sans-serif;}
 li {list-style: none;}
 a {text-decoration: none;font-size: 14pt;}
+div {margin:0 2px;}
 .header{border-bottom: 1px solid #E2E8F0;}
 .navbar {display: flex;justify-content: space-between;align-items: center;padding: 1rem 0.15rem;}
 .hamburger {display: none;}
