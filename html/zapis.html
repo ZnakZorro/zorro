@@ -41,6 +41,7 @@ button{
     <div class="container">
        <span id="alert" style="height:1.5em;text-align:center;display:block; color:orange; "></span>
       <button onClick="copyTXT()" class="btn-red" id="copy" style="float:left;">Kopiuj</button>
+       <button onClick="deleteTXT()" class="btn-red" id="kasuj" style="margin:auto;">Ksauj</button>
        
        <button onClick="zanotujTXT()" class="btn-blue" id="zanotuj" style="float:right;">Zanotuj</button>
       <textarea id="editor"></textarea>
@@ -102,6 +103,12 @@ function copyTXT() {
   
 }
 
+function deleteTXT {
+  document.getElementById("editor").value="";
+}
+
+
+   
 function zanotujTXT(){
       let txt = document.getElementById("editor").value;
       if (localStorage.getItem("z___zanotuj")){
