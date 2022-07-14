@@ -4,6 +4,7 @@ class GreetingMessage extends HTMLElement {
 		super();
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
+		let color   = this.hasAttribute('color') ? this.getAttribute('color') : 'lightblue';
 		console.log("______link=",link);
 		console.log("______title=",title);		
 		this.attachShadow({ mode: 'open'});
@@ -19,7 +20,7 @@ class GreetingMessage extends HTMLElement {
 		 <header class="header">
 			 <nav class="navbar">            
 				 <img src="https://znakzorro.github.io/zorro/css/icon/back.svg" onclick="window.location.href='https://znakzorro.github.io/zorro/';" class="icon1">
-				 <a href="https://github.com/ZnakZorro/zorro" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
+				 <a href="https://github.com/ZnakZorro/zorro" class="nav-logo" style="color:${color}">${title}<span id="licznik"></span><span id="flag"></span></a>
 					 <ul class="nav-menu">
 					 <li class="nav-item"><a href="${link}app/waluty/index.html" class="nav-link">WALUTY</a></li>
 					 <li class="nav-item"><a href="${link}app/covid/index.html" class="nav-link">COVID</a></li>
@@ -31,7 +32,7 @@ class GreetingMessage extends HTMLElement {
 					 <li class="nav-item"><a href="https://znakzorro.github.io/github-page-pwa/" class="nav-link" target="_blank">T2</a></li>
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
 				 </ul>
-				 <div class="hamburger">
+				 <div class="hamburger" >
 					 <span class="bar"></span>
 					 <span class="bar"></span>
 					 <span class="bar"></span>
