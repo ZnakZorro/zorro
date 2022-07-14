@@ -31,7 +31,7 @@ div.pad {margin:0 4px;}
 }
 
 .nav-link{
-    font-size: 1.05rem;
+    font-size: 17pt;
     font-weight: 300;
     color: #475569;
 }
@@ -63,22 +63,10 @@ div.pad {margin:0 4px;}
     border-top:1px solid gray;
 }
 
-    .nav-menu.active {
-        left: 0;
-    }
-
-    .nav-item {
-        margin: 0.7rem 0;
-    }
-
-    .hamburger {
-        display: block;
-        cursor: pointer;
-    }
-
-    .hamburger.active .bar:nth-child(2) {
-        opacity: 0;
-    }
+    .nav-menu.active {left: 0;}
+    .nav-item {margin: 0.7em 0;}
+    .hamburger {display: block;cursor: pointer;}
+    .hamburger.active .bar:nth-child(2) {opacity: 0;}
 
     .hamburger.active .bar:nth-child(1) {
         -webkit-transform: translateY(8px) rotate(45deg);
