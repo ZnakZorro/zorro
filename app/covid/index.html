@@ -7,6 +7,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="theme-color" content="#db5945">
+	<link rel="stylesheet" href="../../css/navbar.css" />	
 <!--link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/fractal1.svg"-->
    <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
 	
@@ -612,6 +613,7 @@ const newDistance=(ten)=>{
   
 </head>
 <body>
+	<app-menu title="Covid" link="../../"></app-menu>
 <div class="col">
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
     <span id="country"></span> &nbsp; <span id="population"> </span> &nbsp; <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b>
@@ -671,6 +673,10 @@ const newDistance=(ten)=>{
 <hr />
 
 <div id="klawisze"></div>
+	
+<script src="../../appMenu.js"></script>
+<script src="../../js/navbar.js"></script>	
+	
 </body>
 </html>
 <!--
