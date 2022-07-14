@@ -13,7 +13,7 @@ class GreetingMessage extends HTMLElement {
 	<div class="message" aria-live="polite"></div>
 <header class="header">
 	<nav class="navbar">            
-		<img id="logo" src="https://znakzorro.github.io/zorro/css/icon/refresh.svg" onClick="refresh()" class="icon1 loader"/>
+		<!--img id="logo" src="https://znakzorro.github.io/zorro/css/icon/refresh.svg" onClick="refresh()" class="icon1 loader"/-->
 		<img src="https://znakzorro.github.io/zorro/css/icon/back.svg" onclick="window.location.href='https://znakzorro.github.io/zorro/';" style="width:38px;vertical-align: middle; cursor:pointer;">
 		<a href="https://github.com/ZnakZorro/zorro" class="nav-logo">gitZorro <span id="licznik"></span><span id="flag"></span></a>
 			<ul class="nav-menu">
