@@ -49,10 +49,10 @@ class GreetingMessage extends HTMLElement {
 	}
 
 	connectedCallback () {
-        console.log(this)
+        //console.log(this)
         console.log(this.dataset)
-        console.log(this.dataset.link)
-        console.log(this.title)
+        //console.log(this.dataset.link)
+        //console.log(this.title)
 		let btn = this.querySelector('button');
 		if (!btn) return;
 		btn.addEventListener('click', this.clickHandler);
