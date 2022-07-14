@@ -3,6 +3,8 @@ class GreetingMessage extends HTMLElement {
 	constructor () {
 		super();
 		let btnText = this.innerHTML.trim();
+		let link = this.hasAttribute('link') ? this.getAttribute('link') : '';
+		console.log("______link=",link);
 		this.innerHTML =
 `<!--p>
 		appMenu
@@ -15,9 +17,9 @@ class GreetingMessage extends HTMLElement {
 		<img src="https://znakzorro.github.io/zorro/css/icon/back.svg" onclick="window.location.href='https://znakzorro.github.io/zorro/';" style="width:38px;vertical-align: middle; cursor:pointer;">
 		<a href="https://github.com/ZnakZorro/zorro" class="nav-logo">gitZorro <span id="licznik"></span><span id="flag"></span></a>
 			<ul class="nav-menu">
-			<li class="nav-item"><a href="app/waluty/index.html" class="nav-link">WALUTY</a></li>
-			<li class="nav-item"><a href="app/covid/index.html" class="nav-link">COVID</a></li>
-			<li class="nav-item"><a href="app/todo/index.html" class="nav-link">ToDo</a></li>
+			<li class="nav-item"><a href="${this.hasAttribute('link') ? '../../' : ''}app/waluty/index.html" class="nav-link">WALUTY</a></li>
+			<li class="nav-item"><a href="${this.hasAttribute('link') ? '../../' : ''}app/covid/index.html" class="nav-link">COVID</a></li>
+			<li class="nav-item"><a href="${this.hasAttribute('link') ? this.getAttribute('link') : ''}app/todo/index.html" class="nav-link">ToDo</a></li>
 			<li class="nav-item"><a href="html/index.html" class="nav-link">Inne</a></li> 
 			<li class="nav-item"><a href="html/zapis.html" class="nav-link">Zapis</a></li>
 			<li class="nav-item"><a href="app/dustin/" class="nav-link">dustIN</a></li>
