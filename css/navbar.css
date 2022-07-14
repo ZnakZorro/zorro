@@ -50,7 +50,7 @@ div.pad {margin:0 4px;}
     .nav-menu {
     position: fixed;
     left: -100%;
-    top: 5rem;
+    top: 3.5rem;
     flex-direction: column;
     background-color: #fff;
     width: 100%;
@@ -60,6 +60,7 @@ div.pad {margin:0 4px;}
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
     z-index: 5;
     background: #e8e8e8;
+    border-top:1px solid gray;
 }
 
     .nav-menu.active {
