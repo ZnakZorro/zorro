@@ -19,6 +19,7 @@
 <!-- optional -->  
 <script src="https://code.highcharts.com/modules/offline-exporting.js"></script>  
 <script src="https://code.highcharts.com/modules/export-data.js"></script>  
+<link rel="stylesheet" href="../../css/navbar.css" />	
 <style>
 body {font:normal 14pt verdana}
 
@@ -340,7 +341,8 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-	<div id="menu"></div>
+<!--div id="menu"></div-->
+<app-menu wave="fala" name="ZnakZorro" data-link="../../" title="Waluta">Klawisz</app-menu>	
 	
     <div class="col"></div>
     <img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;">
@@ -496,7 +498,7 @@ let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
   */
 }
 
-
+<!--
 fetch("../../menu.html")
 .then(r => {return r.text()})
 .then(o => {
@@ -504,12 +506,18 @@ fetch("../../menu.html")
 	document.getElementById("menu").innerHTML = o;
 })
 .catch(e => {console.log(e)})
+-->
 
+
+
+
+<script src="./appMenu.js"></script>
+<script src="https://znakzorro.github.io/zorro/js/navbar.js"></script>	
 
 
 
 
 </script>
-<!--script src="https://znakzorro.github.io/zorro/js/navbar.js"></script-->
+<script src="https://znakzorro.github.io/zorro/js/navbar.js"></script>
 </body>
 </html>
