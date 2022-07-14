@@ -45,7 +45,7 @@ class GreetingMessage extends HTMLElement {
 		let name = host.getAttribute('name');
 		target.textContent = `Hi there, ${name ? name : 'friend'}! Hope you're having a great day!`;
 		setTimeout(function () {
-			console.log(timqout 1");
+			console.log("timqout 1");
 			//target.textContent = '';
 		}, 15000);
 	}
@@ -101,7 +101,7 @@ let greeting = document.querySelector('app-menu');
 greeting.setAttribute('hello', 'you');
 
 setTimeout(function () {
-	console.log(timqout 2);
+	console.log("timqout 2");
     //greeting.setAttribute('logout', true);
 }, 15000);
 
