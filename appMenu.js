@@ -5,13 +5,16 @@ class GreetingMessage extends HTMLElement {
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
 		let color   = this.hasAttribute('color') ? this.getAttribute('color') : 'lightblue';
+		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		console.log("______link=",link);
 		console.log("______title=",title);		
 		this.attachShadow({ mode: 'open'});
 			
 		this.shadowRoot.innerHTML = `
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
-		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/navbar.css" />
+		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/navbar.css" />		
+		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/${style}.css" />
+		
 		<style>
 		.header * {
 			font-family: 'Roboto', "Verdana", sans-serif; 
