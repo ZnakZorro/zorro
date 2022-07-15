@@ -1,4 +1,3 @@
-
 class NavBarNavigator extends HTMLElement {
 	constructor () {
 		super();
