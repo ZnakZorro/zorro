@@ -4,7 +4,7 @@ class GreetingMessage extends HTMLElement {
 		super();
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
-		let color   = this.hasAttribute('color') ? this.getAttribute('color') : 'lightblue';
+		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#482ff7';
 		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		console.log("______link=",link);
 		console.log("______title=",title);		
