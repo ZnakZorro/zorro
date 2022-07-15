@@ -1,5 +1,5 @@
 
-class GreetingMessage extends HTMLElement {
+class NavBarNavigator extends HTMLElement {
 	constructor () {
 		super();
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
@@ -67,6 +67,6 @@ class GreetingMessage extends HTMLElement {
 }
 
 if ('customElements' in window) {
-	customElements.define('app-menu', GreetingMessage);
+	customElements.define('app-menu', NavBarNavigator);
 }
 
