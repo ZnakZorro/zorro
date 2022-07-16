@@ -97,6 +97,7 @@ function submitHTML(){
        html = html.replace(/\<h/gi,'\n<h');
        html = html.replace(/\<div/gi,'\n<div');
        html = header + html + footer;
+	console.log(html);
    
          var newBlob = new Blob([html], {type: "text/html"})
          if (window.navigator && window.navigator.msSaveOrOpenBlob) {
