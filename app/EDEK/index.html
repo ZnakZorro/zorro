@@ -50,7 +50,8 @@
 
     document.getElementById("saveButton").addEventListener('click', function() {
        //let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(":","-").replaceAll(" ","-");
-       let date = (new Date()).toLocaleString().replace(/[ .,:]/g,"-").replace("--","-")
+       let date = (new Date()).toLocaleString().replace(/[ .,:]/g,"-").replace("--","-");
+       let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '-').replace("--","-");;
        
        let nameOfFile = "edek-"+date+".html";
        let filename = prompt("Nazwa pliku",nameOfFile);
