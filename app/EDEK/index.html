@@ -55,10 +55,14 @@
         saveAs(blob, filename);
         */
        //let date = (new Date()).toISOString().slice(0, 10);
+       let nameOfFile = "edek-"+date+".html";
+       let filename = prompt("Nazwa pliku",nameOfFile);
+       console.log(filename);
+       
        let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(":","-").replaceAll(" ","-");
         let content = document.querySelector("div.ck-content").innerHTML;
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, "edek-"+date+".html");
+        saveAs(blob, filename);
 
     })
 
