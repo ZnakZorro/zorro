@@ -26,27 +26,16 @@
 
 
 
-        let zapisz=()=>{
-            let content = document.querySelector("div.ck-content").innerHTML;
-            //console.log(content);
-            //saveTextAs(content, "test.html");
-            saveTextAs("Hi,This,is,a,CSV,File", "test.csv");
-            var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-            saveAs(blob, "edek.html");
 
-            //var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-            //FileSaver.saveAs(blob, "hello world.txt");            
-
-        }
    </script>
 
 </head>
 <body>
     <div class="keys">
         <span>EDEK</span>
-        <button onClick="zapisz()">Zapisz</button>
+        
         <button id="saveButton">saveButton</button>
-        <button onClick="zapisz()">Zapisz</button>
+        
     </div>
     <div id="editor">
         <p></p>
@@ -65,9 +54,11 @@
         var filename = (document.querySelector('#filename').value || 'gifme') + '.gif';
         saveAs(blob, filename);
         */
+       //let date = (new Date()).toISOString().slice(0, 10);
+       let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(" ","-");
         let content = document.querySelector("div.ck-content").innerHTML;
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
-        saveAs(blob, "edek.html");
+        saveAs(blob, "edek-"+date+".html");
 
     })
 
