@@ -55,7 +55,7 @@
         saveAs(blob, filename);
         */
        //let date = (new Date()).toISOString().slice(0, 10);
-       let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(" ","-");
+       let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(":","-").replaceAll(" ","-");
         let content = document.querySelector("div.ck-content").innerHTML;
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
         saveAs(blob, "edek-"+date+".html");
