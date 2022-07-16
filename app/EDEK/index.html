@@ -90,7 +90,9 @@ function getTitle(html){
    
 function submitHTML(){   
    let html   = document.getElementById('editor').innerHTML;
+	console.log("html=");console.log(html);
    let title  = getTitle(html) || 'htmlWWW';
+	console.log(title);
    let header = '<html lang="pl">\n<head>\n<meta charset="utf-8"><title>'+title+'</title>\n</head>\n<body>\n';
    let footer = '\n</body>\n</html>\n';
        html = html.replace(/\<p/gi,'\n<p');
