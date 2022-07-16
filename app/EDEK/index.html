@@ -58,7 +58,7 @@
        let nameOfFile = "edek-"+date+".html";
        let filename = prompt("Nazwa pliku",nameOfFile);
        console.log(filename);
-       
+       if(!filename) return;
        
         let content = document.querySelector("div.ck-content").innerHTML;
         var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
