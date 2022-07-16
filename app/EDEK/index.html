@@ -34,7 +34,9 @@
     <div class="keys">
         <span>EDEK</span>
         
-        <button id="saveButton">saveButton</button>
+        <button id="saveButton">save</button>
+	    <button onclick="submitHTML()">submitHTML()</button>
+	    
         
     </div>
     <div id="editor">
@@ -68,34 +70,49 @@
    
    
    
-   <script>
-      function getTitle(){
-		if (document.getElementById('title').value.length>8) {clearInterval(setTitleInterval); return;}
-		var ed = document.getElementById('cke_1_contents');
-		var iframe = ed.getElementsByTagName('iframe')[0];
-		var ibody = iframe.contentDocument || iframe.contentWindow.document;
-		var dbody = ibody.getElementsByTagName('body')[0];
-		var ihtml = dbody.innerHTML;		
-		var titleMatch = new RegExp("<h1[^>]*>(.*?)<\/h1>","gmi");
-		var m = ihtml.match(titleMatch);
-		//console.log(m);
-		if (m && m[0]) {
-			var t = m[0];
-			//t=t.replace('<.*?>','');
-			//t=t.replace(/(<\/?\w+?>)\s*?(<\/?\w+?>)|(<\/?\w+?>)/g,'');
-			t=t.replace(/(<.*?>)/g,'');
-			
-			t  = t.substring(0,60);
-			//t1 = t.replace(/[^a-zA-Z0-9]/g,'_');
-			t = t.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g,'_');
-			t = t.replace(/_{2}/g,"_");
-			t = t.replace(/^_/g,"");
-			var dict = {"ą":"a","ć":"c","ę":"e","ó":"o","ł":"l","ń":"n","ż":"z","ź":"z","Ą":"A","Ć":"C","Ę":"E","Ó":"O","Ł":"L","Ń":"N","Ż":"Z","Ź":"Z"}
-			t = t.replace(/[^\w ]/g, function(char) {return dict[char] || char;});	
-			//console.log(t)
-			document.getElementById('title').value=t;
-		}		
-	}
+ <script>
+ const $=(y)=>document.querySelector(y);
+const $$=(y)=>document.querySelectorAll(y);
+   
+function getTitle(html){
+   let titleMatch = new RegExp("<h1[^>]*>(.*?)<\/h1>");
+   let res = html.match(titleMatch);
+   let title = null;
+   if (res && res[1]) title = res[1];
+   if (title){
+      title  = title.substring(0,63);
+      title = title.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g,'_');  
+      var dict = {"ą":"a","ć":"c","ę":"e","ó":"o","ł":"l","ń":"n","ż":"z","ź":"z","Ą":"A","Ć":"C","Ę":"E","Ó":"O","Ł":"L","Ń":"N","Ż":"Z","Ź":"Z"}
+      title = title.replace(/[^\w ]/g, function(char) {return dict[char] || char;});	
+   }
+   return title;
+}   
+   
+function submitHTML(){   
+   let html   = document.getElementById('editor').innerHTML;
+   let title  = getTitle(html) || 'htmlWWW';
+   let header = '<html lang="pl">\n<head>\n<meta charset="utf-8"><title>'+title+'</title>\n</head>\n<body>\n';
+   let footer = '\n</body>\n</html>\n';
+       html = html.replace(/\<p/gi,'\n<p');
+       html = html.replace(/\<h/gi,'\n<h');
+       html = html.replace(/\<div/gi,'\n<div');
+       html = header + html + footer;
+   
+         var newBlob = new Blob([html], {type: "text/html"})
+         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+            window.navigator.msSaveOrOpenBlob(newBlob);
+            return;
+         } 
+
+     const data = window.URL.createObjectURL(newBlob);
+     var link = document.createElement('a');
+     link.href = data;
+     link.download = title+".html";
+     link.click();
+     setTimeout(function(){
+       window.URL.revokeObjectURL(data);
+     },100)
+}
 	
    </script>
    
