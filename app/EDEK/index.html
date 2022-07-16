@@ -65,5 +65,39 @@
     })
 
     </script>
+   
+   
+   
+   <script>
+      function getTitle(){
+		if (document.getElementById('title').value.length>8) {clearInterval(setTitleInterval); return;}
+		var ed = document.getElementById('cke_1_contents');
+		var iframe = ed.getElementsByTagName('iframe')[0];
+		var ibody = iframe.contentDocument || iframe.contentWindow.document;
+		var dbody = ibody.getElementsByTagName('body')[0];
+		var ihtml = dbody.innerHTML;		
+		var titleMatch = new RegExp("<h1[^>]*>(.*?)<\/h1>","gmi");
+		var m = ihtml.match(titleMatch);
+		//console.log(m);
+		if (m && m[0]) {
+			var t = m[0];
+			//t=t.replace('<.*?>','');
+			//t=t.replace(/(<\/?\w+?>)\s*?(<\/?\w+?>)|(<\/?\w+?>)/g,'');
+			t=t.replace(/(<.*?>)/g,'');
+			
+			t  = t.substring(0,60);
+			//t1 = t.replace(/[^a-zA-Z0-9]/g,'_');
+			t = t.replace(/[&\/\\#,+()$~%.'":*?<>{} ]/g,'_');
+			t = t.replace(/_{2}/g,"_");
+			t = t.replace(/^_/g,"");
+			var dict = {"ą":"a","ć":"c","ę":"e","ó":"o","ł":"l","ń":"n","ż":"z","ź":"z","Ą":"A","Ć":"C","Ę":"E","Ó":"O","Ł":"L","Ń":"N","Ż":"Z","Ź":"Z"}
+			t = t.replace(/[^\w ]/g, function(char) {return dict[char] || char;});	
+			//console.log(t)
+			document.getElementById('title').value=t;
+		}		
+	}
+	
+   </script>
+   
 </body>
 </html>
