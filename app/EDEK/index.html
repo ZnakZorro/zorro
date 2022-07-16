@@ -33,7 +33,7 @@
 <body>
     <div class="keys">
         <span>EDEK</span>
-        <button id="submit">Zapisz</button>
+        <button id="submit">Zapisz</button> --- 
         <button id="saveButton">save</button>
 	    <button onclick="submitHTML()">submitHTML()</button>
 	    
@@ -57,14 +57,25 @@
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
             zapisz(editor.getData());
         } );        
-        let zapisz=(ten)=>{
-            console.log(ten);
+	    
+        let zapisz=(content)=>{
+		console.log(content);
+		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
+		let nameOfFile = "edek-"+date+".html";
+		let filename = prompt("Nazwa pliku",nameOfFile);
+		console.log(filename);
+		if(!filename) return;
+		var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
+		saveAs(blob, filename);		
         }
+	
+	
+	
     document.getElementById("saveButton").addEventListener('click', function() {
        //let date = (new Date()).toLocaleString().replaceAll(",","").replaceAll(".","-").replaceAll(":","-").replaceAll(" ","-");
        //let date = (new Date()).toLocaleString().replace(/[ .,:]/g,"-").replace("--","-");
-       let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");
-       
+	    
+       let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
        let nameOfFile = "edek-"+date+".html";
        let filename = prompt("Nazwa pliku",nameOfFile);
        console.log(filename);
