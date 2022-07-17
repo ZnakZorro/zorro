@@ -1,24 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-    </head>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>EDEK5</title>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="red">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../../img/dom.svg"> 
+   <link rel="manifest" href="../../../zorro.web.json"> 
+<style>
+    #container {
+        width: 1000px;
+        margin: 20px auto;
+    }
+    .ck-editor__editable[role="textbox"] {
+        /* editing area */
+        min-height: 200px;
+    }
+    .ck-content .image {
+        /* block images */
+        max-width: 80%;
+        margin: 20px auto;
+    }
+</style>    
+</head>
     <body>
-        <style>
-            #container {
-                width: 1000px;
-                margin: 20px auto;
-            }
-            .ck-editor__editable[role="textbox"] {
-                /* editing area */
-                min-height: 200px;
-            }
-            .ck-content .image {
-                /* block images */
-                max-width: 80%;
-                margin: 20px auto;
-            }
-        </style>
+
+        <app-menu title="Edek-5" name="ZnakZorro" link="../../../"></app-menu>
+        <script src="../../../appMenu.js"></script>
         <div id="container">
             <div id="editor">
             </div>
