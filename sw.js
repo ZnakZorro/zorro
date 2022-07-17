@@ -65,7 +65,15 @@ self.addEventListener('install', (event) => {
       'https://znakzorro.github.io/zorro/',
       'https://znakzorro.github.io/zorro/index.html',
       'https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js',
-      'https://znakzorro.github.io/zorro/app/EDEK/5/ckeditor-super.js'
+      'https://znakzorro.github.io/zorro/app/EDEK/5/ckeditor-super.js',
+      'https://znakzorro.github.io/zorro/img/menu/bus.jpg',
+      'https://znakzorro.github.io/zorro/img/menu/czeresnie.jpg',
+      'https://znakzorro.github.io/zorro/img/meteo/chmury.jpg',
+      'https://api.met.no/images/weathericons/svg/partlycloudy_day.svg',
+      'https://api.met.no/images/weathericons/svg/clearsky_day.svg',
+      'https://api.met.no/images/weathericons/svg/partlycloudy_night.svg',
+      'https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900',
+      'https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap'
     ])
   );
 });
