@@ -73,7 +73,17 @@ self.addEventListener('install', (event) => {
       'https://api.met.no/images/weathericons/svg/clearsky_day.svg',
       'https://api.met.no/images/weathericons/svg/partlycloudy_night.svg',
       'https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900',
-      'https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap'
+      'https://fonts.googleapis.com/css2?family=PT+Sans+Narrow:wght@400;700&family=Roboto:ital,wght@0,100;0,300;0,400;1,300&display=swap',
+      'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js',
+      'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js',
+      'https://code.highcharts.com/highcharts.js',
+      'https://code.highcharts.com/highcharts-3d.js',
+      'https://code.highcharts.com/modules/series-label.js',
+      'https://code.highcharts.com/modules/exporting.js',
+      'https://code.highcharts.com/modules/offline-exporting.js',
+      'https://code.highcharts.com/modules/export-data.js'
+      
     ])
   );
 });
