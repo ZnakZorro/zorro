@@ -48,6 +48,7 @@ div.pad {margin:0 4px;}
 @media only screen and (min-width: 800px) {
     .nav-logo {font-size: 1.15rem;}
     .nav-item { margin-left: 1rem;}
+    .nav-link {font-size: 14pt;}
 }
 
 @media only screen and (max-width: 768px) {
