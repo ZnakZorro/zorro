@@ -39,3 +39,9 @@ let ccc=async()=>{
 	await cc();
 	
 }
+
+document.addEventListener("DOMContentLoaded",function(){
+	let elem = document.createElement("div");
+        elem.innerHTML = '<button onclick="ccc()">ClearCache</button>';
+        if (cytat) document.body.appendChild(elem);  
+})
