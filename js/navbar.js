@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded",function(){
     const hamburger = document.querySelector(".hamburger");
     const navMenu = document.querySelector(".nav-menu");
-    const navLink = document.querySelectorAll(".nav-link");
+    const navLinks = document.querySelectorAll(".nav-link");
     console.log(hamburger);
-    hamburger.addEventListener("click", mobileMenu);
-    navLink.forEach(n => n.addEventListener("click", closeMenu));
+    if (hamburger) hamburger.addEventListener("click", mobileMenu);
+    if (navLinks)   navLinks.forEach(n => n.addEventListener("click", closeMenu));
 
 function mobileMenu() {
     hamburger.classList.toggle("active");
@@ -45,5 +45,5 @@ document.addEventListener("DOMContentLoaded",function(){
 	let elem = document.createElement("div");
 	elem.className="btns";
         elem.innerHTML = '<button onclick="ccc()">ClearCache</button>';
-        if (cytat) document.body.appendChild(elem);  
+        document.body.appendChild(elem);  
 })
