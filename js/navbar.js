@@ -28,7 +28,7 @@ setTimeout(()=>{
 
 });
 
-
+/*
 let cc = async()=>{
 	caches.keys()
 	.then((names)=> {
@@ -45,3 +45,4 @@ let ccc=async()=>{
 
 document.addEventListener("DOMContentLoaded",function(){
 })
+*/
