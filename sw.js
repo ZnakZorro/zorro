@@ -64,7 +64,8 @@ self.addEventListener('install', (event) => {
     addResourcesToCache([
       'https://znakzorro.github.io/zorro/',
       'https://znakzorro.github.io/zorro/index.html',
-      'https://cdn.ckeditor.com/ckeditor5/34.2.0/classic/ckeditor.js',
+      'https://znakzorro.github.io/zorro/js/FileSaver.min.js',
+      'https://znakzorro.github.io/zorro/app/EDEK/ckeditor.js',
       'https://znakzorro.github.io/zorro/app/EDEK/5/ckeditor-super.js',
       'https://znakzorro.github.io/zorro/img/menu/bus.jpg',
       'https://znakzorro.github.io/zorro/img/menu/czeresnie.jpg',
