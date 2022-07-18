@@ -78,7 +78,8 @@ div.card {
 }
 div.card img {
     width: 100%;
-    
+}
+.card-body {
 }
 @media (max-width: 768px) {
     div.card {
