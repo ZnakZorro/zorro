@@ -286,10 +286,11 @@ let close_YRNO=()=>{
 */
 let pogoda_YRNO_modal=()=>{
    let moda = document.getElementById("modal");
-   moda.innerHTML = document.getElementById("yrnoCard").innerHTML;
+   moda.innerHTML = "<img id="pogodayrno" src='https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />';
    moda.classList.add("bum-trans");
    setTimeout(()=>{
       moda.classList.add("re-trans");
+      setTimeout(()=>{()=>{moda.innerHTML = "";},1000);
    },10000);
    
 }
