@@ -285,8 +285,9 @@ let close_YRNO=()=>{
 }
 */
 let pogoda_YRNO_modal=()=>{
+   console.log("pogoda_YRNO++++++++++++++++++++++++++++++++++++++++"); 
    let moda = document.getElementById("modal");
-   moda.innerHTML = "<img id="pogodayrno" src='https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />';
+   moda.innerHTML = "<img id="modalyrno" src='https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />';
    moda.classList.add("bum-trans");
    setTimeout(()=>{
       moda.classList.add("re-trans");
