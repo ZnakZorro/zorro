@@ -18,13 +18,14 @@ function closeMenu() {
 
 });
 
+/*
 let getTimeToken = ()=>{return(new Date()).getTime();}
 
 let refresh=async()=>{
 	await cc();
 	window.location.href="./";//?token="+getTimeToken();
 }
-
+*/
 let cc = async()=>{
 	caches.keys()
 	.then((names)=> {
