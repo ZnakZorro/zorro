@@ -287,6 +287,11 @@ let close_YRNO=()=>{
 let pogoda_YRNO_modal=()=>{
    let moda = document.getElementById("modal");
    moda.innerHTML = document.getElementById("yrnoCard").innerHTML;
+   moda.classList.add("bum-trans");
+   setTimeout(()=>{
+      moda.classList.add("re-trans");
+   },10000);
+   
 }
 let pogoda_YRNO = () =>{
    pogoda_YRNO_modal();
