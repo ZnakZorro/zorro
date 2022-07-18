@@ -46,7 +46,7 @@ div.pad {margin:0 4px;}
     color: #482ff7;
 }
 @media only screen and (min-width: 800px) {
-    .nav-logo {font-size: 1.15rem;}
+    .nav-logo {font-size: 1.15rem;margin-left:0.7em;}
     .nav-item { margin-left: 1rem;}
     .nav-link {font-size: 14pt;}
 }
