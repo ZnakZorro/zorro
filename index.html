@@ -284,6 +284,7 @@ let close_YRNO=()=>{
    document.getElementById("pogodayrno").removeEventListener("click", close_YRNO, false);
 }
 */
+   
 let pogoda_YRNO_modal=()=>{
    console.log("pogoda_YRNO++++++++++++++++++++++++++++++++++++++++"); 
    let moda = document.getElementById("modal");
@@ -291,10 +292,11 @@ let pogoda_YRNO_modal=()=>{
    moda.classList.add("bum-trans");
    setTimeout(()=>{
       moda.classList.add("re-trans");
-      setTimeout(()=>{()=>{moda.innerHTML = "";},1000);
+      setTimeout(()=>{moda.innerHTML = "";},1000);
    },10000);
    
 }
+
 let pogoda_YRNO = () =>{
    pogoda_YRNO_modal();
    return;
