@@ -41,31 +41,6 @@ const dayL=(time)=>{
 }
 
 
-/*
-//clear cache
-let cccc=async()=>{
-	await cc();
-	
-}
-
-let refresh=async()=>{
-	await cc();
-	window.location.href="./";//?token="+getToken();
-}
-
-let cc = async()=>{
-	caches.keys()
-	.then((names)=> {
-		console.log(names)
-    for (let name of names)
-		caches.delete(name);
-	})
-	.then(r=>{console.log(r)});
-}
-*/
-
-
-
 
 /*******************************/
 const canWakeLock = () => 'wakeLock' in navigator;
@@ -96,3 +71,18 @@ startlockWakeState=async()=> {
 startlockWakeState();
 setTimeout(releaseWakeState, 15000);
 
+
+/*****************************************/
+let cc = async()=>{
+	caches.keys()
+	.then((names)=> {
+		console.log(names)
+		for (let name of names) caches.delete(name);
+	})
+	.then(r=>{console.log(r)});
+}
+
+let ccc=async()=>{
+	await cc();
+	
+}
