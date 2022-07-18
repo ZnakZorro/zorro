@@ -80,7 +80,10 @@ body {
  }   
 .bum-trans img {   
    margin-top: -12%;
-   }
+ }
+   #modal {width:100%;}
+   #modal img {width:175%;}
+   
 </style>
 <script>
 
@@ -281,7 +284,13 @@ let close_YRNO=()=>{
    document.getElementById("pogodayrno").removeEventListener("click", close_YRNO, false);
 }
 */
+let pogoda_YRNO_modal=()=>{
+   let moda = document.getElementById("modal");
+   moda.innerHTML = document.getElementById("yrnoCard").innerHTML;
+}
 let pogoda_YRNO = () =>{
+   pogoda_YRNO_modal();
+   return;
    console.log("pogoda_YRNO----------------");  
    if (document.getElementById("yrnoCard").classList.contains("bum-trans")){
       console.log("contains-bum-trans-");
