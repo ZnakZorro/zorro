@@ -79,7 +79,10 @@ let cc = async()=>{
 		console.log(names)
 		for (let name of names) caches.delete(name);
 	})
-	.then(r=>{console.log(r)});
+	.then(r=>{
+		window.location.reload(true);
+		console.log(r)
+	});
 }
 
 let ccc=async(ten)=>{
