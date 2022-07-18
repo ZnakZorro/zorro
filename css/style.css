@@ -83,7 +83,7 @@ div.card img {
 }
 @media (max-width: 768px) {
     div.card {
-        width: 50%;
+        width: 48%;
         
     }
 }   
