@@ -17,3 +17,25 @@ function closeMenu() {
 }
 
 });
+
+let getToken = ()=>{return(new Date()).getTime();}
+
+let refresh=async()=>{
+	await cc();
+	window.location.href="./";//?token="+getToken();
+}
+
+let cc = async()=>{
+	caches.keys()
+	.then((names)=> {
+		console.log(names)
+    for (let name of names)
+		caches.delete(name);
+	})
+	.then(r=>{console.log(r)});
+}
+
+let ccc=async()=>{
+	await cc();
+	
+}
