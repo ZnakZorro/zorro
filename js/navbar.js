@@ -2,6 +2,7 @@ const hamburger = document.querySelector(".hamburger");
 const navMenu = document.querySelector(".nav-menu");
 const navLink = document.querySelectorAll(".nav-link");
 document.addEventListener("DOMContentLoaded",function(){
+    console.log(hamburger);
     hamburger.addEventListener("click", mobileMenu);
     navLink.forEach(n => n.addEventListener("click", closeMenu));
 });
