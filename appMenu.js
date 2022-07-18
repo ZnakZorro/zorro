@@ -52,8 +52,10 @@ class NavBarNavigator extends HTMLElement {
 		const navLink   = this.shadowRoot.querySelectorAll(".nav-link");
 		hamburger.addEventListener("click", mobileMenu);
 		navLink.forEach(n => n.addEventListener("click", closeMenu));
-		document.querySelector(".icon1").classList.add("loader");
-		setTimeout(()=>{document.querySelector(".icon1").classList.remove("loader");},1000);
+		if (document.querySelector(".icon1")){
+			document.querySelector(".icon1").classList.add("loader");
+			setTimeout(()=>{document.querySelector(".icon1").classList.remove("loader");},1000);
+		}
 
 		function mobileMenu() {
 			hamburger.classList.toggle("active");
