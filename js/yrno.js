@@ -342,7 +342,7 @@ const opisYRNO=(data)=>{
   _$("#ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
   _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
   
-  setTimeout(()=>{_$("#logo").classList.remove("loader");},500);
+  
   
 }
 
