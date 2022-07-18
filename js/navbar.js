@@ -18,11 +18,11 @@ function closeMenu() {
 
 });
 
-let getToken = ()=>{return(new Date()).getTime();}
+let getTimeToken = ()=>{return(new Date()).getTime();}
 
 let refresh=async()=>{
 	await cc();
-	window.location.href="./";//?token="+getToken();
+	window.location.href="./";//?token="+getTimeToken();
 }
 
 let cc = async()=>{
@@ -42,6 +42,7 @@ let ccc=async()=>{
 
 document.addEventListener("DOMContentLoaded",function(){
 	let elem = document.createElement("div");
+	elem.className="btns";
         elem.innerHTML = '<button onclick="ccc()">ClearCache</button>';
         if (cytat) document.body.appendChild(elem);  
 })
