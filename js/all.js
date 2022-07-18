@@ -82,7 +82,8 @@ let cc = async()=>{
 	.then(r=>{console.log(r)});
 }
 
-let ccc=async()=>{
+let ccc=async(ten)=>{
 	await cc();
-	
+	console.log(ten);
+	if (ten) ten.classList.add("active");
 }
