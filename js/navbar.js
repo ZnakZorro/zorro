@@ -18,20 +18,12 @@ function closeMenu() {
 
 });
 
-/*
-let getTimeToken = ()=>{return(new Date()).getTime();}
 
-let refresh=async()=>{
-	await cc();
-	window.location.href="./";//?token="+getTimeToken();
-}
-*/
 let cc = async()=>{
 	caches.keys()
 	.then((names)=> {
 		console.log(names)
-    for (let name of names)
-		caches.delete(name);
+		for (let name of names) caches.delete(name);
 	})
 	.then(r=>{console.log(r)});
 }
