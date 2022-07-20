@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 3</title>
+<title>git::RSS 4</title>
 <meta charset="utf-8">
 <link rel="shortcut icon" type="image/svg+xml" size="any" href="./../img/dom.svg"> 
    <link rel="manifest" href="./../zorro.web.json"> 
@@ -61,7 +61,7 @@ console.log(rssOBJ);
 document.addEventListener("DOMContentLoaded",function(){
     let html = "";
     for (o of rssOBJ){
-        html += `<button onclick='readRSS("${o.u},this")'>${o.n}</button>`;
+        html += `<button onclick='readRSS("${o.u}",this)'>${o.n}</button>`;
     }
     document.getElementById("klawisze").innerHTML += html;
     readRSS();
