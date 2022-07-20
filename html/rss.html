@@ -108,7 +108,9 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
     };        
     console.log(options)
 
-    
+   //url = "https://zszczech.zut.edu.pl/cdn/cors/?type=xml&url=https://www.polsatnews.pl/rss/swiat.xml";
+   url = "https://zszczech.zut.edu.pl/cdn/cors/?type=xml&url="+url;
+   
     fetch(url,options)
     .then(response => response.text())
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
@@ -152,6 +154,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
 
 <body>
 <app-menu title="RSS" name="ZnakZorro" link="../"></app-menu>
+   <div id="info"></div>
 <script src="../appMenu.js"></script>
 <div id="klawisze" class="klawisze">
 </div>
