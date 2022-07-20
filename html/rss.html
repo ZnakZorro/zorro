@@ -15,6 +15,8 @@
     font-weight: 300;
     line-height: 1.3;
     }
+    button {margin:0.15em; padding:0.25em;border-radius: 0.5em;}
+
     a {text-decoration: none;}
     p {margin:0;}
     h4 {margin: 0.5em 0 0 0;}
@@ -45,9 +47,16 @@ for (r of rssARR){
     rssOBJ.push({"n":a[0],"u":a[1]});
 }
 console.log(rssOBJ);
-   
-   
-   
+
+document.addEventListener("DOMContentLoaded",function(){
+    let html = "";
+    for (o of rssOBJ){
+        html += `<button onclick='readRSS("${o.u}")'>${o.n}</button>`;
+    }
+    document.getElementById("klawisze").innerHTML += html;
+    readRSS();
+});
+
  function htmlencode(str) {
     return str.replace(/[&<>"']/g, function($0) {
         return "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"#39"}[$0] + ";";
@@ -76,33 +85,11 @@ const decodeHTML=(str)=> {
     return str;
   }
 
-const rssTXT ='
-Szczecin - https://rss.gazeta.pl/pub/rss/szczecin.xml
-Wyborcza - https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml
-Kraj24 – https://tvn24.pl/wiadomosci-z-kraju,3.xml
-Swiat – https://www.polsatnews.pl/rss/swiat.xml
-Polityka – https://www.polityka.pl/rss/podcasts.xml?list=2433
-Gospodarka – https://www.bankier.pl/rss/wiadomosci.xml
-Internet – https://www.mbaportal.pl/rss/article
-Gry – https://gamerweb.pl/feed/
-Nauka – https://naukawpolsce.pap.pl/all/rss.xml
-Sport – https://www.polsatsport.pl/rss/wszystkie.xml
-';   
 
-const RSS_URL = [
-    "https://rss.gazeta.pl/pub/rss/szczecin.xml",
-    "https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml",
-    "https://www.theguardian.com/news/series/todayinfocus/podcast.xml",
-    "https://feeds.a.dj.com/rss/RSSWorldNews.xml",
-    "https://feeds.a.dj.com/rss/RSSWSJD.xml",
-    "https://radioszczecin.pl/rss.php",
-    "https://www.engadget.com/rss.xml",
-    "https://www.wi.zut.edu.pl/pl/wydzial/informacje-o-wydziale/aktualnosci?format=feed" 
-];
-
-const readRSS=(nr)=>{
-    fetch(RSS_URL[nr])
-    //fetch("https://wiadomosci.gazeta.pl/pub/rss/wiadomosci.htm")
+const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
+    console.log("uuuuuuuu=",url)
+    console.log(ten)
+    fetch(url)
     .then(response => response.text())
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
@@ -139,20 +126,14 @@ const readRSS=(nr)=>{
         document.getElementById("gazeta").innerHTML = html;
     });
 }
-readRSS(0);
+
 </script>
 </head>
 
 <body>
 <app-menu title="RSS" name="ZnakZorro" link="../../"></app-menu>
 <script src="../../appMenu.js"></script>
-<div class="klawisze">
-    <button onclick="readRSS(0)" >Szczecin</button>
-    <button onclick="readRSS(1)" >Wyborcza</button>
-   <button onclick="readRSS(5)" >5</button>
-   <button onclick="readRSS(6)" >6</button>
-   <button onclick="readRSS(7)" >7</button>
-
+<div id="klawisze" class="klawisze">
 </div>
 <div id="gazeta"></div>
 
