@@ -26,7 +26,6 @@
     }
 </style>
 
-
 <script>
 
 const rssTXT =`
@@ -149,6 +148,9 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
         });
         //document.body.insertAdjacentHTML("beforeend", html);
         document.getElementById("gazeta").innerHTML = html;
+    }).catch(e => {
+        console.log(e)
+        document.getElementById("gazeta").innerHTML = `<br /><hr /><small>${_url}</small> <h4>${e.toString()}</h3>`;
     });
 }
 
