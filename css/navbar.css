@@ -62,7 +62,7 @@ div.pad {margin:0 4px;}
     text-align: center;
     transition: 0.3s;
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-    z-index: 5;
+    z-index: 15;
     background: #e8e8e8;
     border-top:1px solid gray;
 }
