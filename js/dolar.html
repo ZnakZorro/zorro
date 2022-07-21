@@ -1,0 +1,46 @@
+
+<script src="dolar.js"></script>
+
+
+<script>
+    $_(() => { // jQuery document ready equivalent
+    console.log('This is from Dom Content loaded');
+
+    $_('h1').css('color', 'red'); // jQuery css()
+    $_('h2').css({'color': 'green', 'text-decoration': 'underline'});
+
+
+    console.log($_('h1').html()); // jQuery html()
+    console.log($_('h2').text());  // jQuery text()
+
+    $_('#btnAlert').on('click', () => alert('Hai From Button')); // jQuey on()
+
+    $_('ul>li').each(function (itx){ // jQuery each()
+        if(itx%2 === 0) {
+            $_(this).css('color', 'red');
+        }
+    })
+    setTimeout(()=>{
+        $_('h1').css({'color': 'blue', 'text-decoration': 'overline'})
+        $_('h1').html("<u>qqq</u>")
+        $_('h2').text("www")
+        console.log($_('h1').html()); // jQuery html()
+        console.log($_('h2').text());  // jQuery text()
+
+    },2000);
+
+    
+});
+
+</script>
+
+<h1>h111</h1>
+<h2>h222</h2>
+<button id="btnAlert">Button alert</button>
+
+<ul>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+    <li>1</li>
+</ul>
