@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 6c</title>
+<title>git::RSS 7</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -103,6 +103,7 @@ const decodeHTML=(str)=> {
         str = str.replaceAll("&gt;",">");
         str = str.replaceAll("&lt;","<");
         str = str.replaceAll("�","ó");
+        str = str.replaceAll("]]>","");
     }
     return str;
   }
