@@ -66,6 +66,10 @@ const addEventToElements = (elements) => {
     addEvents(elements, "each", (opts) => {
       invokeCallbackForElements(elements, opts);
     });
+
+    addEvents(elements, "add",    (...atr) => elements.forEach(e=>e.classList.add(atr[0])));
+    addEvents(elements, "remove", (...atr) => elements.forEach(e=>e.classList.remove(atr[0])));
+    
 };
 
 const $_ = (argument) => {

@@ -1,17 +1,19 @@
-
+<style>
+    .active {background-color: black;color: aliceblue;}
+</style>
 <script src="dolar.js"></script>
 
 
 <script>
     $_(() => { // jQuery document ready equivalent
-    console.log('This is from Dom Content loaded');
+    //console.log('This is from Dom Content loaded');
 
     $_('h1').css('color', 'red'); // jQuery css()
     $_('h2').css({'color': 'green', 'text-decoration': 'underline'});
 
 
-    console.log($_('h1').html()); // jQuery html()
-    console.log($_('h2').text());  // jQuery text()
+    //console.log($_('h1').html()); // jQuery html()
+    //console.log($_('h2').text());  // jQuery text()
 
     $_('#btnAlert').on('click', () => alert('Hai From Button')); // jQuey on()
 
@@ -20,20 +22,37 @@
             $_(this).css('color', 'red');
         }
     })
+    $_('h1').add('active');
+    $_('#info p').add('active');
+    //console.log("ppp=>",$_('#info p'));
+
+
     setTimeout(()=>{
+        $_('#info p').remove('active');
+        $_('h1').remove('active');
         $_('h1').css({'color': 'blue', 'text-decoration': 'overline'})
         $_('h1').html("<u>qqq</u>")
         $_('h2').text("www")
-        console.log($_('h1').html()); // jQuery html()
-        console.log($_('h2').text());  // jQuery text()
-
+        //console.log($_('h1').html()); // jQuery html()
+        //console.log($_('h2').text());  // jQuery text()
+        
+        $_('ul>li').each(function(itx){
+            console.log("this=",this,itx)
+        if(itx%2 === 0) {
+            $_(this).css('color', 'blue');
+        }
+    })
     },2000);
 
     
 });
 
 </script>
-
+<div id="info">
+    <p>1</p>
+    <p>2</p>
+    <p>3</p>
+</div>
 <h1>h111</h1>
 <h2>h222</h2>
 <button id="btnAlert">Button alert</button>
