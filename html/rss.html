@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 7</title>
+<title>git::RSS 7a</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -99,14 +99,15 @@ document.addEventListener("DOMContentLoaded",function(){
   }
   
 const decodeHTML=(str)=> {
-    if(str && typeof str === 'string') {
-        str = str.replaceAll("&gt;",">");
-        str = str.replaceAll("&lt;","<");
-        str = str.replaceAll("�","ó");
-        str = str.replaceAll("]]>","");
-    }
-    return str;
-  }
+   if(str && typeof str === 'string') {
+      str = str.replaceAll("&gt;",">");
+      str = str.replaceAll("&lt;","<");
+      str = str.replaceAll("�","ó");
+      str = str.replaceAll("]]>","");
+      str = str.replaceAll("<!--[CDATA[<p-->>","");
+   }
+return str;
+}
 
 
 const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
