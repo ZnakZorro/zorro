@@ -127,7 +127,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
         console.log(data);
-       if(!data.querySelector("channel") console.log("---------------------------------------------------------------------");
+       if(!data.querySelector("channel")) console.log("---------------------------------------------------------------------");
         const title = data.querySelector("channel title").textContent | "title";
         const link = data.querySelector("channel link").textContent | "link";
         console.log(title,link)
