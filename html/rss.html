@@ -134,7 +134,8 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
             if (i>5) return;
             //console.log(el)
             //console.log(el.querySelector("description").innerHTML)
-            let czas = (new Date(el.querySelector("pubDate").textContent)).toLocaleString('pl-PL');
+            let pubTime = el.querySelector("pubDate") ? el.querySelector("pubDate").textContent : (new Date()).toLocaleString();
+            let czas = (new Date(pubTime)).toLocaleString('pl-PL');
             let desc = decodeHTML(el.querySelector("description").innerHTML);
             console.log(i,desc)
             //document.getElementById("txt").value += desc+"\n\n"
