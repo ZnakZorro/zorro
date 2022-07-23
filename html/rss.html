@@ -34,9 +34,9 @@ Wyborcza - https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml
 Gospodarka - https://www.bankier.pl/rss/wiadomosci.xml
 Waluty - https://www.bankier.pl/rss/waluty.xml
 Finanse - https://www.bankier.pl/rss/finanse.xml
-Gry - https://gamerweb.pl/feed/
 APOD - https://apod.nasa.gov/apod.rss
 
+Gry - https://gamerweb.pl/feed/
 Kraj24 - https://tvn24.pl/wiadomosci-z-kraju,3.xml
 Swiat - https://www.polsatnews.pl/rss/swiat.xml
 Polityka - https://www.polityka.pl/rss/podcasts.xml?list=2433
@@ -127,8 +127,9 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
         console.log(data);
-        const title = data.querySelector("channel title").textContent ?? "title";
-        const link = data.querySelector("channel link").textContent ?? "link";
+       if(!data.querySelector("channel") console.log("---------------------------------------------------------------------");
+        const title = data.querySelector("channel title").textContent | "title";
+        const link = data.querySelector("channel link").textContent | "link";
         console.log(title,link)
         const items = data.querySelectorAll("item");
         let html = `<h3><a href="${link}" target="_blank">${title}</a></h3>`;
