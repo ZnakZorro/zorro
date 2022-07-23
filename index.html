@@ -85,7 +85,9 @@ body {
       /*width:175%;*/
    }
    .img-modal {padding:0}  
-        button.ccc {display:absolute; z-index:99;}
+        .supermodal {}
+        .menumodal {}
+        .ccc {z-index:99; border:1px solid gray; background:#eee;}
 </style>
 <script src="./js/all.js?v=1"></script>
 <script>
@@ -110,12 +112,18 @@ body {
    <div class="container">
      <button onclick="ccc()" class="ccc">ClearCache</button>
      <!-- modal --> 
-     <div id="modal">
-        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-            <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal">
+     <div id="supermodal">
+        <div id="menumodal">
+                <a href="/app/meteo/radar/" class="ccc">Radar</a>
+                <a href="/html/rss.html" class="ccc">RSS</a>
+                <button onclick="ccc()" class="ccc">ClearCache</button>
         </div>
-      </div>
-            
+        <div id="modal">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                        <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal">
+                </div>
+        </div>
+     </div>    
          
   <!--card-->
     <!--
