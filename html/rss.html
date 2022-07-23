@@ -50,6 +50,7 @@ let rssOBJ =[];
 for (r of rssARR){
   if(r){
     let a = r.split(" - ");
+   console.log(a);
     rssOBJ.push({"n":a[0],"u":a[1]});
   }
 }
@@ -122,8 +123,8 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
         console.log(data);
-        const title = data.querySelector("channel title").textContent;
-        const link = data.querySelector("channel link").textContent;
+        const title = data.querySelector("channel title").textContent ?? "title";
+        const link = data.querySelector("channel link").textContent ?? "link";
         console.log(title,link)
         const items = data.querySelectorAll("item");
         let html = `<h3><a href="${link}" target="_blank">${title}</a></h3>`;
