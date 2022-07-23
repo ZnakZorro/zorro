@@ -50,11 +50,11 @@ let rssOBJ =[];
 for (r of rssARR){
   if(r){
     let a = r.split(" - ");
-   console.log(a);
+   //console.log(a);
     rssOBJ.push({"n":a[0],"u":a[1]});
   }
 }
-console.log(rssOBJ);
+//console.log(rssOBJ);
 
 document.addEventListener("DOMContentLoaded",function(){
     let html = "";
