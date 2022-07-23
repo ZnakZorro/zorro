@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 8b</title>
+<title>git::RSS 8c</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -139,7 +139,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
             if (i>5) return;
             //console.log(el)
             //console.log(el.querySelector("description").innerHTML)
-            let pubTime = el.querySelector("pubDate") ? el.querySelector("pubDate").textContent : (new Date()).toLocaleString();
+            let pubTime = el.querySelector("pubDate") ? el.querySelector("pubDate").textContent : (new Date()).toString();//toLocaleString();
             let czas = (new Date(pubTime)).toLocaleString('pl-PL');
             let desc = decodeHTML(el.querySelector("description").innerHTML);
             console.log(i,desc)
