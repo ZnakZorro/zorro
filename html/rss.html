@@ -97,6 +97,7 @@ return str;
 
 
 const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
+    let _url = url;
     console.log("uuuuuuuu=",url)
     console.log(ten);
     document.querySelectorAll("#klawisze button").forEach((b)=>b.classList.remove("active"))
