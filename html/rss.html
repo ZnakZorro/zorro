@@ -91,6 +91,11 @@ const decodeHTML=(str)=> {
       str = str.replaceAll("�","ó");
       str = str.replaceAll("]]>","");
       str = str.replaceAll("<!--[CDATA[<p-->>","");
+      str = str.replaceAll("<!--[CDATA","");
+      str = str.replaceAll("[","");
+      str = str.replaceAll("]","");
+      str = str.replaceAll("<","");
+      str = str.replaceAll(">","");
    }
 return str;
 }
