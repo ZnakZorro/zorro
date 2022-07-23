@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 8d</title>
+<title>git::RSS 9</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -144,16 +144,21 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
             //document.getElementById("txt").value += desc+"\n\n"
             //decodeURIComponent(el.querySelector("description").innerHTML)
          //let q=el.querySelector("title").childNodes[0].data;
-         console.log(6,el.querySelector("title"));
-         console.log(7,el.querySelector("title").childNodes[0]);
-         console.log(8,el.querySelector("title").childNodes[0].data);
-         
+         //console.log(6,el.querySelector("title"));
+         //console.log(7,el.querySelector("title").childNodes[0]);
+         //console.log(8,el.querySelector("title").childNodes[0].data);
+         //decodeHTML(el.querySelector("title").innerHTML)
+         //el.querySelector("link").innerHTML
+         let itemTitle = el.querySelector("title").childNodes[0].data;
+         let itemLink = el.querySelector("link").childNodes[0].data;
+         console.log(77,itemTitle);
+         console.log(88,itemLink);
         html += `
             <article>
             <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
                 <h4> 
-                    <a href="${el.querySelector("link").innerHTML}" target="_blank" rel="noopener">
-                    ${j}. ${decodeHTML(el.querySelector("title").innerHTML)}
+                    <a href="${itemLink}" target="_blank" rel="noopener">
+                    ${j}. ${itemTitle}
                     </a>
                 </h4>
                 <p><span>${czas}</span><br />
