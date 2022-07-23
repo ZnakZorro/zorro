@@ -143,6 +143,11 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
             console.log(i,desc)
             //document.getElementById("txt").value += desc+"\n\n"
             //decodeURIComponent(el.querySelector("description").innerHTML)
+         //let q=el.querySelector("title").childNodes[0].data;
+         console.log(6,el.querySelector("title"));
+         console.log(7,el.querySelector("title").childNodes[0]);
+         console.log(8,el.querySelector("title").childNodes[0].data);
+         
         html += `
             <article>
             <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
