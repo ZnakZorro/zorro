@@ -90,3 +90,7 @@ let ccc=async(ten)=>{
 	console.log(ten);
 	if (ten) ten.classList.add("active");
 }
+
+/*11111111111111111111111111111*/
+let ccONE = async()=>{caches.keys().then((names)=> {for (let name of names) caches.delete(name);})}
+let cccONE=async()=>{await ccONE();}
