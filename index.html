@@ -85,25 +85,26 @@ body {
       /*width:175%;*/
    }
    .img-modal {padding:0}  
-        .supermodal {}
-        .menumodal {position:abslute}
-        .ccc {
-            z-index: 99;
-            border: 1px solid gray;
-            background: #888;
-            padding: 0.2em 0.5em;
-            margin: 0.3em;
-            text-decoration: none;
-            color: white;
-            font-size: 1em;
-            font-weight: 400;
-            border-radius: 0.5em;
-            cursor: pointer;
-            min-width: 100px!important;
-            position: relative;
-            display: inline-block;
-            text-align: center;
-        }
+        
+.supermodal {position:relative;}
+.menumodal {position:abslute}
+.ccc {
+    z-index: 99;
+    border: 1px solid gray;
+    background: #888;
+    padding: 0.2em 0.5em;
+    margin: 0.3em;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    font-weight: 400;
+    border-radius: 0.5em;
+    cursor: pointer;
+    min-width: 100px!important;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
 </style>
 <script src="./js/all.js?v=1"></script>
 <script>
@@ -128,18 +129,18 @@ body {
    <div class="container">
      
      <!-- modal --> 
-     <div id="supermodal">
-        <div id="menumodal">
+     <div class="supermodal">
+        <div class="menumodal">
                 <a href="/app/meteo/radar/" class="ccc">Radar</a>
                 <a href="/html/rss.html" class="ccc">RSS</a>
                 <button onclick="ccc()" class="ccc">ClearCache</button>
         </div>
         <div id="modal">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                        <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal">
+                      <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal">
                 </div>
         </div>
-     </div>    
+     </div>
          
   <!--card-->
     <!--
