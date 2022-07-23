@@ -86,8 +86,24 @@ body {
    }
    .img-modal {padding:0}  
         .supermodal {}
-        .menumodal {}
-        .ccc {z-index:99; border:1px solid gray; background:#eee;}
+        .menumodal {position:abslute}
+        .ccc {
+            z-index: 99;
+            border: 1px solid gray;
+            background: #888;
+            padding: 0.2em 0.5em;
+            margin: 0.3em;
+            text-decoration: none;
+            color: white;
+            font-size: 1em;
+            font-weight: 400;
+            border-radius: 0.5em;
+            cursor: pointer;
+            min-width: 100px!important;
+            position: relative;
+            display: inline-block;
+            text-align: center;
+        }
 </style>
 <script src="./js/all.js?v=1"></script>
 <script>
@@ -110,7 +126,7 @@ body {
    
    
    <div class="container">
-     <button onclick="ccc()" class="ccc">ClearCache</button>
+     
      <!-- modal --> 
      <div id="supermodal">
         <div id="menumodal">
