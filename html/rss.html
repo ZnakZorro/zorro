@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS 9a</title>
+<title>git::RSS a</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -127,17 +127,17 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
     .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
     .then(data => {
         console.log(data);
-       if(!data.querySelector("channel")) console.log("---------------------------------------------------------------------");
-        const title = data.querySelector("channel title").textContent;
-        const link = data.querySelector("channel link").textContent;
-     console.log(title,link)        
+       if(!data.querySelector("channel")) console.log("channel---------------------------------------------------------------------");
+        //const title = data.querySelector("channel title").textContent;
+        //const link = data.querySelector("channel link").textContent;
+     //console.log(title,link)        
      let mainTitle = data.querySelector("title").childNodes[0].data;
      let mainLink  = data.querySelector("link").childNodes[0].data;
 mainTitle = mainTitle.replaceAll("�","ó");
      console.log(mainTitle,mainLink)        
         
         let html = "";
-        if (link && title) html += `<h3><a href="${link}" target="_blank">${title}</a></h3>`;
+        if (link && title) html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
      
         const items = data.querySelectorAll("item");
         items.forEach((el,i) => {
