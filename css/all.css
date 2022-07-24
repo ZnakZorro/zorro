@@ -53,7 +53,7 @@ p {margin:0;}
     color: white;
     font-size: 1em;
     /*font-weight: 400;*/
-    border-radius: 0.5em;
+    border-radius: 0.75em;
     cursor: pointer;
     min-width: 100px!important;
     position: relative;
