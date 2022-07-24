@@ -107,6 +107,7 @@ div.card img {
   border-radius: 100px;
   white-space: nowrap;
   float:right;
+  z-index: 14;
 }
 
 .btns {padding:0.25em;}
