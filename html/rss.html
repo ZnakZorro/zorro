@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS aa</title>
+<title>git::RSS ab</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -137,7 +137,8 @@ mainTitle = mainTitle.replaceAll("�","ó");
      console.log(137,mainTitle,mainLink)        
         
         let html = "";
-        if (link && title) html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
+        //if (link && title) 
+         html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
      
         const items = data.querySelectorAll("item");
         items.forEach((el,i) => {
