@@ -20,8 +20,6 @@
    <link rel="stylesheet" href="./css/all.css" />
    
 <style>
-
-
  .icon1 {max-width:32px; cursor:pointer;}
  div.pogoda div.active {background-color:lightgoldenrodyellow;}
  div#sun  {}
@@ -76,7 +74,7 @@
     top: 11px;
     left: 5px;
 }
-.ccc {
+/*.ccc {
     z-index: 14;
     border: 1px solid #888;
     background: #aaa;
@@ -92,7 +90,7 @@
     position: relative;
     display: inline-block;
     text-align: center;
-}
+}*/
 </style>
 <script src="./js/all.js?v=1"></script>
 <script>
@@ -100,9 +98,9 @@
     const imgReady=()=>{
        console.log("imgReady()================================================");
         document.getElementById("menumodal").innerHTML =`
-        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="ccc">Radar</a>
-        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="ccc">RSS</a>
-        <button onclick="ccc()" class="ccc">ClearCache</button>`;            
+        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn">Radar</a>
+        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn">RSS</a>
+        <button onclick="ccc()" class="btn">ClearCache</button>`;            
     }
 </script>
 </head>
