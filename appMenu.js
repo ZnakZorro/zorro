@@ -22,7 +22,7 @@ class NavBarNavigator extends HTMLElement {
 		 <header class="header">
 			 <nav class="navbar">            
 				 <img src="https://znakzorro.github.io/zorro/css/icon/back.svg" width="32" onclick="window.location.href='https://znakzorro.github.io/zorro/';" class="icon1">
-				 <a href="https://github.com/ZnakZorro/zorro" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
+				 <a href="https://znakzorro.github.io/zorro/" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
 					 <ul class="nav-menu">
 					 <li class="nav-item"><a href="${link}app/waluty/index.html" class="nav-link">WALUTY</a></li>
 					 <li class="nav-item"><a href="${link}app/covid/index.html" class="nav-link">COVID</a></li>
