@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<title>git::RSS ab</title>
+ <meta charset="utf-8">
+               <meta http-equiv="cache-control" content="max-age=0" />
+               <meta http-equiv="cache-control" content="no-cache" />
+               <meta http-equiv="expires" content="0" />
+               <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+               <meta http-equiv="pragma" content="no-cache" />   
+   
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="./../img/dom.svg"> 
+<link rel="manifest" href="./../zorro.web.json"> 
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+<link rel="stylesheet" href="../css/all.css" />
+<style>
+ body {padding:0 0.33rem;}
+    h3 {margin: 0.5em 0;}
+    h3 a {color:black;}
+    h4 {margin: 0.25em 0;}
+    article {display:grid; margin-bottom: 0.5em;}
+    article img {
+        width: 128px!important;
+        height: auto;
+        margin: 5px 5px 0 0;
+    }
+.btn.big {
+    margin: 0.75em 0.2em;
+    padding: 0.5em;
+    background: #666;
+    color: #fff;
+}
+.btn.big:active {background:red;}
+
+</style>
+
+<script>
+
+const rssTXT =`
+Szczecin - https://rss.gazeta.pl/pub/rss/szczecin.xml
+Wyborcza - https://rss.gazeta.pl/pub/rss/najnowsze_wyborcza.xml
+Gospodarka - https://www.bankier.pl/rss/wiadomosci.xml
+Waluty - https://www.bankier.pl/rss/waluty.xml
+Finanse - https://www.bankier.pl/rss/finanse.xml
+
+APOD - https://apod.nasa.gov/apod.rss
+Gry - https://gamerweb.pl/feed/
+Kraj24 - https://tvn24.pl/wiadomosci-z-kraju,3.xml
+Swiat - https://www.polsatnews.pl/rss/swiat.xml
+Polityka - https://www.polityka.pl/rss/podcasts.xml?list=2433
+Internet - https://www.mbaportal.pl/rss/article
+Nauka - https://naukawpolsce.pap.pl/all/rss.xml
+Sport - https://www.polsatsport.pl/rss/wszystkie.xml
+`;   
+
+let rssActual = 0;
+let rssLast = 0;
+
+let rssARR = rssTXT.trim().split("\n");
+let rssOBJ =[];
+for (r of rssARR){
+  if(r){
+    let a = r.split(" - ");
+   //console.log(a);
+    rssOBJ.push({"n":a[0],"u":a[1]});
+    rssLast++;
+  } else break;
+}
+rssLast--;
+
+
+console.log("rssLast=",rssLast);
+//console.log(rssOBJ);
+
+document.addEventListener("DOMContentLoaded",function(){
+    let html = "";
+    for (o of rssOBJ){
+        html += `<button onclick='readRSS("${o.u}",this)'>${o.n}</button>`;
+    }
+    document.getElementById("klawisze").innerHTML += html;
+    readRSS();
+});
+
+ function htmlencode(str) {
+    return str.replace(/[&<>"']/g, function($0) {
+        return "&" + {"&":"amp", "<":"lt", ">":"gt", '"':"quot", "'":"#39"}[$0] + ";";
+    });
+} 
+
+  function decodeHTMLEntities (str) {
+    if(str && typeof str === 'string') {
+      // strip script/html tags
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+      //element.innerHTML = str;
+      //str = element.textContent;
+      //element.textContent = '';
+    }
+
+    return str;
+  }
+  
+const decodeHTML=(str)=> {
+   if(str && typeof str === 'string') {
+      str = str.replaceAll("&gt;",">");
+      str = str.replaceAll("&lt;","<");
+      str = str.replaceAll("�","ó");
+      str = str.replaceAll("]]>","");
+      str = str.replaceAll("<!--[CDATA[<p-->>","");
+      str = str.replaceAll("<!--[CDATA","");
+      str = str.replaceAll("[","");
+      str = str.replaceAll("]","");
+   }
+return str;
+}
+
+
+const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
+    ten = ten ? ten : document.querySelectorAll("#klawisze button")[0];
+    console.log("this=",ten)
+    let _url = url;
+    console.log("uuuuuuuu=",url)
+    console.log(ten);
+    document.querySelectorAll("#klawisze button").forEach((b)=>b.classList.remove("active"))
+    if (ten) ten.classList.add("active");
+    else document.querySelector("#klawisze button").classList.add("active");
+
+    let options = {
+        method: 'GET', // *GET, POST, PUT, DELETE, etc.
+        //mode: '*cors', // no-cors, *cors, same-origin
+        //cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+        credentials: 'omit', // include, *same-origin, omit
+        //headers: {'Content-Type': 'text/xml'},
+        //redirect: 'follow', // manual, *follow, error
+        //referrerPolicy: 'no-referrer', // no-referrer, *no-referrer-when-downgrade, origin, origin-when-cross-origin, same-origin, strict-origin, strict-origin-when-cross-origin, unsafe-url
+        //body: JSON.stringify(data) // body data type must match "Content-Type" header
+    };        
+    //console.log(options)
+
+   //url = "https://zszczech.zut.edu.pl/cdn/cors/?type=xml&url=https://www.polsatnews.pl/rss/swiat.xml";
+   url = "https://zszczech.zut.edu.pl/cdn/cors/?type=xml&url="+url;
+   
+    fetch(url,options)
+    .then(response => response.text())
+    .then(str => new window.DOMParser().parseFromString(str, "text/xml"))
+    .then(data => {
+        //console.log(data);
+       if(!data.querySelector("channel")) console.log("channel---------------------------------------------------------------------");
+        //const title = data.querySelector("channel title").textContent;
+        //const link = data.querySelector("channel link").textContent;
+     //console.log(title,link)        
+     let mainTitle = data.querySelector("title").childNodes[0].data;
+     let mainLink  = data.querySelector("link").childNodes[0].data;
+mainTitle = mainTitle.replaceAll("�","ó");
+     //console.log(137,mainTitle,mainLink)        
+        
+        let html = "";
+        //if (link && title) 
+         html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
+     
+        const items = data.querySelectorAll("item");
+        items.forEach((el,i) => {
+            let j=i+1;
+            if (i>5) return;
+            //console.log(el)
+            //console.log(el.querySelector("description").innerHTML)
+            let pubTime = el.querySelector("pubDate") ? el.querySelector("pubDate").textContent : (new Date()).toString();//toLocaleString();
+            let czas = (new Date(pubTime)).toLocaleString('pl-PL');
+            let desc = decodeHTML(el.querySelector("description").innerHTML);
+            //console.log(i,desc)
+            //document.getElementById("txt").value += desc+"\n\n"
+            //decodeURIComponent(el.querySelector("description").innerHTML)
+         //let q=el.querySelector("title").childNodes[0].data;
+         //console.log(6,el.querySelector("title"));
+         //console.log(7,el.querySelector("title").childNodes[0]);
+         //console.log(8,el.querySelector("title").childNodes[0].data);
+         //decodeHTML(el.querySelector("title").innerHTML)
+         //el.querySelector("link").innerHTML
+         let itemTitle = el.querySelector("title").childNodes[0].data;
+         itemTitle = itemTitle.replaceAll("�","ó");
+         let itemLink = el.querySelector("link").childNodes[0].data;
+         //console.log(163,itemTitle,itemLink);
+        html += `
+            <article>
+            <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
+                <h4> 
+                    <a href="${itemLink}" target="_blank" rel="noopener">
+                    ${j}. ${itemTitle}
+                    </a>
+                </h4>
+                <p><span>${czas}</span><br />
+                ${desc}</p>
+            </article>
+        `;
+        });
+        //document.body.insertAdjacentHTML("beforeend", html);
+        document.getElementById("gazeta").innerHTML = html;
+    }).catch(e => {
+        console.log(e)
+        document.getElementById("gazeta").innerHTML = `<br /><hr /><small>${_url}</small> <h4>${e.toString()}</h3>`;
+    });
+}
+
+let next=()=>{
+    rssActual++;
+    if (rssActual>rssLast) rssActual=0;
+    let btns = document.querySelectorAll("#klawisze button")[rssActual];
+    console.log(btns)
+    if (btns) btns.click();
+}
+</script>
+</head>
+
+<body>
+<app-menu title="RSS" name="ZnakZorro" link="../"></app-menu>
+   <div id="info"></div>
+<script src="../appMenu.js"></script>
+<div id="klawisze" class="klawisze"></div>
+<div id="ster" class="klawisze"><button class="btn big" onclick="next()">Next</button></div>
+
+<div id="gazeta"></div>
+
+</body>
+</html>
