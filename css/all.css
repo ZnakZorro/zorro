@@ -42,7 +42,7 @@ p {margin:0;}
  .container {
     padding: 0.3em;
     margin: 0.3em;
-    display: flow-root;
+    display: inline-block;
 }
 .btn {
     z-index: 14;
