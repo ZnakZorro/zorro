@@ -60,6 +60,13 @@ h1,h2,h3 {margin: 0.25em 0;}
     display: inline-block;
     text-align: center;
 }
+.btn.big {
+    margin: 0.75em 0.2em;
+    padding: 0.5em;
+    background: #666;
+    color: #fff;
+}
+.btn.big:active {background:red;}
 .blue  {background-color: #69f;}
 .red   {background-color: #d3004e;}
 .green {background-color: #228b22;}
