@@ -60,3 +60,6 @@ p {margin:0;}
     display: inline-block;
     text-align: center;
 }
+.blue  {background-color: #9bf;}
+.red   {background-color: #f62;}
+.green {background-color: #2f6;}
