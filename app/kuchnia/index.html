@@ -26,7 +26,11 @@ fetch(u)
       document.getElementById("kuchnia").innerHTML = o;
 })
   .catch(e => {console.log(e)})   
-}  
+} 
+document.addEventListener("DOMContentLoaded",function(){
+    let first = document.querySelector("#klawisze button");
+    if (first) first.click(); 
+});
 </script>
 </head>
 
@@ -34,7 +38,7 @@ fetch(u)
     <div class="wrapper">
         <app-menu title="Kuchnia" name="ZnakZorro" link="../"></app-menu>
         <script src="../../appMenu.js"></script>
-        <div class="container">
+        <div class="container" id="klawisze">
           
           <button class="btn blue" onclick='Przepis("./ciasta/ciasto-dla-gosci.html")'>Ciasto dla gości</button>
           
