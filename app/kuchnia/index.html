@@ -18,7 +18,7 @@
 </style>
 <script>
 const edit=(url)=>{
-   let exurl = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+url
+   let exurl = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    window.open(exurl);  
 }
    
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
         <div class="container" id="klawisze">
           
-          <button class="btn blue" onclick='Przepis(this,"./ciasta/ciasto-dla-gosci.html")'>Ciasto dla gości</button>
+          <button class="btn blue" onclick='Przepis(this,"ciasta/ciasto-dla-gosci.html")'>Ciasto dla gości</button>
           
         </div>
         <div class="container" id="kuchnia"></div>
