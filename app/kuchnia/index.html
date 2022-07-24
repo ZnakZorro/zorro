@@ -22,7 +22,7 @@ const Przepis=(u)=>{
 fetch(u)
   .then(r => {return r.text()})
   .then(o => {
-      console.log(o)
+      //console.log(o)
       document.getElementById("kuchnia").innerHTML = o;
 })
   .catch(e => {console.log(e)})   
