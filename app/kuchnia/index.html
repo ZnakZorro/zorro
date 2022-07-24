@@ -18,12 +18,13 @@
 </style>
 <script>
   
-const Przepis=(u)=>{  
+const Przepis=(ten,u)=>{  
 fetch(u)
   .then(r => {return r.text()})
   .then(o => {
       //console.log(o)
       document.getElementById("kuchnia").innerHTML = o;
+      ten.classList.add("active");
 })
   .catch(e => {console.log(e)})   
 } 
@@ -40,7 +41,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
         <div class="container" id="klawisze">
           
-          <button class="btn blue" onclick='Przepis("./ciasta/ciasto-dla-gosci.html")'>Ciasto dla gości</button>
+          <button class="btn blue" onclick='Przepis(this,"./ciasta/ciasto-dla-gosci.html")'>Ciasto dla gości</button>
           
         </div>
         <div class="container" id="kuchnia"></div>
