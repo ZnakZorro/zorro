@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-<title>git::RSS a</title>
+<title>git::RSS aa</title>
  <meta charset="utf-8">
                <meta http-equiv="cache-control" content="max-age=0" />
                <meta http-equiv="cache-control" content="no-cache" />
@@ -134,7 +134,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
      let mainTitle = data.querySelector("title").childNodes[0].data;
      let mainLink  = data.querySelector("link").childNodes[0].data;
 mainTitle = mainTitle.replaceAll("�","ó");
-     console.log(mainTitle,mainLink)        
+     console.log(137,mainTitle,mainLink)        
         
         let html = "";
         if (link && title) html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
@@ -148,7 +148,7 @@ mainTitle = mainTitle.replaceAll("�","ó");
             let pubTime = el.querySelector("pubDate") ? el.querySelector("pubDate").textContent : (new Date()).toString();//toLocaleString();
             let czas = (new Date(pubTime)).toLocaleString('pl-PL');
             let desc = decodeHTML(el.querySelector("description").innerHTML);
-            console.log(i,desc)
+            //console.log(i,desc)
             //document.getElementById("txt").value += desc+"\n\n"
             //decodeURIComponent(el.querySelector("description").innerHTML)
          //let q=el.querySelector("title").childNodes[0].data;
@@ -158,9 +158,9 @@ mainTitle = mainTitle.replaceAll("�","ó");
          //decodeHTML(el.querySelector("title").innerHTML)
          //el.querySelector("link").innerHTML
          let itemTitle = el.querySelector("title").childNodes[0].data;
+         itemTitle = itemTitle.replaceAll("�","ó");
          let itemLink = el.querySelector("link").childNodes[0].data;
-         console.log(77,itemTitle);
-         console.log(88,itemLink);
+         console.log(163,itemTitle,itemLink);
         html += `
             <article>
             <!--img src="${el.querySelector("link").innerHTML}/image/large.png" alt=""-->
