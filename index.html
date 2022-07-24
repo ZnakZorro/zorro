@@ -112,7 +112,10 @@ body {
 </style>
 <script src="./js/all.js?v=1"></script>
 <script>
-       cccONE();
+    cccONE();
+    const imgReady=()=>{
+       console.log("imgReady()================================================");
+    }
 </script>
 </head>
 
@@ -141,7 +144,7 @@ body {
         </div>
         <div id="modal">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal">
+                      <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">
                 </div>
         </div>
      </div>
