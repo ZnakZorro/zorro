@@ -115,6 +115,10 @@ body {
     cccONE();
     const imgReady=()=>{
        console.log("imgReady()================================================");
+        document.getElementById("menumodal").innerHTML =`
+        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="ccc">Radar</a>
+        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="ccc">RSS</a>
+        <button onclick="ccc()" class="ccc">ClearCache</button>`;            
     }
 </script>
 </head>
@@ -137,10 +141,12 @@ body {
      
      <!-- modal --> 
      <div class="supermodal">
-        <div class="menumodal">
+        <div class="menumodal" id="menumodal">
+                <!--
                 <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="ccc">Radar</a>
                 <a href="https://znakzorro.github.io/zorro/html/rss.html" class="ccc">RSS</a>
                 <button onclick="ccc()" class="ccc">ClearCache</button>
+                -->
         </div>
         <div id="modal">
                 <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
