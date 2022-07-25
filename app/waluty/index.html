@@ -79,8 +79,9 @@ div.col {
     max-width: 640px;
     margin: auto;
 }
+td,th {padding:3px;}
 </style> 
-<!--link rel="stylesheet" href="../../css/navbar.css"-->
+
 <link rel="stylesheet" href="../../css/all.css">
 
 <script>
@@ -265,7 +266,7 @@ let rysujWykresProsty = (dane)=>{
 let opiszWaluty = (dane,categories)=>{
     //console.log(categories);
     //console.log(dane);
-    let procenty = "delta%<br />"
+    let procenty = ""
     let names = [];
     dane.forEach(d=>{
         names.push(d.name);
@@ -273,12 +274,7 @@ let opiszWaluty = (dane,categories)=>{
     let stamp = categories.pop();
     let tim = new Intl.DateTimeFormat('pl-PL').format(stamp);
     //console.log(stamp,tim);
-/*
-    var czasPL =new Intl.DateTimeFormat('pl-PL', {year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',hour12:false,timeZone:'Europe/Warsaw'}).format(new Date(1650931200000));
-console.log('czasPL=',czasPL);
-console.log(new Intl.DateTimeFormat('pl-PL').format(stamp));
-console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
-*/
+
     let dat=[];
     dat[0]=dane[0].data.pop();
     dat[1]=dane[1].data.pop();
@@ -288,18 +284,10 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     let delta = {dolar:last.dolar-start.dolar,euro:last.euro-start.euro,funt:last.funt-start.funt};
     let procent = {dolar:(100*delta.dolar/start.dolar), euro:(100*delta.euro/start.euro), funt:(100*delta.funt/start.funt), };
     
-    /*
-    console.log(start);
-    console.log(last);
-    console.log(delta);
-    console.log(procent);
-    procenty += `USD: ${procent.dolar.toFixed(2)}% <br />`;
-    procenty += `EUR: ${procent.euro.toFixed(2)}% <br />`;
-    procenty += `GBR: ${procent.funt.toFixed(2)}% <br />`;
-    */
+  
 
     html = `
-    <div class="highcharts-data-table" style="display: block;">
+    <div class="highcharts-data-table" style="margin:auto;display: inline-block;">
         <table id="highcharts-data-table-0" border=1 cellpadding=6 cellspacing=0>
         <caption class="highcharts-table-caption">WALUTY</caption>
         <thead>
@@ -329,7 +317,7 @@ console.log(new Intl.DateTimeFormat('pl-PL').format(1650931200000));
     `;
 
     document.getElementById("info2").innerHTML=html;
-    document.getElementById("procenty").innerHTML=procenty;
+    //document.getElementById("procenty").innerHTML=procenty;
 
 }
 
