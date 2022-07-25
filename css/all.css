@@ -10,7 +10,7 @@ body {
 }
 .wrapper {
     padding: 0;
-    margin: 0;
+    margin: auto;
 }
  .container {
     padding: 0.25em;
