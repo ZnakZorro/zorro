@@ -79,8 +79,10 @@ console.log("rssLast=",rssLast);
 
 document.addEventListener("DOMContentLoaded",function(){
     let html = "";
+    let nr = 0;
     for (o of rssOBJ){
-        html += `<button onclick='readRSS("${o.u}",this)'>${o.n}</button>`;
+        html += `<button onclick='readRSS("${o.u}",this,nr)'>${o.n}</button>`;
+      nr++;
     }
     document.getElementById("klawisze").innerHTML += html;
     readRSS();
@@ -101,7 +103,8 @@ return str;
 }
 
 
-const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null)=>{
+const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr)=>{
+    rssActual = parseInt(nr);
     ten = ten ? ten : document.querySelectorAll("#klawisze button")[0];
     let _url = url;
     console.log("uuuuuuuu=",url)
