@@ -27,13 +27,6 @@
         height: auto;
         margin: 5px 5px 0 0;
     }
-/*.btn.big {
-    margin: 0.75em 0.2em;
-    padding: 0.5em;
-    background: #666;
-    color: #fff;
-}
-.btn.big:active {background:red;}*/
 
 </style>
 
@@ -104,9 +97,8 @@ return str;
 
 
 const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr="0")=>{
-    console.log("nr=",nr);
-    if (nr) rssActual = parseInt(nr);
     ten = ten ? ten : document.querySelectorAll("#klawisze button")[0];
+    if (nr) rssActual = parseInt(nr);
     let _url = url;
     console.log("uuuuuuuu=",url)
     document.querySelectorAll("#klawisze button").forEach((b)=>b.classList.remove("active"))
