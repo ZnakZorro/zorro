@@ -103,7 +103,7 @@ return str;
 }
 
 
-const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr)=>{
+const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr="0")=>{
     console.log("nr=",nr);
     if (nr) rssActual = parseInt(nr);
     ten = ten ? ten : document.querySelectorAll("#klawisze button")[0];
