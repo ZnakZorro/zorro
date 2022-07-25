@@ -358,22 +358,19 @@ document.addEventListener("DOMContentLoaded",function(){
 </script>
 </head>
 <body>
-
 <app-menu title="Waluty" name="ZnakZorro" link="../../"></app-menu>	
 	
-    
-    
-    
-    
-
+<div class="wrapper">	
     <div class="col zmianydni">
-	    <img src="./refresh.svg" onclick="window.location.reload(true);" style="float: right;margin: 0.5em; width:38px;vertical-align: middle; cursor:pointer;">
-        <button onclick="zmianaStart(this)" class="active">Start</button>
-        <button onclick="zmianaDni(this,30)">1 miesiąc</button>
-        <button onclick="zmianaDni(this,60)">2 miesiące</button>
-        <button onclick="zmianaDni(this,90)">3 miesiące</button>
-    </div>
-    
+	<!--div class="col zmianydni"-->
+	<div class="container">
+	    	<img src="./refresh.svg" onclick="window.location.reload(true);" style="float: right;margin: 0.5em; width:38px;vertical-align: middle; cursor:pointer;">
+        	<button onclick="zmianaStart(this)" class="active">Start</button>
+        	<button onclick="zmianaDni(this,30)">1 miesiąc</button>
+        	<button onclick="zmianaDni(this,60)">2 miesiące</button>
+        	<button onclick="zmianaDni(this,90)">3 miesiące</button>
+    	</div>
+</div>    
 
     <figure class="highcharts-figure" style="max-width:640px; margin:auto;">
         <div id="container">
