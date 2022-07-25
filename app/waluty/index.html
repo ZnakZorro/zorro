@@ -57,7 +57,20 @@ button {
     filter: sepia(0.1);*/
 }
 #container {width:100%;}
-*/	
+div.col {
+    box-sizing: border-box;
+    max-width: 640px;
+    margin: auto;
+}
+#klawiszePlus button {font-size:0.93em;margin: 0.12em;}
+
+div#info {margin:auto; background-color: #eee;}
+div#info div {background-color: #ddd;}
+div#info div span {background-color: #aaa;}
+div.info {padding:0.2em;}
+	
+*/
+	
 input[type="range" i] {
     width: 88%;
     padding: 1%;
@@ -74,17 +87,6 @@ input[type="range" i] {
     border: none;
     background-color: #f8f8f8;
     width:4em;
-}
-#klawiszePlus button {font-size:0.93em;margin: 0.12em;}
-
-div#info {margin:auto; background-color: #eee;}
-div#info div {background-color: #ddd;}
-div#info div span {background-color: #aaa;}
-div.info {padding:0.2em;}
-div.col {
-    box-sizing: border-box;
-    max-width: 640px;
-    margin: auto;
 }
 
 </style> 
@@ -360,9 +362,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <body>
 <app-menu title="Waluty" name="ZnakZorro" link="../../"></app-menu>	
 	
-<div class="wrapper">	
-    <div class="col zmianydni">
-	<!--div class="col zmianydni"-->
+<div class="wrapper">
 	<div class="container">
 	    	<img src="./refresh.svg" onclick="window.location.reload(true);" style="float: right;margin: 0.5em; width:38px;vertical-align: middle; cursor:pointer;">
         	<button onclick="zmianaStart(this)" class="active">Start</button>
