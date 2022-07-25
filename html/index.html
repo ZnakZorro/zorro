@@ -10,18 +10,19 @@
    <meta name="theme-color" content="#008">
    <link rel="shortcut icon" type="image/svg+xml" size="any" href="../img/dom.svg"> 
    <link rel="manifest" href="../zorro.web.json"> 
-   <link rel="stylesheet" href="../css/navbar.css">
    <link rel="stylesheet" href="../css/style.css" />
    <link rel="stylesheet" href="../css/all.css" />
+   
    <style>   
-      span {background:transparent!important;}
-</style>
-<script>
-    const backHome=()=>{window.location.href="../";}
-    document.addEventListener("DOMContentLoaded",function(){
-        //document.getElementById("info").textContent = "info";
-    });
-</script>
+      
+   </style>
+   
+   <script>
+       const backHome=()=>{window.location.href="../";}
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+   </script>
           
 </head>
 
@@ -30,42 +31,32 @@
         <app-menu title="Inne" name="ZnakZorro" link="../"></app-menu>
         <script src="../appMenu.js"></script>
        
-        <div class="container blue">
-           
+        <div class="container">           
                <a href="./rss.html"   class="btn blue">RSS</a>
                <a href="./zapis.html" class="btn blue">ZAPIS</a>            
                <a href="./grid-system.html" class="btn blue">gridSystem</a>
                <a href="./gtranslate.html"  class="btn blue">gTranslate</a>
-               <a href="../app/editor/"     class="btn blue">Editor</a>            
-           
+               <a href="../app/editor/"     class="btn blue">Editor</a>
        </div>
        
        <div class="container">
-          <span class="green">
                <a href="./reformat.html"    class="btn green">reFormat</a>  
                <a href="./format/reverseTable.html" class="btn green">reverseTable</a>
-         </span>
        </div>
        
        <div class="container">
-           <span class="red">
               <a href="./format/sortTable.html" class="btn red">sortTable</a>
               <a href="./format/sortTableFragDrop.html" class="btn red">sortTableFragDrop</a>
-           </span>
        </div>
        
        <div class="container">
-         <div class="container">
-           <span class="blue">
               <a href="../app/kuchnia"         class="btn blue">Kuchnia</a>
               <a href="../app/przepisy"         class="btn blue">Przepisy</a>
-           </span>
-         </div>
        </div>
             <!--
             <a href="./gtranslate/index.html" class="btn">gtranslate1</a>
             -->
-    </div>
+    </div><!-- wraper-->
 
 </body>
 </html>
