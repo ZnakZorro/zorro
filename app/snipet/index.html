@@ -48,15 +48,15 @@ const show=(url)=>{
    let exurl = location.href+url
    console.log(exurl,"show");
    getCode(url,function(code){
-        console.log("show",code);   
+        console.log("show==",code);   
    })
 }
 const save=(url)=>{
    let exurl = location.href+url
    console.log(exurl,"save");   
-   getCode(url,((code)=>{
-        console.log("save",code);   
-   }))
+   getCode(url,(code)=>{
+        console.log("save==",code);   
+   })
 }
    
 const ShowNow=(ten,url)=>{  
