@@ -88,3 +88,5 @@ div.pad {margin:0 4px;}
     vertical-align: middle; 
     cursor:pointer;
 }
+.hidenow{display:none;}
+.shownow{display:block;}
