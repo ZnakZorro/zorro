@@ -35,7 +35,7 @@ const snipARR = [
 document.addEventListener("DOMContentLoaded",function(){
       console.log("dom ready",snipARR); 
       let html ="";
-      snipARR.forEeach((o,i)=>{
+      snipARR.forEach((o,i)=>{
          console.log(i,o); 
          let u = o.f+'/'+o.u;
          html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",i)'>${n}</button>`;
