@@ -17,18 +17,32 @@
    h3,h2 {font-size:1.2em}
 </style>
 <script>
+
+const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   
 const edit=(url)=>{
-   let exurl = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   let exurl = getURL(url);//'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    window.open(exurl,"_self");  
 }
+const show=(url)=>{
+   let exurl = getURL(url);
+   console.log(exurl,"show");  
+}
+const save=(url)=>{
+   let exurl = getURL(url);
+   console.log(exurl,"save");   
+}
    
-const Przepis=(ten,url)=>{  
+const ShowNow=(ten,url)=>{  
 fetch(url)
-  .then(r => {return r.text()})
-  .then(o => {
-      //console.log(o)
-      let html = `<button onclick='edit("${url}")'>edit</button><br />`+o;
-      document.getElementById("kuchnia").innerHTML = html;
+  .then(ret => {return ret.text()})
+  .then(code => {
+      //console.log(code)
+      let html = `<button onclick='edit("${url}")'>edit</button><br />`;
+      html += `<button onclick='edit("${url}")'>show</button><br />`;
+      html += `<button onclick='save("${url}")'>save</button><br />`;
+      html += code;
+      document.getElementById("snipet").innerHTML = html;
       ten.classList.add("active");
 })
   .catch(e => {console.log(e)})   
@@ -46,10 +60,10 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
         <div class="container" id="klawisze">
           
-          <button class="btn blue" onclick='Przepis(this,"html/index.html")'>index.html</button>
+          <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index.html</button>
           
         </div>
-        <div class="container" id="kuchnia"></div>
+        <div class="container" id="snipet"></div>
     </div>
   
   </body>
