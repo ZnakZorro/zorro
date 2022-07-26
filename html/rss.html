@@ -92,6 +92,7 @@ const decodeHTML=(str)=> {
       str = str.replaceAll("<!--[CDATA","");
       str = str.replaceAll("[","");
       str = str.replaceAll("]","");
+      str = str.replaceAll("http://","//");
    }
 return str;
 }
