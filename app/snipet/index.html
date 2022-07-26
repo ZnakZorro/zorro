@@ -80,14 +80,17 @@ console.log(i);
 fetch(url)
   .then(ret => {return ret.text()})
   .then(code => {
-      console.log(i);
+      //console.log(i);
       //console.log(code)
       let html = `<button onclick='edit("${url}")'>edit</button>`;
       html += `<button onclick='show("${url}")'>show</button>`;
       html += `<button onclick='save("${url}")'>save</button>`;
-      html += `<div class="code" id="code">${code}</div>`;
-      html += `<div class="code" id="code">${encodeURIComponent(code)}</div>`;
-      document.getElementById("snipet").textContent = html
+      document.getElementById("edits").innerHTML = html
+   
+      //html += `<div class="code" id="code">${code}</div>`;
+      //html += `<div class="code" id="code">${encodeURIComponent(code)}</div>`;
+      
+      document.getElementById("snipet").textContent = code;
       ten.classList.add("active");
 })
   .catch(e => {console.log(e)})   
@@ -103,6 +106,7 @@ document.addEventListener("DOMContentLoaded",function(){
     <div class="wrapper">
         <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
+       
         <div class="container" id="klawisze">
           
           <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index</button>
@@ -110,6 +114,7 @@ document.addEventListener("DOMContentLoaded",function(){
           <button class="btn" onclick='ShowNow(this,"js/createElement.js")'>create</button> 
           
         </div>
+       <div class="container" id="edits"></div>
         <div class="container" id="snipet"></div>
     </div>
   
