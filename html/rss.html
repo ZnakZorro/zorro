@@ -135,7 +135,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr="0")
         mainTitle = mainTitle.replaceAll("�","ó");
         let html = "";
          html += `<h3><a href="${mainLink}" target="_blank">${mainTitle}</a></h3>`;
-     
+        console.log(rssOBJ[nr]);
         const items = data.querySelectorAll("item");
         items.forEach((el,i) => {
             let j=i+1;
