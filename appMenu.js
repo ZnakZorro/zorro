@@ -69,14 +69,14 @@ class NavBarNavigator extends HTMLElement {
 			navMenu.classList.remove("active");
 		}
 		setTimeout(()=>{
-			this.shadowRoot.querySelector(".header").classList.remove("hidenow");
-			this.shadowRoot.querySelector(".header").classList.add("shownow");
 		},1000);
 		
 		let selfRoot = this.shadowRoot;
 		
 		document.addEventListener("DOMContentLoaded",function(){
 			console.log("dom redy this.shadowRoot==",selfRoot);
+			this.shadowRoot.querySelector(".header").classList.remove("hidenow");
+			this.shadowRoot.querySelector(".header").classList.add("shownow");
 		})
 
 	}
