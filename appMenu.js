@@ -28,7 +28,7 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/covid/index.html" class="nav-link">COVID</a></li>
 					 <li class="nav-item"><a href="${link}app/todo/index.html" class="nav-link">ToDo</a></li>
 					 <li class="nav-item"><a href="${link}app/EDEK/" class="nav-link">EDEK</a></li>
-					 <li class="nav-item"><a href="${link}app/snipet/" class="nav-link">SNIP</a></li>
+					 <li class="nav-item"><a href="${link}app/snipet/" class="nav-link">SNIPET</a></li>
 					 <li class="nav-item"><a href="${link}html/zapis.html" class="nav-link">Zapis</a></li>
 					 <li class="nav-item"><a href="${link}html/index.html" class="nav-link">Inne</a></li> 
 					 <li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li>
@@ -67,6 +67,7 @@ class NavBarNavigator extends HTMLElement {
 			hamburger.classList.remove("active");
 			navMenu.classList.remove("active");
 		}
+		setTimeout(()=>{document.querySelector("..header").classList.add("shownow");},2000);
 	}
 
 }
