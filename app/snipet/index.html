@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded",function(){
          html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",i)'>${n}</button>';
       });
       console.log(html); 
+      document.getElementById("klawisze").innerHTML = html;
 })
 //---DOM READY----------------------------------   
   
