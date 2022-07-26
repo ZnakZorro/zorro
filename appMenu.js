@@ -67,7 +67,7 @@ class NavBarNavigator extends HTMLElement {
 			hamburger.classList.remove("active");
 			navMenu.classList.remove("active");
 		}
-		setTimeout(()=>{document.querySelector("..header").classList.add("shownow");},2000);
+		setTimeout(()=>{document.querySelector(".header").classList.add("shownow");},2000);
 	}
 
 }
