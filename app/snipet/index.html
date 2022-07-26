@@ -51,7 +51,7 @@ fetch(url)
   .then(code => {
       //console.log(code)
       let html = `<button onclick='edit("${url}")'>edit</button>`;
-      html += `<button onclick='edit("${url}")'>show</button>`;
+      html += `<button onclick='show("${url}")'>show</button>`;
       html += `<button onclick='save("${url}")'>save</button>`;
       html += `<div class="code" id="code">${code}</div>`;
       document.getElementById("snipet").innerHTML = html;
