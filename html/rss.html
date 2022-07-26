@@ -40,6 +40,7 @@ Waluty - https://www.bankier.pl/rss/waluty.xml
 Finanse - https://www.bankier.pl/rss/finanse.xml
 Kopalnia - https://kopalniawiedzy.pl/wiadomosci.rss
 APOD - https://apod.nasa.gov/apod.rss
+TabA - https://rss.nbp.pl/kursy/TabelaA.xml
 
 Chip - https://www.chip.pl/feed/
 TVN24 - https://tvn24.pl/najnowsze.xml
@@ -155,12 +156,16 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr="0")
     });
 }
 
-let next=()=>{
+const next=()=>{
     rssActual++;
  console.log(rssActual,rssLast);
     if (rssActual>rssLast) rssActual=0;
     let btns = document.querySelectorAll("#klawisze button")[rssActual];
     if (btns) btns.click();
+}
+const readURL=()=>{
+   let url = document.getElementById("inURL").value;
+   readRSS(url,null,null);
 }
 </script>
 </head>
@@ -171,6 +176,10 @@ let next=()=>{
 <script src="../appMenu.js"></script>
 <div id="klawisze" class="klawisze"></div>
 <div id="ster" class="klawisze"><button class="btn big" onclick="next()">Next</button></div>
+<div id="inpu" class="klawisze">
+  <input id="inURL" class="int" />
+  <button class="btn" onclick="readURL()">go</button>
+ </div>
 
 <div id="gazeta"></div>
 
