@@ -15,6 +15,7 @@
    
 <style>
    h3,h2 {font-size:1.2em}
+   .code{font-family:monospace; background:white; border:1px solid gray;}
 </style>
 <script>
 const snipARR = [
@@ -49,10 +50,10 @@ fetch(url)
   .then(ret => {return ret.text()})
   .then(code => {
       //console.log(code)
-      let html = `<button onclick='edit("${url}")'>edit</button><br />`;
-      html += `<button onclick='edit("${url}")'>show</button><br />`;
-      html += `<button onclick='save("${url}")'>save</button><br />`;
-      html += code;
+      let html = `<button onclick='edit("${url}")'>edit</button>`;
+      html += `<button onclick='edit("${url}")'>show</button>`;
+      html += `<button onclick='save("${url}")'>save</button>`;
+      html += `<div class="code" id="code">${code}</div>`;
       document.getElementById("snipet").innerHTML = html;
       ten.classList.add("active");
 })
@@ -71,8 +72,8 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
         <div class="container" id="klawisze">
           
-          <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index.html</button>
-          <button class="btn blue" onclick='ShowNow(this,"js/fetch.html")'>index.html</button> 
+          <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index</button>
+          <button class="btn" onclick='ShowNow(this,"js/fetch.html")'>fetch</button> 
           
         </div>
         <div class="container" id="snipet"></div>
