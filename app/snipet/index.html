@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>SNIPET</title>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="gold">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json">   
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
+   
+<style>
+   h3,h2 {font-size:1.2em}
+</style>
+<script>
+const edit=(url)=>{
+   let exurl = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   window.open(exurl,"_self");  
+}
+   
+const Przepis=(ten,url)=>{  
+fetch(url)
+  .then(r => {return r.text()})
+  .then(o => {
+      //console.log(o)
+      let html = `<button onclick='edit("${url}")'>edit</button><br />`+o;
+      document.getElementById("kuchnia").innerHTML = html;
+      ten.classList.add("active");
+})
+  .catch(e => {console.log(e)})   
+} 
+document.addEventListener("DOMContentLoaded",function(){
+    let first = document.querySelector("#klawisze button");
+    if (first) first.click(); 
+});
+</script>
+</head>
+
+<body>
+    <div class="wrapper">
+        <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+        <div class="container" id="klawisze">
+          
+          <button class="btn blue" onclick='Przepis(this,"html/index.html")'>index.html</button>
+          
+        </div>
+        <div class="container" id="kuchnia"></div>
+    </div>
+  
+  </body>
+</html>
