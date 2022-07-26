@@ -26,15 +26,21 @@
 </style>
 <script>
 const snipARR = [
-   {n:"index",                f:"html",   u:"index.html"},
-   {n:"fetch",                f:"js",     u:"fetch.html"},
-   {n:"createElement.html",   f:"js",     u:"createElement.html"},
-   createElement.html
+   {n:"index",           f:"html",   u:"index.html"},
+   {n:"fetch",           f:"js",     u:"fetch.js"},
+   {n:"createElement",   f:"js",     u:"createElement.js"},
    
 ];
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
       console.log("dom ready",snipARR); 
+      let html ="";
+      snipARR.forEeach((o,i)=>{
+         console.log(i,o); 
+         let u = o.f+'/'+o.u;
+         html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",i)'>${n}</button>';
+      });
+      console.log(html); 
 })
 //---DOM READY----------------------------------   
   
@@ -68,10 +74,12 @@ const save=(url)=>{
    })
 }
    
-const ShowNow=(ten,url)=>{  
+const ShowNow=(ten,url,i)=>{  
+console.log(i);
 fetch(url)
   .then(ret => {return ret.text()})
   .then(code => {
+      console.log(i);
       //console.log(code)
       let html = `<button onclick='edit("${url}")'>edit</button>`;
       html += `<button onclick='show("${url}")'>show</button>`;
@@ -97,7 +105,8 @@ document.addEventListener("DOMContentLoaded",function(){
         <div class="container" id="klawisze">
           
           <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index</button>
-          <button class="btn" onclick='ShowNow(this,"js/fetch.html")'>fetch</button> 
+          <button class="btn" onclick='ShowNow(this,"js/fetch.js")'>fetch</button> 
+          <button class="btn" onclick='ShowNow(this,"js/createElement.js")'>create</button> 
           
         </div>
         <div class="container" id="snipet"></div>
