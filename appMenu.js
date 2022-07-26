@@ -46,8 +46,7 @@ class NavBarNavigator extends HTMLElement {
 		 <div class="message" aria-live="polite"></div>
 		 `;		
 	}
-	let selfRootGlobal = null;
-	console.log("this===",this)
+	
 	connectedCallback () {
 		
 		const hamburger = this.shadowRoot.querySelector(".hamburger");
