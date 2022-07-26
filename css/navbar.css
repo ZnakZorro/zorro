@@ -6,7 +6,7 @@
 li {list-style: none;}
 a {text-decoration: none;font-size: 14pt;}
 div.pad {margin:0 4px;}
-.header{border-bottom: 1px solid #E2E8F0; width:100vw;min-height: 3.7em;}
+.header{border-bottom: 1px solid #E2E8F0; width:100vw;min-height: 3.0em;}
 .navbar {display: flex;justify-content: space-between;align-items: center;padding: 0.5rem 0.95rem 0.5em 0.65em;}
 .hamburger {display: none;}
 
