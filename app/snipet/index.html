@@ -29,7 +29,17 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 //---DOM READY----------------------------------   
   
-   
+
+const getCode=(url,callback)=>{
+   fetch(url)
+  .then(ret => {return ret.text()})
+  .then(code => {
+      callback(code);
+   })
+     .catch(e => {console.log(e)})   
+   } 
+}   
+
 const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    
 const edit=(url)=>{
@@ -37,12 +47,18 @@ const edit=(url)=>{
    window.open(exurl,"_self");  
 }
 const show=(url)=>{
-   let exurl = getURL(url);
-   console.log(exurl,"show");  
+   let exurl = location.href+url
+   console.log(exurl,"show");
+   getCode(url,function(code){
+        console.log("show",code);   
+   })
 }
 const save=(url)=>{
-   let exurl = getURL(url);
+   let exurl = location.href+url
    console.log(exurl,"save");   
+   getCode(url,((code)=>{
+        console.log("save",code);   
+   }))
 }
    
 const ShowNow=(ten,url)=>{  
