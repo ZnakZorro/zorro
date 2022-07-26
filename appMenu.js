@@ -46,8 +46,10 @@ class NavBarNavigator extends HTMLElement {
 		 <div class="message" aria-live="polite"></div>
 		 `;		
 	}
-
+	let selfRootGlobal = null;
+	console.log("this===",this)
 	connectedCallback () {
+		
 		const hamburger = this.shadowRoot.querySelector(".hamburger");
 		const navMenu   = this.shadowRoot.querySelector(".nav-menu");
 		const navLink   = this.shadowRoot.querySelectorAll(".nav-link");
@@ -72,8 +74,10 @@ class NavBarNavigator extends HTMLElement {
 			this.shadowRoot.querySelector(".header").classList.add("shownow");
 		},1000);
 		
+		let selfRoot = this.shadowRoot;
+		selfRootGlobal = this.shadowRoot;
 		document.addEventListener("DOMContentLoaded",function(){
-			console.log("dom redy this.shadowRoot=",this.shadowRoot);
+			console.log("dom redy this.shadowRoot=",selfRoot,selfRootGlobal);
 		})
 
 	}
