@@ -147,7 +147,7 @@ const readRSS=(url="https://rss.gazeta.pl/pub/rss/szczecin.xml",ten=null,nr="0")
          itemTitle = itemTitle.replaceAll("�","ó");
          let itemLink = el.querySelector("link").childNodes[0].data;
         html += `
-            <article>
+            <article id="art${j}">
                 <h4> 
                     <a href="${itemLink}" target="_blank" rel="noopener">
                     ${j}. ${itemTitle}
