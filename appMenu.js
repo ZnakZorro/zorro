@@ -19,7 +19,7 @@ class NavBarNavigator extends HTMLElement {
 			font-family: 'Roboto', "Verdana", sans-serif; 
 		}  
 		</style>		
-		 <header class="header">
+		 <header class="header hidenow">
 			 <nav class="navbar">            
 				 <img src="https://znakzorro.github.io/zorro/css/icon/back.svg" width="32" onclick="window.location.href='https://znakzorro.github.io/zorro/';" class="icon1">
 				 <a href="https://znakzorro.github.io/zorro/" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
@@ -67,7 +67,15 @@ class NavBarNavigator extends HTMLElement {
 			hamburger.classList.remove("active");
 			navMenu.classList.remove("active");
 		}
-		setTimeout(()=>{this.shadowRoot.querySelector(".header").classList.add("shownow");},2000);
+		setTimeout(()=>{
+			this.shadowRoot.querySelector(".header").classList.remove("hidenow");
+			this.shadowRoot.querySelector(".header").classList.add("shownow");
+		},1000);
+		
+		document.addEventListener("DOMContentLoaded",function(){
+			console.log("dom redy this.shadowRoot=",this.shadowRoot);
+		})
+
 	}
 
 }
