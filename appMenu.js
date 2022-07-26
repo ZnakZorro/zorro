@@ -74,9 +74,9 @@ class NavBarNavigator extends HTMLElement {
 		},1000);
 		
 		let selfRoot = this.shadowRoot;
-		selfRootGlobal = this.shadowRoot;
+		
 		document.addEventListener("DOMContentLoaded",function(){
-			console.log("dom redy this.shadowRoot=",selfRoot,selfRootGlobal);
+			console.log("dom redy this.shadowRoot==",selfRoot);
 		})
 
 	}
