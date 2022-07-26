@@ -75,7 +75,7 @@ fetch(url)
       html += `<button onclick='show("${url}")'>show</button>`;
       html += `<button onclick='save("${url}")'>save</button>`;
       html += `<div class="code" id="code">${code}</div>`;
-      document.getElementById("snipet").innerHTML = html;
+      document.getElementById("snipet").textContent = html;
       ten.classList.add("active");
 })
   .catch(e => {console.log(e)})   
