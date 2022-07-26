@@ -87,9 +87,9 @@ const ShowNow=(ten,url,i)=>{
         .then(code => {
             //console.log(i);
             //console.log(code)
-            let html = `<button onclick='edit("${url}")'>edit</button>`;
-            html += `<button onclick='show("${url}")'>show</button>`;
-            html += `<button onclick='save("${url}")'>save</button>`;
+            let html = `<button class="adm" onclick='edit("${url}")'>edit</button>`;
+               html += `<button class="adm" onclick='show("${url}")'>show</button>`;
+               html += `<button class="adm" onclick='save("${url}")'>save</button>`;
             document.getElementById("edits").innerHTML = html
 
             //html += `<div class="code" id="code">${code}</div>`;
