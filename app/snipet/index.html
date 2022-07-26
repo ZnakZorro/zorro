@@ -35,9 +35,7 @@ const getCode=(url,callback)=>{
   .then(ret => {return ret.text()})
   .then(code => {
       callback(code);
-   })
-     .catch(e => {console.log(e)})   
-   } 
+   }).catch(e => {console.log(e)})
 }   
 
 const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
