@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded",function(){
       snipARR.forEach((o,i)=>{
          console.log(i,o); 
          let u = o.f+'/'+o.u;
-         html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",i)'>${o.n}</button>`;
+         html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`;
       });
       console.log(html); 
       document.getElementById("klawisze").innerHTML = html;
