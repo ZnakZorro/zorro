@@ -94,11 +94,11 @@ const show=(url)=>{
 
 const save=(url)=>{
    let code = document.getElementById("snipet").textContent;
-   console.log("save==",code);
+   //console.log("save==",code);
    let filename = snipARR[actualDOC].u;
    if (!filename) {alert("no file"); return;}
    let ext = filename.split(".")[1];
-   console.log(96,ext,filename);
+   //console.log(96,ext,filename);
    let mime = "text/plain";
    if (ext==="html")   mime = "text/html";
    if (ext==="js")     mime = "text/javascript";
