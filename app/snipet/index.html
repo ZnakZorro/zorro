@@ -60,10 +60,10 @@ const showButtonsByFolders=()=>{
          folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
       });
       console.log("ffffffffff",folders);
-      (for f in folders){
+      for (const f in folders){
          console.log(f); 
       }
-      (for f of folders){
+      for (const f of folders){
          console.log(f); 
       }
       //console.log(html); 
