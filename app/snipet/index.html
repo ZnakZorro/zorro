@@ -77,47 +77,7 @@ const getLocalURL=url=>{
    return url;
 }
 const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
-   
-const show=(url)=>{
-   url = getLocalURL(url);
-   console.log(77,url);
-   let exurl = location.href+url
-   console.log(exurl,"show");
-   getCode(url,function(code){
-        console.log("show==",code);   
-   })
-}
-
-const save=(url)=>{
-   let code = document.getElementById("snipet").textContent;
-   console.log("save==",code);
-         let filename = snipARR[actualDOC].u;
-         if (!filename) {alert("no file"); return;}
-         let ext = filename.split(".")[1];
-         console.log(96,ext,filename);
-         let mime = "text/plain";
-         if (ext==="html")   mime = "text/html";
-         if (ext==="js")     mime = "text/javascript";
-         if (ext==="json")   mime = "application/json";
-         
-         var blob = new Blob([code], {type: mime+";charset=utf-8"});
-         saveAs(blob, filename);      
-return;   
-   
-   url = getLocalURL(url);
-   console.log(77,url);
-   let exurl = location.href+url
-   console.log(exurl,"save");   
-   getCode(url,(code)=>{
-        console.log("save==",code);
-         let filename = snipARR[actualDOC].n;
-         console.log(filename);
-         if(!filename) return;
-         var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
-         saveAs(blob, filename);      
-   })
-}
-
+ 
 const edit=(url)=>{   
    url = getLocalURL(url);
    console.log(77,url);
@@ -125,25 +85,42 @@ const edit=(url)=>{
    window.open(exurl,"_self");  
 }
 
+const show=(url)=>{
+   let code = document.getElementById("snipet").textContent;
+   url = getLocalURL(url);
+   console.log("show==",code);   
+   
+}
+
+const save=(url)=>{
+   let code = document.getElementById("snipet").textContent;
+   console.log("save==",code);
+   let filename = snipARR[actualDOC].u;
+   if (!filename) {alert("no file"); return;}
+   let ext = filename.split(".")[1];
+   console.log(96,ext,filename);
+   let mime = "text/plain";
+   if (ext==="html")   mime = "text/html";
+   if (ext==="js")     mime = "text/javascript";
+   if (ext==="json")   mime = "application/json";
+
+   var blob = new Blob([code], {type: mime+";charset=utf-8"});
+   saveAs(blob, filename); 
+}
+
+
+
 
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
 const ShowNow=(ten,url,i)=>{
       actualDOC = i;
-      console.log("actualDOC=",actualDOC,snipARR[actualDOC]);
+      console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
       ten.classList.add("active");
    
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
-            //console.log(i);
-            //console.log(code)
-            /*let html = `<button class="adm" onclick='edit("${url}")'>edit</button>`;
-               html += `<button class="adm" onclick='show("${url}")'>show</button>`;
-               html += `<button class="adm" onclick='save("${url}")'>save</button>`;
-            document.getElementById("edits").innerHTML += html*/
-
-
             document.getElementById("snipet").textContent = code;
             ten.classList.add("active");
       })
@@ -164,8 +141,8 @@ document.addEventListener("DOMContentLoaded",function(){
        
         <div class="container" id="klawisze"></div>
        <div class="container" id="edits">
+            <button class="adm red" onclick="save()">save</button>
             <button class="adm" onclick="show()">show</button>
-            <button class="adm" onclick="save()">save</button>          
             <button class="adm" onclick="edit()">edit</button>
             <hr />
        </div>
