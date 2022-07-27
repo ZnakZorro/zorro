@@ -35,8 +35,8 @@ const snipARR = [
    {n:"dom",             f:"js",     u:"domReady.js"},
    
 ];
-//---dom ready--------------------------------
-document.addEventListener("DOMContentLoaded",function(){
+   
+const showButtons=()=>{
       console.log("dom ready",snipARR); 
       let html ="";
       snipARR.forEach((o,i)=>{
@@ -45,7 +45,31 @@ document.addEventListener("DOMContentLoaded",function(){
          html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`;
       });
       console.log(html); 
-      document.getElementById("klawisze").innerHTML = html;
+      document.getElementById("klawisze").innerHTML = html;   
+}   
+
+const showButtonsByFolders=()=>{
+      console.log("dom ready",snipARR); 
+      let html ="";
+      let folders={}
+      snipARR.forEach((o,i)=>{
+         folders[o.f] = [];
+      });
+      console.log(1,folders);
+      snipARR.forEach((o,i)=>{
+         console.log(i,o); 
+         let u = o.f+'/'+o.u;
+         folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
+      });
+      console.log(2,folders);
+      //console.log(html); 
+      //document.getElementById("klawisze").innerHTML = html;   
+}   
+
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+      showButtons();
+      showButtonsByFolders()
 })
 //---DOM READY----------------------------------   
   
