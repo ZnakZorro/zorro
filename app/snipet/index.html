@@ -75,7 +75,7 @@ const show=(url)=>{
    console.log("actualDOC=",actualDOC,snipARR[actualDOC]);
    let o = snipARR[actualDOC];
    console.log(o)
-   url = (url) ? url : o.f+"/"o.u;
+   url = (url) ? url : o.f+"/"+o.u;
    console.log(77,url);
    let exurl = location.href+url
    console.log(exurl,"show");
