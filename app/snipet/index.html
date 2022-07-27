@@ -89,6 +89,15 @@ const show=(url)=>{
 }
 
 const save=(url)=>{
+   let code = document.getElementById("snipet").textContent;
+   console.log("save==",code);
+         let filename = snipARR[actualDOC].n;
+         console.log(filename);
+         if(!filename) return;
+         var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+         saveAs(blob, filename);      
+return;   
+   
    url = getLocalURL(url);
    console.log(77,url);
    let exurl = location.href+url
@@ -155,7 +164,7 @@ document.addEventListener("DOMContentLoaded",function(){
             <hr />
        </div>
        
-        <div class="container code" id="snipet"></div>
+        <div class="container code" id="snipet" contenteditable="true"></div>
     </div>
   
   </body>
