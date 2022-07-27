@@ -29,6 +29,7 @@
    div#klawisze>div>span {display:inline-block; min-width:3.0em;}
    div#klawisze>div>button {background-color: #777;color: white;}
 </style>
+   <script src="../../js/FileSaver.min.js"></script>
 <script>
 const snipARR = [
    {n:"index",           f:"html",   u:"index.html"},
@@ -86,15 +87,22 @@ const show=(url)=>{
         console.log("show==",code);   
    })
 }
+
 const save=(url)=>{
    url = getLocalURL(url);
    console.log(77,url);
    let exurl = location.href+url
    console.log(exurl,"save");   
    getCode(url,(code)=>{
-        console.log("save==",code);   
+        console.log("save==",code);
+         let filename = snipARR[actualDOC].n;
+         console.log(filename);
+         if(!filename) return;
+         var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+         saveAs(blob, filename);      
    })
 }
+
 const edit=(url)=>{   
    url = getLocalURL(url);
    console.log(77,url);
