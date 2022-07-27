@@ -25,6 +25,9 @@
     line-break: anywhere;
     display: flex;
 }
+   div#klawisze div span {display:inline-block; min-width:4em;}
+   div#klawisze>div>span {display:inline-block; min-width:4em;}
+   div#klawisze>div>button {background-color:#ddd;}
 </style>
 <script>
 const snipARR = [
@@ -35,44 +38,26 @@ const snipARR = [
    {n:"dom",             f:"js",     u:"domReady.js"},
    
 ];
+let actualDOC=0;
    
-const showButtons=()=>{
-      console.log("dom ready",snipARR); 
-      let html ="";
-      snipARR.forEach((o,i)=>{
-         let u = o.f+'/'+o.u;
-         html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`;
-      });
-      console.log(html); 
-      document.getElementById("klawisze").innerHTML = html;   
-}   
-
 const showButtonsByFolders=()=>{
-      console.log("dom ready",snipARR); 
-      let html ="";
       let folders={}
       snipARR.forEach((o,i)=>{
          folders[o.f] = [];
       });
-      console.log(1,folders);
       snipARR.forEach((o,i)=>{
          let u = o.f+'/'+o.u;
          folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
       });
-      console.log("ffffffffff",folders);
       for (const f in folders){
-         console.log(f,folders[f]); 
-         let html = "<div>"+f+": "+folders[f].join("")+"</div>";
+         let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
          document.getElementById("klawisze").innerHTML += html;   
       }
-      //console.log(html); 
-      //document.getElementById("klawisze").innerHTML = html;   
 }   
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-      //showButtons();
-      showButtonsByFolders()
+      showButtonsByFolders();
 })
 //---DOM READY----------------------------------   
   
@@ -108,6 +93,8 @@ const save=(url)=>{
 
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
 const ShowNow=(ten,url,i)=>{
+      actualDOC = i;
+      console.log("actualDOC=",actualDOC,snipARR[actualDOC]);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
       ten.classList.add("active");
    
