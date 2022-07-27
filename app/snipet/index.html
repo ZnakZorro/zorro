@@ -91,10 +91,16 @@ const show=(url)=>{
 const save=(url)=>{
    let code = document.getElementById("snipet").textContent;
    console.log("save==",code);
-         let filename = snipARR[actualDOC].n;
-         console.log(filename);
-         if(!filename) return;
-         var blob = new Blob([code], {type: "text/plain;charset=utf-8"});
+         let filename = snipARR[actualDOC].u;
+         if (!filename) {alert("no file"); return;}
+         let ext = filename.split(".")[1];
+         console.log(96,ext,filename);
+         let mime = "text/plain";
+         if (ext==="html")   mime = "text/html";
+         if (ext==="js")     mime = "text/javascript";
+         if (ext==="json")   mime = "application/json";
+         
+         var blob = new Blob([code], {type: mime+";charset=utf-8"});
          saveAs(blob, filename);      
 return;   
    
