@@ -62,6 +62,8 @@ const showButtonsByFolders=()=>{
       console.log("ffffffffff",folders);
       for (const f in folders){
          console.log(f,folders[f]); 
+         let html = f+": "+folders[f].join("");
+         document.getElementById("klawisze").innerHTML += html;   
       }
       //console.log(html); 
       //document.getElementById("klawisze").innerHTML = html;   
