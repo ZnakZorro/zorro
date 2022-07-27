@@ -25,9 +25,8 @@
     line-break: anywhere;
     display: flex;
 }
-   div#klawisze div span {display:inline-block; min-width:4em;}
-   div#klawisze>div>span {display:inline-block; min-width:4em;}
-   div#klawisze>div>button {background-color:#ddd;}
+   div#klawisze>div>span {display:inline-block; min-width:3.3em;}
+   div#klawisze>div>button {background-color: #777;color: white;}
 </style>
 <script>
 const snipARR = [
@@ -129,13 +128,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
        
-        <div class="container" id="klawisze">
-          
-          <button class="btn blue" onclick='ShowNow(this,"html/index.html")'>index</button>
-          <button class="btn" onclick='ShowNow(this,"js/fetch.js")'>fetch</button> 
-          <button class="btn" onclick='ShowNow(this,"js/createElement.js")'>create</button> 
-          
-        </div>
+        <div class="container" id="klawisze"></div>
        <div class="container" id="edits"></div>
        
         <div class="container code" id="snipet"></div>
