@@ -25,7 +25,8 @@
     line-break: anywhere;
     display: flex;
 }
-   div#klawisze>div>span {display:inline-block; min-width:3.3em;}
+   div#klawisze>div {box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);padding:0.25em;}
+   div#klawisze>div>span {display:inline-block; min-width:3.0em;}
    div#klawisze>div>button {background-color: #777;color: white;}
 </style>
 <script>
@@ -69,13 +70,15 @@ const getCode=(url,callback)=>{
    }).catch(e => {console.log(e)})
 }   
 
+const getLocalURL=url=>{
+   let o = snipARR[actualDOC];
+   url = (url) ? url : o.f+"/"+o.u;
+   return url;
+}
 const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    
 const show=(url)=>{
-   console.log("actualDOC=",actualDOC,snipARR[actualDOC]);
-   let o = snipARR[actualDOC];
-   console.log(o)
-   url = (url) ? url : o.f+"/"+o.u;
+   url = getLocalURL(url);
    console.log(77,url);
    let exurl = location.href+url
    console.log(exurl,"show");
@@ -84,6 +87,8 @@ const show=(url)=>{
    })
 }
 const save=(url)=>{
+   url = getLocalURL(url);
+   console.log(77,url);
    let exurl = location.href+url
    console.log(exurl,"save");   
    getCode(url,(code)=>{
@@ -91,6 +96,8 @@ const save=(url)=>{
    })
 }
 const edit=(url)=>{   
+   url = getLocalURL(url);
+   console.log(77,url);
    let exurl = getURL(url);//'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    window.open(exurl,"_self");  
 }
@@ -108,10 +115,10 @@ const ShowNow=(ten,url,i)=>{
         .then(code => {
             //console.log(i);
             //console.log(code)
-            let html = `<button class="adm" onclick='edit("${url}")'>edit</button>`;
+            /*let html = `<button class="adm" onclick='edit("${url}")'>edit</button>`;
                html += `<button class="adm" onclick='show("${url}")'>show</button>`;
                html += `<button class="adm" onclick='save("${url}")'>save</button>`;
-            document.getElementById("edits").innerHTML += html
+            document.getElementById("edits").innerHTML += html*/
 
 
             document.getElementById("snipet").textContent = code;
