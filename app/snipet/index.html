@@ -40,7 +40,6 @@ const showButtons=()=>{
       console.log("dom ready",snipARR); 
       let html ="";
       snipARR.forEach((o,i)=>{
-         console.log(i,o); 
          let u = o.f+'/'+o.u;
          html += `<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`;
       });
@@ -57,11 +56,16 @@ const showButtonsByFolders=()=>{
       });
       console.log(1,folders);
       snipARR.forEach((o,i)=>{
-         console.log(i,o); 
          let u = o.f+'/'+o.u;
          folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
       });
-      console.log(2,folders);
+      console.log("ffffffffff",folders);
+      (for f in folders){
+         console.log(f); 
+      }
+      (for f of folders){
+         console.log(f); 
+      }
       //console.log(html); 
       //document.getElementById("klawisze").innerHTML = html;   
 }   
