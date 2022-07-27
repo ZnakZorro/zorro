@@ -62,7 +62,7 @@ const showButtonsByFolders=()=>{
       console.log("ffffffffff",folders);
       for (const f in folders){
          console.log(f,folders[f]); 
-         let html = f+": "+folders[f].join("");
+         let html = "<div>"+f+": "+folders[f].join("")+"</div>";
          document.getElementById("klawisze").innerHTML += html;   
       }
       //console.log(html); 
@@ -71,7 +71,7 @@ const showButtonsByFolders=()=>{
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-      showButtons();
+      //showButtons();
       showButtonsByFolders()
 })
 //---DOM READY----------------------------------   
