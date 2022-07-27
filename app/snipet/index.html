@@ -71,11 +71,10 @@ const getCode=(url,callback)=>{
 
 const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
    
-const edit=(url)=>{
-   let exurl = getURL(url);//'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
-   window.open(exurl,"_self");  
-}
 const show=(url)=>{
+   let o = snipARR[actualDOC];
+   url = url ? url : o.f+"/"o.u;
+   console.log(77,url);
    let exurl = location.href+url
    console.log(exurl,"show");
    getCode(url,function(code){
@@ -89,6 +88,11 @@ const save=(url)=>{
         console.log("save==",code);   
    })
 }
+const edit=(url)=>{   
+   let exurl = getURL(url);//'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   window.open(exurl,"_self");  
+}
+
 
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
 const ShowNow=(ten,url,i)=>{
@@ -105,10 +109,8 @@ const ShowNow=(ten,url,i)=>{
             let html = `<button class="adm" onclick='edit("${url}")'>edit</button>`;
                html += `<button class="adm" onclick='show("${url}")'>show</button>`;
                html += `<button class="adm" onclick='save("${url}")'>save</button>`;
-            document.getElementById("edits").innerHTML = html
+            document.getElementById("edits").innerHTML += html
 
-            //html += `<div class="code" id="code">${code}</div>`;
-            //html += `<div class="code" id="code">${encodeURIComponent(code)}</div>`;
 
             document.getElementById("snipet").textContent = code;
             ten.classList.add("active");
@@ -129,7 +131,12 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
        
         <div class="container" id="klawisze"></div>
-       <div class="container" id="edits"></div>
+       <div class="container" id="edits">
+            <button class="adm" onclick="show()">show</button>
+            <button class="adm" onclick="save()">save</button>          
+            <button class="adm" onclick="edit()">edit</button>
+            <hr />
+       </div>
        
         <div class="container code" id="snipet"></div>
     </div>
