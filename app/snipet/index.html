@@ -119,7 +119,7 @@ const save=(url)=>{
 const formatTXT=(code)=>{
    let arr = code.split("\n");
    arr[0] = "<h3>"+arr[0]+"</h3>";
-   for (let i=1; i<arr.length-2; i++){
+   for (let i=1; i<arr.length-1; i++){
       if (arr[i]) arr[i] = "<p>"+arr[i]+"</p>";
    }
    console.log("aaaaaaa=",arr);
