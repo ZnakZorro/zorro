@@ -50,12 +50,13 @@ const snipARR = [
    
 ];
 let actualDOC=0;
+let mainFolders = [];
    
 const showButtonsByFolders=()=>{
       let folders={}
       snipARR.forEach((o,i)=>{
          folders[o.f] = [];
-      });
+      });      
       snipARR.forEach((o,i)=>{
          let u = o.f+'/'+o.u;
          folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
@@ -63,7 +64,10 @@ const showButtonsByFolders=()=>{
       for (const f in folders){
          let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
          document.getElementById("klawisze").innerHTML += html;   
+         mainFolders.push(f);
       }
+      console.log(mainFolders);
+   
 }   
 
 //---dom ready--------------------------------
