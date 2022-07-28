@@ -66,8 +66,15 @@ const showButtonsByFolders=()=>{
          document.getElementById("klawisze").innerHTML += html;   
          mainFolders.push(f);
       }
-      console.log(mainFolders);
-   
+      console.log(1,mainFolders);
+      let mainFolders = [...new Set(mainFolders)]
+      console.log(2,mainFolders);
+      
+      mainFolders.forEach((f)=>{
+         console.log(f);
+         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;   
+         
+      })
 }   
 
 //---dom ready--------------------------------
@@ -76,6 +83,9 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 //---DOM READY----------------------------------   
   
+const mainFoder(furl,ten){
+   ten.classList.add("active");
+}
 
 const getCode=(url,callback)=>{
    fetch(url)
@@ -176,7 +186,7 @@ document.addEventListener("DOMContentLoaded",function(){
     <div class="wrapper">
         <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
-       
+       <div class="container klawisze" id="mainFolders"></div>
         <div class="container" id="klawisze"></div>
        <div class="container" id="edits">
             <button class="adm red" onclick="save()">save</button>
