@@ -84,7 +84,8 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 //---DOM READY----------------------------------   
   
-const mainFoder=dir,ten)=>{
+const mainFoder=(dir,ten)=>{
+   document.querySelectorAll("#mainFolders button").forEach(b=>b.classList.remove("active"));
    ten.classList.add("active");
    console.log(dir);
    let arr=[];
