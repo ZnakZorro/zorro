@@ -123,7 +123,8 @@ const formatTXT=(code)=>{
    arr[0] = "<h3>"+arr[0]+"</h3>";
    for (let i=1; i<arr.length-1; i++){
       arr[i] = arr[i].trim();
-      if (arr[i]!="") arr[i] = "<p>"+arr[i]+"</p>";
+      if (arr[i] != "") arr[i] = "<p>"+arr[i]+"</p>";
+      else              arr[i] = "<br />";
    }
    console.log("aaaaaaa=",arr);
    return arr.join("\n");
