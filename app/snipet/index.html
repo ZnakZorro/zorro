@@ -120,6 +120,9 @@ const save=(url)=>{
 const formatTXT=(code)=>{
    let arr = code.split("\n");
    arr[0] = "<h3>"+arr[0]+"</h3>";
+   for (let i=1; i<aa.length-2; i++){
+      arr[i] = "<h3>"+arr[i]+"</h3>";
+   }
    console.log(arr);
    return arr.join("\n");
 }
@@ -130,7 +133,7 @@ const ShowNow=(ten,url,i)=>{
       actualDOC = i;
       console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-      ten.classList.add("active");
+      //ten.classList.add("active");
       let ext = snipARR[actualDOC].u.split(".")[1];
       console.log("128",ext);
       let formatowanie = false;
@@ -144,8 +147,9 @@ const ShowNow=(ten,url,i)=>{
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
-            
-            document.getElementById("snipet").textContent = formatowanie ? formatTXT(code) : code;
+            if (formatowanie){
+                  document.getElementById("snipet").innerHTML = formatTXT(code);
+            } else document.getElementById("snipet").textContent = code;
             ten.classList.add("active");
       })
         .catch(e => {console.log(e)})   
