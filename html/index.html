@@ -38,6 +38,30 @@
               document.getElementById"info").innerHTML = "Browser doesn't support Web Share API";
             }      
        }
+
+      
+      
+      const sharegoo=()=>{      
+         const shareData = {
+             title: 'MDN',
+             text: 'Learn web development on MDN!',
+             url: 'https://developer.mozilla.org'
+           }
+
+           const btn = document.querySelector('button');
+           const resultPara = document.querySelector('.info');
+
+           // Share must be triggered by "user activation"
+           btn.addEventListener('click', async () => {
+             try {
+               await navigator.share(shareData)
+               resultPara.textContent = 'MDN shared successfully'
+             } catch(err) {
+               resultPara.textContent = 'Error: ' + err
+             }
+           });
+      }
+      
       
    </script>
           
@@ -47,7 +71,7 @@
     <div class="wrapper">
         <app-menu title="Inne" name="ZnakZorro" link="../"></app-menu>
         <script src="../appMenu.js"></script>
-       <div id="info"></div>
+       <div id="info" class="info"></div>
         <div class="container">           
                <a href="./rss.html"   class="btn blue">RSS</a>
                <a href="./zapis.html" class="btn blue">ZAPIS</a>            
@@ -81,6 +105,7 @@
        
          <div class="container">
                <button onclick="sharego()">share.test</button>
+               <button onclick="sharegoo()">shareo.test</button>
          </div>       
        
     </div><!-- wraper-->
