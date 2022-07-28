@@ -51,7 +51,8 @@ const snipARR = [
 ];
 let actualDOC=0;
 let mainFolders = [];
-   
+
+//-------won
 const showButtonsByFolders=()=>{
       let folders={}
       snipARR.forEach((o,i)=>{
@@ -77,36 +78,13 @@ const showButtonsByFolders=()=>{
          
       })
 }   
+   
 
 const showMainFolders=()=>{
-      snipARR.forEach((f)=>{
-         mainFolders.push(f);
+      snipARR.forEach((o)=>{
+         mainFolders.push(o.f);
       });  
       mainFolders = [...new Set(mainFolders)]
-      mainFolders.forEach((f)=>{
-         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;    
-      })
-return;      
-      
-      
-      let folders={}
-      snipARR.forEach((o,i)=>{
-         folders[o.f] = [];
-      });      
-      snipARR.forEach((o,i)=>{
-         let u = o.f+'/'+o.u;
-         folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
-      });
-      for (const f in folders){
-         let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
-         document.getElementById("klawisze").innerHTML += html;   
-         mainFolders.push(f);
-      }
-      //console.log(1,mainFolders);
-      //mainFolders = [...new Set(mainFolders)]
-      let _mainFolders = [...new Set(mainFolders)]
-      //console.log(2,mainFolders,_mainFolders);
-      
       mainFolders.forEach((f)=>{
          document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;    
       })
@@ -130,15 +108,23 @@ const mainFoder=(dir,ten)=>{
       //console.log(a);
       html += `<button data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
    });
-   document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";
-   
+   document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";   
 }
 
+
+const fireFirsStart=()=>{
+    document.querySelector("#mainFolders button").click();
+    setTimeout(()=>{
+        document.querySelector("#klawisze button").click();
+    },100)
+    
+} 
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
       //showButtonsByFolders();
       showMainFolders();
+      fireFirsStart();
 })
 //---DOM READY----------------------------------   
   
