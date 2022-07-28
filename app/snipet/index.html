@@ -67,8 +67,9 @@ const showButtonsByFolders=()=>{
          mainFolders.push(f);
       }
       console.log(1,mainFolders);
-      let mainFolders = [...new Set(mainFolders)]
-      console.log(2,mainFolders);
+      mainFolders = [...new Set(mainFolders)]
+      let _mainFolders = [...new Set(mainFolders)]
+      console.log(2,mainFolders,_mainFolders);
       
       mainFolders.forEach((f)=>{
          console.log(f);
