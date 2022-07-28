@@ -130,6 +130,7 @@ const formatTXT=(code)=>{
 
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
 const ShowNow=(ten,url,i)=>{
+      let snipet = document.getElementById("snipet");
       actualDOC = i;
       console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
@@ -138,18 +139,20 @@ const ShowNow=(ten,url,i)=>{
       console.log("128",ext);
       let formatowanie = false;
       if (ext==="txt") {
-            document.getElementById("snipet").classList.add("text");
+            snipet.classList.add("text");
             formatowanie = true;
       }
-      else  document.getElementById("snipet").classList.remove("text");
+      else  snipet.classList.remove("text");
       
    
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
             if (formatowanie){
-                  document.getElementById("snipet").innerHTML = formatTXT(code);
-            } else document.getElementById("snipet").textContent = code;
+                  snipet.innerHTML = formatTXT(code);
+            } else {       
+               snipet.textContent = code;
+            }
             ten.classList.add("active");
       })
         .catch(e => {console.log(e)})   
