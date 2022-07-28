@@ -145,7 +145,7 @@ const ShowNow=(ten,url,i)=>{
         .then(ret => {return ret.text()})
         .then(code => {
             
-            document.getElementById("snipet").textContent = formatowanie ? code : formatTXT(code);
+            document.getElementById("snipet").textContent = formatowanie ? formatTXT(code) : code;
             ten.classList.add("active");
       })
         .catch(e => {console.log(e)})   
