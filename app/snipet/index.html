@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded",function(){
 const mainFoder=(dir,ten)=>{
    document.querySelectorAll("#mainFolders button").forEach(b=>b.classList.remove("active"));
    ten.classList.add("active");
-   console.log(dir);
+   //console.log(dir);
    let arr=[];
    snipARR.forEach((z,i)=>{
       z.i=i;
@@ -95,20 +95,14 @@ const mainFoder=(dir,ten)=>{
          arr.push(z);  
       }
    })
-   console.log(arr);
+   //console.log(arr);
    let html = "<span>"+dir+": </span>";
    arr.forEach((a)=>{
-      console.log(a);
+      //console.log(a);
       html += `<button data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
    });
    document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";
-   /*
-   for (const f in folders){
-         let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
-         document.getElementById("klawisze").innerHTML += html;   
-         mainFolders.push(f);
-      }
-  */
+   
 }
 
 const getCode=(url,callback)=>{
