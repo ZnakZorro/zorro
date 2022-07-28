@@ -67,6 +67,9 @@ h1,h2,h3 {margin: 0.25em 0;}
 .red   {background-color: #d3004e;}
 .green {background-color: #228b22;}
 .blue  {background-color: #69f;}
+.navy  {background-color: #004;}
+
+.main  {background-color: #126;}
 .adm   {background-color: #9bf; color:black;}
 .adm0   {background-color: #9bf; color:black;}
 .adm1   {background-color: #9fb; color:black;}
