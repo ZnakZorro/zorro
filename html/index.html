@@ -22,20 +22,22 @@
        document.addEventListener("DOMContentLoaded",function(){
            //document.getElementById("info").textContent = "info";
        });
-const sharego=()=>{      
-      if (navigator.share) {
-        navigator
-          .share({
-            title: "This is header/title",
-            text: "This is the description",
-            url: "https://put-here-url.com",
-          })
-          .then(() => console.log("Successful share"))
-          .catch((error) => console.log("Error sharing", error));
-      } else {
-        console.error("Browser doesn't support Web Share API");
-      }      
-      }
+      
+      const sharego=()=>{      
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "This is header/title",
+                  text: "This is the description",
+                  url: "https://put-here-url.com",
+                })
+                .then(() => console.log("Successful share"))
+                .catch((error) => console.log("Error sharing", error));
+            } else {
+              console.error("Browser doesn't support Web Share API");
+              document.getElementById"info").innerHTML = "Browser doesn't support Web Share API";
+            }      
+       }
       
    </script>
           
@@ -45,7 +47,7 @@ const sharego=()=>{
     <div class="wrapper">
         <app-menu title="Inne" name="ZnakZorro" link="../"></app-menu>
         <script src="../appMenu.js"></script>
-       
+       <div id="info"></div>
         <div class="container">           
                <a href="./rss.html"   class="btn blue">RSS</a>
                <a href="./zapis.html" class="btn blue">ZAPIS</a>            
@@ -78,7 +80,7 @@ const sharego=()=>{
             -->
        
          <div class="container">
-               <button onclick="sharego()">sharego</button>
+               <button onclick="sharego()">share.test</button>
          </div>       
        
     </div><!-- wraper-->
