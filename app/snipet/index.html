@@ -82,15 +82,16 @@ const mainFoder=(dir,ten)=>{
       //console.log(a);
       html += `<button data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
    });
-   document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";   
+   document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>"; 
+   document.querySelector("#klawisze button").click();
 }
 
 
 const fireFirsStart=()=>{
     document.querySelector("#mainFolders button").click();
-    setTimeout(()=>{
+    //setTimeout(()=>{
         document.querySelector("#klawisze button").click();
-    },100)
+    //},100)
     
 } 
 
