@@ -28,6 +28,7 @@
       font-family: inherit;
       font-size: medium;
       line-break: inherit;
+      white-space: inherit;
    }
    div#klawisze>div {box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);padding:0.25em;}
    div#klawisze>div>span {display:inline-block; min-width:3.0em;}
@@ -120,7 +121,8 @@ const formatTXT=(code)=>{
    let arr = code.split("\n");
    arr[0] = "<h3>"+arr[0]+"</h3>";
    for (let i=1; i<arr.length-1; i++){
-      if (arr[i]) arr[i] = "<p>"+arr[i]+"</p>";
+      arr[i] = arr[i].trim();
+      if (arr[i]!="") arr[i] = "<p>"+arr[i]+"</p>";
    }
    console.log("aaaaaaa=",arr);
    return arr.join("\n");
