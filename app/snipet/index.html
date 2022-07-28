@@ -116,7 +116,12 @@ const save=(url)=>{
    saveAs(blob, filename); 
 }
 
-
+const formatTXT=(code)=>{
+   let arr = code.split("\n");
+   arr[0] = "<h3>"+arr[0]+"</h3>";
+   
+   return arr.join("\n");
+}
 
 
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
@@ -127,15 +132,19 @@ const ShowNow=(ten,url,i)=>{
       ten.classList.add("active");
       let ext = snipARR[actualDOC].u.split(".")[1];
       console.log("128",ext);
-      
-      if (ext==="txt") document.getElementById("snipet").classList.add("text");
-      else             document.getElementById("snipet").classList.remove("text");
+      let formatowanie = false;
+      if (ext==="txt") {
+            document.getElementById("snipet").classList.add("text");
+            formatowanie = true;
+      }
+      else  document.getElementById("snipet").classList.remove("text");
       
    
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
-            document.getElementById("snipet").textContent = code;
+            
+            document.getElementById("snipet").textContent = formatowanie : code ? formatTXT(code);
             ten.classList.add("active");
       })
         .catch(e => {console.log(e)})   
