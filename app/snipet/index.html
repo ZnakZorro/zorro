@@ -89,7 +89,8 @@ const mainFoder=(dir,ten)=>{
    ten.classList.add("active");
    console.log(dir);
    let arr=[];
-   snipARR.forEach((z)=>{
+   snipARR.forEach((z,i)=>{
+      z.i=i;
       if (z.f===dir){
          arr.push(z);  
       }
