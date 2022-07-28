@@ -99,7 +99,7 @@ const mainFoder=(dir,ten)=>{
    let html = "<span>"+dir+": </span>";
    arr.forEach((a)=>{
       console.log(a);
-      html += `<button data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.n}";${a.i})'>index</button>';
+      html += `<button data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}";${a.i})'>${a.n}</button>`;
    });
    document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";
    /*
