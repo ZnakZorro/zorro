@@ -52,33 +52,6 @@ const snipARR = [
 let actualDOC=0;
 let mainFolders = [];
 
-//-------won
-const showButtonsByFolders=()=>{
-      let folders={}
-      snipARR.forEach((o,i)=>{
-         folders[o.f] = [];
-      });      
-      snipARR.forEach((o,i)=>{
-         let u = o.f+'/'+o.u;
-         folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
-      });
-      for (const f in folders){
-         let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
-         document.getElementById("klawisze").innerHTML += html;   
-         mainFolders.push(f);
-      }
-      //console.log(1,mainFolders);
-      //mainFolders = [...new Set(mainFolders)]
-      let _mainFolders = [...new Set(mainFolders)]
-      //console.log(2,mainFolders,_mainFolders);
-      
-      mainFolders.forEach((f)=>{
-         //console.log(f);
-         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;   
-         
-      })
-}   
-   
 
 const showMainFolders=()=>{
       snipARR.forEach((o)=>{
