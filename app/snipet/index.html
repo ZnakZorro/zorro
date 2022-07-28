@@ -121,9 +121,9 @@ const formatTXT=(code)=>{
    let arr = code.split("\n");
    arr[0] = "<h3>"+arr[0]+"</h3>";
    for (let i=1; i<arr.length-2; i++){
-      arr[i] = "<h3>"+arr[i]+"</h3>";
+      if (arr[i]) arr[i] = "<p>"+arr[i]+"</p>";
    }
-   console.log(arr);
+   console.log("aaaaaaa=",arr);
    return arr.join("\n");
 }
 
