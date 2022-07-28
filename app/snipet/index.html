@@ -66,13 +66,13 @@ const showButtonsByFolders=()=>{
          document.getElementById("klawisze").innerHTML += html;   
          mainFolders.push(f);
       }
-      console.log(1,mainFolders);
+      //console.log(1,mainFolders);
       mainFolders = [...new Set(mainFolders)]
       let _mainFolders = [...new Set(mainFolders)]
-      console.log(2,mainFolders,_mainFolders);
+      //console.log(2,mainFolders,_mainFolders);
       
       mainFolders.forEach((f)=>{
-         console.log(f);
+         //console.log(f);
          document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;   
          
       })
@@ -141,7 +141,7 @@ const formatTXT=(code)=>{
       if (arr[i] != "") arr[i] = "<p>"+arr[i]+"</p>";
       else              arr[i] = "<br />";
    }
-   console.log("aaaaaaa=",arr);
+   //console.log("aaaaaaa=",arr);
    return arr.join("\n");
 }
 
