@@ -1,0 +1,48 @@
+<p><button>Share MDN!</button></p>
+<p class="result"></p>
+
+<script>
+
+console.log(navigator);
+
+
+const shareDataa = {
+  title: 'MDN',
+  text: 'Learn web development on MDN!',
+  url: 'https://developer.mozilla.org'
+}
+
+const btn = document.querySelector('button');
+const resultPara = document.querySelector('.result');
+
+// Share must be triggered by "user activation"
+btn.addEventListener('click', async () => {
+  try {
+    await navigator.share(shareDataa)
+    resultPara.textContent = 'MDN shared successfully'
+  } catch(err) {
+    resultPara.textContent = `Error: ${err}`
+  }
+});
+
+
+
+
+let testShare = { someNewProperty: 'Data to share' }
+
+// Complex data that uses new key
+const shareData = {
+  title: 'MDN',
+  text: 'Learn web development on MDN!',
+  url: 'https://developer.mozilla.org',
+  someNewProperty: 'Data to share'
+}
+
+// Test that the key is valid and supported before sharing
+if (navigator.canShare(testShare)) {
+    console.log("Use navigator.share() to share shareData");
+} else {
+    console.log("Handle case that new data property cant be shared.");
+}
+
+</script>
