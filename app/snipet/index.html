@@ -205,16 +205,71 @@ document.addEventListener("DOMContentLoaded",function(){
     <div class="wrapper">
         <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
-       <div class="container klawisze" id="mainFolders"></div>
+       <div class="info message" id="info"></div>
+        <div class="container klawisze" id="mainFolders"></div>
         <div class="container" id="klawisze"></div>
-       <div class="container" id="edits">
+        <div class="container" id="edits">
             <button class="adm0" onclick="save()">save</button>
             <button class="adm1" onclick="show()">show</button>
             <button class="adm2" onclick="edit()">edit</button>
-       </div>
+        </div>
        
         <div class="container code" id="snipet" contenteditable="true"></div>
+       
+       
+         <div class="container">
+               <button onclick="sharego()">share.test</button>
+               <button onclick="sharegoo()">shareo.test</button>
+         </div>            
+       
     </div>
   
   </body>
+   
+<script>
+   <script>
+     
+      
+      const sharego=()=>{      
+            if (navigator.share) {
+              navigator
+                .share({
+                  title: "Snipet ",
+                  text: "Tekst snipeta",
+                  url: "https://znakzorro.github.io/zorro/app/snipet/",
+                })
+                .then(() => console.log("Successful share"))
+                .catch((error) => console.log("Error sharing", error));
+            } else {
+              console.error("Browser doesn't support Web Share API");
+              document.getElementById("info").innerHTML = "Browser doesn't support Web Share API";
+            }      
+       }
+
+      
+      /*
+      const sharegoo=()=>{      
+         const shareData = {
+             title: 'MDN',
+             text: 'Learn web development on MDN!',
+             url: 'https://developer.mozilla.org'
+           }
+
+           const btn = document.querySelector('button');
+           const resultPara = document.querySelector('.info');
+
+           // Share must be triggered by "user activation"
+           btn.addEventListener('click', async () => {
+             try {
+               await navigator.share(shareData)
+               resultPara.textContent = 'MDN shared successfully'
+             } catch(err) {
+               resultPara.textContent = 'Error: ' + err
+             }
+           });
+      }
+      */
+      
+   </script>
+   
 </html>
