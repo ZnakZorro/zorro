@@ -78,12 +78,41 @@ const showButtonsByFolders=()=>{
       })
 }   
 
-//---dom ready--------------------------------
-document.addEventListener("DOMContentLoaded",function(){
-      showButtonsByFolders();
-})
-//---DOM READY----------------------------------   
-  
+const showMainFolders=()=>{
+      snipARR.forEach((f)=>{
+         mainFolders.push(f);
+      });  
+      mainFolders = [...new Set(mainFolders)]
+      mainFolders.forEach((f)=>{
+         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;    
+      })
+return;      
+      
+      
+      let folders={}
+      snipARR.forEach((o,i)=>{
+         folders[o.f] = [];
+      });      
+      snipARR.forEach((o,i)=>{
+         let u = o.f+'/'+o.u;
+         folders[o.f].push(`<button data-index="${i}" onclick='ShowNow(this,"${u}",${i})'>${o.n}</button>`);
+      });
+      for (const f in folders){
+         let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
+         document.getElementById("klawisze").innerHTML += html;   
+         mainFolders.push(f);
+      }
+      //console.log(1,mainFolders);
+      //mainFolders = [...new Set(mainFolders)]
+      let _mainFolders = [...new Set(mainFolders)]
+      //console.log(2,mainFolders,_mainFolders);
+      
+      mainFolders.forEach((f)=>{
+         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;    
+      })
+}   
+
+
 const mainFoder=(dir,ten)=>{
    document.querySelectorAll("#mainFolders button").forEach(b=>b.classList.remove("active"));
    ten.classList.add("active");
@@ -104,6 +133,15 @@ const mainFoder=(dir,ten)=>{
    document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>";
    
 }
+
+
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+      //showButtonsByFolders();
+      showMainFolders();
+})
+//---DOM READY----------------------------------   
+  
 
 const getCode=(url,callback)=>{
    fetch(url)
