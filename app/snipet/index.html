@@ -95,6 +95,11 @@ const mainFoder=(dir,ten)=>{
       }
    })
    console.log(arr);
+   let html = "<span>"+dir+": </span>";
+   arr.forEach((a)=>{
+      console.log(a);
+      html += `<button>${a.n}</button>`;
+   });
    /*
    for (const f in folders){
          let html = "<div><span>"+f+": </span>"+folders[f].join("")+"</div>";
