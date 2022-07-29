@@ -146,13 +146,18 @@ function submitHTML(){
 
 let remoteURL = new URLSearchParams(window.location.search).get("url");
 if (remoteURL){
-	fetch(u)
+	fetch(remoteURL)
 	.then(ret => {return ret.text()})
 	.then(out => {
 		console.log(out)
 		document.querySelector(".ck-content").textContent = out;
 	})
 	.catch(e => {console.log(e)})	
+	
+	console.log(document.querySelector('#editor'))
+	console.log(document.querySelector('#editor div'))
+	console.log(document.querySelector('#editor div div'))
+	
 }
 	 
    </script>
