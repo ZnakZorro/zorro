@@ -59,8 +59,8 @@ const showMainFolders=()=>{
          mainFolders.push(o.f);
       });  
       mainFolders = [...new Set(mainFolders)]
-      mainFolders.forEach((f)=>{
-         document.getElementById("mainFolders").innerHTML += `<button class='btn main' onclick='mainFoder("${f}",this)'>${f}</button>`;    
+      mainFolders.forEach((f,i)=>{
+         document.getElementById("mainFolders").innerHTML += `<button class='btn c${(i+10)%10}' onclick='mainFoder("${f}",this)'>${f}</button>`;    
       })
 }   
 
