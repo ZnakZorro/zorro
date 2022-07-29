@@ -44,6 +44,7 @@ const snipARR = [
    {n:"createElement",   f:"js",      u:"createElement.js"},
    {n:"active",          f:"js",      u:"active.js"},
    {n:"dom",             f:"js",      u:"domReady.js"},
+   {n:"param",           f:"js",      u:"parameters.js"},
    {n:"Ekspres",         f:"dom",     u:"expres.txt"},
    {n:"Nalewki",         f:"dom",     u:"nalewki.txt"},
    {n:"Borówki",         f:"580",     u:"borowki.txt"},
@@ -60,7 +61,7 @@ const showMainFolders=()=>{
       });  
       mainFolders = [...new Set(mainFolders)]
       mainFolders.forEach((f,i)=>{
-         document.getElementById("mainFolders").innerHTML += `<button class='btn c${(i+10)%10}' onclick='mainFoder("${f}",this)'>${f}</button>`;    
+         document.getElementById("mainFolders").innerHTML += `<button class='btn c${(i+10)%10}' onclick='mainFoder("${f}",this)'>${f.toUpperCase()}</button>`;    
       })
 }   
 
