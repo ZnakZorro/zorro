@@ -69,6 +69,15 @@ const cityClick=(ten)=>{
     </div>
 
 <div class="btns"><button onclick="ccc()">ClearCache</button></div>
-   <div class="btns"><button onclick="ccc(this)">ClearCache-this</button></div>
+   
+<div class="btns"><button onclick="ccc(this)">ClearCache-this</button></div>
+   
+   
+<div id="batony"></div>
+<script>
+    for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
+</script>
+   
+   
 </body>
 </html>
