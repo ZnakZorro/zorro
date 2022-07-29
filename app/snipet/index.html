@@ -228,12 +228,14 @@ document.addEventListener("DOMContentLoaded",function(){
    
      
       
-      const sharego=()=>{      
+      const sharego=()=>{     
+            let title = snipARR[actualDOC].n+" - "+snipARR[actualDOC].u;
+            let text  = document.getElementById("snipet").innerHTML;
             if (navigator.share) {
               navigator
                 .share({
-                  title: "Snipet ",
-                  text: "Tekst snipeta",
+                  title: title,
+                  text: text,
                   url: "https://znakzorro.github.io/zorro/app/snipet/",
                 })
                 .then(() => console.log("Successful share"))
