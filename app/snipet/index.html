@@ -145,6 +145,7 @@ const save=(url)=>{
    //console.log(96,ext,filename);
    let mime = "text/plain";
    if (ext==="html")   mime = "text/html";
+   if (ext==="htm")   mime = "text/html";
    if (ext==="js")     mime = "text/javascript";
    if (ext==="json")   mime = "application/json";
 
@@ -170,6 +171,7 @@ const formatTXT=(code)=>{
 /*qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq*/   
 const ShowNow=(ten,url,i)=>{
       let snipet = document.getElementById("snipet");
+      snipet.textContent = "";
       actualDOC = i;
       //console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
