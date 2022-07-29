@@ -168,11 +168,11 @@ const formatTXT=(code)=>{
 const ShowNow=(ten,url,i)=>{
       let snipet = document.getElementById("snipet");
       actualDOC = i;
-      console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
+      //console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
       //ten.classList.add("active");
       let ext = snipARR[actualDOC].u.split(".")[1];
-      console.log("128",ext);
+      //console.log("128",ext);
       let formatowanie = false;
       if (ext==="txt") {
             snipet.classList.add("text");
