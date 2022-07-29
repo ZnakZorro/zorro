@@ -1,5 +1,6 @@
 Odkamienianie DeLonghi Dedica EC 685.M
 
+
 - Trzymać wciśnięty przez 10 sekund przycisk  do momentu, gdy trzy przyciski zaczną migać w sekwencji. 
 - Ustawić pokrętło pary w pozycję skrajną. 
 - Wcisnąć przycisk czyszczenia w celu uruchomienia odkamieniania.
