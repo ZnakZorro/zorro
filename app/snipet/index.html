@@ -38,18 +38,19 @@
    <script src="../../js/FileSaver.min.js"></script>
 <script>
 const snipARR = [
-   {n:"index",           f:"html",    u:"index.html"},
-   {n:"git",             f:"html",    u:"git.html"},
-   {n:"fetch",           f:"js",      u:"fetch.js"},
-   {n:"createElement",   f:"js",      u:"createElement.js"},
-   {n:"active",          f:"js",      u:"active.js"},
-   {n:"dom",             f:"js",      u:"domReady.js"},
-   {n:"param",           f:"js",      u:"parameters.js"},
-   {n:"Ekspres",         f:"dom",     u:"expres.txt"},
-   {n:"Nalewki",         f:"dom",     u:"nalewki.txt"},
-   {n:"Borówki",         f:"580",     u:"borowki.txt"},
-   {n:"Ciasto",          f:"kuchnia", u:"ciasto.txt"},
-   {n:"Piernik",          f:"kuchnia", u:"Piernik.htm"},
+   {n:"Gramofon",        f:"dom",     v:"html",  u:"gramofon.html"},
+   {n:"Ekspres",         f:"dom",     v:"txt",   u:"expres.txt"},
+   {n:"Nalewki",         f:"dom",     v:"txt",   u:"nalewki.txt"},
+   {n:"index",           f:"html",    v:"code",  u:"index.html"},
+   {n:"git",             f:"html",    v:"code",  u:"git.html"},
+   {n:"fetch",           f:"js",      v:"code",  u:"fetch.js"},
+   {n:"createElement",   f:"js",      v:"code",  u:"createElement.js"},
+   {n:"active",          f:"js",      v:"code",  u:"active.js"},
+   {n:"dom",             f:"js",      v:"code",  u:"domReady.js"},
+   {n:"param",           f:"js",      v:"code",  u:"parameters.js"},
+   {n:"Borówki",         f:"580",     v:"txt",   u:"borowki.txt"},
+   {n:"Ciasto",          f:"kuchnia", v:"txt",   u:"ciasto.txt"},
+   {n:"Piernik",         f:"kuchnia", v:"html",  u:"Piernik.htm"},
    
    
 ];
@@ -179,6 +180,7 @@ const ShowNow=(ten,url,i)=>{
       let ext = snipARR[actualDOC].u.split(".")[1];
       //console.log("128",ext);
       let formatowanie = false;
+      console.log(snipARR[actualDOC].v);
       if (ext==="txt") {
             snipet.classList.add("text");
             formatowanie = true;
