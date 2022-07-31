@@ -191,8 +191,10 @@ const ShowNow=(ten,url,i)=>{
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
+            console.log("194 ext=",ext);
+            console.log("195 ver=",snipARR[actualDOC].v);
             if (formatowanie){
-                  snipet.innerHTML = formatTXT(code);
+                  snipet.innerHTML = ext==="htm" ? code : formatTXT(code);
             } else {       
                snipet.textContent = code;
             }
