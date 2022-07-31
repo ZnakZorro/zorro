@@ -181,11 +181,11 @@ const ShowNow=(ten,url,i)=>{
       //console.log("128",ext);
       let formatowanie = false;
       console.log(snipARR[actualDOC].v);
-      if (ext==="txt") {
+      if (ext==="txt" || ext==="htm") {
             snipet.classList.add("text");
-            formatowanie = true;
       }
       else  snipet.classList.remove("text");
+      formatowanie = (ext==="txt" || ext ==="htm") ;
       
    
       fetch(url)
