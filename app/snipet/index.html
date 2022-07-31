@@ -194,9 +194,10 @@ const ShowNow=(ten,url,i)=>{
             console.log("194 ext=",ext);
             console.log("195 ver=",snipARR[actualDOC].v);
             if (formatowanie){
-                  snipet.innerHTML = ext==="htm" ? code : formatTXT(code);
-            } else {       
-               snipet.textContent = code;
+                  snipet.innerHTML =  formatTXT(code);
+            } else { 
+               if (ext==="htm") snipet.innerHTML   = code;
+               else             snipet.textContent = code;
             }
             ten.classList.add("active");
       })
