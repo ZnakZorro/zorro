@@ -32,7 +32,7 @@
 
 </head>
 <body>
-<app-menu title="EDEK" name="ZnakZorro" link="../../"></app-menu>
+<app-menu title="EDEK 2" name="ZnakZorro" link="../../"></app-menu>
 <script src="../../appMenu.js"></script>	
     <div class="keys">
         <span>EDEK</span>
@@ -71,7 +71,7 @@
 			.then(ret => {return ret.text()})
 			.then(out => {
 				console.log(remoteURL)
-				fileName = remoteURL.split(".").pop()
+				fileName = remoteURL.split("/").pop()
 				
 				//document.querySelector(".ck-content").textContent = out;
 				document.querySelector('#editor').innerHTML = out;
