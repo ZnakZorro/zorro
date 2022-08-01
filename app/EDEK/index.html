@@ -23,9 +23,11 @@
    </style>
    <script src="./ckeditor.js"></script>
    <script src="../../js/FileSaver.min.js"></script>
+   <script src="../../js/edit.js"></script>
+	
    <script>
 
-const formatTXT=(code)=>{
+/*const formatTXT=(code)=>{
    let arr = code.split("\n");
    if (arr[0]) arr[0] = "<h3>"+arr[0]+"</h3>";
    if (arr[1]) arr[1] = "<b>"+arr[1]+"</b>";
@@ -37,7 +39,7 @@ const formatTXT=(code)=>{
    }
    //console.log("aaaaaaa=",arr);
    return arr.join("\n");
-}
+}*/
 
 
 
@@ -86,7 +88,7 @@ const formatTXT=(code)=>{
 				console.log(remoteURL)
 				fileName = remoteURL.split("/").pop();
 				let ext  = remoteURL.split(".").pop()
-				if (ext==="txt") out=formatTXT(out);
+				if (ext==="txt") out=formatTXT2HTML(out);
 				//document.querySelector(".ck-content").textContent = out;
 				document.querySelector('#editor').innerHTML = out;
 				installEditor();
