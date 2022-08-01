@@ -497,4 +497,19 @@ footer {
 	main .message h2 {
 		font-size: 1.5em;
 	}
+	
+	.editor__editable,main .ck-editor[role='application'] .ck.ck-content,.ck.editor__editable[role='textbox'],.ck.ck-editor__editable[role='textbox'],.ck.editor[role='textbox'] {
+		line-height: 1.33em;
+		padding: 0.5em;
+	}	
+	.editor__editable{
+		line-height: 1.33em;
+		padding: 0.5em;
+	}	
+	main .ck-editor{
+		line-height: 1.33em;
+		padding: 0.5em;
+	}	
+	
+	
 }
