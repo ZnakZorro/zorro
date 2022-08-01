@@ -19,7 +19,8 @@ const formatTXT2HTML=(code,ext="txt",type=null)=>{
 
 
 const formatTXT2HTMLext=(code,ext="txt",type=null)=>{
-   if      (ext==="html") return code;
+   if      (ext==="html" || ext==="js") return code;
    else if (ext==="md")   return marked.parse(code);
    else if (ext==="txt")  return formatTXT2HTML(code);            
+   else    return code;            
 }
