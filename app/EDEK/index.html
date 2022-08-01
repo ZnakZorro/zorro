@@ -48,6 +48,7 @@
         
     </div>
     <script>
+	let fileName=null;
         let editor;
 	    
 	    
@@ -69,7 +70,9 @@
 			fetch(remoteURL)
 			.then(ret => {return ret.text()})
 			.then(out => {
-				//console.log(out)
+				console.log(remoteURL)
+				fileName = remoteURL.split(".").pop()
+				
 				//document.querySelector(".ck-content").textContent = out;
 				document.querySelector('#editor').innerHTML = out;
 				installEditor();
@@ -95,6 +98,7 @@
 		console.log(content);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
 		let nameOfFile = "edek-"+date+".html";
+		if (fileName) nameOfFile=fileName;
 		let filename = prompt("Nazwa pliku",nameOfFile);
 		console.log(filename);
 		if(!filename) return;
