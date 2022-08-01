@@ -45,25 +45,52 @@
         
     </div>
     <div id="editor">
-        <p></p>
+        <p>tu jestem...</p>
     </div>
     <script>
         let editor;
-
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then( newEditor => {
-                editor = newEditor;
-            } )
-            .catch( error => {
-                console.error( error );
-            } );
 	    
+	    
+	const installEditor=()=>{
+		ClassicEditor
+		    .create(document.querySelector('#editor'))
+		    .then(newEditor => {
+			editor = newEditor;
+		    } )
+		    .catch( error => {
+			console.error( error );
+		    } );
+
+	}	    
+	    
+		//eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+		let remoteURL = new URLSearchParams(window.location.search).get("url");
+		if (remoteURL){
+			fetch(remoteURL)
+			.then(ret => {return ret.text()})
+			.then(out => {
+				//console.log(out)
+				//document.querySelector(".ck-content").textContent = out;
+				document.querySelector('#editor').innerHTML = out;
+				installEditor();
+			})
+			.catch(e => {console.log(e)})	
+
+			//console.log(document.querySelector('#editor'))
+			//console.log(document.querySelector('#editor div'))
+			//console.log(document.querySelector('#editor div div'))
+
+		} else installEditor();
+	    //eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee
+
+	    
+
+
 	//https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/saving-data.html
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
-            zapisz(editor.getData());
-        } );        
-	    
+	    zapisz(editor.getData());
+	} );        
+
         let zapisz=(content)=>{
 		console.log(content);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
@@ -144,21 +171,7 @@ function submitHTML(){
      },100)
 }
 
-let remoteURL = new URLSearchParams(window.location.search).get("url");
-if (remoteURL){
-	fetch(remoteURL)
-	.then(ret => {return ret.text()})
-	.then(out => {
-		console.log(out)
-		document.querySelector(".ck-content").textContent = out;
-	})
-	.catch(e => {console.log(e)})	
-	
-	console.log(document.querySelector('#editor'))
-	console.log(document.querySelector('#editor div'))
-	console.log(document.querySelector('#editor div div'))
-	
-}
+
 	 
    </script>
    
