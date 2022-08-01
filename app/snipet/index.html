@@ -190,7 +190,8 @@ const ShowNow=(ten,url,i)=>{
             if (formatowanie){
                   snipet.innerHTML =  formatTXT2HTML(code,ext,1); //const formatTXT2HTML=(code,ext="txt",type=null)
             } else { 
-               if (ext==="htm") snipet.innerHTML   = code;
+               if      (ext==="htm") snipet.innerHTML   = code;
+               else if (ext==="md")  snipet.innerHTML   = marked.parse(code);
                else             snipet.textContent = code;
             }
             ten.classList.add("active");
