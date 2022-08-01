@@ -24,24 +24,9 @@
    <script src="./ckeditor.js"></script>
    <script src="../../js/FileSaver.min.js"></script>
    <script src="../../js/edit.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 	
    <script>
-
-/*const formatTXT=(code)=>{
-   let arr = code.split("\n");
-   if (arr[0]) arr[0] = "<h3>"+arr[0]+"</h3>";
-   if (arr[1]) arr[1] = "<b>"+arr[1]+"</b>";
-   if (arr[2]) arr[2] = "<b><i>"+arr[2]+"</i></b>";
-   for (let i=1; i<arr.length-1; i++){
-      arr[i] = arr[i].trim();
-      if (arr[i] != "") arr[i] = "<p>"+arr[i]+"</p>";
-      else              arr[i] = "<br />";
-   }
-   //console.log("aaaaaaa=",arr);
-   return arr.join("\n");
-}*/
-
-
 
    </script>
 
@@ -53,10 +38,7 @@
         <span>EDEK</span>
 	    	&nbsp; <button id="submit">Zapisz</button>
 	    	&nbsp; <a href="./5/index.html">MAX-5</a>
-	 <!-- 
-        <button id="saveButton">save</button>
-	<button onclick="submitHTML()">submitHTML()</button>
-	-->    
+
         
     </div>
     <div id="editor">
@@ -88,7 +70,7 @@
 				console.log(remoteURL)
 				fileName = remoteURL.split("/").pop();
 				let ext  = remoteURL.split(".").pop()
-				if (ext==="txt") out=formatTXT2HTML(out);
+				out = formatTXT2HTMLext(out,ext);
 				//document.querySelector(".ck-content").textContent = out;
 				document.querySelector('#editor').innerHTML = out;
 				installEditor();
