@@ -86,7 +86,7 @@ const formatTXT=(code)=>{
 				console.log(remoteURL)
 				fileName = remoteURL.split("/").pop();
 				let ext  = remoteURL.split(".").pop()
-				if (ext==="txt") out=outformatTXT(out);
+				if (ext==="txt") out=formatTXT(out);
 				//document.querySelector(".ck-content").textContent = out;
 				document.querySelector('#editor').innerHTML = out;
 				installEditor();
