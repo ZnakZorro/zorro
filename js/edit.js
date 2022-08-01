@@ -1,5 +1,7 @@
 console.log("edit.js");
             
+
+
 const formatTXT2HTML=(code,ext="txt",type=null)=>{
    let arr = code.split("\n");
    if (arr[0]) arr[0] = "<h3>"+arr[0]+"</h3>";
@@ -12,4 +14,11 @@ const formatTXT2HTML=(code,ext="txt",type=null)=>{
    }
    //console.log("aaaaaaa=",arr);
    return arr.join("\n");
+}
+
+
+const formatTXT2HTMLext=(code,ext="txt",type=null)=>{
+   if      (ext==="html") return code;
+   else if (ext==="md")   return marked.parse(code);
+   else if (ext==="txt")  return formatTXT2HTML(code);            
 }
