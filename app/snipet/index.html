@@ -204,7 +204,7 @@ const ShowNow=(ten,url,i)=>{
                else                                snipet.textContent = code;
             }
          */
-            if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
+            if      (ext==="htm" || ext==="md"  || ext==="txt" ) snipet.innerHTML   = code;
             else                                snipet.textContent = code;
             snipet.className="container";
             snipet.classList.add(ext);
