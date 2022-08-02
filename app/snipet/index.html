@@ -33,6 +33,7 @@
       white-space: inherit;
    }
    .text *  {padding-bottom:0.1em;}
+   div#klawisze{background:#fff;}
    div#klawisze>div {box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);padding:0.25em;}
    div#klawisze>div>span {display:inline-block; min-width:3.0em;font-weight: bold;}
    /*div#klawisze>div>button {background-color: #777;color: white;}*/
@@ -47,6 +48,7 @@ const snipARR = [
    {n:"Szlif",           f:"dom",     v:"html",  u:"szlif.htm"},
    {n:"Ekspres",         f:"dom",     v:"txt",   u:"expres.txt"},
    {n:"Nalewki",         f:"dom",     v:"txt",   u:"nalewki.txt"},
+   {n:"Lody",         f:"dom",     v:"md",   u:"lody.md"},
    {n:"index",           f:"html",    v:"code",  u:"index.html"},
    {n:"git",             f:"html",    v:"code",  u:"git.html"},
    {n:"fetch",           f:"js",      v:"code",  u:"fetch.js"},
@@ -88,7 +90,7 @@ const mainFoder=(dir,ten)=>{
       }
    })
    //console.log(arr);
-   let html = "<span>"+dir+": </span>";
+   let html = "<span>"+dir.toUpperCase()+": </span>";
    arr.forEach((a,i)=>{
       //console.log(a);
       html += `<button class="c${i%10}" data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
