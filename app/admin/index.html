@@ -32,10 +32,11 @@ document.addEventListener("DOMContentLoaded",function(){
     let html = "";
     for (let city in APPconfig.city){
         let name = APPconfig.city[city].name;
+        let id   = APPconfig.city[city].id;
         console.log(APPcity,city,name);
         let checked="";
         if (APPcity===city) checked="checked"
-        html += '<p><input name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
+        html += '<p><input id="'+id+'" name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
     }
     _$("#radioCity").innerHTML = html;
 });
