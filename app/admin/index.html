@@ -43,8 +43,11 @@ document.addEventListener("DOMContentLoaded",function(){
 // domready
 
 const cityClick=(ten)=>{
+   console.log(ten);
     APPcity = ten.value;
+   APPid = ten.id;
     localStorage.setItem("APPcity", APPcity);
+    localStorage.setItem("APPid", APPid);
 }
 
 
