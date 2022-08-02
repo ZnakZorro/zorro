@@ -96,10 +96,10 @@ const showAll=()=>{
             </div>
             `;  
             klaw += `
-                <button data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
+                <button class="btn c10" data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
             `;          
         }
-        let klawAll = '<button id="allbus" class="active" onClick="showAll()">Autobusy</button>';
+        let klawAll = '<button id="allbus" class="active1" onClick="showAll()">Autobusy</button>';
         document.getElementById("tabliczki").innerHTML = html;
         document.getElementById("klawisze").innerHTML = klaw + klawAll;
 }
@@ -115,38 +115,12 @@ const showAll=()=>{
 
 <body>
     <div class="wrapper">
-        <h3>
-            <img src="../../css/icon/back.svg" onClick="backFromAPP()" style="width:38px;vertical-align: middle; cursor:pointer;"/>
-            &nbsp; BUS
-          </h3>
+        <app-menu title="SNIPET" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+	    
         <div class="container busgrid" id="klawisze"></div>
         <div class="container busgrid" id="tabliczki">
-<!--
-            <div class="tablica">
-                <h3><span>66</span> Lidl na Jaśminową</h3>
-                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1539"></iframe>
-            </div>
-
-            <div class="tablica">
-                <h3><span>B,71</span> Łubinowa</h3>
-                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1273"></iframe>
-            </div>
-            
-            <div class="tablica">
-                <h3><span>Końcowy</span> Słoneczne</h3>
-                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1260"></iframe>
-            </div>
-
-            <div class="tablica">
-                <h3><span>Tramwaj</span> ZUS do centrum</h3>
-                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1297"></iframe>
-            </div>
-            
-            <div class="tablica">
-                <h3><span>66,71</span> z ZUS do domu</h3>
-                <iframe src="https://www.zditm.szczecin.pl/pl/pasazer/rozklady-jazdy,tablica,1299"></iframe>
-            </div>
--->            
+ 
             
         </div>
     </div>
