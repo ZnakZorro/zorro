@@ -1,4 +1,4 @@
-const dir = [
+const snipARR = [
    {n:"Gramofon",        f:"dom",       u:"gramofon.htm"},
    {n:"Szlif",           f:"dom",       u:"szlif.htm"},
    {n:"Ekspres",         f:"dom",       u:"expres.txt"},
