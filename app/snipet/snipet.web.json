@@ -1,22 +1,22 @@
 {
-	"name": "git#DOM",
-	"short_name": "git#DOM",
-	"description": "git#DOM",
-	"start_url": "index.html",
+	"name": "SNIPet",
+	"short_name": "SNIPet",
+	"description": "SNIPet",
+	"start_url": "https://znakzorro.github.io/zorro/app/snipet/index.html",
 	"display": "standalone",
 
-	"theme_color": "#246",
-	"background_color": "#369",
+	"theme_color": "darkorange",
+	"background_color": "darkorange",
 	"icons": [
 		{
-			"src": "./img/dom.webp",
+			"src": "./img/snipet.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./img/dom.webp",
+			"src": "./img/snipet.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
