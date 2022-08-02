@@ -93,7 +93,16 @@
     console.log(APPcity,APPid);
     console.log("=======================");
         
-    
+
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){        
+    //$("#modalyrnomodal").src= "https://www.yr.no/en/content/"+APPid+"/meteogram.svg";
+    //$("#modalyrnomodal").style.display="block";   
+    $("#modalyrnoimage").style.display="block";   
+    $("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;        
+})
+//---DOM READY----------------------------------
+        
 </script>
 </head>
 
@@ -123,8 +132,8 @@
                 -->
         </div>
         <div id="modal">
-                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
-                      <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">
+                <div id"="modalyrnoimage" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="display:none;">
+                      <!--img id="modalyrnomodal" style="display:none;" src="https://www.yr.no/en/content/2-3083828/meteogram.svg" class="img-fluid img-modal" onload="imgReady()"-->
                 </div>
         </div>
      </div>
