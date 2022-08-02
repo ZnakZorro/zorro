@@ -8,16 +8,26 @@ let APPconfig={
 			"name": "Szczecin-Dąbie",
 			"lat": "53.3788",
 			"lon": "14.666",
-			"altitude": "25"
+			"altitude": "25",
+			"id":"2-3083828"
 		},
 		"Szczecin": {
 			"name": "Szczecin",
 			"lat": "53.380",
 			"lon": "14.662",
-			"altitude": "25"
-		}
+			"altitude": "25",
+			"id":"2-3083829"
+		},
+		"Warszawa": {
+			"name": "Warszawa",
+			"lat": "",
+			"lon": "",
+			"altitude": "",
+			"id":"2-8425827"
+		}		
 	}
 }
+
 let APPcity = "Dabie";
 
 
