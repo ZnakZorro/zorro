@@ -9,8 +9,8 @@
 2. list2
 3. list3
 
+I just love **bold text**.
 
-1. First item
-2. Second item
-3. Third item
-4. Fourth item
+Italicized text is the *cat's meow*.
+
+Try to put a blank line before...
