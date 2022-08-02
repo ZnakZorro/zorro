@@ -73,8 +73,8 @@ const getTabliczka=(t)=>{
             <iframe src="${d.iurl}"></iframe>
         </div>
         `;
-    document.querySelectorAll("button.active1").forEach((b)=>b.classList.remove("active1"))
-    t.classList.add("active1");
+    document.querySelectorAll("button.active").forEach((b)=>b.classList.remove("active"))
+    t.classList.add("active");
 }
 
 const showAll=()=>{
@@ -97,7 +97,7 @@ const showAll=()=>{
                 <button class="btn c16" data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
             `;          
         }
-        let klawAll = '<button id="allbus" class="active1" onClick="showAll()">Autobusy</button>';
+        let klawAll = '<button id="allbus" class="active" onClick="showAll()">Autobusy</button>';
         document.getElementById("tabliczki").innerHTML = html;
         document.getElementById("klawisze").innerHTML = klaw + klawAll;
 }
