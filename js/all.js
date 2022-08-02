@@ -24,11 +24,22 @@ let APPconfig={
 			"lon": "",
 			"altitude": "",
 			"id":"2-8425827"
-		}		
+		},
+		"Żyrardów": {
+			"name": "Żyrardów",
+			"lat": "",
+			"lon": "",
+			"altitude": "",
+			"id":"2-752967"
+		},
+		
 	}
 }
 
-let APPcity = "Dabie";
+
+    let = _APPcity = localStorage.getItem("APPcity");
+    let = _APPid   = localStorage.getItem("APPid");
+console.log(_APPcity,_APPid);
 
 
 const backFromAPP=()=>{window.location.href="../../";}
