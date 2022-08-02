@@ -6,7 +6,7 @@ class NavBarNavigator extends HTMLElement {
 		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#482ff7';
 		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let APPcity = localStorage.getItem("APPcity");
-		if (title==="gitZorro" && APPcity) title=Appcity;
+		if (title==="gitZorro" && APPcity) title=APPcity;
 		
 		//console.log("______link=",link);
 		//console.log("______title=",title);		
