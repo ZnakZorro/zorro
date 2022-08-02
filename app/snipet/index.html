@@ -31,6 +31,7 @@
       font-size: medium;
       line-break: inherit;
       white-space: inherit;
+      background: white;
    }
    .text *  {padding-bottom:0.1em;}
    div#klawisze{background:#fff;}
@@ -221,13 +222,13 @@ document.addEventListener("DOMContentLoaded",function(){
 /*  SHARE  */      
       const sharego=()=>{     
             let title = snipARR[actualDOC].n+" - "+snipARR[actualDOC].u;
-            let text  = document.getElementById("snipet").innerHTML;
+            let text  = document.getElementById("snipet").textContent;
             if (navigator.share) {
               navigator
                 .share({
                   title: title,
                   text: text,
-                  url: "https://znakzorro.github.io/zorro/app/snipet/",
+                  url: "https://znakzorro.github.io/zorro/",
                 })
                 .then(() => console.log("Successful share"))
                 .catch((error) => console.log("Error sharing", error));
