@@ -3,7 +3,7 @@
 
 let APPconfig={
 	"city": {
-		"Dabie": {
+		"Szczecin-Dąbie": {
 			"name": "Szczecin-Dąbie",
 			"lat": "53.3788",
 			"lon": "14.666",
