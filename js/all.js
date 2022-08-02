@@ -40,7 +40,10 @@ const dayL=(time)=>{
   return pad2(H)+":"+pad2(M);
 }
 
-
+const showhide=(id)=>{
+   let ob = document.getElementById(id);  
+   if (ob.style.display==="none") ob.style.display="block"; else ob.style.display="none";
+}
 
 /*******************************/
 const canWakeLock = () => 'wakeLock' in navigator;
