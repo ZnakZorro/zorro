@@ -80,6 +80,7 @@ const getTabliczka=(t)=>{
 const showAll=()=>{
     let html = "";
         let klaw = "";
+	c=10;
         for (let b in busy){
             let a = b.split(" ");
             let bus = a[0];
@@ -94,7 +95,7 @@ const showAll=()=>{
             </div>
             `;  
             klaw += `
-                <button class="btn c16" data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
+                <button class="btn c${(c++)%20}" data-bus="${bus}" data-name="${name}" data-iurl="${iurl}"  onclick="getTabliczka(this)">${bus} - ${name}</button>
             `;          
         }
         let klawAll = '<button id="allbus" class="active" onClick="showAll()">Autobusy</button>';
