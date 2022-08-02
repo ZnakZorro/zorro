@@ -27,4 +27,4 @@ My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
 | Paragraph   | Text        |
 
 
-![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains")
+![Nebula are beautiful!](./img/nebula.jpg "Nebula in Galaxy")
