@@ -48,29 +48,7 @@ div#klawisze>div>span {display:inline-block; min-width:3.0em;font-weight: bold;}
    <script src="./dir.js"></script>
    
 <script>
-   console.log(dir);
-const snipARR = dir;
-/*
-[
-   {n:"Gramofon",        f:"dom",     v:"html",  u:"gramofon.htm"},
-   {n:"Szlif",           f:"dom",     v:"html",  u:"szlif.htm"},
-   {n:"Ekspres",         f:"dom",     v:"txt",   u:"expres.txt"},
-   {n:"Nalewki",         f:"dom",     v:"txt",   u:"nalewki.txt"},
-   {n:"index",           f:"html",    v:"code",  u:"index.html"},
-   {n:"git",             f:"html",    v:"code",  u:"git.html"},
-   {n:"fetch",           f:"js",      v:"code",  u:"fetch.js"},
-   {n:"createElement",   f:"js",      v:"code",  u:"createElement.js"},
-   {n:"active",          f:"js",      v:"code",  u:"active.js"},
-   {n:"dom",             f:"js",      v:"code",  u:"domReady.js"},
-   {n:"param",           f:"js",      v:"code",  u:"parameters.js"},
-   {n:"Borówki",         f:"580",     v:"txt",   u:"borowki.txt"},
-   {n:"Ciasto",          f:"kuchnia", v:"txt",   u:"ciasto.txt"},
-   {n:"Piernik",         f:"kuchnia", v:"html",  u:"Piernik.htm"},
-   {n:"Lody",         f:"kuchnia",     v:"md",   u:"lody.md"},
-   {n:"md",         f:"md", v:"md",  u:"md.md"},   
-];
-*/
-   
+
 let actualDOC=0;
 let mainFolders = [];
 
@@ -89,7 +67,6 @@ const showMainFolders=()=>{
 const mainFoder=(dir,ten)=>{
    document.querySelectorAll("#mainFolders button").forEach(b=>b.classList.remove("active"));
    ten.classList.add("active");
-   //console.log(dir);
    let arr=[];
    snipARR.forEach((z,i)=>{
       z.i=i;
