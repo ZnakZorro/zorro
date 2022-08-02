@@ -27,4 +27,4 @@ My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
 | Paragraph   | Text        |
 
 
-![Nebula are beautiful!](./img/nebula.jpg "Nebula in Galaxy")
+![Nebula are beautiful!](../img/nebula.jpg "Nebula in Galaxy")
