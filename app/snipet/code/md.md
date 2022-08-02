@@ -20,11 +20,13 @@ My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
 ---
 
 ``Use `code` in your Markdown file.``
+/
 
 | Syntax      | Description |
 | ----------- | ----------- |
 | Header      | Title       |
 | Paragraph   | Text        |
 
+---
 
-![Nebula are beautiful!](./img/nebula.jpg "Nebula in Galaxy")
+![Nebula are beautiful!]([./img/nebula.jpg](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg) "Nebula in Galaxy")
