@@ -29,4 +29,6 @@ My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
 
 ---
 
-![Nebula are beautiful!]([./img/nebula.jpg](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg) "Nebula in Galaxy")
+![Nebula are beautiful!]([https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg) "Nebula in Galaxy")
+
+![opis1]([https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg] "Opis2")
