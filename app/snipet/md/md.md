@@ -13,4 +13,9 @@ I just love **bold text**.
 
 Italicized text is the *cat's meow*.
 
-Try to put a blank line before...
+***
+
+---
+
+
+
