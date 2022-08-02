@@ -98,8 +98,8 @@
 document.addEventListener("DOMContentLoaded",function(){        
     //_$("#modalyrnomodal").src= "https://www.yr.no/en/content/"+APPid+"/meteogram.svg";
     //_$("#modalyrnomodal").style.display="block";   
-    _$("#modalyrnoimage").style.display="block";   
-    _$("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;        
+    //_$("#modalyrnoimage").style.display="block";   
+    _$("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;
 })
 //---DOM READY----------------------------------
         
@@ -125,14 +125,14 @@ document.addEventListener("DOMContentLoaded",function(){
      <!-- modal --> 
      <div class="supermodal">
         <div class="menumodal" id="menumodal">
-                <!--
+                
                 <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="ccc">Radar</a>
                 <a href="https://znakzorro.github.io/zorro/html/rss.html" class="ccc">RSS</a>
                 <button onclick="ccc()" class="ccc">ClearCache</button>
-                -->
+                
         </div>
         <div id="modal">
-                <div id"="modalyrnoimage" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light" style="display:none;">
+                <div id"="modalyrnoimage" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
                       <!--img id="modalyrnomodal" style="display:none;" src="https://www.yr.no/en/content/2-3083828/meteogram.svg" class="img-fluid img-modal" onload="imgReady()"-->
                 </div>
         </div>
@@ -149,7 +149,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       <div class="card-body">
         <h5 class="card-title">Wykres pogody</h5>
-        <p class="card-text">Szczecin-Dąbie</p>
+        <p class="card-text">YrNo</p>
         <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
       </div>
     </div>
