@@ -81,6 +81,7 @@ h1,h2,h3 {margin: 0.25em 0;}
 button:focus, button:active {outline:none;}
 
 .active, btn.active, button.active, button:active {background:#222!important; color:orange!important;}
+.active1 {background:#ddd!important; color:navy!important;}
 
  table {width:100%; max-width:800px;} 
  td,th {
