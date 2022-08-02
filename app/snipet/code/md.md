@@ -29,8 +29,4 @@ My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
 
 ---
 
-![Nebula are beautiful!](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg) "Nebula in Galaxy")
-
-![opis1](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg "Opis2")
-
-![MarineGEO circle logo](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg "MarineGEO logo")
+![Nebula are beautiful!](https://znakzorro.github.io/zorro/app/snipet/img/nebula.jpg "Nebula in Galaxy")
