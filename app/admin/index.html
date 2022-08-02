@@ -20,7 +20,7 @@
     .container {padding:0.66em;}
     p {padding:0.33em;}
 </style>
-<script src="../../js/all.js?i=2"></script>
+<script src="../../js/all.js"></script>
    
 <script>
 console.log(APPconfig);
@@ -46,6 +46,8 @@ const cityClick=(ten)=>{
     localStorage.setItem("APPcity", APPcity);
 }
 
+
+
 </script>
    
 </head>
@@ -70,10 +72,10 @@ const cityClick=(ten)=>{
 
 <div class="btns"><button onclick="ccc()">ClearCache</button></div>
    
-<div class="btns"><button onclick="ccc(this)">ClearCache-this</button></div>
+
    
-   
-<div id="batony"></div>
+<button onclick='showhide("butony");'>Kolory</button>
+<div id="batony" style="display:none;"></div>
 <script>
     for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
 </script>
