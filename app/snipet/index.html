@@ -187,9 +187,9 @@ const ShowNow=(ten,url,i)=>{
         .then(code => {
             console.log("194 ext=",ext);
             console.log("195 ver=",snipARR[actualDOC].v);
-            code = formatTXT2HTML(code,ext);
+            code = formatTXT2HTMLext(code,ext);
             if (formatowanie){
-                  snipet.innerHTML =  formatTXT2HTML(code);
+                  snipet.innerHTML =  code;
             } else { 
                if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
                else                                snipet.textContent = code;
