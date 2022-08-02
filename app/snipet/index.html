@@ -17,7 +17,7 @@
    h3,h2 {font-size:1.2em}
    ul,ol {margin-left: 1.5em;}
    ul>p {margin:0em;}
-.code {
+.js, .html, .md, .code {
     font-family: monospace;
     background: white;
     border: 1px solid gray;
@@ -26,7 +26,7 @@
     white-space: break-spaces;
     line-break: anywhere;
 }
-   .text {
+   .txt,.text {
       font-family: inherit;
       font-size: medium;
       line-break: inherit;
@@ -197,6 +197,7 @@ const ShowNow=(ten,url,i)=>{
                if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
                else                                snipet.textContent = code;
             }
+            snipet.classList.add(ext);
             ten.classList.add("active");
       })
         .catch(e => {console.log(e)})   
