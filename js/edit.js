@@ -25,3 +25,15 @@ console.log("22 ejs=",ext);
    else if (ext==="txt")  return formatTXT2HTML(code);            
    else    return code;            
 }
+
+/*
+const formatTXT2HTMLext=(code,ext="txt",type=null)=>{
+console.log("30 ejs=",ext);   
+   //if      (ext==="html" || ext==="js") return code;
+   //let klasa = "code";
+   if (ext==="md")   {code = marked.parse(code); }
+   if (ext==="txt")  {code = formatTXT2HTML(code);}
+   
+   return `<div class="${ext}">${code}</div>`;            
+}
+*/
