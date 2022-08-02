@@ -97,7 +97,7 @@ const mainFoder=(dir,ten)=>{
    let html = "<span>"+dir.toUpperCase()+": </span>";
    arr.forEach((a,i)=>{
       //console.log(a);
-      html += `<button class="c${i%10}" data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
+      html += `<button class="c${20-(i%20)}" data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
    });
    document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>"; 
    document.querySelector("#klawisze button").click();
