@@ -152,11 +152,9 @@ const ShowNow=(ten,url,i)=>{
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
-            console.log("194 ext=",ext);
-            code = formatTXT2HTMLext(code,ext);
-         
+            code = formatTXT2HTMLext(code,ext);         
             if      (ext==="htm" || ext==="md"  || ext==="txt" ) snipet.innerHTML   = code;
-            else                                snipet.textContent = code;
+            else snipet.textContent = code;
             snipet.className="container";
             snipet.classList.add(ext);
             ten.classList.add("active");
