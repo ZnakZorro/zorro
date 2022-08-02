@@ -42,16 +42,16 @@ div#klawisze>div {box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);padding:0.25em;}
 div#klawisze>div>span {display:inline-block; min-width:3.0em;font-weight: bold;}
 /*div#klawisze>div>button {background-color: #777;color: white;}*/
 </style>
-   <script src="../../js/FileSaver.min.js"></script>
-   <script src="../../js/edit.js"></script>
-   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-   <script src="./dir.js"></script>
+   
+<script src="../../js/FileSaver.min.js"></script>
+<script src="../../js/edit.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script src="./snipARR.js"></script>
    
 <script>
 
 let actualDOC=0;
 let mainFolders = [];
-
 
 const showMainFolders=()=>{
       snipARR.forEach((o)=>{
@@ -74,10 +74,8 @@ const mainFoder=(dir,ten)=>{
          arr.push(z);  
       }
    })
-   //console.log(arr);
    let html = "<span>"+dir.toUpperCase()+": </span>";
    arr.forEach((a,i)=>{
-      //console.log(a);
       html += `<button class="c${20-(i%20)}" data-index="${a.i}" onclick='ShowNow(this,"${a.f}/${a.u}",${a.i})'>${a.n}</button>`;
    });
    document.getElementById("klawisze").innerHTML = "<div>"+html+"</div>"; 
@@ -87,15 +85,11 @@ const mainFoder=(dir,ten)=>{
 
 const fireFirsStart=()=>{
     document.querySelector("#mainFolders button").click();
-    //setTimeout(()=>{
-        document.querySelector("#klawisze button").click();
-    //},100)
-    
+    document.querySelector("#klawisze button").click();  
 } 
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-      //showButtonsByFolders();
       showMainFolders();
       fireFirsStart();
 })
@@ -119,8 +113,7 @@ const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.hr
  
 const edit=(url)=>{   
    url = getLocalURL(url);
-   console.log(77,url);
-   let exurl = getURL(url);//'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   let exurl = getURL(url);
    window.open(exurl,"_self");  
 }
 
@@ -133,11 +126,9 @@ const show=(url)=>{
 
 const save=(url)=>{
    let code = document.getElementById("snipet").textContent;
-   //console.log("save==",code);
    let filename = snipARR[actualDOC].u;
    if (!filename) {alert("no file"); return;}
    let ext = filename.split(".")[1];
-   //console.log(96,ext,filename);
    let mime = "text/plain";
    if (ext==="html")   mime = "text/html";
    if (ext==="htm")    mime = "text/html";
@@ -155,36 +146,15 @@ const ShowNow=(ten,url,i)=>{
       let snipet = document.getElementById("snipet");
       snipet.textContent = "";
       actualDOC = i;
-      //console.log("117 actualDOC=",actualDOC,snipARR[actualDOC],ten);
       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-      //ten.classList.add("active");
       let ext = snipARR[actualDOC].u.split(".")[1];
-      //console.log("128",ext);
-      /*
-      let formatowanie = false;
-      console.log(snipARR[actualDOC].v);
-      if (ext==="txt" || ext==="htm") {
-            snipet.classList.add("text");
-      }
-      else  snipet.classList.remove("text");
-      formatowanie = (ext==="txt");// || ext ==="htm") ;
-      */
-      
    
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
             console.log("194 ext=",ext);
-            //console.log("195 ver=",snipARR[actualDOC].v);
             code = formatTXT2HTMLext(code,ext);
-         /*
-            if (formatowanie){
-                  snipet.innerHTML =  code;
-            } else { 
-               if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
-               else                                snipet.textContent = code;
-            }
-         */
+         
             if      (ext==="htm" || ext==="md"  || ext==="txt" ) snipet.innerHTML   = code;
             else                                snipet.textContent = code;
             snipet.className="container";
@@ -254,10 +224,7 @@ const changeEdit=()=>{
 
    
 <div id="batony"></div>
-<script>
-    //for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
-</script>
-   
+
 </body>
 
 </html>
