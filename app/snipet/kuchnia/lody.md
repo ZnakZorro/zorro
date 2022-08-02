@@ -1,4 +1,4 @@
-###Domowe lody śmietankowe
+### Domowe lody śmietankowe
 
 - 200 ml śmietanki kremówki
 - 30 g cukru
