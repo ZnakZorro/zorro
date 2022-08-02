@@ -5,9 +5,9 @@
 - lista
 - lista 
 
-1.list
-2.list
-3.list
+1. list1
+2. list2
+3. list3
 
 
 1. First item
