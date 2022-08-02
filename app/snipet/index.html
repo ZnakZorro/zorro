@@ -26,7 +26,7 @@
     white-space: break-spaces;
     line-break: anywhere;
 }
-   .txt,.text {
+   .htm, .txt,.text {
       font-family: inherit;
       font-size: medium;
       line-break: inherit;
@@ -240,7 +240,7 @@ document.addEventListener("DOMContentLoaded",function(){
     
    
 const changeEdit=()=>{
-   let state = document.getElementById("changeEditing").value;
+   let state = document.getElementById("changeEditing").checked;
    console.log(state);
    document.getElementById("snipet").setAttribute("contenteditable", state);
 }   
