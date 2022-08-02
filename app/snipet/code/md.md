@@ -15,6 +15,8 @@ Italicized text is the *cat's meow*.
 
 ***
 
+My favorite search engine is [Duck Duck Go](https://duckduckgo.com).
+
 ---
 
 ``Use `code` in your Markdown file.``
@@ -25,3 +27,4 @@ Italicized text is the *cat's meow*.
 | Paragraph   | Text        |
 
 
+![The San Juan Mountains are beautiful!](/assets/images/san-juan-mountains.jpg "San Juan Mountains")
