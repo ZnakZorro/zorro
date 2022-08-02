@@ -45,7 +45,9 @@
    
 <script>
    console.log(dir);
-const snipARR = [
+const snipARR = dir;
+/*
+[
    {n:"Gramofon",        f:"dom",     v:"html",  u:"gramofon.htm"},
    {n:"Szlif",           f:"dom",     v:"html",  u:"szlif.htm"},
    {n:"Ekspres",         f:"dom",     v:"txt",   u:"expres.txt"},
@@ -61,10 +63,10 @@ const snipARR = [
    {n:"Ciasto",          f:"kuchnia", v:"txt",   u:"ciasto.txt"},
    {n:"Piernik",         f:"kuchnia", v:"html",  u:"Piernik.htm"},
    {n:"Lody",         f:"kuchnia",     v:"md",   u:"lody.md"},
-   {n:"md",         f:"md", v:"md",  u:"md.md"},
-   
-   
+   {n:"md",         f:"md", v:"md",  u:"md.md"},   
 ];
+*/
+   
 let actualDOC=0;
 let mainFolders = [];
 
@@ -157,7 +159,7 @@ const save=(url)=>{
    //console.log(96,ext,filename);
    let mime = "text/plain";
    if (ext==="html")   mime = "text/html";
-   if (ext==="htm")   mime = "text/html";
+   if (ext==="htm")    mime = "text/html";
    if (ext==="js")     mime = "text/javascript";
    if (ext==="json")   mime = "application/json";
 
@@ -177,6 +179,7 @@ const ShowNow=(ten,url,i)=>{
       //ten.classList.add("active");
       let ext = snipARR[actualDOC].u.split(".")[1];
       //console.log("128",ext);
+      /*
       let formatowanie = false;
       console.log(snipARR[actualDOC].v);
       if (ext==="txt" || ext==="htm") {
@@ -184,20 +187,25 @@ const ShowNow=(ten,url,i)=>{
       }
       else  snipet.classList.remove("text");
       formatowanie = (ext==="txt");// || ext ==="htm") ;
+      */
       
    
       fetch(url)
         .then(ret => {return ret.text()})
         .then(code => {
             console.log("194 ext=",ext);
-            console.log("195 ver=",snipARR[actualDOC].v);
+            //console.log("195 ver=",snipARR[actualDOC].v);
             code = formatTXT2HTMLext(code,ext);
+         /*
             if (formatowanie){
                   snipet.innerHTML =  code;
             } else { 
                if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
                else                                snipet.textContent = code;
             }
+         */
+            if      (ext==="htm" || ext==="md") snipet.innerHTML   = code;
+            else                                snipet.textContent = code;
             snipet.classList.add(ext);
             ten.classList.add("active");
       })
@@ -230,7 +238,11 @@ document.addEventListener("DOMContentLoaded",function(){
 /*  SHARE  */      
     
    
-   
+const changeEdit=()=>{
+   let state = document.getElementById("changeEditing").value;
+   console.log(state);
+   document.getElementById("snipet").setAttribute("contenteditable", state);
+}   
 </script>
 </head>
 
@@ -245,9 +257,10 @@ document.addEventListener("DOMContentLoaded",function(){
             <button class="adm0" onclick="save()">save</button>
             <button class="adm1" onclick="show()">show</button>
             <button class="adm2" onclick="edit()">edit</button>
+           <input type="checkbox" id="changeEditing" onchange="changeEdit()" /> edit
         </div>
        
-        <div class="container code" id="snipet" contenteditable="true"></div>
+        <div class="container code" id="snipet" contenteditable="false"></div>
        
        
          <div class="container">
