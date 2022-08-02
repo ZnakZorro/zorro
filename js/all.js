@@ -1,6 +1,5 @@
 
-const _$=e=>document.querySelector(e);
-const _$$=e=>document.querySelectorAll(e);
+
 
 let APPconfig={
 	"city": {
@@ -36,6 +35,8 @@ let APPconfig={
 	}
 }
 
+const _$=e=>document.querySelector(e);
+const _$$=e=>document.querySelectorAll(e);
 
     let = _APPcity = localStorage.getItem("APPcity");
     let = _APPid   = localStorage.getItem("APPid");
