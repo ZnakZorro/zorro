@@ -15,7 +15,7 @@
 <style>
     body {background-color:#fa4;}  
     body,input,button {font-size:larger;}  
-   .form-control {
+   /*.form-control {
       font-family: system-ui, sans-serif;
       font-size: 1.2rem;
       font-weight: bold;
@@ -23,7 +23,7 @@
       display: grid;
       grid-template-columns: 1em auto;
       gap: 0.85em;
-   }   
+   }  */ 
 
 </style>
 <script src="../../js/all.js?i=8"></script>
@@ -97,19 +97,11 @@ const cityClick=(ten)=>{
 <script>
     for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
 </script>
- <script src="//cdn.jsdelivr.net/npm/eruda"></script>
-<script>eruda.init();</script>  
+<!--script src="//cdn.jsdelivr.net/npm/eruda"></script><script>eruda.init();</script-->
    
    
    
- <div class="wrapper">
-      <div class="container">       
-         <label class="form-control"><input id="2-3083828" name="rcity" type="radio" value="Szczecin-Dąbie" checked="" onchange="cityClick(this)">Szczecin-Dąbie</label>
-         <label class="form-control"><input type="radio" name="rcity">Szczecin</label>
-         <label class="form-control"><input type="radio" name="rcity" >Warszawa</label>
-      </div>
-</div>  
-   
+ 
       
    
 </body>
