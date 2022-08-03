@@ -62,9 +62,10 @@ div.pad {margin:0 4px;}
     text-align: center;
     transition: 0.3s;
     box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05);
-    z-index: 15;
+    z-index: 25;
     background: #e8e8e8;
-    border-top:1px solid gray;
+    border-top:2px solid gray;
+    border-bottom: 4px solid gray;
 }
 
     .nav-menu.active {left: 0;}
