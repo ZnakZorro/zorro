@@ -38,8 +38,8 @@ let APPconfig={
 const _$=e=>document.querySelector(e);
 const _$$=e=>document.querySelectorAll(e);
 
-    let = _APPcity = localStorage.getItem("APPcity");
-    let = _APPid   = localStorage.getItem("APPid");
+    let = _APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : "Dąbie";
+    let = _APPid   = localStorage.getItem("APPid")   ? localStorage.getItem("APPid")   : "2-3083828";
 console.log(_APPcity,_APPid);
 
 
