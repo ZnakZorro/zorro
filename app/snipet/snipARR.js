@@ -15,6 +15,7 @@ const snipARR = [
    {n:"Piernik",         f:"kuchnia",   u:"Piernik.htm"},
    {n:"Lody",            f:"kuchnia",   u:"lody.md"},
    {n:"md",              f:"code",      u:"md.md"},
+   {n:"console",         f:"code",      u:"console.js"},
    
    
 ];
