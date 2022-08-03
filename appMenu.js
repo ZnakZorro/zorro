@@ -72,7 +72,7 @@ class NavBarNavigator extends HTMLElement {
 			navMenu.classList.remove("active");
 		}
 		setTimeout(()=>{
-			console.log("timeout==",this.shadowRoot,selfRoot);
+			//console.log("timeout==",this.shadowRoot,selfRoot);
 			//this.shadowRoot.querySelector(".header").classList.remove("hidenow");
 			//this.shadowRoot.querySelector(".header").classList.add("shownow");
 		},1000);
@@ -80,7 +80,7 @@ class NavBarNavigator extends HTMLElement {
 		let selfRoot = this.shadowRoot;
 		
 		document.addEventListener("DOMContentLoaded",function(){
-			console.log("dom redy this.shadowRoot==",selfRoot);
+			//console.log("dom redy this.shadowRoot==",selfRoot);
 			selfRoot.querySelector(".header").classList.remove("hidenow");
 			selfRoot.querySelector(".header").classList.add("shownow");
 		})
