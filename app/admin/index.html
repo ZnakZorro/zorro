@@ -42,7 +42,8 @@ document.addEventListener("DOMContentLoaded",function(){
         console.log(APPcity,"city="+city,"name="+name,"id="+id);
         let checked="";
         if (APPcity===city) checked="checked"
-        html += '<p><input id="'+id+'" name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
+        //html += '<p><input id="'+id+'" name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
+        html += '<label class="form-control"><input id="'+id+'" name="rcity" type="radio" value="'+city+'" '+checked+' onchange="cityClick(this)">'+name+'</label>';
     }
     _$("#radioCity").innerHTML = html;
 });
