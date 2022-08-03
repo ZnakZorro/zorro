@@ -26,12 +26,12 @@ console.log(APPconfig);
 // dom ready
 document.addEventListener("DOMContentLoaded",function(){
     APPcity = localStorage.getItem("APPcity") || APPcity;
-    console.log("APPcity=",APPcity)
+    console.log("admin APPcity=",APPcity)
     let html = "";
     for (let city in APPconfig.city){
         let name = APPconfig.city[city].name;
-        let id   = APPconfig.city[city].id;
-        //console.log(APPcity,"city="+city,"name="+name,"id="+id);
+        let id   = APPconfig.city[city].id ? APPconfig.city[city].id : "2-3083828";
+        console.log(APPcity,"city="+city,"name="+name,"id="+id);
         let checked="";
         if (APPcity===city) checked="checked"
         html += '<p><input id="'+id+'" name="rcity" type="radio" value="'+city+'" '+checked+' onChange="cityClick(this)"/> '+name+'</p>';
@@ -64,8 +64,9 @@ const cityClick=(ten)=>{
           <div class="row grid field">           
             <h3>Miasto</h3>
             <div id="radioCity">
-               <p><input id="2-3083828" name="rcity" type="radio" value="!Szczecin-Dąbie" checked="" onchange="cityClick(this)"> Szczecin-Dąbie</p>
+               
                <p><input id="2-3083829" name="rcity" type="radio" value="!Szczecin" onchange="cityClick(this)"> Szczecin</p>
+               <p><input id="2-3083828" name="rcity" type="radio" value="!Szczecin-Dąbie" checked="" onchange="cityClick(this)"> Szczecin-Dąbie</p>
                <p><input id="2-8425827" name="rcity" type="radio" value="!Warszawa" onchange="cityClick(this)"> Warszawa</p>
                <p><input id="2-752967" name="rcity" type="radio" value="!Żyrardów" onchange="cityClick(this)"> Żyrardów</p>
              </div>
