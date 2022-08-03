@@ -87,8 +87,8 @@
         <button onclick="ccc()" class="btn">ClearCache</button>`;            
     }
 
-    let = APPcity = localStorage.getItem("APPcity");
-    let = APPid   = localStorage.getItem("APPid");
+    let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : _APPcity;
+    let APPid   = localStorage.getItem("APPid")   ? localStorage.getItem("APPid")   : _APPid;
     console.log("=======================");
     console.log(APPcity,APPid);
     console.log("=======================");
