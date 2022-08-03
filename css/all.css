@@ -1,12 +1,12 @@
-.form-control {
-  font-family: system-ui, sans-serif;
-  font-size: 2rem;
-  font-weight: bold;
-  line-height: 1.1;
-  display: grid;
-  grid-template-columns: 1em auto;
-  gap: 0.5em;
-}
+   .form-control {
+      font-family: system-ui, sans-serif;
+      font-size: 1.2rem;
+      font-weight: bold;
+      line-height: 1.33;
+      display: grid;
+      grid-template-columns: 1em auto;
+      gap: 0.85em;
+   } 
 
 *, :after, :before {
     -webkit-box-sizing: border-box;
