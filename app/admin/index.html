@@ -13,9 +13,18 @@
    <link rel="stylesheet" href="../../css/style.css" />
    <link rel="stylesheet" href="../../css/all.css" />
 <style>
-   /* body {background-color:#fa4;}  */  
+   body {background-color:#fa4;}   
     body {background-color:#4af;}    
-    body,input,button {font-size:larger;}    
+    body,input,button {font-size:larger;}  
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 2rem;
+  font-weight: bold;
+  line-height: 1.1;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.5em;
+}   
    
 </style>
 <script src="../../js/all.js?i=8"></script>
@@ -90,6 +99,22 @@ const cityClick=(ten)=>{
 </script>
  <script src="//cdn.jsdelivr.net/npm/eruda"></script>
 <script>eruda.init();</script>  
+   
+   
+   
+ <div class="demo no-resize">
+      <div class="demo--content demo--place-center">
+         <label class="form-control">
+           <input type="radio" name="radio-form-control">
+           Radio
+         </label>
+         <label class="form-control">
+           <input type="radio" name="radio-form-control" checked="">
+           Radio - checked
+         </label>
+      </div>
+</div>  
+   
    
 </body>
 </html>
