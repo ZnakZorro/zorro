@@ -13,9 +13,12 @@
    <link rel="stylesheet" href="../../css/style.css" />
    <link rel="stylesheet" href="../../css/all.css" />
 <style>
-    body {font-size:16pt; background-color:#fa4;}    
+   /* body {background-color:#fa4;}  */  
+    body {background-color:#4af;}    
+    body,input,button {font-size:larger;}    
+   
 </style>
-<script src="../../js/all.js?i=7"></script>
+<script src="../../js/all.js?i=8"></script>
    
 <script>
 console.log(APPconfig);
@@ -54,21 +57,25 @@ const cityClick=(ten)=>{
 
 <body>
     <div class="wrapper">
-        <app-menu title="ADMIN" name="ZnakZorro" link="../../"></app-menu>
+        <app-menu title="ADMIN2" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
        
         <div class="container">
           <div class="row grid field">           
             <h3>Miasto</h3>
             <div id="radioCity">
-                <p><input type="radio" /> Szczecin</p>
-            </div>
+               <p><input id="2-3083828" name="rcity" type="radio" value="!Szczecin-Dąbie" checked="" onchange="cityClick(this)"> Szczecin-Dąbie</p>
+               <p><input id="2-3083829" name="rcity" type="radio" value="!Szczecin" onchange="cityClick(this)"> Szczecin</p>
+               <p><input id="2-8425827" name="rcity" type="radio" value="!Warszawa" onchange="cityClick(this)"> Warszawa</p>
+               <p><input id="2-752967" name="rcity" type="radio" value="!Żyrardów" onchange="cityClick(this)"> Żyrardów</p>
+             </div>
           </div>
         </div>
     
       <div class="container">
          <div class="btns">
-            <button onclick="ccc()">ClearCache</button> 
+            <br />
+            <button onclick="ccc()">ClearCache</button> <br /><br />
             <button onclick='showhide("batony");'>Kolory</button>
          </div>
 
