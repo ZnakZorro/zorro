@@ -7,24 +7,14 @@
    <title>Admin</title>
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
-   <meta name="theme-color" content="#214960">
+   <meta name="theme-color" content="#orangered">
    <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
    <link rel="manifest" href="../../zorro.web.json">
    <link rel="stylesheet" href="../../css/style.css" />
    <link rel="stylesheet" href="../../css/all.css" />
 <style>
-    body {background-color:#fa4;}  
-    body,input,button {font-size:larger;}  
-   /*.form-control {
-      font-family: system-ui, sans-serif;
-      font-size: 1.2rem;
-      font-weight: bold;
-      line-height: 1.33;
-      display: grid;
-      grid-template-columns: 1em auto;
-      gap: 0.85em;
-   }  */ 
-
+    body {background-color:#orangered;}  
+    body,input,button {font-size:larger;} 
 </style>
 <script src="../../js/all.js?i=8"></script>
    
@@ -53,7 +43,7 @@ const cityClick=(ten)=>{
       console.log(ten);
       APPcity = ten.value;
       APPid = ten.id;
-   console.log(APPcity,APPid);
+      console.log(APPcity,APPid);
       localStorage.setItem("APPcity", APPcity);
       localStorage.setItem("APPid", APPid);
 }
@@ -66,14 +56,13 @@ const cityClick=(ten)=>{
 
 <body>
     <div class="wrapper">
-        <app-menu title="ADMIN2" name="ZnakZorro" link="../../"></app-menu>
+        <app-menu title="ADMIN" color="#fff" style"navbar-orange" name="ZnakZorro" link="../../"></app-menu>
         <script src="../../appMenu.js"></script>
        
         <div class="container">
           <div class="row grid field">           
             <h3>Miasto</h3>
-            <div id="radioCity">
-               
+            <div id="radioCity">               
                <p><input id="2-3083829" name="rcity" type="radio" value="Szczecin" onchange="cityClick(this)"> Szczecin</p>
                <p><input id="2-3083828" name="rcity" type="radio" value="Szczecin-Dąbie" checked="" onchange="cityClick(this)"> Szczecin-Dąbie</p>
                <p><input id="2-8425827" name="rcity" type="radio" value="Warszawa" onchange="cityClick(this)"> Warszawa</p>
@@ -88,14 +77,15 @@ const cityClick=(ten)=>{
             <button onclick="ccc()">ClearCache</button> <br /><br />
             <button onclick='showhide("batony");'>Kolory</button>
          </div>
-
          <div id="batony" style="display:none;"></div>
      </div>    
        
 </div><!--wrapper-->   
    
 <script>
-    for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
+   setTimeout(()=>{
+      for (let n=0; n<22; n++) document.getElementById("batony").innerHTML += `<button class="c${n} btn">c${n}</button>`;
+   },1000);
 </script>
 <!--script src="//cdn.jsdelivr.net/npm/eruda"></script><script>eruda.init();</script-->
    
