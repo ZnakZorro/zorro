@@ -4,8 +4,8 @@ let _dataType = "compact"; //  compact  complete   classic
 
 let jsonAPP   = localStorage.getItem("APPconfig");
 let configAPP = JSON.parse(jsonAPP);
-console.log("all 7 configAPP=",configAPP);
-console.log(configAPP);
+//console.log("all 7 configAPP=",configAPP);
+//console.log(configAPP);
 let lat  = configAPP.lat;
 let lon  = configAPP.lon;
 let alt  = configAPP.altitude;
@@ -45,7 +45,7 @@ const zapiszYRNO=(obj)=>{
       let timeDelta =  timeNow - timeCache;
       let minuteDelta = timeDelta / 60000;
       //console.log(timeNow,timeFrom,timeCache,timeDelta,minuteDelta);
-      console.log("48 qqqqqqqqqqqqq === minuteDelta=",minuteDelta,lastyrnoDATAcity,yrnoDATAcity,(lastyrnoDATAcity === yrnoDATAcity));
+      //console.log("48 qqqqqqqqqqqqq === minuteDelta=",minuteDelta,lastyrnoDATAcity,yrnoDATAcity,(lastyrnoDATAcity === yrnoDATAcity));
       if (minuteDelta < 20 && (lastyrnoDATAcity === yrnoDATAcity)) return;
   let data = obj.properties.timeseries;
   let json = JSON.stringify(obj.properties.timeseries);
@@ -54,7 +54,7 @@ const zapiszYRNO=(obj)=>{
       localStorage.setItem("yrnoDATA", json);
       localStorage.setItem("yrnoTYPE", _dataType);     
   localStorage.setItem("yrnoDATAcity", yrnoDATAcity);     
-  
+  refreshYRNOview();
 }
 
 const getYRNO2Cache=()=>{
