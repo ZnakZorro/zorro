@@ -391,7 +391,7 @@ const testNazw=(obj)=>{
     pll.push(o.replaceAll(" ","_"));
   }
   arr.sort();
-  console.log(arr);
+  //console.log(arr);
   //console.log(pll)
 }
 
