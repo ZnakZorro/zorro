@@ -75,7 +75,7 @@ https://github.com/nicolasgrancher/weather-js
  * @returns {number}
  */
 function apparentTemperature(Tc, Vkmh, R, P) {
-    console.log("apparentTemperature(Tc, Vkmh, R, P)=",Tc, Vkmh, R, P);
+    //console.log("apparentTemperature(Tc, Vkmh, R, P)=",Tc, Vkmh, R, P);
     Vkmh = Vkmh * 3.6;
     if (Tc < 10) {
         return windChill(Tc, Vkmh);
@@ -119,7 +119,7 @@ function windChill(Tc, Vkmh) {
  * @returns {number}
  */
 function heatIndex(Tc, R, P) {
-   console.log("#106 heatIndex(Tc, R, P)=",Tc, R, P)
+   //console.log("#106 heatIndex(Tc, R, P)=",Tc, R, P)
     if (!window.dewPoint) {       
         return Tc; 
     }
@@ -219,7 +219,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     let symbol = obj[nr].data.next_1_hours.summary.symbol_code.split("_")[0];
     let time = obj[nr].time;
     let data = obj[nr].data.instant.details;
-    console.log(data);
+    //console.log(data);
     //console.log(obj[nr].data.next_1_hours.summary.symbol_code);
     let rain = obj[nr].data.next_1_hours.precipitation_amount || 0;
     let rain01 = (obj[nr].data.next_1_hours.details?.precipitation_amount)  ? obj[nr].data.next_1_hours.details.precipitation_amount : 0;
