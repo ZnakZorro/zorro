@@ -1,21 +1,17 @@
 let yrnoToken = ()=>{return(new Date()).getTime();}
 let _city = "Szczecin-Dąbie";
 let _dataType = "compact"; //  compact  complete   classic
-//let APPcity = localStorage.getItem("APPcity")
-//let APPlat = localStorage.getItem("APPlat");
-//let APPlon = localStorage.getItem("APPlon");
-//let APPalt = localStorage.getItem("APPlat");
-//console.log(APPcity,APPlat,APPlon,APPalt);
+
 let jsonAPP   = localStorage.getItem("APPconfig");
 let configAPP = JSON.parse(jsonAPP);
-console.log("all 10 configAPP=",configAPP);
+console.log("all 7 configAPP=",configAPP);
 console.log(configAPP);
 let lat  = configAPP.lat;
 let lon  = configAPP.lon;
 let alt  = configAPP.altitude;
 let id   = configAPP.id;
 let name = configAPP.name;
-console.log("18**************",lat,lon,alt,id,name);
+console.log("14**************",lat,lon,alt,id,name);
 
 let  _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25";//&t="+yrnoToken();
 let __urlYRNO = `https://api.met.no/weatherapi/locationforecast/2.0/${_dataType}?lat=${lat}&lon=${lon}&altitude=${alt}`;
