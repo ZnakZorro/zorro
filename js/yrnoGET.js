@@ -45,8 +45,8 @@ const zapiszYRNO=(obj)=>{
       let timeDelta =  timeNow - timeCache;
       let minuteDelta = timeDelta / 60000;
       //console.log(timeNow,timeFrom,timeCache,timeDelta,minuteDelta);
-      console.log("43 qqqqqqqqqqqqq=========minuteDelta=",minuteDelta);
-      //if (minuteDelta < 30) return;
+      console.log("48 qqqqqqqqqqqqq === minuteDelta=",minuteDelta,lastyrnoDATAcity,yrnoDATAcity,(lastyrnoDATAcity === yrnoDATAcity));
+      if (minuteDelta < 20 && (lastyrnoDATAcity === yrnoDATAcity)) return;
   let data = obj.properties.timeseries;
   let json = JSON.stringify(obj.properties.timeseries);
       localStorage.setItem("yrnoCITY", _city);
