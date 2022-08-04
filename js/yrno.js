@@ -229,7 +229,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.temp = tosm(data.air_temperature);
     w.press = Math.round(data.air_pressure_at_sea_level);
     w.wind  = data.wind_speed;
-    w.humi  = data.relative_humidity;
+    w.humid  = data.relative_humidity;
     w.rain  = tosm(rain,"mm");
     w.rain01  = rain01;
 console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.wind, w.humid, w.press)          
