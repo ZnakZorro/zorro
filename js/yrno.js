@@ -248,7 +248,7 @@ const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.te
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
       setNewPogodaFoto(0,w);
-      //console.log("235 obj wwwwwwwwww=",w);
+      console.log("251 w.chil=",w.chil);
       let container = _$("#"+id);
       let zapas = container.innerHTML;
       container.innerHTML = formatLine(w);
