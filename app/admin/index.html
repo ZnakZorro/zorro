@@ -42,8 +42,9 @@ document.addEventListener("DOMContentLoaded",function(){
 const cityClick=(ten)=>{
       console.log(ten);
       APPcity = ten.value;
-   console.log(APPconfig[APPcity])
-   localStorage.setItem("APPconfig", JSON.stringify(APPconfig[APPcity]));
+   console.log(APPconfig,APPcity)
+   console.log(APPconfig.city[APPcity])
+   localStorage.setItem("APPconfig", JSON.stringify(APPconfig.city[APPcity]));
       APPid = ten.id;
       console.log(APPcity,APPid);
       localStorage.setItem("APPcity", APPcity);
