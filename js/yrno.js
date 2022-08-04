@@ -219,7 +219,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     let symbol = obj[nr].data.next_1_hours.summary.symbol_code.split("_")[0];
     let time = obj[nr].time;
     let data = obj[nr].data.instant.details;
-    //console.log(data);
+    console.log(data);
     //console.log(obj[nr].data.next_1_hours.summary.symbol_code);
     let rain = obj[nr].data.next_1_hours.precipitation_amount || 0;
     let rain01 = (obj[nr].data.next_1_hours.details?.precipitation_amount)  ? obj[nr].data.next_1_hours.details.precipitation_amount : 0;
@@ -232,6 +232,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.humi  = data.relative_humidity;
     w.rain  = tosm(rain,"mm");
     w.rain01  = rain01;
+console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.wind, w.humid, w.press)          
     w.chill = tosm(apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1));
     w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
     w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
