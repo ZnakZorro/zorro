@@ -11,11 +11,13 @@ let lon  = configAPP.lon;
 let alt  = configAPP.altitude;
 let id   = configAPP.id;
 let name = configAPP.name;
-console.log("14**************",lat,lon,alt,id,name);
+let yrnoDATAcity = name;
+
+//console.log("14**************",lat,lon,alt,id,name);
 
 //let  _old_urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25";//&t="+yrnoToken();
 let _urlYRNO = `https://api.met.no/weatherapi/locationforecast/2.0/${_dataType}?lat=${lat}&lon=${lon}&altitude=${alt}`;
-console.log(_urlYRNO);
+//console.log(_urlYRNO);
 
 
 
@@ -32,7 +34,10 @@ const _getYRNO=(url)=>{
 };
 
 const zapiszYRNO=(obj)=>{
+  let lastyrnoDATAcity =  localStorage.getItem("yrnoDATAcity") ? localStorage.getItem("yrnoDATAcity") : null;     
   console.log(obj)
+  console.log(lastyrnoDATAcity,yrnoDATAcity)
+  
   let updated_at = obj.properties.meta.updated_at;
       let timeNow   = (new Date()).getTime();
       let timeFrom  = (new Date(updated_at)).getTime();
@@ -48,6 +53,8 @@ const zapiszYRNO=(obj)=>{
       localStorage.setItem("yrnoTIME", timeNow);
       localStorage.setItem("yrnoDATA", json);
       localStorage.setItem("yrnoTYPE", _dataType);     
+  localStorage.setItem("yrnoDATAcity", yrnoDATAcity);     
+  
 }
 
 const getYRNO2Cache=()=>{
