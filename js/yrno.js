@@ -407,7 +407,9 @@ document.addEventListener("DOMContentLoaded",function(){
     
 });
 
-
+const refreshYRNOview=()=>{
+    console.log("refreshYRNOview()===");  
+}
 
 
 
