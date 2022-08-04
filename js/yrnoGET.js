@@ -8,8 +8,18 @@ let _dataType = "compact"; //  compact  complete   classic
 //console.log(APPcity,APPlat,APPlon,APPalt);
 let configAPP = localStorage.getItem("APPconfig");
 console.log("all 10 configAPP=",configAPP);
-let _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25";//&t="+yrnoToken();
-//let yrnoPL={};
+console.log(configAPP);
+let lat  = configAPP.lat;
+let lon  = configAPP.lon;
+let alt  = configAPP.alt;
+let id   = configAPP.id;
+let name = configAPP.name;
+console.log(lat,lon,alt,id,name);
+
+let  _urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+_dataType+"?lat=53.378773&lon=14.665842&altitude=25";//&t="+yrnoToken();
+let __urlYRNO = `https://api.met.no/weatherapi/locationforecast/2.0/"${_dataType}+${lat}&lon=${lon}&altitude=${alt}`;
+console.log(_urlYRNO);
+console.log(__urlYRNO);
 
 
 const _getYRNO=(url)=>{  
