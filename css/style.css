@@ -27,7 +27,7 @@ div.pogoda div {
     display: inline-block;
 }
 
-
+div#sun div span:nth-child(1),
 div.pogoda div span:nth-child(1) {
     font-size: 11pt;
     z-index:3;
