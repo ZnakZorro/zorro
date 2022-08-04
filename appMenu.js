@@ -34,9 +34,9 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/snipet/" class="nav-link">SNIPET</a></li>
 					 <li class="nav-item"><a href="${link}html/zapis.html" class="nav-link">Zapis</a></li>
 					 <li class="nav-item"><a href="${link}html/index.html" class="nav-link">Inne</a></li> 
-					 <li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li>
+					 <!--li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li-->
 					 <li class="nav-item"><a href="${link}app/radio/index.html" class="nav-link">LINKI</a></li>   
-					 <li class="nav-item"><a href="https://znakzorro.github.io/github-page-pwa/" class="nav-link" target="_blank">T2</a></li>
+					 <!--li class="nav-item"><a href="https://znakzorro.github.io/github-page-pwa/" class="nav-link" target="_blank">T2</a></li-->
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
 				 </ul>
 				 <div class="hamburger" >
