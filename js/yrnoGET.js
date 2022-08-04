@@ -12,7 +12,7 @@ console.log("all 10 configAPP=",configAPP);
 console.log(configAPP);
 let lat  = configAPP.lat;
 let lon  = configAPP.lon;
-let alt  = configAPP.alt;
+let alt  = configAPP.altitude;
 let id   = configAPP.id;
 let name = configAPP.name;
 console.log("18**************",lat,lon,alt,id,name);
