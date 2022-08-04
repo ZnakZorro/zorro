@@ -243,9 +243,6 @@ console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.win
 } 
 
 //fffffffffffffffffffffffffffffffffffffff
-//const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${tosm(w.wind,"m/s")}</span><br /><span>${w.pl}</span>`;
-//const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${w.rain}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humi,"%")}</span>`;
-//const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}<br />${w.chill}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humi,"%")}</span>`;
 const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humi,"%")}</span>`;
 
   const getYRNOhour=(nr=0,id)=>{ 
@@ -266,12 +263,9 @@ const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.te
 //zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz
 const countCacheTimeMinutes = () => Math.round(((new Date()).getTime() - parseInt(localStorage.getItem("yrnoTIME") || "0"))/60000);
 
-const getYRNO=(url=urlYRNO)=>{ 
-  //console.log("getYRNO=====",counter);
-  //counter++;
+const getYRNO=(url=urlYRNO)=>{
   let lastTime = localStorage.getItem("yrnoTIME") || "0";
   cacheTimeMinutes = Math.round(((new Date()).getTime() - parseInt(lastTime))/60000);
-  //console.log("1 cacheTimeMinutes=====",cacheTimeMinutes);
   let json = localStorage.getItem("yrnoDATA"); 
   let obj  = JSON.parse(json);
   opisYRNO(obj);
@@ -281,7 +275,6 @@ const capitalize = s => s && s[0].toUpperCase() + s.slice(1);
 
 const symbolTR=(tx)=>{
   tx = tx.split("_")[0];
-  //console.log("symbol=",tx,yrnoPL[tx].pl);
   return (yrnoPL[tx].pl);
 }
 const ronda=(tx,miano=null)=>{
@@ -302,7 +295,6 @@ const tosm=(tx,miano="&deg;C")=>{
 const dateFrom=(updated_at)=>{
     let newFrom  = (new Date()).getTime();
     let timeFrom = (new Date(updated_at)).getTime();
-    //console.log(newFrom,timeFrom);
     let delta = newFrom - timeFrom;
     let minutes = Math.round(delta/(60*1000));
     let hours   = "00";
@@ -318,9 +310,7 @@ const hoursTime=(dd)=>{
 }
 
 const setNewPogodaFoto=(nr,obj)=>{
-  //console.log("setNewPogodaFoto=",nr,obj);
   let pogodaSRC = yrnoPL[obj.symbol].img || "pogoda.jpg";
-  //console.log("pogodaSRC=",pogodaSRC);
   _$("#pogoda").src="./img/meteo/"+pogodaSRC;  
 }
 
@@ -345,35 +335,20 @@ const opisYRNO=(data)=>{
 
   let html = '<!--pogoda-->';
 
-  //-----html += '<div class="grid pogoda">'+deltaDelta+'; '+w00.time+' <small>'+dataType+'</small></div>';
-  //html += '<div class="grid2 pogoda fon-20 fon-600"><div id="ev0"><span>'+w00.time+'</span>'+w00.temp+',</div><div id="ev1"> '+tosm(w00.press,"hPa")+', '+tosm(w00.wind,"m/s")+'</div></div>';
-  html += '<div class="grid pogoda fon-14">';   
+    html += '<div class="grid pogoda fon-14">';   
     html += `<div id="ev2">${formatLine(w01)}</div>`;
     html += `<div id="ev3">${formatLine(w06)}</div>`;
     html += `<div id="ev4">${formatLine(w12)}</div>`;
   html += '</div>';
 
   _$("#WeatherReport").innerHTML = html;
-  // eventy
-  //_$("#ev0").addEventListener('click', ((e)=>{winClick(0);}), false);
-  //_$("#ev1").addEventListener('click', ((e)=>{winClick(1);}), false);
+  
   _$("#ev2").addEventListener('click', ((e)=>{winClick(2);}), false);
   _$("#ev3").addEventListener('click', ((e)=>{winClick(3);}), false);
   _$("#ev4").addEventListener('click', ((e)=>{winClick(4);}), false);
-  
-  
-  
+
 }
 
-
-/*
-air_pressure_at_sea_level: 1004
-air_temperature: 7.7
-cloud_area_fraction: 80.3
-relative_humidity: 89.4
-wind_from_direction: 241
-wind_speed: 5.2
-*/
 const insertWeatherReport=()=>{
   if (!document.getElementById("WeatherReport"))
       document.querySelector("div.container").insertAdjacentHTML('afterbegin', '<div id="WeatherReport"></div>');
@@ -387,27 +362,21 @@ const testNazw=(obj)=>{
   let arr=[];
   let pll=[];
   for (let o in out){
-    //console.log(o);
     arr.push(o);
     pll.push(o.replaceAll(" ","_"));
   }
   arr.sort();
-  //console.log(arr);
-  //console.log(pll)
 }
 
 
-document.addEventListener("DOMContentLoaded",function(){
-  
+document.addEventListener("DOMContentLoaded",function(){  
     insertWeatherReport();
     getYRNO2Cache();
     setInterval(()=>{
       cacheTimeMinutes = countCacheTimeMinutes();
-      //console.log(cacheTimeMinutes);
-
     },300000)
    
-  
+ 
     fetch("https://znakzorro.github.io/zorro/data/yrno.img.en.pl.json")
     .then(function(response) {
           if (!response.ok) {throw Error(response.statusText);}
@@ -417,8 +386,6 @@ document.addEventListener("DOMContentLoaded",function(){
         yrnoPL = obj;      
         getYRNO(urlYRNO);
         testNazw(obj);
-        //console.log(yrnoPL);
-        //console.log("3 cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) setTimeout(()=>{getYRNO()},3000); 
     })
     .catch(e => {console.log(e)});
@@ -451,137 +418,4 @@ document.addEventListener("visibilitychange", function() {
     }
 },false);
 
-/*
-let liczFlag=0;
-const handleVisibilityChange=(flag)=>{
-    console.log("handleVisibilityChange=",flag)
-    liczFlag++;
-    let f= flag? "+":"-";
-    _$("#flag").textContent = ", "+liczFlag+f;
-    _$("#flag2").textContent += f+" ";
-}
-window.addEventListener('focus', function() {
-  handleVisibilityChange(true);
-}, false);
-
-window.addEventListener('blur', function() {
-  handleVisibilityChange(false);
-}, false);
-*/
-
-/*
-fetch("https://www.yr.no//api/v0/locations/2-3083828/celestialevents")
-    .then(function(response) {
-          if (!response.ok) {throw Error(response.statusText);}
-          return response.json();
-    })
-    .then(obj => {
-        console.log(obj);
-    })
-    .catch(e => {console.log(e)});
-*/
-
-
-/*
-fetch("https://api.sunrise-sunset.org/json?lat=53.37883&lng=14.6660&formatted=0")
-.then(function(response) {
-  if (!response.ok) {throw Error(response.statusText);}
-  return response.json();
-})
-.then(data => {
-  console.log(data,new Date(Date.parse(data.results.sunrise)))
-  let sunrise = (new Date(data.results.sunrise)).toLocaleString('pl-PL').split(" ").pop();
-  let sunset  = (new Date(data.results.sunset)).toLocaleString('pl-PL').split(" ").pop();
-  sunrise = sunrise.replace(/(\:\d\d)$/,"");
-  sunset  =  sunset.replace(/(\:\d\d)$/,"");
-  //console.log(sunrise,sunset)
-  let dayLen  = dayL(data.results.day_length);
-    _$("#sun").innerHTML  = `<div><span>Wschód:</span> <span>${sunrise}</span></div>`;
-    _$("#sun").innerHTML += `<div><span>Zachód:</span> <span>${sunset}</span></div>`;
-    _$("#sun").innerHTML += `<div><span>Dzień:</span> <span>${dayLen}</span></div>`;
-});
-*/
-
-
-/*
-results:
-astronomical_twilight_begin: "2022-01-09T05:05:27+00:00"
-astronomical_twilight_end: "2022-01-09T17:08:53+00:00"
-civil_twilight_begin: "2022-01-09T06:34:07+00:00"
-civil_twilight_end: "2022-01-09T15:40:13+00:00"
-day_length: 27906
-nautical_twilight_begin: "2022-01-09T05:48:30+00:00"
-nautical_twilight_end: "2022-01-09T16:25:50+00:00"
-solar_noon: "2022-01-09T11:07:10+00:00"
-sunrise: "2022-01-09T07:14:37+00:00"
-sunset: "2022-01-09T14:59:43+00:00"
-*/
-
-///////////////////////
-
-/*
-console.log((new Date()).toLocaleString('pl-PL'));
-
-const date = new Date();
-
-console.log(date.toLocaleDateString('pl-PL'));
-
-const dateOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-console.log(date.toLocaleDateString('pl-PL', dateOptions));
-
-console.log(
-  date.toLocaleDateString('pl-PL', {
-    month: 'short',
-    day: 'numeric',
-  }),
-);
-
-console.log(
-  date.toLocaleDateString('pl-PL', {
-    month: 'long',
-  }),
-);
-
-console.log(date.toLocaleTimeString('pl-PL'));
-
-const timeOptions = {
-  //hour12: true,
-  hour: 'numeric',
-  minute: '2-digit',
-  second: '2-digit',
-};
-
-console.log(date.toLocaleTimeString('pl-PL', timeOptions));
-// 11:30:33 PM
-
-console.log(
-  date.toLocaleTimeString('pl-PL', {
-    timeZone: 'Europe/Warsaw',
-  }),
-);
-*/
-
-/*
-const dateOptions = {
-  weekday: 'long',
-  year: 'numeric',
-  month: 'long',
-  day: 'numeric',
-};
-const timeOptions = {
-  //hour12: true,
-  hour: 'numeric',
-  minute: '2-digit',
-  second: '2-digit',
-};
-const date = new Date();
-console.log( date.toLocaleString('pl-PL', { ...timeOptions, ...dateOptions }));
-console.log( date.toLocaleString('pl-PL'));
-console.log(date.toLocaleString('pl-PL'));
-*/
  
