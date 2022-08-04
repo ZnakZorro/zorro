@@ -7,7 +7,7 @@ let APPconfig={
 			"name": "Szczecin-Dąbie",
 			"lat": "53.3788",
 			"lon": "14.666",
-			"altitude": "25",
+			"altitude": "15",
 			"id":"2-3083828"
 		},
 		"Szczecin": {
@@ -19,21 +19,22 @@ let APPconfig={
 		},
 		"Warszawa": {
 			"name": "Warszawa",
-			"lat": "",
-			"lon": "",
-			"altitude": "",
+			"lat": "52.1818",
+			"lon": "21.0476",
+			"altitude": "90",
 			"id":"2-8425827"
 		},
 		"Żyrardów": {
 			"name": "Żyrardów",
-			"lat": "",
-			"lon": "",
-			"altitude": "",
+			"lat": "52.0031",
+			"lon": "20.5585",
+			"altitude": "150",
 			"id":"2-752967"
 		},
 		
 	}
 }
+//https://en-gb.topographic-map.com/maps/vje9/Szczecin/
 
 const _$=e=>document.querySelector(e);
 const _$$=e=>document.querySelectorAll(e);
