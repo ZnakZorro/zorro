@@ -24,8 +24,8 @@ b - remoove chill temperature
  * @returns {number}
  */
 function dewPoint(Tc, R) {
-    console.log("#11 dewPoint=", Tc, R)
-    if (!Tc || !R )                             {console.log(6); return Tc;}
+    //console.log("#11 dewPoint=", Tc, R)
+    if (!Tc || !R )                             {return Tc;}
     //if (Tc ==="undefined" || R==="undefined" )  {console.log(7); return Tc;}
     //if (Tc ===undefined   || R=== undefined  )  {console.log(8); return Tc;}
     
@@ -47,7 +47,7 @@ function dewPoint(Tc, R) {
     if (Tr < 0 || Tr > 50) {
         return Tc;
     }
-    console.log("#30 dewPoint=",Tr)
+    //console.log("#30 dewPoint=",Tr)
     return Tr;
 }
 
@@ -75,6 +75,7 @@ https://github.com/nicolasgrancher/weather-js
  * @returns {number}
  */
 function apparentTemperature(Tc, Vkmh, R, P) {
+    console.log("apparentTemperature(Tc, Vkmh, R, P)=",Tc, Vkmh, R, P);
     Vkmh = Vkmh * 3.6;
     if (Tc < 10) {
         return windChill(Tc, Vkmh);
