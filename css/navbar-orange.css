@@ -2,5 +2,5 @@
 .bar {background-color: #f80;}
 .nav-link {color: #fff;}
 @media only screen and (max-width: 768px){
-    .nav-menu {background: #f92; border-color:#fff;}
+    .nav-menu {background: #666; border-color:#fff;}/*wall of menu*/
 }
