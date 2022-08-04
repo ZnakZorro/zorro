@@ -40,8 +40,8 @@ const zapiszYRNO=(obj)=>{
       let timeDelta =  timeNow - timeCache;
       let minuteDelta = timeDelta / 60000;
       //console.log(timeNow,timeFrom,timeCache,timeDelta,minuteDelta);
-      console.log("minuteDelta=",minuteDelta);
-      if (minuteDelta < 30) return;
+      console.log("43 qqqqqqqqqqqqq=========minuteDelta=",minuteDelta);
+      //if (minuteDelta < 30) return;
   let data = obj.properties.timeseries;
   let json = JSON.stringify(obj.properties.timeseries);
       localStorage.setItem("yrnoCITY", _city);
@@ -55,16 +55,4 @@ const getYRNO2Cache=()=>{
 }
 _getYRNO(_urlYRNO);
 
-/*
-    fetch("https://znakzorro.github.io/zorro/data/yrno.en.pl.json")
-    .then(function(response) {
-          if (!response.ok) {throw Error(response.statusText);}
-          return response.json();
-    })
-    .then(obj => {
-        yrnoPL = obj;
-        _getYRNO(_urlYRNO);
-        //console.log(yrnoPL);
-    })
-    .catch(e => {console.log(e)});
- */
+
