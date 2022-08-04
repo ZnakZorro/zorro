@@ -243,7 +243,7 @@ console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.win
 } 
 
 //fffffffffffffffffffffffffffffffffffffff
-const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humi,"%")}</span>`;
+const formatLine=(w)=> `<span>${w.time}</span><span>${w.icon}</span><span>${w.temp}</span><br /><span>${tosm(w.press,"hPa")}</span><br /><span>${ronda(w.wind,"m/s")}, ${ronda(w.humid,"%")}</span>`;
 
   const getYRNOhour=(nr=0,id)=>{ 
       let w = getOBJhour(nr);
