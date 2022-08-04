@@ -1,3 +1,18 @@
+const getYRNOurl=()=>{
+        let _dataType = "compact"; //  compact  complete   classic
+        let jsonAPP   = localStorage.getItem("APPconfig");
+        let configAPP = JSON.parse(jsonAPP);
+        let lat  = configAPP.lat;
+        let lon  = configAPP.lon;
+        let alt  = configAPP.altitude;
+        let id   = configAPP.id;
+        //let name = configAPP.name;
+        //et yrnoDATAcity = name;
+        let _urlYRNO = `https://api.met.no/weatherapi/locationforecast/2.0/${_dataType}?lat=${lat}&lon=${lon}&altitude=${alt}`;
+        console.log(_urlYRNO);
+    return _urlYRNO;
+}    
+
 
 /**
 b - remoove chill temperature
@@ -143,12 +158,14 @@ let gfxSVG = "https://api.met.no/images/weathericons/svg/";
 
 //let dataType = "compact"; //  compact  complete   classic
 let dataType = localStorage.getItem("yrnoTYPE") || "???";
-console.log("dataType=====",dataType);
+//console.log("dataType=====",dataType);
 let nic = localStorage.getItem("nic") || "***";
 
 
 
-let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
+//let urlYRNO = "https://api.met.no/weatherapi/locationforecast/2.0/"+dataType+"?lat=53.378773&lon=14.665842&altitude=25"
+let urlYRNO = getYRNOurl();
+console.log("urlYRNO=====",urlYRNO);
 let yrnoPL={};
 let cacheTimeMinutes=99;
 //let counter=0;
