@@ -17,6 +17,7 @@ body {
  .container {
     padding: 0.25em;
     margin: 0.25em;
+    display: flow-root;
 }
 body,button {
     font-family: 'Roboto', "Verdana", sans-serif;
