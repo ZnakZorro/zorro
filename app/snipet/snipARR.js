@@ -1,3 +1,14 @@
+let SNIPETY = {
+    "dom":     ["gramofon.htm",   "szlif.htm", "expres.txt", "nalewki.txt"],
+    "html":    ["index.html","git.html","arrows.thml"],
+    "js":      ["fetch.js","createElement.js","active.js","domReady.js","parameters.js"],
+    "code":    ["md.md","console.js"],
+    "kuchnia": ["ciasto.txt","Piernik.htm","lody.md"],
+    "580":     ["borowki.txt"],
+}
+console.log(SNIPETY);
+
+
 const snipARR = [
    {n:"Gramofon",        f:"dom",       u:"gramofon.htm"},
    {n:"Szlif",           f:"dom",       u:"szlif.htm"},
