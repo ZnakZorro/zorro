@@ -51,9 +51,13 @@ const cityClick=(ten)=>{
       localStorage.setItem("APPid", APPid);
    
    //console.log(APPcity,APPlat,APPlon,APPalt);
+   let APPid = APPconfig.city[APPcity].id;
+   _$("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;
 }
 
-
+const imgReady=()=>{
+   console.log("imgReady()");  
+}
 
 </script>
    
@@ -75,7 +79,9 @@ const cityClick=(ten)=>{
              </div>
           </div>
         </div>
-    
+       
+      <div id="modalyrnoimage"></div>
+       
       <div class="container">
          <div class="btns">
             <br />
