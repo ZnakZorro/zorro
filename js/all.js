@@ -31,7 +31,13 @@ let APPconfig={
 			"altitude": "150",
 			"id":"2-752967"
 		},
-		
+		"Nowogard": {
+			"name": "Nowogard",
+			"lat": "53.6724",
+			"lon": "15.1022",
+			"altitude": "50",
+			"id":"2-3090558"
+		},		
 	}
 }
 //https://en-gb.topographic-map.com/maps/vje9/Szczecin/
