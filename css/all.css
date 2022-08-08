@@ -13,6 +13,7 @@ body {
 .wrapper {
     padding: 0;
     margin: auto;
+    max-width:1024px;
 }
  .container {
     padding: 0.25em;
