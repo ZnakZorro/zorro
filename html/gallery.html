@@ -20,11 +20,17 @@
           
 
 <style>
+body {
+  margin: 0;
+  background: #60c4ff;
+   width: 100vw;
+}
+   
  .gallery {
   --n: 1; /* number of rows*/
   --m: 5; /* number of columns */
   --g: 0px; /* control the gap */
-  --f: 0.25; /* 0.8 control the scale factor */
+  --f: 0.15; /* 0.8 control the scale factor */
 
   display: grid;
   gap: var(--g);
@@ -50,10 +56,6 @@
   height: calc(100vw * var(--f) / var(--m));
 }
 
-body {
-  margin: 0;
-  background: #60c4ff;
-}
    
 </style>
 
