@@ -5,7 +5,7 @@ let SNIPETY = {
     "code":    ["md.md","console.js"],
     "kuchnia": ["ciasto.txt","Piernik.htm","lody.md"],
     "580":     ["borowki.txt"],
-    "580":     ["drozdze.html"],
+    "580":     ["drozdze.htm"],
 }
 console.log(SNIPETY);
 
@@ -24,7 +24,7 @@ const snipARR = [
    {n:"dom",             f:"js",        u:"domReady.js"},
    {n:"param",           f:"js",        u:"parameters.js"},
    {n:"Borówki",         f:"580",       u:"borowki.txt"},
-    {n:"Drożdże",         f:"580",       u:"drozdze.html"},
+    {n:"Drożdże",         f:"580",       u:"drozdze.htm"},
    {n:"Ciasto",          f:"kuchnia",   u:"ciasto.txt"},
    {n:"Piernik",         f:"kuchnia",   u:"Piernik.htm"},
    {n:"Lody",            f:"kuchnia",   u:"lody.md"},
