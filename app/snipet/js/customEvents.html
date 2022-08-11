@@ -1,0 +1,47 @@
+<script>
+	document.addEventListener('myEvent', function (event) {
+		console.log(event.detail);
+	});
+	
+	
+	let event0 = new CustomEvent('myEvent', {
+		bubbles: true,
+		cancelable: true,
+		detail: 'Tu będą obiekty albo tablice'
+	});
+	
+	// Emit the event
+	document.dispatchEvent(event0);
+	
+	
+	/**
+	 * Emit a custom event
+	 * @param  {String} type   The event type
+	 * @param  {*}      detail Any details to pass along with the event
+	 */
+	 function emit (type, detail) {
+			// Create a new event
+			let event2 = new CustomEvent(type, {
+				bubbles: true,
+				cancelable: true,
+				detail: detail
+			});
+	
+			// Dispatch the event
+			return document.dispatchEvent(event2);
+	}
+	
+	// Emit a custom event
+	emit('myEvent');
+	
+	// Emit a custom event with details
+	emit('myEvent', {name: 'Merlin'});
+	
+	setTimeout(()=>{emit('myEvent', {name: 'Zorro'});},5000)
+	setTimeout(()=>{emit('myEvent', {name: 'Zorro'});},6000)
+	setTimeout(()=>{emit('myEvent', 'Zorro');},7000)
+		
+	
+	</script>
+	
+	
