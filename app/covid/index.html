@@ -156,7 +156,10 @@ const describePL = (data,country) => {
   console.log(data)
     let dane = [];
     let last = data.rows.length-1;
-    o.rows.forEach((r,i)=>{
+    let outData = [];
+    let outTime = [];
+    
+    data.rows.forEach((r,i)=>{
         let deltaCases=0;
         let deltaDeats=0;
         if (i<last){
@@ -164,11 +167,15 @@ const describePL = (data,country) => {
             deltaDeats = data.rows[i][3] - data.rows[i+1][3]
         }
         let time = (new Date(r[0]+" 00:00:00")).getTime();
-        console.log(r[0],(new Date(time)).toLocaleString());
+        //console.log(r[0],(new Date(time)).toLocaleString());
         dane.push([time,deltaCases]);
-	//dane.push([time,r[0],r[2],r[3],deltaCases,deltaDeats]);
+        outTime.push(time);
+        outData.push(deltaCases);
+	      //dane.push([time,r[0],r[2],r[3],deltaCases,deltaDeats]);
     })
-    console.log(dane);	
+    console.log(dane);
+    //let country="Poland";	
+    rysujWykres2D([outData],outTime,country);
   
 //rysujWykres2D([outData],outTime,country);
 	
