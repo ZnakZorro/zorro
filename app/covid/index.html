@@ -150,8 +150,12 @@ const weekMiddle=(datas,times,country)=>{
   return [outTime,outData];
 }
 
+const describePL = (data,country) => {
+  console.log("pl=",data);
+}
 
-const describe=(data,country)=>{
+const describe = (data,country) => {
+  console.log("old=",data);
   document.getElementById("ctype").textContent = coronus.dataType;
   document.getElementById("country").textContent = coronus.country;
 //console.log(data);
@@ -178,33 +182,8 @@ const describe=(data,country)=>{
     let dataD=[];
     let j=0;
     let datas7 = weekMiddle(datas,times,country);
-    //console.log(datas7);
-  
-  /*
-  datas.forEach((dat,i)=>{
-      if (dat>1){
-          //let time = (new Date(Date.parse(times[i]))).getTime();
-          let time = (new Date((times[i]))).getTime();
-          let delta = dat - last;
-          sumaW += delta;
-          dane.push([time,delta]);
-          last = dat;
-          if (i % 7===6){
-            let deltaW = sumaW/7;
-            sumaW = 0;
-            week.push([time,deltaW]);
-            dataA.push([Math.round(deltaW-lastW),Math.round(deltaW)]);
-            dataD.push([Math.round(deltaW-lastW), Math.round(deltaW), j]);
-            lastW=deltaW;
-            j++;
-          }
-      }
-  });
-  if (type==="3d") rysujWykres3D([dataD],null,country);
-  else             rysujWykres2D([dataA],null,country);
-  */
+    console.log(datas7);
 
-  
   if (countries.length===0){
     for (let c in data.countries){countries.push(c);}
     rysujKlawisze(countries);
@@ -225,7 +204,10 @@ let getAsyncFetch=async(u,callback=null,country="Poland")=>{
 }
   
 document.addEventListener("DOMContentLoaded",function(){
-    getAsyncFetch(url,describe,"Poland");
+	getAsyncFetch(url,describe,"Poland");
+	let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
+	getAsyncFetch(plURL,describePL,"Poland");
+
 });
 
 
@@ -247,7 +229,7 @@ let wykres2D = null;
 let wykres3D = null;
 	
 let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
-	//console.log(data,kategorie);
+	console.log(data,kategorie);
 	let wykres2D = Highcharts.chart('container', {
 		chart: {
 			type: 'spline',
@@ -617,7 +599,7 @@ const newDistance=(ten)=>{
 	
 	<div class="wrapper">
 		<div class="container">
-			<a href="covid22.html">Covid'22</a>
+			<a href="covid22.html" class="btn big">Covid'22</a>
 		</div>
 	</div>
 
