@@ -146,40 +146,48 @@ const weekMiddle=(datas,times,country)=>{
   }
   //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
   //
-  console.log([outData],outTime,country);	
+  //console.log([outData],outTime,country);	
   rysujWykres2D([outData],outTime,country);
   return [outTime,outData];
 }
 
 const describePL = (data,country) => {
-  console.log("pl=",data);
-  console.log(data)
+  //console.log("pl=",data);
+  //console.log(data)
     let dane = [];
     let last = data.rows.length-1;
     let outData = [];
     let outTime = [];
     
     data.rows.forEach((r,i)=>{
+      let time = (new Date(r[0]+" 00:00:00")).getTime();
+        outTime.push(time);
+        outData.push(r[2]);
+      /*
         let deltaCases=0;
         let deltaDeats=0;
         if (i<last){
-            deltaCases = data.rows[i][2] - data.rows[i+1][2]
-            deltaDeats = data.rows[i][3] - data.rows[i+1][3]
+            deltaCases = data.rows[i][2] - data.rows[i+1][2];
+            deltaDeats = data.rows[i][3] - data.rows[i+1][3];
+            if (deltaCases<0) deltaCases = 0;
+            if (deltaDeats<0) deltaDeats = 0;
         }
-        let time = (new Date(r[0]+" 00:00:00")).getTime();
-        //console.log(r[0],(new Date(time)).toLocaleString());
         dane.push([time,deltaCases]);
         outTime.push(time);
         outData.push(deltaCases);
 	      //dane.push([time,r[0],r[2],r[3],deltaCases,deltaDeats]);
+      */
     })
-    console.log(dane);
+    //console.log(dane);
     //let country="Poland";	
-    rysujWykres2D([outData],outTime,country);
+
+    //rysujWykres2D([outData.reverse()],outTime.reverse(),country);
+    let datas7 = weekMiddle(outData.reverse(),outTime.reverse(),country); console.log(datas7);
   
 //rysujWykres2D([outData],outTime,country);
 	
 }
+
 
 const describe = (data,country) => {
   console.log("old=",data);
@@ -236,7 +244,8 @@ const drawCovidPL=()=>{
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-	getAsyncFetch(url,describe,"Poland");
+	drawCovidPL();
+	//getAsyncFetch(url,describe,"Poland");
 	//let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
 	//getAsyncFetch(plURL,describePL,"Poland");
 
