@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>git::COVID</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#db5945">
+	<link rel="stylesheet" href="../../css/navbar.css" />	
+<!--link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/fractal1.svg"-->
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+	
+<!--script src="https://zszczech.zut.edu.pl/app/autobusy/js/moment.min.js"></script-->
+<!--script src="https://zszczech.zut.edu.pl/app/autobusy/js/pl.js"></script-->
+<!--script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script-->
+	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js" integrity="sha512-4Hra0ugHwC1jKVrS6cwYQu47pRQxNoZZNT/KKLraGJb4csT6rxfba0jpIxKE1O7N5ImwPKqbYv875hXN5h0tqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<!--script src="https://code.highcharts.com/modules/exporting.js"></script-->  
+<!-- optional -->  
+<!--script src="https://code.highcharts.com/modules/offline-exporting.js"></script-->  
+<script src="https://code.highcharts.com/modules/export-data.js"></script>  
+<style>
+body {font:normal 14pt verdana}
+
+button {
+    margin: 0.25em 0.18em;
+    min-width: 3em;
+}
+.active {
+    color: red;
+    text-shadow: 1px 1px #888;
+    box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
+    opacity: 2.4;
+    filter: sepia(0.1);
+}
+#container {width:100%;}
+input[type="range" i] {
+    width: 88%;
+    padding: 1%;
+    margin: 1%;
+}
+.check span {
+    width: 6.5em;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    display: inline-block;
+    margin: 0.35em 0.1em;
+}
+.check span:nth-child(1){
+    border: none;
+    background-color: #f8f8f8;
+    width:4em;
+}
+#klawiszePlus button {font-size:0.93em;margin: 0.12em;}
+	
+</style> 
+
+
+<script>
+  let coronus = {
+    "country":"Poland",
+    "dataType":"cases",
+    "population":0,
+    "populTXT":" ",
+    "perHow":"all",
+    "distance": "1q" 
+  }
+  function getURLParameter(name) {
+    return decodeURIComponent(
+      (location.search.match(RegExp("[?|&]"+name+'=(.+?)(&|$)'))||[,null])[1]
+    );
+  }
+  let type=getURLParameter("type");
+  console.log("#22 type=",type);
+ 
+
+//let u   = "https://zszczech.zut.edu.pl/app/COV/data.json";
+let u   = "https://zszczech.zut.edu.pl/app/COV/data.php";
+
+let url = u;
+
+let countries = [];
+
+const weekMiddle=(datas,times,country)=>{
+  //console.log("#92 weekMiddle=",datas,times,country)
+  let okolo=(v)=> Math.round(v*10)/10;
+    //console.log(datas,times);
+    let outData = [];
+    let outTime = [];
+    let ile = 0;
+    let suma = 0;
+    let lastD = datas[0];
+    let lastI   = datas.length-1;
+    let actualI = 0;
+    // coronus.distance==="1y"
+    let timeFrom = (new Date().getTime()) - 12*31*24*3600*1000;					// coronus.distance==="1y"
+    if (coronus.distance==="1m")  timeFrom = (new Date().getTime()) - 1*31*24*3600*1000;	// coronus.distance==="1m"
+    if (coronus.distance==="1q")  timeFrom = (new Date().getTime()) - 3*31*24*3600*1000;	// coronus.distance==="1q"
+    if (coronus.distance==="all") timeFrom = 0;							// coronus.distance==="all"				
+    datas.forEach((dat,i)=>{
+      let dow = parseInt(moment(times[i]).format("d")); // 0=niedziela
+      let time = times[i];
+      let delta = (new Date(times[i]).getTime())-timeFrom;
+      //console.log(delta)
+     
+      
+      ile++;
+      suma += dat - lastD;
+      lastD = dat;
+      if(dow===0){
+          let mid = ((suma/ile));
+          //qqqqqqqqqqqqqqqqqq
+          if (coronus.perHow==="1M") {
+              mid = (mid/coronus.population)*1000000;
+              //console.log(mid)
+          }
+          if (delta>0){
+              outData.push(okolo(mid));
+              outTime.push(moment(times[i]).valueOf());
+          }
+          //console.log(dow,ile,suma,mid);
+          suma = 0;
+          ile = 0;
+          actualI = i;
+      }
+    });
+    
+  //console.log(lastI,actualI,lastI-actualI,actualI<lastI);
+
+  if (actualI<lastI){
+      suma =0;
+      for (let i=actualI; i<lastI; i++){
+          suma += datas[i] - datas[i-1];
+          //console.log(i,times[i],datas[i], datas[i] - datas[i-1]); 
+      } 
+          mid = suma/(lastI-actualI-1)
+          if (coronus.perHow==="1M") mid = (mid/coronus.population)*1000000;
+          outData.push(okolo(mid));
+          outTime.push(moment(times[lastI-1]).valueOf());
+  }
+  //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
+  //
+  console.log([outData],outTime,country);	
+  rysujWykres2D([outData],outTime,country);
+  return [outTime,outData];
+}
+
+const describePL = (data,country) => {
+  console.log("pl=",data);
+    let dane = [];
+    let last = data.rows.length-1;
+    let outData = [];
+    let outTime = [];
+    
+    data.rows.forEach((r,i)=>{
+      let time = (new Date(r[0]+" 00:00:00")).getTime();
+        outTime.push(time);
+        outData.push(r[2]);
+    })
+    //rysujWykres2D([outData.reverse()],outTime.reverse(),country);
+    let datas7 = weekMiddle(outData.reverse(),outTime.reverse(),country); console.log(datas7);	
+}
+
+const describe = (data,country,action=true) => {
+  console.log(action,"describe=",data);
+  document.getElementById("ctype").textContent = coronus.dataType;
+  document.getElementById("country").textContent = coronus.country;
+//console.log(data);
+  
+  coronus.population = parseFloat(data.countries[country].population); 
+	if (coronus.population){
+	//console.log(coronus.population);
+	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]';
+	//console.log(coronus.populTXT);
+	  document.getElementById("population").textContent = coronus.populTXT;
+	}
+//console.log(coronus);
+	
+  let datas = data.countries[country][coronus.dataType]; 
+  
+  //console.log(datas);
+    let times = data.series;
+    let week = [];
+    let sumaW=0;
+    let lastW = 0;
+    let dane = [];
+    let last = datas[0];
+    let dataA=[];
+    let dataD=[];
+    let j=0;
+    if (action){
+      let datas7 = weekMiddle(datas,times,country);
+      console.log(datas7);
+    }
+
+  if (countries.length===0){
+    for (let c in data.countries){countries.push(c);}
+    rysujKlawisze(countries);
+  }
+}
+
+let getAsyncFetch=async(u,callback=null,country="Poland",action)=>{
+  const config = {
+    headers: {'Accept':'application/json'}
+  }
+  const res = await fetch(u,config)
+  const data = await res.json();
+  let lastUpdated = ((new Date(data.lastUpdated)).toLocaleString('pl-PL'));
+  //console.log(data);
+  
+  document.getElementById("lastUpdated").textContent = lastUpdated.toString();
+  if (callback) callback(data,country,action);
+}
+  
+const drawCovidPL=()=>{
+	//let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
+	let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+201&p0=Poland";
+	getAsyncFetch(plURL,describePL,"Poland");	
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+  
+	getAsyncFetch(url,describe,"Poland",null);
+  drawCovidPL();
+	//let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
+	//getAsyncFetch(plURL,describePL,"Poland");
+
+});
+
+
+
+Highcharts.setOptions({
+	time: {
+		timezoneOffset: 2 * 60,
+		useUTC:false
+	},
+	lang:{
+		shortWeekdays:  ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pnt', 'Sob'],
+		weekdays:       ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+		shortMonths:    ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
+		months:         ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"]
+	}	
+});
+
+let wykres2D = null;
+let wykres3D = null;
+	
+let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
+	console.log(data,kategorie);
+	let wykres2D = Highcharts.chart('container', {
+		chart: {
+			type: 'spline',
+       events: {
+            /*redraw: function () {
+              console.log("redraw");
+            },*/
+            load: function () {
+              return;
+              let dats = data[0];//.sort(function(a, b){return a[0]-b[0]});
+              let last0 = dats.length-1;
+              let i=0;
+              console.log(i,last0,dats);
+             let inter0 = setInterval(()=>{
+                  this.series[0].addPoint([dats[i][0], dats[i][1]]);
+                  i++;
+                  if (i>last0) clearInterval(inter0);
+              },50);
+            }
+        },            
+		},
+		title: {
+			text: 'COVID - '+country+' - '+coronus.populTXT
+		},
+		subtitle: {
+			text: null
+		},
+		xAxis: {
+        type:'datetime',
+        dateTimeLabelFormats: {day: '%e  %b'},
+      	labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
+			  dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
+        categories: kategorie,      
+   //type: 'logarithmic',
+			//type: 'linear',
+			/*dateTimeLabelFormats: { // don't display the dummy year
+				month: '%e. %b',
+				year: '%b'
+			},*/
+			title: {
+				text: 'Przyrosty ' + coronus.dataType
+			}
+		},
+		yAxis: {
+   // type: 'logarithmic',
+			title: {text: 'Dziennie'},
+      //left: 2,
+      /*labels: {
+				//align: 'right',
+				//opposite: true,
+				x: -135,
+				y: 4
+			},*/
+			//min: 0
+		},
+		tooltip: {
+			shared: true,
+			crosshairs: true,
+			//headerFormat: '<b>{point.x:%A, %b %e, %H:%M}</b><br>',
+			headerFormat: '<b>{point.x:%e %b, %Y}</b><br />',
+		},
+		plotOptions: {
+			series: {
+				marker: {
+					enabled: true
+				}
+			}
+		},
+
+		colors: ['#008', '#800', '#080', '#036', '#000'],
+
+		series: [
+			{
+      type:'spline',
+      //color: '#0000aa',
+			name:country,
+			data: data[0]
+			}
+      /*,{
+        type:'spline',
+        color: '#0000aa',
+        fillOpacity: 0.3,
+			name:country,
+			data: data[1]
+			}*/
+		],
+
+		responsive: {
+			rules: [{
+				condition: {
+					maxWidth: 500
+				},
+				chartOptions: {
+					plotOptions: {
+						series: {
+							marker: {
+								radius: 2.5
+							}
+						}
+					}
+				}
+			}]
+		}
+	});
+  /*data[0].forEach((dat)=>{
+      console.log(data)
+      //wykres.series[0].setData([dat]);
+      dat[0]+=2000
+      dat[1]+=2000
+      wykres.series[1].addPoint([dat]);
+      
+  })
+  //wykres.series[0].setData([111,2222]);
+  */
+}
+
+
+const removeAddActive = (query,eleActive)=>{
+    document.querySelectorAll(query).forEach((b)=>{b.classList.remove("active");});
+    eleActive.classList.add("active");
+}
+
+const testIfIs = (query,eleActive)=>{
+    let ret=false;
+    document.querySelectorAll(query).forEach((b)=>{
+      if (b.textContent === eleActive.textContent) ret=true;
+    });
+   return ret;
+}
+
+
+
+const countryChart=(t)=>{
+  coronus.country = t.textContent;
+  getAsyncFetch(url,describe,t.textContent);
+  
+  if (t.parentNode){  
+    if (t.parentNode.id === "klawisze"){
+      removeAddActive("#klawisze button",t);
+      let clon = t.cloneNode(true);
+      if(!testIfIs("#klawiszePlus button",t)) {
+         let clon = t.cloneNode(true);
+         document.getElementById("klawiszePlus").appendChild(clon);  
+      }
+    }   
+    removeAddActive("#klawiszePlus button",t);
+  }
+
+}
+
+const rysujKlawisze=(countries)=>{
+  countries.sort();
+  let html = "";
+  countries.forEach((c)=>{    
+    html += '<button onClick="countryChart(this)">'+c+'</button>';
+  })
+  document.getElementById("klawisze").innerHTML = html;
+}
+
+const kasuj=()=>{
+  document.getElementById("klawiszePlus").innerHTML = '<button onclick="countryChart(this)" class="active">Poland</button>';
+}
+
+</script>
+
+  
+  
+ 
+<script>
+  // Give the points a 3D feel by adding a radial gradient
+  Highcharts.getOptions().colors = $.map(Highcharts.getOptions().colors, function(color) {
+    return {
+      radialGradient: {
+        cx: 0.4,
+        cy: 0.3,
+        r: 0.5
+      },
+      stops: [
+        [0, color],
+        [1, Highcharts.Color(color).brighten(-0.2).get('rgb')]
+      ]
+    };
+  });  
+  
+  
+  
+const rysujWykres3D=(dane,kategorie=null,kraj="Wykres")=>{
+  // Set up the chart
+  wykres3D = new Highcharts.Chart({
+    chart: {
+      renderTo: 'container',
+      margin: 70,
+      type: 'scatter',
+      options3d: {
+        enabled: true,
+        alpha: 10,
+        beta: 80,
+        depth: 400,
+        viewDistance: 15,
+
+        frame: {
+          bottom: {
+            size: 1,
+            color: 'rgba(0,0,0,0.02)'
+          },
+          back: {
+            size: 1,
+            color: 'rgba(0,0,0,0.04)'
+          },
+          side: {
+            size: 1,
+            color: 'rgba(0,0,0,0.06)'
+          }
+        }
+      }
+    },
+    title: {
+      text: kraj+' Draggable box'
+    },
+    subtitle: {
+      text: 'Click and drag the plot area to rotate in space'
+    },
+    plotOptions: {
+      scatter: {
+        width: 10,
+        height: 10,
+        depth: 10
+      }
+    },
+    tooltip: {
+      enabled:!false
+    },
+    yAxis: {
+      //min: 0,
+      //max: 10,
+      title: "Ycov"
+    },
+    xAxis: {
+      //min: 0,
+      //max: 10,
+      gridLineWidth: 1,
+      title: "Xcov"
+    },
+    zAxis: {
+      //min: 0,
+      //max: 10,
+      title: "Zcov"
+    },
+    legend: {
+      enabled: false
+    },
+    series: [{
+      lineWidth: 2,
+      name: 'Attractor',
+      data: dane[0]
+    }]
+  });
+
+
+  // Add mouse events for rotation
+  $(wykres3D.container).bind('mousedown.hc touchstart.hc', function(e) {
+    e = wykres3D.pointer.normalize(e);
+
+    var posX = e.pageX,
+      posY = e.pageY,
+      alpha = wykres3D.options.chart.options3d.alpha,
+      beta = wykres3D.options.chart.options3d.beta,
+      newAlpha,
+      newBeta,
+      sensitivity = 5; // lower is more sensitive
+
+    $(document).bind({
+      'mousemove.hc touchdrag.hc': function(e) {
+        // Run beta
+        newBeta = beta + (posX - e.pageX) / sensitivity;
+        newBeta = Math.min(100, Math.max(-100, newBeta));
+        wykres3D.options.chart.options3d.beta = newBeta;
+
+        // Run alpha
+        newAlpha = alpha + (e.pageY - posY) / sensitivity;
+        newAlpha = Math.min(100, Math.max(-100, newAlpha));
+        wykres3D.options.chart.options3d.alpha = newAlpha;
+  console.log(newAlpha,newBeta);  //10 80
+        wykres3D.redraw(false);
+      },
+      'mouseup touchend': function() {
+        $(document).unbind('.hc');
+      }
+    });
+  });  
+  
+}
+
+
+const alphaInput=(t)=>{
+    let newAlpha = t.value;
+    console.log("in=",newAlpha)
+    wykres3D.options.chart.options3d.alpha = newAlpha;
+    wykres3D.redraw(false);
+}
+
+const betaInput=(t)=>{
+    let newBeta = 100-t.value;
+    console.log("in=",newBeta)
+    wykres3D.options.chart.options3d.beta = newBeta;
+    wykres3D.redraw(false);
+}
+
+const newType=(ten)=>{
+  coronus.dataType = ten.value;
+  countryChart({"textContent":coronus.country});
+}
+
+const perWhat=(ten)=>{
+  coronus.perHow = ten.value;
+  countryChart({"textContent":coronus.country});
+}
+
+const newDistance=(ten)=>{
+  coronus.distance = ten.value;
+  countryChart({"textContent":coronus.country});
+}
+
+
+			const recache = ()=>{
+				//https://zszczech.zut.edu.pl/app/COV/cache.php?token=457687
+			}
+			let getToken = ()=>{return(new Date()).getTime();}
+
+			let cccc=async()=>{
+				await cc();
+
+			}
+
+			let refresh=async()=>{
+				await cc();
+				window.location.href="./";//?token="+getToken();
+			}
+
+			let cc = async()=>{
+				caches.keys()
+				.then((names)=> {
+					console.log(names)
+			    for (let name of names)
+					caches.delete(name);
+				})
+				.then(r=>{console.log(r)});
+			}
+
+
+			let testCache=(d)=>{
+				console.log("#595 TestCache=",d,parseInt(d[0]));
+			}
+			let token = Math.round(((new Date()).getTime())/(3600 * 1000));
+			//console.log("token=",token)
+
+			fetch("https://zszczech.zut.edu.pl/app/COV/cache.php?token="+token, {cache: "no-store"})
+			.then(r => {return r.text()})
+			.then(o => {testCache(o)})
+			.catch(e => {console.log(e)})
+
+</script>  
+  
+</head>
+<body>
+	<app-menu title="Covid" name="ZnakZorro" link="../../"></app-menu>
+	
+	<div class="wrapper">
+		<div class="container">
+			<a href="covid22.html" class="btn big">Covid'22</a>
+			<button onclick="drawCovidPL()" class="btn big">CovidPL</button>
+
+		</div>
+	</div>
+
+<div class="col">
+    <!--img src="../../css/icon/back.svg" onclick="window.location.href='../../';" style="width:38px;vertical-align: middle; cursor:pointer;"-->
+    <span id="country"></span> &nbsp; <span id="population"> </span> &nbsp; <span id="lastUpdated"></span> &nbsp <b><span id="ctype"></span></b>
+  <!--button onclick='location.href="../../";' style="font-size:1.2em;">&laquo;</button-->
+  <!--
+  <button onclick='location.href="./";'>X</button>
+  <button onclick='location.href="./?type=1d";'>1D</button>
+  <button onclick='location.href="./?type=2d";'>2D</button>
+  <button onclick='location.href="./?type=3d";'>3D</button>
+  -->
+</div>
+<div class="col check">
+  <span>Rodzaj:</span>
+  <span><input type="radio" name="dataType" value="cases"  onChange="newType(this)"checked /> Cases</span>
+  <span><input type="radio" name="dataType" value="deaths" onChange="newType(this)" /> Deaths</span>
+</div>
+<div class="col check">
+  <span>Ile:</span>
+  <span><input type="radio" name="perHow" value="all"  onChange="perWhat(this)"checked /> wszyscy</span>
+  <span><input type="radio" name="perHow" value="1M"   onChange="perWhat(this)" /> per 1M</span>
+</div>
+<div class="col check">
+  <span>Czas:</span>
+  <span><input type="radio" name="distance" value="all"  onChange="newDistance(this)"  /> wszystko</span>
+  <span><input type="radio" name="distance" value="1y"   onChange="newDistance(this)" /> rok</span>
+  <span><input type="radio" name="distance" value="1q"   onChange="newDistance(this)" checked  /> kwartał</span>
+  <!--span><input type="radio" name="distance" value="1m"   onChange="newDistance(this)"  /> miesiąc</span-->
+</div>
+<div class="col check">
+  <button onclick="refresh()" class="btn" style="">refresh()</button>
+</div>
+	
+<figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+    <div id="container"></div>
+</figure>
+<!--div class="col">
+  A:<input type="range" min="-100" max="100" step="5" value="10" onInput="alphaInput(this)" /><br />
+  B:<input type="range" min="-100" max="100" step="5" value="20" onInput="betaInput(this)" />
+</div-->
+<div class="col">
+	<!--h3 style="font-weight:normal; cursor:pointer;" title="Kasuj wybrane kraje"><span id="dn" onClick="kasuj()">@Attractor COVID</span> <span id="dd"></span></h3-->
+    <div id="info"></div>
+    <pre id="pre"></pre>
+</div>
+<div id="klawiszePlus">
+    <button onclick="countryChart(this)" class="">Poland</button>   
+    <button onclick="countryChart(this)" class="">Germany</button>
+    <button onclick="countryChart(this)" class="">United Kingdom</button>
+    <button onclick="countryChart(this)" class="">United States</button>
+    
+    <button onclick="countryChart(this)" class="">Denmark</button>
+    <button onclick="countryChart(this)" class="">Sweden</button>    
+    <button onclick="countryChart(this)" class="">Australia</button>    
+	<button onclick="countryChart(this)" class="">China</button>    
+</div>
+
+<hr />
+
+<div id="klawisze"></div>
+	
+<script src="../../appMenu.js"></script>
+	
+</body>
+</html>
+<!--
+http://jsfiddle.net/4Lpz3cuj/
+https://jsfiddle.net/1rowmsv2/
+
+
+https://jsfiddle.net/eww77685/
+
+-->
+
+
