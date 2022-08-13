@@ -147,15 +147,20 @@ const weekMiddle=(datas,times,country)=>{
   }
   //console.log(times[lastI-1],Math.round(suma/(lastI-actualI)))
   //
-  console.log([outData],outTime,country);	
+  //console.log([outData],outTime,country);	
   rysujWykres2D([outData],outTime,country);
   return [outTime,outData];
 }
 
-const describePL = (data,country) => {
-  console.log("pl=",data);
-    let dane = [];
-    let last = data.rows.length-1;
+//QQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ
+const describe = (data,country) => {
+  console.log("d157 escribe=",data);
+
+  document.getElementById("ctype").textContent = coronus.dataType;
+  document.getElementById("country").textContent = coronus.country;
+
+    //let dane = [];
+    //let last = data.rows.length-1;
     let outData = [];
     let outTime = [];
     
@@ -166,45 +171,10 @@ const describePL = (data,country) => {
     })
     //rysujWykres2D([outData.reverse()],outTime.reverse(),country);
     let datas7 = weekMiddle(outData.reverse(),outTime.reverse(),country); console.log(datas7);	
+
 }
 
-const describe = (data,country,action=true) => {
-  console.log(action,"describe=",data);
-  document.getElementById("ctype").textContent = coronus.dataType;
-  document.getElementById("country").textContent = coronus.country;
-//console.log(data);
-  
-  coronus.population = parseFloat(data.countries[country].population); 
-	if (coronus.population){
-	//console.log(coronus.population);
-	  coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]';
-	//console.log(coronus.populTXT);
-	  document.getElementById("population").textContent = coronus.populTXT;
-	}
-//console.log(coronus);
-	
-  let datas = data.countries[country][coronus.dataType]; 
-  
-  //console.log(datas);
-    let times = data.series;
-    let week = [];
-    let sumaW=0;
-    let lastW = 0;
-    let dane = [];
-    let last = datas[0];
-    let dataA=[];
-    let dataD=[];
-    let j=0;
-    if (action){
-      let datas7 = weekMiddle(datas,times,country);
-      console.log(datas7);
-    }
 
-  if (countries.length===0){
-    for (let c in data.countries){countries.push(c);}
-    rysujKlawisze(countries);
-  }
-}
 
 let getAsyncFetch=async(u,callback=null,country="Poland",action)=>{
   const config = {
@@ -218,20 +188,30 @@ let getAsyncFetch=async(u,callback=null,country="Poland",action)=>{
   document.getElementById("lastUpdated").textContent = lastUpdated.toString();
   if (callback) callback(data,country,action);
 }
-  
-const drawCovidPL=()=>{
-	//let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
-	let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+201&p0=Poland";
-	getAsyncFetch(plURL,describePL,"Poland");	
+
+const getPopulation=(data,country)=>{
+  console.log(country,data[country]); 
+    coronus.population = parseFloat(data[country]); 
+    if (coronus.population){    
+      coronus.populTXT   = '['+(coronus.population/1000000).toFixed(2)+'M]';
+      document.getElementById("population").textContent = coronus.populTXT;
+    }
+    if (countries.length===0){
+      for (let c in data){countries.push(c);}
+      rysujKlawisze(countries);
+    }
+}
+
+const drawCovidPL=(country = "Poland")=>{
+  getAsyncFetch("https://znakzorro.github.io/zorro/app/covid/population.json",getPopulation,country);	
+
+	let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+201&p0="+country;
+	getAsyncFetch(plURL,describe,"Poland");	
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-  
-	getAsyncFetch(url,describe,"Poland",null);
+	//getAsyncFetch(url,describe,"Poland",null);
   drawCovidPL();
-	//let plURL = "https://covid-19.datasettes.com/covid.json?sql=select+day%2C+country_or_region%2C+confirmed%2C+deaths%2C+recovered%2C+active%2C+last_update%2C+combined_key+from+daily_reports+where+%22country_or_region%22+%3D+%3Ap0+order+by+day+desc+limit+101&p0=Poland";
-	//getAsyncFetch(plURL,describePL,"Poland");
-
 });
 
 
@@ -253,7 +233,8 @@ let wykres2D = null;
 let wykres3D = null;
 	
 let rysujWykres2D = (data,kategorie=null,country="Wykres")=>{
-	console.log(data,kategorie);
+	console.log("rysujWykres2D",data);
+  //console.log(kategorie);
 	let wykres2D = Highcharts.chart('container', {
 		chart: {
 			type: 'spline',
@@ -388,7 +369,9 @@ const testIfIs = (query,eleActive)=>{
 
 const countryChart=(t)=>{
   coronus.country = t.textContent;
-  getAsyncFetch(url,describe,t.textContent);
+  drawCovidPL(coronus.country)
+
+  //getAsyncFetch(url,describe,t.textContent);
   
   if (t.parentNode){  
     if (t.parentNode.id === "klawisze"){
