@@ -1,0 +1,66 @@
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin:0;
+    padding:0;
+}
+body {
+  margin:0;
+  padding:0;
+}
+.wrapper {
+    padding: 0;
+    margin: auto;
+    max-width:1024px;
+}
+ .container {
+    padding: 0.25em;
+    margin: 0.25em;
+    display: flow-root;
+}
+body,button {
+    font-family: 'Roboto', "Verdana", sans-serif;
+    font-size: 14pt;
+    font-weight: 300;
+    line-height: 1.3;
+    background-color: #f4f4f4;
+}
+button {
+    margin: 0.2em;
+    padding: 0.15em 0.5em;
+    border-radius: 0.5em;
+    border-width: 1px;
+    min-width: 4em;
+    /*box-shadow: 0px 1px 2px 0px rgb(0 0 0 / 50%);*/
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
+    cursor: pointer;
+}
+
+
+a {text-decoration: none;}
+p {margin:0;}
+h1,h2,h3 {margin: 0.25em 0;}
+
+.btn {
+    z-index: 14;
+    border: 1px solid #888;
+    background: #aaa;
+    padding: 0.2em 0.5em;
+    margin: 0.3em;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
+    border-radius: 0.75em;
+    cursor: pointer;
+    min-width: 92px!important;
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+
+.active, btn.active, button.active, button:active {
+    background: #222!important;
+    color: orange!important;
+}
