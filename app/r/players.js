@@ -118,12 +118,12 @@ const ustaw=(ten=null)=>{
 const radio0=(ten)=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
   document.querySelector(".currently-playing-label").textContent = "TOK-FM";
- ustaw();
+ ustaw(ten);
 }
 const radio1=(ten)=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ypqt40u0x1zuv";
   document.querySelector(".currently-playing-label").textContent = "Radio NŚ";
- ustaw();
+ ustaw(ten);
 }
 const radio2=(ten)=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ye5kghkgcm0uv";
