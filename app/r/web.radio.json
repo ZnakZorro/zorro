@@ -1,0 +1,24 @@
+{
+	"name": "radioR",
+	"short_name": "radioR",
+	"description": "radioR",
+	"start_url": "index.html",
+	"display": "standalone",
+
+	"theme_color": "#a42",
+	"background_color": "#a42",
+	"icons": [
+		{
+			"src": "./radio.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	],
+	"screenshots": [		
+		{
+			"src": ".radio.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	]
+}
