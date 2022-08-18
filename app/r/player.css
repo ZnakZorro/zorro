@@ -1,3 +1,8 @@
+.volume-and-title {
+    width: calc(100% - 100px);
+    border: 1px solid silver;
+}
+
 .radio-player {
   margin: 0.3em;
 }
