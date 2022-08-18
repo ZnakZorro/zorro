@@ -1,6 +1,7 @@
 .volume-and-title {
     width: calc(100% - 100px);
     border: 1px solid silver;
+    max-width:400px;
 }
 
 .radio-player {
@@ -60,6 +61,8 @@
     border: 1px solid #000;
     border-radius: 50px;
     overflow: hidden; /* This will help with styling the thumb */
+    width: calc(100% - 55px);
+    max-width:300px;
   }
 
   input[type="range"]::-webkit-slider-thumb {
