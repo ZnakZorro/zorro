@@ -1,6 +1,6 @@
 <html lang="pl"><head>
 <meta charset="utf-8">
-<title>#RADIO</title>
+<title>linkI</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <meta name="HandheldFriendly" content="true">
 <meta name="mobile-web-app-capable" content="yes"> 
@@ -63,7 +63,7 @@ const IOTview=(IOThosty)=>{
       
       let uurl = r.url.replace("http:","").replaceAll("/","");
       //console.log(uurl,r);
-      _$("#radios").innerHTML += `<div class="one">${del} <a href="${r.url}" target="_blank">${r.name} &rArr; ${uurl}</a></div>`;
+      _$("#radios").innerHTML += `<div class="one">${del} <a href="${r.url}" target="_top">${r.name} &rArr; ${uurl}</a></div>`;
     }
     console.log(JSON.stringify(IOThosty,null,"\t"));
 }
