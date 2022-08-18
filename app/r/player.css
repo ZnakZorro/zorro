@@ -85,7 +85,7 @@
   }
   input[type="range"]:focus {
     border-radius: 50px;
-    box-shadow: 0 0 19px -6px #F59E0B;
+    box-shadow: 0 0 19px -3px #F59E0B;
   }
 /******* mini ************/
 
