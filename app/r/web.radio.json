@@ -9,15 +9,15 @@
 	"background_color": "#a42",
 	"icons": [
 		{
-			"src": "./radio.svg",
-			"sizes": "1024x1024",
+			"src": "./radio512.svg",
+			"sizes": "512x512",
 			"type": "image/svg"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": ".radio.svg",
-			"sizes": "1024x1024",
+			"src": ".radio512.svg",
+			"sizes": "512x512",
 			"type": "image/svg"
 		}
 	]
