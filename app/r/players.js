@@ -111,8 +111,8 @@ const ustaw=(ten=null)=>{
        document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
        ten.classList.add("active");
       }
-      playPauseButtonIcon.classList.remove('fa-pause');
-      playPauseButtonIcon.classList.add('fa-play');
+      playPauseButtonIcon.classList.remove('fa-play');
+      playPauseButtonIcon.classList.add('fa-pause');
       audio.play();
 }
 const radio0=(ten)=>{
@@ -130,3 +130,6 @@ const radio2=(ten)=>{
   document.querySelector(".currently-playing-label").textContent = "Radio 357";
  ustaw(ten); 
 }
+document.addEventListener("DOMContentLoaded",function(){
+   document.querySelector("#klawisze button").click();
+});
