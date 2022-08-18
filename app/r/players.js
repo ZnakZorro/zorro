@@ -108,8 +108,8 @@ const adjustVolumeIcon = volume => {
 
 const ustaw=(ten=null)=>{
       if (ten){
-       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active");
-       ten.classList.add("active");;
+       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
+       ten.classList.add("active");
       }
       playPauseButtonIcon.classList.remove('fa-pause');
       playPauseButtonIcon.classList.add('fa-play');
