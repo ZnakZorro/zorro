@@ -31,7 +31,7 @@
   .currently-playing {
     display: flex;
     flex-direction: column;
-    margin-bottom: 12px;
+    margin-bottom: 1rem;
   }
   .volume-controls {
     display: flex;
@@ -39,11 +39,11 @@
   }
 
   .currently-playing-label {
-    font-size: 12px;
+    font-size: 1.2rem;
     font-weight: 300;
 }
 .currently-playing-title {
-    font-size: 22px;
+    font-size: 0.7rem;
 }
 
 
