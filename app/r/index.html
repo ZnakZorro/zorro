@@ -1,14 +1,48 @@
-<!-- player.html https://dev.to/thormeier/let-s-build-a-web-radio-player-from-scratch-2poo -->
 <!DOCTYPE html>
-<html>
+<html lang="pl">
 <head>
-  <meta charset="utf8">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>radioR</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#008">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
   <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
   <link rel="stylesheet" href="player.css">
+  
+   <style>   
+      
+   </style>
+   
+   <script>
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+   </script>
+          
 </head>
+
 <body>
-    <div class="radio-player">
+    <div class="wrapper">
+        <app-menu title="index" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+       
+        <div class="container">
+          
+       </div>
+       
+       
+    </div><!-- wraper-->
+
+<!-- player.html https://dev.to/thormeier/let-s-build-a-web-radio-player-from-scratch-2poo -->
+
+  <div class="radio-player">
         <audio src="https://pl-play.adtonos.com/tok-fm" class="visually-hidden" id="stream">
         <!-- More stuff here -->
       </audio>
