@@ -106,19 +106,27 @@ const adjustVolumeIcon = volume => {
   })
 
 
-const radio0=()=>{
+const ustaw=(ten=null)=>{
+      if (ten){
+       document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active");
+       ten.classList.add("active");;
+      }
+      playPauseButtonIcon.classList.remove('fa-pause');
+      playPauseButtonIcon.classList.add('fa-play');
+      audio.play();
+}
+const radio0=(ten)=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
   document.querySelector(".currently-playing-label").textContent = "TOK-FM";
- audio.play();
+ ustaw();
 }
-const radio1=()=>{
+const radio1=(ten)=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ypqt40u0x1zuv";
   document.querySelector(".currently-playing-label").textContent = "Radio NŚ";
- audio.play()
+ ustaw();
 }
-const radio2=()=>{
+const radio2=(ten)=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ye5kghkgcm0uv";
   document.querySelector(".currently-playing-label").textContent = "Radio 357";
- audio.play();
- 
+ ustaw(ten); 
 }
