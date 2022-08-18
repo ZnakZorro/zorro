@@ -17,6 +17,7 @@
   height: 70px;
   font-size: 25px;
   margin-right: 24px;
+  min-width: auto!important;
 }
 .mute-button {
   width: 30px;
