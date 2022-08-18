@@ -11,14 +11,14 @@
 		{
 			"src": "./img/snipet.svg",
 			"sizes": "512x512",
-			"type": "image/webp"
+			"type": "image/svg+xml"
 		}
 	],
 	"screenshots": [		
 		{
 			"src": "./img/snipet.svg",
 			"sizes": "512x512",
-			"type": "image/webp"
+			"type": "image/svg+xml"
 		}
 	]
 }
