@@ -23,6 +23,7 @@
   width: 30px;
   height: 30px;
   margin-right: 12px;
+  min-width: auto!important;
 }
 
 .player-controls {
