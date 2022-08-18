@@ -114,6 +114,7 @@ const ustaw=(ten=null)=>{
       playPauseButtonIcon.classList.remove('fa-play');
       playPauseButtonIcon.classList.add('fa-pause');
       audio.play();
+     isPlaying = true;
 }
 const radio0=(ten)=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
