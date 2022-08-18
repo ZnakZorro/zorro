@@ -106,3 +106,8 @@ const adjustVolumeIcon = volume => {
   })
 
 
+
+const radio1=(){
+  document.getElementById("stream").src="https://stream.rcs.revma.com/ypqt40u0x1zuv";
+  document.querySelector(".currently-playing-label").textContent = "Radio NŚ"
+}
