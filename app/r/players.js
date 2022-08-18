@@ -109,7 +109,7 @@ const adjustVolumeIcon = volume => {
 const radio0=()=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
   document.querySelector(".currently-playing-label").textContent = "TOK-FM";
- audio.pause();
+ audio.play();
 }
 const radio1=()=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ypqt40u0x1zuv";
@@ -119,7 +119,6 @@ const radio1=()=>{
 const radio2=()=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ye5kghkgcm0uv";
   document.querySelector(".currently-playing-label").textContent = "Radio 357";
- audio.pause();
  audio.play();
  
 }
