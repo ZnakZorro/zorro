@@ -41,39 +41,39 @@
        <div class="container" id="info" style="mih-height:1.5em;">
        </div>
        
-    </div><!-- wraper-->
+    
 
 <!-- player.html https://dev.to/thormeier/let-s-build-a-web-radio-player-from-scratch-2poo -->
 
-  <div class="radio-player">
-        <audio src="https://pl-play.adtonos.com/tok-fm" class="visually-hidden" id="stream">
-        <!-- More stuff here -->
-      </audio>
-  
+  <div class="container radio-player">
+        
+     <audio src="https://pl-play.adtonos.com/tok-fm" class="visually-hidden" id="stream">
+        
+     </audio>
 
+        <div class="player-controls">
+           
+          <button name="play-pause" class="button play-pause-button" aria-label="Play/pause">
+            <i class="fas fa-play" aria-hidden></i>
+          </button>
 
-  <div class="player-controls">
-    <button name="play-pause" class="button play-pause-button" aria-label="Play/pause">
-      <i class="fas fa-play" aria-hidden></i>
-    </button>
-  
-    <div class="volume-and-title">
-      <div class="currently-playing" aria-label="Currently playing">
-        <span class="currently-playing-label">Radio TOK-FM</span>
-        <span class="currently-playing-title">tu co Słuchamy</span>
-      </div>
-  
-      <div class="volume-controls">
-        <button name="mute" class="button mute-button" aria-label="Mute/unmute">
-          <i class="fas fa-volume-down" aria-hidden></i>
-        </button>
-  
-        <input type="range" name="volume" class="volume" min="0" max="1" step="0.05" value="0.66" aria-label="Volume">
-      </div>
-    </div>
+          <div class="volume-and-title">
+            <div class="currently-playing" aria-label="Currently playing">
+              <span class="currently-playing-label">Radio TOK-FM</span>
+              <span class="currently-playing-title">tu co Słuchamy</span>
+            </div>
+
+            <div class="volume-controls">
+              <button name="mute" class="button mute-button" aria-label="Mute/unmute">
+                <i class="fas fa-volume-down" aria-hidden></i>
+              </button>
+
+              <input type="range" name="volume" class="volume" min="0" max="1" step="0.05" value="0.66" aria-label="Volume">
+            </div>
+         </div>
   </div>
 </div>
-   
+</div><!-- wraper-->   
    
    
   <script src="players.js"></script>
