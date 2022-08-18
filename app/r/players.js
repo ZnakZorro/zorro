@@ -106,17 +106,20 @@ const adjustVolumeIcon = volume => {
   })
 
 
-const radio0=(){
+const radio0=()=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
-  document.querySelector(".currently-playing-label").textContent = "TOK-FM"
+  document.querySelector(".currently-playing-label").textContent = "TOK-FM";
+ audio.pause();
 }
-
-const radio1=(){
+const radio1=()=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ypqt40u0x1zuv";
-  document.querySelector(".currently-playing-label").textContent = "Radio NŚ"
+  document.querySelector(".currently-playing-label").textContent = "Radio NŚ";
+ audio.play()
 }
-
-const radio2=(){
+const radio2=()=>{
   document.getElementById("stream").src="https://stream.rcs.revma.com/ye5kghkgcm0uv";
-  document.querySelector(".currently-playing-label").textContent = "Radio 357"
+  document.querySelector(".currently-playing-label").textContent = "Radio 357";
+ audio.pause();
+ audio.play();
+ 
 }
