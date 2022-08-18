@@ -16,7 +16,7 @@
 	],
 	"screenshots": [		
 		{
-			"src": ".radio512.svg",
+			"src": "./radio512.svg",
 			"sizes": "512x512",
 			"type": "image/svg"
 		}
