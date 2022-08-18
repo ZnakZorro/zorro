@@ -1,6 +1,6 @@
 .volume-and-title {
     width: calc(100% - 100px);
-    border: 1px solid silver;
+    
     max-width:400px;
 }
 
@@ -71,7 +71,7 @@
   
     height: 19px;
     width: 19px;
-  
+  border: 1px solid silver;
     cursor: ew-resize;
     background: #F59E0B;
     box-shadow: -400px 0 0 390px #FDE68A;
