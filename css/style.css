@@ -44,7 +44,7 @@ div.pogoda div span:nth-child(5) {
     font-size: 17pt;   
 }
 div#sun div {
-    font-size: 14pt;
+    /*font-size: 14pt;*/
     z-index:3;
 }
 div#sun span {    
