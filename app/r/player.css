@@ -58,7 +58,7 @@
 .volume {
     -webkit-appearance: none;
     appearance: none;
-    border: 1px solid #000;
+
     border-radius: 50px;
     overflow: hidden; /* This will help with styling the thumb */
     width: calc(100% - 55px);
