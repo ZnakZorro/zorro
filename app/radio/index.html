@@ -75,7 +75,12 @@ document.addEventListener("DOMContentLoaded",function(){
 
     }
 });
-  
+ 
+	
+const dodajToken=(ten)=>{
+	let visibleToken =_$("#"+tok+" input#token").value;
+	console.log(visibleToken);
+}
 </script>
 </head>
   
@@ -96,7 +101,15 @@ document.addEventListener("DOMContentLoaded",function(){
       
     </div>
   
-  
+<hr />
+    <div id="tok">
+      
+      
+      <div><span>Token:</span>&nbsp;  &nbsp; <span><input id="token"/></span></div>
+      <button class="btn" onclick="dodajToken(this)">Dodaj token</button>
+      
+    </div>
+    
     
 </div>
 
