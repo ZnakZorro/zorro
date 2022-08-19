@@ -184,7 +184,7 @@ let arr = opis.split("\n");
     let htm = '';
     citys.forEach((c)=>{
         //html +='<a href="#https://api.met.no/weatherapi/locationforecast/2.0/compact?lat='+c.lat+'&lon='+c.lon+'&altitude=25">'+c.name+'</a>, ';
-        htm  +='<button data-lat="'+c.lat+'" data-lon="'+c.lon+'">'+c.name+'</button> ';
+        htm  +='<button class="btn" data-lat="'+c.lat+'" data-lon="'+c.lon+'">'+c.name+'</button> ';
     })
     /*document.getElementById("klawisze").innerHTML = html;
     document.querySelectorAll("#klawisze a").forEach((el)=>{
