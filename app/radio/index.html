@@ -80,12 +80,16 @@ document.addEventListener("DOMContentLoaded",function(){
  
 	
 const dodajToken=(ten)=>{
-	let visibleToken =document.getElementById("token").value;	//_$("#"+tok+" input#token").value;
+	let info = document.getElementById("info");
+	let visibleToken = document.getElementById("token").value;	//_$("#"+tok+" input#token").value;
 	console.log("visibleToken=",visibleToken);
 	let hash = MD5.generate(visibleToken);
    	console.log("hash=",hash);
 	var strHash = md5(visibleToken);
 	console.log("strHash=",strHash);
+	info.innerHTML = `
+	<p>${visibleToken}; ${hash}; ${strHash}; </p>
+	`;
 	
 	
 }
@@ -111,12 +115,11 @@ const dodajToken=(ten)=>{
   
 <hr />
     <div id="tok">
-      
-      
       <div><span>Token:</span>&nbsp;  &nbsp; <span><input id="token"/></span></div>
-      <button class="btn" onclick="dodajToken(this)">Dodaj token</button>
-      
+      <button class="btn" onclick="dodajToken(this)">Dodaj token</button>      
     </div>
+<hr />
+	<div id="info"></div>
     
     
 </div>
