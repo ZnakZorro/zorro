@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded",function(){
  
 	
 const dodajToken=(ten)=>{
-	let visibleToken =_$("#"+tok+" input#token").value;
+	let visibleToken =document.getElementById("token").value;	//_$("#"+tok+" input#token").value;
 	console.log("visibleToken=",visibleToken);
 	let hash = MD5.generate(visibleToken);
    	console.log("hash=",hash);
