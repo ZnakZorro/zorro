@@ -111,7 +111,7 @@
 
 <script>
 let getYRNO=()=>{
-    let u ="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+    let u ="https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15";
     fetch(u)
     .then(r => {return r.json()})
     .then(o => {
