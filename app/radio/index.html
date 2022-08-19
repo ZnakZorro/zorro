@@ -16,6 +16,8 @@
   .one a {text-decoration: none;}
   #dadaj div {margin:0.75em 0;}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/md5-js-tools@1.0.2/lib/md5.min.js"></script>
+<script type="text/javascript" src="../../js/md5/md5.min.js"></script>	
 
 <script>
 const _$=e=>document.querySelector(e);
@@ -79,7 +81,13 @@ document.addEventListener("DOMContentLoaded",function(){
 	
 const dodajToken=(ten)=>{
 	let visibleToken =_$("#"+tok+" input#token").value;
-	console.log(visibleToken);
+	console.log("visibleToken=",visibleToken);
+	let hash = MD5.generate(visibleToken);
+   	console.log("hash=",hash);
+	var strHash = md5(visibleToken);
+	console.log("strHash=",strHash);
+	
+	
 }
 </script>
 </head>
@@ -131,5 +139,9 @@ const dodajToken=(ten)=>{
 
 
 </script>
+<script>
+   let hash = MD5.generate("Example string");
+   console.log(hash);
+</script>	
 </body>
 </html>
