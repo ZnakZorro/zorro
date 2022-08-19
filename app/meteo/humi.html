@@ -115,8 +115,16 @@ let getYRNO=()=>{
     fetch(u)
     .then(r => {return r.json()})
     .then(o => {
-        console.log(o);
-
+       console.log(o);
+       let data = o.properties.timeseries;
+       console.log(data);
+       let data0 = data[0].data.instant.details;
+       console.log(data0);
+       let t = data0.air_temperature;
+       let h= data0.relative_humidity;
+       document.getElementById('temp').value = t;
+       document.getElementById('rh').value = h;
+        calc();
     })
     .catch(e => {console.log(e)})
 }
