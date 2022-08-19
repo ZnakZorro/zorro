@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <title>HUMI</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>   
+      body {font:normal Verdana 14pt;}
+   </style>
+   <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/style.css" />
+   <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/mini.css" />
+
+
+<script>
+    function calc() {
+    
+    //ga('send', 'event', 'Wilgotnosc bezwzgledna', 'Obliczenia');
+    
+    temp = getVal(document.getElementById('temp'), -20.0, 50.0);
+    rh = getVal(document.getElementById('rh'), 1.0, 100.0);
+    
+    dp = document.getElementById('dp');
+    ah = document.getElementById('ah');
+    
+    if(isNaN(temp) || isNaN(rh)) {
+    dp.value = "";
+    ah.value = "";
+    } else {
+    dp.value = getDP(temp, rh);
+    ah.value = getAH(temp, rh);
+    }
+    
+    
+    return false;
+    }
+    
+    function getVal(el, min, max) {
+    val = parseFloat(el.value.replace(',', '.'));
+    if(isNaN(val) || (val<min) || (val>max)) {
+    el.style.boxShadow ="0px 0px 5px 1px rgba(250,53,53,1)";
+    setTimeout(function(){el.style.boxShadow ="";}, 300);
+    val = NaN;
+    }
+    return val;
+    }
+    
+    
+    function getDP(temp, rh) {
+     var h = ((Math.log10(rh)-2)/0.4343) + ((17.62*temp)/(243.12+temp));
+     h = ((243.12*h)/(17.62-h));
+     return Math.round(h*100)/100;
+     }
+    
+    function getAH(temp, rh) {
+     var ah = 216.7*(((rh/100)*6.112*Math.exp((17.62*temp)/(243.12+temp)))/(273.15+temp));
+     return Math.round(ah*100)/100;
+     }
+    </script>
+</head>
+<body>
+
+<div class="wrapper">
+
+        <form>
+
+            <div class="input-group">
+                <label for="temp" class="input-label">Temperatura powietrza (-20..50 °C)</label>
+                <div class="input-edit-group">
+                    <input type="number" id="temp" value='21.5'>
+                    <span class="input-unit">°C</span>
+                </div>
+            </div>
+
+
+            <div class="input-group">
+
+                <label for="rh" class="input-label">Wilgotność względna (1..100 %)</label>
+                <div class="input-edit-group">
+                    <input type="number" id="rh" value='55.5'>
+                    <span class="input-unit">%</span>
+                </div>
+            </div>
+
+            <input class="btn" type="submit" value="Oblicz wilgotność bezwzględną" onclick="return calc();">
+        </form>
+
+
+        <div class="input-group">
+            <label for="ah" class="input-label">Wilgotność bezwzględna</label>
+            <div class="input-edit-group">
+                <input type="number" id="ah" readonly>
+                <span class="input-unit">g/m³</span>
+            </div>
+        </div>
+
+
+        <div class="input-group">
+            <label for="dp" class="input-label">Punkt rosy</label>
+            <div class="input-edit-group">
+                <input type="number" id="dp" readonly>
+                <span class="input-unit">°C</span>
+            </div>
+        </div>
+
+<button class="btn" onclick="getYRNO()">getYRNO</button>
+</div>
+
+
+<script>
+let getYRNO=()=>{
+    let u ="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+    fetch(u)
+    .then(r => {return r.json()})
+    .then(o => {
+        console.log(o);
+
+    })
+    .catch(e => {console.log(e)})
+}
+
+
+
+</script>
+
+</body>
+</html>
