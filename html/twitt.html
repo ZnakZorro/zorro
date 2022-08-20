@@ -10,14 +10,16 @@
    <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/style.css" />
    <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/mini.css" />
    <style> 
-      body{column-count: 2;}
+    body{column-count:2;}
     .wrapper {
         padding: 0;
         margin: auto;
         max-width: 940px;
        /*column-count:2;*/
     }
-  
+    @media only screen and (max-width: 600px) {
+     body {body{column-count:1;}}
+    }  
  </style>
  
 
