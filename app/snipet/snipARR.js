@@ -1,6 +1,6 @@
 let SNIPETY = {
     "dom":     ["gramofon.htm",   "szlif.htm", "expres.txt", "nalewki.txt","dieta.txt"],
-    "html":    ["mini.html","index.html","git.html","arrows.thm"],
+    "html":    ["mini.html","index.html","git.html","arrows.htm"],
     "js":      ["fetch.js","createElement.js","active.js","domReady.js","parameters.js"],
     "code":    ["md.md","console.js"],
     "kuchnia": ["ciasto.txt","Piernik.htm","lody.md"],
@@ -30,7 +30,7 @@ const snipARR = [
    {n:"Lody",            f:"kuchnia",   u:"lody.md"},
    {n:"md",              f:"code",      u:"md.md"},
    {n:"console",         f:"code",      u:"console.js"},
-   {n:"arrows",             f:"html",      u:"arrows.thm"},
+   {n:"arrows",             f:"html",      u:"arrows.htm"},
    
    
    
