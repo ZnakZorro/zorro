@@ -10,30 +10,42 @@
    <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/style.css" />
    <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/mini.css" />
    <style> 
-    body{column-count:2;max-width: 1024px;margin:auto}
+    body{
+       column-count:2;
+       max-width: 1024px;
+       margin:auto;
+       column-gap: 0.3em;
+      }
     .wrapper {
         padding: 0;
         margin: auto;
-        
-       /*column-count:2;*/
     }
     @media only screen and (max-width: 600px) {
-     body {body{column-count:1;}}
+       body {column-count:1;}
     }  
  </style>
- 
-
-
+<script>
+  let pokaz=nr=>{
+     document.getElementById("col0").style.display="none";  
+     document.getElementById("col1").style.display="none";  
+     document.getElementById("col"+nr).style.display="block";  
+  }
+</script>   
+   
 </head>
 <body>
-
-  <div class="wrapper">        
+<div>
+   <button onclick="pokaz(0)">NocnaZ</button>
+   <button onclick="pokaz(1)">NocnaZ</button>
+   
+</div>
+  <div class="wrapper" id="col0">        
         <div class="container">
             <a class="twitter-timeline" href="https://twitter.com/NocnaZ?ref_src=twsrc%5Etfw">Tweets by NocnaZ</a> 
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
   </div>
-  <div class="wrapper">
+  <div class="wrapper" id="col1">
         <div class="container">
             <a class="twitter-timeline" href="https://twitter.com/Piechocinski?ref_src=twsrc%5Etfw">Tweets by Piechocinski</a> 
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
