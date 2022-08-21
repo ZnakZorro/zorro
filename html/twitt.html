@@ -26,14 +26,16 @@
  </style>
 <script>
   let pokaz=(ten,nr)=>{
-     document.querySelectorAll("#klawisze button").forEach((b)=>{
-        b.style.display="none";  
+     document.querySelectorAll("#klawisze button").forEach((b,i)=>{
+        //b.style.display="none";  
+        if (i===nr) document.getElementById("col"+i).style.display="block";  
+        else        document.getElementById("col"+i).style.display="none";  
         b.classList.remove("active")
   });
       ten.classList.add("active");
      //document.getElementById("col0").style.display="none";  
      //document.getElementById("col1").style.display="none";  
-     document.getElementById("col"+nr).style.display="block";  
+     //document.getElementById("col"+nr).style.display="block";  
   }
 </script>   
    
