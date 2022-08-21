@@ -5,6 +5,7 @@ class NavBarNavigator extends HTMLElement {
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
 		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#482ff7';
 		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
+		let styl   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : "Szczecin na Dąbie";
 		if (title==="gitZorro" && APPcity) title=APPcity;
 		
@@ -15,12 +16,13 @@ class NavBarNavigator extends HTMLElement {
 		this.shadowRoot.innerHTML = `
 		<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>
 		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/navbar.css" />		
-		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/${style}.css" />
+		<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/${styl}.css" />
 		
 		<style>
 		.header * {
 			font-family: 'Roboto', "Verdana", sans-serif; 
 		}  
+		
 		</style>		
 		 <header class="header hidenow">
 			 <nav class="navbar">            
