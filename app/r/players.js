@@ -55,18 +55,19 @@ const adjustVolumeIcon = volume => {
   }
 
 
-
+const volumeAdjust=()=>{
+    const volume = parseFloat(volumeControl.value); 
+   console.log("#64v=",volume);
+    audio.volume = currentVolume = volume;
+    currentVolume = volume;
+    adjustVolumeIcon(volume);
+ 
+}
 
 
 
   volumeControl.addEventListener('input', () => {
-    console.log(input)
-    const volume = parseFloat(volumeControl.value)
-  
-    audio.volume = currentVolume = volume
-    currentVolume = volume
-  
-    adjustVolumeIcon(volume)
+   volumeAdjust();
   })
   
   volumeButton.addEventListener('click', () => {
@@ -115,6 +116,7 @@ const ustaw=(ten=null)=>{
       playPauseButtonIcon.classList.add('fa-pause');
       audio.play();
      isPlaying = true;
+ console.log(isPlaying);
 }
 const radio0=(ten)=>{
   document.getElementById("stream").src="https://pl-play.adtonos.com/tok-fm";
