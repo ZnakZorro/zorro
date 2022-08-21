@@ -25,18 +25,27 @@
     }  
  </style>
 <script>
-  let pokaz=nr=>{
-     document.getElementById("col0").style.display="none";  
-     document.getElementById("col1").style.display="none";  
+  let pokaz=(ten,nr)=>{
+     document.querySelectorAll("#klawisze button").forEach((b)=>{
+        b..style.display="none";  
+        b.classList.remove("active")
+  });
+      ten.classList.add("active");
+     //document.getElementById("col0").style.display="none";  
+     //document.getElementById("col1").style.display="none";  
      document.getElementById("col"+nr).style.display="block";  
   }
 </script>   
    
 </head>
 <body>
-<div style="width"100%">
-   <button class="btn blue" onclick="pokaz(0)">NocnaZ</button>
-   <button class="btn red" onclick="pokaz(1)">Piechocinski</button>
+<div class="wrapper">
+        <app-menu title="Twitt" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+</div>
+<div id="klawisze" style="width"100%">
+   <button class="btn blue active" onclick="pokaz(this,0)">NocnaZ</button>
+   <button class="btn red  active" onclick="pokaz(this,1)">Piechocinski</button>
    
 </div>
   <div class="wrapper" id="col0">        
