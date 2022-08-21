@@ -40,12 +40,15 @@
 </head>
 <body>
 <div class="wrapper">
-        <app-menu title="Twitt" name="ZnakZorro" link="../../"></app-menu>
-        <script src="../../appMenu.js"></script>
+        <app-menu title="Twitt" name="ZnakZorro" link="../"></app-menu>
+        <script src="../appMenu.js"></script>
 </div>
 <div id="klawisze" style="width"100%">
    <button class="btn blue active" onclick="pokaz(this,0)">NocnaZ</button>
    <button class="btn red  active" onclick="pokaz(this,1)">Piechocinski</button>
+<button class="btn red  active" onclick="pokaz(this,2)">MarcinPalade</button>
+                                                          
+                                                          
    
 </div>
   <div class="wrapper" id="col0">        
@@ -57,6 +60,12 @@
   <div class="wrapper" id="col1">
         <div class="container">
             <a class="twitter-timeline" href="https://twitter.com/Piechocinski?ref_src=twsrc%5Etfw">Tweets by Piechocinski</a> 
+            <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        </div>
+  </div>
+  <div class="wrapper" id="col2">
+        <div class="container">
+            <a class="twitter-timeline" href="https://twitter.com/MarcinPalade?ref_src=twsrc%5Etfw">Tweets by MarcinPalade</a> 
             <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         </div>
   </div>
