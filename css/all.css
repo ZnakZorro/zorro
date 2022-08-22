@@ -147,4 +147,10 @@ th {
       grid-template-columns: 1em auto;
       gap: 0.65em;
    } 
-
+    .b {font-weight:bold;} 
+    .line {margin:0.2em 0;}
+    .em3,.em4,.em5,.em6 {display: inline-block;}
+    .em3 {width: 3em;}
+    .em4 {width: 4em;}
+    .em5 {width: 5em;}
+    .em6 {width: 6em;}
