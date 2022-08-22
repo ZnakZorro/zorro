@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <title>mini_app</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>   
+      body {font:normal Verdana 14pt;}
+   </style>
+</head>
+
+
+<script>
+const calcLR=()=>{
+let L1 = parseFloat(document.getElementById("coil1").value);
+let R1 = parseFloat(document.getElementById("resistor1").value);
+console.log(L1,R1);
+L1 = L1/1000;
+R1=R1;
+console.log(L1,R1,Math.PI);
+let frq = R1/(2 * Math.PI * L1);
+document.getElementById("frq").value = frq;
+}  
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+    //$("#diva").style.color="#222";
+    //$("#diva").style.backgroundColor="#eee";
+    calcLR();
+})
+//---DOM READY----------------------------------
+
+</script>
+<body>
+  
+<p>L: <input id="coil1" value="2"> mH</p>
+<p>R: <input id="resistor1" value="8">Om</p>
+<p><button onClick="calcLR()">calc LR</button></p>
+<p>FRQ: <input id="frq">Hz</p>
+
+
+Wzór na znalezienie punktu odcięcia częstotliwości obwodu RL to częstotliwość = R/2πL. Wykonując obliczenia matematyczne, z wartościami pokazanymi powyżej otrzymujemy częstotliwość = R/2πL = (10KΩ)/(2(3,14)(470mH))=3388 Hz, czyli około 3,39KHz.
+<br />
+Oznacza to, że wszystkie częstotliwości powyżej 3,39 kHz są tłumione. W miarę oddalania się (wyżej) od regionu 3,39 kHz tłumienie staje się coraz większe.
+<br />
+Częstotliwości poniżej 3,39 kHz są przepuszczane bez tłumienia.<br />
+
+</body>
+</html>
