@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html lang="pl"> 
+<head> 
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600"> 
+<meta name="viewport" content="width=device-width,initial-scale=1"> 
+<meta name="mobile-web-app-capable" content="yes"> 
+<link rel="icon" type="image/png" size="200x200" href="ele200.png" />
+	<link rel="icon" type="image/png" size="200x200" href="ele200.png"> 
+	<link rel="shortcut icon" type="image/png" size="200x200" href="ele200.png"> 	
+	<meta name="theme-color" content="#963">
+	<link rel="manifest" href="ele.webmanifest"> 
+	
+
+<title>RC_filter</title>
+<style type="text/css">
+body {margin:10px; font:normal 12px verdana;}
+div.pole {border:1px solid silver; padding:4px; margin:4px; background:#ffa; width:100px;}
+div.pole input {width:40px;}
+span.kreska {background:gray;display:block; clear:left; border-bottom:1px solid white;font-size:3px;}
+#wynik {font-size:9px; float:left;background:#ffc; border:1px solid #ddd; width:1000px;}
+
+input[type="range"] {
+    width: 42vw;
+    min-width: 200px;
+    margin: 1vmin;
+}
+.sliders span {
+    display: inline-block;
+}
+.span1 {}
+.span2{}
+</style>
+	<script type="text/javascript" src="slider.js"></script>
+		<link rel="stylesheet" href="slider.css" type="text/css" />
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.6.0/mootools.min.js"></script>
+
+<script type="text/javascript">
+
+function oblicz(valF,skala){
+	var krocie=1000000; 
+	
+	var valR1=$('r1').value.toFloat();		var valC1=$('c1').value.toFloat();
+	var valR2=$('r2').value.toFloat();		var valC2=$('c2').value.toFloat();
+	var valR3=$('r3').value.toFloat();		var valR4=$('r4').value.toFloat();
+
+	var wynik11=valR1 + ( (1/(6.28* valC1 *valF))*krocie ).toFloat();
+	var wynik22=valR2 + ( (1/(6.28* valC2 *valF))*krocie ).toFloat();
+
+	var wynik113=( (wynik11*valR3) / (wynik11+valR3) ).toFloat();
+	var wynik224=( (wynik22*valR4) / (wynik22+valR4) ).toFloat();
+	
+	var wynik=(wynik224/(wynik224+wynik113)).toFloat();
+	return wynik=(wynik*skala).round(0);
+}
+
+function akcja(){
+	var skala=1000;
+	var html='';
+	var min=skala;
+	var dBmin=100;
+	var frq=0;
+	var data = []
+	for (i=2;i<80;i++){
+		let ff=i*i*3;
+		//if (ff>20000) klasa='background:#ddd; '; else klasa='';
+		gain=oblicz(ff,skala);
+		dB= 20*Math.log(gain/skala);
+		data.push([ff,dB]);
+		/*if (gain<min) {min=gain; dBmin=dB; frq=ff;}
+		dBr=dB.round();
+		dBw=(1000+(20*dB)).round();
+		width=dBw;
+		kroc=(skala/gain).round(1);
+		gain=gain/skala;*/
+		//html = html+'<span class="kreska" style="'+klasa+'width:'+width+'px; " title="F='+ff+' dB='+dBr+' G= '+gain+' K='+kroc+'">-</span>';
+		}
+	//console.log(data)
+	//dBmin=dBmin.round();
+	//min=min/skala;
+	//html= '<b>Frq='+frq+'</b> dB='+dBmin+' Gain= '+min+'<br />'+html;
+	//$('wynik').set('html',html);
+	
+	if (wykres) updateWykres(data); else rysujWykres(data);
+}
+
+
+
+
+window.addEvent('domready', function() {
+	$('Licz').addEvent('click',function(){akcja();});
+	$('r1').addEvent('blur',function(){akcja();});
+	$('c1').addEvent('blur',function(){akcja();});
+	$('r2').addEvent('blur',function(){akcja();});
+	$('c2').addEvent('blur',function(){akcja();});
+	$('r3').addEvent('blur',function(){akcja();});
+	$('r4').addEvent('blur',function(){akcja();});
+		
+	akcja();
+});
+
+
+
+window.addEvent('domready', function(){
+// R1
+	var sr1 = $('Slide_R1');
+	new Slider(sr1, {steps: 100,initialStep:0},
+		function(value){
+			$('r1').value=value/5;
+			akcja();
+		}
+	);
+//C1
+	var sc1 = $('Slide_C1');
+	new Slider(sc1,  {steps: 100,initialStep:50},
+		function(value){
+		
+			$('c1').value=Math.ceil(value/5);
+			akcja();
+		}
+	);
+	
+// R2
+	var sr2 = $('Slide_R2');
+	new Slider(sr2, {steps: 100,initialStep:20},
+		function(value){
+			$('r2').value=Math.ceil(value/5);
+			akcja();
+		}
+	);
+//C2
+	var sc2 = $('Slide_C2');
+	new Slider(sc2,  {steps: 100,initialStep:10},
+		function(value){
+			$('c2').value=value*10;
+			akcja();
+		}
+	);
+	
+	
+	
+	
+});
+</script>
+	<!--[if IE]>
+		<link href=ie.css rel=stylesheet />
+		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+
+</head>
+<body>
+
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description">
+        
+    </p>
+</figure>
+
+
+
+
+
+<div class="sliders">
+	<span class="span1">R1 <input type="range" id="Slide_R1" class="slider"/></span>
+	<span class="span1">R2 <input type="range" id="Slide_R2" class="slider"/></span>
+	<div style="clear:both;"></div>
+	<span class="span2">C1 <input type="range" id="Slide_C1" class="slider"/></span>
+	<span class="span2">C2 <input type="range" id="Slide_C2" class="slider"/></span>
+</div>
+
+</div>
+<div style="clear:both;"></div>
+<div id=test></div>
+<img src="Loudnessfilter.png" align="left" />
+<div style="float:left;">
+<div class="pole">
+R1 <input id="r1" value="0" />   E<br />
+C1 <input id="c1" value="10" />  uF
+</div>
+<div class="pole">
+R2 <input id="r2" value="4" >  E<br />
+C2 <input id="c2" value="100" > uF
+</div>
+<div class="pole">
+R3 <input id="r3" value="10" >  E<br />
+R4 <input id="r4" value="4" > E
+</div>
+
+<button id="Licz" name="Licz"> Licz </button>
+</div>
+
+
+<div  id="wynik"></div>
+
+
+<script>
+let wykres = null;
+let updateWykres=(data)=>{
+	wykres.series[0].setData(data);
+	wykres.redraw();
+}
+
+let rysujWykres=(data)=>{
+	wykres = Highcharts.chart('container', {
+		type:'spline',
+		title: {text: 'RC Filter'},
+		subtitle: {text: null},
+		yAxis: {
+			title: {text: 'Gain'},
+			//type: 'logarithmic',
+			max:-0,
+			min:-50
+		},
+		xAxis: {
+			accessibility: {rangeDescription: 'Frequency'},
+			type: 'logarithmic',
+		},
+		legend: {
+			layout: 'vertical',
+			align: 'right',
+			verticalAlign: 'middle'
+		},
+		plotOptions: {
+			series: {
+				label: {connectorAllowed: false},
+				//pointStart: 2010
+			}
+		},
+		series: [
+			{name: 'Gain',data: data}
+		],
+		responsive: {
+			rules: [{
+				condition: {maxWidth: 500},
+				chartOptions: {
+					legend: {
+						layout: 'horizontal',
+						align: 'center',
+						verticalAlign: 'bottom'
+					}
+				}
+			}]
+		}
+	});
+}
+
+
+//javascript:(function () { var script = document.createElement('script'); script.src="//cdn.jsdelivr.net/npm/eruda"; document.body.appendChild(script); script.onload = function () { eruda.init() } })();
+</script>
+
+
+<script src="//cdn.jsdelivr.net/npm/eruda"></script>
+<script>
+eruda.init();
+</script>
+<div style="width:100%; margin:2em;clear: both;">
+<button onclic="eruda.init();">eruda.init()</button>
+</div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+	"name": "ele2020",
+	"short_name": "ele2020",
+	"description": "ele2020",
+	"start_url": "index.html",
+	"display": "standalone",
+
+	"theme_color": "#541429",
+	"background_color": "#541429",
+	"icons": [
+		{
+			"src": "ele200.png",
+			"sizes": "200x200",
+			"type": "image/png"
+		}
+	],
+	"screenshots": [		{
+			"src": "ele200.png",
+			"sizes": "200x200",
+			"type": "image/png"
+	}]
+}
