@@ -48,5 +48,16 @@
        
     </div><!-- wraper-->
 
+   <div id="avg"></div>
+   
+   <script>
+      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
+      .then(r => {return r.text()})
+      .then(o => {document.getElementById("avg").innerHTML = o;})
+      .catch(e => {console.log(e)})
+
+   </script>
+   
+   
 </body>
 </html>
