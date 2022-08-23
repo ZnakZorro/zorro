@@ -54,12 +54,13 @@ const calcLR=()=>{
     let frqi = Math.round(frq);
     document.getElementById("frq").value = frqi;
 
-	
+	let skala = 1;
 	let data = []
 	for (f=20;f<20000;f+=10){
 		let ff=f;
 		gain=obliczFiltr(ff,frq,R1,L1);
-		dB= gain    //20*Math.log(gain/skala);
+        dB= 20*Math.log(gain/skala);
+		//dB= gain    //20*Math.log(gain/skala);
 		data.push([ff,dB]);
     }
     //console.log(data)
@@ -84,8 +85,8 @@ document.addEventListener("DOMContentLoaded",function(){
     
     <div class="wrapper">
         <div class="container">
-            <h3>RL</h3>    
-		<img src="https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/ele/img/LR.svg" style="float:right; width:10em;"/>
+            <h3>RL</h3> 
+            <img src="./img/LR.svg" style="float:right; width:12em;"/>   
             <div class="line"><span class="em3 b">L:</span>    <input class="em4" id="coil1"     onchange="calcLR()" value="2"> mH</div>
             <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcLR()" value="8"> Om</div>
             <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcLR()">Calc LR</button></div>
@@ -93,12 +94,12 @@ document.addEventListener("DOMContentLoaded",function(){
         </div>
     </div>
     
-<div class="small small">
+<!--div class="small small">
 Wzór na znalezienie punktu odcięcia częstotliwości obwodu RL to częstotliwość = R/2πL. Wykonując obliczenia matematyczne, z wartościami pokazanymi powyżej otrzymujemy częstotliwość = R/2πL = (10KΩ)/(2(3,14)(470mH))=3388 Hz, czyli około 3,39KHz.
 <br />
 Oznacza to, że wszystkie częstotliwości powyżej 3,39 kHz są tłumione. W miarę oddalania się (wyżej) od regionu 3,39 kHz tłumienie staje się coraz większe.
 <br />
 Częstotliwości poniżej 3,39 kHz są przepuszczane bez tłumienia.<br />
-</div>
+</div-->
 </body>
 </html>
