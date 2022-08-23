@@ -1,4 +1,5 @@
-﻿
+﻿let 2PI = Math.PI * 2;
+
 let wykres = null;
 let updateWykres=(data)=>{
 	wykres.series[0].setData(data);
