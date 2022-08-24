@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>Zwrotnica</title>  
+   <title>Zwrotnica2a</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
@@ -104,9 +104,26 @@ const calcBass=()=>{
     }
 } 
 
+const calcMiddle=()=>{
+    for (f=20;f<20000;f+=10){
+		/*let ff=f;
+		gain=filterBassVal(ff,frq,R1,L1);
+        dB= 8.65*Math.log(gain/skala);
+        dB = Math.round(dB*100)/100;
+		//dB= gain    //20*Math.log(gain/skala);
+		data.push([ff,dB]);*/
+        dane.middle.push([f,0]);
+    }
+}
+
+const calcZwrotnica2a=()=>{
+    console.log("change");
+}
 const calcZwrotnica2=()=>{
+    if (wykres) wyktes = null;
     calcTreble();
     calcBass();
+    calcMiddle();
     if (wykres) updateWykres(dane); else rysujWykres("highchart",dane);    
 }
 
@@ -134,8 +151,8 @@ document.addEventListener("DOMContentLoaded",function(){
             <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div>
             <h3>Bass</h3> 
             <img src="./img/LR.svg" style="float:right; width:12em;"/>   
-            <div class="line"><span class="em3 b">L:</span>    <input class="em4" id="coil1"     onchange="calcZwrotnica2()" value="2"> mH</div>
-            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2()" value="8"> Om</div>
+            <div class="line"><span class="em3 b">L:</span>    <input class="em4" id="coil1"     onchange="calcZwrotnica2a()" value="2"> mH</div>
+            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
         </div>
@@ -143,8 +160,8 @@ document.addEventListener("DOMContentLoaded",function(){
         <div class="container pass">
             <h3>Treble</h3> 
             <img src="./img/CR.svg" style="float:right; width:12em;"/>   
-            <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor1"     onchange="calcZwrotnica2()" value="10"> uF</div>
-            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2()" value="8"> Om</div>
+            <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor1"     onchange="calcZwrotnica2a()" value="10"> uF</div>
+            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
             <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div>
