@@ -1,8 +1,16 @@
 let PIPI = Math.PI * 2;
 
 let wykres = null;
+
 let updateWykres=(data)=>{
-	wykres.series[0].setData(data);
+	
+	console.log(data);
+	//wykres.series[0].remove();
+	//wykres.series[1].remove();
+	//wykres.series[2].remove();
+	wykres.series[0].setData(data.treble);
+	wykres.series[1].setData(data.middle);
+	wykres.series[2].setData(data.bass);
 	wykres.redraw();
 }
 
