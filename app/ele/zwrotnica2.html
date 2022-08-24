@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>Zwrotnica</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#008">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
+   <style>
+    .b {font-weight:bold;} 
+    .line {margin:0.2em 0;}
+    .em3,.em4,.em5,.em6 {display: inline-block;}
+    .em3 {width: 3em;}
+    .em4 {width: 4em;}
+    .em5 {width: 5em;}
+    .em6 {width: 6em;}
+   </style>
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/series-label.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script> 
+        <script src="./js/wykresy.js"></script> 
+   <script>
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+   </script>
+</head>
+
+
+<script>
+const obliczFiltrCR=(ff,frq,R1,C1)=>{
+    let impedancja = 1/(2 * Math.PI * ff * C1);
+    let gain = R1/(R1+impedancja);
+    return gain;
+
+}   
+
+const calcCR=()=>{
+    let C1 = parseFloat(document.getElementById("capasitor1").value);
+    let R1 = parseFloat(document.getElementById("resistor1").value);
+    C1 = C1/1000000;
+    R1=R1;
+    console.log(C1,R1,Math.PI);
+    let frq = 1/(2 * Math.PI * R1 * C1);
+    let frqi = Math.round(frq);
+    document.getElementById("frq").value = frqi;
+
+	let skala = 1;
+	let data = []
+	for (f=20;f<20000;f+=10){
+		let ff=f;
+		gain=obliczFiltrCR(ff,frq,R1,C1);
+        dB= 8.65*Math.log(gain/skala);
+        dB = Math.round(dB*100)/100;
+		//dB= gain    //20*Math.log(gain/skala);
+		data.push([ff,dB]);
+    }
+    //console.log(data)
+	if (wykres) updateWykres(data); else rysujWykres("highchart",data);    
+}  
+
+
+const obliczFiltrLR=(ff,frq,R1,L1)=>{
+    //2piFL
+    let impedancja = 2*Math.PI*ff*L1;
+    let gain = R1/(R1+impedancja);
+    return gain;
+
+}   
+
+const calcLR=()=>{
+    let L1 = parseFloat(document.getElementById("coil1").value);
+    let R1 = parseFloat(document.getElementById("resistor1").value);
+    L1 = L1/1000;
+    R1=R1;
+    console.log(L1,R1,Math.PI);
+    let frq = R1/(2 * Math.PI * L1);
+    let frqi = Math.round(frq);
+    document.getElementById("frq").value = frqi;
+
+	let skala = 1;
+	let data = []
+	for (f=20;f<20000;f+=10){
+		let ff=f;
+		gain=obliczFiltrLR(ff,frq,R1,L1);
+        dB= 8.65*Math.log(gain/skala);
+        dB = Math.round(dB*100)/100;
+		//dB= gain    //20*Math.log(gain/skala);
+		data.push([ff,dB]);
+    }
+    //console.log(data)
+	if (wykres) updateWykres(data); else rysujWykres("highchart",data);    
+} 
+
+
+
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+    calcCR();
+})
+//---DOM READY----------------------------------
+
+</script>
+<body>
+    <div class="wrapper">
+
+        <app-menu title="Zwrot" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
+
+        <div class="container">
+            <figure class="highcharts-figure">
+                <div id="highchart"></div>
+                <p class="highcharts-description"></p>
+            </figure>
+        </div>
+
+        <div class="container pass">
+            <h3>Bass</h3> 
+            <img src="./img/LR.svg" style="float:right; width:12em;"/>   
+            <div class="line"><span class="em3 b">L:</span>    <input class="em4" id="coil1"     onchange="calcLR()" value="2"> mH</div>
+            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcLR()" value="8"> Om</div>
+            <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcLR()">Calc LR</button></div>
+            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
+        </div>
+
+        <div class="container pass">
+            <h3>Treble</h3> 
+            <img src="./img/CR.svg" style="float:right; width:12em;"/>   
+            <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor1"     onchange="calcCR()" value="10"> uF</div>
+            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcCR()" value="8"> Om</div>
+            <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcCR()">Calc CR</button></div>
+            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
+        </div>
+   
+        
+    </div>
+
+</body>
+</html>
