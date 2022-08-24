@@ -20,6 +20,12 @@
        document.addEventListener("DOMContentLoaded",function(){
            //document.getElementById("info").textContent = "info";
        });
+    const getAVG=()=>{}
+      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
+      .then(r => {return r.text()})
+      .then(o => {document.getElementById("avg").innerHTML = o;})
+      .catch(e => {console.log(e)})
+   }
    </script>
           
 </head>
@@ -30,7 +36,8 @@
         <script src="../../appMenu.js"></script>
        
         <div class="container">
-               <a href="RC.html" class="btn blue">RC</a>
+            <a href="zwrotnica2.html" class="btn red">Zrotnica 2</a>
+            <a href="RC.html" class="btn blue">RC</a>
                <a href="LR.html" class="btn red">LR</a>
                <a href="CR.html" class="btn red">CL</a>
               
@@ -43,7 +50,9 @@
         <a href="" class="btn" target="_blank"></a>
         <a href="" class="btn" target="_blank"></a>
         <a href="" class="btn" target="_blank"></a>
-        <a href="" class="btn" target="_blank"></a>          
+        <a href="" class="btn" target="_blank"></a>  
+        <hr />        
+        <button onClick="getAVG()"=" class="btn green">getAVG()</button>          
 
     </div>       
    
@@ -53,11 +62,6 @@
    
    
    <script>
-      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
-      .then(r => {return r.text()})
-      .then(o => {document.getElementById("avg").innerHTML = o;})
-      .catch(e => {console.log(e)})
-
    </script>
    
    
