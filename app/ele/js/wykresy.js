@@ -1,4 +1,4 @@
-﻿let 2PI = Math.PI * 2;
+let PIPI = Math.PI * 2;
 
 let wykres = null;
 let updateWykres=(data)=>{
@@ -7,6 +7,7 @@ let updateWykres=(data)=>{
 }
 
 let rysujWykres=(container,data)=>{
+	console.log(data)
 	wykres = Highcharts.chart(container, {
 		type:'spline',
 		title: {text: 'Filter'},
@@ -33,7 +34,9 @@ let rysujWykres=(container,data)=>{
 			}
 		},
 		series: [
-			{name: 'Gain',data: data}
+			//{name: 'Gain',data: data},
+			{name: 'Treble',data:data.treble},
+			{name: 'Bass',data:data.bass}
 		],
 		responsive: {
 			rules: [{
