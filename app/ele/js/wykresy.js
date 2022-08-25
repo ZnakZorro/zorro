@@ -1,4 +1,4 @@
-let PIPI = Math.PI * 2;
+﻿let PIPI = Math.PI * 2;
 
 let wykres = null;
 
@@ -14,7 +14,8 @@ let updateWykres=(data)=>{
 	wykres.redraw();
 }
 
-let rysujWykres=(container,data)=>{
+let rysujWykres=(container,category,data)=>{
+	console.log(category)
 	console.log(data)
 	wykres = Highcharts.chart(container, {
 		type:'spline',
@@ -29,6 +30,7 @@ let rysujWykres=(container,data)=>{
 		xAxis: {
 			accessibility: {rangeDescription: 'Frequency'},
 			type: 'logarithmic',
+			categories:category
 		},
 		legend: {
 			layout: 'vertical',
@@ -44,6 +46,7 @@ let rysujWykres=(container,data)=>{
 		series: [
 			//{name: 'Gain',data: data},
 			{name: 'Treble',data:data.treble},
+			{name: 'Middle',data:data.middle},
 			{name: 'Bass',data:data.bass}
 		],
 		responsive: {
