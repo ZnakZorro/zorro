@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>Zwrotnica2a</title>  
+   <title>Zwrotnica</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
@@ -43,45 +43,54 @@ let dane = {
     "treble":[],
 }
 
+let category = [];
+
+for (i=0;i<100;i++){
+    let j = i+2;
+	let ff= Math.round(j*j*2.5);
+    if (ff<500) ff = Math.round(ff/10)*10;
+    else        ff = Math.round(ff/100)*100;
+    category.push(ff);    
+}        
+//console.log(category)
+
 const filterTrebleVal=(ff,frq,R1,C1)=>{
-    let impedancja = 1/(2 * Math.PI * ff * C1);
+    let impedancja = 1/(PIPI * ff * C1);
     let gain = R1/(R1+impedancja);
     return gain;
 }   
 
 const calcTreble=()=>{
-    let C1 = parseFloat(document.getElementById("capasitor1").value);
-    let R1 = parseFloat(document.getElementById("resistor1").value);
-    C1 = C1/1000000;
-    R1=R1;
-    console.log(C1,R1,Math.PI);
-    let frq = 1/(2 * Math.PI * R1 * C1);
+    dane.treble.length = 0;
+    let C3 = parseFloat(document.getElementById("capasitor3").value);
+    let R3 = parseFloat(document.getElementById("resistor3").value);
+    C3 = C3/1000000;
+   
+    console.log(C3,R3,PIPI);
+    let frq = 1/(PIPI * R3 * C3);
     let frqi = Math.round(frq);
-    document.getElementById("frq").value = frqi;
+    document.getElementById("frq3").value = frqi;
 
 	let skala = 1;
-	let data = []
-	for (f=20;f<20000;f+=10){
-		let ff=f;
-		gain=filterTrebleVal(ff,frq,R1,C1);
+    category.forEach((f)=>{
+		gain=filterTrebleVal(f,frq,R3,C3);
         dB= 8.65*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
-		//dB= gain    //20*Math.log(gain/skala);
-		data.push([ff,dB]);
-        dane.treble.push([ff,dB]);
-    }
+        //dane.treble.push([f,dB]);
+        dane.treble.push(dB);
+    })
 }  
 
 
 const filterBassVal=(ff,frq,R1,L1)=>{
-    //2piFL
-    let impedancja = 2*Math.PI*ff*L1;
+    let impedancja = PIPI*ff*L1;
     let gain = R1/(R1+impedancja);
     return gain;
 
 }   
 
 const calcBass=()=>{
+    dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
     let R1 = parseFloat(document.getElementById("resistor1").value);
     L1 = L1/1000;
@@ -89,42 +98,41 @@ const calcBass=()=>{
     console.log(L1,R1,Math.PI);
     let frq = R1/(2 * Math.PI * L1);
     let frqi = Math.round(frq);
-    document.getElementById("frq").value = frqi;
+    document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
-	let data = []
-	for (f=20;f<20000;f+=10){
-		let ff=f;
-		gain=filterBassVal(ff,frq,R1,L1);
+	category.forEach((f)=>{
+		gain=filterBassVal(f,frq,R1,L1);
         dB= 8.65*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
-		//dB= gain    //20*Math.log(gain/skala);
-		data.push([ff,dB]);
-        dane.bass.push([ff,dB]);
-    }
+        //dane.bass.push([f,dB]);
+        dane.bass.push(dB);
+    })
 } 
 
 const calcMiddle=()=>{
-    for (f=20;f<20000;f+=10){
+    dane.middle.length = 0;
+    category.forEach((f)=>{
 		/*let ff=f;
 		gain=filterBassVal(ff,frq,R1,L1);
         dB= 8.65*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
 		//dB= gain    //20*Math.log(gain/skala);
 		data.push([ff,dB]);*/
-        dane.middle.push([f,0]);
-    }
+        //dane.middle.push([f,0]);
+        dane.middle.push(0);
+    })
 }
 
 const calcZwrotnica2a=()=>{
     console.log("change");
 }
 const calcZwrotnica2=()=>{
-    if (wykres) wykres = null;
+    //if (wykres) wykres = null;
     calcTreble();
     calcBass();
     calcMiddle();
-    if (wykres) updateWykres(dane); else rysujWykres("highchart",dane);    
+    if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
 }
 
 
@@ -154,16 +162,16 @@ document.addEventListener("DOMContentLoaded",function(){
             <div class="line"><span class="em3 b">L:</span>    <input class="em4" id="coil1"     onchange="calcZwrotnica2a()" value="2"> mH</div>
             <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             
-            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
+            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
         </div>
 
         <div class="container pass">
             <h3>Treble</h3> 
             <img src="./img/CR.svg" style="float:right; width:12em;"/>   
-            <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor1"     onchange="calcZwrotnica2a()" value="10"> uF</div>
-            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
+            <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor3"     onchange="calcZwrotnica2a()" value="10"> uF</div>
+            <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor3" onchange="calcZwrotnica2a()" value="8"> Om</div>
             
-            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
+            <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq3"> Hz</div>
             <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div>
         </div>
    
