@@ -41,18 +41,16 @@ let dane = {
     "bass":[],
     "middle":[],
     "treble":[],
+    "suma":[],
+    "line":[],
 }
 
 let category = [];
-
-for (i=0;i<100;i++){
-    let j = i+2;
-	let ff= Math.round(j*j*2.5);
-    if (ff<500) ff = Math.round(ff/10)*10;
-    else        ff = Math.round(ff/100)*100;
-    category.push(ff);    
-}        
-//console.log(category)
+for (i=1;i<101;i++){
+    let f = Math.exp(i/10) * 10
+    category.push(Math.round(f));
+    dane.line.push(-6);
+}
 
 const filterTrebleVal=(ff,frq,R1,C1)=>{
     let impedancja = 1/(PIPI * ff * C1);
@@ -66,7 +64,7 @@ const calcTreble=()=>{
     let R3 = parseFloat(document.getElementById("resistor3").value);
     C3 = C3/1000000;
    
-    console.log(C3,R3,PIPI);
+    //console.log(C3,R3,PIPI);
     let frq = 1/(PIPI * R3 * C3);
     let frqi = Math.round(frq);
     document.getElementById("frq3").value = frqi;
@@ -95,7 +93,7 @@ const calcBass=()=>{
     let R1 = parseFloat(document.getElementById("resistor1").value);
     L1 = L1/1000;
     R1=R1;
-    console.log(L1,R1,Math.PI);
+    //console.log(L1,R1,Math.PI);
     let frq = R1/(2 * Math.PI * L1);
     let frqi = Math.round(frq);
     document.getElementById("frq1").value = frqi;
@@ -113,14 +111,15 @@ const calcBass=()=>{
 const calcMiddle=()=>{
     dane.middle.length = 0;
     category.forEach((f)=>{
-		/*let ff=f;
-		gain=filterBassVal(ff,frq,R1,L1);
-        dB= 8.65*Math.log(gain/skala);
-        dB = Math.round(dB*100)/100;
-		//dB= gain    //20*Math.log(gain/skala);
-		data.push([ff,dB]);*/
-        //dane.middle.push([f,0]);
         dane.middle.push(0);
+    })
+}
+const calcSuma=()=>{
+    dane.suma.length = 0;
+    category.forEach((f,i)=>{
+        let s = (dane.treble[i]+dane.middle[i]+dane.bass[i])/3;
+        s = Math.round(s*10)/10;
+        dane.suma.push(s);
     })
 }
 
@@ -132,6 +131,7 @@ const calcZwrotnica2=()=>{
     calcTreble();
     calcBass();
     calcMiddle();
+    calcSuma();    
     if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
 }
 

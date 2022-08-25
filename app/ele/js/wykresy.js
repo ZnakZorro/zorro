@@ -4,7 +4,7 @@ let wykres = null;
 
 let updateWykres=(data)=>{
 	
-	console.log(data);
+	//console.log(data);
 	//wykres.series[0].remove();
 	//wykres.series[1].remove();
 	//wykres.series[2].remove();
@@ -15,10 +15,10 @@ let updateWykres=(data)=>{
 }
 
 let rysujWykres=(container,category,data)=>{
-	console.log(category)
-	console.log(data)
+	//console.log(category)
+	//console.log(data)
 	wykres = Highcharts.chart(container, {
-		type:'spline',
+		//type:'spline',
 		title: {text: 'Filter'},
 		subtitle: {text: null},
 		yAxis: {
@@ -29,25 +29,30 @@ let rysujWykres=(container,category,data)=>{
 		},
 		xAxis: {
 			accessibility: {rangeDescription: 'Frequency'},
-			type: 'logarithmic',
+			//min:20,
+			//max:20000,
+			//type: 'logarithmic',
 			categories:category
 		},
-		legend: {
+		/*legend: {
 			layout: 'vertical',
 			align: 'right',
 			verticalAlign: 'middle'
-		},
+		},*/
 		plotOptions: {
 			series: {
-				label: {connectorAllowed: false},
+				//label: {connectorAllowed: false},
 				//pointStart: 2010
 			}
 		},
+		colors: ['#00f', '#080', '#f00', '#aaa','#aa0'],
+		//visibility: [1,1,1,0,0],
 		series: [
-			//{name: 'Gain',data: data},
 			{name: 'Treble',data:data.treble},
 			{name: 'Middle',data:data.middle},
-			{name: 'Bass',data:data.bass}
+			{name: 'Bass',data:data.bass},
+			{name: 'Suma',data:data.suma,visible:false},
+			{name: '-6dB',data:data.line,visible:false}
 		],
 		responsive: {
 			rules: [{
