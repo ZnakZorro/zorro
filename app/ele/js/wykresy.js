@@ -24,8 +24,8 @@ let rysujWykres=(container,category,data)=>{
 		yAxis: {
 			title: {text: 'Gain'},
 			//type: 'logarithmic',
-			//max:-0,
-			//min:-50
+			max:-0,
+			min:-50
 		},
 		xAxis: {
 			accessibility: {rangeDescription: 'Frequency'},
@@ -45,14 +45,14 @@ let rysujWykres=(container,category,data)=>{
 				//pointStart: 2010
 			}
 		},
-		colors: ['#00f', '#080', '#f00', '#aaa','#aa0'],
+		colors: ['#00f', '#080', '#f00', '#aa0','#aaa'],
 		//visibility: [1,1,1,0,0],
 		series: [
 			{name: 'Treble',data:data.treble},
 			{name: 'Middle',data:data.middle},
 			{name: 'Bass',data:data.bass},
 			{name: 'Suma',data:data.suma,visible:false},
-			{name: '-6dB',data:data.line,visible:false}
+			{name: '-6dB',data:data.line}
 		],
 		responsive: {
 			rules: [{
