@@ -14,7 +14,7 @@
    <link rel="stylesheet" href="../../css/all.css" />
    <style>
     .b {font-weight:bold;} 
-    .line {margin:0.2em 0;}
+    .line {margin:0.2em 0;max-width: 45%;}
     .em3,.em4,.em5,.em6 {display: inline-block;}
     .em3 {width: 3em;}
     .em4 {width: 4em;}
@@ -160,12 +160,11 @@ const calcMiddle=()=>{
         dane.middle.push(dB);
     });
     // normalize to 0
-    category.forEach((f,i)=>{
+    /*category.forEach((f,i)=>{
         dane.middle[i] = dane.middle[i]-max;
         dane.middle[i] = Math.round(dane.middle[i]*10)/10;
-    });
-    
-    //console.log(max);
+    });*/ 
+    //console.log("mid max=",max);
 }
 
 const calcSuma=()=>{
@@ -230,6 +229,7 @@ const slides=(ten)=>{
     let id = ten.dataset.id;
     let position = parseInt(ten.value);
     let val = logslider(position);
+    console.log(id,position,val)
     document.getElementById(id).value=val;
     calcZwrotnica2();
 }
@@ -255,41 +255,56 @@ const slides=(ten)=>{
     <div class="col2 left">
         <!--div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div-->
         <div class="container pass">            
-            <img src="./img/LR.svg" class="filter" />   
+            <img src="./img/LCR-1.svg" class="filter" />   
             <h3>Bass</h3>             
             <div class="line">
                 <span class="em3 b">L1:</span>
                 <span><input class="em4" id="coil1"     oninput="calcZwrotnica2a()" value="2.4"> mH</span>
-                <span><input type="range" data-id="coil1" onchange="slides(this)" value="24" min="0" max="200" step="1"></span>
+                <span><input type="range" data-id="coil1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
+            </div>
+            <div class="line">
+                <span class="em3 b">C1:</span>
+                <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="47"> uF</span>
+                <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R1:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
         </div>
 
         <div class="container pass">            
-            <img src="./img/LCR.svg" class="filter" />   
+            <img src="./img/LCLR-2.svg" class="filter" />   
             <h3>Middle</h3>             
             <div class="line">
                 <span class="em3 b">L2:</span>
-                <span><input class="em4" id="coil2"     onchange="calcZwrotnica2a()" value="2.4"> mH</span>
-                <span><input type="range" data-id="coil2" onchange="slides(this)" value="24" min="0" max="200" step="1"></span>
+                <span><input class="em4" id="coil2"     onchange="calcZwrotnica2a()" value="0.18"> mH</span>
+                <span><input type="range" data-id="coil2" onchange="slides(this)" value="20" min="0" max="50" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">C2:</span>
-                <span><input class="em4" id="capasitor2"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
-                <span><input type="range" data-id="capasitor2" onchange="slides(this)" value="48" min="1" max="200" step="1"></span>
+                <span><input class="em4" id="capasitor2"     onchange="calcZwrotnica2a()" value="55"> uF</span>
+                <span><input type="range" data-id="capasitor2" onchange="slides(this)" value="335" min="1" max="400" step="1"></span>
+            </div>
+            <div class="line">
+                <span class="em3 b">L2a:</span>
+                <span><input class="em4" id="coil2a"     onchange="calcZwrotnica2a()" value="0.18"> mH</span>
+                <span><input type="range" data-id="coil2a" onchange="slides(this)" value="20" min="0" max="50" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R2:</span>    <input class="em4" id="resistor2" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq2"> Hz</div>
         </div>
 
         <div class="container pass">
-            <img src="./img/CR.svg" class="filter"/>   
+            <img src="./img/CLR-3.svg" class="filter"/>   
             <h3>Treble</h3> 
             <div class="line">
                 <span class="em3 b">C3:</span>
                 <span><input class="em4" id="capasitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
-                <span><input type="range" data-id="capasitor3" onchange="slides(this)" value="48" min="1" max="200" step="1"></span>
+                <span><input type="range" data-id="capasitor3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
+            </div>
+            <div class="line">
+                <span class="em3 b">L3:</span>
+                <span><input class="em4" id="coil3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
+                <span><input type="range" data-id="coil3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R3:</span>    <input class="em4" id="resistor3" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq3"> Hz</div>    
