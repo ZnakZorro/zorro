@@ -23,7 +23,7 @@
      showgrid="false"
      inkscape:zoom="5.6458333"
      inkscape:cx="120.08856"
-     inkscape:cy="58.00738"
+     inkscape:cy="58.361624"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
      inkscape:window-x="72"
@@ -31,22 +31,17 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg287" />
   <path
-     d="m 123.86078,27.893876 94.4347,0"
+     d="m 156.81138,25.944066 h 61.99448"
      id="path179"
      style="stroke:#000000;stroke-width:2.83881"
      sodipodi:nodetypes="cc" />
   <path
-     d="m 24.576529,123.74218 157.433801,0"
+     d="m 17.778992,121.79237 197.181938,0"
      id="path181"
      style="stroke:#000000;stroke-width:2.83881"
      sodipodi:nodetypes="cc" />
-  <path
-     d="m 188.73764,123.74218 29.55784,0"
-     id="path183"
-     style="stroke:#000000;stroke-width:2.83881"
-     sodipodi:nodetypes="cc" />
   <g
-     transform="matrix(0,1.3452705,-1.4976298,0,198.17948,39.686938)"
+     transform="matrix(0,1.3452705,-1.4976298,0,231.13008,37.737128)"
      id="g197"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
     <path
@@ -61,70 +56,19 @@
        fill="#ffffff"
        id="rect195" />
   </g>
-  <text
-     x="174.13144"
-     y="77.165154"
-     fill="#0000f0"
-     font="italic  bold 12pt serif"
-     stroke="none"
-     text-anchor="middle"
-     id="text209"
-     style="font-size:25.5971px;font-family:sans-serif;stroke-width:4.26618; cursor:pointer;"
-     transform="scale(0.94776919,1.0551092)" onclick="klik(this)">R</text>
   <g
-     transform="matrix(1.4976298,0,0,1.3452705,24.484957,17.229289)"
+     transform="matrix(1.4976298,0,0,1.3452705,57.435553,15.279479)"
      id="g237"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
     <path
-       d="m 0,8 h 8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 19.057898,0.035772"
+       d="M -26.514695,8 8,8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 19.057898,0.035772"
        id="path235"
        sodipodi:nodetypes="ccccccc" />
   </g>
-  <text
-     x="61.97028"
-     y="53.193012"
-     fill="#000000"
-     font="italic  bold 12pt serif"
-     stroke="none"
-     text-anchor="middle"
-     id="text239"
-     style="font-size:25.4222px;font-family:sans-serif;stroke-width:4.23703"
-     transform="scale(0.94776919,1.0551092)" onclick="klik(this)">L</text>
   <g
-     transform="matrix(1.3452705,0,0,1.4976298,218.29548,15.912838)"
-     id="g245"
-     style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
-    <path
-       d="M 0,8 H 5"
-       id="path241" />
-    <circle
-       cx="8"
-       cy="8"
-       r="3"
-       fill="#ffffff"
-       id="circle243" />
-  </g>
-  <g
-     transform="matrix(1.3452705,0,0,1.4976298,218.29548,111.76115)"
-     id="g251"
-     style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
-    <path
-       d="M 0,8 H 5"
-       id="path247" />
-    <circle
-       cx="8"
-       cy="8"
-       r="3"
-       fill="#ffffff"
-       id="circle249" />
-  </g>
-  <g
-     transform="matrix(-1.3452705,0,0,-1.4976298,24.576527,39.874915)"
+     transform="matrix(-1.3452705,0,0,-1.4976298,23.808225,37.743048)"
      id="g257"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
-    <path
-       d="M 0,8 H 5"
-       id="path253" />
     <circle
        cx="8"
        cy="8"
@@ -133,12 +77,9 @@
        id="circle255" />
   </g>
   <g
-     transform="matrix(-1.3452705,0,0,-1.4976298,24.576527,135.72322)"
+     transform="matrix(-1.3452705,0,0,-1.4976298,23.808225,133.59135)"
      id="g263"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
-    <path
-       d="M 0,8 H 5"
-       id="path259" />
     <circle
        cx="8"
        cy="8"
@@ -149,34 +90,69 @@
   <circle
      style="fill:#000000;stroke-width:5"
      id="path833"
-     cx="185.86771"
-     cy="27.483538"
+     cx="218.8183"
+     cy="25.533728"
      r="5.2828536" />
   <circle
      style="fill:#000000;stroke-width:5"
      id="path833-3"
-     cx="185.58041"
-     cy="123.14017"
+     cx="218.53101"
+     cy="121.19036"
      r="5.2828536" />
   <path
-     d="M 114.40132,16.646571 V 38.170897"
+     d="M 147.35192,14.696761 V 36.221087"
      id="path173-7"
      style="stroke:#000000;stroke-width:2.83881" />
   <path
-     d="M 122.63552,16.785217 V 38.309543"
+     d="M 155.58612,14.835407 V 36.359733"
      id="path173-7-3"
      style="stroke:#000000;stroke-width:2.83881" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 225.93145,59.254141 10.78633,-7.407526"
+     id="path350" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 225.37351,80.021939 11.20756,6.009654"
+     id="path354" />
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+     d="m 236.3913,51.877598 0.0203,34.286079"
+     id="path356" />
   <text
      xml:space="preserve"
-     style="font-style:normal;font-weight:normal;font-size:30.1643px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.754107"
-     x="106.26917"
-     y="66.739449"
-     id="text1318"><tspan
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="176.47765"
+     y="86.87149"
+     id="text462"><tspan
        sodipodi:role="line"
-       id="tspan1316"
-       x="106.26917"
-       y="66.739449"
-       style="stroke-width:0.754107"
-       onclick="klik(this)"
-       >C</tspan></text>
+       id="tspan460"
+       x="176.47765"
+       y="86.87149">R<tspan
+   style="font-size:16px"
+   id="tspan832">2</tspan></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="75.068741"
+     y="54.295578"
+     id="text466"><tspan
+       sodipodi:role="line"
+       id="tspan464"
+       x="75.068741"
+       y="54.295578">L<tspan
+   style="font-size:16px"
+   id="tspan828">2</tspan></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="133.59627"
+     y="63.616993"
+     id="text470"><tspan
+       sodipodi:role="line"
+       id="tspan468"
+       x="133.59627"
+       y="63.616993">C<tspan
+   style="font-size:16px"
+   id="tspan830">2</tspan></tspan></text>
 </svg>
