@@ -20,8 +20,26 @@
     .em4 {width: 4em;}
     .em5 {width: 5em;}
     .em6 {width: 6em;}
-    img.filter {float:right; width:12em;}
+    img.filter {float:right; width:10em;}
     div.pass {border-bottom:1px solid gray;}
+    div.col2 {
+        width: 50%;
+        display: grid;
+        float: left;
+        padding: 1%;
+    }
+    .left {float:left;}
+    .right {float:right;}
+
+    @media (max-width: 960px) {
+    div.col2 {
+        width: 100%;  
+    }
+    img.filter {
+        float: right;
+        width: 8em;
+    }
+}   
    </style>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -222,14 +240,20 @@ const slides=(ten)=>{
 
         <app-menu title="Zwrot" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
 
+        <div class="col2 right">
+
         <div class="container">
             <figure class="highcharts-figure">
                 <div id="highchart"></div>
                 <p class="highcharts-description"></p>
             </figure>
         </div>
-        <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div>
+        
 
+    </div>
+
+    <div class="col2 left">
+        <!--div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div-->
         <div class="container pass">            
             <img src="./img/LR.svg" class="filter" />   
             <h3>Bass</h3>             
@@ -272,7 +296,8 @@ const slides=(ten)=>{
         </div>
 
         <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div>
-   
+
+    </div>
         
     </div>
 
