@@ -6,6 +6,7 @@ let SNIPETY = {
     "kuchnia": ["ciasto.txt","Piernik.htm","lody.md"],
     "580":     ["borowki.txt","drozdze.htm"],
     "ELE":     ["avg.htm"],
+    "ELE":     ["altus75.htm"],
 }
 console.log(SNIPETY);
 
@@ -31,8 +32,9 @@ const snipARR = [
    {n:"Lody",            f:"kuchnia",   u:"lody.md"},
    {n:"md",              f:"code",      u:"md.md"},
    {n:"console",         f:"code",      u:"console.js"},
-   {n:"arrows",             f:"html",      u:"arrows.htm"},
+   {n:"arrows",          f:"html",      u:"arrows.htm"},
    {n:"AVG",             f:"ele",      u:"avg.htm"},
+   {n:"Altus75",         f:"ele",      u:"altus75.htm"},
    
    
    
