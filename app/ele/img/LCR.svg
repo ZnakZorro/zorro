@@ -22,8 +22,8 @@
      inkscape:deskcolor="#d1d1d1"
      showgrid="false"
      inkscape:zoom="5.6458333"
-     inkscape:cx="120.08856"
-     inkscape:cy="58.361624"
+     inkscape:cx="117.78598"
+     inkscape:cy="58.538746"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
      inkscape:window-x="72"
@@ -31,9 +31,14 @@
      inkscape:window-maximized="1"
      inkscape:current-layer="svg287" />
   <path
-     d="m 156.81138,25.944066 h 61.99448"
+     d="m 176.80772,25.944066 41.99814,0"
      id="path179"
      style="stroke:#000000;stroke-width:2.83881"
+     sodipodi:nodetypes="cc" />
+  <path
+     d="m 135.36062,25.776704 h 31.28973"
+     id="path179-2"
+     style="stroke:#000000;stroke-width:2.45032"
      sodipodi:nodetypes="cc" />
   <path
      d="m 17.778992,121.79237 197.181938,0"
@@ -57,11 +62,11 @@
        id="rect195" />
   </g>
   <g
-     transform="matrix(1.4976298,0,0,1.3452705,57.435553,15.279479)"
+     transform="matrix(1.4976298,0,0,1.3452705,23.553879,15.021483)"
      id="g237"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
     <path
-       d="M -26.514695,8 8,8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 19.057898,0.035772"
+       d="M -3.6787884,8 8,8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 19.057898,0.035772"
        id="path235"
        sodipodi:nodetypes="ccccccc" />
   </g>
@@ -100,11 +105,11 @@
      cy="121.19036"
      r="5.2828536" />
   <path
-     d="M 147.35192,14.696761 V 36.221087"
+     d="M 167.45905,14.412981 V 35.937307"
      id="path173-7"
      style="stroke:#000000;stroke-width:2.83881" />
   <path
-     d="M 155.58612,14.835407 V 36.359733"
+     d="M 175.69325,14.551627 V 36.075953"
      id="path173-7-3"
      style="stroke:#000000;stroke-width:2.83881" />
   <path
@@ -134,25 +139,61 @@
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
-     x="75.068741"
-     y="54.295578"
+     x="45.495403"
+     y="53.177334"
      id="text466"><tspan
        sodipodi:role="line"
        id="tspan464"
-       x="75.068741"
-       y="54.295578">L<tspan
+       x="45.495403"
+       y="53.177334">L<tspan
    style="font-size:16px"
    id="tspan828">2</tspan></tspan></text>
+  <g
+     transform="matrix(-1.3452705,0,0,-1.4976298,151.163,37.573863)"
+     id="g197-3"
+     style="font-family:sans-serif;fill:#ffffff;stroke:#000000;stroke-width:2">
+    <rect
+       x="12"
+       y="4"
+       width="24"
+       height="8"
+       fill="#ffffff"
+       id="rect195-7"
+       style="fill:#ffffff" />
+  </g>
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
-     x="133.59627"
-     y="63.616993"
+     x="98.73719"
+     y="55.996868"
+     id="text462-3"><tspan
+       sodipodi:role="line"
+       id="tspan460-5"
+       x="98.73719"
+       y="55.996868">R<tspan
+   style="font-size:18.6667px"
+   id="tspan832-6">L2</tspan></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="41.262432"
+     y="105.38792"
+     id="text466-2"><tspan
+       sodipodi:role="line"
+       id="khz-middle"
+       x="41.262432"
+       y="105.38792"
+       style="fill:#000080">LC</tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="159.71416"
+     y="60.593067"
      id="text470"><tspan
        sodipodi:role="line"
        id="tspan468"
-       x="133.59627"
-       y="63.616993">C<tspan
+       x="159.71416"
+       y="60.593067">C<tspan
    style="font-size:16px"
    id="tspan830">2</tspan></tspan></text>
 </svg>

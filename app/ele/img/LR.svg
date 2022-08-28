@@ -23,7 +23,7 @@
      showgrid="false"
      inkscape:zoom="5.6458333"
      inkscape:cx="120.08856"
-     inkscape:cy="58.361624"
+     inkscape:cy="58.538746"
      inkscape:window-width="1848"
      inkscape:window-height="1016"
      inkscape:window-x="72"
@@ -52,11 +52,24 @@
        id="rect195" />
   </g>
   <g
+     transform="matrix(-1.3452705,0,0,-1.4976298,181.41651,37.538216)"
+     id="g197-3"
+     style="font-family:sans-serif;fill:#ffffff;stroke:#000000;stroke-width:2">
+    <rect
+       x="12"
+       y="4"
+       width="24"
+       height="8"
+       fill="#ffffff"
+       id="rect195-7"
+       style="fill:#ffffff" />
+  </g>
+  <g
      transform="matrix(1.4976298,0,0,1.3452705,57.435553,15.279479)"
      id="g237"
      style="font-family:sans-serif;fill:none;stroke:#000000;stroke-width:2">
     <path
-       d="M -26.514695,8 H 8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 65.30251,0.035772"
+       d="M -26.514695,8 H 8 c 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 0,-7.11110798 8,-7.11110798 8,0 l 10.197563,0.035772"
        id="path235"
        sodipodi:nodetypes="ccccccc" />
   </g>
@@ -121,6 +134,18 @@
   <text
      xml:space="preserve"
      style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="130.99071"
+     y="55.96122"
+     id="text462-3"><tspan
+       sodipodi:role="line"
+       id="tspan460-5"
+       x="130.99071"
+       y="55.96122">R<tspan
+   style="font-size:18.6667px"
+   id="tspan832-6">L1</tspan></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
      x="75.068741"
      y="54.295578"
      id="text466"><tspan
@@ -130,4 +155,22 @@
        y="54.295578">L<tspan
    style="font-size:18.6667px"
    id="tspan864">1</tspan></tspan></text>
+  <text
+     xml:space="preserve"
+     style="font-style:normal;font-weight:normal;font-size:26.6667px;line-height:1.25;font-family:sans-serif;fill:#000000;fill-opacity:1;stroke:none"
+     x="74.444344"
+     y="104.0737"
+     id="text466-2"><tspan
+       sodipodi:role="line"
+       id="khz-bass"
+       x="74"
+       y="104"
+       style="fill:#000040">LR</tspan></text>
+  <rect
+     style="fill:#000000;stroke-width:5"
+     id="rect713"
+     width="48.501205"
+     height="2.4972181"
+     x="165.53201"
+     y="24.470783" />
 </svg>
