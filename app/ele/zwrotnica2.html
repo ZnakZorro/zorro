@@ -104,11 +104,18 @@ const calcTreble=()=>{
 }  
 
 
-const filterBassVal=(f,R1,RL1,L1,C1)=>{
-    let inductorReactance1 =  (Math.PI*f*L1) + RL1 ;
-    let capacitorReactance1 = 1/(Math.PI*f*C1);
-    //???????????????????????????????????????????????????//
-    let gain = R1/(R1+inductorReactance1);
+const filterBassVal=(f,R1,RL1,L1,C1,test)=>{
+    let inductorReactance1 =  (2*Math.PI*f*L1) + RL1 ;
+    let capacitorReactance1 = 1/(2*Math.PI*f*C1);
+    //console.log(f,inductorReactance1,capacitorReactance1)
+    let partSpeak = (capacitorReactance1 * R1) / (capacitorReactance1 + R1);
+    let partIn    = inductorReactance1 + RL1;
+    //console.log(f,partSpeak,partIn)
+    //qqqqqqqqqqqqqqqqq//
+    gain = partSpeak/(partSpeak+partIn);
+    //let gain = 0;
+    //if (test) gain = partSpeak/(partSpeak+partIn);
+    //else      gain = R1/(R1+inductorReactance1);
     return gain;
 
 }   
@@ -122,14 +129,17 @@ const calcBass=()=>{
     L1 = L1/1000;
     C1 = C1/1000000;
     R1=R1;
-    console.log("Bass L1="+L1,"RL1="+RL1,"R1="+R1,"C1="+C1);
-    let frq = R1/(2 * Math.PI * L1);
+    let test = false;//document.getElementById("test1").checked ?? false;
+    console.log("Bass L1="+L1,"RL1="+RL1,"R1="+R1,"C1="+C1,"test=",test);
+    
+    //let frq = R1/(2 * Math.PI * L1);
+    let frq = 1/(2 * Math.PI * Math.sqrt(L1 * C1));
     let frqi = Math.round(frq);
     document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
 	category.forEach((f)=>{
-		let gain=filterBassVal(f,R1,RL1,L1,C1);
+		let gain=filterBassVal(f,R1,RL1,L1,C1,test);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
         //dane.bass.push([f,dB]);
@@ -243,7 +253,7 @@ const slides=(ten)=>{
 <body>
     <div class="wrapper">
 
-        <app-menu title="Zwrot" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
+        <app-menu title="Zwrot2-12dB" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
 
         <div class="col2 right">
 
@@ -261,7 +271,9 @@ const slides=(ten)=>{
         <!--div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div-->
         <div class="container pass">            
             <img src="./img/LCR-1.svg" class="filter" />   
-            <h3>Bass</h3>             
+            <h3>Bass
+                <!--input id="test1" type="checkbox">test-->
+            </h3>             
             <div class="line">
                 <span class="em3 b">L1:</span>
                 <span><input class="em4" id="coil1"     oninput="calcZwrotnica2a()" value="2.4"> mH</span>
@@ -274,8 +286,8 @@ const slides=(ten)=>{
             </div>
             <div class="line">
                 <span class="em3 b">C1:</span>
-                <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="47"> uF</span>
-                <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
+                <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="33"> uF</span>
+                <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="257" min="0" max="500" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R1:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
@@ -283,7 +295,7 @@ const slides=(ten)=>{
 
         <div class="container pass">            
             <img src="./img/LCLR-2.svg" class="filter" />   
-            <h3>Middle</h3>             
+            <h3 class="yellow">Middle</h3>             
             <div class="line">
                 <span class="em3 b">L2:</span>
                 <span><input class="em4" id="coil2"     onchange="calcZwrotnica2a()" value="0.18"> mH</span>
@@ -305,7 +317,7 @@ const slides=(ten)=>{
 
         <div class="container pass">
             <img src="./img/CLR-3.svg" class="filter"/>   
-            <h3>Treble</h3> 
+            <h3 class="yellow">Treble</h3> 
             <div class="line">
                 <span class="em3 b">C3:</span>
                 <span><input class="em4" id="capacitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
