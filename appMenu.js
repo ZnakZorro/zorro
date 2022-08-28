@@ -36,12 +36,15 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/EDEK/" class="nav-link">EDEK</a></li>
 					 <li class="nav-item"><a href="${link}app/snipet/" class="nav-link">SNIPET</a></li>
 					 <li class="nav-item"><a href="${link}html/zapis.html" class="nav-link">Zapis</a></li>
-					 
-					 <!--li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li-->
 					 <li class="nav-item"><a href="${link}app/radio/index.html" class="nav-link">LINKI</a></li>   
-					 <!--li class="nav-item"><a href="https://znakzorro.github.io/github-page-pwa/" class="nav-link" target="_blank">T2</a></li-->
-					 <!--li class="nav-item"><a href="${link}vue/index.html" class="nav-link">VUE</a></li-->
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
+					 <li class="nav-item"><a href="${link}app/ele/index.html" class="nav-link">Ele</a></li>
+					 
+					 <!--
+					 <li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li>
+					 <li class="nav-item"><a href="https://znakzorro.github.io/github-page-pwa/" class="nav-link" target="_blank">T2</a></li>
+					 <li class="nav-item"><a href="${link}vue/index.html" class="nav-link">VUE</a></li>
+					 -->
 					 
 				 </ul>
 				 <div class="hamburger" >
