@@ -69,6 +69,7 @@ h1,h2,h3 {margin: 0.25em 0;}
 }
 .btn.big:active {background:red;}
 .red   {background-color: #d3004e;}
+.yellow   {background-color: #ffff00;color:black;}
 .green {background-color: #228b22;}
 .blue  {background-color: #69f;}
 .navy  {background-color: #004;}
