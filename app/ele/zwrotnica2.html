@@ -84,7 +84,7 @@ const filterTrebleVal=(ff,frq,R1,C1)=>{
 
 const calcTreble=()=>{
     dane.treble.length = 0;
-    let C3 = parseFloat(document.getElementById("capasitor3").value);
+    let C3 = parseFloat(document.getElementById("capacitor3").value);
     let R3 = parseFloat(document.getElementById("resistor3").value);
     C3 = C3/1000000;
    
@@ -104,9 +104,11 @@ const calcTreble=()=>{
 }  
 
 
-const filterBassVal=(ff,frq,R1,L1)=>{
-    let impedancja = PIPI*ff*L1;
-    let gain = R1/(R1+impedancja);
+const filterBassVal=(f,R1,RL1,L1,C1)=>{
+    let inductorReactance1 =  (Math.PI*f*L1) + RL1 ;
+    let capacitorReactance1 = 1/(Math.PI*f*C1);
+    //???????????????????????????????????????????????????//
+    let gain = R1/(R1+inductorReactance1);
     return gain;
 
 }   
@@ -114,17 +116,20 @@ const filterBassVal=(ff,frq,R1,L1)=>{
 const calcBass=()=>{
     dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
+    let RL1 = parseFloat(document.getElementById("resistorl1").value);
+    let C1 = parseFloat(document.getElementById("capacitor1").value);
     let R1 = parseFloat(document.getElementById("resistor1").value);
     L1 = L1/1000;
+    C1 = C1/1000000;
     R1=R1;
-    //console.log(L1,R1,Math.PI);
+    console.log("Bass L1="+L1,"RL1="+RL1,"R1="+R1,"C1="+C1);
     let frq = R1/(2 * Math.PI * L1);
     let frqi = Math.round(frq);
     document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
 	category.forEach((f)=>{
-		let gain=filterBassVal(f,frq,R1,L1);
+		let gain=filterBassVal(f,R1,RL1,L1,C1);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
         //dane.bass.push([f,dB]);
@@ -143,7 +148,7 @@ const calcMiddle=()=>{
     dane.middle.length = 0;
     let L2 = parseFloat(document.getElementById("coil2").value);
     let R2 = parseFloat(document.getElementById("resistor2").value);
-    let C2 = parseFloat(document.getElementById("capasitor2").value);
+    let C2 = parseFloat(document.getElementById("capacitor2").value);
     L2 = L2/1000;
     C2 = C2/1000000;
     //console.log(R2,L2,C2)
@@ -229,7 +234,7 @@ const slides=(ten)=>{
     let id = ten.dataset.id;
     let position = parseInt(ten.value);
     let val = logslider(position);
-    console.log(id,position,val)
+    console.log("id="+id,"pos="+position,"val="+val);
     document.getElementById(id).value=val;
     calcZwrotnica2();
 }
@@ -263,6 +268,11 @@ const slides=(ten)=>{
                 <span><input type="range" data-id="coil1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
+                <span class="em3 b">Rl1:</span>
+                <span><input class="em4" id="resistorl1"     oninput="calcZwrotnica2a()" value="0"> E</span>
+                <span><input type="range" data-id="resistorl1" onchange="slides(this)" value="0" min="0" max="200" step="1"></span>
+            </div>
+            <div class="line">
                 <span class="em3 b">C1:</span>
                 <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="47"> uF</span>
                 <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
@@ -281,8 +291,8 @@ const slides=(ten)=>{
             </div>
             <div class="line">
                 <span class="em3 b">C2:</span>
-                <span><input class="em4" id="capasitor2"     onchange="calcZwrotnica2a()" value="55"> uF</span>
-                <span><input type="range" data-id="capasitor2" onchange="slides(this)" value="335" min="1" max="400" step="1"></span>
+                <span><input class="em4" id="capacitor2"     onchange="calcZwrotnica2a()" value="55"> uF</span>
+                <span><input type="range" data-id="capacitor2" onchange="slides(this)" value="335" min="1" max="400" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">L2a:</span>
@@ -298,8 +308,8 @@ const slides=(ten)=>{
             <h3>Treble</h3> 
             <div class="line">
                 <span class="em3 b">C3:</span>
-                <span><input class="em4" id="capasitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
-                <span><input type="range" data-id="capasitor3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
+                <span><input class="em4" id="capacitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
+                <span><input type="range" data-id="capacitor3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">L3:</span>
@@ -316,25 +326,39 @@ const slides=(ten)=>{
         
     </div>
 
-<div class="small">
-    <h3>
-        Altus 75
-    </h3>
+    <!--https://znakzorro.github.io/zorro/app/snipet/ele/altus75.htm-->
+    <div style="margin:2em 0; clear: both;">
+        <h3>
+            Altus 75
+        </h3>
+        <p>
+            <strong>Głośnik niskotonowy GDN 25/40/3 8 ohm</strong>&nbsp;
+            <br>
+            60-5000 [Hz] / 90dB / FS = 37 [Hz]
+        </p>
+        <p>
+            <strong>Głośnik średniotonowy GDM 10/60 8 [Ohm]</strong>&nbsp;
+            <br>
+            1-9kHz / 91dB / FS=580Hz / Podział - 1 000Hz
+        </p>
+        <p>
+            <strong>nowy - Głośnik wysokotonowy GDWK 10/80/26 8 ohm&nbsp;</strong>&nbsp;
+            <br>
+            4-25kHz / 93dB /
+        </p>
+        
     <p>
-        <strong>Głośnik niskotonowy GDN 25/40/3 8 ohm</strong>&nbsp;
+        oryginał - GDWT 9/80 8 Ohm, membrana z laminatu.
         <br>
-        60-5000 [Hz] / 90dB / FS = 37 [Hz]
-    </p>
-    <p>
-        <strong>Głośnik średniotonowy 8 [Ohm]</strong>&nbsp;
-        <br>
-        1-9kHz / 91dB / FS=580Hz / Podział - 1 000Hz
-    </p>
-    <p>
-        <strong>Głośnik wysokotonowy GDWK 10/80/26 8 ohm&nbsp;</strong>&nbsp;
-        <br>
-        4-25kHz / 93dB /
-    </p>
-</div>
+        4 000 - 14 000 [Hz] / 100 [dB] / FS - 1 600 [Hz] / podział - 4500 [Hz]
+    </p>    
+        
+        
+    <img src="https://znakzorro.github.io/zorro/app/snipet/img/Altus75-2.jpg" />    
+    <img src="https://znakzorro.github.io/zorro/app/snipet/img/Altus75-1.jpg" />    
+        
+    </div>
+
+
 </body>
 </html>

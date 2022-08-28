@@ -15,6 +15,11 @@
    <style>
     .b {font-weight:bold;} 
     .line {margin:0.2em 0;}
+    .line span input[type="range" i] {
+        display: block;
+        width: 175px;
+        margin: 0.5em 0;
+    }
     .em3,.em4,.em5,.em6 {display: inline-block;}
     .em3 {width: 3em;}
     .em4 {width: 4em;}
@@ -84,7 +89,7 @@ const filterTrebleVal=(ff,frq,R1,C1)=>{
 
 const calcTreble=()=>{
     dane.treble.length = 0;
-    let C3 = parseFloat(document.getElementById("capasitor3").value);
+    let C3 = parseFloat(document.getElementById("capacitor3").value);
     let R3 = parseFloat(document.getElementById("resistor3").value);
     C3 = C3/1000000;
    
@@ -104,9 +109,9 @@ const calcTreble=()=>{
 }  
 
 
-const filterBassVal=(ff,frq,R1,L1)=>{
+const filterBassVal=(ff,frq,R1,RL1,L1)=>{
     let impedancja = PIPI*ff*L1;
-    let gain = R1/(R1+impedancja);
+    let gain = R1/(R1+impedancja+RL1);
     return gain;
 
 }   
@@ -114,17 +119,18 @@ const filterBassVal=(ff,frq,R1,L1)=>{
 const calcBass=()=>{
     dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
+    let RL1 = parseFloat(document.getElementById("resistorl1").value);
     let R1 = parseFloat(document.getElementById("resistor1").value);
     L1 = L1/1000;
     R1=R1;
-    //console.log(L1,R1,Math.PI);
+    console.log("Bass L1="+L1,"RL1="+RL1,"R1="+R1);
     let frq = R1/(2 * Math.PI * L1);
     let frqi = Math.round(frq);
     document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
 	category.forEach((f)=>{
-		let gain=filterBassVal(f,frq,R1,L1);
+		let gain=filterBassVal(f,frq,R1,RL1,L1);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
         //dane.bass.push([f,dB]);
@@ -132,10 +138,10 @@ const calcBass=()=>{
     });
 } 
 
-const filterMiddleVal=(ff,frq,R2,L2,C2)=>{
+const filterMiddleVal=(ff,frq,R2,RL2,L2,C2)=>{
     let impedancja  = PIPI*ff*L2;
     let capacitance = 1/(PIPI*ff*C2);
-    let gain = R2/(R2+impedancja+capacitance);
+    let gain = R2/(R2+impedancja+capacitance+RL2);
     return gain;
 }   
 
@@ -143,7 +149,9 @@ const calcMiddle=()=>{
     dane.middle.length = 0;
     let L2 = parseFloat(document.getElementById("coil2").value);
     let R2 = parseFloat(document.getElementById("resistor2").value);
-    let C2 = parseFloat(document.getElementById("capasitor2").value);
+    let RL2 = parseFloat(document.getElementById("resistorl2").value);
+    let C2 = parseFloat(document.getElementById("capacitor2").value);
+    console.log("Mid L2="+L2,"RL2="+RL2,"C2="+C2,"R2="+R2);
     L2 = L2/1000;
     C2 = C2/1000000;
     //console.log(R2,L2,C2)
@@ -154,7 +162,7 @@ const calcMiddle=()=>{
     let skala = 1;
     let max = -50;
     category.forEach((f)=>{
-        let gain = filterMiddleVal(f,frq,R2,L2,C2);
+        let gain = filterMiddleVal(f,frq,R2,RL2,L2,C2);
         let dB = 10*Math.log(gain/skala);
         if (dB>max) max = dB;
         dane.middle.push(dB);
@@ -229,7 +237,7 @@ const slides=(ten)=>{
     let id = ten.dataset.id;
     let position = parseInt(ten.value);
     let val = logslider(position);
-    console.log(id,position,val)
+    console.log("id="+id,"pos="+position,"val="+val)
     document.getElementById(id).value=val;
     calcZwrotnica2();
 }
@@ -262,6 +270,11 @@ const slides=(ten)=>{
                 <span><input class="em4" id="coil1"     oninput="calcZwrotnica2a()" value="2.4"> mH</span>
                 <span><input type="range" data-id="coil1" onchange="slides(this)" value="69" min="0" max="200" step="1"></span>
             </div>
+            <div class="line">
+                <span class="em3 b">Rl1:</span>
+                <span><input class="em4" id="resistorl1"     oninput="calcZwrotnica2a()" value="0"> E</span>
+                <span><input type="range" data-id="resistorl1" onchange="slides(this)" value="0" min="0" max="200" step="1"></span>
+            </div>
             <div class="line"><span class="em3 b">R1:</span>    <input class="em4" id="resistor1" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
         </div>
@@ -275,9 +288,14 @@ const slides=(ten)=>{
                 <span><input type="range" data-id="coil2" onchange="slides(this)" value="20" min="0" max="50" step="1"></span>
             </div>
             <div class="line">
+                <span class="em3 b">Rl2:</span>
+                <span><input class="em4" id="resistorl2"     oninput="calcZwrotnica2a()" value="0"> E</span>
+                <span><input type="range" data-id="resistorl2" onchange="slides(this)" value="0" min="0" max="200" step="1"></span>
+            </div>
+            <div class="line">
                 <span class="em3 b">C2:</span>
-                <span><input class="em4" id="capasitor2"     onchange="calcZwrotnica2a()" value="55"> uF</span>
-                <span><input type="range" data-id="capasitor2" onchange="slides(this)" value="335" min="1" max="400" step="1"></span>
+                <span><input class="em4" id="capacitor2"     onchange="calcZwrotnica2a()" value="55"> uF</span>
+                <span><input type="range" data-id="capacitor2" onchange="slides(this)" value="335" min="1" max="400" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R2:</span>    <input class="em4" id="resistor2" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq2"> Hz</div>
@@ -288,8 +306,8 @@ const slides=(ten)=>{
             <h3>Treble</h3> 
             <div class="line">
                 <span class="em3 b">C3:</span>
-                <span><input class="em4" id="capasitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
-                <span><input type="range" data-id="capasitor3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
+                <span><input class="em4" id="capacitor3"     onchange="calcZwrotnica2a()" value="4.8"> uF</span>
+                <span><input type="range" data-id="capacitor3" onchange="slides(this)" value="91" min="1" max="100" step="1"></span>
             </div>
             <div class="line"><span class="em3 b">R3:</span>    <input class="em4" id="resistor3" onchange="calcZwrotnica2a()" value="8"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq3"> Hz</div>    
