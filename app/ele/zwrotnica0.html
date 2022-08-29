@@ -78,6 +78,7 @@ const filterBassVal=(f,RG,L1,C1,RL1,R1,C2,R2,test)=>{
     //console.log(f,"i1="+inductor1, "c1="+capacitor1, "c2="+capacitor2)
     let L1RL1        = inductor1 +RL1;
     let chain01       = (L1RL1 * R1)/(L1RL1 + R1);
+    //console.log(f,chain01);
     let chain1       = (chain01 * capacitor1)/(chain01 + capacitor1);
     let chain2       = capacitor2 + R2;
     let chainSpeaker = (chain2*RG)/(chain2+RG)
@@ -89,8 +90,8 @@ const filterBassVal=(f,RG,L1,C1,RL1,R1,C2,R2,test)=>{
 const calcBass=()=>{
     dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
-    let RL1 = parseFloat(document.getElementById("resistorl1s").value);
-    let R1 = parseFloat(document.getElementById("resistorl1r").value);
+    let RL1= parseFloat(document.getElementById("resistorl1r").value);
+    let R1 = parseFloat(document.getElementById("resistorl1s").value);
     let C1 = parseFloat(document.getElementById("capacitor1").value); 
     let C2 = parseFloat(document.getElementById("capacitor2").value);
     let R2 = parseFloat(document.getElementById("resistor2").value);
@@ -155,7 +156,7 @@ const slides=(ten)=>{
 <body>
     <div class="wrapper">
 
-        <app-menu title="Filter-0" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
+        <app-menu title="Filtr0" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
 
         <div class="col2 right">
 
