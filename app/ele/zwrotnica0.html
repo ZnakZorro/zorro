@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>Zwrotnica</title>  
+   <title>Filtr-0</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
@@ -40,18 +40,13 @@
         width: 8em;
     }
 }   
-   </style>
+</style>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/series-label.js"></script>
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script> 
         <script src="./js/wykresy.js"></script> 
-   <script>
-       document.addEventListener("DOMContentLoaded",function(){
-           //document.getElementById("info").textContent = "info";
-       });
-   </script>
 </head>
 
 
@@ -76,42 +71,43 @@ for (i=1;i<101;i++){
 }
 
 
-
-
-const filterBassVal=(f,RG,L1,R1S,R1R,C2,R2,test)=>{
-    let inductor1 =  (2*Math.PI*f*L1) ;
+const filterBassVal=(f,RG,L1,C1,RL1,R1,C2,R2,test)=>{
+    let inductor1 =  (2*Math.PI*f*L1) ;    
+    let capacitor1 = 1/(2*Math.PI*f*C1);
     let capacitor2 = 1/(2*Math.PI*f*C2);
-    //console.log(f,"i1="+inductor1, "c2="+capacitor2)
-    let chain1       = ((inductor1 * R1R)/(inductor1 + R1R))+R1S;
+    //console.log(f,"i1="+inductor1, "c1="+capacitor1, "c2="+capacitor2)
+    let L1RL1        = inductor1 +RL1;
+    let chain01       = (L1RL1 * R1)/(L1RL1 + R1);
+    let chain1       = (chain01 * capacitor1)/(chain01 + capacitor1);
     let chain2       = capacitor2 + R2;
     let chainSpeaker = (chain2*RG)/(chain2+RG)
     //console.log(f,"ch1="+chain1, "ch2="+chain2, "chaS="+chainSpeaker)
     gain = chainSpeaker/(chainSpeaker + chain1);
     return gain;
-
 }   
 
 const calcBass=()=>{
     dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
-    let R1S = parseFloat(document.getElementById("resistorl1s").value);
-    let R1R = parseFloat(document.getElementById("resistorl1r").value);
+    let RL1 = parseFloat(document.getElementById("resistorl1s").value);
+    let R1 = parseFloat(document.getElementById("resistorl1r").value);
+    let C1 = parseFloat(document.getElementById("capacitor1").value); 
     let C2 = parseFloat(document.getElementById("capacitor2").value);
     let R2 = parseFloat(document.getElementById("resistor2").value);
     let RG = parseFloat(document.getElementById("resistorg").value);
     let test = false;//document.getElementById("test1").checked ?? false;
-    console.log("Bass L1="+L1,"R1S="+R1S,"R1R="+R1R,"R2="+R2,"RG="+RG,"C2="+C2,"test=",test);
+    //console.log("Bass L1="+L1,"C1="+C1,"R1S="+RL1,"R1R="+R1,"R2="+R2,"RG="+RG,"C2="+C2,"test=",test);
     L1 = L1/1000;
+    C1 = C1/1000000;
     C2 = C2/1000000;
     
-
     let frq = 1/(2 * Math.PI * Math.sqrt(L1 * C2));
     let frqi = Math.round(frq);
     document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
 	category.forEach((f)=>{
-		let gain=filterBassVal(f,RG,L1,R1S,R1R,C2,R2,test);
+		let gain=filterBassVal(f,RG,L1,C1,RL1,R1,C2,R2,test);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
         //dane.bass.push([f,dB]);
@@ -119,18 +115,15 @@ const calcBass=()=>{
     });
 } 
 
-
 const calcZwrotnica2a=()=>{
     console.log("change");
 }
 const calcZwrotnica2=()=>{
-    calcBass();
-    
+    calcBass();    
     if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
     //console.log(wykres)
     wykres.yAxis[0].setExtremes(-20,0);
 }
-
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
@@ -141,29 +134,19 @@ document.addEventListener("DOMContentLoaded",function(){
 function logslider(position) {
     let val = (position*position/200)/10
     val = Math.round(val*100)/100
-    if (val<0.01) val = 0.01;
-    return val
-
-    return (Math.exp(position/1000,2)-1)*100;
-  // position will be between 0 and 100
-  var minp = 1;
-  var maxp = 100;
-
-  // The result should be between 100 an 10000000
-  var minv = Math.log(100);
-  var maxv = Math.log(10000000);
-
-  // calculate adjustment factor
-  var scale = (maxv-minv) / (maxp-minp);
-
-  return Math.exp(minv + scale*(position-minp)) / 10000000;
+    if (val<0.01) val = 0.001;
+    return val;
 }
 
 const slides=(ten)=>{
     let id = ten.dataset.id;
     let position = parseInt(ten.value);
+    let prefix = id.substr(0, 3);
+    if (prefix ==="coi" && position == 200) position*=10;
+    if (prefix ==="res" && position == 200) position*=10;
+    if (prefix ==="cap" && position == 500) position*=10;
     let val = logslider(position);
-    console.log("id="+id,"pos="+position,"val="+val);
+    //console.log(prefix, "id="+id,"pos=["+position+"] val"+val);
     document.getElementById(id).value=val;
     calcZwrotnica2();
 }
@@ -172,7 +155,7 @@ const slides=(ten)=>{
 <body>
     <div class="wrapper">
 
-        <app-menu title="Filtr0" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
+        <app-menu title="Filter-0" name="ZnakZorro" link="../../"></app-menu><script src="../../appMenu.js"></script>  
 
         <div class="col2 right">
 
@@ -202,14 +185,19 @@ const slides=(ten)=>{
                 <span><input type="range" data-id="coil1" onchange="slides(this)" value="40" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
-                <span class="em3 b">R1R:</span>
+                <span class="em3 b">RL1:</span>
                 <span><input class="em4" id="resistorl1r"     oninput="calcZwrotnica2a()" value="4"> E</span>
                 <span><input type="range" data-id="resistorl1r" onchange="slides(this)" value="90" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
-                <span class="em3 b">R1S:</span>
+                <span class="em3 b">R1:</span>
                 <span><input class="em4" id="resistorl1s"     oninput="calcZwrotnica2a()" value="3.2"> E</span>
                 <span><input type="range" data-id="resistorl1s" onchange="slides(this)" value="80" min="0" max="200" step="1"></span>
+            </div>
+            <div class="line">
+                <span class="em3 b">C1:</span>
+                <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="3.3"> uF</span>
+                <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="82" min="0" max="500" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">C2:</span>
@@ -221,18 +209,17 @@ const slides=(ten)=>{
                 <span><input class="em4" id="resistor2"     oninput="calcZwrotnica2a()" value="4"> E</span>
                 <span><input type="range" data-id="resistor2" onchange="slides(this)" value="90" min="0" max="200" step="1"></span>
             </div>
-            <div class="line"><span class="em3 b">RG:</span>    <input class="em4" id="resistorg" onchange="calcZwrotnica2a()" value="8"> Om</div>
+            <div class="line"><span class="em3 b">RG:</span>    <input class="em4" id="resistorg" onchange="calcZwrotnica2a()" value="4"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
         </div>
 
         
 
         <div class="klawisze">
-            
-            
             <button class="btn red"           onClick="defaulty()">Default</button>
             <button class="btn blue"           onClick="zapisz()">Zapisz</button>
             <button class="btn green"           onClick="odczyt()">Odczyt</button>
+            <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button>
         </div>
 
     </div>
