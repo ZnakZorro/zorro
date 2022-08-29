@@ -87,7 +87,7 @@ const filterBassVal=(f,RG,L1,C1,RL1,R1,C2,R2,test)=>{
     return gain;
 }   
 
-const calcBass=()=>{
+const calcFilter=()=>{
     dane.bass.length = 0;
     let L1 = parseFloat(document.getElementById("coil1").value);
     let RL1= parseFloat(document.getElementById("resistorl1r").value);
@@ -112,7 +112,7 @@ const calcBass=()=>{
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
         //dane.bass.push([f,dB]);
-        dane.bass.push(dB);
+        dane.middle.push(dB);
     });
 } 
 
@@ -120,7 +120,7 @@ const calcZwrotnica2a=()=>{
     console.log("change");
 }
 const calcZwrotnica2=()=>{
-    calcBass();    
+    calcFilter();    
     if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
     //console.log(wykres)
     wykres.yAxis[0].setExtremes(-20,0);
@@ -147,7 +147,7 @@ const slides=(ten)=>{
     if (prefix ==="res" && position == 200) position*=10;
     if (prefix ==="cap" && position == 500) position*=10;
     let val = logslider(position);
-    //console.log(prefix, "id="+id,"pos=["+position+"] val"+val);
+    console.log(prefix, "id="+id,"pos=["+position+"] val"+val);
     document.getElementById(id).value=val;
     calcZwrotnica2();
 }
@@ -187,13 +187,13 @@ const slides=(ten)=>{
             </div>
             <div class="line">
                 <span class="em3 b">RL1:</span>
-                <span><input class="em4" id="resistorl1r"     oninput="calcZwrotnica2a()" value="4"> E</span>
-                <span><input type="range" data-id="resistorl1r" onchange="slides(this)" value="90" min="0" max="200" step="1"></span>
+                <span><input class="em4" id="resistorl1r"     oninput="calcZwrotnica2a()" value="3.2"> E</span>
+                <span><input type="range" data-id="resistorl1r" onchange="slides(this)" value="80" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">R1:</span>
-                <span><input class="em4" id="resistorl1s"     oninput="calcZwrotnica2a()" value="3.2"> E</span>
-                <span><input type="range" data-id="resistorl1s" onchange="slides(this)" value="80" min="0" max="200" step="1"></span>
+                <span><input class="em4" id="resistorl1s"     oninput="calcZwrotnica2a()" value="8"> E</span>
+                <span><input type="range" data-id="resistorl1s" onchange="slides(this)" value="127" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">C1:</span>
