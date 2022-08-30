@@ -20,6 +20,8 @@ const snipARR = [
    {n:"mini",           f:"html",      u:"mini.html"},
    {n:"index",           f:"html",      u:"index.html"},
    {n:"git",             f:"html",      u:"git.html"},
+             {n:"bip-hab",             f:"html",      u:"bip-hab.htm"},
+    
    {n:"fetch",           f:"js",        u:"fetch.js"},
    {n:"createElement",   f:"js",        u:"createElement.js"},
    {n:"active",          f:"js",        u:"active.js"},
@@ -35,6 +37,7 @@ const snipARR = [
    {n:"arrows",          f:"html",      u:"arrows.htm"},
    {n:"AVG",             f:"ele",      u:"avg.htm"},
    {n:"Altus75",         f:"ele",      u:"altus75.htm"},
+    
    
    
    
