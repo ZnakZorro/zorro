@@ -20,7 +20,7 @@ const snipARR = [
    {n:"mini",           f:"html",      u:"mini.html"},
    {n:"index",           f:"html",      u:"index.html"},
    {n:"git",             f:"html",      u:"git.html"},
-             {n:"bip-hab",             f:"html",      u:"bip-hab.htm"},
+             {n:"bip-hab",             f:"html",      u:"bip-hab.html"},
     
    {n:"fetch",           f:"js",        u:"fetch.js"},
    {n:"createElement",   f:"js",        u:"createElement.js"},
