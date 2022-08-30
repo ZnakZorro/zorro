@@ -14,13 +14,18 @@
    <link rel="stylesheet" href="../../css/all.css" />
    <style>
     .b {font-weight:bold;} 
-    .line {margin:0.2em 0;max-width: 45%;}
+    /*.line {margin:0.2em 0;max-width: 45%;}*/
+    .line{
+        display:flex;
+    }
     .em3,.em4,.em5,.em6 {display: inline-block;}
     .em3 {width: 3em;}
     .em4 {width: 4em;}
     .em5 {width: 5em;}
     .em6 {width: 6em;}
-    img.filter {width:12em;}
+    .em7 {width: 7em;}
+    .em8 {width: 8em;}
+    img.filter {width:100%;}
     div.pass {border-bottom:1px solid gray;}
     div.col2 {
         width: 50%;
@@ -30,14 +35,16 @@
     }
     .left {float:left;}
     .right {float:right;}
-
+    input[type="range" i] {
+        display:inline;
+    }
     @media (max-width: 960px) {
     div.col2 {
         width: 100%;  
     }
     img.filter {
-        float: right;
-        width: 8em;
+        /*float: right;*/
+        /*width: 8em;*/
     }
 }   
 </style>
@@ -111,19 +118,28 @@ const calcFilter=()=>{
 		let gain=filterBassVal(f,RG,L1,C1,RL1,R1,C2,R2,test);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
-        //dane.bass.push([f,dB]);
-        dane.middle.push(dB);
+
+        dane.bass.push(dB);
     });
 } 
 
 const calcZwrotnica2a=()=>{
     console.log("change");
+    
 }
 const calcZwrotnica2=()=>{
     calcFilter();    
     if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
-    //console.log(wykres)
+    console.log(wykres)
     wykres.yAxis[0].setExtremes(-20,0);
+    //wykres.series[0].remove();
+    //wykres.series[0].remove();
+    //wykres.series[1].remove();
+    //wykres.series[0].setData([29.9, 71.5, 106.4, 129.2, 148.5, 216.4, 194.1] );
+    //wykres.xAxis[0].setCategories(['Delhi', 'Mumbai', 'Chennai', 'Kolkatta', 'Hyderabad', 'Benga'])
+    //wykres.legend.destroyItem( wykres.series[0] );
+    //wykres.legend.destroyItem( wykres.series[1] );
+    //wykres.setSize(300, 300);
 }
 
 //---dom ready--------------------------------
@@ -173,44 +189,42 @@ const slides=(ten)=>{
     <div class="col2 left">
         <!--div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button></div-->
         <div class="container pass"> 
-            <div style="float:right;"">
-                <img src="./img/LCR-zwrot-0.svg" class="filter" /><br />
-                <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button>
-            </div>
-            <h3>Bass
-                <!--input id="test1" type="checkbox">test-->
-            </h3>             
+
+                <img src="./img/LCR-horizon.svg" class="filter" /><br />
+                <!--button class="btn em6"           onClick="calcZwrotnica2()">Calc</button-->
+
+
             <div class="line">
                 <span class="em3 b">L1:</span>
-                <span><input class="em4" id="coil1"     oninput="calcZwrotnica2a()" value="0.8"> mH</span>
+                <span class="em7"><input class="em4" id="coil1"     oninput="calcZwrotnica2()" value="0.8"> mH</span>
                 <span><input type="range" data-id="coil1" onchange="slides(this)" value="40" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">RL1:</span>
-                <span><input class="em4" id="resistorl1r"     oninput="calcZwrotnica2a()" value="3.2"> E</span>
+                <span class="em7"><input class="em4" id="resistorl1r"     oninput="calcZwrotnica2()" value="3.2"> E</span>
                 <span><input type="range" data-id="resistorl1r" onchange="slides(this)" value="80" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">R1:</span>
-                <span><input class="em4" id="resistorl1s"     oninput="calcZwrotnica2a()" value="8"> E</span>
+                <span class="em7"><input class="em4" id="resistorl1s"     oninput="calcZwrotnica2()" value="8"> E</span>
                 <span><input type="range" data-id="resistorl1s" onchange="slides(this)" value="127" min="0" max="200" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">C1:</span>
-                <span><input class="em4" id="capacitor1"     oninput="calcZwrotnica2a()" value="3.3"> uF</span>
+                <span class="em7"><input class="em4" id="capacitor1"     oninput="calcZwrotnica2()" value="3.3"> uF</span>
                 <span><input type="range" data-id="capacitor1" onchange="slides(this)" value="82" min="0" max="500" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">C2:</span>
-                <span><input class="em4" id="capacitor2"     oninput="calcZwrotnica2a()" value="33"> uF</span>
+                <span class="em7"><input class="em4" id="capacitor2"     oninput="calcZwrotnica2()" value="33"> uF</span>
                 <span><input type="range" data-id="capacitor2" onchange="slides(this)" value="257" min="0" max="500" step="1"></span>
             </div>
             <div class="line">
                 <span class="em3 b">R2:</span>
-                <span><input class="em4" id="resistor2"     oninput="calcZwrotnica2a()" value="4"> E</span>
+                <span class="em7"><input class="em4" id="resistor2"     oninput="calcZwrotnica2()" value="4"> E</span>
                 <span><input type="range" data-id="resistor2" onchange="slides(this)" value="90" min="0" max="200" step="1"></span>
             </div>
-            <div class="line"><span class="em3 b">RG:</span>    <input class="em4" id="resistorg" onchange="calcZwrotnica2a()" value="4"> Om</div>
+            <div class="line"><span class="em3 b">RG:</span>    <input class="em4" id="resistorg" onchange="calcZwrotnica2()" value="4"> Om</div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq1"> Hz</div>
         </div>
 
