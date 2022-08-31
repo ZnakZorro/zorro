@@ -130,7 +130,7 @@ const calcZwrotnica2a=()=>{
 const calcZwrotnica2=()=>{
     calcFilter();    
     if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
-    console.log(wykres)
+    //console.log(wykres)
     wykres.yAxis[0].setExtremes(-20,0);
     //wykres.series[0].remove();
     //wykres.series[0].remove();
@@ -141,12 +141,6 @@ const calcZwrotnica2=()=>{
     //wykres.legend.destroyItem( wykres.series[1] );
     //wykres.setSize(300, 300);
 }
-
-//---dom ready--------------------------------
-document.addEventListener("DOMContentLoaded",function(){
-    calcZwrotnica2();
-})
-//---DOM READY----------------------------------
 
 function logslider(position) {
     let val = (position*position/200)/10
@@ -244,25 +238,71 @@ const slides=(ten)=>{
     
 <script>
 
+const ustawSuwaki=(zapis)=>{
+    console.log("ustawSuwaki=",zapis)
+    for (let z in zapis){
+        //console.log(document.querySelectorAll('[data-id]'));
+        //console.log(document.querySelector("[data-id='coil1']"));
+        document.querySelectorAll("[data-foo='1']")
+        //let dataID = "data-"+z;
+        //console.log(dataID);
+        let suwak = document.querySelector("[data-id='"+z+"']");
+        //console.log(z,suwak);
+        if (suwak) {
+            //console.log(z,"suwak=",suwak.dataset.id,suwak.value);
+            if (suwak.value) console.log(z,"=",suwak.value);
+        }
+        //data-id="coil1" 
+        //document.getElementById(z).value=JSON.parse(zapis[z])
+    }   
+}
+
 const zapisz=()=>{
     let alles = document.querySelectorAll("input");
     let zapis ={}
     alles.forEach((a)=>{
         if (a.id && a.value) {
-            console.log(a)
             zapis[a.id]=a.value
         }
     })
-    console.log(zapis)
+    console.log(JSON.stringify(zapis))
+    if (zapis) localStorage.setItem("zwrotnica0", JSON.stringify(zapis));
 }
 const odczyt=()=>{
-
+    if (localStorage.getItem("zwrotnica0")) {
+        let zapis = JSON.parse(localStorage.getItem("zwrotnica0"));
+        console.log(zapis);
+        for (let z in zapis){
+            document.getElementById(z).value=JSON.parse(zapis[z])
+        }
+        ustawSuwaki(zapis);
+        calcZwrotnica2();
+    }
+    
+    
 }
 const defaulty=()=>{
-
+    let zapis = {
+        "coil1": "0.8",
+        "resistorl1r": "3.2",
+        "resistorl1s": "8",
+        "capacitor1": "3.3",
+        "capacitor2": "33",
+        "resistor2": "4",
+        "resistorg": "4",
+        "frq1": "980"
+    }
+    for (let z in zapis){document.getElementById(z).value=JSON.parse(zapis[z]);}
+    ustawSuwaki(zapis);
+    calcZwrotnica2();
 }
  
-
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+    odczyt();
+    calcZwrotnica2();
+})
+//---DOM READY----------------------------------
 
 </script>
 
