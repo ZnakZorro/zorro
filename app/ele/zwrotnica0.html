@@ -66,7 +66,7 @@ let dane = {
     "suma":[],
     "line":[],
 }
-
+let odczytName = "0";
 let category = [];
 for (i=1;i<101;i++){
     let f = Math.exp(i/10) * 10;
@@ -114,13 +114,26 @@ const calcFilter=()=>{
     document.getElementById("frq1").value = frqi;
 
 	let skala = 1;
+    let min = 0;
+    let max = -90;
+    let minFRQ = 20;
+    let maxFRQ = 20000;
 	category.forEach((f)=>{
 		let gain=filterBassVal(f,RG,L1,C1,RL1,R1,C2,R2,test);
         let dB = 10*Math.log(gain/skala);
         dB = Math.round(dB*100)/100;
-
         dane.bass.push(dB);
+        if (dB<=min){min=dB; minFRQ=f;}
+        if (dB>=max){max=dB; maxFRQ=f;}
+        min = Math.min(min,dB)
+        max = Math.max(max,dB)
     });
+    document.getElementById("info").innerHTML=`
+    
+    <p>Odczyt=<b>${odczytName}</b>;</p>
+    <p><b>Min</b>=${min}; f=${minFRQ}</p>
+    <p><b>Max</b>=${max}; f=${maxFRQ}</p>
+    `;
 } 
 
 const calcZwrotnica2a=()=>{
@@ -225,10 +238,20 @@ const slides=(ten)=>{
         
 
         <div class="klawisze">
-            <button class="btn red"           onClick="defaulty()">Default</button>
-            <button class="btn blue"           onClick="zapisz()">Zapisz</button>
-            <button class="btn green"           onClick="odczyt()">Odczyt</button>
             <button class="btn em6"           onClick="calcZwrotnica2()">Calc</button>
+            <button class="btn em6 red"           onClick="defaulty(this)">Default</button>
+            <br />
+            <button class="btn em6 blue"           onClick="zapisz(this,0)">Zapisz 0</button>
+            <button class="btn em6 green active"           onClick="odczyt(this,0)">Odczyt 0</button>
+            <br />
+            <button class="btn em6 blue"           onClick="zapisz(this,1)">Zapisz 1</button>
+            <button class="btn em6 green"           onClick="odczyt(this,1)">Odczyt 1</button>
+            <br />
+            <button class="btn em6 blue"           onClick="zapisz(this,2)">Zapisz 2</button>
+            <button class="btn em6 green"           onClick="odczyt(this,2)">Odczyt 2</button>
+            
+
+            <div id="info"></div>
         </div>
 
     </div>
@@ -238,26 +261,28 @@ const slides=(ten)=>{
     
 <script>
 
+const kasujActive=(ten=null)=>{    
+    document.querySelectorAll(".klawisze button").forEach(b=>b.classList.remove("active"));
+    if (ten) ten.classList.add("active");
+}
+
 const ustawSuwaki=(zapis)=>{
-    console.log("ustawSuwaki=",zapis)
     for (let z in zapis){
-        //console.log(document.querySelectorAll('[data-id]'));
-        //console.log(document.querySelector("[data-id='coil1']"));
         document.querySelectorAll("[data-foo='1']")
-        //let dataID = "data-"+z;
-        //console.log(dataID);
         let suwak = document.querySelector("[data-id='"+z+"']");
-        //console.log(z,suwak);
         if (suwak) {
-            //console.log(z,"suwak=",suwak.dataset.id,suwak.value);
-            if (suwak.value) console.log(z,"=",suwak.value);
+            if (suwak.value) {
+                let s = zapis[z];
+                let ss= Math.round(Math.sqrt(s)*45);
+                suwak.value = ss;
+
+            }                
         }
-        //data-id="coil1" 
-        //document.getElementById(z).value=JSON.parse(zapis[z])
+        
     }   
 }
 
-const zapisz=()=>{
+const zapisz=(ten,nr=0)=>{
     let alles = document.querySelectorAll("input");
     let zapis ={}
     alles.forEach((a)=>{
@@ -265,23 +290,25 @@ const zapisz=()=>{
             zapis[a.id]=a.value
         }
     })
-    console.log(JSON.stringify(zapis))
-    if (zapis) localStorage.setItem("zwrotnica0", JSON.stringify(zapis));
+    if (zapis) localStorage.setItem("zwrotnica"+nr, JSON.stringify(zapis));
+    kasujActive(ten);
 }
-const odczyt=()=>{
-    if (localStorage.getItem("zwrotnica0")) {
-        let zapis = JSON.parse(localStorage.getItem("zwrotnica0"));
-        console.log(zapis);
+const odczyt=(ten,nr=0)=>{
+    odczytName = String(nr);
+    if (localStorage.getItem("zwrotnica"+0)) {
+        let zapis = JSON.parse(localStorage.getItem("zwrotnica"+nr));
         for (let z in zapis){
             document.getElementById(z).value=JSON.parse(zapis[z])
         }
         ustawSuwaki(zapis);
         calcZwrotnica2();
+        kasujActive(ten);
     }
     
     
 }
-const defaulty=()=>{
+const defaulty=(ten)=>{
+    odczytName = "DEF";
     let zapis = {
         "coil1": "0.8",
         "resistorl1r": "3.2",
@@ -295,6 +322,7 @@ const defaulty=()=>{
     for (let z in zapis){document.getElementById(z).value=JSON.parse(zapis[z]);}
     ustawSuwaki(zapis);
     calcZwrotnica2();
+    kasujActive(ten);
 }
  
 //---dom ready--------------------------------
