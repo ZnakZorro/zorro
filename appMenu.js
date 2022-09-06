@@ -39,6 +39,7 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/radio/index.html" class="nav-link">LINKI</a></li>   
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
 					 <li class="nav-item"><a href="${link}app/ele/index.html" class="nav-link">Ele</a></li>
+					 <li class="nav-item"><a href="${link}app/hash/index.html" class="nav-link red">#</a></li>
 					 
 					 <!--
 					 <li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li>
