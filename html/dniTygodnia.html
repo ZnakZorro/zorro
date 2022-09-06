@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -15,14 +16,83 @@
 const $=e=>document.querySelector(e);
 const $$=e=>document.querySelectorAll(e);
 
+function copyTXT(id) {
+    console.log(id)
+  document.getElementById("editor").value = document.getElementById(id).innerHTML;
+  let copyText = document.getElementById("editor");
+    console.log(copyText)
+  copyText.select();
+  copyText.setSelectionRange(0, 99999); /* For mobile devices */
+  navigator.clipboard.writeText(copyText.value);
+  document.getElementById("alert"+id).textContent="Skopiowano!";
+   setTimeout(()=>{
+        document.getElementById("alert"+id).textContent="";
+   },5000);
+    
+  
+}
+    
+    
+let korekta=(ileDni=0)=>{
+    let tds = document.querySelectorAll("#tabela td.godz")
+    let suma = 0;
+    tds.forEach((td)=>{
+        //console.log(td,td.textContent);
+        let tdx = td.textContent
+        suma += parseInt(tdx);
+    })
+    let delta  = ileDni - suma;
+    let delta1 = ileDni - suma;
+    let delta2 = ileDni - suma;
+    console.log(ileDni,suma,delta);
+    //console.log(tds.length);
+    let arr = [];
+    for (let a=0; a<tds.length-1; a++) arr.push(a);
+    arr.sort(() => Math.random() - 0.5);
+    console.log(arr);
+
+    if (delta1>0){
+        tds.forEach((td,i)=>{
+            if(delta1>0){
+                if(tds[arr[i]]) tds[arr[i]].textContent = "7";
+            }
+            delta1--;
+        });
+    }
+
+    else if (delta2<0){
+        tds.forEach((td,i)=>{
+            if(delta1<0){
+                tds[arr[i]].textContent = "5";
+            }
+            delta1++;
+        });
+        
+    }
+    sumuj();
+}
+
+let sumuj=(ten=null)=>{
+    let tds = document.querySelectorAll("#tabela td.godz")
+    let suma = 0;
+    tds.forEach((td)=>{
+        //console.log(td,td.textContent);
+        let tdx = td.textContent
+        suma += parseInt(tdx);
+    })
+    document.querySelector("#tabela th#suma").textContent=suma
+
+}
     let wykluczone = [
         "2022-03-01","2022-03-02","2022-03-03","2022-03-04","2022-03-05","2022-03-06","2022-03-07","2022-03-08","2022-03-09",
         "2022-04-17", "2022-04-18",
         "2022-05-01", "2022-05-02", "2022-05-03","2022-05-09",
         "2022-06-05", "2022-06-16","2022-06-17",
         "2022-08-15",
-        "2022-11-01","2022-11-11",
-        "2022-12-25","2022-12-26",
+        "2022-09-01","2022-09-02","2022-09-03","2022-09-04","2022-09-05","2022-09-06","2022-09-07","2022-09-08","2022-09-09","2022-09-10","2022-09-11",
+        "2022-10-14",
+        "2022-11-01","2022-11-11","2022-11-29",
+        "2022-12-24","2022-12-25","2022-12-26","2022-12-30","2022-12-31",
     ];
     
     let dajMiesiac=(ten,miesiac,rok=2022,ileDni=120, delta=0)=>{
@@ -31,12 +101,12 @@ const $$=e=>document.querySelectorAll(e);
             ten.classList.add("active");
         }
         console.log(rok,miesiac,ileDni,"==================")
-        document.getElementById("info").innerHTML = `<p>${rok}, ${miesiac}, ${ileDni}, ${delta}</p>`;
+        document.getElementById("info").innerHTML = `<h4>${rok}, ${miesiac}, ${ileDni}</h4>`;
         let nr=0;
         let html = "";
         let suma = 0;
         let godzin = 6;
-        html +='<table clas="cal" cellpadding="0" cellspacing="0">';
+        html +='<table id="tabela" class="cal" cellpadding="0" cellspacing="0">';
             html +='<tr><th class="th1">Dzień</th><th class="th2">Liczba godz.</th><th class="th3">Podpis</th></tr>';
         for (let d=1; d<366; d++){
             let day = moment().year(rok).dayOfYear(d);
@@ -52,27 +122,31 @@ const $$=e=>document.querySelectorAll(e);
                 console.log(nr,d,cal,dn,dw,m,mmmm);
                 //html +=`<p>${nr},${cal},${dw},${mmmm} </p>`;
                 let ileGodzin = godzin;
-                if (nr % 2 == 0 && delta>0){
+                /*if (nr % 1 == 0 && delta>0){
                     ileGodzin++;
                     delta--;
-                }
-                html +=`<tr><td>${cal}, <small>${ddd}</small></td><td>${ileGodzin}</td><td>&nbsp;</td></tr>`;
+                }*/
+                html +=`<tr><td>${cal}, <small>${ddd}</small></td><td class="godz" contenteditable="true" onInput="sumuj(this)">${ileGodzin}</td><td>&nbsp;</td></tr>`;
                 suma += ileGodzin;
                 
             }
         }
-        html +=`<tr><th>Suma</th><th>${suma}</th><th>&nbsp;</th></tr>`;
+        html +=`<tr><th>Suma</th><th id="suma">${suma}</th><th>&nbsp;</th></tr>`;
         html +='</table>';
         //console.log(html)
         document.getElementById("pole").innerHTML = html;
+        korekta(ileDni)
         //return html;
     }
     //document.getElementById("pole").innerHTML += dajMiesiac(3,2022);
     //document.getElementById("pole").innerHTML += dajMiesiac(4,2022);
     
     document.addEventListener("DOMContentLoaded",function(){
-        let mStart=5;
-        dajMiesiac(null,mStart,2022,120,6);
+        let miesiac = (new Date()).getMonth()+1;
+        console.log("miesiac=",miesiac)
+        let mStart=9;
+        //dajMiesiac(null,mStart,2022,120,9);
+        dajMiesiac(null,9,2022,100)
         $("#btn"+mStart).classList.add("active");
     });
     
@@ -93,19 +167,30 @@ const $$=e=>document.querySelectorAll(e);
 
 
 <body>
+<textarea id="editor" style="display:none;"></textarea>    
     <div id="klawisze">
-        <button id="btn3" onclick='dajMiesiac(this,3,2022,102,6)'>2022-03</button>
-        <button id="btn4" onclick='dajMiesiac(this,4,2022,120,0)'>2022-04</button>
-        <button id="btn5" onclick='dajMiesiac(this,5,2022,120,6)'>2022-05</button>
-        <button id="btn6" onclick='dajMiesiac(this,6,2022)'>2022-06</button>
-        <button id="btn7" onclick='dajMiesiac(this,7,2022)'>2022-07</button>
-        <button id="btn8" onclick='dajMiesiac(this,8,2022)'>2022-08</button>
+        <span id="alertpole" style="color:red; font-size:1.2rem;"></span>
+        <button onclick='copyTXT("pole")'>Copy</button>
+        <button id="btn3" onclick='dajMiesiac(this,3,2022,102)'>2022-03</button>
+        <button id="btn4" onclick='dajMiesiac(this,4,2022,120)'>2022-04</button>
+        <button id="btn5" onclick='dajMiesiac(this,5,2022,126)'>2022-05</button>
+        <button id="btn6" onclick='dajMiesiac(this,6,2022,126)'>2022-06</button>
+        <button id="btn7" onclick='dajMiesiac(this,7,2022,123)'>2022-07</button>
+        <button id="btn8" onclick='dajMiesiac(this,8,2022,120)'>2022-08</button>
+
+        <button id="btn9" onclick='dajMiesiac(this,9,2022,100)'>2022-09</button>
+        <button id="btn10" onclick='dajMiesiac(this,10,2022,130)'>2022-10</button>
+        <button id="btn11" onclick='dajMiesiac(this,11,2022,130)'>2022-11</button>
+        <button id="btn12" onclick='dajMiesiac(this,12,2022,120)'>2022-12</button>
     </div>
     
     <div id="info"></div>
     
     <div id="pole"></div>
     
+    <div id="infor" class="hidden"></div>
+    <span id="alertinfor" style="color:red; font-size:1.2rem;"></span>
+    <button onclick='copyTXT("infor")'>Copy</button>
 
 </body>
 
@@ -161,5 +246,19 @@ const $$=e=>document.querySelectorAll(e);
 	</li>
 </ul>
 </div>
+<script>
+    let infor =[
+    "Aktualizacja strony internetowej Wydziału Informatyki.",
+    "Aktualizacja i rozwój aplikacji internetowych Wydziału Informatyki – System dyplomowania.",
+    "Aktualizacja informacji mediów społecznościowych Wydziału Informatyki (np. Facebook).",
+    "Aktualizacja i konserwacja wyświetlania informacji na ekranach telewizyjnych."
+    ];
+
+    infor.sort(() => Math.random() - 0.5);
+    console.log(infor);
+    infor.forEach((inf)=>{
+        $("#infor").innerHTML += `<p>${inf}</p>`;
+    })
+    </script>
 </body>
 </html>
