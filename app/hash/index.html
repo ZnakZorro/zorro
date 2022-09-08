@@ -26,7 +26,7 @@ const gogogo=(hash)=>{
    
    let token = md5(hash);
    console.log(hash,token);
-   let u = './#/'+token+'.html';
+   let u = './%23/'+token+'.html';
    console.log(hash,token,u);
    fetch(u)
    .then(r => {return r.text()})
