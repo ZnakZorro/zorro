@@ -34,16 +34,16 @@ const analize=()=>{
          let aa = a.trim(); 
          aa=aa.toLowerCase();
          arr[i]=aa;
-         console.log(a,a.trim().length, a.trimStart().length);
+         //console.log(a,a.trim().length, a.trimStart().length);
          
       })
       //arr.filter(a => a.trim().toLowerCase());
       arr.forEach((a)=>{
          if (!keys[a])  keys[a]=1; else keys[a]++;
       })
-      console.log("titles=",arr);
+      //console.log("titles=",arr);
    })
-   console.log("keys=",keys);
+   
    let descript = content.querySelectorAll("p");
    let recipt   = content.querySelectorAll("ul");
    
@@ -66,6 +66,7 @@ const analize=()=>{
    divs.forEach((d,i)=>{
       console.log(d);
    })
+   console.log("keys=",keys);
    keys.forEach((k,i)=>{
       document.getElementById("keys").innerHTML += `<button onclick='showOnly("${k}")'>${k.toUppercase()}</button>`
    })
