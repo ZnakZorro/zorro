@@ -67,7 +67,7 @@ const analize=()=>{
       console.log(d);
    })
    console.log("keys=",keys);
-   for (let k in keys)=>{
+   for (let k in keys){
       document.getElementById("keys").innerHTML += `<button onclick='showOnly("${k}")'>${k.toUppercase()}-${keys[k]}</button>`
    }
 }
