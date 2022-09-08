@@ -28,7 +28,8 @@ const analize=()=>{
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
-      let arr = t.split(",");
+      let arrr = t.textContent.split(",");
+      tet arr  = arrr.filter(a => a.trim());
       console.log("titles=",arr);
    })
    let descript = content.querySelectorAll("p");
