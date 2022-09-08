@@ -44,7 +44,7 @@ const analize=()=>{
    let ps = content.querySelectorAll("p");
    console.log(ps);
    ps.forEach((ps,i)=>{
-     ps.insertAdjacentHTML("afterend", "</div><div>");
+     ps.insertAdjacentHTML("afterend", "</div><div class='doc'>");
       //beforebegin afterbegin beforeend afterend 
    });
    let divs = content.querySelectorAll("div");
@@ -69,7 +69,7 @@ const gogogo=(hash)=>{
    fetch(uri)
    .then(r => {return r.text()})
    .then(o => {
-      document.getElementById("result").innerHTML = "<div>"+o"</div>";
+      document.getElementById("result").innerHTML = "<div class='doc'>"+o+"</div>";
       document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
       analize();
    })
