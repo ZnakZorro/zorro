@@ -56,8 +56,9 @@ const gogogo=(hash)=>{
         <script src="../../appMenu.js"></script>
        
         <div class="container">
-               <a href="./hash.html" class="btn red">#Hash</a>
-           <a href="./md5.html" class="btn red">#md5</a>
+           <!--a href="./hash.html" class="btn red">#Hash</a>
+           <a href="./md5.html" class="btn red">#md5</a-->
+           <button onclick="hasz(input.value);return false">#hash</button>
                
        </div>
        
@@ -69,11 +70,11 @@ const gogogo=(hash)=>{
       
       <form style="display:inline">
             <p>
-              <input id="input" style="min-width:12em;" />
+              <input id="input" style="min-width:17em;" />
               <button type="submit" id="calculate" onclick="gogogo(input.value);return false">GoGoGo</button>               
             </p>
           </form>
-      &nbsp; &nbsp; <button onclick="hasz(input.value);return false">#</button>
+      
       
          
       
