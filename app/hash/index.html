@@ -27,6 +27,7 @@ const gogogo=(hash)=>{
    let token = md5(hash);
    console.log(hash,token);
    let u = './#/'+token+'.html';
+   console.log(hash,token,u);
    fetch(u)
    .then(r => {return r.text()})
    .then(o => {
@@ -54,26 +55,29 @@ const gogogo=(hash)=>{
        
     </div><!-- wraper-->
 
-   
-<form>
-      <p>
-        <label for="input">Input</label>
-        <input id="input" />
-      </p>
-      <p>
-        <button
-          type="submit"
-          id="calculate"
-          onclick="gogogo(input.value);return false"
-        >
-          GoGoGo
-        </button>
-        
-      </p>
-
-    </form>   
-   <div id="result"></div>   
-   
+<div class="wrapper">
+   <div class="container">
+      
+      <form>
+            <p>
+              <label for="input">Input</label>
+              <input id="input" />
+            </p>
+            <p>
+              <button
+                type="submit"
+                id="calculate"
+                onclick="gogogo(input.value);return false"
+              >
+                GoGoGo
+              </button>
+            </p>
+          </form>   
+      
+         <div id="result"></div>   
+      
+   </div>
+</div>
    
    
 </body>
