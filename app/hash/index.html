@@ -27,6 +27,8 @@ const analize=()=>{
    let arrRecipe   = [];
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
+   let arr = titles.split(",");
+   console.log("titles=",arr);
    let descript = content.querySelectorAll("p");
    let recipt   = content.querySelectorAll("ul");
    
@@ -44,6 +46,10 @@ const analize=()=>{
    ps.forEach((ps,i)=>{
      ps.insertAdjacentHTML('afterend', "</div><div>);
       //beforebegin afterbegin beforeend afterend 
+   });
+   let divs = content.querySelectorAll("div");
+   divs.forEach((d,i)=>{
+      console.log(d);
    })
 }
 
