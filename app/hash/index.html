@@ -25,7 +25,9 @@
 const gogogo=(hash)=>{
    let token = md5(hash.toLowerCase());
    console.log(hash,token);
-   let uri = '_/'+token+'.html';
+   //let uri = '_/'+token+'.html';
+   //https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/28ec55f74824fec2bff890bc9279d0ef.html
+   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
    let u = uri;//encodeURIComponent(uri);
    console.log(hash,token,u);
    fetch(u)
@@ -75,7 +77,7 @@ const gogogo=(hash)=>{
           </form>
       <button onclick="gogogo(input.value);return false">--GoGoGo--</button>
       
-         <div id="result"></div>   
+         <div id="result" class="content small"></div>   
       
    </div>
 </div>
