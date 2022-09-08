@@ -51,8 +51,8 @@ const analize=()=>{
    console.log(uls);
    let ps = content.querySelectorAll("p");
    console.log(ps);
-   ps.forEach((ps,i)=>{
-     ps.insertAdjacentHTML("afterend", "</div><div class='doc'>");
+   uls.forEach((u)=>{
+     u.insertAdjacentHTML("afterend", "</div><div class='doc'>");
       //beforebegin afterbegin beforeend afterend 
    });
    let divs = content.querySelectorAll("div");
