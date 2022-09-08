@@ -66,8 +66,14 @@ const analize=()=>{
    divs.forEach((d,i)=>{
       console.log(d);
    })
+   keys.forEach((k,i)=>{
+      document.getElementById("keys").innerHTML += `<button onclick='showOnly("${k}")'>${k.toUppercase()}</button>`
+   })
 }
 
+const showOnly=(key)=>{
+   console.log(key);
+}
 
 const hasz=(hash)=>{
    hash = hash.trim();
@@ -139,6 +145,7 @@ document.addEventListener("DOMContentLoaded",function(){
 <div class="wrapper">
    <div class="container">
    <div id="edit" class="smally"></div>   
+   <div id="keys" class="smally"></div>   
    <div id="result" class="smally"></div>   
    </div>
 </div>
