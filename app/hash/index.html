@@ -22,6 +22,7 @@
 <script>
    
 const analize=()=>{
+   let keys = {}
    let arrTiitle   = [];
    let arrHeadline = [];
    let arrRecipe   = [];
@@ -30,17 +31,21 @@ const analize=()=>{
    titles.forEach((t)=>{
       let arrr = t.textContent.split(",");
       let arr  = arrr.filter(a => a.trim());
+      arr.forEach((a)=>{
+         if (!keys[a])  keys[a]=1; else keys[a]++;
+      }}
       console.log("titles=",arr);
    })
+   console.log("keys=",keys);
    let descript = content.querySelectorAll("p");
    let recipt   = content.querySelectorAll("ul");
    
    console.log(h3s);
-   h3s.forEach((h3,i)=>{
+   titles.forEach((h3,i)=>{
       let id = "sok"+i;
       h3.id = id;
       h3.classList.add("title");
-      console.log(h3s);
+
    })
    let uls = content.querySelectorAll("ul");
    console.log(uls);
