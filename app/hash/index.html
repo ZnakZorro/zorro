@@ -23,6 +23,8 @@
        });
       
 const gogogo=(hash)=>{
+   hash = hash.trim();
+   if (!hash) return;
    let token = md5(hash.toLowerCase());
    console.log(hash,token);
    //let uri = '_/'+token+'.html';
