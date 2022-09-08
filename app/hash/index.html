@@ -31,16 +31,11 @@ const gogogo=(hash)=>{
    hash = hash.trim();
    if (!hash) return;
    let token = md5(hash.toLowerCase());
-   console.log(hash,token);
-   //let uri = '_/'+token+'.html';
-   //https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/28ec55f74824fec2bff890bc9279d0ef.html
-   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
-   let u = uri;//encodeURIComponent(uri);
-   console.log(hash,token,u);
-   fetch(u)
+   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/#/"+token+".html"
+   console.log(hash,token,uri);
+   fetch(uri)
    .then(r => {return r.text()})
    .then(o => {
-      console.log(o)
       document.getElementById("result").innerHTML = o;
    })
    .catch(e => {console.log(e)})
