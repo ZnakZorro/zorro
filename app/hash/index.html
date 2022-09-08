@@ -23,9 +23,9 @@
    
 const analize=()=>{
    let keys = {}
-   let arrTiitle   = [];
-   let arrHeadline = [];
-   let arrRecipe   = [];
+   //let arrTiitle   = [];
+   //let arrHeadline = [];
+   //let arrRecipe   = [];
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
@@ -48,11 +48,15 @@ const analize=()=>{
    let recipt   = content.querySelectorAll("ul");
    
    
-   titles.forEach((h3,i)=>{
-      let id = "sok"+i;
-      h3.id = id;
-      h3.classList.add("title");
-
+   titles.forEach((o,i)=>{
+      o.id = "title"+i;
+      o.classList.add("title");
+   })
+   descript.forEach((o,i)=>{
+      o.id = "descript"+i;
+   })
+   recipt.forEach((o,i)=>{
+      o.id = "title"+i;
    })
    let uls = content.querySelectorAll("ul");
    console.log(uls);
