@@ -24,9 +24,10 @@
       
 const gogogo=(hash)=>{
    
-   let token = md5(hash);
+   let token = md5(hash.toLowerCase());
    console.log(hash,token);
-   let u = './%23/'+token+'.html';
+   let u = './#/'+token+'.html';
+   u = encodeURIComponent(uri);
    console.log(hash,token,u);
    fetch(u)
    .then(r => {return r.text()})
