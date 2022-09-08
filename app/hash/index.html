@@ -23,8 +23,10 @@
        });
       
 const gogogo=(hash)=>{
-   console.log(hash);
-   let u = './#/'+hash+'.html';
+   
+   let token = md5(hash);
+   console.log(hash,token);
+   let u = './#/'+token+'.html';
    fetch(u)
    .then(r => {return r.text()})
    .then(o => {
