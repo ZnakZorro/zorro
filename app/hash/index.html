@@ -14,13 +14,22 @@
    <link rel="stylesheet" href="../../css/all.css" />
    <style>   
       .smally {font-size:12pt; marfin-left:1em;}
+      .title {color:red;}
    </style>
    <script src="./add/md5.min.js"></script>
    
    <script>
-       document.addEventListener("DOMContentLoaded",function(){
-           //document.getElementById("info").textContent = "info";
-       });
+const analize=()=>{
+   let content = document.getElementById("result").innerHTML;
+   let h3s = content.querySelectorAll("h3");
+   console.log(h3s);
+   h3s.forEach((h3,i)=>{
+      let id = "sok"+i;
+      h3.id = id;
+      h3.classList.add("title");
+      console.log(h3s);
+   })
+}
 const hasz=(hash)=>{
    hash = hash.trim();
    if (!hash) return;
@@ -55,6 +64,10 @@ const edit=(url)=>{
    //let exurl = getURL(url);
    window.open(url,"_self");  
 }
+document.addEventListener("DOMContentLoaded",function(){
+  //document.getElementById("info").textContent = "info";
+ analize();
+});
 
 </script>
           
