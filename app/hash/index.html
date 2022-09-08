@@ -13,7 +13,7 @@
    <link rel="stylesheet" href="../../css/style.css" />
    <link rel="stylesheet" href="../../css/all.css" />
    <style>   
-      .smally {font-size:inherid;}
+      .smally {font-size:12pt; marfin-left:1em;}
    </style>
    <script src="./add/md5.min.js"></script>
    
@@ -37,10 +37,25 @@ const gogogo=(hash)=>{
    .then(r => {return r.text()})
    .then(o => {
       document.getElementById("result").innerHTML = o;
+      document.getElementById("edit").innerHTML = '<button onclick='edit("'+uri+'")'>edit</button>';
+      
    })
    .catch(e => {console.log(e)})
 //onclick="result.value=md5(input.value);return false"
-}   
+}
+/*const getLocalURL=url=>{
+   let o = snipARR[actualDOC];
+   url = (url) ? url : o.f+"/"+o.u;
+   return url;
+}
+const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+ */
+const edit=(url)=>{   
+   //url = getLocalURL(url);
+   //let exurl = getURL(url);
+   window.open(url,"_self");  
+}
+
 </script>
           
 </head>
@@ -78,6 +93,7 @@ const gogogo=(hash)=>{
    
 <div class="wrapper">
    <div class="container">
+   <div id="edit" class="smally"></div>   
    <div id="result" class="smally"></div>   
    </div>
 </div>
