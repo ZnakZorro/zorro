@@ -31,9 +31,10 @@ const analize=()=>{
    titles.forEach((t)=>{
       let arr = t.textContent.split(",");
       arr.forEach((a,i)=>{
-         a=a.trim(); 
+         arr[i]=a.trim(); 
+         arr[i]=a.toLowerCase();
          console.log(a.trim(), a.trimStart());
-         a=a.toLowerCase();
+         
       })
       //arr.filter(a => a.trim().toLowerCase());
       arr.forEach((a)=>{
