@@ -29,7 +29,7 @@ const analize=()=>{
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
-      let arr = t.textContent.split(",");
+      let arr = t.textContent.split(", ");
       arr.forEach((a,i)=>{
          let aa = a.trim(); 
          aa=aa.toLowerCase();
