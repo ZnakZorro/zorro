@@ -52,7 +52,7 @@ const analize=()=>{
    let ps = content.querySelectorAll("p");
    console.log(ps);
    uls.forEach((u)=>{
-     u.insertAdjacentHTML("afterend", "</div><div class='doc'>");
+     u.insertAdjacentHTML("afterend", "<hr />");//"</div><div class='doc'>");
       //beforebegin afterbegin beforeend afterend 
    });
    let divs = content.querySelectorAll("div");
