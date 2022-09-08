@@ -27,8 +27,10 @@ const analize=()=>{
    let arrRecipe   = [];
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
-   let arr = titles.split(",");
-   console.log("titles=",arr);
+   titles.forEach((t)=>{
+      let arr = t.split(",");
+      console.log("titles=",arr);
+   })
    let descript = content.querySelectorAll("p");
    let recipt   = content.querySelectorAll("ul");
    
@@ -86,7 +88,8 @@ const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.hr
 const edit=(url)=>{   
    //url = getLocalURL(url);
    //let exurl = getURL(url);
-   url = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   url = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+url;
+   //https://znakzorro.github.io/zorro/app/EDEK/?url=https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/28ec55f74824fec2bff890bc9279d0ef.html
    console.log(url);
   // window.open(url,"_self");  
 }
