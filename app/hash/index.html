@@ -79,20 +79,10 @@ const gogogo=(hash)=>{
    .catch(e => {console.log(e)})
 //onclick="result.value=md5(input.value);return false"
 }
-/*const getLocalURL=url=>{
-   let o = snipARR[actualDOC];
-   url = (url) ? url : o.f+"/"+o.u;
-   return url;
-}
-const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
- */
+
 const edit=(url)=>{   
-   //url = getLocalURL(url);
-   //let exurl = getURL(url);
    url = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+url;
-   //https://znakzorro.github.io/zorro/app/EDEK/?url=https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/28ec55f74824fec2bff890bc9279d0ef.html
-   console.log(url);
-  // window.open(url,"_self");  
+   window.open(url,"_self");  
 }
 document.addEventListener("DOMContentLoaded",function(){
   //document.getElementById("info").textContent = "info";
