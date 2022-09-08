@@ -31,7 +31,7 @@ const gogogo=(hash)=>{
    hash = hash.trim();
    if (!hash) return;
    let token = md5(hash.toLowerCase());
-   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/#/"+token+".html"
+   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
    console.log(hash,token,uri);
    fetch(uri)
    .then(r => {return r.text()})
@@ -66,7 +66,7 @@ const gogogo=(hash)=>{
       <form style="display:inline">
             <p>
               <input id="input" style="min-width:17em;" />
-              <button type="submit" id="calculate" onclick="gogogo(input.value);return false">GoGoGo</button>               
+              <button class="btn red" type="submit" id="calculate" onclick="gogogo(input.value);return false">Go</button>               
             </p>
           </form>
       
