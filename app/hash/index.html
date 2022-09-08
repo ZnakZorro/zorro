@@ -54,7 +54,7 @@ const gogogo=(hash)=>{
    .then(o => {
       document.getElementById("result").innerHTML = o;
       document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
-      
+      analize();
    })
    .catch(e => {console.log(e)})
 //onclick="result.value=md5(input.value);return false"
@@ -73,7 +73,7 @@ const edit=(url)=>{
 }
 document.addEventListener("DOMContentLoaded",function(){
   //document.getElementById("info").textContent = "info";
- analize();
+ 
 });
 
 </script>
