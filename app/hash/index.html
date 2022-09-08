@@ -30,7 +30,12 @@ const analize=()=>{
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
       let arr = t.textContent.split(",");
-      arr.filter(a => a.trim().toLowerCase());
+      arr.forEach((a,i)=>{
+         a=a.trim(); 
+         console.log(a.trim(), a.trimStart());
+         a=a.toLowerCase();
+      })
+      //arr.filter(a => a.trim().toLowerCase());
       arr.forEach((a)=>{
          if (!keys[a])  keys[a]=1; else keys[a]++;
       })
