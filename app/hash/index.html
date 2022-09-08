@@ -18,7 +18,8 @@
    </style>
    <script src="./add/md5.min.js"></script>
    
-   <script>
+<script>
+   
 const analize=()=>{
    let content = document.getElementById("result").innerHTML;
    let h3s = content.querySelectorAll("h3");
@@ -29,7 +30,13 @@ const analize=()=>{
       h3.classList.add("title");
       console.log(h3s);
    })
+   let uls = content.querySelectorAll("ul");
+   console.log(uls);
+   let ps = content.querySelectorAll("p");
+   console.log(ps);
 }
+
+
 const hasz=(hash)=>{
    hash = hash.trim();
    if (!hash) return;
@@ -46,7 +53,7 @@ const gogogo=(hash)=>{
    .then(r => {return r.text()})
    .then(o => {
       document.getElementById("result").innerHTML = o;
-      document.getElementById("edit").innerHTML = '<button onclick='edit("'+uri+'")'>edit</button>';
+      document.getElementById("edit").innerHTML = '<button onclick='edit("'+uri+'")>edit</button>';
       
    })
    .catch(e => {console.log(e)})
