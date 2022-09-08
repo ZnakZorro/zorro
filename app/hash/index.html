@@ -21,7 +21,12 @@
        document.addEventListener("DOMContentLoaded",function(){
            //document.getElementById("info").textContent = "info";
        });
-      
+const hasz=(hash)=>{
+   hash = hash.trim();
+   if (!hash) return;
+   let token = md5(hash.toLowerCase());
+   input.value = token;
+}      
 const gogogo=(hash)=>{
    hash = hash.trim();
    if (!hash) return;
@@ -62,22 +67,13 @@ const gogogo=(hash)=>{
 <div class="wrapper">
    <div class="container">
       
-      <form>
+      <form style="display:inline">
             <p>
-              <label for="input">Input</label>
-              <input id="input" />
-            </p>
-            <p>
-              <button
-                type="submit"
-                id="calculate"
-                onclick="gogogo(input.value);return false"
-              >
-                GoGoGo
-              </button>
+              <input id="input" style="min-width:12em;" />
+              <button type="submit" id="calculate" onclick="gogogo(input.value);return false">GoGoGo</button>               
             </p>
           </form>
-      <!--button onclick="gogogo(input.value);return false">--GoGoGo--</button-->
+      &nbsp; &nbsp; <button onclick="hasz(input.value);return false">#</button>
       
          
       
