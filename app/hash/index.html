@@ -15,12 +15,26 @@
    <style>   
       
    </style>
+   <script src="./add/md5.min.js"></script>
    
    <script>
        document.addEventListener("DOMContentLoaded",function(){
            //document.getElementById("info").textContent = "info";
        });
-   </script>
+      
+const gogogo=(hash)=>{
+   console.log(hash);
+   let u = './#/'+hash+'.html';
+   fetch(u)
+   .then(r => {return r.text()})
+   .then(o => {
+      console.log(o)
+      document.getElementById("result").innerHTML = o;
+   })
+   .catch(e => {console.log(e)})
+//onclick="result.value=md5(input.value);return false"
+}   
+</script>
           
 </head>
 
@@ -38,5 +52,27 @@
        
     </div><!-- wraper-->
 
+   
+<form>
+      <p>
+        <label for="input">Input</label>
+        <input id="input" />
+      </p>
+      <p>
+        <button
+          type="submit"
+          id="calculate"
+          onclick="gogogo(input.value);return false"
+        >
+          GoGoGo
+        </button>
+        
+      </p>
+
+    </form>   
+   <div id="result"></div>   
+   
+   
+   
 </body>
 </html>
