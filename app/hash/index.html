@@ -53,7 +53,7 @@ const gogogo=(hash)=>{
    .then(r => {return r.text()})
    .then(o => {
       document.getElementById("result").innerHTML = o;
-      document.getElementById("edit").innerHTML = '<button onclick='edit("'+uri+'")>edit</button>';
+      document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
       
    })
    .catch(e => {console.log(e)})
