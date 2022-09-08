@@ -22,8 +22,14 @@
 <script>
    
 const analize=()=>{
-   let content = document.getElementById("result");
-   let h3s = content.querySelectorAll("h3");
+   let arrTiitle   = [];
+   let arrHeadline = [];
+   let arrRecipe   = [];
+   let content  = document.getElementById("result");
+   let titles   = content.querySelectorAll("h3");
+   let descript = content.querySelectorAll("p");
+   let recipt   = content.querySelectorAll("ul");
+   
    console.log(h3s);
    h3s.forEach((h3,i)=>{
       let id = "sok"+i;
@@ -35,6 +41,10 @@ const analize=()=>{
    console.log(uls);
    let ps = content.querySelectorAll("p");
    console.log(ps);
+   ps.forEach((ps,i)=>{
+     ps.insertAdjacentHTML('afterend', "</div><div>);
+      //beforebegin afterbegin beforeend afterend 
+   })
 }
 
 
@@ -53,7 +63,7 @@ const gogogo=(hash)=>{
    fetch(uri)
    .then(r => {return r.text()})
    .then(o => {
-      document.getElementById("result").innerHTML = o;
+      document.getElementById("result").innerHTML = "<div>"+o"</div>";
       document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
       analize();
    })
@@ -70,6 +80,8 @@ const getURL=url=>'https://znakzorro.github.io/zorro/app/EDEK/?url='+location.hr
 const edit=(url)=>{   
    //url = getLocalURL(url);
    //let exurl = getURL(url);
+   url = "https://znakzorro.github.io/zorro/app/EDEK/?url='+location.href+url;
+   console.log(url);
    window.open(url,"_self");  
 }
 document.addEventListener("DOMContentLoaded",function(){
