@@ -14,7 +14,7 @@
    <link rel="stylesheet" href="../../css/all.css" />
    <style>   
       .smally {font-size:12pt; margin-left:0.5em;}
-      #result ul {margin-left:1.25em;}
+      #result ul {margin: 0 0 1em 1em;border-bottom: 3px solid #e8e8e8;}
       .title {color:darkred;}
       .hidden {display:none;}
       .show {display:block;}
@@ -27,10 +27,11 @@ const showOnly=(ten,key)=>{
    //document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
    ten.classList.toggle("active");
    let content  = document.getElementById("result");
-   let all   = content.querySelectorAll("*");
+   let all   = content.querySelectorAll("h3,p,ul");
    all.forEach((t)=>{
       t.classList.add("hidden");
    })
+   content.querySelector("h1").classList.remove("hidden");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
       let arr = t.textContent.split(", ");
@@ -42,9 +43,9 @@ const showOnly=(ten,key)=>{
       if (arr.includes(key)){
          let id=t.dataset.id;  
          console.log(id);
-         document.getElementById("title"+id).classList.add("show");
-         document.getElementById("descript"+id).classList.add("show");
-         document.getElementById("recipt"+id).classList.add("show");
+         document.getElementById("title"+id).classList.remove("hidden");
+         document.getElementById("descript"+id).classList.remove("hidden");
+         document.getElementById("recipt"+id).classList.remove("hidden");
       }
    });
 }
@@ -92,10 +93,10 @@ const analize=()=>{
    console.log(uls);
    let ps = content.querySelectorAll("p");
    console.log(ps);
-   uls.forEach((u)=>{
-     u.insertAdjacentHTML("afterend", "<hr />");//"</div><div class='doc'>");
+   /*uls.forEach((u)=>{
+     u.insertAdjacentHTML("afterend", "<hr />");
       //beforebegin afterbegin beforeend afterend 
-   });
+   });*/
    let divs = content.querySelectorAll("div");
    divs.forEach((d,i)=>{
       console.log(d);
@@ -123,7 +124,7 @@ const gogogo=(hash)=>{
    fetch(uri)
    .then(r => {return r.text()})
    .then(o => {
-      document.getElementById("result").innerHTML = "<div class='doc'>"+o+"</div>";
+      document.getElementById("result").innerHTML = o;
       document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
       analize();
    })
