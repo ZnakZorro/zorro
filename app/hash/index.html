@@ -24,7 +24,7 @@
 <script>
 const showOnly=(ten,key)=>{
    //document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
-   ten.classList.trigger("active");
+   ten.classList.toggle("active");
    console.log(key);
    let all   = content.querySelectorAll("*");
    all.forEach((t)=>{
