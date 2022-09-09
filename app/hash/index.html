@@ -23,11 +23,11 @@
    
 <script>
 const showOnly=(ten,key)=>{
-   //console.log(key);
-   //document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
-   ten.classList.toggle("active");
+   console.log(key);
+   document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
+   ten.classList.add("active"); // toggle
    let content  = document.getElementById("result");
-   let all   = content.querySelectorAll("h3,p,ul");
+   let all   = content.querySelectorAll(".first");
    all.forEach((t)=>{
       t.classList.add("hidden");
    })
@@ -42,7 +42,7 @@ const showOnly=(ten,key)=>{
       });
       if (arr.includes(key)){
          let id=t.dataset.id;  
-         //console.log(id);
+         console.log(id);
          document.getElementById("title"+id).classList.remove("hidden");
          document.getElementById("descript"+id).classList.remove("hidden");
          document.getElementById("recipt"+id).classList.remove("hidden");
@@ -53,58 +53,50 @@ const showOnly=(ten,key)=>{
    
 const analize=()=>{
    let keys = {}
-   //let arrTiitle   = [];
-   //let arrHeadline = [];
-   //let arrRecipe   = [];
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
       let arr = t.textContent.split(", ");
+      //arr=arr.filter(a => a.trim());
+      //arr=arr.filter(a => a.toLowerCase());
+      //console.log(arr);
+      
       arr.forEach((a,i)=>{
          let aa = a.trim(); 
-         aa=aa.toLowerCase();
-         arr[i]=aa;
-         //console.log(a,a.trim().length, a.trimStart().length);
-         
+         arr[i]=aa.toLowerCase();
       })
+      
       //arr.filter(a => a.trim().toLowerCase());
       arr.forEach((a)=>{
          if (!keys[a])  keys[a]=1; else keys[a]++;
       })
-      //console.log("titles=",arr);
    })
    
    let descript = content.querySelectorAll("p");
    let recipt   = content.querySelectorAll("ul");
    
-   
    titles.forEach((o,i)=>{
       o.id = "title"+i;
       o.dataset.id = i;
       o.classList.add("title");
+      o.classList.add("first");
    })
    descript.forEach((o,i)=>{
       o.id = "descript"+i;
+      o.classList.add("first");
    })
    recipt.forEach((o,i)=>{
       o.id = "recipt"+i;
+      o.classList.add("first");
    })
    let uls = content.querySelectorAll("ul");
-   console.log(uls);
    let ps = content.querySelectorAll("p");
-   console.log(ps);
-   /*uls.forEach((u)=>{
-     u.insertAdjacentHTML("afterend", "<hr />");
-      //beforebegin afterbegin beforeend afterend 
-   });*/
-   let divs = content.querySelectorAll("div");
-   divs.forEach((d,i)=>{
-      console.log(d);
-   })
+
    console.log("keys=",keys);
    for (let k in keys){
-      if (keys[k]>1){
-         document.getElementById("keys").innerHTML += `<button class="btn mini" onclick='showOnly(this,"${k}")'>${k[0].toUpperCase()}${k.slice(1)}-${keys[k]}</button>`
+      //if (keys[k]>1)
+      {
+         document.getElementById("keys").innerHTML += `<button class="btn white mini" onclick='showOnly(this,"${k}")'>${k[0].toUpperCase()}${k.slice(1)}-${keys[k]}</button>`
       }
    }
 }
@@ -125,7 +117,7 @@ const gogogo=(hash)=>{
    .then(r => {return r.text()})
    .then(o => {
       document.getElementById("result").innerHTML = o;
-      document.getElementById("edit").innerHTML = `<button onclick='edit("${uri}")'>edit</button>`;
+      document.getElementById("edit").innerHTML = `<button class="blue" onclick='edit("${uri}")'>edit</button>`;
       analize();
    })
    .catch(e => {console.log(e)})
@@ -137,7 +129,7 @@ const edit=(url)=>{
    window.open(url,"_self");  
 }
 document.addEventListener("DOMContentLoaded",function(){
-  //document.getElementById("info").textContent = "info";
+  document.getElementById("input").focus();
  
 });
 
@@ -154,7 +146,7 @@ document.addEventListener("DOMContentLoaded",function(){
            <!--a href="./hash.html" class="btn red">#Hash</a>
            <a href="./md5.html" class="btn red">#md5</a-->
            <button onclick="hasz(input.value);return false">#hash</button>
-               
+           <span id="edit"></span>
        </div>
        
        
@@ -165,7 +157,7 @@ document.addEventListener("DOMContentLoaded",function(){
       
       <form style="display:inline">
             <p>
-              <input id="input" style="min-width:17em; font-size: 14pt;" />
+              <input id="input" style="min-width:15em; font-size: 14pt;" />
               <button class="red" type="submit" id="calculate" onclick="gogogo(input.value);return false">Go</button>               
             </p>
           </form>
@@ -178,7 +170,7 @@ document.addEventListener("DOMContentLoaded",function(){
    
 <div class="wrapper">
    <div class="container">
-   <div id="edit" class="smally"></div>   
+   
    <div id="keys" class="smally"></div>   
    <div id="result" class="smally"></div>   
    </div>
