@@ -22,6 +22,11 @@
    <script src="./add/md5.min.js"></script>
    
 <script>
+const removeHidden=(content,selector)=>{
+   if (content){
+      if (content.querySelector(selector)) content.querySelector(selector).classList.remove("hidden");
+   }
+}
 const showOnly=(ten,key)=>{
    //console.log(key);
    document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
@@ -31,7 +36,8 @@ const showOnly=(ten,key)=>{
    all.forEach((t)=>{
       t.classList.add("hidden");
    })
-   content.querySelector("h1").classList.remove("hidden");
+   removeHidden(content,"H1");
+   //if (content.querySelector("h1")) content.querySelector("h1").classList.remove("hidden");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
       let arr = t.textContent.split(", ");
@@ -43,9 +49,12 @@ const showOnly=(ten,key)=>{
       if (arr.includes(key)){
          let id=t.dataset.id;  
          //console.log(id);
-         document.getElementById("title"+id).classList.remove("hidden");
-         document.getElementById("descript"+id).classList.remove("hidden");
-         document.getElementById("recipt"+id).classList.remove("hidden");
+         removeHidden(content,"#title"+id);
+         removeHidden(content,"#descript"+id);
+         removeHidden(content,"#recipt"+id);
+         //document.getElementById("title"+id).classList.remove("hidden");
+         //document.getElementById("descript"+id).classList.remove("hidden");
+         //document.getElementById("recipt"+id).classList.remove("hidden");
       }
    });
 }
