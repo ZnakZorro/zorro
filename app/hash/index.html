@@ -19,6 +19,11 @@
       .title {color:darkred;}
       .hidden {display:none;}
       .show {display:block;}
+
+      h3.title::before {
+            /*counter-increment: section;*/
+            /*content: "Section " counter(section) ": ";  */
+      }      
    </style>
    <script src="./add/md5.min.js"></script>
    
@@ -49,12 +54,14 @@ const showOnly=(ten,key)=>{
       });
       if (arr.includes(key)){
          let id=t.dataset.id;  
-         //console.log(id);
          removeHidden(content,"#title"+id);
          removeHidden(content,"#descript"+id);
          removeHidden(content,"#recipt"+id);
       }
    });
+   // numerowanie
+   let actual = content.querySelectorAll("h3:not(.hidden)");
+   //actual.forEach((a,i)=> {a.textContent = `${i+1}. `+a.textContent;})
 }
 
    
