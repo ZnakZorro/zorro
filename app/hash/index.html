@@ -97,7 +97,8 @@ const analize=()=>{
    let sorty = klucze.sort((a,b)=>b.v-a.v)
    let HTML="";
    klucze.forEach((k)=>{
-      HTML += `<button class="btn white mini" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}-${k.v}</button>`
+      let ile = k.v>1 ? `-${k.v}` : "";      
+      HTML += `<button class="btn white mini" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}${ile}</button>`
    })
    document.getElementById("keys").innerHTML = HTML;
 }
@@ -108,10 +109,13 @@ const hasz=(hash)=>{
    let token = md5(hash.toLowerCase());
    input.value = token;
 }      
-const gogogo=(hash)=>{
-   hash = hash.trim();
-   if (!hash) return;
-   let token = md5(hash.toLowerCase());
+const gogogo=(hash,token=null)=>{
+   if (!token){
+      hash = hash.trim();
+      if (!hash) return;
+      let token = md5(hash.toLowerCase());
+   }
+   
    let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
    console.log(hash,token,uri);
    fetch(uri)
@@ -131,8 +135,20 @@ const edit=(url)=>{
 }
 document.addEventListener("DOMContentLoaded",function(){
   document.getElementById("input").focus();
- 
+  let token = localStorage.getItem("token___token");
+  if (token) {
+      console.log(token);
+      gogogo(null,token)
+  }
 });
+
+const savehasz=()=>{
+   let inVal = document.getElementById("input").value;
+   let token = md5(inVal.toLowerCase());
+   console.log(token);
+   localStorage.setItem("token___token", token);
+   
+}
 
 </script>
           
@@ -144,9 +160,8 @@ document.addEventListener("DOMContentLoaded",function(){
         <script src="../../appMenu.js"></script>
        
         <div class="container">
-           <!--a href="./hash.html" class="btn red">#Hash</a>
-           <a href="./md5.html" class="btn red">#md5</a-->
            <button onclick="hasz(input.value);return false">#hash</button>
+           <button onclick="savehasz();return false">#save</button>
            <span id="edit"></span>
        </div>
        
