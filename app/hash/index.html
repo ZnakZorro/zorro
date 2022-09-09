@@ -23,9 +23,10 @@
    
 <script>
 const showOnly=(ten,key)=>{
+   console.log(key);
    //document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
    ten.classList.toggle("active");
-   console.log(key);
+   let content  = document.getElementById("result");
    let all   = content.querySelectorAll("*");
    all.forEach((t)=>{
       t.classList.add("hidden");
@@ -43,7 +44,7 @@ const showOnly=(ten,key)=>{
          console.log(id);
          document.getElementById("title"+id).classList.add("show");
          document.getElementById("descript"+id).classList.add("show");
-         document.getElementById("recipe"+id).classList.add("show");
+         document.getElementById("recipt"+id).classList.add("show");
       }
    });
 }
