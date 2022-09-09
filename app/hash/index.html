@@ -23,7 +23,7 @@
    
 <script>
 const showOnly=(ten,key)=>{
-   console.log(key);
+   //console.log(key);
    //document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
    ten.classList.toggle("active");
    let content  = document.getElementById("result");
@@ -42,7 +42,7 @@ const showOnly=(ten,key)=>{
       });
       if (arr.includes(key)){
          let id=t.dataset.id;  
-         console.log(id);
+         //console.log(id);
          document.getElementById("title"+id).classList.remove("hidden");
          document.getElementById("descript"+id).classList.remove("hidden");
          document.getElementById("recipt"+id).classList.remove("hidden");
