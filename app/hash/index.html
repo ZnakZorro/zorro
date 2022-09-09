@@ -86,6 +86,7 @@ const analize=()=>{
       o.dataset.id = i;
       o.classList.add("title");
       o.classList.add("first");
+      o.textContent = `${i+1}. `+o.textContent;
    })
    descript.forEach((o,i)=>{
       o.id = "descript"+i;
