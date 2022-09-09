@@ -67,12 +67,18 @@ h1,h2,h3 {margin: 0.25em 0;}
     background: #666;
     color: #fff;
 }
+.btn.mini {
+    margin: 0.25em;
+    padding: 0.25em;
+    font-size:0.8em;
+}
 .btn.big:active {background:red;}
-.red   {background-color: #d3004e;}
+.red   {background-color: #d3004e; color:white;}
 .yellow   {background-color: #ffff00;color:black;}
-.green {background-color: #228b22;}
-.blue  {background-color: #69f;}
-.navy  {background-color: #004;}
+.green {background-color: #228b22; color:white;}
+.blue  {background-color: #69f; color:white;}
+.navy  {background-color: #004; color:white;}
+.white  {background-color: #fff; color:#000;}
 
 .main  {background-color: #126;}
 .adm   {background-color: #9bf; color:black;}
