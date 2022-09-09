@@ -110,10 +110,12 @@ const hasz=(hash)=>{
    input.value = token;
 }      
 const gogogo=(hash,token=null)=>{
-   if (!token){
+   console.log(hash,token);
+   if (token==null){
+      console.log("-------------");
       hash = hash.trim();
       if (!hash) return;
-      let token = md5(hash.toLowerCase());
+      token = md5(hash.toLowerCase());
    }
    
    let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
