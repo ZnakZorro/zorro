@@ -53,9 +53,6 @@ const showOnly=(ten,key)=>{
          removeHidden(content,"#title"+id);
          removeHidden(content,"#descript"+id);
          removeHidden(content,"#recipt"+id);
-         //document.getElementById("title"+id).classList.remove("hidden");
-         //document.getElementById("descript"+id).classList.remove("hidden");
-         //document.getElementById("recipt"+id).classList.remove("hidden");
       }
    });
 }
@@ -66,17 +63,9 @@ const analize=()=>{
    let content  = document.getElementById("result");
    let titles   = content.querySelectorAll("h3");
    titles.forEach((t)=>{
-      let arr = t.textContent.split(", ");
-      //arr=arr.filter(a => a.trim());
-      //arr=arr.filter(a => a.toLowerCase());
-      //console.log(arr);
-      
-      arr.forEach((a,i)=>{
-         let aa = a.trim(); 
-         arr[i]=aa.toLowerCase();
-      })
-      
-      //arr.filter(a => a.trim().toLowerCase());
+      let arr = t.textContent.split(",");
+      arr=arr.map(a => a.trim());
+      arr=arr.map(a => a.toLowerCase());
       arr.forEach((a)=>{
          if (!keys[a])  keys[a]=1; else keys[a]++;
       })
@@ -104,7 +93,9 @@ const analize=()=>{
    for (let k in keys){
       klucze.push({"k":k,"v":keys[k]})
    }
-   let sorty = klucze.sort((a,b)=>b.v-a.v)
+   //console.log(klucze)
+   klucze.sort((a, b) => a.k.localeCompare(b.k));
+   klucze.sort((a, b) => b.v-a.v);
    let HTML="";
    klucze.forEach((k)=>{
       let ile = k.v>1 ? `-${k.v}` : "";      
