@@ -19,11 +19,14 @@
       .title {color:darkred;}
       .hidden {display:none;}
       .show {display:block;}
+         body {
+           counter-reset: section;
+         }
 
-      h3.title::before {
-            /*counter-increment: section;*/
-            /*content: "Section " counter(section) ": ";  */
-      }      
+         h3::before {
+           counter-increment: section;
+           content:counter(section) ": ";
+         }
    </style>
    <script src="./add/md5.min.js"></script>
    
