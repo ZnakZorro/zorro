@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>#hash</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#008">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
+   <style>   
+      .smally {font-size:12pt; margin-left:0.5em;}
+      #result ul {margin: 0 0 1em 1em;border-bottom: 3px solid #e8e8e8;}
+      #result p {margin: 0 0 0 1em;font-style:italic;}
+      .title {color:darkred;}
+      .hidden {display:none;}
+      .show {display:block;}
+
+      body {
+      counter-reset: section;
+      }
+
+      h3::before {
+      counter-increment: section;
+      content:counter(section) ": ";
+      }
+   </style>
+   <script src="./add/md5.min.js"></script>
+   
+<script>
+let waitingTime = 3000;
+let chosenOnes = [];
+let chosenOnesOR = true;
+let chosenOnesTimer = null;
+
+const removeHidden=(content,selector)=>{
+   if (content){
+      if (content.querySelector(selector)) content.querySelector(selector).classList.remove("hidden");
+   }
+}
+const clearWaitingtime=()=>{
+   clearTimeout(chosenOnesTimer); 
+   chosenOnesTimer=null;
+   document.querySelector("#ones").innerHTML ='...';
+   chosenOnes.length=0;
+}
+const showOnly=(ten,key)=>{
+         chosenOnes.push(key);
+         if (chosenOnesTimer) {clearTimeout(chosenOnesTimer); chosenOnesTimer=null;}
+         chosenOnesTimer = setTimeout(()=>{clearWaitingtime()},waitingTime);
+         document.querySelector("#ones").innerHTML = '<button class="btn mini" onClick="clearWaitingtime()">x</button> :: '+chosenOnes.join(", ");
+         document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
+   ten.classList.add("active"); // toggle
+   let content  = document.getElementById("result");
+   let all   = content.querySelectorAll(".first");
+   all.forEach((t)=>{
+      t.classList.add("hidden");
+   })
+   removeHidden(content,"H1");
+   //if (content.querySelector("h1")) content.querySelector("h1").classList.remove("hidden");
+   let titles   = content.querySelectorAll("h3");
+  
+   chosenOnesOR = false
+   //console.log(chosenOnesOR,"chosenOnes=",chosenOnes);
+   let isID = [];
+   
+   titles.forEach((t)=>{
+      let arr = t.textContent.split(", ");
+      arr.forEach((a,i)=>{
+         let aa = a.trim(); 
+         aa=aa.toLowerCase();
+         arr[i]=aa;
+      });
+         if (chosenOnesOR) {
+            // OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR OR  
+            chosenOnes.forEach((key)=>{
+               if (arr.includes(key)){
+                  let id=t.dataset.id;  
+                  removeHidden(content,"#title"+id);
+                  removeHidden(content,"#descript"+id);
+                  removeHidden(content,"#recipt"+id);
+                
+               }
+            });
+         } else {
+               // notOR notOR notOR notOR notOR notOR notOR notOR notOR notOR notOR 
+               let nois = true;
+               chosenOnes.forEach((c)=>{
+                  if (!arr.includes(c)){
+                     nois = false;
+                  }                  
+               });
+               if (nois) isID.push(t.dataset.id)
+               //console.log(nois)            
+         }
+   });
+   console.log(isID,"...",chosenOnes)
+   isID.forEach((id)=>{
+      removeHidden(content,"#title"+id);
+      removeHidden(content,"#descript"+id);
+      removeHidden(content,"#recipt"+id);
+   })
+   document.querySelector("#ones").innerHTML += ' #'+`${isID.length}`;
+}
+
+   
+const analize=()=>{
+   let keys = {}
+   let content  = document.getElementById("result");
+   let titles   = content.querySelectorAll("h3");
+   titles.forEach((t)=>{
+      let arr = t.textContent.split(",");
+      arr=arr.map(a => a.trim());
+      arr=arr.map(a => a.toLowerCase());
+      arr.forEach((a)=>{
+         if (!keys[a])  keys[a]=1; else keys[a]++;
+      })
+   })
+   
+   let descript = content.querySelectorAll("p");
+   let recipt   = content.querySelectorAll("ul");
+   
+   titles.forEach((o,i)=>{
+      o.id = "title"+i;
+      o.dataset.id = i;
+      o.classList.add("title");
+      o.classList.add("first");
+      //o.textContent = `${i+1}. `+o.textContent;
+   })
+   descript.forEach((o,i)=>{
+      o.id = "descript"+i;
+      o.classList.add("first");
+   })
+   recipt.forEach((o,i)=>{
+      o.id = "recipt"+i;
+      o.classList.add("first");
+   });
+
+   let klucze = [];
+   for (let k in keys){
+      klucze.push({"k":k,"v":keys[k]})
+   }
+   //console.log(klucze)
+   klucze.sort((a, b) => a.k.localeCompare(b.k));
+   klucze.sort((a, b) => b.v-a.v);
+   let HTML="";
+   klucze.forEach((k)=>{
+      let ile = k.v>1 ? `-${k.v}` : "";
+      let fir = ((k.k.charCodeAt(0))-96 ) % 21;
+      let clas = "c"+fir;//k.v;
+      //console.log(fir)
+      HTML += `<button class="btn white mini ${clas}" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}${ile}</button>`
+   })
+   document.getElementById("keys").innerHTML = HTML;
+}
+
+const hasz=(hash)=>{
+   hash = hash.trim();
+   if (!hash) return;
+   let token = md5(hash.toLowerCase());
+   input.value = token;
+}      
+const gogogo=(hash,token=null)=>{
+   console.log(hash,token);
+   if (token==null){
+      console.log("-------------");
+      hash = hash.trim();
+      if (!hash) return;
+      token = md5(hash.toLowerCase());
+   }
+   
+   let uri = "https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/hash/_/"+token+".html"
+   console.log(hash,token,uri);
+   fetch(uri)
+   .then(r => {return r.text()})
+   .then(o => {
+      document.getElementById("result").innerHTML = o;
+      document.getElementById("edit").innerHTML = `<button class="blue" onclick='edit("${uri}")'>edit</button>`;
+      analize();
+   })
+   .catch(e => {console.log(e)})
+//onclick="result.value=md5(input.value);return false"
+}
+
+const edit=(url)=>{   
+   url = 'https://znakzorro.github.io/zorro/app/EDEK/?url='+url;
+   window.open(url,"_self");  
+}
+document.addEventListener("DOMContentLoaded",function(){
+  document.getElementById("input").focus();
+  let token = localStorage.getItem("token___token");
+  if (token) {
+      console.log(token);
+      gogogo(null,token)
+  }
+});
+
+const savehasz=()=>{
+   let inVal = document.getElementById("input").value;
+   let token = md5(inVal.toLowerCase());
+   console.log(token);
+   localStorage.setItem("token___token", token);
+   
+}
+
+const changeOR=(t)=>{   
+   console.log(t.checked)
+   chosenOnesOR = t.checked
+   console.log(chosenOnesOR,t.checked)
+}
+</script>
+          
+</head>
+
+<body>
+    <div class="wrapper">
+        <app-menu title="#hash" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+       
+        <div class="container">
+           <button onclick="hasz(input.value);return false">#hash</button>
+           <button onclick="savehasz();return false">#save</button>
+           <span id="edit"></span>
+         <span id="choos">
+            OR:<input type="checkbox" checked="true" onchange="changeOR(this)">
+         </span>
+       </div>
+       
+       
+    </div><!-- wraper-->
+
+<div class="wrapper">
+   <div class="container">
+      
+      <form style="display:inline">
+            <p>
+              <input id="input" style="min-width:15em; font-size: 14pt;" />
+              <button class="red" type="submit" id="calculate" onclick="gogogo(input.value);return false">Go</button>               
+            </p>
+          </form>
+      
+      
+         
+      
+   </div>
+</div>
+   
+<div class="wrapper">
+   <div class="container">
+   
+   <div id="keys" class="smally"></div>   
+   <div id="ones" class="smally"></div>   
+   <div id="result" class="smally"></div>   
+   </div>
+</div>
+   
+</body>
+</html>
