@@ -151,7 +151,7 @@ const analize=()=>{
    klucze.forEach((k)=>{
       let ile = k.v>1 ? `-${k.v}` : "";
       let fir = ((k.k.charCodeAt(0))-96 ) % 21;
-      let clas = "c"+fir;//k.v;
+      let clas = "";//"c"+fir;//k.v;
       //console.log(fir)
       HTML += `<button class="btn white mini ${clas}" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}${ile}</button>`
    })
