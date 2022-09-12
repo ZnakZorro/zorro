@@ -35,27 +35,34 @@
 <script>
 let waitingTime = 3000;
 let chosenOnes = [];
-let chosenOnesOR = true;
 let chosenOnesTimer = null;
+let clearFlag = true;
 
 const removeHidden=(content,selector)=>{
    if (content){
       if (content.querySelector(selector)) content.querySelector(selector).classList.remove("hidden");
    }
 }
+const clearButtonWaitingtime=()=>{
+   document.querySelector("#ones").innerHTML = '';
+   clearWaitingtime();
+   document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active")); 
+}
 const clearWaitingtime=()=>{
    clearTimeout(chosenOnesTimer); 
    chosenOnesTimer=null;
-   //document.querySelector("#ones").innerHTML ='...';
+   if (document.querySelector("#clearButton")) document.querySelector("#clearButton").classList.add("red")
    chosenOnes.length=0;
-   document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
+   clearFlag = true;
+   
 }
 const showOnly=(ten,key)=>{
          chosenOnes.push(key);
          if (chosenOnesTimer) {clearTimeout(chosenOnesTimer); chosenOnesTimer=null;}
          chosenOnesTimer = setTimeout(()=>{clearWaitingtime()},waitingTime);
-         document.querySelector("#ones").innerHTML = '<button class="btn mini" onClick="clearWaitingtime()">x</button> :: '+chosenOnes.join(", ");
-         
+         document.querySelector("#ones").innerHTML = '<button id="clearButton" class="btn mini" onClick="clearButtonWaitingtime()">x</button> :: '+chosenOnes.join(", ");
+         if (clearFlag) document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active")); 
+         clearFlag = false;     
    ten.classList.add("active"); // toggle
    let content  = document.getElementById("result");
    let all   = content.querySelectorAll(".first");
@@ -100,7 +107,7 @@ const showOnly=(ten,key)=>{
                //console.log(nois)            
          }
    });
-   console.log(isID,"...",chosenOnes)
+   //console.log(isID,"...",chosenOnes)
    isID.forEach((id)=>{
       removeHidden(content,"#title"+id);
       removeHidden(content,"#descript"+id);
@@ -210,11 +217,6 @@ const savehasz=()=>{
    
 }
 
-const changeOR=(t)=>{   
-   console.log(t.checked)
-   chosenOnesOR = t.checked
-   console.log(chosenOnesOR,t.checked)
-}
 </script>
           
 </head>
@@ -228,9 +230,6 @@ const changeOR=(t)=>{
            <button onclick="hasz(input.value);return false">#hash</button>
            <button onclick="savehasz();return false">#save</button>
            <span id="edit"></span>
-         <span id="choos">
-            OR:<input type="checkbox" checked="true" onchange="changeOR(this)">
-         </span>
        </div>
        
        
