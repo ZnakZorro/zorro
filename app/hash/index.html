@@ -46,7 +46,7 @@ const removeHidden=(content,selector)=>{
 const clearWaitingtime=()=>{
    clearTimeout(chosenOnesTimer); 
    chosenOnesTimer=null;
-   document.querySelector("#ones").innerHTML ='...';
+   //document.querySelector("#ones").innerHTML ='...';
    chosenOnes.length=0;
    document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
 }
