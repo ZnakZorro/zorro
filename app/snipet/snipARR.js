@@ -25,7 +25,7 @@ const snipARR = [
              {n:"ESP",             f:"esp",      u:"boards.md"},
              {n:"PianoCraft",      f:"ele",       u:"pianocraft.md"},
              {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
-             {n:"Szlif",           f:"audio",       u:"szlif.htm"},
+             
     
                 
     
