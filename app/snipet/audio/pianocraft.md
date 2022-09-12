@@ -1,4 +1,4 @@
-*** Yamaha PianoCraft MCR-N670D - mini wieża klasy Hi-Fi
+***Yamaha PianoCraft MCR-N670D - mini wieża klasy Hi-Fi
 
 1. wzmacniacz A670
 2. odtwarzacz CD z funkcjami sieciowymi MusicCast CD-NT670D
