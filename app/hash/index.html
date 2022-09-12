@@ -19,7 +19,8 @@
       .title {color:darkred;}
       .hidden {display:none;}
       .show {display:block;}
-
+      .active2 {font-weight:bold;}
+      .bold {font-weight:bold;}
       body {
       counter-reset: section;
       }
@@ -150,11 +151,12 @@ const analize=()=>{
    //klucze.sort((a, b) => b.v-a.v);
    let HTML="";
    klucze.forEach((k)=>{
+      let eCL = k.v>4 ? ` active2` : "";
       let ile = k.v>1 ? `(${k.v})` : "";
       let fir = ((k.k.charCodeAt(0))-96 ) % 21;
       let clas = "";//"c"+fir;//k.v;
       //console.log(fir)
-      HTML += `<button class="btn white mini ${clas}" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}${ile}</button>`
+      HTML += `<button class="btn white mini ${clas} ${eCL}" onclick='showOnly(this,"${k.k}")'>${k.k[0].toUpperCase()}${k.k.slice(1)}${ile}</button>`
    })
    document.getElementById("keys").innerHTML = HTML;
 }
