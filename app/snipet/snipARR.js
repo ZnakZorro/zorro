@@ -18,12 +18,12 @@ const snipARR = [
    {n:"mini",           f:"html",      u:"mini.html"},
    {n:"index",           f:"html",      u:"index.html"},
    {n:"git",             f:"html",      u:"git.html"},
-             {n:"bip-hab",         f:"html",      u:"bip-hab.html"},
-             {n:"local",           f:"js",      u:"local.js"},
-             {n:"ESP",             f:"esp",      u:"boards.md"},
-             {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
-             {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
-    {n:"Altus75",         f:"audio",      u:"altus75.htm"},
+            {n:"bip-hab",         f:"html",      u:"bip-hab.html"},
+            {n:"local",           f:"js",      u:"local.js"},
+            {n:"ESP",             f:"esp",      u:"boards.md"},
+            {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
+            {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
+            {n:"Altus75",         f:"audio",      u:"altus75.htm"},
              
     
                 
