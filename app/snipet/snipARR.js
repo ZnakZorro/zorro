@@ -21,8 +21,9 @@ const snipARR = [
              {n:"bip-hab",         f:"html",      u:"bip-hab.html"},
              {n:"local",           f:"js",      u:"local.js"},
              {n:"ESP",             f:"esp",      u:"boards.md"},
-             {n:"PianoCraft",      f:"ele",       u:"pianocraft.md"},
+             {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
              {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
+    {n:"Altus75",         f:"audio",      u:"altus75.htm"},
              
     
                 
@@ -41,7 +42,7 @@ const snipARR = [
    {n:"console",         f:"code",      u:"console.js"},
    {n:"arrows",          f:"html",      u:"arrows.htm"},
    {n:"AVG",             f:"ele",      u:"avg.htm"},
-   {n:"Altus75",         f:"ele",      u:"altus75.htm"},
+   
     
    
    
