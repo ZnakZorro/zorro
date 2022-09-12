@@ -47,13 +47,14 @@ const clearWaitingtime=()=>{
    chosenOnesTimer=null;
    document.querySelector("#ones").innerHTML ='...';
    chosenOnes.length=0;
+   document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
 }
 const showOnly=(ten,key)=>{
          chosenOnes.push(key);
          if (chosenOnesTimer) {clearTimeout(chosenOnesTimer); chosenOnesTimer=null;}
          chosenOnesTimer = setTimeout(()=>{clearWaitingtime()},waitingTime);
          document.querySelector("#ones").innerHTML = '<button class="btn mini" onClick="clearWaitingtime()">x</button> :: '+chosenOnes.join(", ");
-         document.querySelectorAll("#keys button").forEach(b=>b.classList.remove("active"));
+         
    ten.classList.add("active"); // toggle
    let content  = document.getElementById("result");
    let all   = content.querySelectorAll(".first");
@@ -149,7 +150,7 @@ const analize=()=>{
    //klucze.sort((a, b) => b.v-a.v);
    let HTML="";
    klucze.forEach((k)=>{
-      let ile = k.v>1 ? `-${k.v}` : "";
+      let ile = k.v>1 ? `(${k.v})` : "";
       let fir = ((k.k.charCodeAt(0))-96 ) % 21;
       let clas = "";//"c"+fir;//k.v;
       //console.log(fir)
