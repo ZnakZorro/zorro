@@ -1,0 +1,119 @@
+<h3>
+    AUDIO-TECHNICA AT-LP3 (CZARNY)
+</h3>
+<p>
+    Gramofon <strong>Audio-Technica AT-LP3</strong> w pełni automatyczny
+</p>
+<ul>
+    <li>
+        proste ramię
+    </li>
+    <li>
+        główka <strong>AT-HS3</strong>, do której pasują wkładki MC i MM
+    </li>
+    <li>
+        dostarczany z wkładką Dual MM <strong>AT91R</strong>
+    </li>
+</ul>
+<p>
+    INNE:
+</p>
+<ul>
+    <li>
+        Niebieska AT-VM95C ma igłę stożkową 0,6 mil &nbsp;Dzięki zmienionej w porównaniu z poprzedniczkami – AT91 i AT91R – konstrukcji cewki uzyskano wyższe napięcie wyjściowe, wynoszące 4 mV.&nbsp;
+    </li>
+    <li>
+        Zielona AT-VM95E ma igłę z wklejaną diamentową końcówką o szlifie eliptycznym 0,3 x 0,7 mil.
+    </li>
+    <li>
+        Czerwona AT-VM95ML z igłą ze szlifem liniowym Microlinear. Zapewnia szersze pasmo przenoszenia (25 kHz), nieco większą separację kanałów (23 dB) i zwiększa rozdzielczość w zakresie średnio- i wysokotonowym odtwarzanego materiału audio.
+    </li>
+</ul>
+<p>
+    Ceny wkładek bez główki:&nbsp;
+</p>
+<figure class="table">
+    <table>
+        
+        <tbody>
+            <tr>
+                <td>
+                    AT-VM95C
+                </td>
+                <td>
+                    179 zł;
+                </td>
+                <td>
+                    Igła wklejana, diamentową końcówką o szlifie stożkowym.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    AT-VM95E
+                </td>
+                <td>
+                    259 zł
+                </td>
+                <td>
+                    Igła wklejana pełna ze szlifem eliptycznym
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    AT-VM95EN
+                </td>
+                <td>
+                    480/700 zł
+                </td>
+                <td>
+                    Pełną igła ze szlifem eliptycznym 0,3 x 0,7 mi
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    AT-VM95ML
+                </td>
+                <td>
+                    800 zł
+                </td>
+                <td>
+                    Pełną igła diamentową ze szlifem mikroliniowym
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    AT-VM95SH
+                </td>
+                <td>
+                    900 zł
+                </td>
+                <td>
+                    Pełna igła ze szlifem Shibata
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</figure>
+<p>
+    <strong>Igły:</strong>
+</p>
+<ul>
+    <li>
+        - AT-VMN95C igła do wkładki VM95C: 109 zł
+    </li>
+    <li>
+        - AT-VMN95E igła do wkładki VM95E: 149 zł&nbsp;
+    </li>
+    <li>
+        - AT-VMN95EN igła do wkładki VM95EN: 499 zł&nbsp;
+    </li>
+    <li>
+        - AT-VMN95ML igła do wkładki VM95ML: 759 zł&nbsp;
+    </li>
+    <li>
+        - AT-VMN95SH igła do wkładki VM95SH: 899 zł&nbsp;
+    </li>
+    <li>
+        - AT-VMN95SP igła do wkładki VM95SP: 299 zł
+    </li>
+</ul>
