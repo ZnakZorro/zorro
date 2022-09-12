@@ -51,7 +51,8 @@ const clearButtonWaitingtime=()=>{
 const clearWaitingtime=()=>{
    clearTimeout(chosenOnesTimer); 
    chosenOnesTimer=null;
-   if (document.querySelector("#clearButton")) document.querySelector("#clearButton").classList.add("red")
+   //if (document.querySelector("#clearButton")) document.querySelector("#clearButton").classList.add("red");
+   if (document.querySelector("#clearButton")) document.querySelector("#clearButton").remove();
    chosenOnes.length=0;
    clearFlag = true;
    
