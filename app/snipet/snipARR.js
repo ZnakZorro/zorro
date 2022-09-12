@@ -12,8 +12,6 @@ console.log(SNIPETY);
 
 
 const snipARR = [
-   {n:"Gramofon",        f:"dom",       u:"gramofon.htm"},
-   {n:"Szlif",           f:"dom",       u:"szlif.htm"},
    {n:"Ekspres",         f:"dom",       u:"expres.txt"},
    {n:"Nalewki",         f:"dom",       u:"nalewki.txt"},
     {n:"Dieta",         f:"dom",       u:"dieta.txt"},
