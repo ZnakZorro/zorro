@@ -1,10 +1,10 @@
-***Yamaha PianoCraft MCR-N670D - mini wieża klasy Hi-Fi
+## Yamaha PianoCraft MCR-N670D - mini wieża klasy Hi-Fi
 
 1. wzmacniacz A670
 2. odtwarzacz CD z funkcjami sieciowymi MusicCast CD-NT670D
 3. kolumny podstawkowe NS-BP301, 
 
-**CD-NT670D
+## CD-NT670D
 
 Przetwornik cyfrowo-analogowy to popularny Burr Brown PCM5101A - "środkowy" model z rodziny PCM510x.
 
