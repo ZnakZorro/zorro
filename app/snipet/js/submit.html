@@ -1,0 +1,17 @@
+<form>   
+  <label for="name">Name</label>
+  <input required name="name" id="name" type="text">
+  <input type="submit" value="Wyślij" >
+</form>
+
+
+<script>
+document.forms[0].addEventListener('submit', function(event) {
+   event.preventDefault();
+      console.log(this);
+      console.log(event);      
+      console.log(event.submitter);
+      console.log(event.submitter.value);
+  event.submitter.classList.add('spinner-animation');
+})
+</script>
