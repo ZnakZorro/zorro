@@ -24,7 +24,8 @@ const snipARR = [
             {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
             {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
             {n:"Altus75",         f:"audio",      u:"altus75.htm"},
-       {n:"submit",           f:"js",        u:"submit.html"},
+        {n:"submit",           f:"js",        u:"submit.html"},
+        {n:"async",           f:"js",        u:"async.html"},
 
     
              
