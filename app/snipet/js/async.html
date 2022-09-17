@@ -1,0 +1,20 @@
+<div id="quote"></div>
+
+<script>
+const quote = document.querySelector("#quote");
+
+const getQuote = async (url) => {
+	try {
+		const response = await fetch(url);
+		const {content, author, dateAdded} = await response.json();
+		const parsedQuote = ` <q>${content}</q>  <p>* ${author}</p> <p>Added on ${dateAdded}</p>`;
+		quote.innerHTML = parsedQuote;
+	} catch (error) {
+		console.error(error);
+	}
+};
+
+getQuote("https://api.quotable.io/random");
+setTimeout(()=>{getQuote("https://api.quotable.io/random")},5000)
+
+</script>
