@@ -26,6 +26,8 @@ const snipARR = [
             {n:"Altus75",         f:"audio",      u:"altus75.htm"},
         {n:"submit",           f:"js",        u:"submit.html"},
         {n:"async",           f:"js",        u:"async.html"},
+        {n:"WX-051",           f:"audio",        u:"WX-051.htm"},
+    
 
     
              
