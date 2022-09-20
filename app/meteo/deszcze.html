@@ -26,9 +26,9 @@ fetch(u1)
       o.shortIntervals.forEach((ob)=>{
          let p = ob.precipitation;
          let t = ob.start;
-         let tt = (new Date(t)).toLocaleString();
-         console.log(p,t,tt);
-         console.log(p.min,p.max,p.value);
+         let tpl = (new Date(t)).toLocaleString();
+         console.log(p);
+         console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
       })
   }).catch(e => {console.log(e)})
   
