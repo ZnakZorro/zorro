@@ -23,6 +23,9 @@ fetch(u1)
   .then(o => {
       console.log(o);
       console.log(o.shortIntervals);  
+      o.shortIntervals.forEach((ob)=>{
+         console.log(ob.precipitation);
+      })
   }).catch(e => {console.log(e)})
   
 fetch(u2)
