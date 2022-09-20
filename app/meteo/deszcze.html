@@ -24,7 +24,9 @@ fetch(u1)
       console.log(o);
       console.log(o.shortIntervals);  
       o.shortIntervals.forEach((ob)=>{
-         console.log(ob.precipitation);
+         let p = ob.precipitation;
+         console.log(p);
+         console.log(p.min,p.max,p.value);
       })
   }).catch(e => {console.log(e)})
   
