@@ -22,7 +22,46 @@
     .em5 {width: 5em;}
     .em6 {width: 6em;}
     .elem {font-weight: bold; font-size:42px; cursor:pointer;font-family:sans-serif;stroke-width:1.33;}
-    
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 2; /* Sit on top */
+  padding-top: 2em; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn {z-index: 1!important;}
+
    </style>
         <script src="https://code.highcharts.com/highcharts.js"></script>
         <script src="https://code.highcharts.com/modules/series-label.js"></script>
@@ -77,9 +116,23 @@ document.addEventListener("DOMContentLoaded",function(){
 
 </script>
 <body>
+
     <div class="wrapper">
             <app-menu title="CR-f" name="ZnakZorro" link="../../../"></app-menu><script src="../../appMenu.js"></script>        
-        <div class="container">
+               <div class="container">
+                  <!-- Trigger/Open The Modal -->
+                  <!--button id="myBtn">Open Modal</button-->
+                  <!-- The Modal -->
+                  <div id="myModal" class="modal">
+                     <!-- Modal content -->
+                     <div class="modal-content">
+                        <span id="close" class="close">&times;</span>
+                        <span id="modaResult">33 E</span>
+                        <div><input type="range" min="0" max="100" value="33" onchange="rangeChange(this)" style="width: 100%;padding-top: 1em; "/></div>
+                     </div>
+                  </div>
+               </div>
+               <div class="container">
             <figure class="highcharts-figure">
                 <div id="highchart"></div>
                 <p class="highcharts-description"></p>
@@ -91,7 +144,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <div class="container">
             <h3>CR</h3> 
             
-            <div  style=""/>   
+            <div  style="">   
                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
                 <svg
                    version="1.1"
@@ -199,13 +252,15 @@ document.addEventListener("DOMContentLoaded",function(){
                        d="m 236.3913,51.877598 0.0203,34.286079"
                        id="path356" />
                   </g>
-                  <text
-                     <title>rg</title><tspan
+                  <text>
+                     <title>Speaker</title>
+                     <tspan
                        sodipodi:role="line"
                        id="FCR_Rg_1"
                        x="168"
                        y="120"
-                       class="elem">Rg</tspan></text>
+                       class="click elem">Rg</tspan>
+                  </text>
                   <g
                      id="g1516-7"
                      transform="matrix(0,1.5617517,-1.9478936,0,229.05245,-203.20458)">
@@ -220,7 +275,7 @@ document.addEventListener("DOMContentLoaded",function(){
                   </g>
                   <text>
                         <title id="title1822">kondensator C1</title>
-                        <tspan id="FCR_C1_1" x="60" y="88" class="elem" title="capasitor C1"  >C1</tspan>
+                        <tspan id="FCR_C1_1" x="60" y="88" class="click elem" title="capasitor C1"  >C1</tspan>
                   </text>
                   <path
                      style="fill:none;stroke:#000000;stroke-width:2.54526;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
@@ -232,6 +287,12 @@ document.addEventListener("DOMContentLoaded",function(){
                      d="M 110.65541,44.613174 29.952509,44.595784"
                      id="path629-5-2-7-3"
                      sodipodi:nodetypes="cc" />
+
+                  <text>
+                        <title id="FCR_C1_1_result"></title>
+                        <tspan id="FCR_C1_1" x="40" y="170" class="click elem" title="capasitor C1"  >1999Hz</tspan>
+                  </text>
+
                 </svg>
                 
             </div>
@@ -254,6 +315,13 @@ Częstotliwości poniżej 3,39 kHz są przepuszczane bez tłumienia.<br />
 
 <script>
 
+const rangeChange=(ten)=>{
+   let miano = "E";
+   let val = ten.value;
+   console.log(ten,ten.id,val)
+   document.getElementById("modaResult").textContent=val+" "+miano;
+}
+
 const listenElement=(el)=>{
     let tel = el.target
     console.log(el.target)
@@ -263,14 +331,48 @@ const listenElement=(el)=>{
     tel.setAttribute("stroke", "blue")
     tel.setAttribute("fill", "red")
     tel.setAttribute("stroke-width", "4")
+    modal.style.display = "block";
     
 }
 
 
     document.addEventListener("DOMContentLoaded",function(){
 
-        document.querySelector("#FCR_C1_1").addEventListener('click', listenElement, false);
-        document.querySelector("#FCR_Rg_1").addEventListener('click', listenElement, false);
+        //document.querySelector("#FCR_C1_1").addEventListener('click', listenElement, false);
+        //document.querySelector("#FCR_Rg_1").addEventListener('click', listenElement, false);
+        //let clicks=document.querySelectorAll(".click")
+        //console.log(clicks)
+        document.querySelectorAll(".click").forEach((el)=>{
+            el.addEventListener('click', listenElement, false);
+        })
         
     });
 </script>
+
+<script>
+   // Get the modal
+   var modal = document.getElementById("myModal");
+   
+   // Get the button that opens the modal
+   var btn = document.getElementById("myBtn");
+   
+   // Get the <span> element that closes the modal
+   var span = document.getElementById("close");
+   
+   // When the user clicks the button, open the modal 
+   /*btn.onclick = function() {
+     modal.style.display = "block";
+   }*/
+   
+   // When the user clicks on <span> (x), close the modal
+   span.onclick = function() {
+     modal.style.display = "none";
+   }
+   
+   // When the user clicks anywhere outside of the modal, close it
+   window.onclick = function(event) {
+     if (event.target == modal) {
+       modal.style.display = "none";
+     }
+   }
+   </script>
