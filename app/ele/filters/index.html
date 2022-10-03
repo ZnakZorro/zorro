@@ -21,6 +21,8 @@
     .em4 {width: 4em;}
     .em5 {width: 5em;}
     .em6 {width: 6em;}
+
+    .active {background-color: :red; color:white;}
     .elem {font-weight: bold; font-size:42px; cursor:pointer;font-family:sans-serif;stroke-width:1.33;}
 /* The Modal (background) */
 .modal {
@@ -70,9 +72,11 @@
         <script src="https://code.highcharts.com/modules/accessibility.js"></script> 
         <script src="./js/wykresy.js"></script> 
    <script>
-       document.addEventListener("DOMContentLoaded",function(){
-           //document.getElementById("info").textContent = "info";
-       });
+      const $=e=>document.querySelector(e);
+      const $$=e=>document.querySelectorAll(e);
+      document.addEventListener("DOMContentLoaded",function(){
+         //document.getElementById("info").textContent = "info";
+      });
    </script>
 </head>
 
@@ -128,7 +132,7 @@ document.addEventListener("DOMContentLoaded",function(){
                      <div class="modal-content">
                         <span id="close" class="close">&times;</span>
                         <span id="modaResult">33 E</span>
-                        <div><input type="range" min="0" max="100" value="33" onchange="rangeChange(this)" style="width: 100%;padding-top: 1em; "/></div>
+                        <div><input type="range" min="0" max="100" value="33" oninput="rangeChange(this)" style="width: 100%;margin-top: 1em; "/></div>
                      </div>
                   </div>
                </div>
@@ -142,7 +146,7 @@ document.addEventListener("DOMContentLoaded",function(){
     
     <div class="wrapper">
         <div class="container">
-            <h3>CR</h3> 
+            <h3>FCR</h3> 
             
             <div  style="">   
                 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
@@ -257,9 +261,9 @@ document.addEventListener("DOMContentLoaded",function(){
                      <tspan
                        sodipodi:role="line"
                        id="FCR_Rg_1"
-                       x="168"
-                       y="120"
-                       class="click elem">Rg</tspan>
+                       x="110"
+                       y="130"
+                       class="click elem">8E</tspan>
                   </text>
                   <g
                      id="g1516-7"
@@ -275,7 +279,7 @@ document.addEventListener("DOMContentLoaded",function(){
                   </g>
                   <text>
                         <title id="title1822">kondensator C1</title>
-                        <tspan id="FCR_C1_1" x="60" y="88" class="click elem" title="capasitor C1"  >C1</tspan>
+                        <tspan id="FCR_C1_1" x="60" y="92" class="click elem" title="capasitor C1"  >3.3uF</tspan>
                   </text>
                   <path
                      style="fill:none;stroke:#000000;stroke-width:2.54526;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:none;stroke-opacity:1"
@@ -289,8 +293,8 @@ document.addEventListener("DOMContentLoaded",function(){
                      sodipodi:nodetypes="cc" />
 
                   <text>
-                        <title id="FCR_C1_1_result"></title>
-                        <tspan id="FCR_C1_1" x="40" y="170" class="click elem" title="capasitor C1"  >1999Hz</tspan>
+                        <title id="FCR_1_title"></title>
+                        <tspan id="FCR_1_result" x="40" y="170" class="click elem" title="capasitor C1">1999Hz</tspan>
                   </text>
 
                 </svg>
@@ -302,14 +306,6 @@ document.addEventListener("DOMContentLoaded",function(){
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
         </div>
     </div>
-    
-<!--div class="small small">
-Wzór na znalezienie punktu odcięcia częstotliwości obwodu RL to częstotliwość = R/2πL. Wykonując obliczenia matematyczne, z wartościami pokazanymi powyżej otrzymujemy częstotliwość = R/2πL = (10KΩ)/(2(3,14)(470mH))=3388 Hz, czyli około 3,39KHz.
-<br />
-Oznacza to, że wszystkie częstotliwości powyżej 3,39 kHz są tłumione. W miarę oddalania się (wyżej) od regionu 3,39 kHz tłumienie staje się coraz większe.
-<br />
-Częstotliwości poniżej 3,39 kHz są przepuszczane bez tłumienia.<br />
-</div-->
 </body>
 </html>
 
@@ -319,23 +315,48 @@ const rangeChange=(ten)=>{
    let miano = "E";
    let val = ten.value;
    console.log(ten,ten.id,val)
-   document.getElementById("modaResult").textContent=val+" "+miano;
+   document.getElementById("modaResult").textContent=val+miano;
+   $("#FCR_Rg_1").textContent = val+miano;
+   oblicz_FCR();
 }
-
+const openModal=(ten)=>{
+   console.log(ten)
+   //oblicz_FCR
+   let arr = ten.id.split("_")
+   console.log("openModal=",arr)
+   modal.style.display = "block";
+   ten.setAttribute("fill", "red")
+}
+const closeModal=()=>{
+   modal.style.display = "none";
+   document.querySelectorAll(".click").forEach((el)=>{el.removeAttribute("fill");})
+   oblicz_FCR()
+}
 const listenElement=(el)=>{
-    let tel = el.target
-    console.log(el.target)
-    console.log(el.target.id,el.target.textContent)
-    //el.target.style.color="red"
-    //tel.setAttribute("color", "blue")
-    tel.setAttribute("stroke", "blue")
-    tel.setAttribute("fill", "red")
-    tel.setAttribute("stroke-width", "4")
-    modal.style.display = "block";
+    let txtel = el.target
+    //txtel.classList.add("active")
+    //console.log(el.target)
+    //console.log(el.target.id,el.target.textContent)
+    //txtel.setAttribute("stroke", "blue")
+    //txtel.setAttribute("fill", "red")
+    //txtel.setAttribute("stroke-width", "4")
+    openModal(txtel)
     
 }
 
-
+const oblicz_FCR=()=>{
+   let C1x  = $("#FCR_C1_1").textContent;
+   let Rg1x = $("#FCR_Rg_1").textContent;
+   let C1 = parseFloat(C1x);
+   let RG = parseFloat(Rg1x);
+   C1 = C1 / 1000000;
+   RG = RG; 
+   console.log(C1x,Rg1x, RG,C1)
+   let frq = 1/(2 * Math.PI * RG * C1);
+   let frqi = Math.round(frq);
+   $("#FCR_1_result").textContent=frqi+"Hz"
+   
+}
     document.addEventListener("DOMContentLoaded",function(){
 
         //document.querySelector("#FCR_C1_1").addEventListener('click', listenElement, false);
@@ -345,6 +366,7 @@ const listenElement=(el)=>{
         document.querySelectorAll(".click").forEach((el)=>{
             el.addEventListener('click', listenElement, false);
         })
+        oblicz_FCR();
         
     });
 </script>
@@ -365,14 +387,10 @@ const listenElement=(el)=>{
    }*/
    
    // When the user clicks on <span> (x), close the modal
-   span.onclick = function() {
-     modal.style.display = "none";
-   }
+   span.onclick = function() {closeModal();}
    
    // When the user clicks anywhere outside of the modal, close it
    window.onclick = function(event) {
-     if (event.target == modal) {
-       modal.style.display = "none";
-     }
+     if (event.target == modal) {closeModal();}
    }
    </script>
