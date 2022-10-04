@@ -22,7 +22,7 @@
     .em5 {width: 5em;}
     .em6 {width: 6em;}
 
-    .active {background-color: :red; color:white;}
+    .active {background-color:red; color:white;}
     .elem {font-weight: bold; font-size:36px; cursor:pointer;font-family:sans-serif;stroke-width:1.33;}
 /* The Modal (background) */
 .modal {
@@ -122,7 +122,8 @@ document.addEventListener("DOMContentLoaded",function(){
 <body>
 
     <div class="wrapper">
-            <app-menu title="CR-f" name="ZnakZorro" link="../../../"></app-menu><script src="../../../appMenu.js"></script>        
+            <app-menu title="Filters" name="ZnakZorro" link="../../../"></app-menu>
+            <script src="../../../appMenu.js"></script>        
                <div class="container">
                   <!-- Trigger/Open The Modal -->
                   <!--button id="myBtn">Open Modal</button-->
@@ -132,7 +133,7 @@ document.addEventListener("DOMContentLoaded",function(){
                      <div class="modal-content">
                         <span id="close" class="close">&times;</span>
                         <span id="modaResult">33 E</span>
-                        <div><input type="range" min="0" max="100" value="33" oninput="rangeChange(this)" style="width: 100%;margin-top: 1em; "/></div>
+                        <div><input type="range" id="modaRange" min="0" max="100" value="33" oninput="rangeChange(this)" style="width: 100%;margin-top: 1em; "/></div>
                      </div>
                   </div>
                </div>
@@ -146,10 +147,11 @@ document.addEventListener("DOMContentLoaded",function(){
     
     <div class="wrapper">
         <div class="container">
-            <h3>FCR</h3> 
             
-            <div  style="">   
-                <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            
+            <div>   
+               <h3>Filter CR</h3> 
+                
                 <svg
                    version="1.1"
                    viewBox="0 0 260 200"
@@ -256,7 +258,6 @@ document.addEventListener("DOMContentLoaded",function(){
                        d="m 236.3913,51.877598 0.0203,34.286079"
                        id="path356" />
                   </g>
-                  
                   <g
                      id="g1516-7"
                      transform="matrix(0,1.5617517,-1.9478936,0,229.05245,-203.20458)">
@@ -282,7 +283,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
                   <text>
                      <title id="title1822">kondensator C1</title>
-                     <tspan id="FCR_C1_1" x="110" y="92" class="click elem" title="capasitor C1"  >3.3uF</tspan>
+                     <tspan id="FCR_C1_1" data-min="0" data-max="33" x="110" y="92" class="click elem" title="capasitor C1"  >3.3uF</tspan>
                   </text>
                   <text>
                      <title>Speaker</title>
@@ -308,18 +309,36 @@ document.addEventListener("DOMContentLoaded",function(){
 <script>
 
 const rangeChange=(ten)=>{
-   let miano = "E";
-   let val = ten.value;
+   let modalRange = document.getElementById("modaRange")
+   console.log(modalRange,modalRange.dataset)
+   let miano = modalRange.dataset.miano;
+   let targetID = modalRange.dataset.targetID;
+   let val = ten.value/10;
    console.log(ten,ten.id,val)
    document.getElementById("modaResult").textContent=val+miano;
-   $("#FCR_Rg_1").textContent = val+miano;
+   $("#"+targetID).textContent = val+miano;
    oblicz_FCR();
 }
 const openModal=(ten)=>{
-   console.log(ten)
+   let targetID = ten.id;   
+   let modalRange = document.getElementById("modaRange")
+      //FCR_C1_1
    //oblicz_FCR
-   let arr = ten.id.split("_")
-   console.log("openModal=",arr)
+   let arr = targetID.split("_");
+   let miano ="E";
+   if (arr[1][0]==="C") miano = "uF";
+   if (arr[1][0]==="L") miano = "mH";
+   console.log(ten,targetID)
+   console.log(arr[1][0],"openModal=",arr); //['FCR', 'C1', '1']
+   console.log("target=",ten.dataset.min,ten.dataset.max);
+   modalRange.min   = ten.dataset.min*10;
+   modalRange.max   = ten.dataset.max*10;
+   let targetValue = parseFloat(ten.textContent);
+   modalRange.value = 10*targetValue;
+   modaResult.textContent = targetValue+miano;
+   modalRange.dataset.targetID = targetID;
+   modalRange.dataset.miano = miano;
+   //modaRange
    modal.style.display = "block";
    ten.setAttribute("fill", "red")
 }
