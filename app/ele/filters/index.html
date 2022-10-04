@@ -70,7 +70,7 @@
         <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <script src="https://code.highcharts.com/modules/export-data.js"></script>
         <script src="https://code.highcharts.com/modules/accessibility.js"></script> 
-        <script src="./js/wykresy.js"></script> 
+        <script src="../js/wykresy.js"></script> 
    <script>
       const $=e=>document.querySelector(e);
       const $$=e=>document.querySelectorAll(e);
@@ -82,39 +82,10 @@
 
 
 <script>
-const obliczFiltrCR=(ff,frq,R1,C1)=>{
-    let impedancja = 1/(2 * Math.PI * ff * C1);
-    let gain = R1/(R1+impedancja);
-    return gain;
 
-}   
-
-const calcCR=()=>{
-    let C1 = parseFloat(document.getElementById("capasitor1").value);
-    let R1 = parseFloat(document.getElementById("resistor1").value);
-    C1 = C1/1000000;
-    R1=R1;
-    console.log(C1,R1,Math.PI);
-    let frq = 1/(2 * Math.PI * R1 * C1);
-    let frqi = Math.round(frq);
-    document.getElementById("frq").value = frqi;
-
-	let skala = 1;
-	let data = []
-	for (f=20;f<20000;f+=10){
-		let ff=f;
-		gain=obliczFiltrCR(ff,frq,R1,C1);
-        dB= 8.65*Math.log(gain/skala);
-        dB = Math.round(dB*100)/100;
-		//dB= gain    //20*Math.log(gain/skala);
-		data.push([ff,dB]);
-    }
-    //console.log(data)
-	if (wykres) updateWykres(data); else rysujWykres("highchart",data);    
-}  
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-    calcCR();
+    //calcCR();
 })
 //---DOM READY----------------------------------
 
@@ -137,12 +108,6 @@ document.addEventListener("DOMContentLoaded",function(){
                      </div>
                   </div>
                </div>
-               <div class="container">
-            <figure class="highcharts-figure">
-                <div id="highchart"></div>
-                <p class="highcharts-description"></p>
-            </figure>
-        </div>
     </div>
     
     <div class="wrapper">
@@ -283,28 +248,98 @@ document.addEventListener("DOMContentLoaded",function(){
 
                   <text>
                      <title id="title1822">kondensator C1</title>
-                     <tspan id="FCR_C1_1" data-min="0" data-max="33" x="110" y="92" class="click elem" title="capasitor C1"  >3.3uF</tspan>
+                     <tspan id="FCR_C1_1" data-miano="uF" data-min="0" data-max="33" x="110" y="92" class="click elem" title="capasitor C1">3.3uF</tspan>
                   </text>
                   <text>
                      <title>Speaker</title>
-                     <tspan id="FCR_Rg_1" x="140" y="130" class="click elem">8E</tspan>
+                     <tspan id="FCR_Rg_1" data-miano="E" data-min="0" data-max="33" x="120" y="130" class="click elem">8E</tspan>
                   </text>
                   <text>
                      <title id="FCR_1_title">FRQ</title>
-                     <tspan id="FCR_1_result" x="80" y="170" class="click elem" title="capasitor C1">1999Hz</tspan>
+                     <tspan id="FCR_1_result" x="80" y="170" class="elem" title="capasitor C1">6029Hz</tspan>
                   </text>
 
                 </svg>
                 
             </div>
+            <!--
             <div class="line"><span class="em3 b">C:</span>    <input class="em4" id="capasitor1"     onchange="calcCR()" value="10"> uF</div>
             <div class="line"><span class="em3 b">R:</span>    <input class="em4" id="resistor1" onchange="calcCR()" value="8"> Om</div>
             <div class="line"><span class="em3 b"></span>      <button class="btn em6"           onClick="calcCR()">Calc CR</button></div>
             <div class="line"><span class="em3 b">FRQ:</span>  <input class="em4 b" id="frq"> Hz</div>
+            -->
         </div>
+
+        <div class="container">
+         <figure class="highcharts-figure">
+             <div id="highchart"></div>
+             <p class="highcharts-description"></p>
+         </figure>
+      </div>
+
     </div>
 </body>
 </html>
+
+<script>
+let dane = {
+    "bass":[],
+    "middle":[],
+    "treble":[],
+    "suma":[],
+    "line":[],
+}
+let category = [];
+for (i=1;i<101;i++){
+    let f = Math.exp(i/10) * 10;
+    if (f<20) continue;
+    if (f>25000) break;
+    //console.log(i,f)
+    category.push(Math.round(f));
+    dane.line.push(-6);
+}
+
+const obliczFiltrCR=(ff,frq,R1,C1)=>{
+    let impedancja = 1/(2 * Math.PI * ff * C1);
+    let gain = R1/(R1+impedancja);
+    return gain;
+
+}   
+
+const calcFilterCR=()=>{
+    //let C1 = parseFloat(document.getElementById("capasitor1").value);
+    //let R1 = parseFloat(document.getElementById("resistor1").value);
+
+   let C1x  = $("#FCR_C1_1").textContent;
+   let Rg1x = $("#FCR_Rg_1").textContent;
+   let C1 = parseFloat(C1x);
+   let RG = parseFloat(Rg1x);    
+    C1 = C1/1000000;
+    
+    //console.log(C1,RG,Math.PI);
+    let frq = 1/(2 * Math.PI * RG * C1);
+    //let frqi = Math.round(frq);
+    //document.getElementById("frq").value = frqi;*/
+
+	let skala = 1;
+	let data = []
+   dane.bass.length = 0;
+   //category.forEach((f)=>{
+	for (f=20;f<20000;f+=10){
+		let ff=f;
+		gain=obliczFiltrCR(ff,frq,RG,C1);
+        dB= 8.65*Math.log(gain/skala);
+        dB = Math.round(dB*100)/100;
+		//dB= gain    //20*Math.log(gain/skala);
+		//data.push([ff,dB]);
+      //dane.bass.push([ff,dB]);
+      dane.bass.push(dB);
+    }
+    //console.log(data)
+	if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
+}  
+
+</script>
 
 <script>
 
@@ -317,7 +352,8 @@ const rangeChange=(ten)=>{
    console.log(ten,ten.id,val)
    document.getElementById("modaResult").textContent=val+miano;
    $("#"+targetID).textContent = val+miano;
-   oblicz_FCR();
+   oblicz_FCR(targetID);
+   calcFilterCR();
 }
 const openModal=(ten)=>{
    let targetID = ten.id;   
@@ -349,17 +385,11 @@ const closeModal=()=>{
 }
 const listenElement=(el)=>{
     let txtel = el.target
-    //txtel.classList.add("active")
-    //console.log(el.target)
-    //console.log(el.target.id,el.target.textContent)
-    //txtel.setAttribute("stroke", "blue")
-    //txtel.setAttribute("fill", "red")
-    //txtel.setAttribute("stroke-width", "4")
     openModal(txtel)
     
 }
 
-const oblicz_FCR=()=>{
+const oblicz_FCR=(targetID)=>{
    let C1x  = $("#FCR_C1_1").textContent;
    let Rg1x = $("#FCR_Rg_1").textContent;
    let C1 = parseFloat(C1x);
