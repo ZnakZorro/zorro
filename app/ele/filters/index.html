@@ -29,23 +29,23 @@
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 2; /* Sit on top */
-  padding-top: 2em; /* Location of the box */
+  padding-top: 1em; /* Location of the box */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  /*background-color: rgb(0,0,0);*/ /* Fallback color */
+  background-color: rgba(0,0,0,0.2); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;
   margin: auto;
-  padding: 20px;
+  padding: 1em;
   border: 1px solid #888;
-  width: 80%;
+  width: 90%;
 }
 
 /* The Close Button */
@@ -104,7 +104,7 @@ document.addEventListener("DOMContentLoaded",function(){
                      <div class="modal-content">
                         <span id="close" class="close">&times;</span>
                         <span id="modaResult">33 E</span>
-                        <div><input type="range" id="modaRange" min="0" max="100" value="33" onchange="rangeChange(this)" style="width: 100%;margin-top: 1em; "/></div>
+                        <div><input type="range" id="modaRange" min="0" max="100" value="33" oninput="rangeChange(this)" onchange="rangeChange(this,true)" style="width: 100%;margin-top: 1em; "/></div>
                      </div>
                   </div>
                </div>
@@ -248,11 +248,11 @@ document.addEventListener("DOMContentLoaded",function(){
 
                   <text>
                      <title id="title1822">kondensator C1</title>
-                     <tspan id="FCR_C1_1" data-miano="uF" data-min="0" data-max="33" x="110" y="92" class="click elem" title="capasitor C1">3.3uF</tspan>
+                     <tspan id="FCR_C1_1" data-miano="uF" data-min="0" data-max="100" x="110" y="92" class="click elem" title="capasitor C1">3.3uF</tspan>
                   </text>
                   <text>
                      <title>Speaker</title>
-                     <tspan id="FCR_Rg_1" data-miano="E" data-min="0" data-max="33" x="120" y="130" class="click elem">8E</tspan>
+                     <tspan id="FCR_Rg_1" data-miano="E" data-min="0" data-max="100" x="120" y="130" class="click elem">8E</tspan>
                   </text>
                   <text>
                      <title id="FCR_1_title">FRQ</title>
@@ -272,7 +272,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
         <div class="container">
          <figure class="highcharts-figure">
-             <div id="highchart"></div>
+             <div id="highchart" style="max-width:600px"></div>
              <p class="highcharts-description"></p>
          </figure>
       </div>
@@ -307,53 +307,44 @@ const obliczFiltrCR=(ff,frq,R1,C1)=>{
 }   
 
 const calcFilterCR=()=>{
-    //let C1 = parseFloat(document.getElementById("capasitor1").value);
-    //let R1 = parseFloat(document.getElementById("resistor1").value);
-
    let C1x  = $("#FCR_C1_1").textContent;
    let Rg1x = $("#FCR_Rg_1").textContent;
    let C1 = parseFloat(C1x);
    let RG = parseFloat(Rg1x);    
     C1 = C1/1000000;
-    
-    //console.log(C1,RG,Math.PI);
     let frq = 1/(2 * Math.PI * RG * C1);
-    //let frqi = Math.round(frq);
-    //document.getElementById("frq").value = frqi;*/
-
 	let skala = 1;
 	let data = []
-   dane.bass.length = 0;
-   //category.forEach((f)=>{
-	for (f=20;f<20000;f+=10){
+   dane.treble.length = 0;
+   category.forEach((f)=>{
 		let ff=f;
-		gain=obliczFiltrCR(ff,frq,RG,C1);
-        dB= 8.65*Math.log(gain/skala);
-        dB = Math.round(dB*100)/100;
-		//dB= gain    //20*Math.log(gain/skala);
-		//data.push([ff,dB]);
-      //dane.bass.push([ff,dB]);
-      dane.bass.push(dB);
-    }
-    //console.log(data)
+		gain=obliczFiltrCR(f,frq,RG,C1);
+      dB= 8.65*Math.log(gain/skala);
+      dB = Math.round(dB*100)/100;
+      dane.treble.push(dB);
+    })
 	if (wykres) updateWykres(dane); else rysujWykres("highchart",category,dane);    
 }  
 
 </script>
 
 <script>
-
-const rangeChange=(ten)=>{
+const logslider=(position)=> {
+    let val = (position*position/200)/10
+    val = Math.round(val*100)/100
+    if (val<0.01) val = 0.001;
+    return val;
+}
+const rangeChange=(ten,draw=false)=>{
    let modalRange = document.getElementById("modaRange")
-   console.log(modalRange,modalRange.dataset)
    let miano = modalRange.dataset.miano;
    let targetID = modalRange.dataset.targetID;
-   let val = ten.value/10;
-   console.log(ten,ten.id,val)
-   document.getElementById("modaResult").textContent=val+miano;
+   let val = logslider(ten.value);
+    //val = val/10;
+   $("#modaResult").textContent=val+miano;
    $("#"+targetID).textContent = val+miano;
    oblicz_FCR(targetID);
-   calcFilterCR();
+   if (draw) calcFilterCR();
 }
 const openModal=(ten)=>{
    let targetID = ten.id;   
@@ -396,7 +387,7 @@ const oblicz_FCR=(targetID)=>{
    let RG = parseFloat(Rg1x);
    C1 = C1 / 1000000;
    RG = RG; 
-   console.log(C1x,Rg1x, RG,C1)
+   //console.log(C1x,Rg1x, RG,C1)
    let frq = 1/(2 * Math.PI * RG * C1);
    let frqi = Math.round(frq);
    $("#FCR_1_result").textContent=frqi+"Hz"
@@ -412,6 +403,7 @@ const oblicz_FCR=(targetID)=>{
             el.addEventListener('click', listenElement, false);
         })
         oblicz_FCR();
+        calcFilterCR();
         
     });
 </script>
