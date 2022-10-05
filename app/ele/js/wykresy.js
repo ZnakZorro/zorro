@@ -25,7 +25,7 @@ let rysujWykres=(container,category,data)=>{
 			title: {text: 'Gain'},
 			//type: 'logarithmic',
 			max:-0,
-			min:-18
+			//min:-18
 		},
 		xAxis: {
 			accessibility: {rangeDescription: 'Frequency'},
