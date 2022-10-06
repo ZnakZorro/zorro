@@ -6,3 +6,6 @@ button{
   padding:0.2em;
   margin:0.5em;
 }
+div {background:#fff; paddding:0.2em; margin:0.2em;}
+div#keys {border:1px solid red;}
+div#pico {border:1px solid blue;}
