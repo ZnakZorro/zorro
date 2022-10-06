@@ -1,8 +1,10 @@
 body {
-  font:normal 14pt Verdana;
+  font:normal 15pt Verdana;
   background:#eee;
 }
-button{
+button, input[type="submit"]{
+  background:#ddd;
+  font-size:16pt;
   padding:0.2em;
   margin:0.5em;
 }
