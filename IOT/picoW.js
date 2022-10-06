@@ -6,8 +6,13 @@ const installAdds=()=>{
         <button data-val="vol10" onclick="slij(this)">vol10 off</button>
         <button data-val="vol20" onclick="slij(this)">vol20 on </button>
         <button data-val="vol30" onclick="slij(this)">vol 30 </button>
-    `
-}    
+    `;
+    $("#keys").innerHTML = html;
+    
+    html = `<h3>picoW</h3>`;
+    $("#pico").innerHTML = html;
+}
+
 const slij=(ten)=>{
     let url="http://192.168.31.126/";
     let u = "lightoff?";
