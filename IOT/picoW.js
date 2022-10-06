@@ -15,11 +15,11 @@ const installAdds=()=>{
 
 const slij=(ten)=>{
     let url="http://192.168.31.126/";
-    let u = "lightoff?";
+    let u = "off";
     console.log(ten);
     console.log(ten.dataset.val);
     let val = ten.dataset.val;
-    if (val==="vol20") u = "lighton?";
+    if (val==="vol20") u = "on";
     fetch(url+u)
     .then(r => {return r.text()})
     .then(tx => {
