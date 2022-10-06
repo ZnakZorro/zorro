@@ -26,7 +26,13 @@ const slij=(ten)=>{
         console.log(tx);
         $("#pico").textContent = tx;
         let obj=JSON.parse(tx);
-        console.log(obj);
+        if (obj){
+            console.log(obj);
+            let html =""
+            for (const property in obj) {html+=`<p>${property}: ${obj[property]}</p>`;}
+            console.log(html);
+            $("#pico").innerHTML = html;
+        }
     })
     .catch(e => {console.log(e)})    
 }
