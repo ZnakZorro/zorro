@@ -8,6 +8,7 @@ button, input[type="submit"]{
   padding:0.2em;
   margin:0.5em;
 }
+p {margin:0;}
 div {background:#fff; paddding:0.2em; margin:0.2em;}
 div#keys {border:1px solid red;}
 div#pico {border:1px solid blue;}
