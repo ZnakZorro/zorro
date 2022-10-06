@@ -24,6 +24,9 @@ const slij=(ten)=>{
     .then(r => {return r.text()})
     .then(tx => {
         console.log(tx);
+        $("#pico").textContent = tx;
+        let obj=JSON.parse(tx);
+        console.log(obj);
     })
     .catch(e => {console.log(e)})    
 }
