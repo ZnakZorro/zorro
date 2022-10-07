@@ -29,7 +29,7 @@ const slij=(ten)=>{
         if (obj){
             console.log(obj);
             let html =""
-            for (const property in obj) {html+=`<p>${property}: ${obj[property]}</p>`;}
+            for (const property in obj[0]) {html+=`<p>${property}: ${obj[0][property]}</p>`;}
             console.log(html);
             $("#pico").innerHTML = html;
         }
