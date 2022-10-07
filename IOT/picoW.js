@@ -4,8 +4,8 @@ const $$=e=>document.querySelectorAll(e);
 const installAdds=()=>{
     let html = `
         <button data-val="vol10" onclick="slij(this)">V:10</button>
-        <button data-val="vol10" onclick="slij(this)">V:20</button>
-        <button data-val="vol20" onclick="slij(this)">V:25</button>
+        <button data-val="vol20" onclick="slij(this)">V:20</button>
+        <button data-val="vol25" onclick="slij(this)">V:25</button>
         <button data-val="vol30" onclick="slij(this)">V:30</button>
         <button data-val="vol40" onclick="slij(this)">V:40</button>
         <hr />
