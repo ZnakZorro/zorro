@@ -18,8 +18,8 @@ button, .btn, input[type="submit"]{
   display: inline-block;
   text-align: center;  
 }
-p,h1,h2,h3 {margin:0;}
+p,h1,h2,h3 {margin:0 0.1em;}
 div {background:#fff; paddding:0.2em; margin:0.2em;}
-div#keys {border:1px solid red;}
-div#pico {border:1px solid blue;}
-div#pico p {font-size:0.7em;}
+div#keys {}
+div#pico {}
+.small {font-size:0.7em;}
