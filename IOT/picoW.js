@@ -3,9 +3,14 @@ const $$=e=>document.querySelectorAll(e);
 
 const installAdds=()=>{
     let html = `
-        <button data-val="vol10" onclick="slij(this)">vol10 off</button>
-        <button data-val="vol20" onclick="slij(this)">vol20 on </button>
-        <button data-val="vol30" onclick="slij(this)">vol 30 </button>
+        <button data-val="vol10" onclick="slij(this)">V:10</button>
+        <button data-val="vol10" onclick="slij(this)">V:20</button>
+        <button data-val="vol20" onclick="slij(this)">V:25</button>
+        <button data-val="vol30" onclick="slij(this)">V:30</button>
+        <button data-val="vol40" onclick="slij(this)">V:40</button>
+        <hr />
+        <button data-val="on" onclick="slij(this)">Led ON</button>
+        <button data-val="off" onclick="slij(this)">Led OFF</button>
     `;
     $("#keys").innerHTML = html;
     
