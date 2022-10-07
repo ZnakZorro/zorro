@@ -2,11 +2,21 @@ body {
   font:normal 15pt Verdana;
   background:#eee;
 }
-button, input[type="submit"]{
-  background:#ddd;
-  font-size:16pt;
-  padding:0.2em;
-  margin:0.5em;
+button, .btn, input[type="submit"]{
+  background-color: #926AA6;
+  color: #fff;
+  font-size:15pt;
+  border: 1px solid #888;    
+  padding: 0.2em 0.5em;
+  margin: 0.3em 0.2em;
+  text-decoration: none;
+  box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);
+  border-radius: 0.75em;
+  cursor: pointer;
+  min-width: 92px!important;
+  position: relative;
+  display: inline-block;
+  text-align: center;  
 }
 p,h1,h2,h3 {margin:0;}
 div {background:#fff; paddding:0.2em; margin:0.2em;}
