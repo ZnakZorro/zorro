@@ -3,14 +3,20 @@ const $$=e=>document.querySelectorAll(e);
 
 const installAdds=()=>{
     let html = `
-        <button data-val="vol10" onclick="slij(this)">V:10</button>
-        <button data-val="vol20" onclick="slij(this)">V:20</button>
-        <button data-val="vol25" onclick="slij(this)">V:25</button>
-        <button data-val="vol30" onclick="slij(this)">V:30</button>
-        <button data-val="vol40" onclick="slij(this)">V:40</button>
+        <button data-val="vol:10" onclick="slij(this)">V:10</button>
+        <button data-val="vol:15" onclick="slij(this)">V:15</button>
+        <button data-val="vol:20" onclick="slij(this)">V:20</button>
+        <button data-val="vol:25" onclick="slij(this)">V:25</button>
+        <button data-val="vol:30" onclick="slij(this)">V:30</button>
+        <button data-val="vol:40" onclick="slij(this)">V:40</button>
         <hr />
-        <button data-val="on" onclick="slij(this)">Led ON</button>
-        <button data-val="off" onclick="slij(this)">Led OFF</button>
+        <button data-val="pre:1" onclick="slij(this)">A</button>
+        <button data-val="pre:2" onclick="slij(this)">B</button>
+        <button data-val="pre:3" onclick="slij(this)">C</button>
+        <hr />
+        <button data-val="led:on" onclick="slij(this)">Led ON</button>
+        <button data-val="led:off" onclick="slij(this)">Led OFF</button>
+        <button data-val="sys:reset" onclick="slij(this)">Reset</button>
     `;
     $("#keys").innerHTML = html;
     
