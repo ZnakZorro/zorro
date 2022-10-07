@@ -24,13 +24,14 @@ const installAdds=()=>{
     $("#pico").innerHTML = html;
 }
 
-const slij=(ten)=>{
+const slij=(ten=null)=>{
     let url="http://192.168.31.126/";
-    //let u = "off";
-    console.log(ten);
-    console.log(ten.dataset.val);
-    let u = ten.dataset.val;
-    //if (val==="vol20") u = "on";
+    let u = "info:info";
+    if (ten){
+        console.log(ten);
+        console.log(ten.dataset.val);
+        u = ten.dataset.val;
+    }
     fetch(url+u)
     .then(r => {return r.text()})
     .then(tx => {
@@ -53,5 +54,6 @@ document.addEventListener("DOMContentLoaded",function(){
     //$("#diva").style.backgroundColor="#eee";
     console.log("picoW.js");
     installAdds();
+    setInterval(slij,5000);
 })
 
