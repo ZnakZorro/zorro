@@ -48,17 +48,8 @@ const slij=(ten=null)=>{
         obj.forEach((o,i)=>{
             html+=`<p>${i}: ${o}</p>`
         })
+        if (obj[6]) html+=`<img src="http://192.168.31.8/${obj[6]}" />`
         $("#pico").innerHTML = html;
-        /*
-        let obj=JSON.parse(tx);
-        if (obj){
-            console.log(obj);
-            let html =""
-            for (const property in obj[0]) {html+=`<p>${property}: ${obj[0][property]}</p>`;}
-            console.log(html);
-            $("#pico").innerHTML = html;
-        }
-        */
     })
     .catch(e => {console.log(e)})    
 }
