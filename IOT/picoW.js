@@ -60,6 +60,6 @@ document.addEventListener("DOMContentLoaded",function(){
     console.log("picoW.js");
     installAdds();
     slij();
-    setInterval(slij,10000);
+    setInterval(slij,30000);
 })
 
