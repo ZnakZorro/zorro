@@ -54,6 +54,7 @@ document.addEventListener("DOMContentLoaded",function(){
     //$("#diva").style.backgroundColor="#eee";
     console.log("picoW.js");
     installAdds();
-    setInterval(slij,5000);
+    slij();
+    //setInterval(slij,60000);
 })
 
