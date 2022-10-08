@@ -24,3 +24,4 @@ div#keys {}
 div#pico p{font-size:0.6em;}
 .small {font-size:0.7em;}
 .active {background:orange; color:black;}
+img {max-width:240px;}
