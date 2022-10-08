@@ -3,6 +3,7 @@ const $$=e=>document.querySelectorAll(e);
 
 const installAdds=()=>{
     let html = `
+        <button data-val="info:info" onclick="slij(this)">Info</button>
         <button data-val="vol:10" onclick="slij(this)">V:10</button>
         <button data-val="vol:15" onclick="slij(this)">V:15</button>
         <button data-val="vol:20" onclick="slij(this)">V:20</button>
@@ -33,10 +34,11 @@ const slij=(ten=null)=>{
         u = ten.dataset.val;
     }
     fetch(url+u)
-    .then(r => {return r.text()})
+    .then(r => {return r.json()})
     .then(tx => {
         console.log(tx);
-        $("#pico").textContent = tx;
+        $("#pico").textContent = JSON.stringify(tx);
+        /*
         let obj=JSON.parse(tx);
         if (obj){
             console.log(obj);
@@ -45,6 +47,7 @@ const slij=(ten=null)=>{
             console.log(html);
             $("#pico").innerHTML = html;
         }
+        */
     })
     .catch(e => {console.log(e)})    
 }
