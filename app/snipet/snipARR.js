@@ -18,21 +18,17 @@ const snipARR = [
    {n:"mini",           f:"html",      u:"mini.html"},
    {n:"index",           f:"html",      u:"index.html"},
    {n:"git",             f:"html",      u:"git.html"},
-            {n:"bip-hab",         f:"html",      u:"bip-hab.html"},
-            {n:"local",           f:"js",      u:"local.js"},
-            {n:"ESP",             f:"esp",      u:"boards.md"},
-            {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
-            {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
-            {n:"Altus75",         f:"audio",      u:"altus75.htm"},
+        {n:"bip-hab",         f:"html",      u:"bip-hab.html"},
+        {n:"local",           f:"js",      u:"local.js"},
+        {n:"visibility",           f:"js",      u:"visibility.js"},    
+        {n:"ESP",             f:"esp",      u:"boards.md"},
+        {n:"PianoCraft",      f:"audio",       u:"pianocraft.md"},
+        {n:"Gramofon",        f:"audio",       u:"gramofon.htm"},
+        {n:"Altus75",         f:"audio",      u:"altus75.htm"},
         {n:"submit",           f:"js",        u:"submit.html"},
         {n:"async",           f:"js",        u:"async.html"},
-        {n:"WX-051",           f:"audio",        u:"WX-051.htm"},
-    
+        {n:"WX-051",           f:"audio",        u:"WX-051.htm"},   
 
-    
-             
-    
-                
     
    {n:"fetch",           f:"js",        u:"fetch.js"},
    {n:"createElement",   f:"js",        u:"createElement.js"},
