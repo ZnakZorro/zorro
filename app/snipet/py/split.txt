@@ -1,0 +1,4 @@
+txt = "welcome/to/the/jungle"
+x = txt.split("/")[0][:6][2:]
+print(x)
+#x==lcom
