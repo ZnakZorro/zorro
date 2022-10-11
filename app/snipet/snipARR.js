@@ -32,6 +32,7 @@ const snipARR = [
 
     {n:"ESP",             f:"esp",      u:"boards.md"},
     {n:"split",           f:"py",        u:"split.txt"},   
+    {n:"file",            f:"py",        u:"file.txt"},   
 
     {n:"Borówki",         f:"580",       u:"borowki.txt"},
     {n:"Drożdże",         f:"580",       u:"drozdze.htm"},
