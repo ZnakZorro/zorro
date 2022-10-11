@@ -1,0 +1,24 @@
+
+def readFile(name):
+    f = open(name)
+    txt=f.read()
+    f.close()
+    return txt
+
+def writeFile(name,state,content):
+    f = open(name, state)
+    b=f.write(content)
+    f.close()
+    return b
+
+html = readFile("index.html")
+print(html)
+
+text = """
+ala
+ma
+kota
+"""
+
+b=writeFile("text.txt","w",text)
+print(str(b)+"bytes")
