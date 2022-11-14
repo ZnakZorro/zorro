@@ -40,6 +40,7 @@ const snipARR = [
     {n:"Ciasto",          f:"kuchnia",   u:"ciasto.txt"},
     {n:"Piernik",         f:"kuchnia",   u:"Piernik.htm"},
     {n:"Lody",            f:"kuchnia",   u:"lody.md"},
+    {n:"Kawa",            f:"kuchnia",   u:"Kawa.htm"},
    
 
 ];
