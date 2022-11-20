@@ -22,12 +22,13 @@
        });
        let slij=(ten)=>{
          console.log(ten)
+         let cors="http://192.168.31.126/cors/"
          let u = "http://192.168.31.140/"
          let val = ten.dataset.val;
          console.log(val)
          u=u+val;
          console.log(val)
-        fetch(u)
+        fetch(cors+u)
         .then(r => {return r.text()})
         .then(o => {
           console.log(o);
@@ -39,7 +40,7 @@
 
 <body>
     <div class="wrapper">
-        <app-menu title="magicRadio" name="ZnakZorro" link="../../"></app-menu>
+        <app-menu title="magicRadio" name="ZnakZorro" link="../"></app-menu>
         <script src="../appMenu.js"></script>
        
         <div class="container">
