@@ -82,11 +82,10 @@
     const imgReady=()=>{
        console.log("imgReady()================================================");
         document.getElementById("menumodal").innerHTML =`
-        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn">Radar</a>
-        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn">RSS</a>
-        <a href="https://znakzorro.github.io/zorro/magic/index.html" class="btn">magic</a>
-        <a href="https://znakzorro.github.io/zorro/magic/" class="btn">MAGIC</a>
-        <button onclick="ccc()" class="btn">ClearCache</button>`;            
+        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
+        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
+        <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
+        <button onclick="ccc()" class="btn mini minii">CC</button>`;            
     }
 
     let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : _APPcity;
