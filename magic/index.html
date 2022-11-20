@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>rMagic</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#008">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../img/dom.svg"> 
+   <link rel="manifest" href="../zorro.web.json"> 
+   <link rel="stylesheet" href="../css/style.css" />
+   <link rel="stylesheet" href="../css/all.css" />
+   <style>   
+      
+   </style>
+   
+   <script>
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+       let slij=(ten)=>{
+         console.log(ten)
+         let u = "http://192.168.31.140/"
+         let val = dataset.val;
+         console.log(val)
+         u=u+val;
+         console.log(val)
+        fetch(u)
+        .then(r => {return r.text()})
+        .then(o => {
+          console.log(o);
+        }).catch(e => {console.log(e)})      
+     }
+   </script>
+          
+</head>
+
+<body>
+    <div class="wrapper">
+        <app-menu title="index" name="ZnakZorro" link="../../"></app-menu>
+        <script src="../appMenu.js"></script>
+       
+        <div class="container">
+          <div class="left">
+            <a href="http://192.168.31.140/play_stn?id=75_256" class="btn blue">RNŚ</a>
+            <a href="http://192.168.31.140/play_stn?id=75_770" class="btn blue">357</a>
+            <a href="http://192.168.31.140/play_stn?id=75_4"   class="btn blue">Tok-Fm</a>
+            <br />
+            <a href="http://192.168.31.140/setvol?vol=3&mute=0"   class="">V: 3</a>
+            <a href="http://192.168.31.140/setvol?vol=4&mute=0"   class="">V: 4</a>
+            <a href="http://192.168.31.140/setvol?vol=6&mute=0"   class="">V: 6</a>
+            <div id="mini">
+            <button data-val="setvol?vol=3&mute=0" onclick="slij(this)" class="red">xV3</button>
+            <button data-val="setvol?vol=5&mute=0" onclick="slij(this)" class="red">xV5</button> 
+            <button data-val="play_stn?id=75_256"  onclick="slij(this)">xRNŚ</button>
+            <button data-val="play_stn?id=75_4"    onclick="slij(this)">xTOK-FM</button>
+            </div>            
+            
+          </div>
+          <div class="right">
+            <img src="http://192.168.31.140:8080/playlogo.jpg"/>
+          </div>
+               <a href="../../html/grid-system.html" class="btn blue">gridSystem</a>
+               
+       </div>
+       
+       
+    </div><!-- wraper-->
+
+</body>
+</html>
