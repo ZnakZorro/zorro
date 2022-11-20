@@ -23,7 +23,7 @@
        let slij=(ten)=>{
          console.log(ten)
          let u = "http://192.168.31.140/"
-         let val = dataset.val;
+         let val = ten.dataset.val;
          console.log(val)
          u=u+val;
          console.log(val)
@@ -48,21 +48,32 @@
             <a href="http://192.168.31.140/play_stn?id=75_770" class="btn blue">357</a>
             <a href="http://192.168.31.140/play_stn?id=75_4"   class="btn blue">Tok-Fm</a>
             <br />
-            <a href="http://192.168.31.140/setvol?vol=3&mute=0"   class="">V: 3</a>
-            <a href="http://192.168.31.140/setvol?vol=4&mute=0"   class="">V: 4</a>
-            <a href="http://192.168.31.140/setvol?vol=6&mute=0"   class="">V: 6</a>
+            <a href="http://192.168.31.140/setvol?vol=3&mute=0"   class="btn">V: 3</a>
+            <a href="http://192.168.31.140/setvol?vol=4&mute=0"   class="btn">V: 4</a>
+            <a href="http://192.168.31.140/setvol?vol=6&mute=0"   class="btn">V: 6</a>
             <div id="mini">
             <button data-val="setvol?vol=3&mute=0" onclick="slij(this)" class="red">xV3</button>
             <button data-val="setvol?vol=5&mute=0" onclick="slij(this)" class="red">xV5</button> 
             <button data-val="play_stn?id=75_256"  onclick="slij(this)">xRNŚ</button>
             <button data-val="play_stn?id=75_4"    onclick="slij(this)">xTOK-FM</button>
             </div>            
-            
+<hr />
+            <a href="http://192.168.31.140/play_stn?id=75_256" class="btn blue" target="radio">RNŚ</a>
+            <a href="http://192.168.31.140/play_stn?id=75_770" class="btn blue" target="radio">357</a>
+            <a href="http://192.168.31.140/play_stn?id=75_4"   class="btn blue" target="radio">Tok-Fm</a>
+            <br />
+            <a href="http://192.168.31.140/setvol?vol=3&mute=0"   class="btn" target="radio">V: 3</a>
+            <a href="http://192.168.31.140/setvol?vol=4&mute=0"   class="btn" target="radio">V: 4</a>
+            <a href="http://192.168.31.140/setvol?vol=6&mute=0"   class="btn" target="radio">V: 6</a>
+<hr />             
+             
+             
+             
           </div>
           <div class="right">
             <img src="http://192.168.31.140:8080/playlogo.jpg"/>
           </div>
-               <a href="../../html/grid-system.html" class="btn blue">gridSystem</a>
+           <iframe class="ramka" id="radio" name="radio"></iframe>
                
        </div>
        
