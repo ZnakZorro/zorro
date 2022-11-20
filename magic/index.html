@@ -28,6 +28,7 @@
          console.log(val)
          u=u+val;
          console.log(val)
+          u=encodeURIComponent(u)
         fetch(cors+u)
         .then(r => {return r.text()})
         .then(o => {
