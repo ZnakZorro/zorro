@@ -1,0 +1,17 @@
+
+<script src="myLib.js" type="module"></script>
+
+
+<div class="sandwich">sandwich</div>
+
+<script>
+import * as myLib from './myLib.js';
+
+let sandwiches = document.querySelectorAll('.sandwich');
+myLib.addClasses(sandwiches, ['mayo', 'pickles']);
+
+/*import * as myLib from './myLib.js';
+
+let sandwiches = document.querySelectorAll('.sandwich');
+myLib.addClasses(sandwiches, ['mayo', 'pickles']);*/
+</script>
