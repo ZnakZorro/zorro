@@ -56,9 +56,10 @@ const change=()=>{
       proxyOBJ.foo = updated_at;
       let data = obj.properties.timeseries;      
       console.log(data)
-      let dane = data[0].instant.details
-      console.log(dane)
       proxyOBJ.bar = data[0].time;
+      
+      let dane = data[0].data.instant.details
+      console.log(dane)      
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
       console.log(updated_at)
       
