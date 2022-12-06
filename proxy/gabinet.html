@@ -49,7 +49,14 @@ const change=()=>{
    fetch(u)
    .then(r => {return r.json()})
    .then(o => {
-    console.log(o)
+      console.log(o)
+      console.log(o.created)
+      console.log(o.symbolCode.next1Hour)
+      console.log(o.temperature.value)
+      console.log(o.temperature.feelsLike)
+      console.log(o.precipitation.value)
+      console.log(o.wind.speed)
+      
    }).catch(e => {console.log(e)})
 
     proxyOBJ.bar = xtx()
