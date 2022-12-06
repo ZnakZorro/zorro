@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>vu01</title>
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>   
+      body {font:normal Verdana 14pt;}
+   </style>
+  </head>
+  <body>
+    
+<div class="content">
+  <div class="page">
+    <div id="app">
+        <div class="vc border">
+          <p class="tytul">{{ tytul }}</p>
+          <p class="nazwisko">{{ nazwisko }}</p>
+          <p class="funkcja">{{ funkcja }}</p>
+          <p class="katedra">{{ katedra }}</p>
+          <p class="adress">{{ adress }}</p>
+          <p class="telefon">{{ telefon }}</p>
+          <p class="email">{{ email }}</p>
+        </div>
+    </div>
+  </div>
+</div>
+    
+<script>
+var vcObject = new Vue({
+  el: '#app',
+  data: {
+      tytul: 'dr inż.',
+      nazwisko: 'Jan Kowalski',
+      funkcja: 'Kierownik',
+      katedra: 'Katedra Architektury',
+      adress: 'ul. Żołnierska 49, 71-210 Szczecin',
+      telefon: 'tel.: +48 91 449 5574',
+      email: 'jkowalski@wi.zut.edu.pl',
+  }
+});
+  
+  
+  
+function vcFunction() {
+      vcObject.tytul= 'prof.';
+      vcObject.nazwisko= 'Adam Konieczny';
+      vcObject.funkcja= 'Profesor ZUT';
+      vcObject.katedra= 'Katedra Sztucznej Inteligencji i Matematyki Stosowanej';
+      vcObject.adress= 'ul. Żołnierska 49, 71-210 Szczecin';
+      vcObject.telefon= 'tel.: +48 91 449 5589';
+      vcObject.email= 'akonieczny@wi.zut.edu.pl';
+}  
+  
+  
+  document.addEventListener("DOMContentLoaded",function(){
+           setTimeout(()=>{vcFunction()},5000)
+  });  
+  
+</script>
+
+     
+  </body>
+</html>
