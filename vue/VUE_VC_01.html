@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Vue-VC-01</title>
+  <!--script src="https://cdn.jsdelivr.net/npm/vue@2"></script-->
+  <script src="./js/vue.js"></script>
+  <script src="./js/FileSaver.min.js"></script>
+  <style>
+    * {
+        -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
+        color-adjust: exact !important;                 /*Firefox*/
+    }
+@media screen {
+    .ed {background:#eee;} 
+    .border {border:1px solid #aaa;}
+    .klawisze{padding:2mm;}
+    .page {border:1px solid #aaa;}
+  }
+    @media print {
+        .noprint {display:none;}
+        .ed {background:none;}  
+      }
+
+    @page {
+        size:A4 portrait;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin: 0;
+        -webkit-print-color-adjust: exact;
+    }    
+    body {font-size:9pt; font-family:Verdana;}
+    div.vc {
+      float:right; width:90mm;height:50mm;
+    } 
+    p.nazwisko {}
+  </style>
+</head>
+
+<body>
+  
+
+<div class="content">
+  <div class="page">  
+  
+    <div id="app">
+        <div class="vc border">
+          <p class="tytul">{{ tytul }}</p>
+          <p class="nazwisko">{{ nazwisko }}</p>
+          <p class="funkcja">{{ funkcja }}</p>
+          <p class="katedra">{{ katedra }}</p>
+          <p class="adress">{{ adress }}</p>
+          <p class="telefon">{{ telefon }}</p>
+          <p class="email">{{ email }}</p>
+        </div>
+      <p  class="noprint">
+        <input v-model="tytul"><br />
+        <input v-model="nazwisko"><br />
+        <input v-model="funkcja"><br />
+        <input v-model="katedra"><br />
+        <input v-model="adress"><br />
+        <input v-model="telefon"><br />
+        <input v-model="email"><br />
+      </p>
+    </div>
+    
+  </div>
+  
+    <div class="klawisze noprint">
+        <p><button onclick="vcFunction()">Inne</button></p>  
+        <p><button onclick="zapisz()">Zapisz</button></p>
+        <p><button onclick="Drukuj()">Drukuj</button></p>
+        <p><input type="file" id="file-input" /></p>
+        <!--button onclick="zapiszTest()">zapiszTest</button-->
+
+    </div> 
+</div> 
+  
+<script>  
+let Drukuj=()=>{
+  //Zapisz();
+  window.print();
+  
+}
+function addcss(css){
+    var head = document.getElementsByTagName('head')[0];
+    var s = document.createElement('style');
+    s.setAttribute('type', 'text/css');
+    if (s.styleSheet) {   // IE
+        s.styleSheet.cssText = css;
+    } else {                // the world
+        s.appendChild(document.createTextNode(css));
+    }
+    head.appendChild(s);
+ }
+  
+let innerHTMLvc=""; 
+let innerPAGE=""; 
+  
+let Makieta=(ile=10)=>{
+  innerPAGE = document.querySelector("div.page").innerHTML;
+  let page=document.querySelector("div.page");
+  let vc1=document.querySelector("div.vc");
+  vc1.classList.remove("border");
+
+  let marker = '<div class="marker"><div class="m1"></div><div class="m2"></div></div>';
+  innerHTMLvc = vc1.innerHTML;
+  let vcHTML = '<div class="vc wrapper kropki">'+innerHTMLvc+'</div>';
+  page.innerHTML = marker;
+  for (let i=0; i<ile; i++){
+      page.insertAdjacentHTML('beforeend', vcHTML);
+  }
+  page.innerHTML += marker;
+//beforebegin afterbegin beforeend afterend
+  //document.querySelector("img.demo").style.display="none";
+  addcss('.border {border:none;}')
+}
+
+
+let zapisz=()=>{
+  //console.log(vcObject._data.nazwisko);
+  let name = (vcObject._data.nazwisko).replaceAll(" ","_");
+  let jsonTXT = JSON.stringify(vcObject._data,null,"\t"); 
+    let blob = new Blob([jsonTXT], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, name+"_vc.json");    
+    //let file = new File(["Hello, world!"], "file hello world.txt", {type: "text/plain;charset=utf-8"});
+    //saveAs(file);  
+}
+const saveTextAs=(text,name)=>{
+    let blob = new Blob([text], {type: "text/plain;charset=utf-8"});
+    saveAs(blob, name);      
+}
+let zapiszTest=()=>{
+saveTextAs("Hi,This,is,a,CSV,File", "test.csv");
+saveTextAs("<div>Hello, world!</div>", "test.html");
+}
+window.addEventListener('afterprint', (event) => {
+  console.log('After print');
+  console.log(innerPAGE);
+  document.querySelector("div.page").innerHTML = innerPAGE;
+});
+window.addEventListener('beforeprint', (event) => {
+  console.log('Before print');
+  Makieta();
+});
+</script>  
+  
+<script>
+var vcObject = new Vue({
+  el: '#app',
+  data: {
+      tytul: 'dr inż.',
+      nazwisko: 'Jan Kowalski',
+      funkcja: 'Kierownik',
+      katedra: 'Katedra Architektury',
+      adress: 'ul. Żołnierska 49, 71-210 Szczecin',
+      telefon: 'tel.: +48 91 449 5574',
+      email: 'jkowalski@wi.zut.edu.pl',
+  }
+});
+  
+  
+  
+function vcFunction() {
+      vcObject.tytul= 'prof.';
+      vcObject.nazwisko= 'Adam Konieczny';
+      vcObject.funkcja= 'Profesor ZUT';
+      vcObject.katedra= 'Katedra Sztucznej Inteligencji i Matematyki Stosowanej';
+      vcObject.adress= 'ul. Żołnierska 49, 71-210 Szczecin';
+      vcObject.telefon= 'tel.: +48 91 449 5589';
+      vcObject.email= 'akonieczny@wi.zut.edu.pl';
+}  
+</script>
+
+ 
+  
+  
+  
+
+<!--
+<h3>Contents of the file:</h3>
+<pre id="file-content"></pre>  
+-->  
+<script>
+function readSingleFile(e) {
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    displayContents(contents);
+  };
+  reader.readAsText(file);
+}
+
+function displayContents(contents) {
+  let obj = JSON.parse(contents);
+  //console.log(obj);
+  for(let k in obj){
+      //console.log(k,obj[k]);
+      vcObject[k]= obj[k];
+  }
+  //let element = document.getElementById('file-content');
+  //element.textContent = contents;
+}
+  
+document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+</script>
+  
+
+
+  
+  
+  
+<script>
+/*
+var s = document.createElement('script');
+s.type = 'text/javascript';
+s.src = 'https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/1.3.8/FileSaver.min.js';
+document.body.appendChild(s);
+
+
+saveAs(new Blob([data], {type: "application/octet-stream ;charset=utf-8"}), "video.ts")
+*/
+</script>
+</body>
+</html>
+
+
