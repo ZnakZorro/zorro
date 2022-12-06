@@ -22,6 +22,7 @@
             bar: <span class="watch" id="bar">bar</span><br />
             bar: <span class="watch" id="miu">miu</span><br />
         </div>
+       <button onclick="change()">YRNO</button>
     </div>
 
 <script>
@@ -70,7 +71,7 @@ document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll(".watch").forEach((el)=>watchOBJ[el.id]="");
 
   change();
-  setInterval(change,5000);
+  setInterval(change,30000);
 });
 
 </script>
