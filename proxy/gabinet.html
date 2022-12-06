@@ -50,18 +50,17 @@ const change=()=>{
    let u = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15';
    fetch(u)
    .then(r => {return r.json()})
-   .then(o => {
-      console.log(o)
-      console.log(o.created)
-      console.log(o.symbolCode.next1Hour)
-      console.log(o.temperature.value)
-      console.log(o.temperature.feelsLike)
-      console.log(o.precipitation.value)
-      console.log(o.wind.speed)
+   .then(obj => {
+      console.log(obj)
+      let updated_at = obj.properties.meta.updated_at;
+      proxyOBJ.bar = updated_at;
+      let data = obj.properties.timeseries;
+      console.log(updated_at)
+      console.log(data)
       
    }).catch(e => {console.log(e)})
 
-    proxyOBJ.bar = xtx()
+    
     proxyOBJ.foo = xtx()
     proxyOBJ.miu = xtx()
     console.log(watchOBJ)
