@@ -53,16 +53,20 @@ const change=()=>{
    .then(obj => {
       console.log(obj)
       let updated_at = obj.properties.meta.updated_at;
-      proxyOBJ.bar = updated_at;
-      let data = obj.properties.timeseries;
+      proxyOBJ.foo = updated_at;
+      let data = obj.properties.timeseries;      
+      let dane = data[0].instant.details
+      proxyOBJ.bar = data[0].time;
+      proxyOBJ.miu = dane.air_temperature+"&deg;C";
       console.log(updated_at)
       console.log(data)
+      console.log(data[0])
       
    }).catch(e => {console.log(e)})
 
     
-    proxyOBJ.foo = xtx()
-    proxyOBJ.miu = xtx()
+    //proxyOBJ.foo = xtx()
+    //proxyOBJ.miu = xtx()
     console.log(watchOBJ)
     //console.log(proxyOBJ.foo)
 }
@@ -71,7 +75,7 @@ document.addEventListener("DOMContentLoaded",function(){
   document.querySelectorAll(".watch").forEach((el)=>watchOBJ[el.id]="");
 
   change();
-  setInterval(change,30000);
+  setInterval(change,(15*60*1000));
 });
 
 </script>
