@@ -21,6 +21,7 @@
             foo: <span class="watch" id="foo">foo</span><br />
             bar: <span class="watch" id="bar">bar</span><br />
             bar: <span class="watch" id="miu">miu</span><br />
+            bar: <span class="watch" id="win">miu</span><br />
         </div>
        <button onclick="change()">YRNO</button>
     </div>
@@ -39,7 +40,7 @@ var proxyOBJ = new Proxy(watchOBJ, {
     //console.log(`${prop} set from ${target[prop]} to ${value}`);    
     //console.log({ type: 'set', target, prop, value });
     target[prop] = value;
-    document.getElementById(prop).textContent=watchOBJ[prop];
+    document.getElementById(prop).innerHTML=watchOBJ[prop];
     return Reflect.set(target, prop, value);
   }
 });
@@ -61,6 +62,7 @@ const change=()=>{
       let dane = data[0].data.instant.details
       console.log(dane)      
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
+      proxyOBJ.win = dane.wind_speed+"m/s";
       console.log(updated_at)
       
       
