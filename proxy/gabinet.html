@@ -55,12 +55,14 @@ const change=()=>{
       let updated_at = obj.properties.meta.updated_at;
       proxyOBJ.foo = updated_at;
       let data = obj.properties.timeseries;      
+      console.log(data)
       let dane = data[0].instant.details
+      console.log(dane)
       proxyOBJ.bar = data[0].time;
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
       console.log(updated_at)
-      console.log(data)
-      console.log(dane)
+      
+      
       
    }).catch(e => {console.log(e)})
 
