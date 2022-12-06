@@ -22,10 +22,10 @@
           }
           return result;
       }
-     const xtx=(n)=>{
-      return (Math.random() + 1).toString(36).substring(n);
+     const xtx=()=>{
+      return (Math.random() + 1).toString(36).substring(2);
      }
-      console.log("random", xtx(36));
+      console.log("random", xtx());
       console.log(makeid(5));
     </script>
   </head>
@@ -64,10 +64,10 @@ var vcObject = new Vue({
   
   
 function vcFunction() {
-      vcObject.tytul= xtx(5);
-      vcObject.nazwisko= xtx(12)+', '+makeid(8);
+      vcObject.tytul= xtx();
+      vcObject.nazwisko= xtx()+', '+makeid(8);
       vcObject.funkcja= makeid(8)+' '+makeid(8);
-      vcObject.katedra= xtx(30)+'==Katedra Sztucznej Inteligencji i Matematyki Stosowanej';
+      vcObject.katedra= xtx()+'=>Katedra Sztucznej Inteligencji i Matematyki Stosowanej';
       vcObject.adress= 'ul. Żołnierska 49, 71-210 Szczecin';
       vcObject.telefon= 'tel.: +48 91 449 5589';
       vcObject.email= 'akonieczny@wi.zut.edu.pl';
