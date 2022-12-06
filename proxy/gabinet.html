@@ -44,12 +44,13 @@ var proxyOBJ = new Proxy(watchOBJ, {
 });
 
 const change=()=>{
-  let u = 'http://192.168.31.100/YamahaExtendedControl/v1/main/getStatus';
-  fetch(u)
-  .then(r => {return r.json()})
-  .then(o => {
+   //let u = 'http://192.168.31.100/YamahaExtendedControl/v1/main/getStatus';
+   let u = 'https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour';
+   fetch(u)
+   .then(r => {return r.json()})
+   .then(o => {
     console.log(o)
-  }).catch(e => {console.log(e)})
+   }).catch(e => {console.log(e)})
 
     proxyOBJ.bar = xtx()
     proxyOBJ.foo = xtx()
