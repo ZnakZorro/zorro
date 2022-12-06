@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>proxy-1</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#008">
+   <style>   
+      body {font:normal Verdana 14pt;}
+      .wrapper {margin:0; padding:0;}
+      .container {margin:0.2em; padding:0.2em;}
+   </style>
+</head>
+
+<body>
+    <div class="wrapper">       
+        <div class="container">
+            foo: <span id="foo">foo</span>
+            <br />
+            bar: <span id="bar">bar</span>
+        </div>
+    </div>
+
+<script>
+const xtx=()=>(Math.random() + 1).toString(36).substring(2);
+
+var obj = {
+  foo: '1',
+  bar: '2'
+};
+
+var proxied = new Proxy(obj, {
+  get: function(target, prop) {
+    //console.log({ type: 'get', target, prop });    
+    return Reflect.get(target, prop);
+  },
+  set: function(target, prop, value) {
+    obj[prop]=value
+    //console.log({ type: 'set', target, prop, value });
+    document.getElementById(prop).textContent=obj[prop]
+    return Reflect.set(target, prop, value);
+  }
+});
+
+const change=()=>{
+    proxied.bar = xtx()
+    proxied.foo = xtx()
+    console.log(obj)
+    //console.log(proxied.foo)
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+    setInterval(change,2222)
+});
+
+</script>
+    
+</body>
+</html>
