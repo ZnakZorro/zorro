@@ -10,6 +10,19 @@
    <style>   
       body {font:normal Verdana 14pt;}
    </style>
+   <script>
+      function makeid(length) {
+          var result           = '';
+          var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+          var charactersLength = characters.length;
+          for ( var i = 0; i < length; i++ ) {
+              result += characters.charAt(Math.floor(Math.random() * charactersLength));
+          }
+          return result;
+      }
+
+      console.log(makeid(5));
+    </script>
   </head>
   <body>
     
@@ -47,8 +60,8 @@ var vcObject = new Vue({
   
 function vcFunction() {
       vcObject.tytul= 'prof.';
-      vcObject.nazwisko= 'Adam Konieczny';
-      vcObject.funkcja= 'Profesor ZUT';
+      vcObject.nazwisko= makeid(8);
+      vcObject.funkcja= makeid(8)+' '+makeid(8);
       vcObject.katedra= 'Katedra Sztucznej Inteligencji i Matematyki Stosowanej';
       vcObject.adress= 'ul. Żołnierska 49, 71-210 Szczecin';
       vcObject.telefon= 'tel.: +48 91 449 5589';
@@ -57,7 +70,7 @@ function vcFunction() {
   
   
   document.addEventListener("DOMContentLoaded",function(){
-           setTimeout(()=>{vcFunction()},5000)
+           setInterval(()=>{vcFunction()},5000)
   });  
   
 </script>
