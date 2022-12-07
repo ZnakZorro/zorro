@@ -37,6 +37,10 @@
             upda: <span class="watch" id="bar">bar</span><br />
             temp: <span class="watch" id="miu">miu</span><br />
             wind: <span class="watch" id="win">miu</span><br />
+            pres: <span class="watch" id="prs">prs</span><br />
+            rain1: <span class="watch" id="ra1">ra1</span><br />
+            rain6: <span class="watch" id="ra6">ra1</span><br />
+            rain12: <span class="watch" id="ra12">ra1</span><br />
         </div>
        <button onclick="change()">YRNO</button>
     </div>
@@ -63,35 +67,35 @@ var proxyOBJ = new Proxy(watchOBJ, {
   }
 });
 
+const getCzas=(time)=>{
+    let timeFrom  = (new Date(time)).getTime()
+    let czas = (new Date(timeFrom)).toLocaleString('pl-PL');
+    return czas;
+}
 const change=()=>{
-   //let u = 'http://192.168.31.100/YamahaExtendedControl/v1/main/getStatus';
-   //let u = 'https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour';
    let u = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15';
    fetch(u)
    .then(r => {return r.json()})
    .then(obj => {
       console.log(obj)
-      let updated_at = obj.properties.meta.updated_at;
-      proxyOBJ.foo = updated_at;
+      proxyOBJ.foo = getCzas(obj.properties.meta.updated_at);
       let data = obj.properties.timeseries;      
       console.log(data)
-      proxyOBJ.bar = data[0].time;
+      proxyOBJ.bar = getCzas(data[0].time);
       
       let dane = data[0].data.instant.details
-      console.log(dane)      
+      console.log(dane)
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
       proxyOBJ.win = dane.wind_speed+"m/s";
-      console.log(updated_at)
-      
-      
-      
+      proxyOBJ.prs = dane.air_pressure_at_sea_level+"mmHg";
+      console.log(data[0])
+      proxyOBJ.ra1  = data[0].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra6  = data[0].data.next_6_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra12 = "0mm"
+      if(data[0].data.next_12_hours.details?.precipitation_amount)
+          proxyOBJ.ra12 = data[0].data.next_12_hours.details?.precipitation_amount+"mm";
    }).catch(e => {console.log(e)})
-
-    
-    //proxyOBJ.foo = xtx()
-    //proxyOBJ.miu = xtx()
-    console.log(watchOBJ)
-    //console.log(proxyOBJ.foo)
+    console.log(watchOBJ)    
 }
 
 document.addEventListener("DOMContentLoaded",function(){
