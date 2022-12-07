@@ -47,7 +47,7 @@ const xtx=()=>(Math.random() + 1).toString(36).substring(2);
 var watchOBJ = {}
 
 const wOBJ = new Proxa(watchOBJ);
-
+console.log(wOBJ.test())
 
 var proxyOBJ = new Proxy(watchOBJ, {
   get: function(target, prop) {
