@@ -33,28 +33,30 @@
     <div class="wrapper">       
         <div class="container">
           <h3>yrnoProxa <span class="watch" id="foo">foo</span></h3>
-            czas: <span class="watch" id="bar">bar</span><br />
+            czas : <span class="watch" id="bar">bar</span><br />
             temp: <span class="watch" id="miu">miu</span><br />
             wind : <span class="watch" id="win">miu</span><br />
             press: <span class="watch" id="prs">prs</span><br />
-            rain1 : <span class="watch" id="ra1">ra1</span><br />
-            rain6 : <span class="watch" id="ra6">ra1</span><br />
-            rain12: <span class="watch" id="ra12">ra1</span><br />
+            rain1 : <span class="watch" id="ra1"></span><br />
+            rain6 : <span class="watch" id="ra6"></span><br />
+            <span class="watch" id="ico1"></span> <span class="watch" id="cod1"></span>
+            
             <hr />
 
-            czas: <span class="watch" id="bar1">bar</span><br />
+            czas : <span class="watch" id="bar1">bar</span><br />
             temp: <span class="watch" id="miu1">miu</span><br />
             wind : <span class="watch" id="win1">miu</span><br />
             press: <span class="watch" id="prs1">prs</span><br />
-            rain1 : <span class="watch" id="ra11">ra1</span><br />
-            rain6 : <span class="watch" id="ra61">ra1</span><br />
-            rain12: <span class="watch" id="ra121">ra1</span><br />            
+            rain1 : <span class="watch" id="ra11"></span><br />
+            rain6 : <span class="watch" id="ra61"></span><br />
+            <span class="watch" id="ico2"></span> <span class="watch" id="cod2"></span>
         </div>
        <button onclick="change()">YRNO</button>
     </div>
 
 <script>
 const xtx=()=>(Math.random() + 1).toString(36).substring(2);
+
 
 var watchOBJ = {}
 
@@ -75,12 +77,28 @@ var proxyOBJ = new Proxy(watchOBJ, {
   }
 });
 
+String.prototype.pad2 = function()  {return ("0" + this).slice(-2);}
 const getCzas=(time)=>{
     let timeFrom  = (new Date(time)).getTime()
-    let czas = (new Date(timeFrom)).toLocaleString('pl-PL');
-    return czas;
+    //let czas = (new Date(timeFrom)).toLocaleString('pl-PL');
+    let d = (new Date(timeFrom));
+    let godzina = (d.getHours()).toString().pad2();
+    let minuta  = (d.getMinutes()).toString().pad2();
+    return godzina+":"+minuta;    
+    //return czas;
 }
+
+const current=()=>{
+  let u = 'https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour';
+  fetch(u, { mode: 'no-cors'})
+   .then(r => {return r.text()})
+   .then(obj => {
+      console.log(obj)
+   }).catch(e => {console.log(e)})
+}
+
 const change=()=>{
+  current()
    let u = 'https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15';
    fetch(u)
    .then(r => {return r.json()})
@@ -89,32 +107,32 @@ const change=()=>{
       proxyOBJ.foo = getCzas(obj.properties.meta.updated_at);
       let data = obj.properties.timeseries;      
       console.log(data)
-      proxyOBJ.bar = getCzas(data[0].time);
+      let xx = 0+1;
+      proxyOBJ.bar = getCzas(data[xx].time);
       
-      let dane = data[0].data.instant.details
+      let dane = data[xx].data.instant.details
       console.log(dane)
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
       proxyOBJ.win = dane.wind_speed+"m/s";
       proxyOBJ.prs = dane.air_pressure_at_sea_level+"mmHg";
-      proxyOBJ.ra1  = data[0].data.next_1_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra6  = data[0].data.next_6_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra12 = "0mm"
-      if(data[0].data.next_12_hours.details?.precipitation_amount)
-          proxyOBJ.ra12 = data[0].data.next_12_hours.details?.precipitation_amount+"mm";
+      proxyOBJ.ra1  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra6  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
+      let cod1  = data[xx].data.next_1_hours.summary.symbol_code;
+      proxyOBJ.cod1  = cod1
+      proxyOBJ.ico1 = '<img src="https://api.met.no/images/weathericons/svg/'+cod1+'.svg" style="width:48px">';
 
-
-      dane = data[1].data.instant.details
+      xx=1+3;
+      dane = data[xx].data.instant.details
       console.log(dane)
-      proxyOBJ.bar1 = getCzas(data[1].time);
+      proxyOBJ.bar1 = getCzas(data[xx].time);
       proxyOBJ.miu1 = dane.air_temperature+"&deg;C";
       proxyOBJ.win1 = dane.wind_speed+"m/s";
       proxyOBJ.prs1 = dane.air_pressure_at_sea_level+"mmHg";
-      proxyOBJ.ra11  = data[1].data.next_1_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra61  = data[1].data.next_6_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra121 = "0mm"
-      if(data[1].data.next_12_hours.details?.precipitation_amount)
-          proxyOBJ.ra121 = data[0].data.next_12_hours.details?.precipitation_amount+"mm";
-
+      proxyOBJ.ra11  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra61  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
+      let cod2  = data[xx].data.next_1_hours.summary.symbol_code;
+      proxyOBJ.cod2  = cod2
+      proxyOBJ.ico2 = '<img src="https://api.met.no/images/weathericons/svg/'+cod2+'.svg" style="width:48px">';
 
    }).catch(e => {console.log(e)})
     console.log(watchOBJ)    
