@@ -32,15 +32,23 @@
 <body>
     <div class="wrapper">       
         <div class="container">
-          <h3>yrnoProxa</h3>
-            date: <span class="watch" id="foo">foo</span><br />
-            upda: <span class="watch" id="bar">bar</span><br />
+          <h3>yrnoProxa <span class="watch" id="foo">foo</span></h3>
+            czas: <span class="watch" id="bar">bar</span><br />
             temp: <span class="watch" id="miu">miu</span><br />
-            wind: <span class="watch" id="win">miu</span><br />
-            pres: <span class="watch" id="prs">prs</span><br />
-            rain1: <span class="watch" id="ra1">ra1</span><br />
-            rain6: <span class="watch" id="ra6">ra1</span><br />
+            wind : <span class="watch" id="win">miu</span><br />
+            press: <span class="watch" id="prs">prs</span><br />
+            rain1 : <span class="watch" id="ra1">ra1</span><br />
+            rain6 : <span class="watch" id="ra6">ra1</span><br />
             rain12: <span class="watch" id="ra12">ra1</span><br />
+            <hr />
+
+            czas: <span class="watch" id="bar1">bar</span><br />
+            temp: <span class="watch" id="miu1">miu</span><br />
+            wind : <span class="watch" id="win1">miu</span><br />
+            press: <span class="watch" id="prs1">prs</span><br />
+            rain1 : <span class="watch" id="ra11">ra1</span><br />
+            rain6 : <span class="watch" id="ra61">ra1</span><br />
+            rain12: <span class="watch" id="ra121">ra1</span><br />            
         </div>
        <button onclick="change()">YRNO</button>
     </div>
@@ -88,12 +96,26 @@ const change=()=>{
       proxyOBJ.miu = dane.air_temperature+"&deg;C";
       proxyOBJ.win = dane.wind_speed+"m/s";
       proxyOBJ.prs = dane.air_pressure_at_sea_level+"mmHg";
-      console.log(data[0])
       proxyOBJ.ra1  = data[0].data.next_1_hours.details.precipitation_amount+"mm";
       proxyOBJ.ra6  = data[0].data.next_6_hours.details.precipitation_amount+"mm";
       proxyOBJ.ra12 = "0mm"
       if(data[0].data.next_12_hours.details?.precipitation_amount)
           proxyOBJ.ra12 = data[0].data.next_12_hours.details?.precipitation_amount+"mm";
+
+
+      dane = data[1].data.instant.details
+      console.log(dane)
+      proxyOBJ.bar1 = getCzas(data[1].time);
+      proxyOBJ.miu1 = dane.air_temperature+"&deg;C";
+      proxyOBJ.win1 = dane.wind_speed+"m/s";
+      proxyOBJ.prs1 = dane.air_pressure_at_sea_level+"mmHg";
+      proxyOBJ.ra11  = data[1].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra61  = data[1].data.next_6_hours.details.precipitation_amount+"mm";
+      proxyOBJ.ra121 = "0mm"
+      if(data[1].data.next_12_hours.details?.precipitation_amount)
+          proxyOBJ.ra121 = data[0].data.next_12_hours.details?.precipitation_amount+"mm";
+
+
    }).catch(e => {console.log(e)})
     console.log(watchOBJ)    
 }
