@@ -8,10 +8,24 @@
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="https://znakzorro.github.io/img/dom.svg"> 
+   <link rel="manifest" href="https://znakzorro.github.io/zorro.web.json"> 
+   <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/all.css" />      
    <style>   
-      body {font:normal Verdana 14pt;}
-      .wrapper {margin:0; padding:0;}
-      .container {margin:0.2em; padding:0.2em;}
+      body {font-size:15pt;}
+      .block {
+          display: inline-block;
+          width: 49%;
+          padding: 1%;
+          margin-bottom: 3%;
+          background: #fff;
+          vertical-align: top;
+      }
+      @media (max-width: 460px) {
+      .block {
+              width: 100%;  
+          }
+      }         
    </style>
   <script>
     class Proxa {
@@ -33,25 +47,27 @@
     <div class="wrapper">       
         <div class="container">
           <h3>yrnoProxa <span class="watch" id="foo">foo</span></h3>
-            czas : <span class="watch" id="bar">bar</span><br />
-            temp: <span class="watch" id="miu">miu</span><br />
-            wind : <span class="watch" id="win">miu</span><br />
-            press: <span class="watch" id="prs">prs</span><br />
-            rain1 : <span class="watch" id="ra1"></span><br />
-            rain6 : <span class="watch" id="ra6"></span><br />
-            <span class="watch" id="ico1"></span> <span class="watch" id="cod1"></span>
-            
-            <hr />
+          <div class="block">          
+              czas : <span class="watch" id="czas1">bar</span><br />
+              temp: <span class="watch" id="temp1">miu</span><br />
+              wind : <span class="watch" id="wind1">miu</span><br />
+              press: <span class="watch" id="press1">prs</span><br />
+              rain1 : <span class="watch" id="rain11"></span><br />
+              rain6 : <span class="watch" id="rain16"></span><br />
+              <span class="watch" id="ico1"></span> <span class="watch" id="cod1"></span>
+          </div>
 
-            czas : <span class="watch" id="bar1">bar</span><br />
-            temp: <span class="watch" id="miu1">miu</span><br />
-            wind : <span class="watch" id="win1">miu</span><br />
-            press: <span class="watch" id="prs1">prs</span><br />
-            rain1 : <span class="watch" id="ra11"></span><br />
-            rain6 : <span class="watch" id="ra61"></span><br />
-            <span class="watch" id="ico2"></span> <span class="watch" id="cod2"></span>
+          <div class="block">
+              czas : <span class="watch" id="czas2">bar</span><br />
+              temp: <span class="watch" id="temp2">miu</span><br />
+              wind : <span class="watch" id="wind2">miu</span><br />
+              press: <span class="watch" id="press2">prs</span><br />
+              rain1 : <span class="watch" id="rain21"></span><br />
+              rain6 : <span class="watch" id="rain26"></span><br />
+              <span class="watch" id="ico2"></span> <span class="watch" id="cod2"></span>
+          </div>
         </div>
-       <button onclick="change()">YRNO</button>
+        <button onclick="change()">YRNO</button>
     </div>
 
 <script>
@@ -72,7 +88,7 @@ var proxyOBJ = new Proxy(watchOBJ, {
     //console.log(`${prop} set from ${target[prop]} to ${value}`);    
     //console.log({ type: 'set', target, prop, value });
     target[prop] = value;
-    document.getElementById(prop).innerHTML=watchOBJ[prop];
+    document.getElementById(prop).innerHTML = target[prop];
     return Reflect.set(target, prop, value);
   }
 });
@@ -108,30 +124,29 @@ const change=()=>{
       let data = obj.properties.timeseries;      
       console.log(data)
       let xx = 0+1;
-      proxyOBJ.bar = getCzas(data[xx].time);
-      
       let dane = data[xx].data.instant.details
       console.log(dane)
-      proxyOBJ.miu = dane.air_temperature+"&deg;C";
-      proxyOBJ.win = dane.wind_speed+"m/s";
-      proxyOBJ.prs = dane.air_pressure_at_sea_level+"mmHg";
-      proxyOBJ.ra1  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra6  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
+      proxyOBJ.czas1 = getCzas(data[xx].time);
+      proxyOBJ.temp1 = dane.air_temperature+"&deg;C";
+      proxyOBJ.wind1 = dane.wind_speed+"m/s";
+      proxyOBJ.press1 = dane.air_pressure_at_sea_level+"mmHg";
+      proxyOBJ.rain11  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.rain16  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
       let cod1  = data[xx].data.next_1_hours.summary.symbol_code;
-      proxyOBJ.cod1  = cod1
+      proxyOBJ.cod1  = cod1.split("_")[0]
       proxyOBJ.ico1 = '<img src="https://api.met.no/images/weathericons/svg/'+cod1+'.svg" style="width:48px">';
 
       xx=1+3;
       dane = data[xx].data.instant.details
       console.log(dane)
-      proxyOBJ.bar1 = getCzas(data[xx].time);
-      proxyOBJ.miu1 = dane.air_temperature+"&deg;C";
-      proxyOBJ.win1 = dane.wind_speed+"m/s";
-      proxyOBJ.prs1 = dane.air_pressure_at_sea_level+"mmHg";
-      proxyOBJ.ra11  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
-      proxyOBJ.ra61  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
+      proxyOBJ.czas2 = getCzas(data[xx].time);
+      proxyOBJ.temp2 = dane.air_temperature+"&deg;C";
+      proxyOBJ.wind2 = dane.wind_speed+"m/s";
+      proxyOBJ.press2 = dane.air_pressure_at_sea_level+"mmHg";
+      proxyOBJ.rain21  = data[xx].data.next_1_hours.details.precipitation_amount+"mm";
+      proxyOBJ.rain26  = data[xx].data.next_6_hours.details.precipitation_amount+"mm";
       let cod2  = data[xx].data.next_1_hours.summary.symbol_code;
-      proxyOBJ.cod2  = cod2
+      proxyOBJ.cod2  = cod2.split("_")[0]
       proxyOBJ.ico2 = '<img src="https://api.met.no/images/weathericons/svg/'+cod2+'.svg" style="width:48px">';
 
    }).catch(e => {console.log(e)})
