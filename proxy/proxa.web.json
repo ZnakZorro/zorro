@@ -9,14 +9,14 @@
 	"background_color": "#693",
 	"icons": [
 		{
-			"src": "./img/circle.svg",
+			"src": "../img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./img/circle.svg",
+			"src": "../img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
