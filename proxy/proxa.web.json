@@ -5,8 +5,8 @@
 	"start_url": "https://znakzorro.github.io/zorro/proxy/index.html",
 	"display": "standalone",
 
-	"theme_color": "#462",
-	"background_color": "#693",
+	"theme_color": "#f62",
+	"background_color": "#f93",
 	"icons": [
 		{
 			"src": "../img/circle.svg",
