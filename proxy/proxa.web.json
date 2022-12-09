@@ -1,22 +1,22 @@
 {
-	"name": "ProXa",
-	"short_name": "ProXa",
-	"description": "ProXa",
-	"start_url": "urno.html",
+	"name": "ProXXa",
+	"short_name": "ProXXa",
+	"description": "ProXXa",
+	"start_url": "https://znakzorro.github.io/zorro/proxy/index.html",
 	"display": "standalone",
 
 	"theme_color": "#462",
 	"background_color": "#693",
 	"icons": [
 		{
-			"src": "./img/proxy.svg",
+			"src": "./img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./img/proxy.svg",
+			"src": "./img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
