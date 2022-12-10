@@ -9,16 +9,16 @@
 	"background_color": "#f93",
 	"icons": [
 		{
-			"src": "https://znakzorro.github.io/zorro/img/circle.svg",
+			"src": "https://znakzorro.github.io/zorro/img/svg/circle.svg",
 			"sizes": "512x512",
-			"type": "image/webp"
+			"type": "image/svg"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "https://znakzorro.github.io/zorro/img/circle.svg",
-			"sizes": "512x512",
-			"type": "image/webp"
+			"src": "https://znakzorro.github.io/zorro/img/svg/circle.svg",
+			"sizes": "1024x1024",
+			"type": "image/svg"
 		}
 	]
 }
