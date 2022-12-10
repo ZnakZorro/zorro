@@ -9,14 +9,14 @@
 	"background_color": "#f93",
 	"icons": [
 		{
-			"src": "../img/circle.svg",
+			"src": "https://znakzorro.github.io/zorro/img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "../img/circle.svg",
+			"src": "https://znakzorro.github.io/zorro/img/circle.svg",
 			"sizes": "512x512",
 			"type": "image/webp"
 		}
