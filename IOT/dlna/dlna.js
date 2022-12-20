@@ -6,7 +6,11 @@ const go=(n)=>{
     console.log(n);
 }
 const dlnaParser=(event)=>{
-    console.log("moje===",event);   
+    console.log("moje===",event);  
+    let sMsg = event.data
+    console.log("#11 sMsg=",sMsg)
+    let arr = sMsg.split("=");
+    console.log(arr);
 }
 
 //---dom ready--------------------------------
