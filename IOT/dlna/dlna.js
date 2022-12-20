@@ -19,7 +19,7 @@ const dlnaParser=(event)=>{
     console.log("#11 sMsg=",sMsg)
     let arr = sMsg.split("=");
     
-    if arr.length==2){
+    if (arr.length==2){
         msg=arr[0]
         txt=arr[1]
         obj = JSON.parse(txt);
