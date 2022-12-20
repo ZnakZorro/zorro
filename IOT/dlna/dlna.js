@@ -8,10 +8,12 @@ const go=(n)=>{
 
         
 const dlnaDisplay=(key,val)=>{
-    console.log("----------------");
-    console.log("key=",key);
-    console.log("val=",val);
-    console.log("----------------");
+    console.log("------------ key=",key);    
+    console.log("------------ val=",val);
+    $("#l0").innerHTML = "";
+    $("#l1").innerHTML = "";
+    if(key) $("#l0").innerHTML = key;
+    if(val) $("#l1").innerHTML = val;
 }
 
 
