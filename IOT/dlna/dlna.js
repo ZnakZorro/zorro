@@ -14,6 +14,8 @@ const dlnaDisplay=(key,val)=>{
     $("#l1").innerHTML = "";
     if(key) $("#l0").innerHTML = key;
     if(val) $("#l1").innerHTML = val;
+    
+    if (key=="DLNA_Names") $("#serv").innerHTML = val;
 }
 
 
@@ -32,8 +34,8 @@ const dlnaParser=(event)=>{
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-    $("#plus").style.color="#008";
-    $("#plus").style.backgroundColor="#880";
+    //$("#plus").style.color="#008";
+    //$("#plus").style.backgroundColor="#880";
 let u="https://znakzorro.github.io/zorro/IOT/dlna/dlna.html"    
 fetch(u)
 .then(r => {return r.text()})
