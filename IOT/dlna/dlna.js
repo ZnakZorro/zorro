@@ -7,9 +7,11 @@ const go=(n)=>{
 }
 
         
-const dlnaDisplay=(name,obj)=>{
-    console.log("name=",name)
-    console.log("obj=",obj)
+const dlnaDisplay=(key,val)=>{
+    console.log("----------------");
+    console.log("key=",key);
+    console.log("val=",val);
+    console.log("----------------");
 }
 
 
@@ -18,15 +20,12 @@ const dlnaParser=(event)=>{
     let sMsg = event.data
     console.log("#11 sMsg=",sMsg)
     let arr = sMsg.split("=");
-    
-    if (arr.length==2){
-        msg=arr[0]
-        txt=arr[1]
-        obj = JSON.parse(txt);
-        dlnaDisplay(name,obj)
-    } else {
-        console.log(arr);
-    }
+    console.log(arr);
+    let msg0="";
+    let msg1=""
+    if (arr[0])   msg0=arr[0];
+    if (arr[1])   msg1=arr[1];
+    dlnaDisplay(msg0,msg1)
 }
 
 //---dom ready--------------------------------
