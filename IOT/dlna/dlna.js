@@ -8,7 +8,9 @@ const go=(n)=>{
 
         
 const dlnaDisplay=(key,val)=>{
-    let pos = key.indexOf("Level")
+    let pos = key.indexOf("Level");
+    let czas = (new Date()).toLocaleString();
+    $("#qtime").innerHTML = czas;
     console.log("------------ key=",key);    
     console.log("------------ val=",val);
     console.log("------------ pos=",pos);
