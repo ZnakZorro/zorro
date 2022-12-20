@@ -19,6 +19,10 @@ const dlnaDisplay=(key,val)=>{
     $("#qkey").innerHTML = "";
     $("#qval").innerHTML = "";
     if(key) $("#qkey").innerHTML = key;
+        let obj={}
+        if(pos==0) obj=JSON.parse(val);
+        console.log(obj);
+    
     if(val) $("#qval").innerHTML = val;
     
     if (key=="DLNA_Names") $("#qserver").innerHTML = val;
