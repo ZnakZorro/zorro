@@ -5,12 +5,28 @@ const $$=e=>document.querySelectorAll(e);
 const go=(n)=>{
     console.log(n);
 }
+
+        
+const dlnaDisplay=(name,obj)=>{
+    console.log("name=",name)
+    console.log("obj=",obj)
+}
+
+
 const dlnaParser=(event)=>{
     console.log("moje===",event);  
     let sMsg = event.data
     console.log("#11 sMsg=",sMsg)
     let arr = sMsg.split("=");
-    console.log(arr);
+    
+    if arr.length==2){
+        msg=arr[0]
+        txt=arr[1]
+        obj = JSON.parse(txt);
+        dlnaDisplay(name,obj)
+    } else {
+        console.log(arr);
+    }
 }
 
 //---dom ready--------------------------------
