@@ -14,12 +14,12 @@ const dlnaDisplay=(key,val)=>{
     console.log("------------ pos=",pos);
     $("#q"+key).innerHTML = val;
     
-    $("#l0").innerHTML = "";
-    $("#l1").innerHTML = "";
-    if(key) $("#l0").innerHTML = key;
-    if(val) $("#l1").innerHTML = val;
+    $("#qkey").innerHTML = "";
+    $("#qval").innerHTML = "";
+    if(key) $("#qkey").innerHTML = key;
+    if(val) $("#qval").innerHTML = val;
     
-    if (key=="DLNA_Names") $("#serv").innerHTML = val;
+    if (key=="DLNA_Names") $("#qserver").innerHTML = val;
 }
 
 
