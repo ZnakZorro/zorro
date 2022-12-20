@@ -8,8 +8,12 @@ const go=(n)=>{
 
         
 const dlnaDisplay=(key,val)=>{
+    let pos = key.indexOf("Level")
     console.log("------------ key=",key);    
     console.log("------------ val=",val);
+    console.log("------------ pos=",pos);
+    $("#q"+key).innerHTML = val;
+    
     $("#l0").innerHTML = "";
     $("#l1").innerHTML = "";
     if(key) $("#l0").innerHTML = key;
