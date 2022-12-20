@@ -5,7 +5,9 @@ const $$=e=>document.querySelectorAll(e);
 const go=(n)=>{
     console.log(n);
 }
-
+const dlnaParser=(event)=>{
+    console.log("moje===",event);   
+}
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
