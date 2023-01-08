@@ -34,8 +34,19 @@
    
    
 
-<script type="text/javascript">
- 
+<script>
+ fetch(".historia.json")
+.then(r => {return r.json()})
+.then(o => {
+    console.log(obj)
+    for (o in obj){
+       console.log(o,obj[o])
+       obj[o]["id"]=o;
+    }
+    console.log(obj)
+ })
+.catch(e => {console.log(e)})
+
   var items = new vis.DataSet([
   {id: 1, content: 'Grunwald',        start: '1410-07-15', type: 'point'},
   {id: 2, content: 'Kopernik',        start: '1473-02-19', end: '1543-05-21'},
