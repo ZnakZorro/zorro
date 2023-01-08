@@ -51,10 +51,9 @@
 .then(r => {return r.json()})
 .then(obj => {
     //console.log(obj)
-    for (o in obj){
-       //console.log(o,obj[o])
-       obj[o]["id"]=o.parseInt();
-    }
+    obj.forEach((o,n)=>{
+       obj[n]["id"]=n;
+    });
     console.log(obj)
       let items = new vis.DataSet([obj]);
       let options = {};
