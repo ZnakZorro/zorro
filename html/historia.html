@@ -50,10 +50,10 @@
  fetch("./historia.json")
 .then(r => {return r.json()})
 .then(obj => {
-    console.log(obj)
+    //console.log(obj)
     for (o in obj){
-       console.log(o,obj[o])
-       obj[o]["id"]=o;
+       //console.log(o,obj[o])
+       obj[o]["id"]=o.parseInt();
     }
     console.log(obj)
       let items = new vis.DataSet([obj]);
