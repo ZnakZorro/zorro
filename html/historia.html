@@ -56,26 +56,15 @@
        obj[o]["id"]=o;
     }
     console.log(obj)
+      let items = new vis.DataSet(obj]);
+      let options = {};
+      let container = document.getElementById('visualization');
+      let timeline = new vis.Timeline(container, items, options);
+    
  })
 .catch(e => {console.log(e)})
 
-  let items = new vis.DataSet([
-  {id: 1, content: 'Grunwald',        start: '1410-07-15', type: 'point'},
-  {id: 2, content: 'Kopernik',        start: '1473-02-19', end: '1543-05-21'},
-  {id: 3, content: 'Giordano Bruno',  start: '1548-01-01', end: '1600-02-17'},
-  {id: 4, content: 'Galileusz',       start: '1564-02-15', end: '1642-01-08'},
-  {id: 5, content: 'Benjamin Franklin',       start: '1706-01-17', end: '1790-04-17'},   
-  
-  ]);
-
-  // Configuration for the Timeline
-  //, type: 'point'
-
-  let options = {};
-
-  // Create a Timeline
-  let container = document.getElementById('visualization');
-  let timeline = new vis.Timeline(container, items, options);
+   
 </script>
 </body>
 </html>
