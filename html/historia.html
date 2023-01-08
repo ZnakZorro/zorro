@@ -49,7 +49,7 @@
 <script>
  fetch("./historia.json")
 .then(r => {return r.json()})
-.then(o => {
+.then(obj => {
     console.log(obj)
     for (o in obj){
        console.log(o,obj[o])
