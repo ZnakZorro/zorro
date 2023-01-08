@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <title>Historia</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+  <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    #visualization {
+      width: 100%;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
+  </style>
+</head>
+<body>
+<div id="visualization" style="width:100%"></div>
+<script type="text/javascript">
+  // DOM element where the Timeline will be attached
+  var container = document.getElementById('visualization');
+
+  /*
+Galileusz - Galileo Galilei 15.02.1564 w Pizie, 8.01.1642 w Arcetri[1]) 
+ Bruno styczniu 1548 w Noli, zm. 17 lutego 1600 w Rzymie[1]
+(ur. 19 lutego 1473 w Toruniu, zm. przed 21 maja[b] 1543 
+*/
+
+  var items = new vis.DataSet([
+  {id: 1, content: 'Kopernik',        start: '1473-02-19', end: '1543-05-21'},
+  {id: 2, content: 'Giordano Bruno',  start: '1548-01-01', end: '1600-02-17'},
+  {id: 3, content: 'Galileusz',       start: '1564-02-15', end: '1642-01-08'},
+  
+  
+  ]);
+
+  // Configuration for the Timeline
+  //, type: 'point'
+
+  var options = {};
+
+  // Create a Timeline
+  var timeline = new vis.Timeline(container, items, options);
+</script>
+</body>
+</html>
