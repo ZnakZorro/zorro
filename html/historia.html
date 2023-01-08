@@ -55,7 +55,7 @@
        obj[n]["id"]=n;
     });
     console.log(obj)
-      let items = new vis.DataSet([obj]);
+      let items = new vis.DataSet(obj);
       let options = {};
       let container = document.getElementById('visualization');
       let timeline = new vis.Timeline(container, items, options);
