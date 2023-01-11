@@ -49,7 +49,7 @@ let html="";
 divsy.forEach((d)=>{
 	html+=`<span id="${d}">${d}</span>`;
 });
-document.querySelector("#info").innerHTML = html;    
+document.querySelector("#infor").innerHTML = html;    
     
     
     
