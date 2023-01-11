@@ -42,13 +42,13 @@ const getInfo=()=>{
 
 
 //document.addEventListener("DOMContentLoaded",function(){
-
+/*
 let divsy=["tim","pro","vol","bit","khz","kbi","ext","sta","tit"]
 console.log(divsy)
 let html="";
 divsy.forEach((d)=>{html+=`<span id="${d}">${d}</span>`;});
 document.querySelector("#infor").innerHTML = html;    
-    
+*/    
     
     
 getInfo()
