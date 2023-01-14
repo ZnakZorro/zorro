@@ -51,8 +51,8 @@ document.querySelector("#infor").innerHTML = html;
 */    
     
     
-getInfo()
-setInterval(getInfo,1*10000);
+//getInfo()
+//setInterval(getInfo,1*10000);
     
 //});
 console.log("..........................................................................................")
