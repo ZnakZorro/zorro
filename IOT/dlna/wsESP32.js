@@ -9,7 +9,7 @@ const go=(n)=>{
 
 
 
-
+/*
 const parseINFO=(content)=>{
 	//console.log(content);
 	let arra = content.split("!");
@@ -38,7 +38,7 @@ const getInfo=()=>{
 	.catch(e => {console.log(e)})
 }
 
-
+*/
 
 
 //document.addEventListener("DOMContentLoaded",function(){
