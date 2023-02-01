@@ -17,14 +17,15 @@ const snipARR = [
     {n:"arrows",          f:"html",      u:"arrows.htm"},
 
     {n:"local",           f:"js",      u:"local.js"},
-    {n:"visibility",      f:"js",      u:"visibility.js"},    
-    {n:"submit",          f:"js",        u:"submit.html"},
     {n:"async",           f:"js",        u:"async.html"},
     {n:"fetch",           f:"js",        u:"fetch.js"},
     {n:"createElement",   f:"js",        u:"createElement.js"},
     {n:"active",          f:"js",        u:"active.js"},
     {n:"dom",             f:"js",        u:"domReady.js"},
     {n:"param",           f:"js",        u:"parameters.js"},
+    {n:"visibility",      f:"js",      u:"visibility.js"},    
+    {n:"submit",          f:"js",        u:"submit.html"},
+    {n:"array",           f:"js",        u:"array.html"},
     
     {n:"md",              f:"code",      u:"md.md"},
     {n:"console",         f:"code",      u:"console.js"},
