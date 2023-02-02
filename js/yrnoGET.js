@@ -5,7 +5,7 @@ let _dataType = "compact"; //  compact  complete   classic
 let jsonAPP   = localStorage.getItem("APPconfig");
 let configAPP = JSON.parse(jsonAPP);
 //console.log("all 7 configAPP=",configAPP);
-//console.log(configAPP);
+console.log(configAPP);
 let lat  = configAPP.lat;
 let lon  = configAPP.lon;
 let alt  = configAPP.altitude;
