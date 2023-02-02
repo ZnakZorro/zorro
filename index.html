@@ -294,8 +294,8 @@ let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig
       sunset  =  sunset.replace(/(\:\d\d)$/,"");
       //console.log(sunrise,sunset)
       let dayLen  = dayL(dateDelta/1000);
-        _$("#sun").innerHTML  = `<div><span class="s1">Wschód:</span> <span class="s2">${sunrise}</span></div>`;
-        _$("#sun").innerHTML += `<div><span class="s1">Zachód:</span> <span class="s2">${sunset}</span></div>`;
+        _$("#sun").innerHTML  = `<div><span class="s1">Wsch.:</span> <span class="s2">${sunrise}</span></div>`;
+        _$("#sun").innerHTML += `<div><span class="s1">Zach.:</span> <span class="s2">${sunset}</span></div>`;
         _$("#sun").innerHTML += `<div><span class="s1">Dzień:</span> <span class="s2">${dayLen}</span></div>`;
       let longest  = (17*60*60)+( 1*60); //17:01
       let shortest = ( 7*60*60)+(29*60); //7:29
@@ -305,9 +305,9 @@ let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig
       let dayLongest  = dayL((dateDelta - shortest)/1000);
       console.log("sssssssssssss",longest,shortest);
       console.log("sssssssssssss",dateSunset,dateSunrise,dateDelta,dayLongest,dayShortes);  
-        _$("#sunplus").innerHTML  = `<div><span class="s1">Dłuższy:</span> <span class="s2">${dayLongest}</span></div>`;
-        _$("#sunplus").innerHTML += `<div><span class="s1">Któtszy:</span> <span class="s2">${dayShortes}</span></div>`;
-        _$("#sunplus").innerHTML += `<div><span class="s1">Dzień:</span> <span class="s2">7:30/17:01</span></div>`;
+        _$("#sunplus").innerHTML  = `<div><span class="s1">Dłu.:</span> <span class="s2">${dayLongest}</span></div>`;
+        _$("#sunplus").innerHTML += `<div><span class="s1">Krót.:</span> <span class="s2">${dayShortes}</span></div>`;
+        _$("#sunplus").innerHTML += `<div><span class="s1"></span> <span class="s2">7:30 / 17:01</span></div>`;
 
         
    
