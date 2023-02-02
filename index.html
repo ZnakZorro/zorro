@@ -301,8 +301,8 @@ let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig
       let shortest = ( 7*60*60)+(29*60)+15; //07:29:15
         longest  *= 1000;
         shortest *= 1000;
-      let dayLongest  = dayL((longest - dateDelta)/1000);
-      let dayShortes  = dayL((dateDelta - shortest)/1000);
+      let dayShortes  = dayL((longest - dateDelta)/1000);
+      let dayLongest  = dayL((dateDelta - shortest)/1000);
       console.log("sssssssssssss",longest,shortest);
       console.log("sssssssssssss",dateSunset,dateSunrise,dateDelta,dayLongest,dayShortes);  
         _$("#sunplus").innerHTML  = `<div><span class="s1">Dłuższy:</span> <span class="s2">${dayLongest}</span></div>`;
