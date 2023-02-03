@@ -53,7 +53,7 @@
 	    	&nbsp; <button id="submit">Zapisz</button>
 	    
 	    	&nbsp; <button id="save">Save</button>
-	    	&nbsp; <button id="read">Read</button>
+	    	&nbsp; <button id="read" style="float:right;">Read</button>
 
         
     </div>
@@ -111,7 +111,7 @@
 	document.querySelector('#read').addEventListener( 'click', () => {
 	    	let content = localStorage.getItem("edek1");
 		editor.setData(content);
-		document.querySelector('.ck-body-wrapper').innerHTML = contents;
+		document.querySelector('.ck-body-wrapper').innerHTML = content;
 	} );        
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
 		zapisz(editor.getData());
@@ -200,7 +200,12 @@ function submitHTML(){
      },100)
 }
 
-
+// domready dom ready
+document.addEventListener("DOMContentLoaded",function(){
+	let content = localStorage.getItem("edek1");
+	editor.setData(content);
+	document.querySelector('.ck-body-wrapper').innerHTML = content;
+});
 	 
    </script>
 &nbsp; <a href="./5/index.html">MAX-5</a>   
