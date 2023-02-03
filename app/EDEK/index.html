@@ -110,19 +110,22 @@
 	} );        
 	document.querySelector('#read').addEventListener( 'click', () => {
 	    	let content = localStorage.getItem("edek1");
-		editor.setData(content);		
+		editor.setData(content);
+		document.querySelector('.ck-body-wrapper').innerHTML = contents;
 	} );        
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
-	    zapisz(editor.getData());
+		zapisz(editor.getData());
 	} );        
 
         let zapisz=(content)=>{
-		console.log(content);
+		console.log("#121",content);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
 		let nameOfFile = "edek-"+date+".html";
 		if (fileName) nameOfFile=fileName;
 		let filename = prompt("Nazwa pliku",nameOfFile);
-		console.log(filename);
+
+		let title = getTitle(content);
+		console.log("#128",filename,title);
 		if(!filename) return;
 		var blob = new Blob([content], {type: "text/plain;charset=utf-8"});
 		saveAs(blob, filename);		
