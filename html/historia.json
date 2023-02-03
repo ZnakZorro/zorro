@@ -11,7 +11,7 @@
 {"content": "Newton",            "start": "1643.01.04", "end": "1727.03.31"},
 {"content": "Franklin",          "start": "1706-01-17", "end": "1790-04-17"},
 {"content": "Napoleon",          "start": "1769-08-15", "end": "1821-05-05"},  
-{"content": "Rewolucja Fr",      "start": "1789-05-05", "end": "1799-11-11"},    
+{"content": "Rewolucja Fr",      "start": "1789-05-05", "end": "1799-11-11", "type": "point"},    
 {"content": "Mickiewicz",        "start": "1798-12-24", "end": "1855-11-26"},
 {"content": "Sienkiewicz",       "start": "1846-05-05", "end": "1916-11-15"} 
 ]
