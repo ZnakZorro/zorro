@@ -28,19 +28,15 @@
 	
 <script>
       function handleFileSelect(event) {
-        var file = event.target.files[0]; // wczytanie wybranego pliku
-
-        // Sprawdzenie, czy plik jest poprawny
-        if (!file) {
-          return;
-        }
-
-        // Wczytanie zawartości pliku
-        var reader = new FileReader();
+        var file = event.target.files[0]; 	// wczytanie wybranego pliku
+        if (!file) {return;}			// Sprawdzenie, czy plik jest poprawny
+        
+        var reader = new FileReader();		// Wczytanie zawartości pliku
         reader.onload = function(event) {
           var contents = event.target.result;
           console.log("Zawartość pliku: " + contents);
-	  document.querySelector('#editor').innerHTML = contents;
+	  //document.querySelector('#editor').innerHTML = contents;
+	  document.querySelector('.ck-body-wrapper').innerHTML = "contents";
         };
         reader.readAsText(file);
       }
