@@ -26,16 +26,32 @@
    <script src="../../js/edit.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 	
-   <script>
+<script>
+      function handleFileSelect(event) {
+        var file = event.target.files[0]; // wczytanie wybranego pliku
 
-   </script>
+        // Sprawdzenie, czy plik jest poprawny
+        if (!file) {
+          return;
+        }
 
+        // Wczytanie zawartości pliku
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          var contents = event.target.result;
+          console.log("Zawartość pliku: " + contents);
+	  document.querySelector('#editor').innerHTML = contents;
+        };
+        reader.readAsText(file);
+      }
+    </script>
 </head>
 <body>
 <app-menu title="EDEK 2" name="ZnakZorro" link="../../"></app-menu>
 <script src="../../appMenu.js"></script>	
     <div class="keys">
         <span>EDEK</span>
+	    	<input type="file" onchange="handleFileSelect(event)">
 	    	&nbsp; <button id="submit">Zapisz</button>
 	    	&nbsp; <a href="./5/index.html">MAX-5</a>
 
