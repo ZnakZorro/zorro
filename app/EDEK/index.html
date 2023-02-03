@@ -37,6 +37,7 @@
           console.log("Zawartość pliku: " + contents);
 	  //document.querySelector('#editor').innerHTML = contents;
 	  document.querySelector('.ck-body-wrapper').innerHTML = "contents";
+	  editor.setData("<h1>xxx</h1>")
         };
         reader.readAsText(file);
       }
