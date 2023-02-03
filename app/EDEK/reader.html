@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function handleFileSelect(event) {
+        var file = event.target.files[0]; // wczytanie wybranego pliku
+
+        // Sprawdzenie, czy plik jest poprawny
+        if (!file) {
+          return;
+        }
+
+        // Wczytanie zawartości pliku
+        var reader = new FileReader();
+        reader.onload = function(event) {
+          var contents = event.target.result;
+          console.log("Zawartość pliku: " + contents);
+        };
+        reader.readAsText(file);
+      }
+    </script>
+  </head>
+  <body>
+    <input type="file" onchange="handleFileSelect(event)">
+  </body>
+</html>
