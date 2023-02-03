@@ -48,9 +48,12 @@
 <script src="../../appMenu.js"></script>	
     <div class="keys">
         <span>EDEK</span>
+	    	&nbsp; <a href="./5/index.html">MAX-5</a>
 	    	<input type="file" onchange="handleFileSelect(event)">
 	    	&nbsp; <button id="submit">Zapisz</button>
-	    	&nbsp; <a href="./5/index.html">MAX-5</a>
+	    <hr />
+	    	&nbsp; <button id="save">Save</button>
+	    	&nbsp; <button id="read">Read</button>
 
         
     </div>
@@ -101,6 +104,14 @@
 
 
 	//https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/saving-data.html
+	document.querySelector('#save').addEventListener( 'click', () => {
+	    	let content = editor.getData();
+		localStorage.setItem("edek1", content);
+	} );        
+	document.querySelector('#read').addEventListener( 'click', () => {
+	    	let content = localStorage.getItem("edek1");
+		editor.setData(content);		
+	} );        
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
 	    zapisz(editor.getData());
 	} );        
