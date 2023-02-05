@@ -1,7 +1,7 @@
 import {
-  bestClub1 as favoriteTeam,
-  fruits1 as crops,
-  multiply1 as product,
-  strona1 as url
+  bestClub as favoriteTeam1,
+  fruits as crops1,
+  multiply as product1,
+  strona as url1
 } from './module-1.js';
-document.querySelector("#info1").innerHTML += bestClub1;
+document.querySelector("#info1").innerHTML += favoriteTeam1;
