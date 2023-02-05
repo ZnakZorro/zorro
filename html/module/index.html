@@ -4,13 +4,25 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ES Module - CodeSweetly</title>
+    <script type="module" src="module-1.js"></script>
+    <script type="module" src="module-2.js"></script>
   </head>
   <body>
     <h1>ES Module Tutorial</h1>
     <h2>Check the console ⬇⬇⬇</h2>
+  <div id="info"></div>
+  <div id="info1"></div>
+	  
+	  
+<script>
+import {
+  bestClub1 as favoriteTeam,
+  fruits1 as crops,
+  multiply1 as product,
+  strona1 as url
+} from './module-1.js';
+document.querySelector("#info1").innerHTML += bestClub1;
+</script>
 
-    <script type="module" src="module-1.js"></script>
-    <script type="module" src="module-2.js"></script>
-	  <div id="info"></div>
   </body>
 </html>
