@@ -3,5 +3,5 @@ const fruits = ['Grape', 'Apple', 'Pineapple', 'Lemon'];
 function multiply(x, y) {
   return x * y;
 }
-
-export { bestClub, fruits, multiply };
+const strona = "https://www.freecodecamp.org/news/javascript-es-modules-and-module-bundlers/";
+export { bestClub, fruits, multiply, strona };
