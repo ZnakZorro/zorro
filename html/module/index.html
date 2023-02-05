@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ES Module - CodeSweetly</title>
+  </head>
+  <body>
+    <h1>ES Module Tutorial</h1>
+
+    <!-- Add the "index.js" JavaScript file to this HTML document -->
+    <script type="module" src="module-1.js"></script>
+    <script>
+    import { bestClub, multiply, fruits } from "./module-1.js";
+	const myBestClub = bestClub + " " + "is my best club.";
+	console.log(myBestClub);
+    </script>
+    
+  </body>
+</html>
