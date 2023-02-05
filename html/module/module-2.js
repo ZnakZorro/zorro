@@ -7,3 +7,4 @@ import {
 const bestClub = `I bought ${product(2, 11)} ${crops[2]}s at ${favoriteTeam}.`;
 
 console.log(bestClub);
+document.querySelector("#info").innerHTML = bestClub;
