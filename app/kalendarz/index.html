@@ -40,7 +40,7 @@ table td {
         <div class="container">
 
 <h3>Kalendarz 2023</h3>
-
+		
 <figure>
 <table id="tabela">
 	<tbody>
@@ -183,7 +183,7 @@ table td {
 </table>
 </figure>
 
-<p></p>    
+<div id="info"></div> 
 		
 	</div> <!--container-->
  </div><!-- wraper-->
@@ -194,16 +194,18 @@ const removeAll=()=>{
 const clickTD=(e)=>{
 	console.log(e);
 	let td=e.target;
-	console.log(td.id,td);
+	let nr = td.id.split("_")[1];
+	console.log(nr,td.id,td);
 	removeAll();
 	td.classList.add("active");
+	document.getElementById("info").innerHTML = nr;
 }
 
 document.addEventListener("DOMContentLoaded",function(){
    let tds = document.querySelectorAll("table#tabela td");
 	console.log(tds);
 	tds.forEach((td,i)=>{
-		td.id="td"+i;
+		td.id="td_"+i;
 		console.log(i,td);
 		td.addEventListener('click', clickTD, false); 
 	});
