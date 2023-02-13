@@ -11,8 +11,11 @@
    <meta name="theme-color" content="#008">
    <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
    <link rel="manifest" href="../../zorro.web.json"> 
-   <link rel="stylesheet" href="../../css/style.css" />   
-   <style>   
+   <link rel="stylesheet" href="../../css/style.css" />  
+<link rel="stylesheet" href="../../css/all.css" />
+   
+   <style>     
+      .btn {min-width: 6.25em!important;}
       body {font:normal Verdana 14pt;}
       .wrapper {margin:0; padding:0;}
       .container {margin:0.2em; padding:0.2em;}
@@ -27,7 +30,9 @@
 </head>
 
 <body>
-    <div class="wrapper">       
+    <div class="wrapper">
+        <app-menu title="Kalendarz" name="ZnakZorro" link="../"></app-menu>
+        <script src="../appMenu.js"></script>	
         <div class="container">
                <a href="./plik.html" class="btn blue">Plik</a>
                
