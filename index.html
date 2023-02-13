@@ -71,7 +71,7 @@
 .supermodal {position:relative;}
 .menumodal {
     position: absolute;
-    top: 8px;
+    top: 10px;
     left: 5px;
 }
 
@@ -80,13 +80,14 @@
 <script>
     //cccONE();
     const imgReady=()=>{
-            return;
+       /*
        console.log("imgReady()================================================");
         document.getElementById("menumodal").innerHTML =`
         <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
         <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
         <a href="./app/kalendarz/index.html" class="btn navy mini minii">Kalendarz</a>
-        <button onclick="ccc()" class="btn mini minii">CC</button>`;            
+        <button onclick="ccc()" class="btn mini minii">CC</button>`;  
+        */          
     }
 
     let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : _APPcity;
