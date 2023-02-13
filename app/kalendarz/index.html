@@ -20,7 +20,7 @@
       .wrapper {margin:0; padding:0;}
       .container {margin:0.2em; padding:0.2em;}
 	   table {background:#fff;}
-	   table td {text-align:center;}
+	   table td {text-align:center; padding:3px; font-size:14px;}
    </style>
    <script src=""></script>
    
@@ -187,7 +187,7 @@ const clickTD=(e)=>{
 }
 
 document.addEventListener("DOMContentLoaded",function(){
-   let tds = document.querySelector("table#tabela td");
+   let tds = document.querySelectorAll("table#tabela td");
 	console.log(tds);
 	tds.forEach((td,i)=>{
 		console.log(i,tds);
