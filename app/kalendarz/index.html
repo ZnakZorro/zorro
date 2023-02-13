@@ -192,10 +192,11 @@ const removeAll=()=>{
 	document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("active");});
 }
 const clickTD=(e)=>{
-	console.log(e.id);
 	console.log(e);
+	let td=e.target;
+	console.log(td.id,td);
 	removeAll();
-	e.classList.add("active");
+	td.classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded",function(){
