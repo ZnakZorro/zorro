@@ -23,11 +23,7 @@
 	   table td {text-align:center;}
    </style>
    <script src=""></script>
-   <script>
-       document.addEventListener("DOMContentLoaded",function(){
-           //document.getElementById("info").textContent = "info";
-       });
-   </script>
+   
           
 </head>
 
@@ -40,7 +36,7 @@
 <p>Kalendarz </p>
 
 <figure>
-<table>
+<table id="tabela">
 	<tbody>
 		<tr>
 			<td colspan="5" rowspan="4"><h1><span id="rok">2023</span></h1></td>
@@ -185,6 +181,14 @@
 		
 	</div> <!--container-->
  </div><!-- wraper-->
-
+<script>
+document.addEventListener("DOMContentLoaded",function(){
+   let tds = document.querySelector("table#tabela td");
+	console.log(tds);
+	tds.forEach((td,i)=>{
+		console.log(i,tds);
+	});
+});
+</script>
 </body>
 </html>
