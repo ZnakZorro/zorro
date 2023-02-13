@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-   <meta charset="UTF-8" />
+   <meta charset="utf-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>innyKal</title>  
+   <title>nibyKal</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
@@ -28,6 +28,7 @@ table td {
 }
 table#tabela td.acta  {background:#666;color:#fff;}
 table#tabela td.actm  {background:#222;color: orange;}
+.toactive  {background:darkred;color: white;}
 .b {font-weight:bold;}
 </style>
    <script src=""></script>
@@ -41,18 +42,18 @@ table#tabela td.actm  {background:#222;color: orange;}
         <script src="https://znakzorro.github.io/zorro/appMenu.js"></script>	
         <div class="container">
 
-<h3>inny Kalendarz 2023</h3>
+<h3>niby Kalendarz <span id="rok1">2023</span></h3>
 		
 <figure>
 <table id="tabela">
 	<tbody>
 		<tr>
-			<td colspan="5" rowspan="4"><h1><span id="rok">2023</span></h1></td>
+			<td colspan="5" rowspan="4"><h1><span id="rok2">2023</span></h1><span id="data"></span></td>
 			<td>Sty</td>
 			<td>Maj</td>
 			<td>Sie</td>
 			<td>Lut</td>
-			<td>Cze</td>
+			<td>Czer</td>
 			<td>Wrz</td>
 			<td>Kwi</td>
 		</tr>
@@ -69,7 +70,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
-			<td>Lis</td>
+			<td>List</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
 			<td>&nbsp;</td>
@@ -84,8 +85,8 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>&nbsp;</td>
 		</tr>
 		<tr>
-			<td>1</td>
-			<td>8</td>
+			<td>01</td>
+			<td>08</td>
 			<td>15</td>
 			<td>22</td>
 			<td>29</td>
@@ -98,8 +99,8 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Sob</td>
 		</tr>
 		<tr>
-			<td>2</td>
-			<td>9</td>
+			<td>02</td>
+			<td>09</td>
 			<td>16</td>
 			<td>23</td>
 			<td>30</td>
@@ -112,7 +113,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Nie</td>
 		</tr>
 		<tr>
-			<td>3</td>
+			<td>03</td>
 			<td>10</td>
 			<td>17</td>
 			<td>24</td>
@@ -126,7 +127,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Pon</td>
 		</tr>
 		<tr>
-			<td>4</td>
+			<td>04</td>
 			<td>11</td>
 			<td>18</td>
 			<td>25</td>
@@ -140,7 +141,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Wto</td>
 		</tr>
 		<tr>
-			<td>5</td>
+			<td>05</td>
 			<td>12</td>
 			<td>19</td>
 			<td>26</td>
@@ -154,7 +155,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Śro</td>
 		</tr>
 		<tr>
-			<td>6</td>
+			<td>06</td>
 			<td>13</td>
 			<td>20</td>
 			<td>27</td>
@@ -168,7 +169,7 @@ table#tabela td.actm  {background:#222;color: orange;}
 			<td>Czw</td>
 		</tr>
 		<tr>
-			<td>7</td>
+			<td>07</td>
 			<td>14</td>
 			<td>21</td>
 			<td>28</td>
@@ -205,7 +206,7 @@ const clickTD=(e)=>{
 		removeAll(false,true);
 		trp.classList.add("active");		
 	}
-	//document.getElementById("info").innerHTML = nr;
+	document.getElementById("info").innerHTML = nr;
 	if (modCol<5) return;
 	removeAll(true,false);
 	
@@ -220,6 +221,39 @@ const clickTD=(e)=>{
 	
 }
 
+
+const todayDate=()=>{
+    const pad=(s)=>{ return ("0"+s.toString()).slice(-2); }
+	const getMiesiac = date => ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"][date.getMonth()];
+	const getMie = date => ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"][date.getMonth()];
+    let weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+	let wdays = ["Nie", "Pon", "Wto", "Śro", "Czw", "Pią", "Sob"];
+    let d = new Date();
+    let rok     = d.getFullYear().toString();
+    let miesiac = pad(d.getMonth()+1);
+    let dzien   = pad(d.getDate());
+    let dw      = d.getDay();
+	console.log(rok,miesiac,dzien,dw,wdays[dw],weekdays[dw],getMie(d),getMiesiac(d));
+	document.querySelector("#data").innerHTML=dzien+". "+getMiesiac(d)+", "+weekdays[dw];
+	let tab = document.querySelector("table#tabela");
+	//console.log(tab);
+	const dzi = String(dzien);
+	const mie = getMie(d);
+	
+	let dmatches = null;
+	let mmatches = null;
+	for (const td of tab.querySelectorAll('td')) {
+		if (!td.id) continue;
+		if (td.textContent.includes(dzi)) {dmatches=(td);}
+		if (td.textContent.includes(mie)) {mmatches=(td);}
+	}
+	dmatches.classList.add("toactive");
+	mmatches.classList.add("toactive");
+	//clickTD
+	dmatches.click();
+	mmatches.click();
+}
+ 
 document.addEventListener("DOMContentLoaded",function(){
    let tds = document.querySelectorAll("table#tabela td");
 	//console.log(tds);
@@ -242,6 +276,7 @@ document.addEventListener("DOMContentLoaded",function(){
 			tds[t].classList.add("b");
 		}
 	}
+	todayDate();
 });
 </script>
 </body>
