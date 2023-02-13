@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -9,10 +8,10 @@
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <meta name="theme-color" content="#008">
-   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
-   <link rel="manifest" href="../../zorro.web.json"> 
-   <link rel="stylesheet" href="../../css/style.css" />  
-<link rel="stylesheet" href="../../css/all.css" />
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="https://znakzorro.github.io/zorro/img/dom.svg"> 
+   <link rel="manifest" href="https://znakzorro.github.io/zorro/zorro.web.json"> 
+   <link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/style.css" />  
+<link rel="stylesheet" href="https://znakzorro.github.io/zorro/css/all.css" />
    
 <style>     
 .btn {min-width: 6.25em!important;}
@@ -192,10 +191,16 @@ table#tabela td.actm  {background:#222;color: orange;}
 <script>
 const removeAll=()=>{
 	document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("acta");td.classList.remove("actm");});
+	document.querySelectorAll("table#tabela tr").forEach((tr)=>{tr.classList.remove("active");});
 }
 const clickTD=(e)=>{
 	console.log(e);
 	let td=e.target;
+	let p1=td.parentNode; 
+	let p2=td.parentElement;
+	
+		console.log(p1,p2)
+
 	let nr = td.id.split("_")[1];
 	let modRow = nr %12;
 	console.log("nr="+nr,"mod="+modRow,td.id,td);
@@ -203,6 +208,7 @@ const clickTD=(e)=>{
 	document.getElementById("info").innerHTML = nr;
 	if (modRow<5) return;
 	removeAll();
+	p1.classList.add("active");
 	for (i=0; i<11; i++){
 		let mr = modRow + (i*12)
 		let id = "td_"+mr;
