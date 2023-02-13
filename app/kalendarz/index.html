@@ -25,6 +25,7 @@ table td {
 	padding: 6px 2px;
 	font-size: 14px;
 	min-width: 2em;
+	cursor:pointer;
 }
 </style>
    <script src=""></script>
@@ -187,9 +188,14 @@ table td {
 	</div> <!--container-->
  </div><!-- wraper-->
 <script>
+const removeAll=()=>{
+	document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("active");});
+}
 const clickTD=(e)=>{
 	console.log(e.id);
 	console.log(e);
+	removeAll();
+	e.classList.add("active");
 }
 
 document.addEventListener("DOMContentLoaded",function(){
