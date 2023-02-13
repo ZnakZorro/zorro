@@ -182,11 +182,16 @@
 	</div> <!--container-->
  </div><!-- wraper-->
 <script>
+const clickTD=(e)=>{
+	console.log(e)
+}
+
 document.addEventListener("DOMContentLoaded",function(){
    let tds = document.querySelector("table#tabela td");
 	console.log(tds);
 	tds.forEach((td,i)=>{
 		console.log(i,tds);
+		td.addEventListener('click', clickTD, false); 
 	});
 });
 </script>
