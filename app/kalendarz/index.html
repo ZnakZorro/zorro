@@ -14,14 +14,19 @@
    <link rel="stylesheet" href="../../css/style.css" />  
 <link rel="stylesheet" href="../../css/all.css" />
    
-   <style>     
-      .btn {min-width: 6.25em!important;}
-      body {font:normal Verdana 14pt;}
-      .wrapper {margin:0; padding:0;}
-      .container {margin:0.2em; padding:0.2em;}
-	   table {background:#fff;}
-	   table td {text-align:center; padding:3px; font-size:14px;}
-   </style>
+<style>     
+.btn {min-width: 6.25em!important;}
+body {font:normal Verdana 14pt;}
+.wrapper {margin:0; padding:0;}
+.container {margin:0.2em; padding:0.2em;}
+table {background:#fff;}
+table td {
+	text-align: center;
+	padding: 6px 2px;
+	font-size: 14px;
+	min-width: 2em;
+}
+</style>
    <script src=""></script>
    
           
@@ -33,7 +38,7 @@
         <script src="../../appMenu.js"></script>	
         <div class="container">
 
-<p>Kalendarz </p>
+<h3>Kalendarz 2023</h3>
 
 <figure>
 <table id="tabela">
@@ -183,14 +188,16 @@
  </div><!-- wraper-->
 <script>
 const clickTD=(e)=>{
-	console.log(e)
+	console.log(e.id);
+	console.log(e);
 }
 
 document.addEventListener("DOMContentLoaded",function(){
    let tds = document.querySelectorAll("table#tabela td");
 	console.log(tds);
 	tds.forEach((td,i)=>{
-		console.log(i,tds);
+		td.id="td"+i;
+		console.log(i,td);
 		td.addEventListener('click', clickTD, false); 
 	});
 });
