@@ -80,6 +80,7 @@
 <script>
     //cccONE();
     const imgReady=()=>{
+            return;
        console.log("imgReady()================================================");
         document.getElementById("menumodal").innerHTML =`
         <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
@@ -121,12 +122,17 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       </div>
    <div class="container" style="position: relative;">
-        <div class="menumodal" id="menumodal"></div>  
+        
    </div>
    <div class="container" style="position: relative;">
      
      <!-- modal --> 
-     <!--div class="menumodal" id="menumodal"></div-->           
+     <div class="menumodal" id="menumodal">
+        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
+        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
+        <a href="./app/kalendarz/index.html" class="btn navy mini minii">Kalendarz</a>
+        <button onclick="ccc()" class="btn mini minii">CC</button>           
+     </div>           
      <div class="supermodal">
         
         <div id="modal">
