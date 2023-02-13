@@ -27,6 +27,8 @@ table td {
 	min-width: 2em;
 	cursor:pointer;
 }
+table#tabela td.acta  {background:#666;color:#fff;}
+table#tabela td.actm  {background:#222;color: orange;}
 </style>
    <script src=""></script>
    
@@ -36,7 +38,7 @@ table td {
 <body>
     <div class="wrapper">
         <app-menu title="Kalendarz" name="ZnakZorro" link="../../"></app-menu>
-        <script src="../../appMenu.js"></script>	
+        <script src="https://znakzorro.github.io/zorro/appMenu.js"></script>	
         <div class="container">
 
 <h3>Kalendarz 2023</h3>
@@ -189,24 +191,38 @@ table td {
  </div><!-- wraper-->
 <script>
 const removeAll=()=>{
-	document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("active");});
+	document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("acta");td.classList.remove("actm");});
 }
 const clickTD=(e)=>{
 	console.log(e);
 	let td=e.target;
 	let nr = td.id.split("_")[1];
-	console.log(nr,td.id,td);
-	removeAll();
-	td.classList.add("active");
+	let modRow = nr %12;
+	console.log("nr="+nr,"mod="+modRow,td.id,td);
+	
 	document.getElementById("info").innerHTML = nr;
+	if (modRow<5) return;
+	removeAll();
+	for (i=0; i<11; i++){
+		let mr = modRow + (i*12)
+		let id = "td_"+mr;
+		try{
+			document.getElementById(id).classList.add("acta");
+		}	catch (error) {console.log(error);}
+	}
+	td.classList.add("actm");
+	
 }
 
 document.addEventListener("DOMContentLoaded",function(){
    let tds = document.querySelectorAll("table#tabela td");
 	console.log(tds);
+	let j=4;
 	tds.forEach((td,i)=>{
-		td.id="td_"+i;
-		console.log(i,td);
+		if (i===8 || i===15 || i===22) j+=5;
+		let nr = i+j;
+		if (i!=0) td.id="td_"+nr;
+		console.log(i,nr,td);
 		td.addEventListener('click', clickTD, false); 
 	});
 });
