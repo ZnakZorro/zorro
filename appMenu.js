@@ -3,7 +3,7 @@ class NavBarNavigator extends HTMLElement {
 		super();
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
-		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#482ff7';
+		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#eee';
 		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let styl   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : "Szczecin na Dąbie";
@@ -24,7 +24,7 @@ class NavBarNavigator extends HTMLElement {
 		}  
 		
 		</style>		
-		 <header class="header hidenow">
+		 <header class="header hidenow" style="background:${color}">
 			 <nav class="navbar">            
 				 <img src="https://znakzorro.github.io/zorro/css/icon/back.svg" width="32" onclick="window.location.href='https://znakzorro.github.io/zorro/';" class="icon1">
 				 <a href="https://znakzorro.github.io/zorro/" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
