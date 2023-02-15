@@ -28,10 +28,14 @@ table td {
 }
 table#tabela td.acta  {background:#666;color:#fff;}
 table#tabela td.actm  {background:#222;color: orange;}
-.toactive  {background:darkred;color: white;}
+.toactive  {background:#a8a8a8;color: white;}
 .b {font-weight:bold;}
+.hide{visibility: hidden;}
 </style>
-   <script src=""></script>
+<script>
+
+
+</script>
    
           
 </head>
@@ -191,34 +195,75 @@ table#tabela td.actm  {background:#222;color: orange;}
 	</div> <!--container-->
  </div><!-- wraper-->
 <script>
+
+const years ={
+	"2023":{
+		"months":[0,5,8,20,11,6,9,23,7,10,17,32,22]
+	}
+}
+console.log(years)
+console.log(years["2023"]["months"]);
+
+const getDays = (year, month) => {
+    return new Date(year, month, 0).getDate();
+};
+//console.log(getDays(2023,1))
+
+
 const removeAll=(a=true,b=true)=>{
 	if(a) document.querySelectorAll("table#tabela td").forEach((td)=>{td.classList.remove("acta");td.classList.remove("actm");});
 	if(b) document.querySelectorAll("table#tabela tr").forEach((tr)=>{tr.classList.remove("active");});
 }
 const clickTD=(e)=>{
+	document.getElementById("info").innerHTML ="";
 	//console.log(e);
 	let td=e.target;
-	let nr = td.id.split("_")[1];
+	let _nr = td.id.split("_")[1];
+	let nr = parseInt(_nr);
+
 	let modCol = nr %12;
-	//console.log("nr="+nr,"mod="+modCol,td.id,td);
+	document.getElementById("info").innerHTML += `nr=${nr}, mCol=${modCol}`;
+	
 	if (modCol<5){
 		let trp=td.parentNode; 
 		removeAll(false,true);
 		trp.classList.add("active");		
 	}
-	document.getElementById("info").innerHTML = nr;
+	
 	if (modCol<5) return;
 	removeAll(true,false);
 	
 	for (i=0; i<11; i++){
-		let mr = modCol + (i*12)
+		let mr = modCol + (i*12);
 		let id = "td_"+mr;
 		try{
 			document.getElementById(id).classList.add("acta");
-		}	catch (error) {console.log(error);}
+		}	catch (error) {
+			//console.log(error);
+		}
 	}
 	td.classList.add("actm");
-	
+		////////////////////////////////////////////////
+			let clickMonth = null;
+			for (m=1; m<14; m++){
+				
+				if (years["2023"]["months"][m]===nr) {clickMonth = m;break;}
+			}
+			if (clickMonth) {
+				let lastDay = getDays(2023,clickMonth);
+				let mids = [52,64,76];
+
+				for (m=0; m<3;m++){					
+					document.getElementById("td_"+mids[m]).textContent="";
+				}
+
+				let s = Math.abs(31-lastDay-3);
+				for (m=0; m<s;m++){	
+					document.getElementById("td_"+mids[m]).textContent=29+m;
+				}
+				document.getElementById("info").innerHTML += `, lastD=${lastDay}, `;
+			}
+		///////////////////////////////////////	
 }
 
 
@@ -247,11 +292,17 @@ const todayDate=()=>{
 		if (td.textContent.includes(dzi)) {dmatches=(td);}
 		if (td.textContent.includes(mie)) {mmatches=(td);}
 	}
+	//for (const td of tab.querySelectorAll('td')) {if (td.textContent.includes(mie)) {matches.push(td);}}
+	//console.log(dmatches);
+	//console.log(mmatches);
 	dmatches.classList.add("toactive");
 	mmatches.classList.add("toactive");
 	//clickTD
 	dmatches.click();
 	mmatches.click();
+
+
+
 }
  
 document.addEventListener("DOMContentLoaded",function(){
