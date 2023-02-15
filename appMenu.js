@@ -3,7 +3,7 @@ class NavBarNavigator extends HTMLElement {
 		super();
 		let link    = this.hasAttribute('link') ? this.getAttribute('link') : '';
 		let title   = this.hasAttribute('title') ? this.getAttribute('title') : 'gitZorro';
-		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#eee';
+		let color   = this.hasAttribute('color') ? this.getAttribute('color') : '#f4f4f4';
 		let style   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let styl   = this.hasAttribute('style') ? this.getAttribute('style') : 'navbar-normal';
 		let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : "Szczecin na Dąbie";
