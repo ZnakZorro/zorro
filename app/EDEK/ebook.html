@@ -1,26 +1,27 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-   <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>eBook1</title>
-   <meta name="HandheldFriendly" content="true">
-   <meta name="mobile-web-app-capable" content="yes"> 
-   <meta name="theme-color" content="#214960">
-   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
-   <link rel="manifest" href="../../zorro.web.json"> 
-   <link rel="stylesheet" type="text/css" href="./styles.css">
-   <style>
-    .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
-        min-height: 5em;
-    }
-    #editor {min-height: 8em;}
-    div.keys {padding:0.5em;background: aqua;}
-    div.keys span {padding:0 1em;}
-    div.keys button {margin:0.3em;}    
-    .ck-body-wrapper {padding:0 1em;background:#f4f4f4;}
-    .keyri{
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<title>eBook1</title>
+	<meta name="HandheldFriendly" content="true">
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<meta name="theme-color" content="#214960">
+	<link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+	<link rel="manifest" href="../../zorro.web.json"> 
+	<link rel="stylesheet" type="text/css" href="../../css/styles.css">
+	<link rel="stylesheet" type="text/css" href="./styles.css">
+	<style>
+	.ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+	min-height: 5em;
+	}
+	#editor {min-height: 8em;}
+	div.keys {padding:0.5em;background: aqua;}
+	div.keys span {padding:0 1em;}
+	div.keys button {margin:0.3em;}    
+	.ck-body-wrapper {padding:0 1em;background:#f4f4f4;}
+	.keyri{
 	    text-align: right;
 	    position: absolute;
 	    right: 0px;
@@ -58,6 +59,11 @@ div.keys span {display: block;position: relative;}
     <div id="editor">
         
     </div>
+	<div class="keys">        
+	    	<button onclick="nameThis()">ChatGPT-1</button>
+		<button onclick="nameThis()">ChatGPT-2</button>
+		<button onclick="nameThis()">ChatGPT-3</button>
+	</div>
   <script src="./edek.js"></script>
 </body>
 </html>
