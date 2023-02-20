@@ -15,7 +15,7 @@
     .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
         min-height: 5em;
     }
-    #editor {min-height: 5em;}
+    #editor {min-height: 8em;}
     div.keys {padding:0.5em;}
     div.keys span {padding:0 1em;}
     div.keys button {margin:0.3em;}    
@@ -32,16 +32,17 @@
 <app-menu title="EDEK 2" name="ZnakZorro" link="../../"></app-menu>
 <script src="../../appMenu.js"></script>	
     <div class="keys">
-        <div>
+        
 	    	<button id="submit">To disk</button>
 	    	<input type="file" onchange="handleFileSelect(event)">
-	</div> 
-	<div style="float:right;">	    
+	
+	<span style="text-align:right;">	    
 	    	<button id="save">Save</button>
 	    	<button id="read">Read</button>
-	</div>
+	</span>
         
     </div>
+	<hr />
     <div id="editor">
         
     </div>
@@ -49,6 +50,5 @@
   <script>
      localStorageName="ebook1";
   </script>
-&nbsp; <a href="./5/index.html">MAX-5</a>   
 </body>
 </html>
