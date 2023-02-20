@@ -20,6 +20,11 @@
     div.keys span {padding:0 1em;}
     div.keys button {margin:0.3em;}    
     .ck-body-wrapper {padding:0 1em;background:#f4f4f4;}
+    .keyri{
+	    text-align: right;
+	    position: absolute;
+	    right: 0px;
+	}
    </style>
    <script src="./ckeditor.js"></script>
    <script src="../../js/FileSaver.min.js"></script>
@@ -38,12 +43,12 @@
 <body>
 <app-menu title="EDEK 2" name="ZnakZorro" link="../../"></app-menu>
 <script src="../../appMenu.js"></script>	
-    <div class="keys">
-        
+    <div class="keys">        
 	    	<button id="submit">To disk</button>
 	    	<input type="file" onchange="handleFileSelect(event)">
 	
-	<span style="text-align:right;">	    
+	<span class="keyri">	
+		<button onclick='location.href="./"'>Edek</button>
 	    	<button id="save">Save</button>
 	    	<button id="read">Read</button>
 	</span>
