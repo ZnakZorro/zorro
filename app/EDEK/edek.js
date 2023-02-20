@@ -83,7 +83,7 @@ function handleFileSelect(event) {
 		let res2 = content.match(titleMatch2);
 		console.log("#84",res1,res2);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
-		let nameOfFile = "edek-"+date+".html";
+		let nameOfFile = localStorageName+"-"+date+".html";
 		if (fileName) nameOfFile=fileName;
 		let filename = prompt("Nazwa pliku",nameOfFile);
 
@@ -97,7 +97,7 @@ function handleFileSelect(event) {
  
    
 function getTitle(html){
-   let titleMatch = new RegExp("<h1[^>]*>(.*?)<\/h1>");
+   let titleMatch = new RegExp("<h2[^>]*>(.*?)<\/h2>");
    let res = html.match(titleMatch);
    let title = null;
    if (res && res[1]) title = res[1];
