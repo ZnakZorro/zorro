@@ -61,21 +61,27 @@ function handleFileSelect(event) {
 
 	//https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/saving-data.html
 	document.querySelector('#save').addEventListener( 'click', () => {
-		console.log("#save");
+		console.log("#save",localStorageName);
 	    	let content = editor.getData();
 		localStorage.setItem(localStorageName, content);
 	} );        
 	document.querySelector('#read').addEventListener( 'click', () => {
+		console.log("#read",localStorageName);
 	    	let content = localStorage.getItem(localStorageName);
 		editor.setData(content);
 		document.querySelector('.ck-body-wrapper').innerHTML = content;
 	} );        
 	document.querySelector( '#submit' ).addEventListener( 'click', () => {
+		console.log("#submit",localStorageName);
 		zapisz(editor.getData());
 	} );        
 
         let zapisz=(content)=>{
-		console.log("#121",content);
+		let titleMatch1 = new RegExp("<h1[^>]*>(.*?)<\/h1>");
+		let titleMatch2 = new RegExp("<h2[^>]*>(.*?)<\/h2>");
+   		let res1 = html.match(titleMatch1);
+		let res2 = html.match(titleMatch2);
+		console.log("#84",res1,res2);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
 		let nameOfFile = "edek-"+date+".html";
 		if (fileName) nameOfFile=fileName;
@@ -136,7 +142,7 @@ function submitHTML(){
 // domready dom ready
 document.addEventListener("DOMContentLoaded",function(){
 	let content = localStorage.getItem(localStorageName);
-	console.log(localStorageName,content)
+	console.log(localStorageName)
 	if (content){
 		editor.setData(content);
 		document.querySelector('.ck-body-wrapper').innerHTML = content;
