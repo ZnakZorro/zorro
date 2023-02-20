@@ -137,6 +137,8 @@ function submitHTML(){
 // domready dom ready
 document.addEventListener("DOMContentLoaded",function(){
 	let content = localStorage.getItem(localStorageName);
-	editor.setData(content);
-	document.querySelector('.ck-body-wrapper').innerHTML = content;
+	if (content){
+		editor.setData(content);
+		document.querySelector('.ck-body-wrapper').innerHTML = content;
+	}
 });
