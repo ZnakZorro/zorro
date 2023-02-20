@@ -25,7 +25,14 @@
    <script src="../../js/FileSaver.min.js"></script>
    <script src="../../js/edit.js"></script>
    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-	 
+<script>
+	let localStorageName = "ebook1";
+	let arr = location.pathname.split("/").pop();
+	console.log(arr);
+	let lsName = location.pathname.split("/").pop().split(".")[0];
+	console.log(lsName);
+
+</script>	 
 
 </head>
 <body>
@@ -48,7 +55,7 @@
     </div>
   <script src="./edek.js"></script>
   <script>
-     localStorageName="ebook1";
+	let localStorageName = "ebook1";
   </script>
 </body>
 </html>
