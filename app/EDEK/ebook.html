@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>EDEK</title>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" type="text/css" href="./styles.css">
+   <style>
+    .ck.ck-editor__main>.ck-editor__editable:not(.ck-focused) {
+        min-height: 5em;
+    }
+    #editor {min-height: 5em;}
+    div.keys {padding:0.5em;}
+    div.keys span {padding:0 1em;}
+    div.keys button {margin:0.3em;}    
+    .ck-body-wrapper {padding:0 1em;background:#f4f4f4;}
+   </style>
+   <script src="./ckeditor.js"></script>
+   <script src="../../js/FileSaver.min.js"></script>
+   <script src="../../js/edit.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+	 
+
+</head>
+<body>
+<app-menu title="EDEK 2" name="ZnakZorro" link="../../"></app-menu>
+<script src="../../appMenu.js"></script>	
+    <div class="keys">
+        
+	    	<button id="submit">Zapisz</button>
+	    	<input type="file" onchange="handleFileSelect(event)">
+	    	
+	    
+	    	<button id="save">Save</button>
+	    	<button id="read" style="float:right;">Read</button>
+
+        
+    </div>
+    <div id="editor">
+        
+    </div>
+  <script src="./edek.js"></script>
+  <script>
+     localStorageName="ebook1";
+  </script>
+&nbsp; <a href="./5/index.html">MAX-5</a>   
+</body>
+</html>
