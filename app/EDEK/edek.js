@@ -79,8 +79,8 @@ function handleFileSelect(event) {
         let zapisz=(content)=>{
 		let titleMatch1 = new RegExp("<h1[^>]*>(.*?)<\/h1>");
 		let titleMatch2 = new RegExp("<h2[^>]*>(.*?)<\/h2>");
-   		let res1 = html.match(titleMatch1);
-		let res2 = html.match(titleMatch2);
+   		let res1 = content.match(titleMatch1);
+		let res2 = content.match(titleMatch2);
 		console.log("#84",res1,res2);
 		let date = (new Date()).toLocaleString().replace(/[^\w\s]| /gi, '_').replace("__","_");    
 		let nameOfFile = "edek-"+date+".html";
