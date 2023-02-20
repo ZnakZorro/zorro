@@ -1,6 +1,4 @@
 
-let localStorageName = "edek1";
-
 const $=(y)=>document.querySelector(y);
 const $$=(y)=>document.querySelectorAll(y);
 
@@ -63,6 +61,7 @@ function handleFileSelect(event) {
 
 	//https://ckeditor.com/docs/ckeditor5/latest/installation/advanced/saving-data.html
 	document.querySelector('#save').addEventListener( 'click', () => {
+		console.log("#save");
 	    	let content = editor.getData();
 		localStorage.setItem(localStorageName, content);
 	} );        
@@ -137,6 +136,7 @@ function submitHTML(){
 // domready dom ready
 document.addEventListener("DOMContentLoaded",function(){
 	let content = localStorage.getItem(localStorageName);
+	console.log(localStorageName,content)
 	if (content){
 		editor.setData(content);
 		document.querySelector('.ck-body-wrapper').innerHTML = content;
