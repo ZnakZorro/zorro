@@ -148,3 +148,8 @@ document.addEventListener("DOMContentLoaded",function(){
 		document.querySelector('.ck-body-wrapper').innerHTML = content;
 	}
 });
+
+/******************************/
+const nameThis=(ten)=>{
+	console.log(ten.textContent);
+}
