@@ -2,11 +2,6 @@
 ### Kod Service Tag: D5Q79T3
 ---
 
-| Syntax      | Description |
-| ----------- | ----------- |
-| Header      | Title       |
-| Paragraph   | Text        |
-
 | Nazwa           | Opis |
 | --------------- | ----------------------- |
 |Nazwa komputera  | Dell-G15-5511           |
