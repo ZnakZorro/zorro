@@ -1,7 +1,7 @@
 
 const snipARR = [
     {n:"Ekspres",         f:"dom",        u:"expres.txt"},
-    {n:"Dell",            f:"dom",        u:"dell.txt"},
+    {n:"Dell",            f:"dom",        u:"dell.md"},
     {n:"Nalewki",         f:"dom",        u:"nalewki.txt"},
     {n:"Dieta",           f:"dom",        u:"dieta.txt"},
     {n:"Gwinty",          f:"dom",        u:"wymiary.htm"},
