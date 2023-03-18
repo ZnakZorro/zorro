@@ -1,5 +1,5 @@
-##DELL G15 5511 
-###Kod Service Tag: D5Q79T3
+## DELL G15 5511 
+### Kod Service Tag: D5Q79T3
 ---
 
 | Syntax      | Description |
@@ -7,10 +7,15 @@
 | Header      | Title       |
 | Paragraph   | Text        |
 
+| Nazwa           | Opis |
+| --------------- | ----------------------- |
+|Nazwa komputera  | Dell-G15-5511           |
+|Model sprzętu    |  Dell Inc. Dell G15 5511|
+|Pamięć           |  16,0 GİB               |
 
-|Nazwa komputera  | Dell-G15-5511|
-|Model sprzętu |  Dell Inc. Dell G15 5511|
-|Pamięć  |  16,0 GİB|
+--
+---
+----
 
 Nazwa komputera   Dell-G15-5511
 Model sprzętu   Dell Inc. Dell G15 5511
