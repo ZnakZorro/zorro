@@ -28,7 +28,9 @@ const snipARR = [
     {n:"visibility",      f:"js",         u:"visibility.js"},    
     {n:"submit",          f:"js",         u:"submit.html"},
     {n:"array",           f:"js",         u:"array.js"},
-    {n:"saveFile",           f:"js",         u:"saveFile.js"},
+    {n:"saveFile",        f:"js",         u:"saveFile.js"},
+    {n:"Copy",            f:"js",         u:"copy_paste.html"},
+    
     
     {n:"md",              f:"code",       u:"md.md"},
     {n:"console",         f:"code",       u:"console.js"},
