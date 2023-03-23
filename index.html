@@ -244,7 +244,9 @@ document.addEventListener("DOMContentLoaded",function(){
   
   
 <div class="container">
-      <button onclick='document.getElementById("txtx").value="";'>Cleaxr TXT</button>
+      <button onclick='PasteTXT()'>Paste</button>
+      <button onclick='CopyTXT()'>Copy</button>   
+      <button onclick='document.getElementById("txtx").value="";'>Clear</button>
       <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
 
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
@@ -260,6 +262,22 @@ document.addEventListener("DOMContentLoaded",function(){
  
   
 </body>
+<script>
+    const PasteTXT=async()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.value="";
+        txtx.style.height="20em";
+        const text = await navigator.clipboard.readText();
+        txtx.value = text;
+    }
+    const CopyTXT=()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.select();
+        navigator.clipboard.writeText(txtx.value);
+    }
+</script>    
+   
+   
 
 <!--script src="./js/navbar.js?v=1"></script-->
 <script type="text/javascript" src="./js/yrno.js"></script> 
