@@ -244,11 +244,12 @@ document.addEventListener("DOMContentLoaded",function(){
   
   
 <div class="container">
-      <button onclick='PasteTXT()'>Paste</button>
+      <button onclick='PasteTXT()'>Paste</button> 
       <button onclick='CopyTXT()'>Copy</button>   
-      <button onclick='document.getElementById("txtx").value="";'>Clear</button>
-      <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
-
+      <span style="float:right;">
+         <button onclick='document.getElementById("txtx").value="";'>Clear</button>
+         <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
+      </span>
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
 </div>
 <div class="container"></div>
@@ -257,11 +258,9 @@ document.addEventListener("DOMContentLoaded",function(){
   
  </div>
 
-   
-   
- 
   
 </body>
+   
 <script>
     const PasteTXT=async()=>{
         let txtx = document.getElementById("txtx");
