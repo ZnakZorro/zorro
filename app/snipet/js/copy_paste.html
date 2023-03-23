@@ -1,0 +1,28 @@
+<div class="container">
+    <button id="paste_button">Paste</button>
+    <button id="copy_button">Copy</button>
+    <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
+</div>
+
+<script>
+    const pasteButton = document.querySelector('#paste_button');
+    pasteButton.addEventListener('click', async () => {
+        try {
+            const text = await navigator.clipboard.readText()
+            document.querySelector('#txtx').value += text;
+        } catch (error) {
+            console.log('Failed to read clipboard');
+        }
+    });
+
+    const copyButton = document.querySelector('#copy_button');
+    copyButton.addEventListener('click', async () => {
+        try {
+            let txtx = document.querySelector("#txtx");
+                txtx.select();
+                await navigator.clipboard.writeText(txtx.value);
+        } catch (error) {
+            console.log('Failed to copy clipboard');
+        }
+    });
+</script> 
