@@ -1,10 +1,13 @@
 
-const the_animation = document.querySelectorAll('.animation')
+const the_animation = document.querySelectorAll('.animation');
+console.log(the_animation)
 
 const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-        console.log(entry.isIntersecting,entry.target)
+        //console.log(entry.target,entry.target.dataset.src)
         if (entry.isIntersecting) {
+            console.log(entry.target.dataset.src)
+            entry.target.src = entry.target.dataset.src;
             entry.target.classList.add('scroll-animation')
         }
             else {
@@ -18,5 +21,6 @@ const observer = new IntersectionObserver((entries) => {
 
 for (let i = 0; i < the_animation.length; i++) {
     const elements = the_animation[i];
+    console.log(elements)
     observer.observe(elements);
 } 
