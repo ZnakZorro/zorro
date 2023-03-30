@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    background-color: rgb(48, 33, 63);
+    color: white;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+.animation {
+    opacity: 0;
+    transform: translateX(-50%);
+    transition: all 0.7s ease-out;
+    transition-delay: 0.1s;
+
+}
+
+.scroll-animation {
+    opacity: 1;
+    transform: translateX(0);
+}
