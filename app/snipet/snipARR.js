@@ -30,6 +30,7 @@ const snipARR = [
     {n:"array",           f:"js",         u:"array.js"},
     {n:"saveFile",        f:"js",         u:"saveFile.js"},
     {n:"Copy",            f:"js",         u:"copy_paste.html"},
+    {n:"Date",            f:"js",         u:"date.html"},
     
     
     {n:"md",              f:"code",       u:"md.md"},
