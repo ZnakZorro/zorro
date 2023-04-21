@@ -4,3 +4,25 @@
 setInterval(()=>{document.querySelector("#zegar").textContent = (new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));},1000);
 //"full","long","medium","short"
 </script>
+  
+<script>
+let zzz='<h1 id="zegar" style="background:black; color:white;opacity:0.6;font-size:10vw;position:absolute;top:10px;left:10px;z-index:99">00:00:00<h1>';
+document.body.insertAdjacentHTML('afterbegin', zzz);
+setInterval(()=>{document.querySelector("#zegar").textContent=(new Intl.DateTimeFormat('pl-PL',{timeStyle:'medium'}).format(new Date()));},1000);
+  
+  
+  
+  
+
+let zzz='<h1 id="zegar" style="background:black; color:white;opacity:0.6;font-size:10vw;position:absolute;top:10px;left:10px;z-index:99">00:00:00<h1>';document.body.insertAdjacentHTML("afterbegin",zzz),setInterval(()=>{document.querySelector("#zegar").textContent=new Intl.DateTimeFormat("pl-PL",{timeStyle:"medium"}).format(new Date)},1e3);
+
+//SPIPET
+javascript:(function(){document.body.insertAdjacentHTML("afterbegin",'<h1 id="zegar" style="background:black;color:white;opacity:0.6;font-size:10vw;position:fixed;top:10px;left:10px;z-index:99">00:00:00<h1>'),setInterval((()=>{document.querySelector("#zegar").textContent=new Intl.DateTimeFormat("pl-PL",{timeStyle:"medium"}).format(new Date)}),1e3);})();
+
+
+javascript:(function(){
+
+})();
+  
+  
+</script>
