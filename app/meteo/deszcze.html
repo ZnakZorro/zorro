@@ -55,8 +55,8 @@ fetch(u1)
 	      o.shortIntervals.forEach((ob)=>{
 		 let p = ob.precipitation;
 		 let t = ob.start;
-		 //let tpl = (new Date(t)).toLocaleString();
-		  let tpl = (new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date(t)));
+		 let tpl = (new Date(t)).toLocaleString();
+		  //let tpl = (new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date(t)));
 		 //console.log(p);
 		 //console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
 		 //info.innerHTML += "<p>"+tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%</p>";
