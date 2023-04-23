@@ -2,18 +2,40 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-   <meta charset="UTF-8" />
-   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-   <title>deszcze</title>  
-   <meta name="HandheldFriendly" content="true">
-   <meta name="mobile-web-app-capable" content="yes"> 
-   <style>   
-      body {font:normal Verdana 14pt;}
-   </style>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge" />
+	<title>DESZCZ</title>
+	<meta name="HandheldFriendly" content="true">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#008">
+	<link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg">
+	<link rel="manifest" href="../../zorro.web.json">
+	<link rel="stylesheet" href="../../css/all.css" />
+	<link rel="stylesheet" href="../../css/style.css" />
+	<link rel="stylesheet" href="../../css/table.css" />
+
+	<script>
+		document.addEventListener("DOMContentLoaded",function(){
+		});
+	</script>
+          
 </head>
+
 <body>
-  
-  
+<div class="wrapper">
+	<app-menu title="DESZCZ" name="DESZCZ" link="../../"></app-menu>
+	<script src="../../appMenu.js"></script>
+	<div class="info message" id="info"></div>
+   
+		<div class="container">
+               <a href="./plik.html" class="btn blue">Plik</a>
+               
+       </div>
+   
+</div><!-- wraper-->
+
+
 <script>
 const u1 = "https://www.yr.no/api/v0/locations/2-3083828/forecast";
 const u2 = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15";
@@ -23,12 +45,15 @@ fetch(u1)
   .then(o => {
       console.log(o);
       console.log(o.shortIntervals);  
+      let info = document.querySelector("#info");
+      info.innerHTML ="";
       o.shortIntervals.forEach((ob)=>{
          let p = ob.precipitation;
          let t = ob.start;
          let tpl = (new Date(t)).toLocaleString();
          console.log(p);
-         console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
+         //console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
+         info.innerHTML += tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%<br />";
       })
   }).catch(e => {console.log(e)})
   
