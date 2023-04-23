@@ -568,7 +568,7 @@ Meteogram.prototype.getChartOptions = function () {
         xAxis: [{ // Bottom X axis
             type: 'datetime',
             tickInterval: 2 * 36e5, // two hours
-            minorTickInterval: 36e5, // one hour
+            minorTickInterval: 2 * 36e5, // 2* one hour
             tickLength: 0,
             gridLineWidth: 1,
             gridLineColor: 'rgba(128, 128, 128, 0.1)',
@@ -733,7 +733,7 @@ Meteogram.prototype.getChartOptions = function () {
                     value: 0
                 },
                 style: {
-                    fontSize: '9px',
+                    fontSize: '11px',
                     color: 'black'
                 }
             },
