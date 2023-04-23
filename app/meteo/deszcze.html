@@ -14,7 +14,9 @@
 	<link rel="stylesheet" href="../../css/all.css" />
 	<link rel="stylesheet" href="../../css/style.css" />
 	<link rel="stylesheet" href="../../css/table.css" />
-
+	<style>
+		#info {font-family:monostace; font-size:10px;}
+	</style>
 	<script>
 		document.addEventListener("DOMContentLoaded",function(){
 		});
@@ -53,7 +55,7 @@ fetch(u1)
          let tpl = (new Date(t)).toLocaleString();
          console.log(p);
          //console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
-         info.innerHTML += tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%<br />";
+         info.innerHTML += "<p>"+tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%</p>";
       })
   }).catch(e => {console.log(e)})
 
