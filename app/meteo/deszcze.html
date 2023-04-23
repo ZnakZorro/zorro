@@ -15,7 +15,10 @@
 	<link rel="stylesheet" href="../../css/style.css" />
 	<link rel="stylesheet" href="../../css/table.css" />
 	<style>
-		#info {font-family: monospace; font-size:1em;}
+	#info {
+		font-family: monospace;
+		font-size: calc(16px + 3 * ((100vw) / 400));
+	}
 	</style>
 	<script>
 		document.addEventListener("DOMContentLoaded",function(){
@@ -57,7 +60,7 @@ fetch(u1)
 		 let tpl = (new Date(t)).toLocaleString();
 		 console.log(p);
 		 //console.log(tpl,"min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%");
-		 info.innerHTML += "<p>"+tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%</p>";
+		 //info.innerHTML += "<p>"+tpl+", min="+p.min,"max="+p.max,"val="+p.value,p.probability+"%</p>";
 		 t=html += `<tr><td>${tpl}</td><td>${p.min}</td><td>${p.max}</td><td>${p.value}</td><td>${p.probability}</td></tr>`;
 
 	      })
