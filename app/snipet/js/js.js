@@ -7,3 +7,12 @@ Number.prototype.pad = function(size) {
     return s;
 }
 (9).pad();  //returns "09"
+
+// Class
+class Rectangle {
+  constructor(height, width) {
+    this.height = height;
+    this.width = width;
+  }
+}
+const square = new Rectangle(10, 10);
