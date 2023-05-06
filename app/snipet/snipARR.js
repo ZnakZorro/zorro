@@ -19,6 +19,7 @@ const snipARR = [
     {n:"arrows",          f:"html",       u:"arrows.htm"},
 
     {n:"local",           f:"js",         u:"local.js"},
+    {n:"JS",              f:"js",         u:"js.js"},
     {n:"async",           f:"js",         u:"async.html"},
     {n:"fetch",           f:"js",         u:"fetch.js"},
     {n:"createElement",   f:"js",         u:"createElement.js"},
