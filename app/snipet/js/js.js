@@ -8,11 +8,20 @@ Number.prototype.pad = function(size) {
 }
 (9).pad();  //returns "09"
 
+//**********************************
 // Class
 class Rectangle {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
+    
+	constructor(height, width) {
+	  this.height = height;
+	  this.width = width;
+	}
+
+    calc=()=>{
+        return this.width * this.height;
+    }
+
   }
-}
-const square = new Rectangle(10, 10);
+  
+const square = new Rectangle(20, 10);
+console.log(square.calc())
