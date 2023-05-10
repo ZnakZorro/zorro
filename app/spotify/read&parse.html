@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SPTlist</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+    body, table{font-family:Verdana; font-size: 12pt;}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: left;
+  padding: 6px;
+  border: 1px solid #ddd;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+</style>
+</head>
+<body>
+
+
+<input type="file" id="file-input" />
+<h3>List:</h3>
+<div id="file-content"></div>
+<script>
+function readSingleFile(e) {
+  let file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let contents = e.target.result;
+    displayContents(contents);
+  };
+  reader.readAsText(file);
+}
+
+function displayContents(contents) {
+    let element = document.getElementById('file-content');
+    element.textContent = contents;
+    let page = document.createElement( 'html' );
+    page.innerHTML = contents
+    let rows = page.querySelectorAll('[role="row"]');
+    console.log(rows.length)
+    let arrs=[];
+    rows.forEach((r,n)=>{
+        if (n>0){
+            console.log(n,r);
+            
+            let arr=[]
+            let info = {}
+            let divs = r.querySelectorAll("div>div");
+            divs.forEach((s,i)=>{
+                console.log(n,i,s.textContent)
+                if (i===7) info.time=s.textContent
+            })
+            
+            let ahrefs = r.querySelectorAll("a");
+            ahrefs.forEach((a,i)=>{
+                {
+                    let t = a.textContent
+                    arr.push(a.textContent)
+                    //console.log(n,i,t);
+                }          
+            });
+            
+            let len = arr.length;
+            //console.log(n,len,arr[0])
+            info.title  = arr[0];
+            info.artist = arr[1];
+            if (len>3) info.artist += ", "+arr[2];
+            if (len>4) info.artist += ", "+arr[3];
+            if (len>5) info.artist += ", "+arr[4];
+            if (len>6) info.artist += ", "+arr[5];
+            if (len>7) info.artist += ", "+arr[6];
+            info.album=arr.pop();
+            arrs.push(info);
+        }     
+    })
+    //console.log(arrs)
+    let html = "<table><tr><th>lp</th><th>Title</th><th>Author</th><th>Album</th><th>Time</th></tr>";
+    arrs.forEach((a,i)=>{
+        let j=i+1
+        console.log(j,a)
+        html += `<tr><td>${j}</td><td>${a.title}</td><td>${a.artist}</td><td>${a.album}</td><td>${a.time}</td></tr>`;
+    })
+    html += "</table>";
+    element.innerHTML = html;
+}
+
+document.getElementById('file-input').addEventListener('change', readSingleFile, false);
+
+</script>
+</body>
+</html>
