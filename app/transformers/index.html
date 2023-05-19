@@ -3,11 +3,12 @@
 </script>
 <script>
 //import { pipeline } from '@xenova/transformers';
-
+setTimeout((){
 // Allocate a pipeline for sentiment-analysis
 let pipe = await pipeline('sentiment-analysis');
 
 let out = await pipe('I love transformers!');
 console.log(out)
 // [{'label': 'POSITIVE', 'score': 0.999817686}]
+    },3000)
 </script>
