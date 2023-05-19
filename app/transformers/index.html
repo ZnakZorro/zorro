@@ -1,8 +1,9 @@
 <script type="module" crossorigin src="https://cdn.jsdelivr.net/npm/@xenova/transformers"></script>
 
 <script>
-import { pipeline } from '@xenova/transformers';
+
 setTimeout(()=>{
+    import { pipeline } from '@xenova/transformers';
 // Allocate a pipeline for sentiment-analysis
 let pipe = await pipeline('sentiment-analysis');
 
