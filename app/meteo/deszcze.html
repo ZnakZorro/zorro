@@ -217,10 +217,7 @@ const pogodaTydzien=(o)=>{
   ranges.length=0;
   averages.length=0;
   o.longIntervals.forEach(e => {    
-    //let czas = new Intl.DateTimeFormat('pl-PL', {timeStyle: 'short'}).format(new Date(e.start))
-    //let czas = (new Date(e.start)).toLocaleString();
-    //let czas = (new Intl.DateTimeFormat('pl-PL', opt).format(new Date(e.start)));
-    //let time = (new Date(e.start));//.getTime();
+    console.log(e)
     let time = new Intl.DateTimeFormat('pl-PL', {dateStyle: 'short',timeStyle: 'short'}).format(new Date(e.start))
     
     //ranges 
