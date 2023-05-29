@@ -217,9 +217,9 @@ const pogodaTydzien=(o)=>{
   ranges.length=0;
   averages.length=0;
   o.longIntervals.forEach(e => {    
-    console.log(e)
-    let time = new Intl.DateTimeFormat('pl-PL', {dateStyle: 'short',timeStyle: 'short'}).format(new Date(e.start))
     
+    let time = new Intl.DateTimeFormat('pl-PL', {dateStyle: 'short',timeStyle: 'short'}).format(new Date(e.start))
+    console.log(time,e.temperature)
     //ranges 
     //console.log(czas,e.precipitation)
     ranges.push([e.precipitation.min,e.precipitation.max]);
