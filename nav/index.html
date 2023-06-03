@@ -196,6 +196,43 @@
         </div>
       </div>
     </header>
+    
+    
+<div class="container">
+      <button onclick="PasteTXT()">Paste</button> 
+      <button onclick="CopyTXT()">Copy</button>   
+      <span style="float:right;">
+         <button onclick='document.getElementById("txtx").value="";'>Clear</button>
+         
+      </span>
+      <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
+</div>    
+    
+<script>
+  //---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+  if (localStorage.getItem("pastetxtx")){
+   let str = localStorage.getItem("pastetxtx");
+    document.getElementById("txtx").value = str;
+  }
+})
+//---DOM READY----------------------------------
+    const PasteTXT=async()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.value="";
+        txtx.style.height="20em";
+        const text = await navigator.clipboard.readText();
+        txtx.value = text;
+    }
+    const CopyTXT=()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.select();
+        navigator.clipboard.writeText(txtx.value);
+      localStorage.setItem("pastetxtx", txtx.value);
+    }
+</script>    
+       
+    
     <script src="script.js"></script>
   </body>
 </html>
