@@ -48,14 +48,15 @@ button {
 }
 
 .btn {
-  display: block;
+  display: inline-block;
   background-color: var(--primary-color);
   color: var(--white);
   text-align: center;
-  padding: 0.6rem 1.4rem;
+  padding: 0.5rem 1rem;
+  min-width:2rem;
   font-size: 1rem;
   font-weight: 500;
-  border-radius: 5px;
+  border-radius: 0.33rem;
 }
 
 .icon {
