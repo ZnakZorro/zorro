@@ -26,7 +26,11 @@ body {
   color: var(--dark-grey);
   letter-spacing: -0.4px;
 }
-
+.wrapper {
+  display:block;
+  width:100%;
+  
+}
 ul {
   list-style: none;
 }
