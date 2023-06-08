@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>jQuery => Vanilla JS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body>
+
+		<nav id="menu">
+			<ul>
+				<li class="item bar">Home</li>
+				<li class="item">About</li>
+				<li class="item bar">Articles</li>
+				<li class="item">Resources</li>
+			</ul>
+			<div class="hidden">Hide me</div>
+			<div class="hidden">Hide me, too</div>
+			<div class="hidden">Also hide me!</div>
+		</nav>
+
+
+
+
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script>
+			/*
+			jQuery(document).ready( function() {
+
+				let menu = jQuery('#menu');
+
+				menu.find('li.item')
+					.addClass('foo')
+					.removeClass('bar')
+					.css('background-color', 'rebeccapurple')
+					.css('color', '#fff');
+
+				menu.find('.hidden').css('display', 'none');
+
+			});
+			*/
+
+			// Get the #menu element from the DOM
+			let menu = document.querySelector('#menu');
+
+			// Loop through each li.item in the menu
+			let items = menu.querySelectorAll('li.item');
+			for (let item of items) {
+				item.classList.add('foo');
+				item.classList.remove('bar');
+				item.style.backgroundColor = 'rebeccapurple';
+				item.style.color = '#fff';
+			}
+
+			// loop through each .hidden class and actually hide it
+			let hidden = menu.querySelectorAll('.hidden');
+			for (let item of hidden) {
+				item.setAttribute('hidden', '');
+			}
+		</script>
+	</body>
+</html>
