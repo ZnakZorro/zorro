@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Vanilla JS => jQuery</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            .foo {color:red;}
+            .bar {background-color:blue;}
+        </style>
+        <script src="dolar_class.js"></script>
+	</head>
+
+	<body>
+
+		<nav id="menu">
+			<ul>
+				<li class="item bar">Home</li>
+				<li class="item">About</li>
+				<li class="item bar">Articles</li>
+				<li class="item">Resources</li>
+			</ul>
+			<div class="hidden">Hide me</div>
+			<div class="hidden">Hide me, too</div>
+			<div class="hidden">Also hide me!</div>
+		</nav>
+        <button onclick="action()">Action</button>
+
+
+<script>
+    const action=()=>{
+        let menu = new $('#menu');
+        menu.find('li.item')
+            .addClass('foo')
+            .removeClass('bar')
+            .css('background-color', 'rebeccapurple')
+            .css('color', '#fff');
+
+        menu.find('.hidden').attr('hidden');
+
+    }
+</script>
