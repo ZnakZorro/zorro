@@ -74,10 +74,10 @@ h1,h2,h3 {margin: 0.25em 0;}
     min-width: 74px !important;
 }
 .btn.minii {
-    margin: 0.15em;
+    margin: 0.12em;
     padding: 0.25em;
     font-size: 0.90em;
-    min-width: 66px !important;
+    min-width: 62px !important;
 }
 .btn.big:active {background:red;}
 .red   {background-color: #d3004e; color:white;}
