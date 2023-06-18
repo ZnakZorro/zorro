@@ -5,6 +5,7 @@ const snipARR = [
     {n:"Nalewki",         f:"dom",        u:"nalewki.txt"},
     {n:"Dieta",           f:"dom",        u:"dieta.txt"},
     {n:"Gwinty",          f:"dom",        u:"wymiary.htm"},
+    {n:"Dom",          f:"dom",        u:"dom.htm"},
     
     {n:"PianoCraft",      f:"audio",      u:"pianocraft.md"},
     {n:"Gramofon",        f:"audio",      u:"gramofon.htm"},
