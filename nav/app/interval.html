@@ -48,7 +48,10 @@
             document.querySelector("#navic").innerHTML = t;
             installScript(["../script.js","../navbar.js"])
           })
-          .catch(e => {console.log(e)})
+          .catch(e => {console.log(e)});
+        
+        let exmenu = $("#dropdown2").innerHTML;
+        $("#exmenu").innerHTML = exmenu;
       })
       //---DOM READY----------------------------------
 
@@ -80,6 +83,7 @@
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
+  <div class="kontener" id="exmenu"></div>
 
 <script>
 let info = document.getElementById("info"); 
