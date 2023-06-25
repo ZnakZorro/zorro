@@ -8,7 +8,7 @@
     <meta name="theme-color" content="#033500">
     <link rel="manifest" href="../nav.web.json"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="./favicon.ico">
+    <!--link rel="shortcut icon" href="./favicon.ico"-->
     <link rel="shortcut icon" type="image/jpg" size="512x512" href="../nav.jpg">
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../all.css" />
@@ -19,14 +19,14 @@
     </style>
     <script>
      
-      const $=e=>document.querySelector(e);
-      const $$=e=>document.querySelectorAll(e);
+      //const $=e=>document.querySelector(e);
+      //const $$=e=>document.querySelectorAll(e);
       let installScript=(urls,callback)=>{
             let script = document.createElement('script');
             script.onload = function () {
             urls.shift();
-                if (urls.length>0) installScript(urls,callback);
-                else callback();
+                if (urls.length>0) installScript(urls,callback=null);
+                else if (callback) callback();
             };
             script.src = urls[0];
             document.head.appendChild(script);
@@ -36,7 +36,7 @@
          fetch("../menu.html")
           .then(r => {return r.text()})
           .then(t => {
-            console.log(t);
+            //console.log(t);
             $("#navic").innerHTML = t;
             installScript(["../script.js","../navbar.js"])
           })
