@@ -18,9 +18,6 @@
       #klawisze, button {min-width:4em;}
     </style>
     <script>
-     
-      //const $=e=>document.querySelector(e);
-      //const $$=e=>document.querySelectorAll(e);
       let installScript=(urls,callback)=>{
             let script = document.createElement('script');
             script.onload = function () {
@@ -37,7 +34,7 @@
           .then(r => {return r.text()})
           .then(t => {
             //console.log(t);
-            $("#navic").innerHTML = t;
+            document.querySelector("#navic").innerHTML = t;
             installScript(["../script.js","../navbar.js"])
           })
           .catch(e => {console.log(e)})
