@@ -17,8 +17,9 @@
       .info {
           font-family: monospace;
           font-size: 0.9em;
-          column-count: 3;
+          /*column-count: 3;*/
       }
+      .info p {display:inline-block; margin:0.15em; min-width:30%;}
       .kontener {margin: 0.35em}
       #klawisze button {min-width:6em;padding: 0.5em}
     </style>
@@ -90,17 +91,17 @@ const stopInterval=()=>{
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
   
 const repeatMinuta=(itime=60000)=> {
-  info.innerHTML = "Start Interval #"+maxCount+"<br />";
+  info.innerHTML = "<h4>Start Interval #"+maxCount+"</h4>";
   if (interV) {
     stopInterval();
   }
   y.play(); 
-  info.innerHTML += counter+", "+ getNow()+"<br />";
+  info.innerHTML += "<p>"+counter+", "+ getNow()+"</p>";
   interV = setInterval(()=>{
     y.play(); 
     counter++;
     if (counter > maxCount) stopInterval();
-    info.innerHTML += counter+", "+ getNow()+"<br />";
+    info.innerHTML += <p>counter+", "+ getNow()+"</p>";
   },itime);  
 } 
 
