@@ -47,8 +47,8 @@
             //console.log(t);
             document.querySelector("#navic").innerHTML = t;
             installScripts(["../script.js","../navbar.js"])
-            let exmenu = $("#dropdown2").innerHTML;
-            $("#exmenu").innerHTML = exmenu;
+            let exmenu = document.querySelector("#dropdown2").innerHTML;
+            document.querySelector("#exmenu").innerHTML = exmenu;
           })
           .catch(e => {console.log(e)});
         
