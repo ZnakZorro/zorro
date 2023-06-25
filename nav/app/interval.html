@@ -110,7 +110,7 @@ const repeatMinuta=(itime=60000)=> {
   interV = setInterval(()=>{
     y.play(); 
     counter++;
-    if (counter > maxCount) stopInterval();
+    if (counter > maxCount-1) stopInterval();
     info.innerHTML += "<p>"+counter+", "+ getNow()+"</p>";
   },itime);  
 } 
