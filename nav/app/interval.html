@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<audio id="myAudio">
+  <source src="horse.ogg" type="audio/ogg">
+  <source src="horse.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<audio id="minutaAudio">
+  <source src="minuta.ogg" type="audio/ogg">
+  <source src="minuta.mp3" type="audio/mpeg">
+  Your browser does not support the audio element.
+</audio>
+<p>Click the buttons to play or pause the audio.</p>
+
+<button onclick="playAudio()" type="button">Play Audio</button>
+<button onclick="pauseAudio()" type="button">Pause Audio</button> 
+<br />
+<button onclick="playMinuta()" type="button">Play Minuta</button>
+<button onclick="pauseMinuta()" type="button">Pause Minuta</button> 
+<button onclick="repeatMinuta()" type="button">Repeat Minuta</button> 
+
+<script>
+var x = document.getElementById("myAudio"); 
+var y = document.getElementById("minutaAudio"); 
+
+function playAudio() { 
+  x.play(); 
+} 
+
+function pauseAudio() { 
+  x.pause(); 
+} 
+
+function playMinuta() { 
+  y.play(); 
+} 
+
+function pauseMinuta() { 
+  y.pause(); 
+} 
+function repeatMinuta() { 
+  setIntervat(()=>{
+    y.play(); 
+  },60000);  
+} 
+</script>
+
+</body>
+</html>
