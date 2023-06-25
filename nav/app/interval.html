@@ -14,8 +14,12 @@
     <link rel="stylesheet" href="../all.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <style>
-      .kontener {}
-      #klawisze button {min-width:4em;}
+      .info {
+          font-family: monospace;
+          font-size: 0.9em;
+      }
+      .kontener {margin: 0.35em}
+      #klawisze button {min-width:6em;}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -61,8 +65,8 @@
   <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
   <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
 </div>
-<div class="kontener" id="info"></div>
-<div class="kontener" id="infotime"></div>
+<div class="kontener info" id="info"></div>
+<div class="kontener info" id="infotime"></div>
 
 <script>
 let info = document.getElementById("info"); 
@@ -88,18 +92,18 @@ const stopInterval=()=>{
     info.innerHTML += "Stop Interval <br />";
    counter = 0;
 }
-  
+const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
 const repeatMinuta=(itime=60000)=> {
   info.innerHTML = "Start Interval <br />";
   if (interV) {
     stopInterval();
   }
   y.play(); 
-  info.innerHTML += counter+", "+ (new Date()).toLocaleString('pl-PL')+"<br />";
+  info.innerHTML += counter+", "+ getNow()+"<br />";
   interV = setInterval(()=>{
     y.play(); 
     counter++;
-    info.innerHTML += counter+", "+ (new Date()).toLocaleString('pl-PL')+"<br />";
+    info.innerHTML += counter+", "+ getNow()+"<br />";
   },itime);  
 } 
 
