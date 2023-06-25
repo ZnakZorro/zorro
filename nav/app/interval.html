@@ -25,55 +25,34 @@
           </a>
       </div>
 </div>
-<audio id="myAudio">
-  <source src="audio/horse.ogg" type="audio/ogg">
-  <source src="audio/horse.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-<audio id="minutaAudio">
-  <source src="audio/minuta.ogg" type="audio/ogg">
-  <source src="audio/minuta.mp3" type="audio/mpeg">
-  Your browser does not support the audio element.
-</audio>
-<p>Click the buttons to play or pause the audio.</p>
 
-<button class="btn btn-primary" onclick="playAudio()" type="button">Play Audio</button>
-<button class="btn btn-primary" onclick="pauseAudio()" type="button">Pause Audio</button> 
-<br />
-<button class="btn btn-primary" onclick="playMinuta()" type="button">Play Minuta</button>
-<button class="btn btn-primary" onclick="pauseMinuta()" type="button">Pause Minuta</button> 
-  <br />
-  
+<audio id="minutaAudio">
+  <source src="audio/ye.mp3" type="audio/mpeg">
+</audio>
+
 <div class="container" id="klawisze">
   <button class="btn blue" onclick="repeatMinuta(60000)" type="button">1 Minuta</button>
-  <button class="btn blue" onclick="repeatMinuta(60000)" type="button">5 Minut</button>
-  <button class="btn blue" onclick="repeatMinuta(60000)" type="button">7,5 Minut</button> 
-  <button class="btn red"  onclick="stopInterval()" type="button">STOP Minuta</button> 
+  <button class="btn blue" onclick="repeatMinuta(300000)" type="button">5 Minut</button>
+  <button class="btn blue" onclick="repeatMinuta(450000)" type="button">7,5 Minut</button> 
+  <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
+  <button class="btn red"  onclick="stopInterval()" type="button">STOP INTERVAL</button> 
 </div>
 <div class="container" id="info"></div>
+<div class="container" id="infotime"></div>
 
 <script>
 let info = document.getElementById("info"); 
-let x = document.getElementById("myAudio"); 
+let infotime = document.getElementById("infotime"); 
 let y = document.getElementById("minutaAudio"); 
 let interV = null;
 let counter = 0;
   
 
-function playAudio() { 
-  x.play(); 
-} 
-
-function pauseAudio() { 
-  x.pause(); 
-} 
-
-function playMinuta() { 
+const playMinuta=()=> { 
   y.play();
-  console.log("y.play");
 } 
 
-function pauseMinuta() { 
+const pauseMinuta=() =>{ 
   y.pause(); 
 } 
 
@@ -96,7 +75,8 @@ const repeatMinuta=(itime=60000)=> {
   interV = setInterval(()=>{
     y.play(); 
     counter++;
-    info.innerHTML += counter+", ";    
+    info.innerHTML += counter+", ";  
+    infotime.innerHTML = (new Date()).toLocaleString('pl-PL');
   },itime);  
 } 
 
