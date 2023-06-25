@@ -77,7 +77,7 @@ let y = document.getElementById("minutaAudio");
 let interV = null;
 let counter = 0;
   
-
+/*
 const playMinuta=()=> { 
   y.play();
 } 
@@ -85,13 +85,13 @@ const playMinuta=()=> {
 const pauseMinuta=() =>{ 
   y.pause(); 
 } 
-
+*/
   /***************************************************/
   
 const stopInterval=()=>{
     interV=clearInterval(interV);
     interV = null;
-    info.innerHTML = "Stop Interval";
+    info.innerHTML += "Stop Interval <br />";
    counter = 0;
 }
   
@@ -101,12 +101,11 @@ const repeatMinuta=(itime=60000)=> {
     stopInterval();
   }
   y.play(); 
-  info.innerHTML += "0, ";
+  info.innerHTML += counter+", "+ (new Date()).toLocaleString('pl-PL')+"<br />";
   interV = setInterval(()=>{
     y.play(); 
     counter++;
-    info.innerHTML += counter+", ";  
-    infotime.innerHTML = (new Date()).toLocaleString('pl-PL');
+    info.innerHTML += counter+", "+ (new Date()).toLocaleString('pl-PL')+"<br />";
   },itime);  
 } 
 
