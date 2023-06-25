@@ -90,7 +90,7 @@ const stopInterval=()=>{
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
   
 const repeatMinuta=(itime=60000)=> {
-  info.innerHTML = "Start Interval #"+maxCount<br />";
+  info.innerHTML = "Start Interval #"+maxCount+"<br />";
   if (interV) {
     stopInterval();
   }
