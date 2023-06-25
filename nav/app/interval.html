@@ -12,13 +12,45 @@
     <link rel="shortcut icon" type="image/jpg" size="512x512" href="../nav.jpg">
     <link rel="stylesheet" href="../style.css" />
     <link rel="stylesheet" href="../all.css" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <style>
+      .kontener {}
       #klawisze, button {min-width:4em;}
     </style>
+    <script>
+     
+      const $=e=>document.querySelector(e);
+      const $$=e=>document.querySelectorAll(e);
+      let installScript=(urls,callback)=>{
+            let script = document.createElement('script');
+            script.onload = function () {
+            urls.shift();
+                if (urls.length>0) installScript(urls,callback);
+                else callback();
+            };
+            script.src = urls[0];
+            document.head.appendChild(script);
+        }
+      //---dom ready--------------------------------
+      document.addEventListener("DOMContentLoaded",function(){
+         fetch("../menu.html")
+          .then(r => {return r.text()})
+          .then(t => {
+            console.log(t);
+            $("#navic").innerHTML = t;
+            installScript(["../script.js","../navbar.js"])
+          })
+          .catch(e => {console.log(e)})
+      })
+      //---DOM READY----------------------------------
+
+      
+    </script>
     
   </head>
 <body>
-<div class="container">
+<div id="navic"></div>
+<div class="kontener">
         <div class="nav-start">
           <a class="logo" href="../">
             <img src="../nav.jpg" width="35" height="35" alt="Back"/>
@@ -30,15 +62,15 @@
   <source src="audio/ye.mp3" type="audio/mpeg">
 </audio>
 
-<div class="container" id="klawisze">
+<div class="kontener" id="klawisze">
   <button class="btn blue" onclick="repeatMinuta(60000)" type="button">1 Minuta</button>
   <button class="btn blue" onclick="repeatMinuta(300000)" type="button">5 Minut</button>
   <button class="btn blue" onclick="repeatMinuta(450000)" type="button">7,5 Minut</button> 
   <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
   <button class="btn red"  onclick="stopInterval()" type="button">STOP INTERVAL</button> 
 </div>
-<div class="container" id="info"></div>
-<div class="container" id="infotime"></div>
+<div class="kontener" id="info"></div>
+<div class="kontener" id="infotime"></div>
 
 <script>
 let info = document.getElementById("info"); 
@@ -81,6 +113,6 @@ const repeatMinuta=(itime=60000)=> {
 } 
 
 </script>
-
+    
 </body>
 </html>
