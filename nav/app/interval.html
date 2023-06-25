@@ -25,6 +25,7 @@
       .kontener {margin: 0.35em}
       #klawisze button {min-width:6em;padding: 0.5em}
       .btn.gray {background:gray;}
+      .btn.mini {min-width:3em;padding: 0.25em;}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -71,10 +72,10 @@
   <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
 </div>
   <div class="kontener" id="counters">
-    <button class="btn gray" onclick="setMax(2)" type="button"> #2 </button>
-    <button class="btn gray" onclick="setMax(5)" type="button"> #5 </button>
-    <button class="btn gray" onclick="setMax(8)" type="button"> #8 </button>
-    <button class="btn gray" onclick="setMax(12)" type="button"> #12 </button>
+    <button class="btn gray mini" onclick="setMax(2)" type="button"> #2 </button>
+    <button class="btn gray mini" onclick="setMax(5)" type="button"> #5 </button>
+    <button class="btn gray mini" onclick="setMax(8)" type="button"> #8 </button>
+    <button class="btn gray mini" onclick="setMax(12)" type="button"> #12 </button>
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
