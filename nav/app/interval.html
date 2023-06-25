@@ -81,14 +81,16 @@
     <button class="btn gray mini" onclick="setMax(5)" type="button"> #5 </button>
     <button class="btn gray mini" onclick="setMax(8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(12)" type="button"> #12 </button>
+    <p id="counter"></p>
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
-  <div class="kontener" id="exmenu"></div>
+<div class="kontener" id="exmenu"></div>
 
 <script>
 let info = document.getElementById("info"); 
 let infotime = document.getElementById("infotime"); 
+let counterp = document.getElementById("counter"); 
 let y = document.getElementById("minutaAudio"); 
 let interV = null;
 let counter = 0;
@@ -97,6 +99,8 @@ let maxCount = 8;
 const setMax=(max=8)=>{
   maxCount = max;
   info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
+  counterp.textContent="#"+maxCount;
+  
 }
 const stopInterval=()=>{
     interV=clearInterval(interV);
@@ -108,6 +112,7 @@ const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format
   
 const repeatMinuta=(itime=60000)=> {
   info.innerHTML = "<h4>Start Interval #"+maxCount+"</h4>";
+  counterp.textContent="#"+maxCount;
   if (interV) {
     stopInterval();
   }
@@ -115,11 +120,11 @@ const repeatMinuta=(itime=60000)=> {
   info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
   interV = setInterval(()=>{   
     counter++;
-    if (counter > maxCount) {
-      stopInterval();
-    } else {
-       y.play(); 
-      info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+    y.play();
+    if (counter < maxCount) {       
+      info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
+    } else {      
+       stopInterval();
     }
   },itime);  
 } 
