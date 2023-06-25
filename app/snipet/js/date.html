@@ -1,4 +1,7 @@
 
+const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
+
+
 <h1 id="zegar" style="font-size:12vw; margin:auto;">00:00:00<h1>
 <script>
 setInterval(()=>{document.querySelector("#zegar").textContent = (new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));},1000);
