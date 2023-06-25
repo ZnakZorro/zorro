@@ -1,12 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="pl">
   <head>
-    <style>
-      button {margin:0.5em;}
-    </style>
+    <meta charset="UTF-8" />
+    <title>Interval</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#033500">
+    <link rel="manifest" href="../nav.web.json"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="image/jpg" size="512x512" href="../nav.jpg">
+    <link rel="stylesheet" href="../style.css" />
+    <link rel="stylesheet" href="../all.css" />
+    
   </head>
 <body>
-
+<div class="container">
+        <div class="nav-start">
+          <a class="logo" href="../">
+            <img src="../nav.jpg" width="35" height="35" alt="Back"/>
+          </a>
+      </div>
+</div>
 <audio id="myAudio">
   <source src="audio/horse.ogg" type="audio/ogg">
   <source src="audio/horse.mp3" type="audio/mpeg">
@@ -24,11 +38,21 @@
 <br />
 <button onclick="playMinuta()" type="button">Play Minuta</button>
 <button onclick="pauseMinuta()" type="button">Pause Minuta</button> 
-<button onclick="repeatMinuta()" type="button">Repeat Minuta</button> 
+  <br />
+  
+<div class="container" id="klawisze">
+  <button class="btn blue" onclick="repeatMinuta()" type="button">Repeat Minuta</button> 
+  <button class="btn red"  onclick="stopInterval()" type="button">STOP Minuta</button> 
+</div>
+<div class="container" id="info"></div>
 
 <script>
-var x = document.getElementById("myAudio"); 
-var y = document.getElementById("minutaAudio"); 
+let info = document.getElementById("info"); 
+let x = document.getElementById("myAudio"); 
+let y = document.getElementById("minutaAudio"); 
+let interV = null;
+let counter = 0;
+  
 
 function playAudio() { 
   x.play(); 
@@ -45,11 +69,26 @@ function playMinuta() {
 function pauseMinuta() { 
   y.pause(); 
 } 
-function repeatMinuta() { 
-  setInterval(()=>{
+function repeatMinuta() {
+  if (interV) {
+    interV=clearInterval(interV);
+    interV = null;
+  }
+   y.play(); 
+  info.innerHTML = "Start Interval <br />";
+  interV = setInterval(()=>{
     y.play(); 
+    counter++;
+    info.innerHTML = counter+", ";
+    
   },60000);  
 } 
+const stopInterval=()=>{
+    interV=clearInterval(interV);
+    interV = null;
+    info.innerHTML = "Stop Interval";
+   counter = 0;
+}
 </script>
 
 </body>
