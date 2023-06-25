@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <style>
+      button {margin:0.5em;}
+    </style>
+  </head>
 <body>
 
 <audio id="myAudio">
@@ -41,7 +46,7 @@ function pauseMinuta() {
   y.pause(); 
 } 
 function repeatMinuta() { 
-  setIntervat(()=>{
+  setInterval(()=>{
     y.play(); 
   },60000);  
 } 
