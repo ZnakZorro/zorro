@@ -17,9 +17,10 @@
       .info {
           font-family: monospace;
           font-size: 0.9em;
+          column-count: 3;
       }
       .kontener {margin: 0.35em}
-      #klawisze button {min-width:6em;}
+      #klawisze button {min-width:6em;padding: 0.5em}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -74,18 +75,12 @@ let infotime = document.getElementById("infotime");
 let y = document.getElementById("minutaAudio"); 
 let interV = null;
 let counter = 0;
-  
-/*
-const playMinuta=()=> { 
-  y.play();
-} 
+let maxCount = 8;
 
-const pauseMinuta=() =>{ 
-  y.pause(); 
-} 
-*/
-  /***************************************************/
-  
+const setMax=(max=8)=>{
+  maxCount = max;
+  info.innerHTML += "maxCount = "+maxCount+"<br />";
+}
 const stopInterval=()=>{
     interV=clearInterval(interV);
     interV = null;
@@ -93,8 +88,9 @@ const stopInterval=()=>{
    counter = 0;
 }
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
+  
 const repeatMinuta=(itime=60000)=> {
-  info.innerHTML = "Start Interval <br />";
+  info.innerHTML = "Start Interval #"+maxCount<br />";
   if (interV) {
     stopInterval();
   }
@@ -103,6 +99,7 @@ const repeatMinuta=(itime=60000)=> {
   interV = setInterval(()=>{
     y.play(); 
     counter++;
+    if (counter > maxCount) stopInterval();
     info.innerHTML += counter+", "+ getNow()+"<br />";
   },itime);  
 } 
