@@ -92,7 +92,7 @@ const setMax=(max=8)=>{
 const stopInterval=()=>{
     interV=clearInterval(interV);
     interV = null;
-    info.innerHTML += "Stop Interval <br />";
+    info.innerHTML += "<h4>Stop Interval </h4>";
    counter = 0;
 }
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
