@@ -106,12 +106,15 @@ const repeatMinuta=(itime=60000)=> {
     stopInterval();
   }
   y.play(); 
-  info.innerHTML += "<p>"+counter+", "+ getNow()+"</p>";
-  interV = setInterval(()=>{
-    y.play(); 
+  info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+  interV = setInterval(()=>{   
     counter++;
-    if (counter > maxCount-1) stopInterval();
-    info.innerHTML += "<p>"+counter+", "+ getNow()+"</p>";
+    if (counter > maxCount) {
+      stopInterval();
+    } else {
+       y.play(); 
+      info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+    }
   },itime);  
 } 
 
