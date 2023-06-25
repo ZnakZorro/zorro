@@ -15,7 +15,7 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <style>
       .kontener {}
-      #klawisze, button {min-width:4em;}
+      #klawisze button {min-width:4em;}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -47,13 +47,7 @@
   </head>
 <body>
 <div id="navic"></div>
-<div class="kontener">
-        <div class="nav-start">
-          <a class="logo" href="../">
-            <img src="../nav.jpg" width="35" height="35" alt="Back"/>
-          </a>
-      </div>
-</div>
+
 
 <audio id="minutaAudio">
   <source src="audio/ye.mp3" type="audio/mpeg">
@@ -65,7 +59,7 @@
   <button class="btn blue" onclick="repeatMinuta(300000)" type="button">5 Minut</button>
   <button class="btn blue" onclick="repeatMinuta(450000)" type="button">7,5 Minut</button> 
   <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
-  <button class="btn red"  onclick="stopInterval()" type="button">STOP INTERVAL</button> 
+  <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
 </div>
 <div class="kontener" id="info"></div>
 <div class="kontener" id="infotime"></div>
