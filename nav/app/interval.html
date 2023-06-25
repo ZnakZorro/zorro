@@ -46,12 +46,13 @@
           .then(t => {
             //console.log(t);
             document.querySelector("#navic").innerHTML = t;
-            installScript(["../script.js","../navbar.js"])
+            installScripts(["../script.js","../navbar.js"])
+            let exmenu = $("#dropdown2").innerHTML;
+            $("#exmenu").innerHTML = exmenu;
           })
           .catch(e => {console.log(e)});
         
-        let exmenu = $("#dropdown2").innerHTML;
-        $("#exmenu").innerHTML = exmenu;
+        
       })
       //---DOM READY----------------------------------
 
