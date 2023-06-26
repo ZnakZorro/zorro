@@ -2,21 +2,21 @@
 	"name": "interVal",
 	"short_name": "interVal",
 	"description": "interVal",
-	"start_url": "https://znakzorro.github.io/zorro/nav/app/interval",
+	"start_url": "https://znakzorro.github.io/zorro/nav/app/interval.html",
 	"display": "standalone",
 
 	"theme_color": "#f63",
 	"background_color": "#f63",
 	"icons": [
 		{
-			"src": "../nav.jpg",
+			"src": "./interVal.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "../nav.jpg",
+			"src": "./interVal.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
