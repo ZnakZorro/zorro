@@ -27,6 +27,8 @@
       #klawisze button {min-width:6em;padding: 0.5em}
       .btn.gray {background:gray;}
       .btn.mini {min-width:4em;padding: 0.25em;}
+      #exmenu a {padding:0.3em; text-align:center; border:1px; backgound:#ddd;}
+      input#intime {max-width:3em;}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -81,15 +83,17 @@
     <button class="btn gray mini" onclick="setMax(5)" type="button"> #5 </button>
     <button class="btn gray mini" onclick="setMax(8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(12)" type="button"> #12 </button>
-    <p id="counter"></p>
+    <div class="kontener">
+      <p id="counter"></p>
+      <input id="intime" /> min.
+    </div>
+    
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
-<div class="kontener">
-  <p id="exmenu"></p>
-  <input id="intime" /> min.
-</div>
 
+<div class="kontener info" id="exmenu"></div>
+  
 <script>
 let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
