@@ -85,15 +85,19 @@
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
-<div class="kontener" id="exmenu"></div>
+<div class="kontener">
+  <p id="exmenu"></p>
+  <input id="intime" /> min.
+</div>
 
 <script>
-let info = document.getElementById("info"); 
-let infotime = document.getElementById("infotime"); 
-let counterp = document.getElementById("counter"); 
-let y = document.getElementById("minutaAudio"); 
-let interV = null;
-let counter = 0;
+let info     = document.getElementById("info");
+let infotime = document.getElementById("infotime");
+let counterp = document.getElementById("counter");
+let intime   = document.getElementById("intime");
+let y        = document.getElementById("minutaAudio");
+let interV   = null;
+let counter  = 0;
 let maxCount = 8;
 
 const setMax=(max=8)=>{
@@ -109,10 +113,11 @@ const stopInterval=()=>{
    counter = 0;
 }
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
-  
+const parseTime=(time)=> Math.round(time/60000);
 const repeatMinuta=(itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
   counterp.textContent="#"+maxCount;
+  intime.value = parseTime(itime);
   if (interV) {
     stopInterval();
   }
