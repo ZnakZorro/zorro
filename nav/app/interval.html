@@ -111,7 +111,7 @@ const stopInterval=()=>{
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
   
 const repeatMinuta=(itime=60000)=> {
-  info.innerHTML = "<h4>Start Interval #"+maxCount+"</h4>";
+  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
   counterp.textContent="#"+maxCount;
   if (interV) {
     stopInterval();
