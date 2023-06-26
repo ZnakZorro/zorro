@@ -2,7 +2,8 @@
 	"name": "interVal",
 	"short_name": "interVal",
 	"description": "interVal",
-	"start_url": "https://znakzorro.github.io/zorro/nav/app/interval.html",
+	"start_url": "/zorro/nav/app/interval.html",
+	"id":"git.zorro.nav.interval",
 	"display": "standalone",
 
 	"theme_color": "#f63",
