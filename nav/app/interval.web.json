@@ -10,14 +10,14 @@
 	"background_color": "#f63",
 	"icons": [
 		{
-			"src": "./interval.jpg",
+			"src": "/zorro/nav/app/interval.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./interval.jpg",
+			"src": "/zorro/nav/app/interval.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
