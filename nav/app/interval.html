@@ -81,12 +81,12 @@
 </audio>
 
 <div class="kontener" id="klawisze">
-  <button class="btn blue" onclick="repeatMinuta(15000)" type="button">15 Sek</button>
-  <button class="btn blue" onclick="repeatMinuta(60000)" type="button">1 Minuta</button>
-  <button class="btn blue" onclick="repeatMinuta(320000)" type="button">5 Minut</button>
-  <button class="btn blue" onclick="repeatMinuta(450000)" type="button">7,5 Minut</button> 
-  <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
-  <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
+  <button class="btn blue" onclick="repeatMinuta(this,15000)" type="button">15 Sek</button>
+  <button class="btn blue" onclick="repeatMinuta(this,60000)" type="button">1 Minuta</button>
+  <button class="btn blue" onclick="repeatMinuta(this,320000)" type="button">5 Minut</button>
+  <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">7,5 Minut</button> 
+  <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15 Minut</button> 
+  <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
 </div>
   <div class="kontener" id="counters">
     <button class="btn gray mini" onclick="setMax(this,1)" type="button">#1</button>
@@ -123,7 +123,7 @@ const setMax=(ten,max=8)=>{
   document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
   ten.classList.add("active");
 }
-const stopInterval=()=>{
+const stopInterval=(ten)=>{
     interV=clearInterval(interV);
     interV = null;
     info.innerHTML += "<h4>Stop Interval </h4>";
@@ -140,7 +140,7 @@ const parseTimes=(time)=> {
   return [min,sek];
 }
   
-const repeatMinuta=(itime=60000)=> {
+const repeatMinuta=(ten,itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
   counterp.textContent="#"+maxCount;
   //intime.value = parseTime(itime);
@@ -160,7 +160,9 @@ const repeatMinuta=(itime=60000)=> {
     } else {      
        stopInterval();
     }
-  },itime);  
+  },itime); 
+  document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
+  ten.classList.add("active");
 } 
 
 </script>
