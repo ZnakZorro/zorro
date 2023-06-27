@@ -173,8 +173,8 @@ const repeatMinuta=(ten,itime=60000)=> {
     }
   },itime); 
 
-  let paren1 = ten.parentNode;
-  let paren2 = ten.parentElement;
+  let parent1 = ten.parentNode;
+  let parent2 = ten.parentElement;
   console.log(parent1,parent2,querySelectorAll("#klawisze"))
   document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
   if (ten) ten.classList.add("active");
