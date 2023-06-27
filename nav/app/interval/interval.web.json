@@ -1,25 +1,25 @@
 {
-	"name": "interVal",
-	"short_name": "interVal",
-	"description": "interVal",
+	"name": "interVal1",
+	"short_name": "interVal1",
+	"description": "interVal1",
 	"start_url": "/zorro/nav/app/interval/index.html",
-	"id":"git.zorro.nav.interval",
+	"id":"git.zorro.nav.interval1",
 	"display": "standalone",
 
-	"theme_color": "#ff3",
+	"theme_color": "#f93",
 	"background_color": "#f63",
 	"icons": [
 		{
-			"src": "/zorro/nav/app/interval/interval.jpg",
+			"src": "/zorro/nav/app/interval/interval.webp",
 			"sizes": "512x512",
-			"type": "image/jpg"
+			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "/zorro/nav/app/interval/interval.jpg",
+			"src": "/zorro/nav/app/interval/interval.webp",
 			"sizes": "512x512",
-			"type": "image/jpg"
+			"type": "image/webp"
 		}
 	]
 }
