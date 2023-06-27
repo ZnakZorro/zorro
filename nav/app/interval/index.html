@@ -93,13 +93,13 @@
 </div>
   <div class="kontener" id="counters">
     <button class="btn gray mini" onclick="setMax(this,1)" type="button">#1</button>
-    <button class="btn gray mini" onclick="setMax(this,2)" type="button">#2</button>
+    <button class="btn gray mini active" onclick="setMax(this,2)" type="button">#2</button>
     <button class="btn gray mini" onclick="setMax(this,4)" type="button"> #4 </button>
     <button class="btn gray mini" onclick="setMax(this,8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
     <div class="kontener">
       <p id="counter"></p>
-      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek.
+      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Strart </button>
     </div>
     
   </div>
@@ -117,9 +117,17 @@ let sektime   = document.getElementById("sektime");
 let y        = document.getElementById("minutaAudio");
 let interV   = null;
 let counter  = 0;
-let maxCount = 8;
-
-const setMax=(ten,max=8)=>{
+let maxCount = 2;
+  
+const setStart=()=>{
+  let min = document.getElementById("intime").value;
+  let sek = document.getElementById("sektime").value;
+  let milisek = 1000 * ((min*60)+sek)
+  console,log("milisek=",milisek);
+  repeatMinuta(null,milisek);
+}
+  
+const setMax=(ten,max=2)=>{
   maxCount = max;
   //info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
   counterp.textContent="#"+maxCount;
@@ -164,8 +172,13 @@ const repeatMinuta=(ten,itime=60000)=> {
        stopInterval();
     }
   },itime); 
+
+  let paren1 = ten.parentNode;
+  let paren2 = ten.parentElement;
+  console.log(parent1,parent2,querySelectorAll("#klawisze"))
   document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-  ten.classList.add("active");
+  if (ten) ten.classList.add("active");
+  
 } 
 
 </script>
