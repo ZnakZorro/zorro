@@ -2,22 +2,22 @@
 	"name": "interVal",
 	"short_name": "interVal",
 	"description": "interVal",
-	"start_url": "/zorro/nav/app/interval.html",
+	"start_url": "/zorro/nav/app/interval/index.html",
 	"id":"git.zorro.nav.interval",
 	"display": "standalone",
 
-	"theme_color": "#f63",
+	"theme_color": "#ff3",
 	"background_color": "#f63",
 	"icons": [
 		{
-			"src": "/zorro/nav/app/interval.jpg",
+			"src": "/zorro/nav/app/interval/interval.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "/zorro/nav/app/interval.jpg",
+			"src": "/zorro/nav/app/interval/interval.jpg",
 			"sizes": "512x512",
 			"type": "image/jpg"
 		}
