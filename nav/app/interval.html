@@ -132,7 +132,7 @@ const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format
 const parseTime=(time)=> Math.round(time/60000);
 
 const parseTimes=(time)=> {
-  let min = Math.ceil(time/60000);
+  let min = Math.floor(time/60000);
   let sek = Math.round((time - (60000*min))/1000)
   return [min,sek];
 }
