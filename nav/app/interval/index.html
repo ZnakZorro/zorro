@@ -55,12 +55,12 @@
         }
       //---dom ready--------------------------------
       document.addEventListener("DOMContentLoaded",function(){
-         fetch("../menu.html")
+         fetch("../../menu.html")
           .then(r => {return r.text()})
           .then(t => {
             //console.log(t);
             document.querySelector("#navic").innerHTML = t;
-            installScripts(["../script.js","../navbar.js"])
+            installScripts(["../../script.js","../../navbar.js"])
             let exmenu = document.querySelector("#dropdown2").innerHTML;
             document.querySelector("#exmenu").innerHTML = exmenu;
           })
@@ -80,7 +80,7 @@
 
 
 <audio id="minutaAudio">
-  <source src="audio/ye.mp3" type="audio/mpeg">
+  <source src="../audio/ye.mp3" type="audio/mpeg">
 </audio>
 
 <div class="kontener" id="klawisze">
