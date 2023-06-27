@@ -26,7 +26,7 @@
       .kontener {margin: 0.35em}
       #klawisze button {min-width:6em;padding: 0.5em}
       .btn.gray {background:gray;}
-      .btn.mini {min-width:4em;padding: 0.25em;}
+      .btn.mini {min-width:3.5em;padding: 0.25em;}
       
       input.intime {max-width:3em;}
       p#counter {display: inline-block; font-weight:bold; margin-rifght:1em;}
@@ -89,7 +89,8 @@
   <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
 </div>
   <div class="kontener" id="counters">
-    <button class="btn gray mini" onclick="setMax(2)" type="button"> #2 </button>
+    <button class="btn gray mini" onclick="setMax(1)" type="button">#1</button>
+    <button class="btn gray mini" onclick="setMax(2)" type="button">#2</button>
     <button class="btn gray mini" onclick="setMax(5)" type="button"> #5 </button>
     <button class="btn gray mini" onclick="setMax(8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(12)" type="button"> #12 </button>
