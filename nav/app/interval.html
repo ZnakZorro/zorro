@@ -2,10 +2,10 @@
 <html lang="pl">
   <head>
     <meta charset="UTF-8" />
-    <title>Interval</title>
+    <title>interVal</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="theme-color" content="#033500">
+    <meta name="theme-color" content="#f63">
     <link rel="manifest" href="./interval.web.json"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!--link rel="shortcut icon" href="./favicon.ico"-->
@@ -28,7 +28,7 @@
       .btn.gray {background:gray;}
       .btn.mini {min-width:4em;padding: 0.25em;}
       
-      input#intime {max-width:3em;}
+      input.intime {max-width:3em;}
       p#counter {display: inline-block; font-weight:bold; margin-rifght:1em;}
       #exmenu a {
         padding: 0.3em;
@@ -95,7 +95,7 @@
     <button class="btn gray mini" onclick="setMax(12)" type="button"> #12 </button>
     <div class="kontener">
       <p id="counter"></p>
-      <input id="intime" /> min. <input id="sektime" /> sek.
+      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek.
     </div>
     
   </div>
@@ -126,12 +126,22 @@ const stopInterval=()=>{
     info.innerHTML += "<h4>Stop Interval </h4>";
    counter = 0;
 }
+  
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
+  
 const parseTime=(time)=> Math.round(time/60000);
+
+const parseTimes=(time)=> {
+  let min = Math.ceil(time/60000);
+  let sek = Math.round((time - (60000*min))/1000)
+  return [min,sek];
+}
+  
 const repeatMinuta=(itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
   counterp.textContent="#"+maxCount;
   intime.value = parseTime(itime);
+  console.log(parseTimes(itime);)
   if (interV) {
     stopInterval();
   }
