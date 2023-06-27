@@ -70,7 +70,7 @@ self.addEventListener('install', (event) => {
       '../../navbar.js',
       '../../start.js',
       '../../nav.jpg',
-      './interval.jpg'
+      './interval.webp'
     ])
   );
 });
