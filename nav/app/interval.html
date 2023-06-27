@@ -83,7 +83,7 @@
 <div class="kontener" id="klawisze">
   <button class="btn blue" onclick="repeatMinuta(15000)" type="button">15 Sek</button>
   <button class="btn blue" onclick="repeatMinuta(60000)" type="button">1 Minuta</button>
-  <button class="btn blue" onclick="repeatMinuta(300000)" type="button">5 Minut</button>
+  <button class="btn blue" onclick="repeatMinuta(340000)" type="button">5 Minut</button>
   <button class="btn blue" onclick="repeatMinuta(450000)" type="button">7,5 Minut</button> 
   <button class="btn blue" onclick="repeatMinuta(900000)" type="button">15 Minut</button> 
   <button class="btn red"  onclick="stopInterval()" type="button">STOP</button> 
@@ -110,6 +110,7 @@ let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
 let counterp = document.getElementById("counter");
 let intime   = document.getElementById("intime");
+let sektime   = document.getElementById("intime");  
 let y        = document.getElementById("minutaAudio");
 let interV   = null;
 let counter  = 0;
@@ -141,8 +142,10 @@ const parseTimes=(time)=> {
 const repeatMinuta=(itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
   counterp.textContent="#"+maxCount;
-  intime.value = parseTime(itime);
-  console.log(parseTimes(itime));
+  //intime.value = parseTime(itime);
+  let timesArr = (parseTimes(itime));
+  intime.value = timesArr[0];
+  sektime.value = timesArr[1];
   if (interV) {
     stopInterval();
   }
