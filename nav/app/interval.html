@@ -120,8 +120,8 @@ const setMax=(ten,max=8)=>{
   maxCount = max;
   //info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
   counterp.textContent="#"+maxCount;
-  //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-  //ten.classList.add("active");
+  document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
+  ten.classList.add("active");
 }
 const stopInterval=()=>{
     interV=clearInterval(interV);
