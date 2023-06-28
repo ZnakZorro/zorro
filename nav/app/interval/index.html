@@ -68,6 +68,7 @@
         
         
       })
+      document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
       //---DOM READY----------------------------------
 
       
@@ -217,7 +218,7 @@ const repeatMinuta=(ten,itime=60000)=> {
       );
       if (registration.installing) {
         console.log('Service worker installing');
-        document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
+        
       } else if (registration.waiting) {
         console.log('Service worker installed');
       } else if (registration.active) {
