@@ -156,7 +156,7 @@ function WyswietlTabeleRAL(objRAL){
 			if (obj.tag) tag =' <b>'+obj.tag+'</b> ';
 			
 			
-				HTML += '<li data-ral="'+obj.RAL+'" data-nr="'+obj.NR+'" data-hex="'+hex+'" class="subgrid" style="color: '+ctx+'; background: url(&quot;imgral/'+obj.img+'&quot;) 0% 0% / cover no-repeat;">';
+				HTML += '<li data-ral="'+obj.RAL+'" data-nr="'+obj.NR+'" data-hex="'+hex+'" class="subgrid" style="color: '+ctx+'; background:'+hex+' ">';
 				HTML += '<h3>'+obj.RAL+'</h3>';
 				HTML += '<span class="rb-temp">'+rgb+'<br /><i>'+hex+'</i><br /><i>'+tag+obj.pl+' <br />'+obj.en+'</i></span>';
 				//HTML += '<tr data-gray="'+obj.gray+'" data-rgb="'+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+'" data-hsl="'+obj.HSL[0]+','+obj.HSL[1]+','+obj.HSL[2]+'">';
