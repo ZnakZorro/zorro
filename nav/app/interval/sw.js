@@ -70,7 +70,10 @@ self.addEventListener('install', (event) => {
       '../../navbar.js',
       '../../start.js',
       '../../nav.jpg',
-      './interval.webp'
+      './interval.webp',
+      '../audio/start.mp3',
+      '../audio/stop.mp3',
+      '../audio/interval.mp3'
     ])
   );
 });
