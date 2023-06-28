@@ -112,7 +112,10 @@
 <div class="kontener info" id="infotime"></div>
 
 <div class="kontener info" id="exmenu"></div>
+  <div class="kontener info" id="temp"></div>
+  
 </div> <!--wrapper-->  
+  
 <script>
 let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
@@ -120,6 +123,9 @@ let counterp = document.getElementById("counter");
 let intime   = document.getElementById("intime");
 let sektime   = document.getElementById("sektime");  
 let y        = document.getElementById("minutaAudio");
+let startAudio     = document.getElementById("startAudio");
+let stopAudio      = document.getElementById("startAudio");
+let intervalAudio  = document.getElementById("startAudio");
 let interV   = null;
 let counter  = 0;
 let maxCount = 2;
@@ -175,11 +181,11 @@ const repeatMinuta=(ten,itime=60000)=> {
   if (interV) {
     stopInterval();
   }
-  y.play(); 
+  startAudio.play(); 
   info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
   interV = setInterval(()=>{   
     counter++;
-    y.play();
+    intervalAudio.play();
     if (counter < maxCount) {       
       info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
     } else {      
@@ -211,6 +217,7 @@ const repeatMinuta=(ten,itime=60000)=> {
       );
       if (registration.installing) {
         console.log('Service worker installing');
+        document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
       } else if (registration.waiting) {
         console.log('Service worker installed');
       } else if (registration.active) {
