@@ -1,0 +1,779 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<meta name="apple-mobile-web-app-title" content="mobiAPP"> 
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<link rel="icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="shortcut icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="apple-touch-icon" href="colors.png"> 	
+	<meta name="theme-color" content="#600">	
+		
+	<link rel="manifest" href="ral.webmanifest"> 
+	<title>RAL colors</title>
+	
+
+<!--script src="../../js/hnl.mobileConsole.js"></script-->
+
+
+	
+	<!--link rel='stylesheet prefetch' href='//code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css'-->
+	<!--link rel='stylesheet prefetch' href='//cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css'-->
+	<link rel="stylesheet" href="../../css/style.css">
+	<link rel="stylesheet" href="../../css/mdb.css">
+	<link rel="stylesheet" href="../../css/kolory20.css">
+	<link rel="stylesheet" href="../../css/modal.css?_=1">
+	
+<!--http://zszczech.zut.edu.pl/app/DOM/css/style.css-->
+<style>
+body {background:#222;position:relative;color:#eee;}
+table#ralcolors {
+    color: #ffffff;
+    width: 98%;
+    margin: auto;
+	padding:0;
+}
+table#ralcolors td,table#ralcolors th {
+    padding-left: 2px;
+	min-height:3em;
+	display: table-cell;
+}
+tr {width:100%;}
+div.navi {width:100%; padding:0.5em;}
+
+button {
+    font-size: 1rem;
+    padding: 5px;
+    min-width: 96px;
+    margin: 5px;
+}
+
+img.im {
+    height: 4em;
+	/*height: fit-content;*/
+	width:4em;
+    display: table-cell;
+    width: -webkit-fill-available;
+}
+
+@media screen and (max-width: 512px){
+	body {margin: 0; font-size:0.82em;}
+	table#ralcolors {width:100%; margin:0;}	
+	img.im,table#ralcolors td, table#ralcolors th {padding: 0;width:initial;}	
+	span.en {display:none;}
+}
+</style>
+<script>
+function za(num) {    
+    //return +(Math.round(num + "e+2")  + "e-2");
+	//return parseFloat(nr).toFixed(2);
+	return Math.round(num*10)/10;
+}
+
+function RGBToHSL(c) {
+//console.log(c)
+  var r = c[0]/255, g = c[1]/255, b = c[2]/255;
+  var max = Math.max(r, g, b), min = Math.min(r, g, b);
+  var h, s, l = (max + min) / 2;
+
+  if(max == min) {
+    h = s = 0; // achromatic
+  } else {
+    var d = max - min;
+    s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+    switch(max){
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+  		h=za(h*360);
+		s=za(s*100);
+		l=za(l*100);
+  //console.log(h,s,l)
+  return {H:h,S:s,L:l};
+  //return new Array(h * 360, s * 100, l * 100);
+}
+
+
+function RGBToHSL___(r,g,b) {
+  // Make r, g, and b fractions of 1
+  r /= 255;
+  g /= 255;
+  b /= 255;
+
+  // Find greatest and smallest channel values
+  let cmin = Math.min(r,g,b),
+      cmax = Math.max(r,g,b),
+      delta = cmax - cmin,
+      h = 0,
+      s = 0,
+      l = 0;
+	// Calculate hue
+	  // No difference
+	  if (delta == 0)
+		h = 0;
+	  // Red is max
+	  else if (cmax == r)
+		h = ((g - b) / delta) % 6;
+	  // Green is max
+	  else if (cmax == g)
+		h = (b - r) / delta + 2;
+	  // Blue is max
+	  else
+		h = (r - g) / delta + 4;
+
+	  h = Math.round(h * 60);
+		
+	  // Make negative hues positive behind 360°
+	  if (h < 0)
+		  h += 360;	  
+	  l = (cmax + cmin) / 2;
+
+	  // Calculate saturation
+	  s = delta == 0 ? 0 : delta / (1 - Math.abs(2 * l - 1));
+		
+	  // Multiply l and s by 100
+	  s = +(s * 100).toFixed(1);
+	  l = +(l * 100).toFixed(1);
+
+	  //return "hsl(" + h + "," + s + "%," + l + "%)";
+	  //return [h,s,l];
+		h=Math.round(h*10)/10;
+		s=Math.round(s*10)/10;
+		l=Math.round(l*10)/10;
+	  return {H:h,S:s,L:l};
+	  
+}
+
+
+
+function getRBG(tx){
+	var m= tx.match(/(\d{1,3})/g);
+	m=m.map(function(c){return(parseInt(c));});
+	var luma = Math.round(m[0] * 2.126 + m[1] * 7.152 + m[2] * 0.722);
+	//console.log(luma)
+	m.push(Math.round(luma/10))
+	m.push(luma)
+	if (luma>1200) m.push('#000'); else m.push('#fff');
+	//console.log(m)
+	var grays = {}
+	grays.R = Math.round(m[0]*0.50 + m[1]*0.15 + m[2]*0.35);
+	grays.G = Math.round(m[0]*0.15 + m[1]*0.60 + m[2]*0.15);
+	grays.B = Math.round(m[0]*0.35 + m[1]*0.15 + m[2]*0.50);
+	m.push(grays)
+	var HSL = RGBToHSL([m[0],m[1],m[2]]);
+	m.push(HSL)
+	return(m);
+}
+
+var kolory = [];
+// DOM READY
+    document.addEventListener('DOMContentLoaded', function() {
+		fetch('RAL.json')
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(objRAL) {
+			kolory = objRAL;
+			WyswietlTabeleRAL(objRAL);
+		});
+	
+        var trs = document.querySelectorAll("tr");
+		trs.forEach(function(trr,nr){
+			var tds = trr.querySelectorAll("td");
+			if (tds[0] && (tds[0]).textContent){
+				//console.log(tds)
+				var arr =[];
+				var obj = {};
+				var rgbGray = getRBG(tds[1].textContent);
+				//console.log(rgbGray);
+				obj.order = nr;
+				obj.gray = rgbGray[3];
+				obj.aaa = rgbGray[4];
+				//delete rgbGray[3];
+				obj.RAL  = tds[0].textContent;
+				obj.NR  = tds[0].textContent.replace('RAL ','');
+				obj.rgb  = rgbGray;
+				obj.RGB  = [rgbGray[0],rgbGray[1],rgbGray[2]];
+				obj.HSL  = [rgbGray[7].H,rgbGray[7].S,rgbGray[7].L];
+				obj.hex  = tds[2].textContent;
+				obj.HEX  = tds[2].textContent;
+				obj.name = tds[3].textContent;
+				obj.EN   = tds[3].textContent;
+				
+				kolory.push(obj);
+			}
+		});
+		//console.log(kolory.length)
+		//console.log(kolory[0])
+		//console.log(kolory[1])
+		//console.log(kolory[2])
+		kolory = kolory.sort(function(a, b) {
+			return b.aaa - a.aaa;
+		});
+		//console.log(kolory);
+		//console.log(JSON.stringify(kolory));
+		
+    });// dom ready
+
+
+
+//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq	
+function WyswietlTabeleRAL(objRAL){
+	console.log(objRAL);
+	console.time("debuga");
+	var start = window.performance.now();
+
+	var table = document.querySelector("#tralcolors");
+	var HTML = '<tr><th><strong>RAL</strong></th><th><strong>RGB</strong></th><th><strong>HEX</strong></th><th><strong>Color</strong></th></tr>\n';
+	Object.keys(objRAL).forEach(function(key){
+		var obj = objRAL[key];
+		if (obj.order){
+			//console.log(obj);
+			var hex = obj.HEX;
+			var ctx = '#fff';
+			if (obj.gray>168) ctx='#000';
+				HTML += '<tr data-gray="'+obj.gray+'" data-rgb="'+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+'" data-hsl="'+obj.HSL[0]+','+obj.HSL[1]+','+obj.HSL[2]+'">';
+				HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+obj.RAL+'</td>';
+				HTML += '<td style="color: '+ctx+'; background-color: '+hex+';"><small>('+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+')</small></td>';
+				HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+hex+'</td>';
+				HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+obj.pl+'<span class="en"><br />'+obj.en+'</span></td>';
+				HTML += '<td ><img src="./imgral/'+obj.img+'" alt="'+obj.RAL+'" class="im" /></td>';
+			HTML += '</tr>\n';
+		}
+	});
+	table.innerHTML = HTML;
+	console.timeEnd("debuga");
+	var end = window.performance.now();
+	var time = end - start;
+	console.log(time)
+	document.getElementById('info').textContent = Math.round(time)+'ms';
+}
+	/*
+EN: "Cream"
+HEX: "#FDF4E3"
+HSL: Array(3)
+0: 44.3
+1: 69.7
+2: 93.5
+length: 3
+NR: "9001"
+RAL: "RAL 9001"
+RGB: Array(3)
+0: 250
+1: 244
+2: 227
+length: 3
+__proto__: Array(0)
+gray: 244
+img: "classic-200.png"
+order: 181
+pl: "Biały kremowy"	
+		if(nrr>0){
+			var nr = nrr-1;
+			if(kolory[nr]){
+				var k    = kolory[nr];
+				var hex  = k.hex;
+				var ctx = k.rgb[5]
+				//console.log(k.rgb);
+				
+				var tdd = '';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+k.ral+'</td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';"><small>('+k.rgb[0]+','+k.rgb[1]+','+k.rgb[2]+')</small></td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+hex+'</td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+k.name+'</td>';
+					tdd += '<td ><img src="imgral/classic-'+nr+'.png" /></td>';
+					
+				trr.innerHTML = tdd;
+				//trr.innerHTML = '<td>'+nr+'</td>'+'<td>'+nrr+'</td>';
+			}
+		}
+		*/
+	
+
+	
+	//kolory.forEach(function(kolor){
+		//console.log(kolor)
+	//});
+	//zmienKolory();
+/*	
+function WyswietlTabele(){
+	var trs = document.querySelectorAll("tr");
+	trs.forEach(function(trr,nrr){
+		if(nrr>0){
+			var nr = nrr-1;
+			if(kolory[nr]){
+				var k    = kolory[nr];
+				var hex  = k.hex;
+				var ctx = k.rgb[5]
+				//console.log(k.rgb);
+				
+				var tdd = '';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+k.ral+'</td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';"><small>('+k.rgb[0]+','+k.rgb[1]+','+k.rgb[2]+')</small></td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+hex+'</td>';
+					tdd += '<td style="color: '+ctx+'; background-color: '+hex+';">'+k.name+'</td>';
+					tdd += '<td ><img src="imgral/classic-'+nr+'.png" /></td>';
+					
+				trr.innerHTML = tdd;
+				//trr.innerHTML = '<td>'+nr+'</td>'+'<td>'+nrr+'</td>';
+			}
+		}
+	
+	})
+	
+	//kolory.forEach(function(kolor){
+		//console.log(kolor)
+	//});
+	zmienKolory();
+}	
+*/	
+var sortKolory = function(ten){
+		for (var i=0; i<10; i++) {sortTable();console.log('======',i)}
+		return;
+		var sortKolor = document.getElementById("sortKolor");
+		var text = sortKolor.options[sortKolor.selectedIndex].value;
+		console.log(text)
+	//console.log(ten)
+	//var text = ten.textContent;
+	//console.log(text);
+	if (text=='RAL') {location.reload(); return;}
+	if (text=='Sortowanie') {return;}
+	
+	var fff =0;
+	//Jasne
+	if (text=='Jasne'){
+		kolory = kolory.sort(function(a, b) {
+			return b.aaa - a.aaa;
+		});
+	}
+	else if (text=='Ciemne'){
+		kolory = kolory.sort(function(a, b) {
+			return a.aaa - b.aaa;
+		});
+	}
+	else if (text=='Czerwone'){
+		kolory = kolory.sort(function(a, b) {
+			return b.rgb[6].R - a.rgb[6].R;
+		});
+	}
+	else if (text=='Zielone'){
+		kolory = kolory.sort(function(a, b) {
+			return b.rgb[6].G - a.rgb[6].G;
+		});
+	}
+	else if (text=='Niebieskie'){
+		kolory = kolory.sort(function(a, b) {
+			return b.rgb[6].B - a.rgb[6].B;
+		});
+	}
+			else if (text=='Hsl'){
+				kolory = kolory.sort(function(a, b) {
+					//return b.rgb[7].H - a.rgb[7].H;
+					var ah=(a.rgb[7].H);
+					var as=a.rgb[7].S;
+					var al=a.rgb[7].L;
+					var bh=(b.rgb[7].H);
+					var bs=b.rgb[7].S;
+					var bl=b.rgb[7].L;
+					
+					return (bh*360*360+bs*100+bs) - (ah*360*360+as*100+as);
+				});
+			}
+			else if (text=='hSl'){
+				kolory = kolory.sort(function(a, b) {
+					return (fff*b.rgb[7].H+b.rgb[7].S) - (fff*a.rgb[7].H+a.rgb[7].S);
+				});
+			}
+			else if (text=='hsL'){
+				kolory = kolory.sort(function(a, b) {
+					return (fff*b.rgb[7].H+b.rgb[7].L) - (fff*a.rgb[7].H+a.rgb[7].L);
+				});
+			}
+	else {
+		sortTable();
+		/*kolory = kolory.sort(function(a, b) {
+			return b.aaa - a.aaa;
+		});*/
+	}
+	//Object.keys(kolory).forEach(function(key){
+	
+	//console.log(kolory);
+	WyswietlTabeleRAL(kolory)
+
+}
+
+
+function wybierz(grupa){
+/*
+Oznaczenie składa się z napisu "RAL" i czterech cyfr:
+RAL 10xx – grupa odcieni żółtych
+RAL 20xx – grupa odcieni pomarańczowych
+RAL 30xx – grupa odcieni czerwonych i różowych
+RAL 40xx – grupa odcieni purpurowych i fioletowych
+RAL 50xx – grupa odcieni niebieskich
+RAL 60xx – grupa odcieni zielonych
+RAL 70xx – grupa odcieni szarych
+RAL 80xx – grupa odcieni brązowych
+RAL 90xx – grupa odcieni białych i czarnych
+*/
+
+}
+
+	function zmienKolory() {
+		var podzial = {
+			"Żółte":"10",
+			"Pomarańczowe":"20",
+			"Czerwone":"30",
+			"Purpurowe":"40",
+			"Niebieskie":"50",
+			"Zielone":"60",
+			"Szare":"70",
+			"Brązowe":"80",
+			"Białe":"90"
+		} 
+		var selectKolor = document.getElementById("selectKolor");
+		var wybrany = selectKolor.options[selectKolor.selectedIndex].value;
+		var szukany ='RAL '+podzial[wybrany];
+		console.log(wybrany,podzial[wybrany]);
+			var trs = document.querySelectorAll("tr");
+				trs.forEach(function(trr,nrr){
+					var tds = trr.querySelectorAll("td");
+					if (tds[0] && (tds[0]).textContent){
+						//console.log(tds[0]);
+						var jest = tds[0].textContent.indexOf(szukany) ===0;
+						if (jest) trr.style.display = "table-row"; else trr.style.display = "none";
+						//console.log(szukany,tds[0].textContent,jest);
+					}
+				})
+	}
+
+
+
+
+
+</script>
+</head>
+<body>
+
+<div class="navi">
+	<select id="selectKolor" onchange="zmienKolory();">
+		<option>Wybierz</option>
+		<option>Żółte</option>
+		<option>Pomarańczowe</option>
+		<option>Czerwone</option>
+		<option>Purpurowe</option>
+		<option>Niebieskie</option>
+		<option>Zielone</option>
+		<option>Szare</option>
+		<option>Brązowe</option>
+		<option>Białe</option>
+
+
+	</select>
+	
+	<!--select id="sortKolor" onchange="sortKolory();">
+		<option>Sortowanie</option>
+		<option>HSV</option>
+		<option>Jasne</option>
+		<option>Ciemne</option>
+		<option>RAL</option>
+	</select-->
+	
+	&nbsp; <span id="info"></span>
+	&nbsp; &nbsp;  <a href="index.html">GRID</a>
+</div>
+
+
+<div id="klawisze"  class="navi">
+
+<!--
+<button onClick="location.reload()">RAL</button>
+<button onClick="sortKolory(this)">Jasne</button>
+<button onClick="sortKolory(this)">Ciemne</button>
+<br />
+<button onClick="sortKolory(this)">Czerwone</button>
+<button onClick="sortKolory(this)">Zielone</button>
+<button onClick="sortKolory(this)">Niebieskie</button>
+<br />
+<button onClick="sortKolory(this)">Hsl</button>
+<button onClick="sortKolory(this)">hSl</button>
+<button onClick="sortKolory(this)">hsL</button>
+-->
+
+</div>
+
+
+
+<table id="ralcolors" style="" cellapadding="0" cellspacing="0">
+<tbody id="tralcolors"><tr><th><strong>RAL</strong></th><th><strong>RGB</strong></th><th><strong>HEX</strong></th><th><strong>Color</strong></th></tr>
+<tr><td style="color: #000; background-color: #D8C693;">RAL 1000</td><td style="color: #000; background-color: #D8C693;"><small>(216,198,147)</small></td><td style="color: #000; background-color: #D8C693;">#D8C693</td><td style="color: #000; background-color: #D8C693;">Beżowo-zielony<span class="en"><br>Green beige</span></td><td><img src="./imgral/classic-1.png" alt="RAL 1000" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #C7AE87;">RAL 1001</td><td style="color: #000; background-color: #C7AE87;"><small>(199,174,135)</small></td><td style="color: #000; background-color: #C7AE87;">#C7AE87</td><td style="color: #000; background-color: #C7AE87;">Beżowy<span class="en"><br>Beige</span></td><td><img src="./imgral/classic-2.png" alt="RAL 1001" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #CAAC78;">RAL 1002</td><td style="color: #000; background-color: #CAAC78;"><small>(202,172,120)</small></td><td style="color: #000; background-color: #CAAC78;">#CAAC78</td><td style="color: #000; background-color: #CAAC78;">Żółty piaskowy<span class="en"><br>Sand yellow</span></td><td><img src="./imgral/classic-3.png" alt="RAL 1002" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F2A929;">RAL 1003</td><td style="color: #000; background-color: #F2A929;"><small>(242,169,41)</small></td><td style="color: #000; background-color: #F2A929;">#F2A929</td><td style="color: #000; background-color: #F2A929;">Żółty sygnałowy<span class="en"><br>Signal yellow</span></td><td><img src="./imgral/classic-4.png" alt="RAL 1003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #E2A42A;">RAL 1004</td><td style="color: #fff; background-color: #E2A42A;"><small>(226,164,42)</small></td><td style="color: #fff; background-color: #E2A42A;">#E2A42A</td><td style="color: #fff; background-color: #E2A42A;">Żółto-miodowy<span class="en"><br>Golden yellow</span></td><td><img src="./imgral/classic-5.png" alt="RAL 1004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #BF932E;">RAL 1005</td><td style="color: #fff; background-color: #BF932E;"><small>(191,147,46)</small></td><td style="color: #fff; background-color: #BF932E;">#BF932E</td><td style="color: #fff; background-color: #BF932E;">Miodowo-piaskowy<span class="en"><br>Honey yellow</span></td><td><img src="./imgral/classic-6.png" alt="RAL 1005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #D5902A;">RAL 1006</td><td style="color: #fff; background-color: #D5902A;"><small>(213,144,42)</small></td><td style="color: #fff; background-color: #D5902A;">#D5902A</td><td style="color: #fff; background-color: #D5902A;">Pomarańczowo-miodowy<span class="en"><br>Maize yellow</span></td><td><img src="./imgral/classic-7.png" alt="RAL 1006" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #DC9D00;">RAL 1007</td><td style="color: #fff; background-color: #DC9D00;"><small>(220,156,0)</small></td><td style="color: #fff; background-color: #DC9D00;">#DC9D00</td><td style="color: #fff; background-color: #DC9D00;">Żółty narcyzowy<span class="en"><br>Daffodil yellow</span></td><td><img src="./imgral/classic-8.png" alt="RAL 1007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8A6642;">RAL 1011</td><td style="color: #fff; background-color: #8A6642;"><small>(138,102,66)</small></td><td style="color: #fff; background-color: #8A6642;">#8A6642</td><td style="color: #fff; background-color: #8A6642;">Irchowo-beżowy<span class="en"><br>Brown beige</span></td><td><img src="./imgral/classic-9.png" alt="RAL 1011" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #C7B446;">RAL 1012</td><td style="color: #000; background-color: #C7B446;"><small>(199,180,70)</small></td><td style="color: #000; background-color: #C7B446;">#C7B446</td><td style="color: #000; background-color: #C7B446;">Żółty cytrynowy<span class="en"><br>Lemon yellow</span></td><td><img src="./imgral/classic-10.png" alt="RAL 1012" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #EAE6CA;">RAL 1013</td><td style="color: #000; background-color: #EAE6CA;"><small>(234,230,202)</small></td><td style="color: #000; background-color: #EAE6CA;">#EAE6CA</td><td style="color: #000; background-color: #EAE6CA;">Biały ostrygowy<span class="en"><br>Oyster white</span></td><td><img src="./imgral/classic-11.png" alt="RAL 1013" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #DAC49A;">RAL 1014</td><td style="color: #000; background-color: #DAC49A;"><small>(218,196,154)</small></td><td style="color: #000; background-color: #DAC49A;">#DAC49A</td><td style="color: #000; background-color: #DAC49A;">Kość słoniowa<span class="en"><br>Ivory</span></td><td><img src="./imgral/classic-12.png" alt="RAL 1014" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #e6d2b5;">RAL 1015</td><td style="color: #000; background-color: #e6d2b5;"><small>(230,210,181)</small></td><td style="color: #000; background-color: #e6d2b5;">#e6d2b5</td><td style="color: #000; background-color: #e6d2b5;">Jasna kość słoniowa<span class="en"><br>Light ivory</span></td><td><img src="./imgral/classic-13.png" alt="RAL 1015" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #f1dd38;">RAL 1016</td><td style="color: #000; background-color: #f1dd38;"><small>(241,221,56)</small></td><td style="color: #000; background-color: #f1dd38;">#f1dd38</td><td style="color: #000; background-color: #f1dd38;">Żółty siarkowy<span class="en"><br>Sulfur yellow</span></td><td><img src="./imgral/classic-14.png" alt="RAL 1016" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F5D033;">RAL 1017</td><td style="color: #000; background-color: #F5D033;"><small>(245,208,51)</small></td><td style="color: #000; background-color: #F5D033;">#F5D033</td><td style="color: #000; background-color: #F5D033;">Żółty szafranowy<span class="en"><br>Saffron yellow</span></td><td><img src="./imgral/classic-15.png" alt="RAL 1017" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #FBD848;">RAL 1018</td><td style="color: #000; background-color: #FBD848;"><small>(251,216,72)</small></td><td style="color: #000; background-color: #FBD848;">#FBD848</td><td style="color: #000; background-color: #FBD848;">Żółty cynkowy<span class="en"><br>Zinc yellow</span></td><td><img src="./imgral/classic-16.png" alt="RAL 1018" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #9E9764;">RAL 1019</td><td style="color: #fff; background-color: #9E9764;"><small>(158,151,100)</small></td><td style="color: #fff; background-color: #9E9764;">#9E9764</td><td style="color: #fff; background-color: #9E9764;">Irchowo-szary<span class="en"><br>Grey beige</span></td><td><img src="./imgral/classic-17.png" alt="RAL 1019" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #999950;">RAL 1020</td><td style="color: #fff; background-color: #999950;"><small>(153,153,80)</small></td><td style="color: #fff; background-color: #999950;">#999950</td><td style="color: #fff; background-color: #999950;">Piaskowo-szary<span class="en"><br>Olive yellow</span></td><td><img src="./imgral/classic-18.png" alt="RAL 1020" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F3DA0B;">RAL 1021</td><td style="color: #000; background-color: #F3DA0B;"><small>(243,218,11)</small></td><td style="color: #000; background-color: #F3DA0B;">#F3DA0B</td><td style="color: #000; background-color: #F3DA0B;">Żółty kadmowy<span class="en"><br>Rape yellow</span></td><td><img src="./imgral/classic-19.png" alt="RAL 1021" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #FAD201;">RAL 1023</td><td style="color: #000; background-color: #FAD201;"><small>(250,210,1)</small></td><td style="color: #000; background-color: #FAD201;">#FAD201</td><td style="color: #000; background-color: #FAD201;">Żółty sygnałowy<span class="en"><br>Traffic yellow</span></td><td><img src="./imgral/classic-20.png" alt="RAL 1023" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #B09158;">RAL 1024</td><td style="color: #fff; background-color: #B09158;"><small>(176,145,88)</small></td><td style="color: #fff; background-color: #B09158;">#B09158</td><td style="color: #fff; background-color: #B09158;">Beżowy ciemny<span class="en"><br>Ochre yellow</span></td><td><img src="./imgral/classic-21.png" alt="RAL 1024" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #9D8431;">RAL 1027</td><td style="color: #fff; background-color: #9D8431;"><small>(157,132,49)</small></td><td style="color: #fff; background-color: #9D8431;">#9D8431</td><td style="color: #fff; background-color: #9D8431;">Oliwkowy<span class="en"><br>Curry</span></td><td><img src="./imgral/classic-23.png" alt="RAL 1027" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F9A12C;">RAL 1028</td><td style="color: #000; background-color: #F9A12C;"><small>(249,161,44)</small></td><td style="color: #000; background-color: #F9A12C;">#F9A12C</td><td style="color: #000; background-color: #F9A12C;">Żółty melonowy<span class="en"><br>Melon yellow</span></td><td><img src="./imgral/classic-24.png" alt="RAL 1028" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #DFAA2C;">RAL 1032</td><td style="color: #000; background-color: #DFAA2C;"><small>(223,170,44)</small></td><td style="color: #000; background-color: #DFAA2C;">#DFAA2C</td><td style="color: #000; background-color: #DFAA2C;">Żółty ciemna cytryna<span class="en"><br>Broom yellow</span></td><td><img src="./imgral/classic-25.png" alt="RAL 1032" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F99E32;">RAL 1033</td><td style="color: #000; background-color: #F99E32;"><small>(249,158,50)</small></td><td style="color: #000; background-color: #F99E32;">#F99E32</td><td style="color: #000; background-color: #F99E32;">Żółcień georginowa<span class="en"><br>Dahlia yellow</span></td><td><img src="./imgral/classic-26.png" alt="RAL 1033" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #EBA15E;">RAL 1034</td><td style="color: #000; background-color: #EBA15E;"><small>(235,161,94)</small></td><td style="color: #000; background-color: #EBA15E;">#EBA15E</td><td style="color: #000; background-color: #EBA15E;">Żółty pastelowy<span class="en"><br>Pastel yellow</span></td><td><img src="./imgral/classic-27.png" alt="RAL 1034" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #F39F18;">RAL 1037</td><td style="color: #fff; background-color: #F39F18;"><small>(243,159,24)</small></td><td style="color: #fff; background-color: #F39F18;">#F39F18</td><td style="color: #fff; background-color: #F39F18;">Żółty słoneczny<span class="en"><br>Sun yellow</span></td><td><img src="./imgral/classic-30.png" alt="RAL 1037" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #ED760E;">RAL 2000</td><td style="color: #fff; background-color: #ED760E;"><small>(237,118,14)</small></td><td style="color: #fff; background-color: #ED760E;">#ED760E</td><td style="color: #fff; background-color: #ED760E;">Pomarańczowy jasny<span class="en"><br>Yellow orange</span></td><td><img src="./imgral/classic-31.png" alt="RAL 2000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #C93C20;">RAL 2001</td><td style="color: #fff; background-color: #C93C20;"><small>(201,60,32)</small></td><td style="color: #fff; background-color: #C93C20;">#C93C20</td><td style="color: #fff; background-color: #C93C20;">Pomarańczowy ceglasty<span class="en"><br>Red orange</span></td><td><img src="./imgral/classic-32.png" alt="RAL 2001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #CB2821;">RAL 2002</td><td style="color: #fff; background-color: #CB2821;"><small>(203,40,33)</small></td><td style="color: #fff; background-color: #CB2821;">#CB2821</td><td style="color: #fff; background-color: #CB2821;">Czerwony ceglasty<span class="en"><br>Vermilion</span></td><td><img src="./imgral/classic-33.png" alt="RAL 2002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #FF7514;">RAL 2003</td><td style="color: #fff; background-color: #FF7514;"><small>(255,117,20)</small></td><td style="color: #fff; background-color: #FF7514;">#FF7514</td><td style="color: #fff; background-color: #FF7514;">Pomarańczowy średni<span class="en"><br>Pastel orange</span></td><td><img src="./imgral/classic-34.png" alt="RAL 2003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #F44611;">RAL 2004</td><td style="color: #fff; background-color: #F44611;"><small>(244,70,17)</small></td><td style="color: #fff; background-color: #F44611;">#F44611</td><td style="color: #fff; background-color: #F44611;">Pomarańczowy<span class="en"><br>Pure orange</span></td><td><img src="./imgral/classic-35.png" alt="RAL 2004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #F75E25;">RAL 2008</td><td style="color: #fff; background-color: #F75E25;"><small>(247,94,37)</small></td><td style="color: #fff; background-color: #F75E25;">#F75E25</td><td style="color: #fff; background-color: #F75E25;">Oranż<span class="en"><br>Bright red orange</span></td><td><img src="./imgral/classic-38.png" alt="RAL 2008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #F54021;">RAL 2009</td><td style="color: #fff; background-color: #F54021;"><small>(245,64,33)</small></td><td style="color: #fff; background-color: #F54021;">#F54021</td><td style="color: #fff; background-color: #F54021;">Pomarańczowy drogowy<span class="en"><br>Traffic orange</span></td><td><img src="./imgral/classic-39.png" alt="RAL 2009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #D84B20;">RAL 2010</td><td style="color: #fff; background-color: #D84B20;"><small>(216,75,32)</small></td><td style="color: #fff; background-color: #D84B20;">#D84B20</td><td style="color: #fff; background-color: #D84B20;">Pomarańczowy sygnałowy<span class="en"><br>Signal orange</span></td><td><img src="./imgral/classic-40.png" alt="RAL 2010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #EC7C26;">RAL 2011</td><td style="color: #fff; background-color: #EC7C26;"><small>(236,124,38)</small></td><td style="color: #fff; background-color: #EC7C26;">#EC7C26</td><td style="color: #fff; background-color: #EC7C26;">Pomarańczowy głęboki<span class="en"><br>Deep orange</span></td><td><img src="./imgral/classic-41.png" alt="RAL 2011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #E55137;">RAL 2012</td><td style="color: #fff; background-color: #E55137;"><small>(235,106,14)</small></td><td style="color: #fff; background-color: #E55137;">#E55137</td><td style="color: #fff; background-color: #E55137;">Łososiowy<span class="en"><br>Salmon range</span></td><td><img src="./imgral/classic-42.png" alt="RAL 2012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #AF2B1E;">RAL 3000</td><td style="color: #fff; background-color: #AF2B1E;"><small>(175,43,30)</small></td><td style="color: #fff; background-color: #AF2B1E;">#AF2B1E</td><td style="color: #fff; background-color: #AF2B1E;">Czerwony ognisty<span class="en"><br>Flame red</span></td><td><img src="./imgral/classic-44.png" alt="RAL 3000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A52019;">RAL 3001</td><td style="color: #fff; background-color: #A52019;"><small>(165,32,25)</small></td><td style="color: #fff; background-color: #A52019;">#A52019</td><td style="color: #fff; background-color: #A52019;">Czerwony sygnałowy<span class="en"><br>Signal red</span></td><td><img src="./imgral/classic-45.png" alt="RAL 3001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A2231D;">RAL 3002</td><td style="color: #fff; background-color: #A2231D;"><small>(162,35,29)</small></td><td style="color: #fff; background-color: #A2231D;">#A2231D</td><td style="color: #fff; background-color: #A2231D;">Czerwony karminowy<span class="en"><br>Carmine red</span></td><td><img src="./imgral/classic-46.png" alt="RAL 3002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #9B111E;">RAL 3003</td><td style="color: #fff; background-color: #9B111E;"><small>(155,17,30)</small></td><td style="color: #fff; background-color: #9B111E;">#9B111E</td><td style="color: #fff; background-color: #9B111E;">Rubinowy<span class="en"><br>Ruby red</span></td><td><img src="./imgral/classic-47.png" alt="RAL 3003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #75151E;">RAL 3004</td><td style="color: #fff; background-color: #75151E;"><small>(117,21,30)</small></td><td style="color: #fff; background-color: #75151E;">#75151E</td><td style="color: #fff; background-color: #75151E;">Czerwony purpurowy<span class="en"><br>Purple red</span></td><td><img src="./imgral/classic-48.png" alt="RAL 3004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #5E2129;">RAL 3005</td><td style="color: #fff; background-color: #5E2129;"><small>(94,33,41)</small></td><td style="color: #fff; background-color: #5E2129;">#5E2129</td><td style="color: #fff; background-color: #5E2129;">Czerwony winny<span class="en"><br>Wine red</span></td><td><img src="./imgral/classic-49.png" alt="RAL 3005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #412227;">RAL 3007</td><td style="color: #fff; background-color: #412227;"><small>(65,34,39)</small></td><td style="color: #fff; background-color: #412227;">#412227</td><td style="color: #fff; background-color: #412227;">Ciemny wiśniowy<span class="en"><br>Black red</span></td><td><img src="./imgral/classic-50.png" alt="RAL 3007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #642424;">RAL 3009</td><td style="color: #fff; background-color: #642424;"><small>(100,36,36)</small></td><td style="color: #fff; background-color: #642424;">#642424</td><td style="color: #fff; background-color: #642424;">Czerwony tlenkowy<span class="en"><br>Oxide red</span></td><td><img src="./imgral/classic-51.png" alt="RAL 3009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #781F19;">RAL 3011</td><td style="color: #fff; background-color: #781F19;"><small>(120,31,25)</small></td><td style="color: #fff; background-color: #781F19;">#781F19</td><td style="color: #fff; background-color: #781F19;">Czerwony burgundzki<span class="en"><br>Brown red</span></td><td><img src="./imgral/classic-52.png" alt="RAL 3011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #C1876B;">RAL 3012</td><td style="color: #fff; background-color: #C1876B;"><small>(193,135,107)</small></td><td style="color: #fff; background-color: #C1876B;">#C1876B</td><td style="color: #fff; background-color: #C1876B;">Brudny różowy<span class="en"><br>Beige red</span></td><td><img src="./imgral/classic-53.png" alt="RAL 3012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A12312;">RAL 3013</td><td style="color: #fff; background-color: #A12312;"><small>(161,35,18)</small></td><td style="color: #fff; background-color: #A12312;">#A12312</td><td style="color: #fff; background-color: #A12312;">Czerwony pomidorowy<span class="en"><br>Tomato red</span></td><td><img src="./imgral/classic-54.png" alt="RAL 3013" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #D36E70;">RAL 3014</td><td style="color: #fff; background-color: #D36E70;"><small>(211,110,112)</small></td><td style="color: #fff; background-color: #D36E70;">#D36E70</td><td style="color: #fff; background-color: #D36E70;">Różówy antyczny<span class="en"><br>Antique pink</span></td><td><img src="./imgral/classic-55.png" alt="RAL 3014" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #EA899A;">RAL 3015</td><td style="color: #fff; background-color: #EA899A;"><small>(234,137,154)</small></td><td style="color: #fff; background-color: #EA899A;">#EA899A</td><td style="color: #fff; background-color: #EA899A;">Różowy jasny<span class="en"><br>Light pink</span></td><td><img src="./imgral/classic-56.png" alt="RAL 3015" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #B32821;">RAL 3016</td><td style="color: #fff; background-color: #B32821;"><small>(179,40,33)</small></td><td style="color: #fff; background-color: #B32821;">#B32821</td><td style="color: #fff; background-color: #B32821;">Czerwony koralowy<span class="en"><br>Coral red</span></td><td><img src="./imgral/classic-57.png" alt="RAL 3016" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #E63244;">RAL 3017</td><td style="color: #fff; background-color: #E63244;"><small>(230,50,68)</small></td><td style="color: #fff; background-color: #E63244;">#E63244</td><td style="color: #fff; background-color: #E63244;">Różany<span class="en"><br>Rose</span></td><td><img src="./imgral/classic-58.png" alt="RAL 3017" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #D53032;">RAL 3018</td><td style="color: #fff; background-color: #D53032;"><small>(213,48,50)</small></td><td style="color: #fff; background-color: #D53032;">#D53032</td><td style="color: #fff; background-color: #D53032;">Czerwony truskawkowy<span class="en"><br>Strawberry red</span></td><td><img src="./imgral/classic-59.png" alt="RAL 3018" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #CC0605;">RAL 3020</td><td style="color: #fff; background-color: #CC0605;"><small>(204,6,5)</small></td><td style="color: #fff; background-color: #CC0605;">#CC0605</td><td style="color: #fff; background-color: #CC0605;">Czerwony drogowy<span class="en"><br>Traffic red</span></td><td><img src="./imgral/classic-60.png" alt="RAL 3020" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #D95030;">RAL 3022</td><td style="color: #fff; background-color: #D95030;"><small>(217,80,48)</small></td><td style="color: #fff; background-color: #D95030;">#D95030</td><td style="color: #fff; background-color: #D95030;">Różowy łososiowy<span class="en"><br>Salmon pink</span></td><td><img src="./imgral/classic-61.png" alt="RAL 3022" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #C51D34;">RAL 3027</td><td style="color: #fff; background-color: #C51D34;"><small>(197,29,52)</small></td><td style="color: #fff; background-color: #C51D34;">#C51D34</td><td style="color: #fff; background-color: #C51D34;">Czerwony malinowy<span class="en"><br>Raspberry red</span></td><td><img src="./imgral/classic-64.png" alt="RAL 3027" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #CB3234;">RAL 3028</td><td style="color: #fff; background-color: #CB3234;"><small>(203,50,52)</small></td><td style="color: #fff; background-color: #CB3234;">#CB3234</td><td style="color: #fff; background-color: #CB3234;">Żywa czerwień<span class="en"><br>Pure red</span></td><td><img src="./imgral/classic-65.png" alt="RAL 3028" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #B32428;">RAL 3031</td><td style="color: #fff; background-color: #B32428;"><small>(179,36,40)</small></td><td style="color: #fff; background-color: #B32428;">#B32428</td><td style="color: #fff; background-color: #B32428;">Czerwony orientalny<span class="en"><br>Orient red</span></td><td><img src="./imgral/classic-66.png" alt="RAL 3031" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #82608C;">RAL 4001</td><td style="color: #fff; background-color: #82608C;"><small>(130,96,140)</small></td><td style="color: #fff; background-color: #82608C;">#82608C</td><td style="color: #fff; background-color: #82608C;">Liliowy<span class="en"><br>Red lilac</span></td><td><img src="./imgral/classic-69.png" alt="RAL 4001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #922B3E;">RAL 4002</td><td style="color: #fff; background-color: #922B3E;"><small>(146,43,62)</small></td><td style="color: #fff; background-color: #922B3E;">#922B3E</td><td style="color: #fff; background-color: #922B3E;">Fioletowy czerwony<span class="en"><br>Red violet</span></td><td><img src="./imgral/classic-70.png" alt="RAL 4002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #DE4C8A;">RAL 4003</td><td style="color: #fff; background-color: #DE4C8A;"><small>(222,76,138)</small></td><td style="color: #fff; background-color: #DE4C8A;">#DE4C8A</td><td style="color: #fff; background-color: #DE4C8A;">Różowy wrzosowy<span class="en"><br>Heather violet</span></td><td><img src="./imgral/classic-71.png" alt="RAL 4003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #641C34;">RAL 4004</td><td style="color: #fff; background-color: #641C34;"><small>(110,28,52)</small></td><td style="color: #fff; background-color: #641C34;">#641C34</td><td style="color: #fff; background-color: #641C34;">Czerwony bordowy<span class="en"><br>Claret violet</span></td><td><img src="./imgral/classic-72.png" alt="RAL 4004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #7A67A9;">RAL 4005</td><td style="color: #fff; background-color: #7A67A9;"><small>(122,103,169)</small></td><td style="color: #fff; background-color: #7A67A9;">#7A67A9</td><td style="color: #fff; background-color: #7A67A9;">Niebieski liliowy<span class="en"><br>Blue lilac</span></td><td><img src="./imgral/classic-73.png" alt="RAL 4005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A03472;">RAL 4006</td><td style="color: #fff; background-color: #A03472;"><small>(160,52,114)</small></td><td style="color: #fff; background-color: #A03472;">#A03472</td><td style="color: #fff; background-color: #A03472;">Purpurowy drogowy<span class="en"><br>Traffic purple</span></td><td><img src="./imgral/classic-74.png" alt="RAL 4006" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4A192C;">RAL 4007</td><td style="color: #fff; background-color: #4A192C;"><small>(74,25,44)</small></td><td style="color: #fff; background-color: #4A192C;">#4A192C</td><td style="color: #fff; background-color: #4A192C;">Purpurowy fioletowy<span class="en"><br>Purple violet</span></td><td><img src="./imgral/classic-75.png" alt="RAL 4007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #924E7D;">RAL 4008</td><td style="color: #fff; background-color: #924E7D;"><small>(146,78,125)</small></td><td style="color: #fff; background-color: #924E7D;">#924E7D</td><td style="color: #fff; background-color: #924E7D;">Fioletowy sygnałowy<span class="en"><br>Signal violet</span></td><td><img src="./imgral/classic-76.png" alt="RAL 4008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A18594;">RAL 4009</td><td style="color: #fff; background-color: #A18594;"><small>(164,125,144)</small></td><td style="color: #fff; background-color: #A18594;">#A18594</td><td style="color: #fff; background-color: #A18594;">Fioletowy pastelowy<span class="en"><br>Pastel violet</span></td><td><img src="./imgral/classic-77.png" alt="RAL 4009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #CF3476;">RAL 4010</td><td style="color: #fff; background-color: #CF3476;"><small>(215,45,109)</small></td><td style="color: #fff; background-color: #CF3476;">#CF3476</td><td style="color: #fff; background-color: #CF3476;">Telemagenta<span class="en"><br>Telemagenta</span></td><td><img src="./imgral/classic-78.png" alt="RAL 4010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #354D73;">RAL 5000</td><td style="color: #fff; background-color: #354D73;"><small>(42,46,75)</small></td><td style="color: #fff; background-color: #354D73;">#354D73</td><td style="color: #fff; background-color: #354D73;">Niebieski wrzosowy<span class="en"><br>Violet blue</span></td><td><img src="./imgral/classic-81.png" alt="RAL 5000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1F3438;">RAL 5001</td><td style="color: #fff; background-color: #1F3438;"><small>(31,52,56)</small></td><td style="color: #fff; background-color: #1F3438;">#1F3438</td><td style="color: #fff; background-color: #1F3438;">Niebieski zielony<span class="en"><br>Green blue</span></td><td><img src="./imgral/classic-82.png" alt="RAL 5001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #20214F;">RAL 5002</td><td style="color: #fff; background-color: #20214F;"><small>(32,33,79)</small></td><td style="color: #fff; background-color: #20214F;">#20214F</td><td style="color: #fff; background-color: #20214F;">Ultramaryna<span class="en"><br>Ultramarine blue</span></td><td><img src="./imgral/classic-83.png" alt="RAL 5002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1D1E33;">RAL 5003</td><td style="color: #fff; background-color: #1D1E33;"><small>(29,30,51)</small></td><td style="color: #fff; background-color: #1D1E33;">#1D1E33</td><td style="color: #fff; background-color: #1D1E33;">Niebieski szafirowy<span class="en"><br>Saphire blue</span></td><td><img src="./imgral/classic-84.png" alt="RAL 5003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #18171C;">RAL 5004</td><td style="color: #fff; background-color: #18171C;"><small>(32,33,79)</small></td><td style="color: #fff; background-color: #18171C;">#18171C</td><td style="color: #fff; background-color: #18171C;">Niebieski czarny<span class="en"><br>Black blue</span></td><td><img src="./imgral/classic-85.png" alt="RAL 5004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1E2460;">RAL 5005</td><td style="color: #fff; background-color: #1E2460;"><small>(30,45,110)</small></td><td style="color: #fff; background-color: #1E2460;">#1E2460</td><td style="color: #fff; background-color: #1E2460;">Niebieski sygnałowy<span class="en"><br>Signal blue</span></td><td><img src="./imgral/classic-86.png" alt="RAL 5005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3E5F8A;">RAL 5007</td><td style="color: #fff; background-color: #3E5F8A;"><small>(62,95,138)</small></td><td style="color: #fff; background-color: #3E5F8A;">#3E5F8A</td><td style="color: #fff; background-color: #3E5F8A;">Niebieski brylantowy<span class="en"><br>Brillant blue</span></td><td><img src="./imgral/classic-87.png" alt="RAL 5007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #26252D;">RAL 5008</td><td style="color: #fff; background-color: #26252D;"><small>(38,37,45)</small></td><td style="color: #fff; background-color: #26252D;">#26252D</td><td style="color: #fff; background-color: #26252D;">Niebieski szary<span class="en"><br>Grey blue</span></td><td><img src="./imgral/classic-88.png" alt="RAL 5008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #025669;">RAL 5009</td><td style="color: #fff; background-color: #025669;"><small>(2,86,105)</small></td><td style="color: #fff; background-color: #025669;">#025669</td><td style="color: #fff; background-color: #025669;">Niebieski lazurowy<span class="en"><br>Azure blue</span></td><td><img src="./imgral/classic-89.png" alt="RAL 5009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #0E294B;">RAL 5010</td><td style="color: #fff; background-color: #0E294B;"><small>(14,41,75)</small></td><td style="color: #fff; background-color: #0E294B;">#0E294B</td><td style="color: #fff; background-color: #0E294B;">Niebieski Chagall<span class="en"><br>Gentian blue</span></td><td><img src="./imgral/classic-90.png" alt="RAL 5010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #231A24;">RAL 5011</td><td style="color: #fff; background-color: #231A24;"><small>(35,26,36)</small></td><td style="color: #fff; background-color: #231A24;">#231A24</td><td style="color: #fff; background-color: #231A24;">Granatowy stalowy<span class="en"><br>Steel blue</span></td><td><img src="./imgral/classic-91.png" alt="RAL 5011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3B83BD;">RAL 5012</td><td style="color: #fff; background-color: #3B83BD;"><small>(59,131,189)</small></td><td style="color: #fff; background-color: #3B83BD;">#3B83BD</td><td style="color: #fff; background-color: #3B83BD;">Niebieski jasny<span class="en"><br>Light blue</span></td><td><img src="./imgral/classic-92.png" alt="RAL 5012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1E213D;">RAL 5013</td><td style="color: #fff; background-color: #1E213D;"><small>(37,41,74)</small></td><td style="color: #fff; background-color: #1E213D;">#1E213D</td><td style="color: #fff; background-color: #1E213D;">Niebieski kobaltowy<span class="en"><br>Cobalt blue</span></td><td><img src="./imgral/classic-93.png" alt="RAL 5013" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #606E8C;">RAL 5014</td><td style="color: #fff; background-color: #606E8C;"><small>(96,111,140)</small></td><td style="color: #fff; background-color: #606E8C;">#606E8C</td><td style="color: #fff; background-color: #606E8C;">Szary gołębi<span class="en"><br>Pigeon blue</span></td><td><img src="./imgral/classic-94.png" alt="RAL 5014" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2271B3;">RAL 5015</td><td style="color: #fff; background-color: #2271B3;"><small>(34,113,179)</small></td><td style="color: #fff; background-color: #2271B3;">#2271B3</td><td style="color: #fff; background-color: #2271B3;">Niebieski średni<span class="en"><br>Sky blue</span></td><td><img src="./imgral/classic-95.png" alt="RAL 5015" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #063971;">RAL 5017</td><td style="color: #fff; background-color: #063971;"><small>(6,57,113)</small></td><td style="color: #fff; background-color: #063971;">#063971</td><td style="color: #fff; background-color: #063971;">Niebieski drogowy<span class="en"><br>Traffic blue</span></td><td><img src="./imgral/classic-96.png" alt="RAL 5017" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3F888F;">RAL 5018</td><td style="color: #fff; background-color: #3F888F;"><small>(63,136,143)</small></td><td style="color: #fff; background-color: #3F888F;">#3F888F</td><td style="color: #fff; background-color: #3F888F;">Niebieski turkusowy<span class="en"><br>Turquoise blue</span></td><td><img src="./imgral/classic-97.png" alt="RAL 5018" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1B5583;">RAL 5019</td><td style="color: #fff; background-color: #1B5583;"><small>(27,85,131)</small></td><td style="color: #fff; background-color: #1B5583;">#1B5583</td><td style="color: #fff; background-color: #1B5583;">Niebieski Capri<span class="en"><br>Capri blue</span></td><td><img src="./imgral/classic-98.png" alt="RAL 5019" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1D334A;">RAL 5020</td><td style="color: #fff; background-color: #1D334A;"><small>(29,51,74)</small></td><td style="color: #fff; background-color: #1D334A;">#1D334A</td><td style="color: #fff; background-color: #1D334A;">Niebieski zielony<span class="en"><br>Ocean blue</span></td><td><img src="./imgral/classic-99.png" alt="RAL 5020" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #256D7B;">RAL 5021</td><td style="color: #fff; background-color: #256D7B;"><small>(37,109,123)</small></td><td style="color: #fff; background-color: #256D7B;">#256D7B</td><td style="color: #fff; background-color: #256D7B;">Turkusowy morski<span class="en"><br>Water blue</span></td><td><img src="./imgral/classic-100.png" alt="RAL 5021" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #252850;">RAL 5022</td><td style="color: #fff; background-color: #252850;"><small>(37,40,80)</small></td><td style="color: #fff; background-color: #252850;">#252850</td><td style="color: #fff; background-color: #252850;">Niebieski ciemny<span class="en"><br>Night blue</span></td><td><img src="./imgral/classic-101.png" alt="RAL 5022" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #49678D;">RAL 5023</td><td style="color: #fff; background-color: #49678D;"><small>(73,103,141)</small></td><td style="color: #fff; background-color: #49678D;">#49678D</td><td style="color: #fff; background-color: #49678D;">Błękitny popielaty<span class="en"><br>Distant blue</span></td><td><img src="./imgral/classic-102.png" alt="RAL 5023" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #5D9B9B;">RAL 5024</td><td style="color: #fff; background-color: #5D9B9B;"><small>(93,155,155)</small></td><td style="color: #fff; background-color: #5D9B9B;">#5D9B9B</td><td style="color: #fff; background-color: #5D9B9B;">Niebieski pastelowy<span class="en"><br>Pastel blue</span></td><td><img src="./imgral/classic-103.png" alt="RAL 5024" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #316650;">RAL 6000</td><td style="color: #fff; background-color: #316650;"><small>(49,102,80)</small></td><td style="color: #fff; background-color: #316650;">#316650</td><td style="color: #fff; background-color: #316650;">Zielony patynowy<span class="en"><br>Patina green</span></td><td><img src="./imgral/classic-106.png" alt="RAL 6000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #287233;">RAL 6001</td><td style="color: #fff; background-color: #287233;"><small>(40,114,51)</small></td><td style="color: #fff; background-color: #287233;">#287233</td><td style="color: #fff; background-color: #287233;">Zielony szmaragdowy<span class="en"><br>Emerald green</span></td><td><img src="./imgral/classic-107.png" alt="RAL 6001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2D572C;">RAL 6002</td><td style="color: #fff; background-color: #2D572C;"><small>(45,87,44)</small></td><td style="color: #fff; background-color: #2D572C;">#2D572C</td><td style="color: #fff; background-color: #2D572C;">Zielony liściasty<span class="en"><br>Leaf green</span></td><td><img src="./imgral/classic-108.png" alt="RAL 6002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #424632;">RAL 6003</td><td style="color: #fff; background-color: #424632;"><small>(66,70,50)</small></td><td style="color: #fff; background-color: #424632;">#424632</td><td style="color: #fff; background-color: #424632;">Zielony oliwkowy<span class="en"><br>Olive green</span></td><td><img src="./imgral/classic-109.png" alt="RAL 6003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1F3A3D;">RAL 6004</td><td style="color: #fff; background-color: #1F3A3D;"><small>(31,58,61)</small></td><td style="color: #fff; background-color: #1F3A3D;">#1F3A3D</td><td style="color: #fff; background-color: #1F3A3D;">Zielony niebieski<span class="en"><br>Blue green</span></td><td><img src="./imgral/classic-110.png" alt="RAL 6004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2F4538;">RAL 6005</td><td style="color: #fff; background-color: #2F4538;"><small>(47,69,56)</small></td><td style="color: #fff; background-color: #2F4538;">#2F4538</td><td style="color: #fff; background-color: #2F4538;">Zielony mchowy<span class="en"><br>Moss green</span></td><td><img src="./imgral/classic-111.png" alt="RAL 6005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3E3B32;">RAL 6006</td><td style="color: #fff; background-color: #3E3B32;"><small>(62,59,50)</small></td><td style="color: #fff; background-color: #3E3B32;">#3E3B32</td><td style="color: #fff; background-color: #3E3B32;">Szary oliwkowy<span class="en"><br>Grey olive</span></td><td><img src="./imgral/classic-112.png" alt="RAL 6006" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #343B29;">RAL 6007</td><td style="color: #fff; background-color: #343B29;"><small>(52,59,41)</small></td><td style="color: #fff; background-color: #343B29;">#343B29</td><td style="color: #fff; background-color: #343B29;">Oliwkowy ciemny<span class="en"><br>Bottle green</span></td><td><img src="./imgral/classic-113.png" alt="RAL 6007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #39352A;">RAL 6008</td><td style="color: #fff; background-color: #39352A;"><small>(57,53,42)</small></td><td style="color: #fff; background-color: #39352A;">#39352A</td><td style="color: #fff; background-color: #39352A;">Zielony brązowy<span class="en"><br>Brown green</span></td><td><img src="./imgral/classic-114.png" alt="RAL 6008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #31372B;">RAL 6009</td><td style="color: #fff; background-color: #31372B;"><small>(49,55,43)</small></td><td style="color: #fff; background-color: #31372B;">#31372B</td><td style="color: #fff; background-color: #31372B;">Zielony jodłowy<span class="en"><br>Fir green</span></td><td><img src="./imgral/classic-115.png" alt="RAL 6009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #35682D;">RAL 6010</td><td style="color: #fff; background-color: #35682D;"><small>(53,104,45)</small></td><td style="color: #fff; background-color: #35682D;">#35682D</td><td style="color: #fff; background-color: #35682D;">Zielona trawiasta<span class="en"><br>Grass green</span></td><td><img src="./imgral/classic-116.png" alt="RAL 6010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #587246;">RAL 6011</td><td style="color: #fff; background-color: #587246;"><small>(88,114,70)</small></td><td style="color: #fff; background-color: #587246;">#587246</td><td style="color: #fff; background-color: #587246;">Zielony rezedowy<span class="en"><br>Reseda green</span></td><td><img src="./imgral/classic-117.png" alt="RAL 6011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #343E40;">RAL 6012</td><td style="color: #fff; background-color: #343E40;"><small>(52,62,64)</small></td><td style="color: #fff; background-color: #343E40;">#343E40</td><td style="color: #fff; background-color: #343E40;">Zielony czarny<span class="en"><br>Black green</span></td><td><img src="./imgral/classic-118.png" alt="RAL 6012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6C7156;">RAL 6013</td><td style="color: #fff; background-color: #6C7156;"><small>(108,113,86)</small></td><td style="color: #fff; background-color: #6C7156;">#6C7156</td><td style="color: #fff; background-color: #6C7156;">Zielony trzcinowy<span class="en"><br>Reed green</span></td><td><img src="./imgral/classic-119.png" alt="RAL 6013" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #47402E;">RAL 6014</td><td style="color: #fff; background-color: #47402E;"><small>(71,64,46)</small></td><td style="color: #fff; background-color: #47402E;">#47402E</td><td style="color: #fff; background-color: #47402E;">Oliwkowy żółty<span class="en"><br>Yellow olive</span></td><td><img src="./imgral/classic-120.png" alt="RAL 6014" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3B3C36;">RAL 6015</td><td style="color: #fff; background-color: #3B3C36;"><small>(59,60,54)</small></td><td style="color: #fff; background-color: #3B3C36;">#3B3C36</td><td style="color: #fff; background-color: #3B3C36;">Ciemny oliwkowy<span class="en"><br>Black olive</span></td><td><img src="./imgral/classic-121.png" alt="RAL 6015" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1E5945;">RAL 6016</td><td style="color: #fff; background-color: #1E5945;"><small>(30,89,69)</small></td><td style="color: #fff; background-color: #1E5945;">#1E5945</td><td style="color: #fff; background-color: #1E5945;">Zielony turkusowy<span class="en"><br>Turquoise green</span></td><td><img src="./imgral/classic-122.png" alt="RAL 6016" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4C9141;">RAL 6017</td><td style="color: #fff; background-color: #4C9141;"><small>(76,145,65)</small></td><td style="color: #fff; background-color: #4C9141;">#4C9141</td><td style="color: #fff; background-color: #4C9141;">Majowa zieleń<span class="en"><br>May green</span></td><td><img src="./imgral/classic-123.png" alt="RAL 6017" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #57A639;">RAL 6018</td><td style="color: #fff; background-color: #57A639;"><small>(87,166,57)</small></td><td style="color: #fff; background-color: #57A639;">#57A639</td><td style="color: #fff; background-color: #57A639;">Zielony żółty<span class="en"><br>Yellow green</span></td><td><img src="./imgral/classic-124.png" alt="RAL 6018" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #BDECB6;">RAL 6019</td><td style="color: #000; background-color: #BDECB6;"><small>(189,236,182)</small></td><td style="color: #000; background-color: #BDECB6;">#BDECB6</td><td style="color: #000; background-color: #BDECB6;">Zielony pastelowy<span class="en"><br>Pastel green</span></td><td><img src="./imgral/classic-125.png" alt="RAL 6019" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2E3A23;">RAL 6020</td><td style="color: #fff; background-color: #2E3A23;"><small>(46,58,35)</small></td><td style="color: #fff; background-color: #2E3A23;">#2E3A23</td><td style="color: #fff; background-color: #2E3A23;">Zielony chromowy<span class="en"><br>Chrome green</span></td><td><img src="./imgral/classic-126.png" alt="RAL 6020" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #89AC76;">RAL 6021</td><td style="color: #fff; background-color: #89AC76;"><small>(137,172,118)</small></td><td style="color: #fff; background-color: #89AC76;">#89AC76</td><td style="color: #fff; background-color: #89AC76;">Zielony blady<span class="en"><br>Pale green</span></td><td><img src="./imgral/classic-127.png" alt="RAL 6021" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #25221B;">RAL 6022</td><td style="color: #fff; background-color: #25221B;"><small>(37,34,27)</small></td><td style="color: #fff; background-color: #25221B;">#25221B</td><td style="color: #fff; background-color: #25221B;">Oliwkowy brązowy<span class="en"><br>Olive drab</span></td><td><img src="./imgral/classic-128.png" alt="RAL 6022" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #308446;">RAL 6024</td><td style="color: #fff; background-color: #308446;"><small>(48,132,70)</small></td><td style="color: #fff; background-color: #308446;">#308446</td><td style="color: #fff; background-color: #308446;">Zielony drogowy<span class="en"><br>Traffic green</span></td><td><img src="./imgral/classic-129.png" alt="RAL 6024" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #3D642D;">RAL 6025</td><td style="color: #fff; background-color: #3D642D;"><small>(61,100,45)</small></td><td style="color: #fff; background-color: #3D642D;">#3D642D</td><td style="color: #fff; background-color: #3D642D;">Zieleń paproci<span class="en"><br>Fern green</span></td><td><img src="./imgral/classic-130.png" alt="RAL 6025" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #015D52;">RAL 6026</td><td style="color: #fff; background-color: #015D52;"><small>(1,93,82)</small></td><td style="color: #fff; background-color: #015D52;">#015D52</td><td style="color: #fff; background-color: #015D52;">Zielony opal<span class="en"><br>Opal green</span></td><td><img src="./imgral/classic-131.png" alt="RAL 6026" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #84C3BE;">RAL 6027</td><td style="color: #000; background-color: #84C3BE;"><small>(132,195,190)</small></td><td style="color: #000; background-color: #84C3BE;">#84C3BE</td><td style="color: #000; background-color: #84C3BE;">Zielony jasny<span class="en"><br>Light green</span></td><td><img src="./imgral/classic-132.png" alt="RAL 6027" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2C5545;">RAL 6028</td><td style="color: #fff; background-color: #2C5545;"><small>(44,85,69)</small></td><td style="color: #fff; background-color: #2C5545;">#2C5545</td><td style="color: #fff; background-color: #2C5545;">Zielony sosnowy<span class="en"><br>Pine green</span></td><td><img src="./imgral/classic-133.png" alt="RAL 6028" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #20603D;">RAL 6029</td><td style="color: #fff; background-color: #20603D;"><small>(32,96,61)</small></td><td style="color: #fff; background-color: #20603D;">#20603D</td><td style="color: #fff; background-color: #20603D;">Zielony miętowy<span class="en"><br>Mint green</span></td><td><img src="./imgral/classic-134.png" alt="RAL 6029" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #317F43;">RAL 6032</td><td style="color: #fff; background-color: #317F43;"><small>(49,127,67)</small></td><td style="color: #fff; background-color: #317F43;">#317F43</td><td style="color: #fff; background-color: #317F43;">Zielony sygnałowy<span class="en"><br>Signal green</span></td><td><img src="./imgral/classic-135.png" alt="RAL 6032" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #497E76;">RAL 6033</td><td style="color: #fff; background-color: #497E76;"><small>(73,126,118)</small></td><td style="color: #fff; background-color: #497E76;">#497E76</td><td style="color: #fff; background-color: #497E76;">Miętowy turkusowy<span class="en"><br>Mint turquoise</span></td><td><img src="./imgral/classic-136.png" alt="RAL 6033" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #7FB5B5;">RAL 6034</td><td style="color: #000; background-color: #7FB5B5;"><small>(127,181,181)</small></td><td style="color: #000; background-color: #7FB5B5;">#7FB5B5</td><td style="color: #000; background-color: #7FB5B5;">Turkusowy pastelowy<span class="en"><br>Pastel turquoise</span></td><td><img src="./imgral/classic-137.png" alt="RAL 6034" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #008F39;">RAL 6037</td><td style="color: #fff; background-color: #008F39;"><small>(0,143,57)</small></td><td style="color: #fff; background-color: #008F39;">#008F39</td><td style="color: #fff; background-color: #008F39;">Czysta zieleń<span class="en"><br>Pure green</span></td><td><img src="./imgral/classic-140.png" alt="RAL 6037" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #78858B;">RAL 7000</td><td style="color: #fff; background-color: #78858B;"><small>(120,133,139)</small></td><td style="color: #fff; background-color: #78858B;">#78858B</td><td style="color: #fff; background-color: #78858B;">Szary popielaty<span class="en"><br>Squirrel grey</span></td><td><img src="./imgral/classic-142.png" alt="RAL 7000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8A9597;">RAL 7001</td><td style="color: #fff; background-color: #8A9597;"><small>(138,149,151)</small></td><td style="color: #fff; background-color: #8A9597;">#8A9597</td><td style="color: #fff; background-color: #8A9597;">Szary stalowy<span class="en"><br>Silver grey</span></td><td><img src="./imgral/classic-143.png" alt="RAL 7001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #7E7B52;">RAL 7002</td><td style="color: #fff; background-color: #7E7B52;"><small>(126,123,82)</small></td><td style="color: #fff; background-color: #7E7B52;">#7E7B52</td><td style="color: #fff; background-color: #7E7B52;">Szary oliwkowy<span class="en"><br>Olive grey</span></td><td><img src="./imgral/classic-144.png" alt="RAL 7002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6C7059;">RAL 7003</td><td style="color: #fff; background-color: #6C7059;"><small>(108,112,89)</small></td><td style="color: #fff; background-color: #6C7059;">#6C7059</td><td style="color: #fff; background-color: #6C7059;">Szary mchowy<span class="en"><br>Moss grey</span></td><td><img src="./imgral/classic-145.png" alt="RAL 7003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #969992;">RAL 7004</td><td style="color: #fff; background-color: #969992;"><small>(150,153,146)</small></td><td style="color: #fff; background-color: #969992;">#969992</td><td style="color: #fff; background-color: #969992;">Szary sygnałowy<span class="en"><br>Signal grey</span></td><td><img src="./imgral/classic-146.png" alt="RAL 7004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #646B63;">RAL 7005</td><td style="color: #fff; background-color: #646B63;"><small>(100,107,99)</small></td><td style="color: #fff; background-color: #646B63;">#646B63</td><td style="color: #fff; background-color: #646B63;">Szary mysi<span class="en"><br>Mouse grey</span></td><td><img src="./imgral/classic-147.png" alt="RAL 7005" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6D6552;">RAL 7006</td><td style="color: #fff; background-color: #6D6552;"><small>(109,101,82)</small></td><td style="color: #fff; background-color: #6D6552;">#6D6552</td><td style="color: #fff; background-color: #6D6552;">Szary beżowy<span class="en"><br>Beige grey</span></td><td><img src="./imgral/classic-148.png" alt="RAL 7006" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6A5F31;">RAL 7008</td><td style="color: #fff; background-color: #6A5F31;"><small>(106,95,49)</small></td><td style="color: #fff; background-color: #6A5F31;">#6A5F31</td><td style="color: #fff; background-color: #6A5F31;">Szary khaki<span class="en"><br>Khaki grey</span></td><td><img src="./imgral/classic-149.png" alt="RAL 7008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4D5645;">RAL 7009</td><td style="color: #fff; background-color: #4D5645;"><small>(77,86,69)</small></td><td style="color: #fff; background-color: #4D5645;">#4D5645</td><td style="color: #fff; background-color: #4D5645;">Szary zielony<span class="en"><br>Green grey</span></td><td><img src="./imgral/classic-150.png" alt="RAL 7009" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4C514A;">RAL 7010</td><td style="color: #fff; background-color: #4C514A;"><small>(76,81,74)</small></td><td style="color: #fff; background-color: #4C514A;">#4C514A</td><td style="color: #fff; background-color: #4C514A;">Szary średni<span class="en"><br>Tarpaulin grey</span></td><td><img src="./imgral/classic-151.png" alt="RAL 7010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #434B4D;">RAL 7011</td><td style="color: #fff; background-color: #434B4D;"><small>(67,75,77)</small></td><td style="color: #fff; background-color: #434B4D;">#434B4D</td><td style="color: #fff; background-color: #434B4D;">Szary żelazowy<span class="en"><br>Iron grey</span></td><td><img src="./imgral/classic-152.png" alt="RAL 7011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4E5754;">RAL 7012</td><td style="color: #fff; background-color: #4E5754;"><small>(78,87,84)</small></td><td style="color: #fff; background-color: #4E5754;">#4E5754</td><td style="color: #fff; background-color: #4E5754;">Szary bazaltowy<span class="en"><br>Basalt grey</span></td><td><img src="./imgral/classic-153.png" alt="RAL 7012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #464531;">RAL 7013</td><td style="color: #fff; background-color: #464531;"><small>(70,69,49)</small></td><td style="color: #fff; background-color: #464531;">#464531</td><td style="color: #fff; background-color: #464531;">Szary brązowy<span class="en"><br>Brown grey</span></td><td><img src="./imgral/classic-154.png" alt="RAL 7013" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #434750;">RAL 7015</td><td style="color: #fff; background-color: #434750;"><small>(67,71,80)</small></td><td style="color: #fff; background-color: #434750;">#434750</td><td style="color: #fff; background-color: #434750;">Szary łupek<span class="en"><br>Slate grey</span></td><td><img src="./imgral/classic-155.png" alt="RAL 7015" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #293133;">RAL 7016</td><td style="color: #fff; background-color: #293133;"><small>(41,49,51)</small></td><td style="color: #fff; background-color: #293133;">#293133</td><td style="color: #fff; background-color: #293133;">Szary antracytowy<span class="en"><br>Anthracite grey</span></td><td><img src="./imgral/classic-156.png" alt="RAL 7016" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #23282B;">RAL 7021</td><td style="color: #fff; background-color: #23282B;"><small>(35,40,43)</small></td><td style="color: #fff; background-color: #23282B;">#23282B</td><td style="color: #fff; background-color: #23282B;">Szary czarny<span class="en"><br>Black grey</span></td><td><img src="./imgral/classic-157.png" alt="RAL 7021" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #332F2C;">RAL 7022</td><td style="color: #fff; background-color: #332F2C;"><small>(51,47,44)</small></td><td style="color: #fff; background-color: #332F2C;">#332F2C</td><td style="color: #fff; background-color: #332F2C;">Szary ciemny<span class="en"><br>Umbra grey</span></td><td><img src="./imgral/classic-158.png" alt="RAL 7022" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #686C5E;">RAL 7023</td><td style="color: #fff; background-color: #686C5E;"><small>(104,108,94)</small></td><td style="color: #fff; background-color: #686C5E;">#686C5E</td><td style="color: #fff; background-color: #686C5E;">Szary betonowy<span class="en"><br>Concrete grey</span></td><td><img src="./imgral/classic-159.png" alt="RAL 7023" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #474A51;">RAL 7024</td><td style="color: #fff; background-color: #474A51;"><small>(71,74,81)</small></td><td style="color: #fff; background-color: #474A51;">#474A51</td><td style="color: #fff; background-color: #474A51;">Szary grafitowy<span class="en"><br>Graphite grey</span></td><td><img src="./imgral/classic-160.png" alt="RAL 7024" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #2F353B;">RAL 7026</td><td style="color: #fff; background-color: #2F353B;"><small>(47,53,59)</small></td><td style="color: #fff; background-color: #2F353B;">#2F353B</td><td style="color: #fff; background-color: #2F353B;">Szary granitowy<span class="en"><br>Granite grey</span></td><td><img src="./imgral/classic-161.png" alt="RAL 7026" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8B8C7A;">RAL 7030</td><td style="color: #fff; background-color: #8B8C7A;"><small>(139,140,122)</small></td><td style="color: #fff; background-color: #8B8C7A;">#8B8C7A</td><td style="color: #fff; background-color: #8B8C7A;">Szary kamienny<span class="en"><br>Stone grey</span></td><td><img src="./imgral/classic-162.png" alt="RAL 7030" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #474B4E;">RAL 7031</td><td style="color: #fff; background-color: #474B4E;"><small>(71,75,78)</small></td><td style="color: #fff; background-color: #474B4E;">#474B4E</td><td style="color: #fff; background-color: #474B4E;">Szary niebieski<span class="en"><br>Blue grey</span></td><td><img src="./imgral/classic-163.png" alt="RAL 7031" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #B8B799;">RAL 7032</td><td style="color: #000; background-color: #B8B799;"><small>(184,183,153)</small></td><td style="color: #000; background-color: #B8B799;">#B8B799</td><td style="color: #000; background-color: #B8B799;">Szary beżowy<span class="en"><br>Pebble grey</span></td><td><img src="./imgral/classic-164.png" alt="RAL 7032" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #7D8471;">RAL 7033</td><td style="color: #fff; background-color: #7D8471;"><small>(125,132,113)</small></td><td style="color: #fff; background-color: #7D8471;">#7D8471</td><td style="color: #fff; background-color: #7D8471;">Szary cementowy<span class="en"><br>Cement grey</span></td><td><img src="./imgral/classic-165.png" alt="RAL 7033" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8F8B66;">RAL 7034</td><td style="color: #fff; background-color: #8F8B66;"><small>(143,139,102)</small></td><td style="color: #fff; background-color: #8F8B66;">#8F8B66</td><td style="color: #fff; background-color: #8F8B66;">Szary zółty<span class="en"><br>Yellow grey</span></td><td><img src="./imgral/classic-166.png" alt="RAL 7034" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #D7D7D7;">RAL 7035</td><td style="color: #000; background-color: #D7D7D7;"><small>(215,215,215)</small></td><td style="color: #000; background-color: #D7D7D7;">#D7D7D7</td><td style="color: #000; background-color: #D7D7D7;">Szary jasny<span class="en"><br>Light grey</span></td><td><img src="./imgral/classic-167.png" alt="RAL 7035" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #7F7679;">RAL 7036</td><td style="color: #fff; background-color: #7F7679;"><small>(127,118,121)</small></td><td style="color: #fff; background-color: #7F7679;">#7F7679</td><td style="color: #fff; background-color: #7F7679;">Szary platynowy<span class="en"><br>Platinum grey</span></td><td><img src="./imgral/classic-168.png" alt="RAL 7036" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #7D7F7D;">RAL 7037</td><td style="color: #fff; background-color: #7D7F7D;"><small>(125,127,120)</small></td><td style="color: #fff; background-color: #7D7F7D;">#7D7F7D</td><td style="color: #fff; background-color: #7D7F7D;">Szary kurz<span class="en"><br>Dusty grey</span></td><td><img src="./imgral/classic-169.png" alt="RAL 7037" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #B5B8B1;">RAL 7038</td><td style="color: #000; background-color: #B5B8B1;"><small>(195,195,195)</small></td><td style="color: #000; background-color: #B5B8B1;">#B5B8B1</td><td style="color: #000; background-color: #B5B8B1;">Szary agatowy<span class="en"><br>Agate grey</span></td><td><img src="./imgral/classic-170.png" alt="RAL 7038" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6C6960;">RAL 7039</td><td style="color: #fff; background-color: #6C6960;"><small>(108,105,96)</small></td><td style="color: #fff; background-color: #6C6960;">#6C6960</td><td style="color: #fff; background-color: #6C6960;">Szary kwarcytowy<span class="en"><br>Quartz grey</span></td><td><img src="./imgral/classic-171.png" alt="RAL 7039" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #9DA1AA;">RAL 7040</td><td style="color: #fff; background-color: #9DA1AA;"><small>(157,161,170)</small></td><td style="color: #fff; background-color: #9DA1AA;">#9DA1AA</td><td style="color: #fff; background-color: #9DA1AA;">Szary okienny<span class="en"><br>Window grey</span></td><td><img src="./imgral/classic-172.png" alt="RAL 7040" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8D948D;">RAL 7042</td><td style="color: #fff; background-color: #8D948D;"><small>(141,148,141)</small></td><td style="color: #fff; background-color: #8D948D;">#8D948D</td><td style="color: #fff; background-color: #8D948D;">Szary drogowy A<span class="en"><br>Traffic grey A</span></td><td><img src="./imgral/classic-173.png" alt="RAL 7042" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4E5452;">RAL 7043</td><td style="color: #fff; background-color: #4E5452;"><small>(78,84,82)</small></td><td style="color: #fff; background-color: #4E5452;">#4E5452</td><td style="color: #fff; background-color: #4E5452;">Szary drogowy B<span class="en"><br>Traffic grey B</span></td><td><img src="./imgral/classic-174.png" alt="RAL 7043" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #CAC4B0;">RAL 7044</td><td style="color: #000; background-color: #CAC4B0;"><small>(202,196,176)</small></td><td style="color: #000; background-color: #CAC4B0;">#CAC4B0</td><td style="color: #000; background-color: #CAC4B0;">Szary jedwabisty<span class="en"><br>Silk grey</span></td><td><img src="./imgral/classic-175.png" alt="RAL 7044" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #909090;">RAL 7045</td><td style="color: #fff; background-color: #909090;"><small>(144,144,144)</small></td><td style="color: #fff; background-color: #909090;">#909090</td><td style="color: #fff; background-color: #909090;">Szary<span class="en"><br>Telegrey 1</span></td><td><img src="./imgral/classic-176.png" alt="RAL 7045" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #82898F;">RAL 7046</td><td style="color: #fff; background-color: #82898F;"><small>(130,137,143)</small></td><td style="color: #fff; background-color: #82898F;">#82898F</td><td style="color: #fff; background-color: #82898F;">Szary ciemniejszy<span class="en"><br>Telegrey 2</span></td><td><img src="./imgral/classic-177.png" alt="RAL 7046" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #D0D0D0;">RAL 7047</td><td style="color: #000; background-color: #D0D0D0;"><small>(208,208,208)</small></td><td style="color: #000; background-color: #D0D0D0;">#D0D0D0</td><td style="color: #000; background-color: #D0D0D0;">Szary mleczny<span class="en"><br>Telegrey 4</span></td><td><img src="./imgral/classic-178.png" alt="RAL 7047" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #826C34;">RAL 8000</td><td style="color: #fff; background-color: #826C34;"><small>(130,108,52)</small></td><td style="color: #fff; background-color: #826C34;">#826C34</td><td style="color: #fff; background-color: #826C34;">Brązowy zielony<span class="en"><br>Green brown</span></td><td><img src="./imgral/classic-180.png" alt="RAL 8000" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #955F20;">RAL 8001</td><td style="color: #fff; background-color: #955F20;"><small>(149,95,32)</small></td><td style="color: #fff; background-color: #955F20;">#955F20</td><td style="color: #fff; background-color: #955F20;">Brązowy ochrowy<span class="en"><br>Ochre brown</span></td><td><img src="./imgral/classic-181.png" alt="RAL 8001" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6C3B2A;">RAL 8002</td><td style="color: #fff; background-color: #6C3B2A;"><small>(108,59,42)</small></td><td style="color: #fff; background-color: #6C3B2A;">#6C3B2A</td><td style="color: #fff; background-color: #6C3B2A;">Brązowy sygnałowy<span class="en"><br>Signal brown</span></td><td><img src="./imgral/classic-182.png" alt="RAL 8002" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #734222;">RAL 8003</td><td style="color: #fff; background-color: #734222;"><small>(115,66,34)</small></td><td style="color: #fff; background-color: #734222;">#734222</td><td style="color: #fff; background-color: #734222;">Brązowy gliniasty<span class="en"><br>Clay brown</span></td><td><img src="./imgral/classic-183.png" alt="RAL 8003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #8E402A;">RAL 8004</td><td style="color: #fff; background-color: #8E402A;"><small>(142,64,42)</small></td><td style="color: #fff; background-color: #8E402A;">#8E402A</td><td style="color: #fff; background-color: #8E402A;">Brązowy miedziany<span class="en"><br>Copper brown</span></td><td><img src="./imgral/classic-184.png" alt="RAL 8004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #59351F;">RAL 8007</td><td style="color: #fff; background-color: #59351F;"><small>(89,53,31)</small></td><td style="color: #fff; background-color: #59351F;">#59351F</td><td style="color: #fff; background-color: #59351F;">Brązowy płowy<span class="en"><br>Fawn brown</span></td><td><img src="./imgral/classic-185.png" alt="RAL 8007" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #6F4F28;">RAL 8008</td><td style="color: #fff; background-color: #6F4F28;"><small>(111,79,40)</small></td><td style="color: #fff; background-color: #6F4F28;">#6F4F28</td><td style="color: #fff; background-color: #6F4F28;">Brązowy oliwkowy<span class="en"><br>Olive brown</span></td><td><img src="./imgral/classic-186.png" alt="RAL 8008" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #5B3A29;">RAL 8011</td><td style="color: #fff; background-color: #5B3A29;"><small>(91,58,41)</small></td><td style="color: #fff; background-color: #5B3A29;">#5B3A29</td><td style="color: #fff; background-color: #5B3A29;">Brązowy orzechowy<span class="en"><br>Nut brown</span></td><td><img src="./imgral/classic-187.png" alt="RAL 8011" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #592321;">RAL 8012</td><td style="color: #fff; background-color: #592321;"><small>(89,35,33)</small></td><td style="color: #fff; background-color: #592321;">#592321</td><td style="color: #fff; background-color: #592321;">Brązowy czerwony<span class="en"><br>Red brown</span></td><td><img src="./imgral/classic-188.png" alt="RAL 8012" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #382C1E;">RAL 8014</td><td style="color: #fff; background-color: #382C1E;"><small>(56,44,30)</small></td><td style="color: #fff; background-color: #382C1E;">#382C1E</td><td style="color: #fff; background-color: #382C1E;">Brązowy irchowy<span class="en"><br>Sepia brown</span></td><td><img src="./imgral/classic-189.png" alt="RAL 8014" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #633A34;">RAL 8015</td><td style="color: #fff; background-color: #633A34;"><small>(99,58,52)</small></td><td style="color: #fff; background-color: #633A34;">#633A34</td><td style="color: #fff; background-color: #633A34;">Kasztanowy<span class="en"><br>Chestnut brown</span></td><td><img src="./imgral/classic-190.png" alt="RAL 8015" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4C2F27;">RAL 8016</td><td style="color: #fff; background-color: #4C2F27;"><small>(76,47,39)</small></td><td style="color: #fff; background-color: #4C2F27;">#4C2F27</td><td style="color: #fff; background-color: #4C2F27;">Brązowy mahoniowy<span class="en"><br>Mahogany brown</span></td><td><img src="./imgral/classic-191.png" alt="RAL 8016" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #45322E;">RAL 8017</td><td style="color: #fff; background-color: #45322E;"><small>(69,50,46)</small></td><td style="color: #fff; background-color: #45322E;">#45322E</td><td style="color: #fff; background-color: #45322E;">Brązowy czekoladowy<span class="en"><br>Chocolate brown</span></td><td><img src="./imgral/classic-192.png" alt="RAL 8017" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #403A3A;">RAL 8019</td><td style="color: #fff; background-color: #403A3A;"><small>(64,58,58)</small></td><td style="color: #fff; background-color: #403A3A;">#403A3A</td><td style="color: #fff; background-color: #403A3A;">Brązowy szary<span class="en"><br>Grey brown</span></td><td><img src="./imgral/classic-193.png" alt="RAL 8019" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #212121;">RAL 8022</td><td style="color: #fff; background-color: #212121;"><small>(33,33,33)</small></td><td style="color: #fff; background-color: #212121;">#212121</td><td style="color: #fff; background-color: #212121;">Brązowy czarny<span class="en"><br>Black brown</span></td><td><img src="./imgral/classic-194.png" alt="RAL 8022" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #A65E2E;">RAL 8023</td><td style="color: #fff; background-color: #A65E2E;"><small>(166,94,46)</small></td><td style="color: #fff; background-color: #A65E2E;">#A65E2E</td><td style="color: #fff; background-color: #A65E2E;">Brązowy pomarańczowy<span class="en"><br>Orange brown</span></td><td><img src="./imgral/classic-195.png" alt="RAL 8023" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #79553D;">RAL 8024</td><td style="color: #fff; background-color: #79553D;"><small>(121,85,61)</small></td><td style="color: #fff; background-color: #79553D;">#79553D</td><td style="color: #fff; background-color: #79553D;">Brązowy beżowy<span class="en"><br>Beige brown</span></td><td><img src="./imgral/classic-196.png" alt="RAL 8024" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #755C48;">RAL 8025</td><td style="color: #fff; background-color: #755C48;"><small>(117,92,72)</small></td><td style="color: #fff; background-color: #755C48;">#755C48</td><td style="color: #fff; background-color: #755C48;">Brązowy blady<span class="en"><br>Pale brown</span></td><td><img src="./imgral/classic-197.png" alt="RAL 8025" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #4E3B31;">RAL 8028</td><td style="color: #fff; background-color: #4E3B31;"><small>(78,59,49)</small></td><td style="color: #fff; background-color: #4E3B31;">#4E3B31</td><td style="color: #fff; background-color: #4E3B31;">Brązowy ziemisty<span class="en"><br>Terra brown</span></td><td><img src="./imgral/classic-198.png" alt="RAL 8028" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #FDF4E3;">RAL 9001</td><td style="color: #000; background-color: #FDF4E3;"><small>(250,244,227)</small></td><td style="color: #000; background-color: #FDF4E3;">#FDF4E3</td><td style="color: #000; background-color: #FDF4E3;">Biały kremowy<span class="en"><br>Cream</span></td><td><img src="./imgral/classic-200.png" alt="RAL 9001" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #E7EBDA;">RAL 9002</td><td style="color: #000; background-color: #E7EBDA;"><small>(231,235,218)</small></td><td style="color: #000; background-color: #E7EBDA;">#E7EBDA</td><td style="color: #000; background-color: #E7EBDA;">Biało-szary<span class="en"><br>Grey white</span></td><td><img src="./imgral/classic-201.png" alt="RAL 9002" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F4F4F4;">RAL 9003</td><td style="color: #000; background-color: #F4F4F4;"><small>(244,244,244)</small></td><td style="color: #000; background-color: #F4F4F4;">#F4F4F4</td><td style="color: #000; background-color: #F4F4F4;">Biały sygnałowy (czysta biel)<span class="en"><br>Signal white</span></td><td><img src="./imgral/classic-202.png" alt="RAL 9003" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #282828;">RAL 9004</td><td style="color: #fff; background-color: #282828;"><small>(40,40,40)</small></td><td style="color: #fff; background-color: #282828;">#282828</td><td style="color: #fff; background-color: #282828;">Czarny sygnałowy<span class="en"><br>Signal black</span></td><td><img src="./imgral/classic-203.png" alt="RAL 9004" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #0A0A0A;">RAL 9005</td><td style="color: #fff; background-color: #0A0A0A;"><small>(10,10,10)</small></td><td style="color: #fff; background-color: #0A0A0A;">#0A0A0A</td><td style="color: #fff; background-color: #0A0A0A;">Czarny głęboki<span class="en"><br>Jet black</span></td><td><img src="./imgral/classic-204.png" alt="RAL 9005" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #FFFFFF;">RAL 9010</td><td style="color: #000; background-color: #FFFFFF;"><small>(255,255,255)</small></td><td style="color: #000; background-color: #FFFFFF;">#FFFFFF</td><td style="color: #000; background-color: #FFFFFF;">Biały<span class="en"><br>Pure white</span></td><td><img src="./imgral/classic-207.png" alt="RAL 9010" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1C1C1C;">RAL 9011</td><td style="color: #fff; background-color: #1C1C1C;"><small>(28,28,28)</small></td><td style="color: #fff; background-color: #1C1C1C;">#1C1C1C</td><td style="color: #fff; background-color: #1C1C1C;">Czarny grafitowy<span class="en"><br>Graphite black</span></td><td><img src="./imgral/classic-208.png" alt="RAL 9011" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #F6F6F6;">RAL 9016</td><td style="color: #000; background-color: #F6F6F6;"><small>(246,246,246)</small></td><td style="color: #000; background-color: #F6F6F6;">#F6F6F6</td><td style="color: #000; background-color: #F6F6F6;">Biały drogowy<span class="en"><br>Traffic white</span></td><td><img src="./imgral/classic-209.png" alt="RAL 9016" class="im"></td></tr>
+<tr><td style="color: #fff; background-color: #1E1E1E;">RAL 9017</td><td style="color: #fff; background-color: #1E1E1E;"><small>(30,30,30)</small></td><td style="color: #fff; background-color: #1E1E1E;">#1E1E1E</td><td style="color: #fff; background-color: #1E1E1E;">Czarny drogowy<span class="en"><br>Traffic black</span></td><td><img src="./imgral/classic-210.png" alt="RAL 9017" class="im"></td></tr>
+<tr><td style="color: #000; background-color: #D7D7D7;">RAL 9018</td><td style="color: #000; background-color: #D7D7D7;"><small>(215,215,215)</small></td><td style="color: #000; background-color: #D7D7D7;">#D7D7D7</td><td style="color: #000; background-color: #D7D7D7;">Popielaty<span class="en"><br>Papyrus white</span></td><td><img src="./imgral/classic-211.png" alt="RAL 9018" class="im"></td></tr>
+</tbody>
+</table>
+
+<!-- koniec tabeli -->
+
+
+
+<br /><br />
+
+&nbsp; &bull; <a href="https://rgb.to/ral/1015">rgb.to/ral/1015</a><br /><br />
+&nbsp; &bull; <a href="ral0.html">RAL 0 png</a><br /><br />
+
+&nbsp; &bull; <a href="grid0.html">grid0.html</a><br /><br />
+
+
+<br /><br />
+</body>
+</html>
+
+<!--script src="colorssort.js"></script-->
+
+<script>
+function sortTable() {
+  var table, rows, switching, i, x, y, shouldSwitch;
+  table = document.getElementById("tralcolors");
+  switching = true;
+  /*Make a loop that will continue until
+  no switching has been done:*/
+  var sortcounter=0
+  while (switching) {
+	sortcounter++;
+	if (sortcounter>11) break;
+    //start by saying: no switching is done:
+    switching = false;
+    rows = table.rows;
+    /*Loop through all table rows (except the
+    first, which contains table headers):*/
+    for (i = 1; i < (rows.length - 1); i++) {
+      //start by saying there should be no switching:
+      shouldSwitch = false;
+      /*Get the two elements you want to compare,
+      one from current row and one from the next:*/
+      //x = rows[i].getElementsByTagName("TD")[0];
+      //y = rows[i + 1].getElementsByTagName("TD")[0];
+      //check if the two rows should switch place:
+	  //console.log(rows[i].dataset)
+	  //console.log(rows[i].dataset.hsl.split(',')[0])
+	  //console.log(rows[i].dataset.rgb)
+		// HSL
+			//x = rows[i].dataset.hsl.split(',')[0];
+			//y = rows[i+1].dataset.hsl.split(',')[0];
+		// GRAY
+			x = parseInt(rows[i].dataset.gray);
+			y = parseInt(rows[i+1].dataset.gray);
+	  console.log(sortcounter,'x=',x,'\ty=',y)
+	  //console.log(rows[i].dataset.HSL.split(',')[1])
+	  //console.log(rows[i].dataset.HSL.split(',')[2])
+	  //console.log(x.style.backgroundColor,y.style.backgroundColor)
+      //if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+      if (x < y) {
+        //if so, mark as a switch and break the loop:
+        shouldSwitch = true;
+        break;
+      }
+    }
+    if (shouldSwitch) {
+      /*If a switch has been marked, make the switch
+      and mark that a switch has been done:*/
+      rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+      switching = true;
+    }
+  }
+}
+</script>
