@@ -64,10 +64,9 @@
             installScripts(["../../script.js","../../navbar.js"])
             let exmenu = document.querySelector("#dropdown2").innerHTML;
             document.querySelector("#exmenu").innerHTML = exmenu;
+            document.getElementById("temp").textContent = "v2";
           })
-          .catch(e => {console.log(e)});
-        
-        document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
+          .catch(e => {console.log(e)});        
       });      
       //---DOM READY----------------------------------
 
