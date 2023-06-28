@@ -1,0 +1,23 @@
+{
+	"name": "RAL colors",
+	"short_name": "RAL Grid",
+	"description": "RAL sweet colors",
+	"start_url": "index.html",
+	"display": "fullscreen",
+
+	"theme_color": "red",
+	"background_color": "darkred",
+	"icons": [
+		{
+			"src": "colors.png",
+			"sizes": "256x256",
+			"type": "image/png"
+		}
+	],
+	"screenshots": [
+	{
+			"src": "colors.png",
+			"sizes": "256x256",
+			"type": "image/png"
+	}]
+}
