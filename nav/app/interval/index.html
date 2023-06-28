@@ -126,12 +126,20 @@ let intime   = document.getElementById("intime");
 let sektime   = document.getElementById("sektime");  
 let y        = document.getElementById("minutaAudio");
 let startAudio     = document.getElementById("startAudio");
-let stopAudio      = document.getElementById("startAudio");
-let intervalAudio  = document.getElementById("startAudio");
+let stopAudio      = document.getElementById("stopAudio");
+let intervalAudio  = document.getElementById("intervalAudio");
 let interV   = null;
 let counter  = 0;
 let maxCount = 2;
-  
+
+const setActive=(ten)=>{
+      let parent = ten.parentElement;
+      let keys   = parent.querySelectorAll("button")
+      //console.log(keys);
+      keys.forEach(b=>b.classList.remove("active"));
+      //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
+      ten.classList.add("active");
+}
 const setStart=()=>{
   let min = document.getElementById("intime").value;
   let sek = document.getElementById("sektime").value;
@@ -144,8 +152,9 @@ const setMax=(ten,max=2)=>{
   maxCount = max;
   //info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
   counterp.textContent="#"+maxCount;
-  document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
-  ten.classList.add("active");
+  if (ten) {setActive(ten);} 
+  //document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
+  //ten.classList.add("active");
 }
 const stopInterval=(ten)=>{
     interV=clearInterval(interV);
@@ -163,15 +172,6 @@ const parseTimes=(time)=> {
   let sek = Math.round((time - (60000*min))/1000)
   return [min,sek];
 }
-
-const setActive=(ten)=>{
-      let parent = ten.parentElement;
-      let keys   = parent.querySelectorAll("button")
-      console.log(keys);
-      keys.forEach(b=>b.classList.remove("active"));
-      //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-      ten.classList.add("active");
-}
   
 const repeatMinuta=(ten,itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
@@ -187,25 +187,15 @@ const repeatMinuta=(ten,itime=60000)=> {
   info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
   interV = setInterval(()=>{   
     counter++;
-    intervalAudio.play();
+    if (counter === maxCount) stopAudio.play();
+    else                      intervalAudio.play();
     if (counter < maxCount) {       
       info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
     } else {      
        stopInterval();
     }
   },itime); 
-
-  /*let parent1 = ten.parentNode;
-  let parent2 = ten.parentElement;
-  console.log(ten);
-  console.log(parent1);
-  console.log(parent2);
-  console.log(document.querySelector("#klawisze"));*/
-
-  if (ten){
-    setActive(ten);
-  }
-  
+  if (ten) {setActive(ten);}  
 } 
 
 </script>
@@ -214,12 +204,9 @@ const repeatMinuta=(ten,itime=60000)=> {
   const registerServiceWorker = async () => {
   if ('serviceWorker' in navigator) {
     try {
-      const registration = await navigator.serviceWorker.register(
-        'sw.js',{scope: './',}
-      );
+      const registration = await navigator.serviceWorker.register('sw.js',{scope: './',});
       if (registration.installing) {
-        console.log('Service worker installing');
-        
+        console.log('Service worker installing');        
       } else if (registration.waiting) {
         console.log('Service worker installed');
       } else if (registration.active) {
