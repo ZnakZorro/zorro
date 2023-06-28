@@ -53,6 +53,7 @@
             script.src = urls[0];
             document.head.appendChild(script);
         }
+      
       //---dom ready--------------------------------
       document.addEventListener("DOMContentLoaded",function(){
          fetch("../../menu.html")
@@ -66,9 +67,8 @@
           })
           .catch(e => {console.log(e)});
         
-        
-      })
-      document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
+        document.getElementById("temp").textContent = "aaaaaaaaaaaaaaa";
+      });      
       //---DOM READY----------------------------------
 
       
