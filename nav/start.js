@@ -8,3 +8,26 @@ let installScripts = (urls,callback=null)=>{
     script.src = urls[0];
     document.head.appendChild(script);
 }
+
+/*****************************************/
+let cc = async()=>{
+	caches.keys()
+	.then((names)=> {
+		console.log(names)
+		for (let name of names) caches.delete(name);
+	})
+	.then(r=>{
+		window.location.reload(true);
+		console.log(r)
+	});
+}
+
+let ccc=async(ten)=>{
+	await cc();
+	console.log(ten);
+	if (ten) ten.classList.add("active");
+}
+
+/*11111111111111111111111111111*/
+let ccONE = async()=>{caches.keys().then((names)=> {for (let name of names) caches.delete(name);})}
+let cccONE=async()=>{await ccONE();}
