@@ -150,6 +150,15 @@ const parseTimes=(time)=> {
   let sek = Math.round((time - (60000*min))/1000)
   return [min,sek];
 }
+
+const setActive=(ten)=>{
+      let parent = ten.parentElement;
+      let keys   = parent.querySelectorAll("button")
+      console.log(keys);
+      keys.forEach(b=>b.classList.remove("active"));
+      //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
+      ten.classList.add("active");
+}
   
 const repeatMinuta=(ten,itime=60000)=> {
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
@@ -173,14 +182,16 @@ const repeatMinuta=(ten,itime=60000)=> {
     }
   },itime); 
 
-  let parent1 = ten.parentNode;
+  /*let parent1 = ten.parentNode;
   let parent2 = ten.parentElement;
   console.log(ten);
   console.log(parent1);
   console.log(parent2);
-  console.log(document.querySelector("#klawisze"));
-  document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
-  if (ten) ten.classList.add("active");
+  console.log(document.querySelector("#klawisze"));*/
+
+  if (ten){
+    setActive(ten);
+  }
   
 } 
 
