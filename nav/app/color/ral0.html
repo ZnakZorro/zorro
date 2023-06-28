@@ -1,0 +1,2160 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<meta name="apple-mobile-web-app-title" content="mobiAPP"> 
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<link rel="icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="shortcut icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="apple-touch-icon" href="colors.png"> 	
+	<meta name="theme-color" content="#600">	
+		
+	<link rel="manifest" href="ral.webmanifest"> 
+	<title>RAL 0 colors</title>
+	
+	
+<style>
+/* Farbtabellen: Alle RAL Farbnamen */
+.color-grid {
+	list-style: none;
+	text-align: center;
+	margin: 0 auto;
+	padding: 4px 0;
+	background: #ffffff;
+	overflow: hidden;
+}
+.color-grid li {
+	display: block;
+	float: left;
+	/* 5 items in a row = 20% each */
+	width: 16%;
+	margin: 0.5%;
+	padding: 5% 1.5%;
+	color: #fff;
+	cursor: pointer;
+	background: #8CC7DF;
+	overflow: hidden;
+}
+.color-grid li h3 {
+	font-size: 1.7em;
+	font-weight: 100;
+	margin: 0 0 0.5em 0;
+}
+.color-grid li.dark {
+	color: #465256;
+}
+.color-grid li[class^="icon-"]:before,
+.color-grid li[class*=" icon-"]:before {
+	font-size: 10em;
+	position: absolute;
+	display: block;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	line-height: 3;
+	opacity: 0.4;
+	text-align: right;
+	pointer-events: none;
+}
+.color-temp {
+	display: block;
+	font-size: 1.1em;
+	opacity: 0.5;
+	-webkit-transition: opacity 0.3s ease-in-out;
+	-moz-transition: opacity 0.3s ease-in-out;
+	transition: opacity 0.3s ease-in-out;
+}
+.color-grid li .rb-temp {
+	font-size: 1.1em;
+	line-height: 1.6;
+}
+.color-grid li:hover .rb-temp {
+	opacity: 1;
+}
+
+
+/* Overlay */
+#color-grid-layer {
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
+	overflow-y: auto;
+}
+#color-grid-layer .close {
+	position: absolute;
+	top: 1em;
+	right: 1em;
+	width: 60px;
+	height: 60px;
+	overflow: hidden;
+	text-align: center;
+	cursor: pointer;
+}
+#color-grid-layer .close::before {
+	content: 'x';
+	font-size: 4em;
+	line-height: 60px;
+	font-weight: 100;
+	color: #fff;
+}
+#color-grid-layer.dark .close::before {
+	color: #465256;
+}
+#color-grid-layer .close:hover::before {
+	text-shadow: 0px 0px 10px rgba(0, 0, 0, 1);
+}
+#color-grid-layer div {
+	text-align: center;
+	color: #fff;
+	padding: 1%;
+}
+#color-grid-layer.dark div {
+	color: #465256;
+}
+#color-grid-layer h3 {
+	font-weight: 100;
+	font-size: 8em;
+	line-height: 1.2;
+	text-align: center;
+	margin-bottom: 0.25em;
+	padding-top: 60px;
+	color: #fff;
+}
+#color-grid-layer.dark h3 {
+	color: #465256;
+}
+#color-grid-layer div .rb-temp {
+	color: #fff;
+	font-size: 2em;
+	line-height: 1.4;
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)"; /* IE 8 */
+	filter: alpha(opacity=80);  /* IE 5-7 */
+	-moz-opacity: 0.8;  /* Netscape */
+	-khtml-opacity: 0.8;  /* Safari 1.x */
+	opacity: 0.8;  /* Good browsers */
+}
+#color-grid-layer.dark div .rb-temp {
+	color: #465256;
+}
+
+/* Mobile */
+@media only screen
+	and (min-device-width:320px)
+	and (max-device-width:568px){
+
+	/* Farbtabellen */
+	.color-grid {
+		margin: 0 auto;
+		padding: 4px 1%;
+	}
+	.color-grid li {
+		/* 3 items in a row = 33.333333% each */
+		width: 24.333333333%;
+		margin: 1%;
+		padding: 7% 3.5%;
+	}
+	.color-grid.mobile-two-rows li {
+		/* 2 items in a row = 50% each */
+		width: 41%;
+		margin: 1%;
+		padding: 7% 3.5%;
+	}
+	.color-grid li h3 {
+		font-size: 1.2em;
+	}
+	.color-grid li .rb-temp {
+		display: block;
+		overflow: hidden;
+		font-size: 0.8em;
+		text-overflow: ellipsis;
+	}
+
+	/* Overlay */
+	#color-grid-layer .close {
+		top: 0;
+		right: 0;
+		width: 30px;
+		height: 30px;
+	}
+	#color-grid-layer .close::before {
+		font-size: 2em;
+		line-height: 30px;
+	}
+	#color-grid-layer h3 {
+		font-size: 3em;
+		line-height: 1.2;
+		padding-top: 40px;
+	}
+	#color-grid-layer div .rb-temp {
+		font-size: 1.4em;
+		line-height: 1.2;
+	}
+
+}
+
+</style>	
+	
+
+
+</head>
+<body>
+
+
+
+<div>
+<div id="content">
+
+<ul class="color-grid mobile-two-rows">
+
+<li class="dark" style="background: url(&quot;imgral/classic-1.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1000 </h3>
+<span class="rb-temp">Grünbeige<br>
+Green beige<br>
+Beige vert<br>
+Beige verdoso<br>
+Beige verdastro<br>
+Groenbeige<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-2.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1001 </h3>
+<span class="rb-temp">Beige</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-3.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1002 </h3>
+<span class="rb-temp">Sandgelb<br>
+Sand yellow<br>
+Jaune sable<br>
+Amarillo arena<br>
+Giallo sabbia<br>
+Zandgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-4.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1003 </h3>
+<span class="rb-temp">Signalgelb<br>
+Signal yellow<br>
+Jaune de sécurité<br>
+Amarillo señales<br>
+Giallo segnale<br>
+Signaalgeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-5.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1004 </h3>
+<span class="rb-temp">Goldgelb<br>
+Golden yellow<br>
+Jaune or<br>
+Amarillo oro<br>
+Giallo oro<br>
+Goudgeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-6.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1005 </h3>
+<span class="rb-temp">Honiggelb<br>
+Honey yellow<br>
+Jaune miel<br>
+Amarillo miel<br>
+Giallo miele<br>
+Honinggeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-7.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1006 </h3>
+<span class="rb-temp">Maisgelb<br>
+Maize yellow<br>
+Jaune maïs<br>
+Amarillo maiz<br>
+Giallo polenta<br>
+Maisgeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-8.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1007 </h3>
+<span class="rb-temp">Narzissengelb<br>
+Daffodil yellow<br>
+Jaune narcisse<br>
+Amarillo narciso<br>
+Giallo narciso<br>
+Narcissengeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-9.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1011 </h3>
+<span class="rb-temp">Braunbeige<br>
+Brown beige<br>
+Beige brun<br>
+Beige pardo<br>
+Beige marrone<br>
+Bruinbeige<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-10.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1012 </h3>
+<span class="rb-temp">Zitronengelb<br>
+Lemon yellow<br>
+Jaune citron<br>
+Amarillo limón<br>
+Giallo limone<br>
+Citroengeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-11.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1013 </h3>
+<span class="rb-temp">Perlweiß<br>
+Oyster white<br>
+Blanc perlé<br>
+Blanco perla<br>
+Bianco perla<br>
+Parelwit<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-12.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1014 </h3>
+<span class="rb-temp">Elfenbein<br>
+Ivory<br>
+Ivoire<br>
+Marfil<br>
+Avorio<br>
+Ivoorkleurig<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-13.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1015 </h3>
+<span class="rb-temp">Hellelfenbein<br>
+Light ivory<br>
+Ivoire clair<br>
+Marfil claro<br>
+Avorio chiaro<br>
+Licht ivoorkleurig<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-14.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1016 </h3>
+<span class="rb-temp">Schwefelgelb<br>
+Sulfur yellow<br>
+Jaune soufre<br>
+Amarillo azufre<br>
+Giallo zolfo<br>
+Zwavelgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-15.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1017 </h3>
+<span class="rb-temp">Safrangelb<br>
+Saffron yellow<br>
+Jaune safran<br>
+Amarillo azafrán<br>
+Giallo zafferano<br>
+Saffraangeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-16.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1018 </h3>
+<span class="rb-temp">Zinkgelb<br>
+Zinc yellow<br>
+Jaune zinc<br>
+Amarillo de zinc<br>
+Giallo zinco<br>
+Zinkgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-17.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1019 </h3>
+<span class="rb-temp">Graubeige<br>
+Grey beige<br>
+Beige gris<br>
+Beige agrisado<br>
+Beige grigiastro<br>
+Grijsbeige<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-18.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1020 </h3>
+<span class="rb-temp">Olivgelb<br>
+Olive yellow<br>
+Jaune olive<br>
+Amarillo oliva<br>
+Giallo olivastro<br>
+Olijfgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-19.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1021 </h3>
+<span class="rb-temp">Rapsgelb<br>
+Colza yellow<br>
+Jaune colza<br>
+Amarillo colza<br>
+Giallo navone<br>
+Koolzaadgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-20.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1023 </h3>
+<span class="rb-temp">Verkehrsgelb<br>
+Traffic yellow<br>
+Jaune signalisation<br>
+Amarillo tráfico<br>
+Giallo traffico<br>
+Verkeersgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-21.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1024 </h3>
+<span class="rb-temp">Ockergelb<br>
+Ochre yellow<br>
+Jaune ocre<br>
+Amarillo ocre<br>
+Giallo ocra<br>
+Okergeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-22.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1026 </h3>
+<span class="rb-temp">Leuchtgelb<br>
+Luminous yellow<br>
+Jaune brillant<br>
+Amarillo brillante<br>
+Giallo brillante<br>
+Briljantgeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-23.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1027 </h3>
+<span class="rb-temp">Currygelb<br>
+Curry<br>
+Jaune curry<br>
+Amarillo curry<br>
+Giallo curry<br>
+Kerriegeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-24.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1028 </h3>
+<span class="rb-temp">Melonengelb<br>
+Melon yellow<br>
+Jaune melon<br>
+Amarillo melón<br>
+Giallo melone<br>
+Meloengeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-25.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1032 </h3>
+<span class="rb-temp">Ginstergelb<br>
+Broom yellow<br>
+Jaune genêt<br>
+Amarillo retama<br>
+Giallo scopa<br>
+Bremgeel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-26.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1033 </h3>
+<span class="rb-temp">Dahliengelb<br>
+Dahlia yellow<br>
+Jaune dahlia<br>
+Amarillo dalia<br>
+Giallo dahlien<br>
+Dahliageel<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-27.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1034 </h3>
+<span class="rb-temp">Pastellgelb<br>
+Pastel yellow<br>
+Jaune pastel<br>
+Amarillo pastel<br>
+Giallo pastello<br>
+Pastelgeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-28.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1035 </h3>
+<span class="rb-temp">Perlbeige<br>
+Pearl beige<br>
+Beige nacré<br>
+Beige perlado<br>
+Beige perlato<br>
+Parelmoer grijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-29.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1036 </h3>
+<span class="rb-temp">Perlgold<br>
+Pearl gold<br>
+Or nacré<br>
+Oro perlado<br>
+Oro perlato<br>
+Parelmoer goud<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-30.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 1037 </h3>
+<span class="rb-temp">Sonnengelb<br>
+Sun yellow<br>
+Jaune soleil<br>
+Amarillo sol<br>
+Giallo sole<br>
+Zonnegeel<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-31.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2000 </h3>
+<span class="rb-temp">Gelborange<br>
+Yellow orange<br>
+Orangé jaune<br>
+Amarillo naranja<br>
+Arancio giallastro<br>
+Geeloranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-32.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2001 </h3>
+<span class="rb-temp">Rotorange<br>
+Red orange<br>
+Orangé rouge<br>
+Rojo anaranjado<br>
+Arancio rossastro<br>
+Roodoranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-33.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2002 </h3>
+<span class="rb-temp">Blutorange<br>
+Vermilion<br>
+Orangé sang<br>
+Naranja sanguineo<br>
+Arancio sanguigno<br>
+Vermiljoen<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-34.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2003 </h3>
+<span class="rb-temp">Pastellorange<br>
+Pastel orange<br>
+Orangé pastel<br>
+Naranja pálido<br>
+Arancio pastello<br>
+Pasteloranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-35.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2004 </h3>
+<span class="rb-temp">Reinorange<br>
+Pure orange<br>
+Orangé pur<br>
+Naranja puro<br>
+Arancio puro<br>
+Zuiver oranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-36.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2005 </h3>
+<span class="rb-temp">Leuchtorange<br>
+Luminous orange<br>
+Orangé brillant<br>
+Naranja brillante<br>
+Arancio brillante<br>
+Briljantoranje<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-37.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2007 </h3>
+<span class="rb-temp">Leuchthell orange<br>
+Luminous bright orange<br>
+Orangé clair brillant<br>
+Naranja claro brillante<br>
+Arancio chiaro brillante<br>
+Briljant lichtoranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-38.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2008 </h3>
+<span class="rb-temp">Hellrotorange<br>
+Bright red orange<br>
+Orangé rouge clair<br>
+Rojo claro anaranjado<br>
+Rosso arancio chiaro<br>
+Licht roodoranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-39.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2009 </h3>
+<span class="rb-temp">Verkehrsorange<br>
+Traffic orange<br>
+Orangé signalisation<br>
+Naranja tráfico<br>
+Arancio traffico<br>
+Verkeersoranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-40.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2010 </h3>
+<span class="rb-temp">Signalorange<br>
+Signal orange<br>
+Orangé de sécurité<br>
+Naranja señales<br>
+Arancio segnale<br>
+Signaaloranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-41.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2011 </h3>
+<span class="rb-temp">Tieforange<br>
+Deep orange<br>
+Orangé foncé<br>
+Naranja intenso<br>
+Arancio profondo<br>
+Dieporanje<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-42.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2012 </h3>
+<span class="rb-temp">Lachsorange<br>
+Salmon orange<br>
+Orangé saumon<br>
+Naranja salmón<br>
+Arancio salmone<br>
+Zalmoranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-43.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 2013 </h3>
+<span class="rb-temp">Perlorange<br>
+Pearl orange<br>
+Orangé nacré<br>
+Naranja perlado<br>
+Arancio perlato<br>
+Parelmoer oranje<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-44.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3000 </h3>
+<span class="rb-temp">Feuerrot<br>
+Flame red<br>
+Rouge feu<br>
+Rojo vivo<br>
+Rosso fuoco<br>
+Vuurrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-45.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3001 </h3>
+<span class="rb-temp">Signalrot<br>
+Signal red<br>
+Rouge de sécurité<br>
+Rojo señales<br>
+Rosso segnale<br>
+Signaalrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-46.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3002 </h3>
+<span class="rb-temp">Karminrot<br>
+Carmine red<br>
+Rouge carmin<br>
+Rojo carmin<br>
+Rosso carminio<br>
+Karmijnrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-47.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3003 </h3>
+<span class="rb-temp">Rubinrot<br>
+Ruby red<br>
+Rouge rubis<br>
+Rojo rubí<br>
+Rosso rubino<br>
+Robijnrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-48.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3004 </h3>
+<span class="rb-temp">Purpurrot<br>
+Purple red<br>
+Rouge pourpre<br>
+Rojo púrpura<br>
+Rosso porpora<br>
+Purperrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-49.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3005 </h3>
+<span class="rb-temp">Weinrot<br>
+Wine red<br>
+Rouge vin<br>
+Rojo vino<br>
+Rosso vino<br>
+Wijnrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-50.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3007 </h3>
+<span class="rb-temp">Schwarzrot<br>
+Black red<br>
+Rouge noir<br>
+Rojo negruzco<br>
+Rosso nerastro<br>
+Zwartrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-51.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3009 </h3>
+<span class="rb-temp">Oxidrot<br>
+Oxide red<br>
+Rouge oxyde<br>
+Rojo óxido<br>
+Rosso ossido<br>
+Oxyderood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-52.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3011 </h3>
+<span class="rb-temp">Braunrot<br>
+Brown red<br>
+Rouge brun<br>
+Rojo pardo<br>
+Rosso marrone<br>
+Bruinrood<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-53.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3012 </h3>
+<span class="rb-temp">Beigerot<br>
+Beige red<br>
+Rouge beige<br>
+Rojo beige<br>
+Rosso beige<br>
+Beigerood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-54.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3013 </h3>
+<span class="rb-temp">Tomatenrot<br>
+Tomato red<br>
+Rouge tomate<br>
+Rojo tomate<br>
+Rosso pomodoro<br>
+Tomaatrood<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-55.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3014 </h3>
+<span class="rb-temp">Altrosa<br>
+Antique pink<br>
+Vieux rose<br>
+Rojo viejo<br>
+Rosa antico<br>
+Oudroze<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-56.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3015 </h3>
+<span class="rb-temp">Hellrosa<br>
+Light pink<br>
+Rose clair<br>
+Rosa claro<br>
+Rosa chiaro<br>
+Lichtroze<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-57.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3016 </h3>
+<span class="rb-temp">Korallenrot<br>
+Coral red<br>
+Rouge corail<br>
+Rojo coral<br>
+Rosso corallo<br>
+Koraalrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-58.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3017 </h3>
+<span class="rb-temp">Rosé<br>
+Rose<br>
+Rosé<br>
+Rosa<br>
+Rosato<br>
+Bleekrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-59.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3018 </h3>
+<span class="rb-temp">Erdbeerrot<br>
+Strawberry red<br>
+Rouge fraise<br>
+Rojo fresa<br>
+Rosso fragola<br>
+Aardbeirood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-60.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3020 </h3>
+<span class="rb-temp">Verkehrsrot<br>
+Traffic red<br>
+Rouge signalisation<br>
+Rojo tráfico<br>
+Rosso traffico<br>
+Verkeersrood<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-61.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3022 </h3>
+<span class="rb-temp">Lachsrot<br>
+Salmon pink<br>
+Rouge saumon<br>
+Rojo salmón<br>
+Rosso salmone<br>
+Zalmrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-62.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3024 </h3>
+<span class="rb-temp">Leuchtrot<br>
+Luminous red<br>
+Rouge brillant<br>
+Rojo brillante<br>
+Rosso brillante<br>
+Briljantrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-63.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3026 </h3>
+<span class="rb-temp">Leuchthellrot<br>
+Luminous bright red<br>
+Rouge clair brillant<br>
+Rojo claro brillante<br>
+Rosso chiaro brillante<br>
+Briljant lichtrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-64.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3027 </h3>
+<span class="rb-temp">Himbeerrot<br>
+Raspberry red<br>
+Rouge framboise<br>
+Rojo frambuesa<br>
+Rosso lampone<br>
+Framboosrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-65.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3028 </h3>
+<span class="rb-temp">Reinrot<br>
+Pure red<br>
+Rouge pu<br>
+Rojo puro <br>
+Rosso puro<br>
+Zuiver rood <br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-66.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3031 </h3>
+<span class="rb-temp">Orientrot<br>
+Orient red<br>
+Rouge oriental<br>
+Rojo oriente<br>
+Rosso oriente<br>
+Oriëntrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-67.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3032 </h3>
+<span class="rb-temp">Perlrubinrot<br>
+Pearl ruby red<br>
+Rouge rubis nacré<br>
+Rojo rubí perlado<br>
+Rosso rubino perlato<br>
+Parelmoer donkerrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-68.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 3033 </h3>
+<span class="rb-temp">Perlrosa<br>
+Pearl pink<br>
+Rose nacré<br>
+Rosa perlado<br>
+Rosa perlato<br>
+Parelmoer lichtrood<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-69.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4001 </h3>
+<span class="rb-temp">Rotlila<br>
+Red lilac<br>
+Lilas rouge<br>
+Rojo lila<br>
+Lilla rossastro<br>
+Roodlila<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-70.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4002 </h3>
+<span class="rb-temp">Rotviolett<br>
+Red violet<br>
+Violet rouge<br>
+Rojo violeta<br>
+Viola rossastro<br>
+Roodpaars<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-71.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4003 </h3>
+<span class="rb-temp">Erikaviolett<br>
+Heather violet<br>
+Violet bruyère<br>
+Violeta érica<br>
+Viola erica<br>
+Heidepaars<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-72.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4004 </h3>
+<span class="rb-temp">Bordeauxviolett<br>
+Claret violet<br>
+Violet bordeaux<br>
+Burdeos<br>
+Viola bordeaux<br>
+Bordeuaxpaars<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-73.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4005 </h3>
+<span class="rb-temp">Blaulila<br>
+Blue lilac<br>
+Lilas bleu<br>
+Lila azulado<br>
+Lilla bluastro<br>
+Blauwlila<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-74.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4006 </h3>
+<span class="rb-temp">Verkehrspurpur<br>
+Traffic purple<br>
+Pourpre signalisation<br>
+Púrpurá tráfico<br>
+Porpora traffico<br>
+Verkeerspurper<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-75.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4007 </h3>
+<span class="rb-temp">Purpurviolett<br>
+Purple violet<br>
+Violet pourpre<br>
+Violeta púrpura<br>
+Porpora violetto<br>
+Purperviolet<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-76.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4008 </h3>
+<span class="rb-temp">Signalviolett<br>
+Signal violet<br>
+Violet de sécurité<br>
+Violeta señales<br>
+Violetto segnale<br>
+Signaalviolet<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-77.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4009 </h3>
+<span class="rb-temp">Pastellviolett<br>
+Pastel violet<br>
+Violet pastel<br>
+Violeta pastel<br>
+Violetto pastello<br>
+Pastelviolet<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-78.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4010 </h3>
+<span class="rb-temp">Telemagenta<br>
+Telemagenta<br>
+Telemagenta<br>
+Magenta tele<br>
+Tele Magenta<br>
+Telemagenta<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-79.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4011 </h3>
+<span class="rb-temp">Perlviolett<br>
+Pearl violet<br>
+Violet nacré<br>
+Violeta perlado<br>
+Violetto perlato<br>
+Parelmoer donkerviolet<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-80.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 4012 </h3>
+<span class="rb-temp">Perlbrombeer<br>
+Pearl blackberry<br>
+Mûre nacré<br>
+Morado perlado<br>
+Mora perlato<br>
+Parelmoer lichtviolet<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-81.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5000 </h3>
+<span class="rb-temp">Violettblau<br>
+Violet blue<br>
+Bleu violet<br>
+Azul violeta<br>
+Blu violaceo<br>
+Paarsblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-82.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5001 </h3>
+<span class="rb-temp">Grünblau<br>
+Green blue<br>
+Bleu vert<br>
+Azul verdoso<br>
+Blu verdastro<br>
+Groenblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-83.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5002 </h3>
+<span class="rb-temp">Ultramarinblau<br>
+Ultramarine blue<br>
+Bleu outremer<br>
+Azul ultramar<br>
+Blu oltremare<br>
+Ultramarijn blauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-84.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5003 </h3>
+<span class="rb-temp">Saphirblau<br>
+Sapphire blue<br>
+Bleu saphir<br>
+Azul zafiro<br>
+Blu zaffiro<br>
+Saffierblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-85.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5004 </h3>
+<span class="rb-temp">Schwarzblau<br>
+Black blue<br>
+Bleu noir<br>
+Azul negruzco<br>
+Blu nerastro<br>
+Zwartblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-86.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5005 </h3>
+<span class="rb-temp">Signalblau<br>
+Signal blue<br>
+Bleu de sécurité<br>
+Azul señales<br>
+Blu segnale<br>
+Signaalblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-87.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5007 </h3>
+<span class="rb-temp">Brillantblau<br>
+Brilliant blue<br>
+Bleu brillant<br>
+Azul brillante<br>
+Blu brillante<br>
+Briljantblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-88.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5008 </h3>
+<span class="rb-temp">Graublau<br>
+Grey blue<br>
+Bleu gris<br>
+Azul grisáceo<br>
+Blu grigiastro<br>
+Grijsblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-89.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5009 </h3>
+<span class="rb-temp">Azurblau<br>
+Azure blue<br>
+Bleu azur<br>
+Azul azur<br>
+Blu azzurro<br>
+Azuurblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-90.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5010 </h3>
+<span class="rb-temp">Enzianblau<br>
+Gentian blue<br>
+Bleu gentiane<br>
+Azul genciana<br>
+Blu genziana<br>
+Gentiaanblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-91.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5011 </h3>
+<span class="rb-temp">Stahlblau<br>
+Steel blue<br>
+Bleu acier<br>
+Azul acero<br>
+Blu acciaio<br>
+Staalblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-92.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5012 </h3>
+<span class="rb-temp">Lichtblau<br>
+Light blue<br>
+Bleu clair<br>
+Azul luminoso<br>
+Blu luce<br>
+Lichtblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-93.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5013 </h3>
+<span class="rb-temp">Kobaltblau<br>
+Cobalt blue<br>
+Bleu cobalt<br>
+Azul cobalto<br>
+Blu cobalto<br>
+Kobaltblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-94.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5014 </h3>
+<span class="rb-temp">Taubenblau<br>
+Pigeon blue<br>
+Bleu pigeon<br>
+Azul colombino<br>
+Blu colomba<br>
+Duifblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-95.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5015 </h3>
+<span class="rb-temp">Himmelblau<br>
+Sky blue<br>
+Bleu ciel<br>
+Azul celeste<br>
+Blu cielo<br>
+Hemelsblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-96.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5017 </h3>
+<span class="rb-temp">Verkehrsblau<br>
+Traffic blue<br>
+Bleu signalisation<br>
+Azul tráfico<br>
+Blu traffico<br>
+Verkeersblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-97.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5018 </h3>
+<span class="rb-temp">Türkisblau<br>
+Turquoise blue<br>
+Bleu turquoise<br>
+Azul turquesa<br>
+Blu turchese<br>
+Turkooisblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-98.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5019 </h3>
+<span class="rb-temp">Capriblau<br>
+Capri blue<br>
+Bleu capri<br>
+Azul capri<br>
+Blu Capri<br>
+Capriblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-99.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5020 </h3>
+<span class="rb-temp">Ozeanblau<br>
+Ocean blue<br>
+Bleu océan<br>
+Azul oceano<br>
+Blu oceano<br>
+Oceaanblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-100.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5021 </h3>
+<span class="rb-temp">Wasserblau<br>
+Water blue<br>
+Bleu d’eau<br>
+Azul agua<br>
+Blu acqua<br>
+Waterblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-101.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5022 </h3>
+<span class="rb-temp">Nachtblau<br>
+Night blue<br>
+Bleu nocturne<br>
+Azul noche<br>
+Blu notte<br>
+Nachtblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-102.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5023 </h3>
+<span class="rb-temp">Fernblau<br>
+Distant blue<br>
+Bleu distant<br>
+Azul lejanía<br>
+Blu distante<br>
+Verblauw<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-103.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5024 </h3>
+<span class="rb-temp">Pastellblau<br>
+Pastel blue<br>
+Bleu pastel<br>
+Azul pastel<br>
+Blu pastello<br>
+Pastelblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-104.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5025 </h3>
+<span class="rb-temp">Perlenzian<br>
+Pearl gentian blue<br>
+Gentiane nacré<br>
+Gencian perlado<br>
+Blu genziana perlato<br>
+Parelmoer blauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-105.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 5026 </h3>
+<span class="rb-temp">Perlnachtblau<br>
+Pearl night blue<br>
+Bleu nuit nacré<br>
+Azul noche perlado<br>
+Blu notte perlato<br>
+Parelmoer nachtblauw<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-106.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6000 </h3>
+<span class="rb-temp">Patinagrün<br>
+Patina green<br>
+Vert patine<br>
+Verde patina<br>
+Verde patina<br>
+Patinagroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-107.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6001 </h3>
+<span class="rb-temp">Smaragdgrün<br>
+Emerald green<br>
+Vert émeraude<br>
+Verde esmeralda<br>
+Verde smeraldo<br>
+Smaragdgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-108.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6002 </h3>
+<span class="rb-temp">Laubgrün<br>
+Leaf green<br>
+Vert feuillage<br>
+Verde hoja<br>
+Verde foglia<br>
+Loofgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-109.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6003 </h3>
+<span class="rb-temp">Olivgrün<br>
+Olive green<br>
+Vert olive<br>
+Verde oliva<br>
+Verde oliva<br>
+Olijfgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-110.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6004 </h3>
+<span class="rb-temp">Blaugrün<br>
+Blue green<br>
+Vert bleu<br>
+Verde azulado<br>
+Verde bluastro<br>
+Blauwgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-111.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6005 </h3>
+<span class="rb-temp">Moosgrün<br>
+Moss green<br>
+Vert mousse<br>
+Verde musgo<br>
+Verde muschio<br>
+Mosgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-112.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6006 </h3>
+<span class="rb-temp">Grauoliv<br>
+Grey olive<br>
+Olive gris<br>
+Oliva grisáceo<br>
+Oliva grigiastro<br>
+Grijs olijfgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-113.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6007 </h3>
+<span class="rb-temp">Flaschengrün<br>
+Bottle green<br>
+Vert bouteille<br>
+Verde botella<br>
+Verde bottiglia<br>
+Flessengroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-114.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6008 </h3>
+<span class="rb-temp">Braungrün<br>
+Brown green<br>
+Vert brun<br>
+Verde parduzco<br>
+Verde brunastro<br>
+Bruingroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-115.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6009 </h3>
+<span class="rb-temp">Tannengrün<br>
+Fir green<br>
+Vert sapin<br>
+Verde abeto<br>
+Verde abete<br>
+Dennengroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-116.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6010 </h3>
+<span class="rb-temp">Grasgrün<br>
+Grass green<br>
+Vert herbe<br>
+Verde hierba<br>
+Verde erba<br>
+Grasgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-117.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6011 </h3>
+<span class="rb-temp">Resedagrün<br>
+Reseda green<br>
+Vert réséda<br>
+Verde reseda<br>
+Verde reseda<br>
+Resedagroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-118.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6012 </h3>
+<span class="rb-temp">Schwarzgrün<br>
+Black green<br>
+Vert noir<br>
+Verde negruzco<br>
+Verde nerastro<br>
+Zwartgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-119.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6013 </h3>
+<span class="rb-temp">Schilfgrün<br>
+Reed green<br>
+Vert jonc<br>
+Verde caña<br>
+Verde canna<br>
+Rietgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-120.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6014 </h3>
+<span class="rb-temp">Gelboliv<br>
+Yellow olive<br>
+Olive jaune<br>
+Amarillo oliva<br>
+Oliva giallastro<br>
+Geel olijfgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-121.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6015 </h3>
+<span class="rb-temp">Schwarzoliv<br>
+Black olive<br>
+Olive noir<br>
+Oliva negruzco<br>
+Oliva nerastro<br>
+Zwart olijfgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-122.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6016 </h3>
+<span class="rb-temp">Türkisgrün<br>
+Turquoise green<br>
+Vert turquoise<br>
+Verde turquesa<br>
+Verde turchese<br>
+Turkooisgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-123.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6017 </h3>
+<span class="rb-temp">Maigrün<br>
+May green<br>
+Vert mai<br>
+Verde mayo<br>
+Verde maggio<br>
+Meigroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-124.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6018 </h3>
+<span class="rb-temp">Gelbgrün<br>
+Yellow green<br>
+Vert jaune<br>
+Verde amarillento<br>
+Verde giallastro<br>
+Geelgroen<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-125.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6019 </h3>
+<span class="rb-temp">Weißgrün<br>
+Pastel green<br>
+Vert blanc<br>
+Verde blanquecino<br>
+Verde biancastro<br>
+Witgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-126.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6020 </h3>
+<span class="rb-temp">Chromoxidgrün<br>
+Chrome green<br>
+Vert oxyde chromique<br>
+Verde cromo<br>
+Verde cromo<br>
+Chroomoxyde groen<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-127.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6021 </h3>
+<span class="rb-temp">Blassgrün<br>
+Pale green<br>
+Vert pâle<br>
+Verde pálido<br>
+Verde pallido<br>
+Bleekgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-128.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6022 </h3>
+<span class="rb-temp">Braunoliv<br>
+Olive drab<br>
+Olive brun<br>
+Oliva parduzco<br>
+Oliva brunastro<br>
+Bruin olijfgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-129.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6024 </h3>
+<span class="rb-temp">Verkehrsgrün<br>
+Traffic green<br>
+Vert signalisation<br>
+Verde tráfico<br>
+Verde traffico<br>
+Verkeersgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-130.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6025 </h3>
+<span class="rb-temp">Farngrün<br>
+Fern green<br>
+Vert fougère<br>
+Verde helecho<br>
+Verde felce<br>
+Varengroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-131.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6026 </h3>
+<span class="rb-temp">Opalgrün<br>
+Opal green<br>
+Vert opale<br>
+Verde opalo<br>
+Verde opale<br>
+Opaalgroen<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-132.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6027 </h3>
+<span class="rb-temp">Lichtgrün<br>
+Light green<br>
+Vert clair<br>
+Verde luminoso<br>
+Verde chiaro<br>
+Lichtgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-133.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6028 </h3>
+<span class="rb-temp">Kieferngrün<br>
+Pine green<br>
+Vert pin<br>
+Verde pino<br>
+Verde pino<br>
+Pijnboomgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-134.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6029 </h3>
+<span class="rb-temp">Minzgrün<br>
+Mint green<br>
+Vert menthe<br>
+Verde menta<br>
+Verde menta<br>
+Mintgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-135.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6032 </h3>
+<span class="rb-temp">Signalgrün<br>
+Signal green<br>
+Vert de sécurité<br>
+Verde señales<br>
+Verde segnale<br>
+Signaalgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-136.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6033 </h3>
+<span class="rb-temp">Minttürkis<br>
+Mint turquoise<br>
+Turquoise menthe<br>
+Turquesa menta<br>
+Turchese menta<br>
+Mintturquoise<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-137.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6034 </h3>
+<span class="rb-temp">Pastelltürkis<br>
+Pastel turquoise<br>
+Turquoise pastel<br>
+Turquesa pastel<br>
+Turchese pastello<br>
+Pastelturquoise<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-138.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6035 </h3>
+<span class="rb-temp">Perlgrün<br>
+Pearl green<br>
+Vert nacré<br>
+Verde perlado<br>
+Verde perlato<br>
+Parelmoer donkergroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-139.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6036 </h3>
+<span class="rb-temp">Perlopalgrün<br>
+Pearl opal green<br>
+Vert opal nacré<br>
+Verde ópalo perlado<br>
+Verde opalo perlato<br>
+Parelmoer lichtgroen<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-140.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6037 </h3>
+<span class="rb-temp">Reingrün<br>
+Pure green<br>
+Vert pur<br>
+Verde puro <br>
+Verde puro<br>
+Zuiver groen <br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-141.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 6038 </h3>
+<span class="rb-temp">Leuchtgrün<br>
+Luminous green<br>
+Vert brillant<br>
+Verde brillante <br>
+Verde brillante<br>
+Briljantgroen <br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-142.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7000 </h3>
+<span class="rb-temp">Fehgrau<br>
+Squirrel grey<br>
+Gris petit-gris<br>
+Gris ardilla<br>
+Grigio vaio<br>
+Pelsgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-143.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7001 </h3>
+<span class="rb-temp">Silbergrau<br>
+Silver grey<br>
+Gris argent<br>
+Gris plata<br>
+Grigio argento<br>
+Zilvergrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-144.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7002 </h3>
+<span class="rb-temp">Olivgrau<br>
+Olive grey<br>
+Gris olive<br>
+Gris oliva<br>
+Grigio olivastro<br>
+Olijfgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-145.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7003 </h3>
+<span class="rb-temp">Moosgrau<br>
+Moss grey<br>
+Gris mousse<br>
+Gris musgo<br>
+Grigio muschio<br>
+Mosgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-146.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7004 </h3>
+<span class="rb-temp">Signalgrau<br>
+Signal grey<br>
+Gris de sécurité<br>
+Gris señales<br>
+Grigio segnale<br>
+Signaalgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-147.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7005 </h3>
+<span class="rb-temp">Mausgrau<br>
+Mouse grey<br>
+Gris souris<br>
+Gris ratón<br>
+Grigio topo<br>
+Muisgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-148.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7006 </h3>
+<span class="rb-temp">Beigegrau<br>
+Beige grey<br>
+Gris beige<br>
+Gris beige<br>
+Grigio beige<br>
+Beigegrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-149.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7008 </h3>
+<span class="rb-temp">Khakigrau<br>
+Khaki grey<br>
+Gris kaki<br>
+Gris caqui<br>
+Grigio kaki<br>
+Kakigrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-150.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7009 </h3>
+<span class="rb-temp">Grüngrau<br>
+Green grey<br>
+Gris vert<br>
+Gris verdoso<br>
+Grigio verdastro<br>
+Groengrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-151.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7010 </h3>
+<span class="rb-temp">Zeltgrau<br>
+Tarpaulin grey<br>
+Gris tente<br>
+Gris lona<br>
+Grigio tenda<br>
+Zeildoekgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-152.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7011 </h3>
+<span class="rb-temp">Eisengrau<br>
+Iron grey<br>
+Gris fer<br>
+Gris hierro<br>
+Grigio ferro<br>
+IJzergrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-153.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7012 </h3>
+<span class="rb-temp">Basaltgrau<br>
+Basalt grey<br>
+Gris basalte<br>
+Gris basalto<br>
+Grigio basalto<br>
+Bazaltgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-154.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7013 </h3>
+<span class="rb-temp">Braungrau<br>
+Brown grey<br>
+Gris brun<br>
+Gris parduzco<br>
+Grigio brunastro<br>
+Bruingrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-155.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7015 </h3>
+<span class="rb-temp">Schiefergrau<br>
+Slate grey<br>
+Gris ardoise<br>
+Gris pizarra<br>
+Grigio ardesia<br>
+Leigrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-156.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7016 </h3>
+<span class="rb-temp">Anthrazitgrau<br>
+Anthracite grey<br>
+Gris anthracite<br>
+Gris antracita<br>
+Grigio antracite<br>
+Antracietgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-157.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7021 </h3>
+<span class="rb-temp">Schwarzgrau<br>
+Black grey<br>
+Gris noir<br>
+Gris negruzco<br>
+Grigio nerastro<br>
+Zwartgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-158.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7022 </h3>
+<span class="rb-temp">Umbragrau<br>
+Umbra grey<br>
+Gris terre d’ombre<br>
+Gris sombra<br>
+Grigio ombra<br>
+Ombergrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-159.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7023 </h3>
+<span class="rb-temp">Betongrau<br>
+Concrete grey<br>
+Gris béton<br>
+Gris hormigón<br>
+Grigio calcestruzzo<br>
+Betongrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-160.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7024 </h3>
+<span class="rb-temp">Graphitgrau<br>
+Graphite grey<br>
+Gris graphite<br>
+Gris grafita<br>
+Grigio grafite<br>
+Grafietgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-161.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7026 </h3>
+<span class="rb-temp">Granitgrau<br>
+Granite grey<br>
+Gris granit<br>
+Gris granito<br>
+Grigio granito<br>
+Granietgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-162.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7030 </h3>
+<span class="rb-temp">Steingrau<br>
+Stone grey<br>
+Gris pierre<br>
+Gris piedra<br>
+Grigio pietra<br>
+Steengrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-163.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7031 </h3>
+<span class="rb-temp">Blaugrau<br>
+Blue grey<br>
+Gris bleu<br>
+Gris azulado<br>
+Grigio bluastro<br>
+Blauwgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-164.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7032 </h3>
+<span class="rb-temp">Kieselgrau<br>
+Pebble grey<br>
+Gris silex<br>
+Gris guijarro<br>
+Grigio ghiaia<br>
+Kiezelgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-165.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7033 </h3>
+<span class="rb-temp">Zementgrau<br>
+Cement grey<br>
+Gris ciment<br>
+Gris cemento<br>
+Grigio cemento<br>
+Cementgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-166.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7034 </h3>
+<span class="rb-temp">Gelbgrau<br>
+Yellow grey<br>
+Gris jaune<br>
+Gris amarillento<br>
+Grigio giallastro<br>
+Geelgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-167.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7035 </h3>
+<span class="rb-temp">Lichtgrau<br>
+Light grey<br>
+Gris clair<br>
+Gris luminoso<br>
+Grigio luce<br>
+Lichtgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-168.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7036 </h3>
+<span class="rb-temp">Platingrau<br>
+Platinum grey<br>
+Gris platine<br>
+Gris platino<br>
+Grigio platino<br>
+Platinagrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-169.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7037 </h3>
+<span class="rb-temp">Staubgrau<br>
+Dusty grey<br>
+Gris poussière<br>
+Gris polvo<br>
+Grigio polvere<br>
+Stofgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-170.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7038 </h3>
+<span class="rb-temp">Achatgrau<br>
+Agate grey<br>
+Gris agate<br>
+Gris ágata<br>
+Grigio agata<br>
+Agaatgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-171.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7039 </h3>
+<span class="rb-temp">Quarzgrau<br>
+Quartz grey<br>
+Gris quartz<br>
+Gris cuarzo<br>
+Grigio quarzo<br>
+Kwartsgrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-172.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7040 </h3>
+<span class="rb-temp">Fenstergrau<br>
+Window grey<br>
+Gris fenêtre<br>
+Gris ventana<br>
+Grigio finestra<br>
+Venstergrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-173.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7042 </h3>
+<span class="rb-temp">Verkehrsgrau A<br>
+Traffic grey A<br>
+Gris signalisation A<br>
+Gris tráfico A<br>
+Grigio traffico A<br>
+Verkeersgrijs A<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-174.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7043 </h3>
+<span class="rb-temp">Verkehrsgrau B<br>
+Traffic grey B<br>
+Gris signalisation B<br>
+Gris tráfico B<br>
+Grigio traffico B<br>
+Verkeersgrijs B<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-175.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7044 </h3>
+<span class="rb-temp">Seidengrau<br>
+Silk grey<br>
+Gris soie<br>
+Gris seda<br>
+Grigio seta<br>
+Zijdegrijs<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-176.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7045 </h3>
+<span class="rb-temp">Telegrau 1<br>
+Telegrey 1<br>
+Telegris 1<br>
+Gris tele 1<br>
+Grigio tele 1<br>
+Telegrijs 1<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-177.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7046 </h3>
+<span class="rb-temp">Telegrau 2<br>
+Telegrey 2<br>
+Telegris 2<br>
+Gris tele 2<br>
+Grigio tele 2<br>
+Telegrijs 2<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-178.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7047 </h3>
+<span class="rb-temp">Telegrau 4<br>
+Telegrey 4<br>
+Telegris 4<br>
+Gris tele 4<br>
+Grigio tele 4<br>
+Telegrijs 4<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-179.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 7048 </h3>
+<span class="rb-temp">Perlmausgrau<br>
+Pearl mouse grey<br>
+Gris souris nacré<br>
+Gris musgo perlado<br>
+Grigio topo perlato<br>
+Parelmoer muisgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-180.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8000 </h3>
+<span class="rb-temp">Grünbraun<br>
+Green brown<br>
+Brun vert<br>
+Pardo verdoso<br>
+Marrone verdastro<br>
+Groenbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-181.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8001 </h3>
+<span class="rb-temp">Ockerbraun<br>
+Ochre brown<br>
+Brun terre de Sienne<br>
+Pardo ocre<br>
+Marrone ocra<br>
+Okerbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-182.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8002 </h3>
+<span class="rb-temp">Signalbraun<br>
+Signal brown<br>
+Brun de sécurité<br>
+Marrón señales<br>
+Marrone segnale<br>
+Signaalbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-183.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8003 </h3>
+<span class="rb-temp">Lehmbraun<br>
+Clay brown<br>
+Brun argile<br>
+Pardo arcilla<br>
+Marrone fango<br>
+Leembruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-184.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8004 </h3>
+<span class="rb-temp">Kupferbraun<br>
+Copper brown<br>
+Brun cuivré<br>
+Pardo cobre<br>
+Marrone rame<br>
+Koperbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-185.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8007 </h3>
+<span class="rb-temp">Rehbraun<br>
+Fawn brown<br>
+Brun fauve<br>
+Pardo corzo<br>
+Marrone capriolo<br>
+Reebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-186.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8008 </h3>
+<span class="rb-temp">Olivbraun<br>
+Olive brown<br>
+Brun olive<br>
+Pardo oliva<br>
+Marrone oliva<br>
+Olijfbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-187.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8011 </h3>
+<span class="rb-temp">Nussbraun<br>
+Nut brown<br>
+Brun noisette<br>
+Pardo nuez<br>
+Marrone noce<br>
+Notenbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-188.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8012 </h3>
+<span class="rb-temp">Rotbraun<br>
+Red brown<br>
+Brun rouge<br>
+Pardo rojo<br>
+Marrone rossiccio<br>
+Roodbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-189.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8014 </h3>
+<span class="rb-temp">Sepiabraun<br>
+Sepia brown<br>
+Brun sépia<br>
+Sepia<br>
+Marrone seppia<br>
+Sepiabruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-190.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8015 </h3>
+<span class="rb-temp">Kastanienbraun<br>
+Chestnut brown<br>
+Marron<br>
+Castaño<br>
+Marrone castagna<br>
+Kastanjebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-191.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8016 </h3>
+<span class="rb-temp">Mahagonibraun<br>
+Mahogany brown<br>
+Brun acajou<br>
+Caoba<br>
+Marrone mogano<br>
+Mahoniebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-192.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8017 </h3>
+<span class="rb-temp">Schokoladenbraun<br>
+Chocolate brown<br>
+Brun chocolat<br>
+Chocolate<br>
+Marrone cioccolata<br>
+Chocoladebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-193.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8019 </h3>
+<span class="rb-temp">Graubraun<br>
+Grey brown<br>
+Brun gris<br>
+Pardo grisáceo<br>
+Marrone grigiastro<br>
+Grijsbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-194.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8022 </h3>
+<span class="rb-temp">Schwarzbraun<br>
+Black brown<br>
+Brun noir<br>
+Pardo negruzco<br>
+Marrone nerastro<br>
+Zwartbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-195.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8023 </h3>
+<span class="rb-temp">Orangebraun<br>
+Orange brown<br>
+Brun orangé<br>
+Pardo anaranjado<br>
+Marrone arancio<br>
+Oranjebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-196.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8024 </h3>
+<span class="rb-temp">Beigebraun<br>
+Beige brown<br>
+Brun beige<br>
+Pardo beige<br>
+Marrone beige<br>
+Beigebruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-197.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8025 </h3>
+<span class="rb-temp">Blassbraun<br>
+Pale brown<br>
+Brun pâle<br>
+Pardo pálido<br>
+Marrone pallido<br>
+Bleekbruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-198.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8028 </h3>
+<span class="rb-temp">Terrabraun<br>
+Terra brown<br>
+Brun terre<br>
+Marrón tierra<br>
+Marrone terra<br>
+Terrabruin<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-199.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 8029 </h3>
+<span class="rb-temp">Perlkupfer<br>
+Pearl copper<br>
+Cuivre nacré<br>
+Cobre perlado<br>
+Rame perlato<br>
+Parelmoer koper<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-200.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9001 </h3>
+<span class="rb-temp">Cremeweiß<br>
+Cream<br>
+Blanc crème<br>
+Blanco crema<br>
+Bianco crema<br>
+Crèmewit<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-201.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9002 </h3>
+<span class="rb-temp">Grauweiß<br>
+Grey white<br>
+Blanc gris<br>
+Blanco grisáceo<br>
+Bianco grigiastro<br>
+Grijswit<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-202.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9003 </h3>
+<span class="rb-temp">Signalweiß<br>
+Signal white<br>
+Blanc de sécurité<br>
+Blanco señales<br>
+Bianco segnale<br>
+Signaalwit<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-203.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9004 </h3>
+<span class="rb-temp">Signalschwarz<br>
+Signal black<br>
+Noir de sécurité<br>
+Negro señales<br>
+Nero segnale<br>
+Signaalzwart<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-204.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9005 </h3>
+<span class="rb-temp">Tiefschwarz<br>
+Jet black<br>
+Noir foncé<br>
+Negro intenso<br>
+Nero intenso<br>
+Gitzwart<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-205.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9006 </h3>
+<span class="rb-temp">Weißaluminium<br>
+White aluminium<br>
+Aluminium blanc<br>
+Aluminio blanco<br>
+Alluminio brillante<br>
+Blank aluminiumkleurig<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-206.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9007 </h3>
+<span class="rb-temp">Graualuminium<br>
+Grey aluminium<br>
+Aluminium gris<br>
+Aluminio gris<br>
+Alluminio grigiastro<br>
+Grijs aluminiumkleurig<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-207.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9010 </h3>
+<span class="rb-temp">Reinweiß<br>
+Pure white<br>
+Blanc pur<br>
+Blanco puro<br>
+Bianco puro<br>
+Zuiver wit<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-208.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9011 </h3>
+<span class="rb-temp">Graphitschwarz<br>
+Graphite black<br>
+Noir graphite<br>
+Negro grafito<br>
+Nero grafite<br>
+Grafietzwart<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-209.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9016 </h3>
+<span class="rb-temp">Verkehrsweiß<br>
+Traffic white<br>
+Blanc signalisation<br>
+Blanco tráfico<br>
+Bianco traffico<br>
+Verkeerswit<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-210.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9017 </h3>
+<span class="rb-temp">Verkehrsschwarz<br>
+Traffic black<br>
+Noir signalisation<br>
+Negro tráfico<br>
+Nero traffico<br>
+Verkeerszwart<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-211.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9018 </h3>
+<span class="rb-temp">Papyrusweiß<br>
+Papyrus white<br>
+Blanc papyrus<br>
+Blanco papiro<br>
+Bianco papiro<br>
+Papyruswit<br>
+</span></li>
+<li class="dark" style="background: url(&quot;imgral/classic-212.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9022 </h3>
+<span class="rb-temp">Perlhellgrau<br>
+Pearl light grey<br>
+Gris clair nacré<br>
+Gris claro perlado<br>
+Grigio chiaro perlato<br>
+Parelmoer lichtgrijs<br>
+</span></li>
+<li style="background: url(&quot;imgral/classic-213.png&quot;) 0% 0% / cover no-repeat; height: 377px;">
+<h3> RAL 9023 </h3>
+<span class="rb-temp">Perldunkelgrau<br>
+Pearl dark grey<br>
+Gris fonçé nacré<br>
+Gris oscuro perlado<br>
+Grigio scuro perlato<br>
+Parelmoer donkergrijs<br>
+</span></li>
+</ul>              
+</div>
+
+
+
+</div>
+<script>
+fetch('RAL.json')
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(objRAL) {
+    console.log(objRAL);
+		var ulli = document.querySelectorAll("li");
+		ulli.forEach(function(li,nr){
+			var nrr = nr+1;
+			var ral = li.querySelector('H3').textContent.trim();
+			var url =  li.style.background;
+			var m = url.match(/\(\"imgral\/(.*?)\"\)/);
+			
+			console.log(li,nrr,ral, url,m)
+			if (!objRAL[ral]) objRAL[ral]={};
+			objRAL[ral].img=m[1];
+		})
+		console.log(objRAL)
+	console.log(JSON.stringify(objRAL));
+})
+
+</script>
+
+
+</body>
+</html>
