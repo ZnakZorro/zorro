@@ -1,0 +1,379 @@
+
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no,initial-scale=1, maximum-scale=1">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"> 
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<meta name="apple-mobile-web-app-title" content="mobiAPP"> 
+	<meta name="mobile-web-app-capable" content="yes"> 
+	<link rel="icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="shortcut icon" type="image/png" size="256x256" href="colors.png"> 
+	<link rel="apple-touch-icon" href="colors.png"> 	
+	<meta name="theme-color" content="#600">		
+	<link rel="manifest" href="ral.webmanifest"> 
+	<title>RAL Grid 2</title>
+<style>
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+body {font-size:12pt; background:#222; color:#eee; font-family:verdana;}
+a {text-decoration:none; color:white;}
+.grid {
+	display: grid;
+	grid-template-columns: repeat(8, calc((100% - 5.25em) / 8));
+	grid-template-rows: repeat(4, auto);
+	gap: 0.75em;
+	padding: 0.25em;
+}
+
+.subgrid {
+    grid-row: span 4;
+    display: grid;
+    grid-template-rows: subgrid;
+    /*border: 1px solid #000;*/
+    /*box-shadow: 1px 1px 0 0 #000;*/
+    padding: 0.25em 0.25em 1em;
+	cursor:pointer;
+}
+
+h3 {
+  /*background-color: deepskyblue;
+  color: white;*/
+  padding: 0.25em;
+  font-size:1.1em;
+}
+
+/*.emoji {
+  grid-row: 2;
+  text-align: center;
+  font-size: 5em;
+}*/
+
+p {
+  padding: 0 1em;
+}
+
+span:last-of-type {
+  /*justify-self: end;*/
+  /*background-color: deepskyblue;*/
+  /*color: white;*/
+  display: inline-block;
+}
+
+button,input,select {
+    background: #444;
+    color: white;
+	font-size: 1.2em;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+    color: #fff;
+    border-color: black;
+    border-radius: 0.5em;
+    box-shadow: 2px 2px 2px #444;	
+}
+select {    
+    min-width: 7em;
+    border: none;
+}
+
+button,input {
+}
+
+button {float: right;}
+button:focus {outline:0;}
+input:focus {outline:0;}
+li b{display:none;}
+
+textarea {
+    width: 95%;
+    min-height: 30em;
+    font-family: monospace;
+    font-size: 9pt;
+}
+
+@media screen and (max-width: 700px){
+	body {margin: 0; font-size:0.86em;word-break: break-all;}
+	.emoji {font-size: 3em;}
+	.grid {gap: 0.5em;padding: 0.2em;}
+	h3 {font-size: 1.0em;}
+	p {
+		padding: 0 0.3rem;
+		/*white-space: normal;*/
+		/*word-break: break-all;*/
+		padding: 0 0.2rem;
+	}
+	
+}
+
+@media screen and (max-width: 1440px){.grid {grid-template-columns: repeat(6, calc((100% - 4.0em) / 6));}}
+@media screen and (max-width: 1200px){.grid {grid-template-columns: repeat(4, calc((100% - 2.5em) / 4));}}
+@media screen and (max-width: 900px) {.grid {grid-template-columns: repeat(4, calc((100% - 1.5em) / 4));}}
+@media screen and (max-width: 680px) {.grid {grid-template-columns: repeat(3, calc((100% - 1.0em) / 3));}}
+@media screen and (max-width: 480px) {.grid {grid-template-columns: repeat(2, calc((100% - 0.5em) / 2));}}
+@media screen and (max-width: 300px) {.grid {grid-template-columns: repeat(1, calc((100% - 0.0em) / 1));}}
+
+</style>
+
+<script src="./lib/chroma.min.js"></script>
+<script>
+	//dom ready
+    document.addEventListener('DOMContentLoaded', function() {
+		fetch('RAL.json')
+		.then(function(response) {
+			return response.json();
+		})
+		.then(function(objRAL) {
+			WyswietlTabeleRAL(objRAL);
+		});
+				
+		
+	}); //dom ready
+
+
+//qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq	
+function WyswietlTabeleRAL(objRAL){
+	console.log(objRAL);
+	console.time("debuga");
+	var start = window.performance.now();
+
+	var table = document.querySelector("#tralcolors");
+	var HTML = '';
+	Object.keys(objRAL).forEach(function(key){
+		var obj = objRAL[key];
+		if (obj.order){
+			//console.log(obj);
+			var hex = obj.HEX;
+			var rgb = '('+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+')';
+			var ctx = '#fff';
+			if (obj.gray>150) ctx='#000';
+			
+			var tag='';
+			if (obj.tag) tag =' <b>'+obj.tag+'</b> ';
+			
+			
+				HTML += '<li data-ral="'+obj.RAL+'" data-nr="'+obj.NR+'" data-hex="'+hex+'" class="subgrid" style="color: '+ctx+'; background: url(&quot;imgral/'+obj.img+'&quot;) 0% 0% / cover no-repeat;">';
+				HTML += '<h3>'+obj.RAL+'</h3>';
+				HTML += '<span class="rb-temp">'+rgb+'<br /><i>'+hex+'</i><br /><i>'+tag+obj.pl+' <br />'+obj.en+'</i></span>';
+				//HTML += '<tr data-gray="'+obj.gray+'" data-rgb="'+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+'" data-hsl="'+obj.HSL[0]+','+obj.HSL[1]+','+obj.HSL[2]+'">';
+				//HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+obj.RAL+'</td>';
+				//HTML += '<td style="color: '+ctx+'; background-color: '+hex+';"><small>('+obj.RGB[0]+','+obj.RGB[1]+','+obj.RGB[2]+')</small></td>';
+				//HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+hex+'</td>';
+				//HTML += '<td style="color: '+ctx+'; background-color: '+hex+';">'+obj.pl+'<span class="en"><br />'+obj.en+'</span></td>';
+				//HTML += '<td ><img src="./imgral/'+obj.img+'" alt="'+obj.RAL+'" class="im" /></td>';
+			HTML += '</li>\n';
+		}
+	});
+	table.innerHTML = HTML;
+	console.timeEnd("debuga");
+	var end = window.performance.now();
+	var time = end - start;
+	console.log(time)
+	document.getElementById('info').textContent = Math.round(time)+'ms';
+			[].forEach.call(document.querySelectorAll('li'), function(el) {
+				 el.addEventListener('click', function() {
+					 zdarzenie(this); 
+				 }) 
+			})	
+}
+
+var zdarzenie = function(ten){
+	var tlo = ten.style.background;
+	console.log(tlo);
+	//console.log(ten.dataset);
+	document.body.style.background=tlo;
+}
+
+function zmienKolory() {
+	var podzial = {
+		"Wszystkie":"",
+		"Żółte":"10",
+		"Pomarańczowe":"20",
+		"Czerwone":"30",
+		"Purpurowe":"40",
+		"Niebieskie":"50",
+		"Zielone":"60",
+		"Szare":"70",
+		"Brązowe":"80",
+		"Białe":"90",
+		"Inne":"99000"
+	} 
+	var selectKolor = document.getElementById("selectKolor");
+	var wybrany = selectKolor.options[selectKolor.selectedIndex].value;
+	var szukany =' '+podzial[wybrany];
+	console.log(wybrany,podzial[wybrany]);
+		var lili = document.querySelectorAll("li");
+			lili.forEach(function(li,nrr){
+				//if (selectKolor=='Wszystkie')
+				var nr = li.dataset.ral;
+				var jest = nr.indexOf(szukany) >-1;
+				//console.log(nr,szukany,jest,nr.indexOf(szukany))
+				if (jest) li.style.display = "table-row"; else li.style.display = "none";
+
+				//var tds = trr.querySelectorAll("td");
+				//if (tds[0] && (tds[0]).textContent)
+				{
+					//console.log(tds[0]);
+					//var jest = tds[0].textContent.indexOf(szukany) ===0;
+					//if (jest) trr.style.display = "table-row"; else trr.style.display = "none";
+					//console.log(szukany,tds[0].textContent,jest);
+				}
+			})
+}
+
+//ppppppppppppppppppppppppppppppppppppppppppppppppppppppppppp
+function sortNumber(a, b) {  return a[0] - b[0];}
+
+function szukajPodobne(hex){
+	if (hex.length<5) return;
+	if (hex.length===6) return;
+	if (hex.length===7) return;
+	document.body.style.background=hex;
+	//console.log(hex.length)
+	hex = hex.trim();
+	//console.log(hex.length,hex,hexToRgb(hex))
+	//chroma.distance('#fff', '#ff0', 'rgb');
+
+	var ulli = document.querySelectorAll('ul#tralcolors li');
+	var arr=[];
+	ulli.forEach(function(li){
+		var hexColor = li.dataset.hex;
+		//var dist = parseInt(chroma.distance(hexColor, hex, 'rgb'));
+		var dist = parseInt(chroma.deltaE(hexColor, hex));
+		arr.push([dist,li]);
+		console.log(dist);
+		//if (dist>50) li.style.display="none"; else li.style.display="initial";
+		li.style.display="none"; 
+	});
+	arr=arr.sort(sortNumber);
+	//console.log(arr);
+	for(var i=0; i<4; i++){
+		arr[i][1].style.display="initial";			
+			//beforebegin afterbegin beforeend afterend
+			//document.getElementById('tralcolors').insertAdjacentHTML('afterbegin', arr[i][1].innerHTML);
+	}
+}
+
+function searchFunction() {
+  var input, filter, table, ulli, span, i, txtValue, ile, h3, hex;
+  input = document.getElementById("myInput");
+  filter = ' '+input.value.toUpperCase();
+  table = document.getElementById("tralcolors");
+  ulli = table.getElementsByTagName("li");
+  ile=0;
+  if (filter.indexOf("#")>0) return szukajPodobne(filter);
+  
+  for (i = 0; i < ulli.length; i++) {
+    hex  = ulli[i].getElementsByTagName("i")[0];
+    span = ulli[i].getElementsByTagName("i")[1];
+    h3   = ulli[i].getElementsByTagName("h3")[0];
+    if (span || h3 || hex) {
+      txtValue = ' '+(span.textContent || span.innerText) +' '+(hex.textContent || hex.innerText) + ' '+(h3.textContent || h3.innerText);
+	  //console.log(txtValue.toUpperCase(),filter) 
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        ulli[i].style.display = "";
+		ile++
+      } else {
+        ulli[i].style.display = "none";
+      }
+    }
+  }
+  document.getElementById("ile").textContent=ile;
+}
+
+function hexToRgb(hex) {
+	// Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+	var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+	hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+		return r + r + g + g + b + b;
+	});
+	var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+	return result ? {
+		r: parseInt(result[1], 16),
+		g: parseInt(result[2], 16),
+		b: parseInt(result[3], 16)
+	} : null;
+}
+
+function generateCSS(){
+	var table = document.getElementById("tralcolors");
+	var ulli = table.getElementsByTagName("li");
+	var CSS ='';
+	for (i = 0; i < ulli.length; i++) {
+		console.log((ulli[i].style.display=='none'),(ulli[i].style.display))
+		if (ulli[i].style.display == 'none') continue;
+		var hex  = ulli[i].getElementsByTagName("i")[0].textContent;
+		var name   = ulli[i].getElementsByTagName("h3")[0].textContent.replace(' ','_');
+			var rgb = hexToRgb(hex);
+			var luma = Math.round(rgb.r * 0.2126 + rgb.g * 0.7152 + rgb.b * 0.0722);
+			//console.log(name,hex,luma);
+			var ctx = '#fff';
+			if (luma>150) ctx='#000';
+		CSS += '.'+name+' {background:'+hex+'; color:'+ctx+';}\n';
+	}
+	//console.log(CSS);
+	document.getElementById("footer").innerHTML='<textarea>'+CSS+'</textarea>';
+}
+
+</script>
+
+</head>
+
+
+<body>
+<div class="navi" style="padding:0.5em 0.2em;">
+	<select id="selectKolor" onchange="zmienKolory();">
+		<option>Wszystkie</option>
+		<option>Żółte</option>
+		<option>Pomarańczowe</option>
+		<option>Czerwone</option>
+		<option>Purpurowe</option>
+		<option>Niebieskie</option>
+		<option>Zielone</option>
+		<option>Szare</option>
+		<option>Brązowe</option>
+		<option>Białe</option>
+		<option>Inne</option>
+	</select>
+	
+	<a href="index-flat.html" style="float:right; margin:0.5em;">FLAT</a>
+</div>
+
+
+<div><input type="text" id="myInput" onkeyup="searchFunction()" placeholder="Szukaj" title="Wpisz nazwę"> #<span id="ile"></span></div>
+
+
+<ul class="grid" id="tralcolors">
+	<!--li class="subgrid" style="background: url(&quot;imgral/classic-1.png&quot;) 0% 0% / cover no-repeat;">
+		<h3> RAL 1000 </h3>
+		<span class="rb-temp">Grünbeige<br>
+		Green beige<br>
+		Beige vert<br>
+		Beige verdoso<br>
+		Beige verdastro<br>
+		Groenbeige<br>
+		</span>
+	</li-->
+
+
+</ul>
+
+
+<div id="info"></div>
+<div>
+	<button onclick="window.close()">Close</button>
+	<button onclick="generateCSS()">CSS</button>
+</div>
+<br /><br />
+<div id="footer">
+<br /><br />
+&nbsp; <a target="_blank" href="https://new.tikkurila.pl/powloki_przemyslowe/kolory/kolekcje_kolorow_ral/ral_classic">RAL Classic</a><br /><br />
+&nbsp; <a target="_blank" href="https://rgb.to/hex/336699">Hex->RAL</a><br /><br />
+</div>
+
+</body>
+</html>
