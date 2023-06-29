@@ -1,24 +1,24 @@
 {
-	"name": "NavBar",
-	"short_name": "NavBar",
-	"description": "NavBar",
-	"start_url": "index.html",
+	"name": "NAV",
+	"short_name": "NAV",
+	"description": "NAV",
+	"start_url": "/zorro/nav/index.html",
 	"display": "standalone",
 
-	"theme_color": "#963",
-	"background_color": "#963",
+	"theme_color": "#f63",
+	"background_color": "#f63",
 	"icons": [
 		{
-			"src": "./nav.jpg",
+			"src": "./nav.webp",
 			"sizes": "512x512",
-			"type": "image/jpg"
+			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./nav.jpg",
+			"src": "./nav.webp",
 			"sizes": "512x512",
-			"type": "image/jpg"
+			"type": "image/webp"
 		}
 	]
 }
