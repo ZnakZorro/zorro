@@ -117,9 +117,11 @@
     <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
     <div class="kontener">
       <p id="counter"></p>
-      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Strart </button>
+      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Start </button>
     </div>
-    
+    <div class="kontener">
+      <input type="range" id="rangetime" value=0 min=0 max=8 />
+    </div>    
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
@@ -135,7 +137,8 @@ let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
 let counterp = document.getElementById("counter");
 let intime   = document.getElementById("intime");
-let sektime   = document.getElementById("sektime");  
+let sektime   = document.getElementById("sektime");
+let rangetime = document.getElementById("rangetime");  
 let y        = document.getElementById("minutaAudio");
 let startAudio     = document.getElementById("startAudio");
 let stopAudio      = document.getElementById("stopAudio");
@@ -195,17 +198,22 @@ const repeatMinuta=(ten,itime=60000)=> {
   if (interV) {
     stopInterval();
   }
+  counter = 0;
   startAudio.play(); 
   info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
-  interV = setInterval(()=>{   
-    counter++;
-    if (counter === maxCount) stopAudio.play();
-    else                      intervalAudio.play();
-    if (counter < maxCount) {       
-      info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
-    } else {      
-       stopInterval();
-    }
+  rangetime.value=0;
+  rangetime.max=maxCount;
+  
+  interV = setInterval(()=>{  
+      rangetime.value=counter;
+      counter++;
+      if (counter === maxCount) stopAudio.play();
+      else                      intervalAudio.play();
+      if (counter < maxCount) {       
+        info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
+      } else {      
+         stopInterval();
+      }
   },itime); 
   if (ten) {setActive(ten);}  
 } 
