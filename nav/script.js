@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded",function(){
         navigator.clipboard.writeText(txtx.value);
       localStorage.setItem("pastetxtx", txtx.value);
     }
-    const clearTXT=()=>{
+    const ClearTXT=()=>{
         document.getElementById("txtx").value="";
         document.getElementById("txtx").style.height="8em";
     }
