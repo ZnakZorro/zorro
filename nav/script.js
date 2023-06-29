@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded",function(){
     const PasteTXT=async()=>{
         let txtx = document.getElementById("txtx");
         txtx.value="";
-        txtx.style.height="20em";
+        txtx.style.height="15em";
         const text = await navigator.clipboard.readText();
         txtx.value = text;
     }
@@ -26,4 +26,8 @@ document.addEventListener("DOMContentLoaded",function(){
         txtx.select();
         navigator.clipboard.writeText(txtx.value);
       localStorage.setItem("pastetxtx", txtx.value);
+    }
+    const clearTXT=()=>{
+        document.getElementById("txtx").value="";
+        document.getElementById("txtx").style.height="8em";
     }
