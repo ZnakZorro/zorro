@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>NAV</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#f63">
+    <link rel="manifest" href="./interval.web.json"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--link rel="shortcut icon" href="./favicon.ico"-->
+    <link rel="shortcut icon" type="image/webp" size="512x512" href="./interval.webp">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./all.css" />
+    <!--link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /-->
+    <link href="./css/boxicons.min.css" rel="stylesheet" />
+    <script src="./start.js"></script>
+    
+    <style>
+      .wrapper {max-width:1100px; margin:auto;}
+      .kontener {margin: 0.75em 0.33em;}
+      .info,.info p {
+          font-family: monospace;
+          font-size: 0.9em;
+      }
+      .info p {display:inline-block; margin:0.15em; min-width:32%;}
+      
+      #klawisze button {min-width:6.2em;padding: 0.5em}
+      .btn.gray {background:gray;}
+      .btn.mini {min-width:3.5em!important;}
+      
+      input.intime {max-width:2.5em;}
+      p#counter {display: inline-block; font-weight:bold; margin-rifght:3em;}
+      #exmenu a {
+        padding: 0.3em;
+        text-align: center;
+        border: 1px solid gray;
+        background: #eee;
+        display: inline-block;
+        margin: 0.3em;
+        min-width: 10em;
+        border-radius:0.33em;
+    }
+    </style>
+    <script>
+      let installScript=(urls,callback)=>{
+            let script = document.createElement('script');
+            script.onload = function () {
+            urls.shift();
+                if (urls.length>0) installScript(urls,callback=null);
+                else if (callback) callback();
+            };
+            script.src = urls[0];
+            document.head.appendChild(script);
+        }
+      
+      //---dom ready--------------------------------
+      document.addEventListener("DOMContentLoaded",function(){
+         fetch("./menu.html")
+          .then(r => {return r.text()})
+          .then(t => {
+            //console.log(t);
+            document.querySelector("#navic").innerHTML = t;
+            installScripts(["./script.js","./navbar.js"])
+            let exmenu = document.querySelector("#dropdown2").innerHTML;
+            document.querySelector("#exmenu").innerHTML = exmenu;
+            document.getElementById("temp").textContent = "v2";
+          })
+          .catch(e => {console.log(e)});        
+      });      
+      //---DOM READY----------------------------------
+
+      
+    </script>
+    
+  </head>
+<body>
+<div class="wrapper">
+<div id="navic"></div>
+
+<!--
+  start
+  stop
+  interval
+  -->
+<audio id="startAudio"><source src="../audio/start.mp3" type="audio/mpeg"></audio>
+<audio id="stopAudio"><source src="../audio/stop.mp3" type="audio/mpeg"></audio>
+<audio id="intervalAudio"><source src="../audio/interval.mp3" type="audio/mpeg"></audio>
+<audio id="minutaAudio"><source src="../audio/ye.mp3" type="audio/mpeg"></audio>
+
+<div class="kontener" id="klawisze">
+  <button class="btn blue" onclick="repeatMinuta(this,15000)" type="button">15 Sek</button>
+  <button class="btn blue" onclick="repeatMinuta(this,60000)" type="button">1 Minuta</button>
+  <button class="btn blue" onclick="repeatMinuta(this,320000)" type="button">5 Minut</button>
+  <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">7,5 Minut</button> 
+  <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15 Minut</button> 
+  <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
+</div>
+  <div class="kontener" id="counters">
+    <button class="btn gray mini" onclick="setMax(this,1)" type="button">#1</button>
+    <button class="btn gray mini active" onclick="setMax(this,2)" type="button">#2</button>
+    <button class="btn gray mini" onclick="setMax(this,4)" type="button"> #4 </button>
+    <button class="btn gray mini" onclick="setMax(this,8)" type="button"> #8 </button>
+    <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
+    <div class="kontener">
+      <p id="counter"></p>
+      <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Strart </button>
+    </div>
+    
+  </div>
+<div class="kontener info" id="info"></div>
+<div class="kontener info" id="infotime"></div>
+
+<div class="kontener info" id="exmenu"></div>
+  <div class="kontener info" id="temp"></div>
+  <button onclick="ccc()" class="btn mini minii">CC</button>
+  
+</div> <!--wrapper-->  
+  
+<script>
+let info     = document.getElementById("info");
+let infotime = document.getElementById("infotime");
+let counterp = document.getElementById("counter");
+let intime   = document.getElementById("intime");
+let sektime   = document.getElementById("sektime");  
+let y        = document.getElementById("minutaAudio");
+let startAudio     = document.getElementById("startAudio");
+let stopAudio      = document.getElementById("stopAudio");
+let intervalAudio  = document.getElementById("intervalAudio");
+let interV   = null;
+let counter  = 0;
+let maxCount = 2;
+
+const setActive=(ten)=>{
+      let parent = ten.parentElement;
+      let keys   = parent.querySelectorAll("button")
+      //console.log(keys);
+      keys.forEach(b=>b.classList.remove("active"));
+      //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
+      ten.classList.add("active");
+}
+const setStart=()=>{
+  let min = document.getElementById("intime").value;
+  let sek = document.getElementById("sektime").value;
+  let milisek = 1000 * ((min*60)+sek)
+  console.log("milisek=",milisek);
+  repeatMinuta(null,milisek);
+}
+  
+const setMax=(ten,max=2)=>{
+  maxCount = max;
+  //info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
+  counterp.textContent="#"+maxCount;
+  if (ten) {setActive(ten);} 
+  //document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
+  //ten.classList.add("active");
+}
+const stopInterval=(ten)=>{
+    interV=clearInterval(interV);
+    interV = null;
+    info.innerHTML += "<h4>Stop Interval </h4>";
+   counter = 0;
+}
+  
+const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
+  
+const parseTime=(time)=> Math.round(time/60000);
+
+const parseTimes=(time)=> {
+  let min = Math.floor(time/60000);
+  let sek = Math.round((time - (60000*min))/1000)
+  return [min,sek];
+}
+  
+const repeatMinuta=(ten,itime=60000)=> {
+  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
+  counterp.textContent="#"+maxCount;
+  //intime.value = parseTime(itime);
+  let timesArr = (parseTimes(itime));
+  intime.value = timesArr[0];
+  sektime.value = timesArr[1];
+  if (interV) {
+    stopInterval();
+  }
+  startAudio.play(); 
+  info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+  interV = setInterval(()=>{   
+    counter++;
+    if (counter === maxCount) stopAudio.play();
+    else                      intervalAudio.play();
+    if (counter < maxCount) {       
+      info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
+    } else {      
+       stopInterval();
+    }
+  },itime); 
+  if (ten) {setActive(ten);}  
+} 
+
+</script>
+
+<script>
+  const registerServiceWorker = async () => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register('sw.js',{scope: './',});
+      if (registration.installing) {
+        console.log('Service worker installing');        
+      } else if (registration.waiting) {
+        console.log('Service worker installed');
+      } else if (registration.active) {
+        console.log('Service worker active');
+      }
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+};
+
+//registerServiceWorker();
+
+</script>
+</body>
+</html>
