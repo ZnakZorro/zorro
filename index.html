@@ -78,25 +78,12 @@
 </style>
 <script src="./js/all.js"></script>
 <script>
-    //cccONE();
-    const imgReady=()=>{
-       /*
-       console.log("imgReady()================================================");
-        document.getElementById("menumodal").innerHTML =`
-        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
-        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
-        <a href="./app/kalendarz/index.html" class="btn navy mini minii">Kalendarz</a>
-        <button onclick="ccc()" class="btn mini minii">CC</button>`;  
-        */          
-    }
-
     let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : _APPcity;
     let APPid   = localStorage.getItem("APPid")   ? localStorage.getItem("APPid")   : _APPid;
     console.log("=======================");
     console.log(APPcity,APPid);
     console.log("=======================");
-        
-
+   
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){        
     //_$("#modalyrnomodal").src= "https://www.yr.no/en/content/"+APPid+"/meteogram.svg";
@@ -130,6 +117,7 @@ document.addEventListener("DOMContentLoaded",function(){
         <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
         <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
         <a href="./app/kalendarz/index.html" class="btn navy mini minii">Kal</a>
+        <button onclick="ccc()" class="btn mini minii">CC</button>
         <a href="./nav" class="btn navy mini minii">NAV</a>
                   
      </div>  
@@ -250,7 +238,7 @@ document.addEventListener("DOMContentLoaded",function(){
       <span style="float:right;">
          <button onclick='document.getElementById("txtx").value="";'>Clear</button>
          <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
-         <button onclick="ccc()" class="btn mini minii">CC</button> 
+          
       </span>
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
 </div>
