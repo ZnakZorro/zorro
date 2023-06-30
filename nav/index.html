@@ -102,16 +102,16 @@
   
 <div class="kontener" id="klawisze">
   <h3>Interval alarm</h3>
-  <button class="btn blue" onclick="repeatMinuta(this,15000)" type="button">15 Sek</button>
-  <button class="btn blue" onclick="repeatMinuta(this,60000)" type="button">1 Minuta</button>
-  <button class="btn blue" onclick="repeatMinuta(this,320000)" type="button">5 Minut</button>
-  <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">7,5 Minut</button> 
-  <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15 Minut</button> 
+  <button class="btn" onclick="repeatMinuta(this,15000)" type="button">00:15</button>
+  <button class="btn blue" onclick="repeatMinuta(this,60000)" type="button">01:00</button>
+  <button class="btn blue" onclick="repeatMinuta(this,320000)" type="button">05:20</button>
+  <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">07:30</button> 
+  <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15:00</button> 
   <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
 </div>
   <div class="kontener" id="counters">
-    <button class="btn gray mini" onclick="setMax(this,1)" type="button">#1</button>
-    <button class="btn gray mini active" onclick="setMax(this,2)" type="button">#2</button>
+    <button class="btn gray mini active" onclick="setMax(this,1)" type="button">#1</button>
+    <button class="btn gray mini" onclick="setMax(this,2)" type="button">#2</button>
     <button class="btn gray mini" onclick="setMax(this,4)" type="button"> #4 </button>
     <button class="btn gray mini" onclick="setMax(this,8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
@@ -124,6 +124,10 @@
     </div> 
     <div class="kontener">
       <progress style="width:99%" id="rangetime" value=0 min=0 max=2 ></progress>
+    </div> 
+    <div class="kontener">
+      <span id="counterFoo" style="display:inline-block; width:3em;">#16</span>
+      <progress style="width:99%" id="progressFoo" value=0 min=0 max=60></progress>
     </div> 
     <div class="kontener">
       <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
@@ -155,7 +159,7 @@ let intervalAudio  = document.getElementById("intervalAudio");
 let interV   = null;
 
 let counter  = 0;
-let maxCount = 2;
+let maxCount = 1;
 let progresBar = document.getElementById("progresBar");
 let interProgres   = null;  
   
