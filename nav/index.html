@@ -141,7 +141,7 @@
   
   <div class="kontener box">
     <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">#1</span>
-    <progress class="right" id="progresBar"  style="" value=0 min=0 max=60></progress>
+    <progress class="right" id="progresBar"  style="" value=0 min=0 max=100></progress>
   </div> 
   
   <!--div class="kontener">
@@ -180,7 +180,8 @@ let progresBar = document.getElementById("progresBar");
 let interProgres   = null;  
   
 const setProgres=(itime)=>{
-    let steps = 60;
+    let steps = 100;
+    progresBar.max=steps;
     if (interProgres) {
       interProgres=null;
       clearInterval(interProgres)
@@ -193,7 +194,7 @@ const setProgres=(itime)=>{
         progresStep++;
         //console.log(progresStep);
         progresBar.value=progresStep;
-        counterr.textContent=`#${steps-progresStep}`;
+        counterr.textContent=`${steps-progresStep}%`;
     },progresTime);
                                
 }
