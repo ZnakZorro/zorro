@@ -9,3 +9,117 @@
   <div class="left"> <input value="3em" /></div>
   <div class="right"><input type="range" value="100%" /></div>
 </div>
+
+
+<style>
+.left1 {
+	
+	width:3em;
+	background:blue;
+	float:left;
+}
+
+.right1 {
+	width:calc(100% - 3em);	
+	background:red;
+	float:right;   
+}
+input {
+    width:100%;
+}
+</style>
+
+<div class="left1"><input value="3em" /></div>
+<div class="right1"><input type="range" value="100%" /></div>
+
+
+
+
+
+
+<hr />
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#parent {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.child {
+  height: 50px;
+  background: red;
+  flex: 1;
+  min-width: 25%;
+  border: 5px solid white;
+}
+
+@media (max-width: 1100px) {
+  .child {
+    min-width: 33.33%;
+  }
+}
+
+@media (max-width: 400px) {
+  .child {
+    min-width: 50%;
+  }
+}
+
+</style>
+
+<button id="add">Add Child</button>
+
+<div id="parent">
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+  <div class="child"></div>
+</div>
+
+<script
+  src="https://code.jquery.com/jquery-3.7.0.slim.min.js"
+  integrity="sha256-tG5mcZUtJsZvyKAxYLVXrmjKBVLd6VpVccqz/r4ypFE="
+  crossorigin="anonymous"></script>
+<script>
+
+$("#add").on("click", function() {
+  $("#parent").append("<div class='child' />");
+});
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
