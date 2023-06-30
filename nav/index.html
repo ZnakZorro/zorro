@@ -48,9 +48,10 @@
     </style>
     <style>
       .box {display: flex;}
-      .left {flex: 0 0 3em;border: 1px dashed #f0f;}
-      .right {flex: 1;border: 1px dashed #00f;}
+      .left {flex: 0 0 3em;}
+      .right {flex: 1;}
       .box input {width:100%;}
+      .dasz {border: 1px dashed #f0f;}
     </style>
     <script>
       let installScript=(urls,callback)=>{
@@ -128,15 +129,14 @@
       <p id="counterrr"></p>
       <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Start </button>
     </div>
-    <!--div class="kontener">
-      <progress style="width:99%" id="progresBarrr" value=0 min=0 max=60 ></progress>
-  </div--> 
-    <div class="kontener">
-      <progress style="width:99%" id="rangetime" value=0 min=0 max=2 ></progress>
-    </div> 
     
     <div class="kontener box">
       <span     class="left"  id="counter"   style="display:inline-block; width:3em;">#1</span>
+      <progress class="right" style="" id="rangetime" value=0 min=0 max=2 ></progress>
+    </div> 
+    
+    <div class="kontener box">
+      <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">#1</span>
       <progress class="right" id="progresBar"  style="" value=0 min=0 max=60></progress>
     </div> 
     <div class="kontener">
