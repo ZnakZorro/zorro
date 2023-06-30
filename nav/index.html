@@ -125,22 +125,19 @@
     <button class="btn gray mini" onclick="setMax(this,8)" type="button"> #8 </button>
     <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
     <div class="kontener">
-      <p id="counter"></p>
+      <p id="counterrr"></p>
       <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Start </button>
     </div>
-    <div class="kontener">
-      <progress style="width:99%" id="progresBar" value=0 min=0 max=60 ></progress>
-    </div> 
+    <!--div class="kontener">
+      <progress style="width:99%" id="progresBarrr" value=0 min=0 max=60 ></progress>
+  </div--> 
     <div class="kontener">
       <progress style="width:99%" id="rangetime" value=0 min=0 max=2 ></progress>
     </div> 
-    <div class="box">
-      <div class="left"> <input value="3em" /></div>
-      <div class="right"><input type="range" value="100%" /></div>
-    </div>
+    
     <div class="kontener box">
-      <span     class="left"  id="counterFoo"   style="display:inline-block; width:3em;">#16</span>
-      <progress class="right" id="progressFoo"  style="width:99%" value=0 min=0 max=60></progress>
+      <span     class="left"  id="counter"   style="display:inline-block; width:3em;">#1</span>
+      <progress class="right" id="progresBar"  style="" value=0 min=0 max=60></progress>
     </div> 
     <div class="kontener">
       <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
