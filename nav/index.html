@@ -264,7 +264,7 @@ const repeatMinuta=(ten,itime=60000)=> {
   
   interV = setInterval(()=>{  
     counter++;
-    counterp.textContent=`#${maxCount-counter};
+    counterp.textContent=`#${maxCount-counter}`;
     rangetime.value=counter;
       if (counter === maxCount) stopAudio.play();
       else                      intervalAudio.play();
