@@ -140,7 +140,7 @@
   </div> 
   
   <div class="kontener box">
-    <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">#1</span>
+    <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">0%</span>
     <progress class="right" id="progresBar"  style="" value=0 min=0 max=100></progress>
   </div> 
   
@@ -178,6 +178,13 @@ let counter  = 0;
 let maxCount = 1;
 let progresBar = document.getElementById("progresBar");
 let interProgres   = null;  
+
+clearProgress=()=>{
+  counterr.textContent="0%";
+  counterr.value=0;
+  progresBar.textContent="#"+maxCount;
+  progresBar.value=0;
+}
   
 const setProgres=(itime)=>{
     let steps = 100;
@@ -200,10 +207,8 @@ const setProgres=(itime)=>{
 }
 const setActive=(ten)=>{
       let parent = ten.parentElement;
-      let keys   = parent.querySelectorAll("button")
-      //console.log(keys);
+      let keys   = parent.querySelectorAll("button");
       keys.forEach(b=>b.classList.remove("active"));
-      //document.querySelectorAll("#klawisze button").forEach(b=>b.classList.remove("active"));
       ten.classList.add("active");
 }
 const setStart=()=>{
@@ -211,16 +216,16 @@ const setStart=()=>{
   let sek = document.getElementById("sektime").value;
   let milisek = 1000 * ((min*60)+sek)
   console.log("milisek=",milisek);
-  repeatMinuta(null,milisek);
+  clearProgress();
+  //repeatMinuta(null,milisek);
+  repeatMinutaStart(null,milisek)
 }
   
 const setMax=(ten,max=2)=>{
   maxCount = max;
-  //info.innerHTML += "<p>maxCount = "+maxCount+"</p>";
   counterp.textContent="#"+maxCount;
   if (ten) {setActive(ten);} 
-  //document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
-  //ten.classList.add("active");
+  clearProgress();
 }
 const singleAlarm=(ten,time)=>{
   maxCount = 1;
@@ -246,14 +251,20 @@ const parseTimes=(time)=> {
   let sek = Math.round((time - (60000*min))/1000)
   return [min,sek];
 }
-  
+
 const repeatMinuta=(ten,itime=60000)=> {
-  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
+  clearProgress();
   counterp.textContent="#"+maxCount;
   //intime.value = parseTime(itime);
   let timesArr = (parseTimes(itime));
   intime.value = timesArr[0];
   sektime.value = timesArr[1];
+  //repeatMinutaStart(ten,itime);
+  if (ten) {setActive(ten);} 
+}
+const repeatMinutaStart=(ten,itime=60000)=> {
+  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
+
   if (interV) {
     stopInterval();
   }
@@ -276,7 +287,7 @@ const repeatMinuta=(ten,itime=60000)=> {
          stopInterval();
       }
   },itime); 
-  if (ten) {setActive(ten);}  
+   
 } 
 
 </script>
