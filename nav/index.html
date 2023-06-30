@@ -108,11 +108,14 @@
   
 <div class="kontener" id="klawisze">
   <h3>Interval alarm</h3>
-  <button class="btn" onclick="repeatMinuta(this,15000)" type="button">00:15</button>
-  <button class="btn blue" onclick="repeatMinuta(this,60000)" type="button">01:00</button>
-  <button class="btn blue" onclick="repeatMinuta(this,320000)" type="button">05:20</button>
+  <button class="btn" onclick="repeatMinuta(this,15000)">00:15</button>
+  <button class="btn blue" onclick="repeatMinuta(this,60000)">01:00</button>
+  <button class="btn blue" onclick="repeatMinuta(this,320000)">05:20</button>
   <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">07:30</button> 
   <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15:00</button> 
+  
+  <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
+  <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
   <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
 </div>
   <div class="kontener" id="counters">
