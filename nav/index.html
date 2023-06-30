@@ -165,12 +165,12 @@ const setProgres=(itime)=>{
       clearInterval(interProgres)
     }
     let progresTime=(maxCount*itime)/60;
-    console.log(progresTime);
+    //console.log(progresTime);
     let progresStep=0;
     progresBar.value=progresStep;
     interProgres = setInterval(()=>{
         progresStep++;
-        console.log(progresStep);
+        //console.log(progresStep);
         progresBar.value=progresStep;
     },progresTime);
                                
