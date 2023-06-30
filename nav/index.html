@@ -121,7 +121,13 @@
     </div>
     <div class="kontener">
       <progress style="width:99%" id="rangetime" value=0 min=0 max=2 ></progress>
-    </div>    
+    </div> 
+    <div class="kontener">
+      <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
+      <button class="btn" onclick="singleAlarm(this,320000)" type="button"> 05:20 </button>
+      <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
+      <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
+    </div>   
   </div>
 <div class="kontener info" id="info"></div>
 <div class="kontener info" id="infotime"></div>
@@ -170,6 +176,12 @@ const setMax=(ten,max=2)=>{
   if (ten) {setActive(ten);} 
   //document.querySelectorAll("#counters button").forEach(b=>b.classList.remove("active"));
   //ten.classList.add("active");
+}
+const singleAlarm=(ten.time)=>{
+  maxCount = 1;
+  counterp.textContent="#"+maxCount;
+  if (ten) {setActive(ten);} 
+  repeatMinuta(null,time)
 }
 const stopInterval=(ten)=>{
     interV=clearInterval(interV);
