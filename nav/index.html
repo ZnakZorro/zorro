@@ -46,6 +46,12 @@
         border-radius:0.33em;
     }
     </style>
+    <style>
+      .box {display: flex;}
+      .left {flex: 0 0 3em;border: 1px dashed #f0f;}
+      .right {flex: 1;border: 1px dashed #00f;}
+      .box input {width:100%;}
+    </style>
     <script>
       let installScript=(urls,callback)=>{
             let script = document.createElement('script');
@@ -125,9 +131,13 @@
     <div class="kontener">
       <progress style="width:99%" id="rangetime" value=0 min=0 max=2 ></progress>
     </div> 
-    <div class="kontener">
-      <span id="counterFoo" style="display:inline-block; width:3em;">#16</span>
-      <progress style="width:99%" id="progressFoo" value=0 min=0 max=60></progress>
+    <div class="box">
+      <div class="left"> <input value="3em" /></div>
+      <div class="right"><input type="range" value="100%" /></div>
+    </div>
+    <div class="kontener box">
+      <span     class="left"  id="counterFoo"   style="display:inline-block; width:3em;">#16</span>
+      <progress class="right" id="progressFoo"  style="width:99%" value=0 min=0 max=60></progress>
     </div> 
     <div class="kontener">
       <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
