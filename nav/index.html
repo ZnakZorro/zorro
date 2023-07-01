@@ -144,21 +144,31 @@
     <progress class="right" id="progresBar"  style="" value=0 min=0 max=100></progress>
   </div> 
   
-  <!--div class="kontener">
-    <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
-    <button class="btn" onclick="singleAlarm(this,320000)" type="button"> 05:20 </button>
-    <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
-    <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
-  </div-->   
-  
-<div class="kontener info" id="info"></div>
-<div class="kontener info" id="infotime"></div>
-
-<div class="kontener info" id="exmenu"></div>
-  <div class="kontener info" id="temp"></div>
-  <button onclick="ccc()" class="btn mini minii">CC</button>
-  
+      <!--div class="kontener">
+        <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
+        <button class="btn" onclick="singleAlarm(this,320000)" type="button"> 05:20 </button>
+        <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
+        <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
+      </div-->   
+      
+    <div class="kontener info" id="info"></div>
+    <div class="kontener info" id="infotime"></div>
+    
+    <div class="kontener info" id="exmenu"></div>
+      <div class="kontener info" id="temp"></div>
+      <button onclick="ccc()" class="btn mini minii">CC</button>
+      
 </div> <!--wrapper-->  
+
+<div class="header">A simple timer:</div>
+
+   <div class="timer" id="timer">00:00</div>
+   <div class="buttons">
+      <button onclick="startTimer()" id="button1">Start</button>
+      <button onclick="stopTimer()" id = "button2">Stop</button>
+   </div>
+
+
   
 <script>
 let info     = document.getElementById("info");
