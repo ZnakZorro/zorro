@@ -143,13 +143,15 @@
     <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">0%</span>
     <progress class="right" id="progresBar"  style="" value=0 min=0 max=100></progress>
   </div> 
-  
-      <!--div class="kontener">
-        <button class="btn" onclick="singleAlarm(this,60000)" type="button"> 01:00 </button>
-        <button class="btn" onclick="singleAlarm(this,320000)" type="button"> 05:20 </button>
-        <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
-        <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
-      </div-->   
+  <div class="kontener" style="background:silver;">
+      <div class="header">A simple timer:</div>
+       <h3 class="timer" id="timer">00:00</h3>
+       <div class="buttons">
+          <button class="btn" onclick="startTimer()" id="button1">Start</button>
+          <button class="btn" onclick="stopTimer()" id = "button2">Stop</button>
+       </div>
+   </div> 
+     
       
     <div class="kontener info" id="info"></div>
     <div class="kontener info" id="infotime"></div>
@@ -160,14 +162,7 @@
       
 </div> <!--wrapper-->  
 
-   <div class="kontener" style="background:silver;">
-      <div class="header">A simple timer:</div>
-       <div class="timer" id="timer">00:00</div>
-       <div class="buttons">
-          <button class="btn" onclick="startTimer()" id="button1">Start</button>
-          <button class="btn" onclick="stopTimer()" id = "button2">Stop</button>
-       </div>
-   </div>
+  
 
   
 <script>
