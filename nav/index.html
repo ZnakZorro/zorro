@@ -326,7 +326,7 @@ function startTimer()
    if (typeof(Worker)!=="undefined"){
       // Check whether Web Worker has been created. If not, create a new Web Worker based on the Javascript file simple-timer.js
       if (w==null){
-         w = new Worker("simple-timer.js");
+         w = new Worker("./js/worker_times.js");
       }
       // Update timer div with output from Web Worker
       w.onmessage = function (event) {
