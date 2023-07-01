@@ -31,8 +31,8 @@ function myTimer(d0)
 if (timerStart){
    // get current time
    let d0=(new Date()).valueOf();
-   // repeat myTimer(d0) every 100 ms
-   myVar=setInterval(function(){myTimer(d0)},100);
+   // repeat myTimer(d0) every 1000 ms
+   myVar=setInterval(function(){myTimer(d0)},1000);
    // timer should not start anymore since it has been started
    timerStart = false;
 }
