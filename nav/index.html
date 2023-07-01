@@ -334,8 +334,15 @@ function startTimer()
          w = new Worker("./js/worker_times.js");
       }
       // Update timer div with output from Web Worker
+     let plus ="";
       w.onmessage = function (event) {
-         document.getElementById("timer").innerHTML = event.data;
+        
+        let czas = event.data;
+        console.log(czas);
+        if (czas==="01:00") plus="1 minuta";
+        if (czas==="02:00") plus="2 minuta";
+        if (czas==="03:00") plus="3 minuta";
+         document.getElementById("timer").innerHTML = plus+czas;
       };
    } else {
       // Web workers are not supported by your browser
