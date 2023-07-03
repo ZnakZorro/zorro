@@ -15,3 +15,10 @@ console.log('min value', Math.min(...array)) // -19
 // flaten array
 const array = [ 1, [ 2, [ 3, [ 4, [ 5 ] ] ] ] ]
 console.log(array.flat(Infinity)) // [1, 2, 3, 4, 5]
+------------------------------------------------
+ //MAP 
+let wizards = ['Merlin', 'Gandalf', 'Radagast'];
+let html = `<ul>${wizards.map((wizard) => {
+	return `<li>${wizard}</li>`;
+}).join('')}</ul>`;
+console.log(html)
