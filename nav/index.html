@@ -166,29 +166,29 @@
 <div class="custom-select wrapper kontener" style="width:200px;">
   <select id="timetotime" onchange="GetSelectedTextValue(this)">
     <option value="0">Czas:</option>
-    <option value="15000">15 sekund</option>
-    <option value="60000">1 minuta</option>
-    <option value="180000">3 minutty</option>
+    <option value="15000">00:15 sekund</option>
+    <option value="60000">01:00</option>
+    <option value="180000">03:00</option>
     <option value="320000">05:20</option>
     <option value="480000">07:30</option>
-    <option value="600000">10 minut</option>
-    <option value="900000">15 minut</option>
-    <option value="1800000">30 minut</option>
-    <option value="3600000">1 godzina</option>
+    <option value="600000">10:00</option>
+    <option value="900000">15:00</option>
+    <option value="1800000">30:00</option>
+    <option value="3600000">60:00</option>
   </select>
 </div>  
 
   
 <script>
-  const GetSelectedTextValue=(ten)=>{
+const GetSelectedTextValue=(ten)=>{
     console.log(1,ten)
-    console.log(1,ten.value)
+    console.log(1,ten.value,parseInt(ten.value))
   }
-  const changeSelected = (e) => {
+/*const changeSelected = (e) => {
   const $select = document.querySelector('#timetotime');
   console.log(2,$select.value);
 };
-document.querySelector('#timetotime').addEventListener('click', changeSelected);
+document.querySelector('#timetotime').addEventListener('click', changeSelected);*/
   
 let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
