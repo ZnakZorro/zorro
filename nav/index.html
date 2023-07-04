@@ -110,6 +110,23 @@
   
   <div class="kontener" id="klawisze">
     <h3>Interval alarm</h3>
+
+<div class="custom-select wrapper kontener" style="width:200px;">
+  <select id="timetotime" onchange="GetSelectedTextValue(this)">
+    <option value="0">Czas:</option>
+    <option value="00:15">00:15 sekund</option>
+    <option value="01:00">01:00</option>
+    <option value="03:00">03:00</option>
+    <option value="05:20">05:20</option>
+    <option value="07:30">07:30</option>
+    <option value="10:00">10:00</option>
+    <option value="15:00">15:00</option>
+    <option value="30:00">30:00</option>
+    <option value="60:00">60:00</option>
+  </select>
+</div>  
+
+    
     <button class="btn" onclick="repeatMinuta(this,15000)">00:15</button>
     <button class="btn blue" onclick="repeatMinuta(this,60000)">01:00</button>
     <button class="btn blue" onclick="repeatMinuta(this,320000)">05:20</button>
@@ -163,20 +180,7 @@
       
 </div> <!--wrapper-->  
 
-<div class="custom-select wrapper kontener" style="width:200px;">
-  <select id="timetotime" onchange="GetSelectedTextValue(this)">
-    <option value="0">Czas:</option>
-    <option value="15000">00:15 sekund</option>
-    <option value="60000">01:00</option>
-    <option value="180000">03:00</option>
-    <option value="320000">05:20</option>
-    <option value="480000">07:30</option>
-    <option value="600000">10:00</option>
-    <option value="900000">15:00</option>
-    <option value="1800000">30:00</option>
-    <option value="3600000">60:00</option>
-  </select>
-</div>  
+
 
   
 <script>
