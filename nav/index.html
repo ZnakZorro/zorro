@@ -349,7 +349,7 @@ const repeatMinutaStart=(ten,itime=60000)=> {
 var w = null; // initialize variable
 
 // function to start the timer
-function startTimer()
+function startTimer(ttime="00:00")
 {
    // First check whether Web Workers are supported
    if (typeof(Worker)!=="undefined"){
@@ -364,10 +364,11 @@ function startTimer()
         let czas = event.data;
         console.log(czas);
         console.log(parseInt(czas));
-        if (czas==="00:15") {plus="15 sek ";    startAudio.play(); }
-        if (czas==="01:00") {plus="1 minuta ";  intervalAudio.play(); }
-        if (czas==="02:00") {plus="2 minuta ";  intervalAudio.play(); }
-        if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
+        if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
+        //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
+        if (czas===ttime) {plus=ttime;    stopAudio.play(); stopTimer()}
+        
+        //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
          document.getElementById("timer").innerHTML = plus+czas;
       };
    } else {
@@ -379,7 +380,7 @@ function startTimer()
 // function to stop the timer
 function stopTimer()
 {
-   w.terminate();
+   if (w) w.terminate();
    timerStart = true;
    w = null;
 }
