@@ -27,7 +27,11 @@ function myTimer(d0)
    // return output to Web Worker
    postMessage(minutes+":"+seconds);
 }
-               
+const myTimerMS=(d0)=>{
+   let d=(new Date()).valueOf();
+   let diff = d-d0;
+   postMessage(milisek+":"+diff);
+}               
 if (timerStart){
    // get current time
    let d0=(new Date()).valueOf();
