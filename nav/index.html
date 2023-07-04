@@ -164,25 +164,30 @@
 </div> <!--wrapper-->  
 
 <div class="custom-select wrapper kontener" style="width:200px;">
-  <select>
-    <option value="0">Select car:</option>
-    <option value="1">Audi</option>
-    <option value="2">BMW</option>
-    <option value="3">Citroen</option>
-    <option value="4">Ford</option>
-    <option value="5">Honda</option>
-    <option value="6">Jaguar</option>
-    <option value="7">Land Rover</option>
-    <option value="8">Mercedes</option>
-    <option value="9">Mini</option>
-    <option value="10">Nissan</option>
-    <option value="11">Toyota</option>
-    <option value="12">Volvo</option>
+  <select id="timetotime" onchange="GetSelectedTextValue(this)">
+    <option value="0">Czas:</option>
+    <option value="15000">15 sekund</option>
+    <option value="60000">1 minuta</option>
+    <option value="180000">3 minutty</option>
+    <option value="320000">5'20</option>
+    <option value="600000">10 minut</option>
+    <option value="900000">15 minut</option>
+    <option value="1800000">30 minut</option>
+    <option value="3600000">1 godzina</option>
   </select>
 </div>  
 
   
 <script>
+  const GetSelectedTextValue(ten)=>{
+    console.log(1,ten)
+  }
+  const changeSelected = (e) => {
+  const $select = document.querySelector('#timetotime');
+  console.log(2,$select.value);
+};
+document.querySelector('#timetotime').addEventListener('click', changeSelected);
+  
 let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
 let counterp = document.getElementById("counter");
