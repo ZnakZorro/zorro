@@ -359,7 +359,18 @@ const startTimerBTN=(ten,czas)=>{
   
 //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 const startTimer=(ttime=0)=>{
-    if (ttime<2) return;
+  if (ttime<2) return;
+  rangetime.value=0;
+  rangetime.max=maxCount;
+  for (let i=0; i<maxCount; i++){
+    console.log(111111,i);
+    rangetime.value=i;
+    startTimerOne(ttime);
+  }
+}
+  
+const startTimerOne=(ttime=0)=>{
+    
    if (typeof(Worker) !== "undefined"){
      if (timeworker) stopTimer();
       if (timeworker===null){
@@ -369,7 +380,6 @@ const startTimer=(ttime=0)=>{
       startAudio.play();
       let plus ="";
       let moduloProgress = Math.round(ttime/100);
-     //??????????????????????????????????????????????????????????????????/
       timeworker.onmessage = function (event) {
         let czas             = event.data;        
         let iczas            = parseInt(czas);
@@ -377,20 +387,15 @@ const startTimer=(ttime=0)=>{
         progresBar.value     = tprogress;
         counterr.textContent = tprogress+"%";
         console.log(iczas,tprogress);
-                        let timesArr = (parseTimes(iczas));
-                        intime.value = timesArr[0];
-                        sektime.value = timesArr[1];
+                let timesArr = (parseTimes(iczas));
+                intime.value = timesArr[0];
+                sektime.value = timesArr[1];
         if (iczas>ttime) {
           plus="fin = "; 
           intervalAudio.play();   
           stopAudio.play(); 
           stopTimer()
         }
-        
-        //if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
-        //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
-        //if (czas>ttime) {plus=ttime;    stopAudio.play(); stopTimer()}        
-        //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
         let sekCzas = Math.round(iczas/1000);
          document.getElementById("timer").innerHTML = "#"+maxCount+" :: "+plus+sekCzas+"s";
       };
