@@ -361,7 +361,7 @@ const startTimer=(ttime=0)=>{
       if (timeworker==null){
          timeworker = new Worker("./js/worker_times.js");
       }
-     stopTimer();
+      //stopTimer();
       startAudio.play();
       let plus ="";
       let moduloProgress = Math.round(ttime/100);
