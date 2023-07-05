@@ -277,49 +277,49 @@ const parseTimes=(time)=> {
   let sek = Math.round((time - (60000*min))/1000)
   return [min,sek];
 }
-
-const repeatMinuta=(ten,itime=60000)=> {
-  console.log("???????????????????????????????????");
-  return null;
-  clearProgress();
-  counterp.textContent="#"+maxCount;
-  //intime.value = parseTime(itime);
-  let timesArr = (parseTimes(itime));
-  intime.value = timesArr[0];
-  sektime.value = timesArr[1];
-  //repeatMinutaStart(ten,itime);
-  if (ten) {setActive(ten);} 
-}
-const repeatMinutaStart=(ten,itime=60000)=> {
-   console.log("???????????????????????????????????");
-  return null;
-  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
-
-  if (interV) {
-    stopInterval();
-  }
-  setProgres(itime);
-  counter = 0;
-  startAudio.play(); 
-  info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
-  rangetime.value=0;
-  rangetime.max=maxCount;
-  
-  interV = setInterval(()=>{  
-    counter++;
-    counterp.textContent=`#${maxCount-counter}`;
-    rangetime.value=counter;
-      if (counter === maxCount) stopAudio.play();
-      else                      intervalAudio.play();
-      if (counter < maxCount) {       
-        info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
-      } else {      
-         stopInterval();
-      }
-  },itime); 
-   
-} 
-
+/*
+                      const repeatMinuta=(ten,itime=60000)=> {
+                        console.log("???????????????????????????????????");
+                        return null;
+                        clearProgress();
+                        counterp.textContent="#"+maxCount;
+                        //intime.value = parseTime(itime);
+                        let timesArr = (parseTimes(itime));
+                        intime.value = timesArr[0];
+                        sektime.value = timesArr[1];
+                        //repeatMinutaStart(ten,itime);
+                        if (ten) {setActive(ten);} 
+                      }
+                      const repeatMinutaStart=(ten,itime=60000)=> {
+                         console.log("???????????????????????????????????");
+                        return null;
+                        info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
+                      
+                        if (interV) {
+                          stopInterval();
+                        }
+                        setProgres(itime);
+                        counter = 0;
+                        startAudio.play(); 
+                        info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+                        rangetime.value=0;
+                        rangetime.max=maxCount;
+                        
+                        interV = setInterval(()=>{  
+                          counter++;
+                          counterp.textContent=`#${maxCount-counter}`;
+                          rangetime.value=counter;
+                            if (counter === maxCount) stopAudio.play();
+                            else                      intervalAudio.play();
+                            if (counter < maxCount) {       
+                              info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
+                            } else {      
+                               stopInterval();
+                            }
+                        },itime); 
+                         
+                      } 
+*/
 </script>
 
 <script>
@@ -368,9 +368,9 @@ const startTimer=(ttime=0)=>{
         let czas = event.data;        
         let iczas = parseInt(czas);
         //setProgres(iczas/moduloProgress);
-        let tprogress = iczas/moduloProgress
+        let tprogress = Math.round(iczas/moduloProgress);
         console.log(iczas,tprogress);
-        rangetime.value = iczas/moduloProgress;
+        progresBar.value = iczas/moduloProgress;
         if (iczas>ttime) {
           plus="is="; 
           intervalAudio.play();   
