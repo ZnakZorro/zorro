@@ -373,7 +373,8 @@ const startTimer=(ttime=0)=>{
         //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
         //if (czas>ttime) {plus=ttime;    stopAudio.play(); stopTimer()}        
         //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
-         document.getElementById("timer").innerHTML = "#"+maxCount+" "+plus+czas;
+        let sekCzas = Math.round(iczas/1000);
+         document.getElementById("timer").innerHTML = "#"+maxCount+" "+plus+sekCzas+" sek";
       };
    } else {
       document.getElementById("timer").innerHTML = "Sorry, your browser does not support Web Workers ...";
