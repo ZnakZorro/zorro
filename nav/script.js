@@ -29,5 +29,5 @@ document.addEventListener("DOMContentLoaded",function(){
     }
     const ClearTXT=()=>{
         document.getElementById("txtx").value="";
-        document.getElementById("txtx").style.height="8em";
+        document.getElementById("txtx").style.height="5em";
     }
