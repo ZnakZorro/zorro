@@ -361,8 +361,8 @@ const startTimer=(ttime=0)=>{
          timeworker = new Worker("./js/worker_times.js");
       }
       startAudio.play();
-     let plus ="";
-      w.onmessage = function (event) {
+      let plus ="";
+      timeworker.onmessage = function (event) {
         let czas = event.data;
         console.log(czas);
         let iczas = parseInt(czas);
