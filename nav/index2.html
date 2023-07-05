@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>NAV</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#f63">
+    <link rel="manifest" href="./nav.web.json"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!--link rel="shortcut icon" href="./favicon.ico"-->
+    <link rel="shortcut icon" type="image/webp" size="512x512" href="./nav.webp">
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="stylesheet" href="./all.css" />
+    <!--link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" /-->
+    <link href="./css/boxicons.min.css" rel="stylesheet" />
+    <link href="./css/option.css" rel="stylesheet" />
+    <script src="./start.js"></script>
+    
+    <style>
+      .wrapper {max-width:1100px; margin:auto;}
+      .kontener {margin: 0.75em 0.33em;}
+      .info,.info p {
+          font-family: monospace;
+          font-size: 0.9em;
+      }
+      .info p {display:inline-block; margin:0.15em; min-width:32%;}
+      
+      #klawisze button {min-width:5.2em;padding: 0.35em}
+      .btn.gray {background:gray;}
+      .btn.mini {min-width:3.5em!important;}
+      
+      input.intime {max-width:2.5em;}
+      p#counter {display: inline-block; font-weight:bold; margin-rifght:3em;}
+      #exmenu ul {display:inline-block}
+      #exmenu li {display:inline-block}
+      #exmenu ul li {display:inline-block}
+      #exmenu ul li a {
+        display:inline-block;
+        padding: 0.3em;
+        text-align: center;
+        border: 1px solid gray;
+        background: #eee;
+        display: inline-block;
+        margin: 0.3em;
+        min-width: 7em;
+        border-radius:0.33em;
+    }
+    </style>
+    <style>
+      .box {display: flex;}
+      .left {flex: 0 0 3em;}
+      .right {flex: 1;}
+      .box input {width:100%;}
+      .dasz {border: 1px dashed #f0f;}
+    </style>
+    <script>
+      let installScript=(urls,callback)=>{
+            let script = document.createElement('script');
+            script.onload = function () {
+            urls.shift();
+                if (urls.length>0) installScript(urls,callback=null);
+                else if (callback) callback();
+            };
+            script.src = urls[0];
+            document.head.appendChild(script);
+        }
+      
+      //---dom ready--------------------------------
+      document.addEventListener("DOMContentLoaded",function(){
+         fetch("./menu.html")
+          .then(r => {return r.text()})
+          .then(t => {
+            //console.log(t);
+            document.querySelector("#navic").innerHTML = t;
+            installScripts(["./script.js","./navbar.js"])
+            let exmenu = document.querySelector("#dropdown2").innerHTML;
+            document.querySelector("#exmenu").innerHTML = exmenu;
+            document.getElementById("temp").textContent = "v2";
+          })
+          .catch(e => {console.log(e)});        
+      });      
+      //---DOM READY----------------------------------
+
+      
+    </script>
+    
+  </head>
+<body>
+<div class="wrapper">
+<div id="navic"></div>
+
+
+<audio id="startAudio"><source src="./app/audio/start.mp3" type="audio/mpeg"></audio>
+<audio id="stopAudio"><source src="./app/audio/stop.mp3" type="audio/mpeg"></audio>
+<audio id="intervalAudio"><source src="./app/audio/interval.mp3" type="audio/mpeg"></audio>
+<audio id="minutaAudio"><source src="./app/audio/ye.mp3" type="audio/mpeg"></audio>
+
+<div class="row">
+        <button class="btn btn-primary" onclick="PasteTXT()">Paste</button> 
+        <button class="btn btn-primary" onclick="CopyTXT()">Copy</button>   
+        <span style="float:right;">
+           <button class="btn btn-primary red" onclick="ClearTXT()">Clear</button>
+        </span>
+        <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
+  </div>
+
+
+
+  
+  <div class="kontener" id="klawisze">
+    <h3>Interval alarm</h3>
+
+<div class="custom-select wrapper kontener" style="width:200px;">
+  <select id="timetotime" onchange="GetSelectedTextValue(this)">
+    <option value="0">Czas:</option>
+    <option value="00:15">00:15 sekund</option>
+    <option value="01:00">01:00</option>
+    <option value="03:00">03:00</option>
+    <option value="05:20">05:20</option>
+    <option value="07:30">07:30</option>
+    <option value="10:00">10:00</option>
+    <option value="15:00">15:00</option>
+    <option value="30:00">30:00</option>
+    <option value="60:00">60:00</option>
+  </select>
+</div>  
+
+    
+    <button class="btn" onclick="repeatMinuta(this,15000)">00:15</button>
+    <button class="btn blue" onclick="repeatMinuta(this,60000)">01:00</button>
+    <button class="btn blue" onclick="repeatMinuta(this,320000)">05:20</button>
+    <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">07:30</button> 
+    <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15:00</button> 
+    <button class="btn blue" onclick="repeatMinuta(this,1800000)" type="button">30:00</button>
+    <button class="btn blue" onclick="repeatMinuta(this,3600000)" type="button">60:00</button>
+    <!--
+    <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
+    <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
+    -->
+    <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
+  </div>
+  <div class="kontener" id="counters">
+    <button class="btn gray mini active" onclick="setMax(this,1)" type="button">#1</button>
+    <button class="btn gray mini" onclick="setMax(this,2)" type="button">#2</button>
+    <button class="btn gray mini" onclick="setMax(this,4)" type="button"> #4 </button>
+    <button class="btn gray mini" onclick="setMax(this,8)" type="button"> #8 </button>
+    <button class="btn gray mini" onclick="setMax(this,16)" type="button"> #16 </button>
+  </div>
+  
+  <div class="kontener">
+    <input id="intime" class="intime" /> min. <input id="sektime" class="intime" /> sek. <button class="btn red mini" onclick="setStart()"> Start </button>
+  </div>
+  
+  <div class="kontener box">
+    <span     class="left"  id="counter"   style="display:inline-block; width:3em;">#1</span>
+    <progress class="right" style="" id="rangetime" value=0 min=0 max=2 ></progress>
+  </div> 
+  
+  <div class="kontener box">
+    <span     class="left"  id="counterr"   style="display:inline-block; width:3em;">0%</span>
+    <progress class="right" id="progresBar"  style="" value=0 min=0 max=100></progress>
+  </div> 
+  <div class="kontener" style="background:silver;">
+      <div class="header">A simple timer:</div>
+       <h3 class="timer" id="timer">00:00</h3>
+       <div class="buttons">
+          <button class="btn" onclick="startTimer()" id="button1">Start</button>
+          <button class="btn" onclick="stopTimer()" id = "button2">Stop</button>
+       </div>
+   </div> 
+     
+      
+    <div class="kontener info" id="info"></div>
+    <div class="kontener info" id="infotime"></div>
+    
+    <div class="kontener info" id="exmenu"></div>
+      <div class="kontener info" id="temp"></div>
+      <button onclick="ccc()" class="btn mini minii">CC</button>
+      
+</div> <!--wrapper-->  
+
+
+
+  
+<script>
+const GetSelectedTextValue=(ten)=>{
+    console.log(1,ten)
+    console.log(1,ten.value,parseInt(ten.value))
+  startTimer(ten.value);
+  }
+/*const changeSelected = (e) => {
+  const $select = document.querySelector('#timetotime');
+  console.log(2,$select.value);
+};
+document.querySelector('#timetotime').addEventListener('click', changeSelected);*/
+  
+let info     = document.getElementById("info");
+let infotime = document.getElementById("infotime");
+let counterp = document.getElementById("counter");
+let counterr = document.getElementById("counterr");
+let intime   = document.getElementById("intime");
+let sektime   = document.getElementById("sektime");
+let rangetime = document.getElementById("rangetime");  
+let y        = document.getElementById("minutaAudio");
+let startAudio     = document.getElementById("startAudio");
+let stopAudio      = document.getElementById("stopAudio");
+let intervalAudio  = document.getElementById("intervalAudio");
+let interV   = null;
+
+let counter  = 0;
+let maxCount = 1;
+let progresBar = document.getElementById("progresBar");
+let interProgres   = null;  
+
+clearProgress=()=>{
+  counterr.textContent="0%";
+  counterr.value=0;
+  progresBar.textContent="#"+maxCount;
+  progresBar.value=0;
+}
+  
+const setProgres=(itime)=>{
+    let steps = 100;
+    progresBar.max=steps;
+    if (interProgres) {
+      interProgres=null;
+      clearInterval(interProgres)
+    }
+    let progresTime=(maxCount*itime)/steps;
+    //console.log(progresTime);
+    let progresStep=0;
+    progresBar.value=progresStep;    
+    interProgres = setInterval(()=>{
+        progresStep++;
+        //console.log(progresStep);
+        progresBar.value=progresStep;
+        counterr.textContent=`${steps-progresStep}%`;
+    },progresTime);
+                               
+}
+const setActive=(ten)=>{
+      let parent = ten.parentElement;
+      let keys   = parent.querySelectorAll("button");
+      keys.forEach(b=>b.classList.remove("active"));
+      ten.classList.add("active");
+}
+const setStart=()=>{
+  let min = document.getElementById("intime").value;
+  let sek = document.getElementById("sektime").value;
+  let milisek = 1000 * ((min*60)+sek)
+  console.log("milisek=",milisek);
+  clearProgress();
+  //repeatMinuta(null,milisek);
+  repeatMinutaStart(null,milisek)
+}
+  
+const setMax=(ten,max=2)=>{
+  maxCount = max;
+  counterp.textContent="#"+maxCount;
+  if (ten) {setActive(ten);} 
+  clearProgress();
+}
+const singleAlarm=(ten,time)=>{
+  maxCount = 1;
+  counterp.textContent="#"+maxCount;
+  if (ten) {setActive(ten);} 
+  repeatMinuta(null,time)
+}
+const stopInterval=(ten)=>{
+    interV=clearInterval(interV);
+    interV = null;
+        clearInterval(interProgres);
+        interProgres = null;
+    info.innerHTML += "<h4>Stop Interval </h4>";
+   counter = 0;
+}
+  
+const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
+  
+const parseTime=(time)=> Math.round(time/60000);
+
+const parseTimes=(time)=> {
+  let min = Math.floor(time/60000);
+  let sek = Math.round((time - (60000*min))/1000)
+  return [min,sek];
+}
+
+const repeatMinuta=(ten,itime=60000)=> {
+  clearProgress();
+  counterp.textContent="#"+maxCount;
+  //intime.value = parseTime(itime);
+  let timesArr = (parseTimes(itime));
+  intime.value = timesArr[0];
+  sektime.value = timesArr[1];
+  //repeatMinutaStart(ten,itime);
+  if (ten) {setActive(ten);} 
+}
+const repeatMinutaStart=(ten,itime=60000)=> {
+  info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
+
+  if (interV) {
+    stopInterval();
+  }
+  setProgres(itime);
+  counter = 0;
+  startAudio.play(); 
+  info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";
+  rangetime.value=0;
+  rangetime.max=maxCount;
+  
+  interV = setInterval(()=>{  
+    counter++;
+    counterp.textContent=`#${maxCount-counter}`;
+    rangetime.value=counter;
+      if (counter === maxCount) stopAudio.play();
+      else                      intervalAudio.play();
+      if (counter < maxCount) {       
+        info.innerHTML += "<p>#"+counter+", "+ getNow()+"</p>";      
+      } else {      
+         stopInterval();
+      }
+  },itime); 
+   
+} 
+
+</script>
+
+<script>
+  const registerServiceWorker = async () => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register('sw.js',{scope: './',});
+      if (registration.installing) {
+        console.log('Service worker installing');        
+      } else if (registration.waiting) {
+        console.log('Service worker installed');
+      } else if (registration.active) {
+        console.log('Service worker active');
+      }
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+};
+
+//registerServiceWorker();
+
+</script>
+
+
+<script>
+
+var w = null; // initialize variable
+
+// function to start the timer
+function startTimer(ttime="00:00")
+{
+   // First check whether Web Workers are supported
+   if (typeof(Worker)!=="undefined"){
+      // Check whether Web Worker has been created. If not, create a new Web Worker based on the Javascript file simple-timer.js
+      if (w==null){
+         w = new Worker("./js/worker_times.js");
+      }
+      // Update timer div with output from Web Worker
+     let plus ="";
+      w.onmessage = function (event) {
+        
+        let czas = event.data;
+        console.log(czas);
+        console.log(parseInt(czas));
+        if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
+        //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
+        if (czas===ttime) {plus=ttime;    stopAudio.play(); stopTimer()}
+        
+        //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
+         document.getElementById("timer").innerHTML = plus+czas;
+      };
+   } else {
+      // Web workers are not supported by your browser
+      document.getElementById("timer").innerHTML = "Sorry, your browser does not support Web Workers ...";
+   }
+}
+
+// function to stop the timer
+function stopTimer()
+{
+   if (w) w.terminate();
+   timerStart = true;
+   w = null;
+}
+</script>
+
+
+
+  
+</body>
+</html>
