@@ -55,6 +55,7 @@
       .dasz {border: 1px dashed #f0f;}
     </style>
     <script>
+      let znacznik = "v4v";
       let installScript=(urls,callback)=>{
             let script = document.createElement('script');
             script.onload = function () {
@@ -76,7 +77,7 @@
             installScripts(["./script.js","./navbar.js"])
             let exmenu = document.querySelector("#dropdown2").innerHTML;
             document.querySelector("#exmenu").innerHTML = exmenu;
-            document.getElementById("temp").textContent = "v3v";
+            document.getElementById("temp").textContent = znacznik;
           })
           .catch(e => {console.log(e)});        
       });      
@@ -360,6 +361,7 @@ const startTimer=(ttime=0)=>{
       if (timeworker==null){
          timeworker = new Worker("./js/worker_times.js");
       }
+     stopTimer();
       startAudio.play();
       let plus ="";
       let moduloProgress = Math.round(ttime/100);
@@ -394,6 +396,7 @@ const stopTimer=()=>{
    if (timeworker) timeworker.terminate();
    timerStart = true;
    timeworker = null;
+  progresBar.value = 0;
 }
 </script>
 
