@@ -245,8 +245,7 @@ const setStart=()=>{
   let milisek = 1000 * ((min*60)+sek)
   console.log("milisek=",milisek);
   clearProgress();
-  //repeatMinuta(null,milisek);
-  startTimer(milisek)
+  if (milisek>2) startTimer(milisek)
 }
   
 const setMax=(ten,max=2)=>{
