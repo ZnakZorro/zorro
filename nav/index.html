@@ -76,7 +76,7 @@
             installScripts(["./script.js","./navbar.js"])
             let exmenu = document.querySelector("#dropdown2").innerHTML;
             document.querySelector("#exmenu").innerHTML = exmenu;
-            document.getElementById("temp").textContent = "v2";
+            document.getElementById("temp").textContent = "v3v";
           })
           .catch(e => {console.log(e)});        
       });      
@@ -111,7 +111,7 @@
   <div class="kontener" id="klawisze">
     <h3>Interval alarm</h3>
 
-<div class="custom-select wrapper kontener" style="width:200px;">
+<div class="custom-select wrapper kontener" style="">
   <select id="timetotime" onchange="GetSelectedTextValue(this)">
     <option value="0">Czas:</option>
     <option value="15000">00:15</option>
