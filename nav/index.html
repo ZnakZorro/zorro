@@ -372,7 +372,7 @@ const startTimer=(ttime=0)=>{
         console.log(iczas,tprogress);
         progresBar.value = iczas/moduloProgress;
         if (iczas>ttime) {
-          plus="is="; 
+          plus="fin = "; 
           intervalAudio.play();   
           stopAudio.play(); 
           stopTimer()
@@ -383,7 +383,7 @@ const startTimer=(ttime=0)=>{
         //if (czas>ttime) {plus=ttime;    stopAudio.play(); stopTimer()}        
         //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
         let sekCzas = Math.round(iczas/1000);
-         document.getElementById("timer").innerHTML = "#"+maxCount+" "+plus+sekCzas+" sek";
+         document.getElementById("timer").innerHTML = "#"+maxCount+" :: "+plus+sekCzas+"s";
       };
    } else {
       document.getElementById("timer").innerHTML = "Sorry, your browser does not support Web Workers ...";
