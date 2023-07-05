@@ -114,30 +114,27 @@
 <div class="custom-select wrapper kontener" style="width:200px;">
   <select id="timetotime" onchange="GetSelectedTextValue(this)">
     <option value="0">Czas:</option>
-    <option value="00:15">00:15 sekund</option>
-    <option value="01:00">01:00</option>
-    <option value="03:00">03:00</option>
-    <option value="05:20">05:20</option>
-    <option value="07:30">07:30</option>
-    <option value="10:00">10:00</option>
-    <option value="15:00">15:00</option>
-    <option value="30:00">30:00</option>
-    <option value="60:00">60:00</option>
+    <option value="15000">00:15 sekund</option>
+    <option value="60000">01:00</option>
+    <option value="180000">03:00</option>
+    <option value="320000">05:20</option>
+    <option value="450000">07:30</option>
+    <option value="600000>10:00</option>
+    <option value="900000">15:00</option>
+    <option value="1800000">30:00</option>
+    <option value="3600000">60:00</option>
   </select>
 </div>  
 
     
-    <button class="btn" onclick="repeatMinuta(this,15000)">00:15</button>
-    <button class="btn blue" onclick="repeatMinuta(this,60000)">01:00</button>
-    <button class="btn blue" onclick="repeatMinuta(this,320000)">05:20</button>
-    <button class="btn blue" onclick="repeatMinuta(this,450000)" type="button">07:30</button> 
-    <button class="btn blue" onclick="repeatMinuta(this,900000)" type="button">15:00</button> 
-    <button class="btn blue" onclick="repeatMinuta(this,1800000)" type="button">30:00</button>
-    <button class="btn blue" onclick="repeatMinuta(this,3600000)" type="button">60:00</button>
-    <!--
-    <button class="btn" onclick="singleAlarm(this,600000)" type="button"> 10:00 </button>
-    <button class="btn" onclick="singleAlarm(this,900000)" type="button"> 15:00 </button>
-    -->
+    <button class="btn" onclick="startTimerBTN(this,15000)">00:15</button>
+    <button class="btn blue" onclick="startTimerBTN(this,60000)">01:00</button>
+    <button class="btn blue" onclick="startTimerBTN(this,320000)">05:20</button>
+    <button class="btn blue" onclick="startTimerBTN(this,450000)" type="button">07:30</button> 
+    <button class="btn blue" onclick="startTimerBTN(this,900000)" type="button">15:00</button> 
+    <button class="btn blue" onclick="startTimerBTN(this,1800000)" type="button">30:00</button>
+    <button class="btn blue" onclick="startTimerBTN(this,3600000)" type="button">60:00</button>
+    
     <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
   </div>
   <div class="kontener" id="counters">
@@ -187,13 +184,9 @@
 const GetSelectedTextValue=(ten)=>{
     console.log(1,ten)
     console.log(1,ten.value,parseInt(ten.value))
-  startTimer(ten.value);
+    startTimer(ten.value);
   }
-/*const changeSelected = (e) => {
-  const $select = document.querySelector('#timetotime');
-  console.log(2,$select.value);
-};
-document.querySelector('#timetotime').addEventListener('click', changeSelected);*/
+
   
 let info     = document.getElementById("info");
 let infotime = document.getElementById("infotime");
@@ -351,11 +344,14 @@ const repeatMinutaStart=(ten,itime=60000)=> {
 
 <script>
 
-var w = null; // initialize variable
-
+let w = null; // initialize variable
+const startTimerBTN=(ten,czas)=>{
+  let iczas = parseInt(czas);
+  startTimer(iczas)
+}
+  
 // function to start the timer
-function startTimer(ttime="00:00")
-{
+const startTimer=(ttime=0)=>{
    // First check whether Web Workers are supported
    if (typeof(Worker)!=="undefined"){
       // Check whether Web Worker has been created. If not, create a new Web Worker based on the Javascript file simple-timer.js
@@ -368,11 +364,11 @@ function startTimer(ttime="00:00")
         
         let czas = event.data;
         console.log(czas);
-        console.log(parseInt(czas));
-        if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
+        let iczas = parseInt(czas);
+        if (iczas>ttime) {plus=ttime; intervalAudio.play();   stopAudio.play(); stopTimer()}
+        //if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
         //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
-        if (czas===ttime) {plus=ttime;    stopAudio.play(); stopTimer()}
-        
+        //if (czas>ttime) {plus=ttime;    stopAudio.play(); stopTimer()}        
         //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
          document.getElementById("timer").innerHTML = plus+czas;
       };
