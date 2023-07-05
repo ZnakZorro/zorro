@@ -380,9 +380,10 @@ const startTimerOne=(ttime=0)=>{
       timeworker.onmessage = function (event) {
         let czas             = event.data;        
         let iczas            = parseInt(czas);
-        let tprogress        = Math.round(iczas/moduloProgress);       
+        let tprogress        = Math.round(iczas/moduloProgress);  
+        let sekundy = Math.round(iczas/1000);
         progresBar.value     = tprogress;
-        counterr.textContent = tprogress+"%";
+        counterr.textContent = sekundy+"s";
         console.log(iczas,tprogress);
                 let timesArr = (parseTimes(iczas));
                 intime.value = timesArr[0];
@@ -390,7 +391,7 @@ const startTimerOne=(ttime=0)=>{
         if (iczas>ttime) {
           plus="fin = "; 
           intervalAudio.play();   
-          stopAudio.play(); 
+           
           stopTimer(ttime)
         }
         let sekCzas = Math.round(iczas/1000);
@@ -412,8 +413,11 @@ const stopTimer=(ttime)=>{
   document.getElementById("timer").innerHTML = "";
   counter++;
   if (counter<=maxCount) {
+    counterp.textContent = "#"+counter;
     rangetime.value=counter;
     startTimerOne(ttime);
+  } else {
+    stopAudio.play();
   }
 }
 </script>
