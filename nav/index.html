@@ -114,7 +114,7 @@
 <div class="custom-select wrapper kontener" style="width:200px;">
   <select id="timetotime" onchange="GetSelectedTextValue(this)">
     <option value="0">Czas:</option>
-    <option value="15000">00:15 sekund</option>
+    <option value="15000">00:15</option>
     <option value="60000">01:00</option>
     <option value="180000">03:00</option>
     <option value="320000">05:20</option>
@@ -130,11 +130,10 @@
     <button class="btn" onclick="startTimerBTN(this,15000)">00:15</button>
     <button class="btn blue" onclick="startTimerBTN(this,60000)">01:00</button>
     <button class="btn blue" onclick="startTimerBTN(this,320000)">05:20</button>
-    <button class="btn blue" onclick="startTimerBTN(this,450000)" type="button">07:30</button> 
-    <button class="btn blue" onclick="startTimerBTN(this,900000)" type="button">15:00</button> 
-    <button class="btn blue" onclick="startTimerBTN(this,1800000)" type="button">30:00</button>
-    <button class="btn blue" onclick="startTimerBTN(this,3600000)" type="button">60:00</button>
-    
+    <button class="btn blue" onclick="startTimerBTN(this,450000)">07:30</button> 
+    <button class="btn blue" onclick="startTimerBTN(this,900000)">15:00</button> 
+    <button class="btn blue" onclick="startTimerBTN(this,1800000)">30:00</button>
+    <button class="btn blue" onclick="startTimerBTN(this,3600000)">60:00</button>    
     <button class="btn red"  onclick="stopInterval(this)" type="button">STOP</button> 
   </div>
   <div class="kontener" id="counters">
@@ -280,6 +279,8 @@ const parseTimes=(time)=> {
 }
 
 const repeatMinuta=(ten,itime=60000)=> {
+  console.log("???????????????????????????????????");
+  return null;
   clearProgress();
   counterp.textContent="#"+maxCount;
   //intime.value = parseTime(itime);
@@ -290,6 +291,8 @@ const repeatMinuta=(ten,itime=60000)=> {
   if (ten) {setActive(ten);} 
 }
 const repeatMinutaStart=(ten,itime=60000)=> {
+   console.log("???????????????????????????????????");
+  return null;
   info.innerHTML = "<h4>Start Interval</h4>";// #"+maxCount+"</h4>";
 
   if (interV) {
@@ -344,46 +347,43 @@ const repeatMinutaStart=(ten,itime=60000)=> {
 
 <script>
 
-let w = null; // initialize variable
+let timeworker = null;
+  
 const startTimerBTN=(ten,czas)=>{
   let iczas = parseInt(czas);
   startTimer(iczas)
 }
   
-// function to start the timer
+
 const startTimer=(ttime=0)=>{
-   // First check whether Web Workers are supported
    if (typeof(Worker)!=="undefined"){
-      // Check whether Web Worker has been created. If not, create a new Web Worker based on the Javascript file simple-timer.js
-      if (w==null){
-         w = new Worker("./js/worker_times.js");
+      if (timeworker==null){
+         timeworker = new Worker("./js/worker_times.js");
       }
-      // Update timer div with output from Web Worker
+      startAudio.play();
      let plus ="";
       w.onmessage = function (event) {
-        console.log(event);
         let czas = event.data;
         console.log(czas);
         let iczas = parseInt(czas);
-        if (iczas>ttime) {plus=ttime; intervalAudio.play();   stopAudio.play(); stopTimer()}
+        setProgres(iczas);
+        if (iczas>ttime) {plus="is="; intervalAudio.play();   stopAudio.play(); stopTimer()}
+        
         //if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
         //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
         //if (czas>ttime) {plus=ttime;    stopAudio.play(); stopTimer()}        
         //if (czas==="03:00") {plus="3 minuta ";  stopAudio.play(); }
-         document.getElementById("timer").innerHTML = plus+czas;
+         document.getElementById("timer").innerHTML = "#"+maxCount+" "+plus+czas;
       };
    } else {
-      // Web workers are not supported by your browser
       document.getElementById("timer").innerHTML = "Sorry, your browser does not support Web Workers ...";
    }
 }
 
-// function to stop the timer
-function stopTimer()
-{
-   if (w) w.terminate();
+const stopTimer=()=>{
+   if (timeworker) timeworker.terminate();
    timerStart = true;
-   w = null;
+   timeworker = null;
 }
 </script>
 
