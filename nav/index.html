@@ -164,7 +164,7 @@
       
        <div class="buttons">
           <button class="btn" onclick="startTimer()" id="button1">Start</button>
-          <button class="btn" onclick="stopTimer()" id = "button2">Stop</button>
+          <button class="btn" onclick="stopTimer(0)" id = "button2">Stop</button>
        </div>
    </div> 
      
@@ -267,7 +267,7 @@ const stopInterval=(ten)=>{
         interProgres = null;
     info.innerHTML += "<h4>Stop Interval </h4>";
    counter = 0;
-  stopTimer();
+  stopTimer(0);
 }
   
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
@@ -361,22 +361,19 @@ const startTimerBTN=(ten,czas)=>{
 const startTimer=(ttime=0)=>{
   if (ttime<2) return;
   rangetime.value=0;
-  rangetime.max=maxCount;
-  for (let i=0; i<maxCount; i++){
-    console.log(111111,i);
+  rangetime.max=maxCount; 
     rangetime.value=i;
     startTimerOne(ttime);
-  }
+ 
 }
   
 const startTimerOne=(ttime=0)=>{
     
    if (typeof(Worker) !== "undefined"){
-     if (timeworker) stopTimer();
+     if (timeworker) stopTimer(ttime);
       if (timeworker===null){
          timeworker = new Worker("./js/worker_times.js");
       }
-      //stopTimer();
       startAudio.play();
       let plus ="";
       let moduloProgress = Math.round(ttime/100);
@@ -394,7 +391,7 @@ const startTimerOne=(ttime=0)=>{
           plus="fin = "; 
           intervalAudio.play();   
           stopAudio.play(); 
-          stopTimer()
+          stopTimer(ttime)
         }
         let sekCzas = Math.round(iczas/1000);
          document.getElementById("timer").innerHTML = "#"+maxCount+" :: "+plus+sekCzas+"s";
@@ -404,7 +401,7 @@ const startTimerOne=(ttime=0)=>{
    }
 }
 
-const stopTimer=()=>{
+const stopTimer=(ttime)=>{
    if (timeworker) timeworker.terminate();
    timerStart = true;
    timeworker = null;
@@ -413,6 +410,8 @@ const stopTimer=()=>{
   intime.value = 0;
   sektime.value = 0;
   document.getElementById("timer").innerHTML = "";
+  counter++;
+  if (counter<maxCount) startTimer(ttime)
 }
 </script>
 
