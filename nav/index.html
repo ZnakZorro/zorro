@@ -359,7 +359,7 @@ const startTimerBTN=(ten,czas)=>{
   
 //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 const startTimer=(ttime=0)=>{
-  
+    if (ttime<2) return;
    if (typeof(Worker) !== "undefined"){
      if (timeworker) stopTimer();
       if (timeworker===null){
