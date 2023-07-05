@@ -376,6 +376,9 @@ const startTimer=(ttime=0)=>{
         progresBar.value     = tprogress;
         counterr.textContent = tprogress+"%";
         console.log(iczas,tprogress);
+                        let timesArr = (parseTimes(iczas));
+                        intime.value = timesArr[0];
+                        sektime.value = timesArr[1];
         if (iczas>ttime) {
           plus="fin = "; 
           intervalAudio.play();   
