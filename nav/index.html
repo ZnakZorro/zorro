@@ -412,7 +412,7 @@ const stopTimer=(ttime)=>{
   sektime.value = 0;
   document.getElementById("timer").innerHTML = "";
   counter++;
-  if (counter<maxCount-1) {
+  if (counter<maxCount+1) {
     counterp.textContent = "#"+counter;
     rangetime.value=counter;
     startTimerOne(ttime);
