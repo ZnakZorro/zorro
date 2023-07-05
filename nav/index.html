@@ -361,7 +361,7 @@ const startTimer=(ttime=0)=>{
       // Update timer div with output from Web Worker
      let plus ="";
       w.onmessage = function (event) {
-        
+        console.log(event);
         let czas = event.data;
         console.log(czas);
         let iczas = parseInt(czas);
