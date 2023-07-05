@@ -355,10 +355,12 @@ const startTimerBTN=(ten,czas)=>{
   startTimer(iczas)
 }
   
-
+//11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
 const startTimer=(ttime=0)=>{
-   if (typeof(Worker)!=="undefined"){
-      if (timeworker==null){
+  
+   if (typeof(Worker) !== "undefined"){
+     if (timeworker) stopTimer();
+      if (timeworker===null){
          timeworker = new Worker("./js/worker_times.js");
       }
       //stopTimer();
