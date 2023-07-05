@@ -382,16 +382,16 @@ const startTimerOne=(ttime=0)=>{
         let iczas            = parseInt(czas);
         let tprogress        = Math.round(iczas/moduloProgress);  
         let sekundy = Math.round(iczas/1000);
+        let zostalo = Math.round((ttime-iczas)/1000);
         progresBar.value     = tprogress;
-        counterr.textContent = sekundy+"s";
+        counterr.textContent = zostalo+"s";
         console.log(iczas,tprogress);
                 let timesArr = (parseTimes(iczas));
                 intime.value = timesArr[0];
                 sektime.value = timesArr[1];
         if (iczas>ttime) {
           plus="fin = "; 
-          intervalAudio.play();   
-           
+          intervalAudio.play();           
           stopTimer(ttime)
         }
         let sekCzas = Math.round(iczas/1000);
@@ -412,7 +412,7 @@ const stopTimer=(ttime)=>{
   sektime.value = 0;
   document.getElementById("timer").innerHTML = "";
   counter++;
-  if (counter<=maxCount) {
+  if (counter<maxCount-1) {
     counterp.textContent = "#"+counter;
     rangetime.value=counter;
     startTimerOne(ttime);
