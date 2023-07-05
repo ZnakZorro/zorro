@@ -351,8 +351,9 @@ const parseTimes=(time)=> {
 let timeworker = null;
   
 const startTimerBTN=(ten,czas)=>{
+  if (ten) {setActive(ten);} 
   let iczas = parseInt(czas);
-  startTimer(iczas)
+  startTimer(iczas);  
 }
   
 //11111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111
