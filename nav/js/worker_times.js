@@ -32,7 +32,7 @@ const myTimer=(d0)=>{
 const myTimerMS=(d0)=>{
    let d=(new Date()).valueOf();
    let diff = d-d0;
-   postMessage("milisek+":"+diff);
+   postMessage(diff);
 }               
 if (timerStart){
    // get current time
