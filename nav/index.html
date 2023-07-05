@@ -365,11 +365,18 @@ const startTimer=(ttime=0)=>{
       let moduloProgress = Math.round(ttime/100);
      //??????????????????????????????????????????????????????????????????/
       timeworker.onmessage = function (event) {
-        let czas = event.data;
-        console.log(czas);
+        let czas = event.data;        
         let iczas = parseInt(czas);
-        setProgres(iczas/moduloProgress);
-        if (iczas>ttime) {plus="is="; intervalAudio.play();   stopAudio.play(); stopTimer()}
+        //setProgres(iczas/moduloProgress);
+        let tprogress = iczas/moduloProgress
+        console.log(iczas,tprogress);
+        rangetime.value = iczas/moduloProgress;
+        if (iczas>ttime) {
+          plus="is="; 
+          intervalAudio.play();   
+          stopAudio.play(); 
+          stopTimer()
+        }
         
         //if (czas==="00:05") {plus="5 sek ";    startAudio.play(); }
         //if (czas===ttime) {plus="1 minuta ";    intervalAudio.play(); }
