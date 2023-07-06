@@ -414,7 +414,7 @@ const stopTimer=(ttime)=>{
   counter++;
   if (counter<maxCount+0) {
     counterp.textContent = "#"+counter;
-    rangetime.value=counter;
+    rangetime.value=counter+1;
     startTimerOne(ttime);
   } else {
     stopAudio.play();
