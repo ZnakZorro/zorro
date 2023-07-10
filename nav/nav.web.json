@@ -5,19 +5,19 @@
 	"start_url": "/zorro/nav/index.html",
 	"display": "standalone",
 
-	"theme_color": "#f63",
-	"background_color": "#f63",
+	"theme_color": "#fa4",
+	"background_color": "#fa4",
 	"icons": [
 		{
-			"src": "./nav.webp",
-			"sizes": "512x512",
+			"src": "./1536.webp",
+			"sizes": "1536x1536",
 			"type": "image/webp"
 		}
 	],
 	"screenshots": [		
 		{
-			"src": "./nav.webp",
-			"sizes": "512x512",
+			"src": "./1536.webp",
+			"sizes": "1536x1536",
 			"type": "image/webp"
 		}
 	]
