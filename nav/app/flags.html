@@ -2,12 +2,13 @@
     #countrys div {
         display: inline-grid;
         background: #eee;
-        margin: 0.5em;
-        padding: 0.5em;
+        margin: 0.25em;
+        padding: 0.25em;
         min-height: 8em;
-        width: 13em;
+        width: 11em;
     }
     p {margin:0;}
+    img {width:160px;max-height:6em;}
 </style>
 <div id="countrys"></div>
 <script>
@@ -16,13 +17,12 @@ const logi=(obj)=>{
     let countries = document.querySelector("#countrys");
     let html ="";
     obj.forEach((c,i) => {
-        console.log(i,c.name.common); 
-        console.log(i,c.flags.svg,c.car);  
+        console.log(i,c.name.common,c.flags.svg,c.car);  
         let car="";
         if (c.car.signs) car = c.car.signs[0];
-        html += `<div><p>${i+1}. [${car}] ${c.name.common} <p> <img src="${c.flags.svg}" style="width:200px"></div>`;    
+        html += `<div data-nr="${i}" onClick="show(this)"><p>${i+1}. [${car}] ${c.name.common} <p> <img src="${c.flags.svg}" ></div>`;    
     });
-    console.log(html)
+    //console.log(html)
     countries.innerHTML = html;
 }
 
@@ -39,6 +39,19 @@ async function fetchData() {
     logi(countries)
 }
 
+async function fetch1Data(nr) {
+    console.log(nr);
+    const response = await fetch(url); 
+    const countries = await response.json(); 
+    //console.log(countries [64].name.common);
+    console.log(countries[nr]);
+    console.log(JSON.stringify(countries[nr],null,"\t"));
+    
+}
+const show=(ten)=>{
+    console.log(ten,ten.dataset)
+    fetch1Data(ten.dataset.nr)
+}
 console.log(2); 
 fetchData();
 
