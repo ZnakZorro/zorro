@@ -29,7 +29,7 @@ const logi=(obj)=>{
     let countries = document.querySelector("#countrys");
     let html ="";
     obj.forEach((c,i) => {
-        console.log(i,c.name.common,c.flags.svg,c.car);  
+        //console.log(i,c.name.common,c.flags.svg,c.car);  
         let car="";
         if (c.car.signs) car = c.car.signs[0];
         html += `<div data-nr="${i}" onClick="show(this)"><p>${i+1}. [${car}] ${c.name.common} <p> <img src="${c.flags.svg}" ></div>`;    
@@ -43,7 +43,7 @@ const logi=(obj)=>{
 const url ="https://restcountries.com/v3.1/all";
 
 async function fetchData() {
-    console.log(1);
+    //console.log(1);
     const response = await fetch(url); 
     const countries = await response.json(); 
     //console.log(countries [64].name.common);
@@ -64,7 +64,7 @@ const show=(ten)=>{
     console.log(ten,ten.dataset)
     fetch1Data(ten.dataset.nr)
 }
-console.log(2); 
+//console.log(2); 
 fetchData();
 
 </script>
