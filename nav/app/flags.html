@@ -1,0 +1,45 @@
+<style>
+    #countrys div {
+        display: inline-grid;
+        background: #eee;
+        margin: 0.5em;
+        padding: 0.5em;
+        min-height: 8em;
+        width: 13em;
+    }
+    p {margin:0;}
+</style>
+<div id="countrys"></div>
+<script>
+
+const logi=(obj)=>{
+    let countries = document.querySelector("#countrys");
+    let html ="";
+    obj.forEach((c,i) => {
+        console.log(i,c.name.common); 
+        console.log(i,c.flags.svg,c.car);  
+        let car="";
+        if (c.car.signs) car = c.car.signs[0];
+        html += `<div><p>${i+1}. [${car}] ${c.name.common} <p> <img src="${c.flags.svg}" style="width:200px"></div>`;    
+    });
+    console.log(html)
+    countries.innerHTML = html;
+}
+
+//Async Await
+
+const url ="https://restcountries.com/v3.1/all";
+
+async function fetchData() {
+    console.log(1);
+    const response = await fetch(url); 
+    const countries = await response.json(); 
+    //console.log(countries [64].name.common);
+    console.log(countries[60])
+    logi(countries)
+}
+
+console.log(2); 
+fetchData();
+
+</script>
