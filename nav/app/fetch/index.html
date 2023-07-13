@@ -1,8 +1,9 @@
 
 
-<a href="/terms">Read the Terms of Service 1</a>
+<a href="/terms">Read the Terms of Service 11</a>
 
-<dialog></dialog>
+<dialog style="display:block"></dialog>
+<div id="page"></div>
 
 
 <script>
@@ -30,6 +31,8 @@ const handleModal=(event)=>{
 	    console.log(content)
         let dialog = document.querySelector('dialog');
         dialog.append(content);
+	let page = document.querySelector('#page');
+        page.append(content);
     });
 }
 
