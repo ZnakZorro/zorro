@@ -1,6 +1,6 @@
 
 
-<a href="/terms">Read the Terms of Service 11</a>
+<a href="/terms">Read the CONTENT by fetch 2</a>
 
 <dialog style="display:block"></dialog>
 <div id="page"></div>
@@ -8,12 +8,11 @@
 
 <script>
 
-function stringToHTML (text) {
+const stringToHTML=(text)=>{
 	let parser = new DOMParser();
 	let doc = parser.parseFromString(text, 'text/html');
 	return doc.body;
 }
-
 
 
 const handleModal=(event)=>{
@@ -25,12 +24,13 @@ const handleModal=(event)=>{
         }
         throw response;
     }).then(function (text) {
-	console.log(text)
+	console.log(text);
         let html = stringToHTML(text);
         let content = html.querySelector('#agreement');
-	    console.log(content)
-        let dialog = document.querySelector('dialog');
-        dialog.append(content);
+	console.log("=========================");
+	console.log(content);
+        //let dialog = document.querySelector('dialog');
+        //dialog.append(content);
 	let page = document.querySelector('#page');
         page.append(content);
     });
