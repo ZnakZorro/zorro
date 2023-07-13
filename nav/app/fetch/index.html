@@ -1,0 +1,55 @@
+
+
+
+
+
+
+
+
+
+
+<a href="/terms">Read the Terms of Service</a>
+
+
+
+
+
+
+<script>
+
+
+
+function stringToHTML (text) {
+	let parser = new DOMParser();
+	let doc = parser.parseFromString(text, 'text/html');
+	return doc.body;
+}
+
+
+
+const handleModal=(event)=>{
+    console.log(event)
+    event.preventDefault();
+    fetch('./about.html').then(function (response) {
+        if (response.ok) {
+            return response.text();
+        }
+        throw response;
+    }).then(function (text) {
+        let html = stringToHTML(text);
+        let content = html.querySelector('#agreement');
+        let dialog = document.querySelector('dialog');
+        dialog.append(content);
+    });
+}
+
+
+
+
+
+
+let toggle = document.querySelector('[href="/terms"]');
+console.log(toggle)
+toggle.setAttribute('role', 'button');
+toggle.addEventListener('click', handleModal);
+</script>
