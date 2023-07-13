@@ -1,23 +1,11 @@
 
 
-
-
-
-
-
-
-
-
 <a href="/terms">Read the Terms of Service</a>
 
 <dialog></dialog>
 
 
-
-
 <script>
-
-
 
 function stringToHTML (text) {
 	let parser = new DOMParser();
@@ -36,8 +24,10 @@ const handleModal=(event)=>{
         }
         throw response;
     }).then(function (text) {
+	console.log(text)
         let html = stringToHTML(text);
         let content = html.querySelector('#agreement');
+	    console.log(content)
         let dialog = document.querySelector('dialog');
         dialog.append(content);
     });
