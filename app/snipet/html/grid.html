@@ -1,0 +1,85 @@
+
+
+<style>
+    * {
+  box-sizing: border-box;
+}
+body {
+  min-height: 100vh;
+  font-family: "Verdana", sans-serif;
+  font-size: 18px;
+}
+.grid-wrap {
+  padding: 1rem;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 1rem;
+}
+.grid + .grid {
+  margin-top: 1rem;
+}
+
+.grid6 {
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+}
+
+span {
+  border: 2px dashed currentcolor;
+  border-radius: 4px;
+  min-height: 5vh;
+  padding: 1rem;
+  color: #0178d4;
+  
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+div:nth-child(2) span {
+  color: purple;
+}
+
+div:nth-child(3) span {
+  color: green;
+}
+
+div:nth-child(4) span {
+  color: orangered;
+}
+</style>
+
+
+
+
+<main class="grid-wrap">
+
+  <div class="grid">
+    <span>One column default</span>
+  </div>
+
+  <div class="grid">
+    <span>Half column 1</span>
+    <span>Half column 2</span>
+  </div>
+
+  <div class="grid">
+    <span>3-col 1</span>
+    <span>3-col 2</span>
+    <span>3-col 3</span>
+  </div>
+
+  <div class="grid">
+    <span>4-col 1</span>
+    <span>4-col 2</span>
+    <span>4-col 3</span>
+    <span>4-col 4</span>
+  </div>
+  <div class="grid grid6">
+    <span>6-col 1</span><span>6-col 1</span><span>6-col 1</span><span>6-col 1</span><span>6-col 1</span><span>6-col 1</span>
+  </div>
+
+</main>
