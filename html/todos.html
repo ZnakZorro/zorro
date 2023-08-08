@@ -3,37 +3,39 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-   <title>todos</title>  
+   <title>ToDos</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
-   
-   <style>
+   <meta name="theme-color" content="#800">
+   <link rel="icon" type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3E%3C/svg%3E" />
+
+<style>
     *, :after, :before {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
     border-collapse: collapse;
     margin:0;
     padding:0;
-    font-weight: 200;
-}
-body {
-font-family: Verdana, sans-serif;
-font-size:22px; 
-background:#f8f8f8;
-padding:0;
-margin: 0px auto;
-width: 96%;
-max-width: 40em;
-}
+    }
+    body {
+    font-family: Verdana, sans-serif;
+    font-size:22px; 
+    background:#fff;
+    padding:0;
+    margin: 0px auto;
+    width: 96%;
+    max-width: 40em;
+    }
 button {
-    font-size:1.3em; 
+    font-size:1.1em; 
     padding: 2px 15px;
     border-width: 1px;
     box-shadow: 0px 2px 5px rgb(0 0 0 / 20%);
     cursor: pointer;
     margin: 0.2em;
-    border-color: #ccc;
-    background: #fff;
+    border-color: #aaa;
+    background: #ccc;
     border-radius: 0.5em;
     min-width: 36px;
     float: right;
@@ -44,13 +46,14 @@ button {
     gap: 5px;
 }
 .active{background:#c40!important;color: white!important;}
+.ready {background:#888!important;}
 ul {width:100%;}
 ul>li{ width:100%;list-style-type:none;padding-top: 4px;}
-li:nth-child(odd) {
-  background-color: #ddd;
-}
-#todo {min-width:100px;font-size:1.2em;}
-   </style>
+li {background:#eee; padding-left:5px;}
+li:nth-child(odd) {background-color: #ddd;}
+#todo {max-width:300px;font-size:1.1em;}
+</style>
+
 </head>
 <body>
 
@@ -101,20 +104,25 @@ function addTodo(event) {
   li.textContent = form.todo.value;
 
   // Add a remove button
+  let rbtn = document.createElement("button");
+  rbtn.textContent = "✓";
+  rbtn.setAttribute("data-ready", "");
+  li.append(rbtn);
+
   let btn = document.createElement("button");
-  btn.textContent = "Delete";
+  btn.textContent = "×";
   btn.setAttribute("data-delete", "");
   li.append(btn);
 
   // Append to the UI
-  app.append(li);
+  app.prepend(li);
 
   // Hide the no-todos message
   noTodos.setAttribute("hidden", "");
 
   // Clear the form field
   form.todo.value = "";
-
+  form.todo.focus();
   // Save the list
   localStorage.setItem("todos", app.innerHTML);
 }
@@ -124,6 +132,12 @@ function addTodo(event) {
  * @param  {Event} event The event object
  */
 function removeTodo(event) {
+    if (event.target.matches("[data-ready]")) {
+        let il = event.target.closest("li");
+        console.log(il);
+        il.classList.add("ready");
+        localStorage.setItem("todos", app.innerHTML);
+    };
   // Only run on [data-delete] items
   if (!event.target.matches("[data-delete]")) return;
 
@@ -149,107 +163,7 @@ document.addEventListener("click", removeTodo);
 
 // Load saved todos
 loadSavedTodos();
-
-
-
-
-
-	
-/*
-// DOM elements
-let app = document.querySelector("#app");
-let form = document.querySelector("#add-todo");
-let noTodos = document.querySelector("#no-todos");
-
-/**
- * Load saved todo items into the UI
- */
-function loadSavedTodos() {
-  let saved = localStorage.getItem("todos");
-  if (saved) {
-    app.innerHTML = saved;
-  } else {
-    noTodos.removeAttribute("hidden");
-  }
-}
-
-/**
- * Add todo to the list
- * @param {Event} event The event object
- */
-function addTodo(event) {
-  // Stop the form from reloading the page
-  event.preventDefault();
-
-  // If there's no field value, ignore the submission
-  if (!form.todo.value) return;
-
-  // Otherwise, create a todo
-  let li = document.createElement("li");
-  li.textContent = form.todo.value;
-
-  // Add a remove button
-  let btn = document.createElement("button");
-  btn.textContent = "X";
-  btn.setAttribute("data-delete", "");
-  li.append(btn);
-
-  // Append to the UI
-  app.append(li);
-
-  // Hide the no-todos message
-  noTodos.setAttribute("hidden", "");
-
-  // Clear the form field
-  form.todo.value = "";
-
-  // Save the list
-  localStorage.setItem("todos", app.innerHTML);
-}
-
-/**
- * Remove todo items
- * @param  {Event} event The event object
- */
-function removeTodo(event) {
-  // Only run on [data-delete] items
-  if (!event.target.matches("[data-delete]")) return;
-
-  // Otherwise, remove the todo
-  let li = event.target.closest("li");
-  if (!li) return;
-  li.remove();
-
-  // Save the list
-  localStorage.setItem("todos", app.innerHTML);
-
-  // If there are no todos, show the no-todos message
-  if (!app.innerHTML.trim().length) {
-    noTodos.removeAttribute("hidden");
-  }
-}
-
-// Add todos when form is submitted
-form.addEventListener("submit", addTodo);
-
-// Remove todos when delete button is clicked
-document.addEventListener("click", removeTodo);
-
-// Load saved todos
-loadSavedTodos();
-	*/
-
-
-
-
-
-
-
-
-
-
-
-
+form.todo.focus();
 
 
 
