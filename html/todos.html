@@ -68,7 +68,94 @@ li:nth-child(odd) {
 <p id="no-todos" hidden><em>You don't have any todos yet.</em></p>
 
 <script>
+// DOM elements
+let app = document.querySelector("#app");
+let form = document.querySelector("#add-todo");
+let noTodos = document.querySelector("#no-todos");
 
+/**
+ * Load saved todo items into the UI
+ */
+function loadSavedTodos() {
+  let saved = localStorage.getItem("todos");
+  if (saved) {
+    app.innerHTML = saved;
+  } else {
+    noTodos.removeAttribute("hidden");
+  }
+}
+
+/**
+ * Add todo to the list
+ * @param {Event} event The event object
+ */
+function addTodo(event) {
+  // Stop the form from reloading the page
+  event.preventDefault();
+
+  // If there's no field value, ignore the submission
+  if (!form.todo.value) return;
+
+  // Otherwise, create a todo
+  let li = document.createElement("li");
+  li.textContent = form.todo.value;
+
+  // Add a remove button
+  let btn = document.createElement("button");
+  btn.textContent = "Delete";
+  btn.setAttribute("data-delete", "");
+  li.append(btn);
+
+  // Append to the UI
+  app.append(li);
+
+  // Hide the no-todos message
+  noTodos.setAttribute("hidden", "");
+
+  // Clear the form field
+  form.todo.value = "";
+
+  // Save the list
+  localStorage.setItem("todos", app.innerHTML);
+}
+
+/**
+ * Remove todo items
+ * @param  {Event} event The event object
+ */
+function removeTodo(event) {
+  // Only run on [data-delete] items
+  if (!event.target.matches("[data-delete]")) return;
+
+  // Otherwise, remove the todo
+  let li = event.target.closest("li");
+  if (!li) return;
+  li.remove();
+
+  // Save the list
+  localStorage.setItem("todos", app.innerHTML);
+
+  // If there are no todos, show the no-todos message
+  if (!app.innerHTML.trim().length) {
+    noTodos.removeAttribute("hidden");
+  }
+}
+
+// Add todos when form is submitted
+form.addEventListener("submit", addTodo);
+
+// Remove todos when delete button is clicked
+document.addEventListener("click", removeTodo);
+
+// Load saved todos
+loadSavedTodos();
+
+
+
+
+
+	
+/*
 // DOM elements
 let app = document.querySelector("#app");
 let form = document.querySelector("#add-todo");
@@ -150,6 +237,23 @@ document.addEventListener("click", removeTodo);
 
 // Load saved todos
 loadSavedTodos();
+	*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// from page: https://gomakethings.com/building-complex-apps-with-vanilla-javascript-a-series/	
 </script>
 
   
