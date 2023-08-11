@@ -55,9 +55,7 @@ li:nth-child(odd) {background-color: #ddd;}
 #todo {max-width:300px;font-size:1.1em;}
 </style>
 <script type="module" src='https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js'></script>
-<script type="module">
-	import {html, render, signal,effect} from 'https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js';
-</script>
+
 </head>
 <body>
 
@@ -73,8 +71,13 @@ li:nth-child(odd) {background-color: #ddd;}
 
 <div id="app"></div>
 
-<script>
 
+<script type="module">
+  import {
+    html,
+    render,
+    signal,
+  } from "https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js";
 
 // DOM elements
 let app = document.querySelector("#app");
