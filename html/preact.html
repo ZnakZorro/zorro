@@ -54,13 +54,15 @@ li {background:#eee; padding-left:5px;}
 li:nth-child(odd) {background-color: #ddd;}
 #todo {max-width:300px;font-size:1.1em;}
 </style>
-
+<script type="module">
+	import {html, render, signal,effect} from 'https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js';
+</script>
 </head>
 <body>
 
 
 
-<h3>Todos</h3>
+<h3>Todos preact 2</h3>
 
 <form id="add-todo">
 	<label>What:</label>
@@ -72,13 +74,6 @@ li:nth-child(odd) {background-color: #ddd;}
 
 <script>
 
-// let {html, render, signal} = preact;
-import {
-  html,
-  render,
-  signal,
-  effect
-} from "https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js";
 
 // DOM elements
 let app = document.querySelector("#app");
