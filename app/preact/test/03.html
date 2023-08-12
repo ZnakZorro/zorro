@@ -20,7 +20,7 @@ import {html, render, signal, effect} from 'https://cdn.jsdelivr.net/npm/preact-
 let app = document.querySelector('#app');
 let info = document.querySelector('#info');
 let form = document.querySelector('#add-todo');
-let todos = signal([]);
+let todos = signal(["innffoo"]);
   
 function getHTML () {
 	if (!todos.value.length) {return html`<p><em>You don't have any todos yet.</em></p>`;}
