@@ -50,7 +50,7 @@ const getInfo=()=>{
 	       	console.log(o);
 		console.log(o.properties.timeseries[0].data.instant.details);
 		let temp = o.properties.timeseries[0].data.instant.details.air_temperature;
-		todos.value = [temp+":"+temp+"&deg;C"];    
+		todos.value = ["temp:"+temp+"&deg;C"];    
 		    //feelsLike
 	        //let bar="";
 	        /*if (o.PlayingTime){
