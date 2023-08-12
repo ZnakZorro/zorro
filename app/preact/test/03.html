@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <title>ToDo-Signal</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#800">
+<script type="module" src='https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js'></script>
+</head>
+<body>
+<h3>jjPlayer</h3>
+<button id="info">Info</button>
+<div id="app"></div>
+
+<script type="module" >
+import {html, render, signal, effect} from 'https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js';
+
+let app = document.querySelector('#app');
+let info = document.querySelector('#info');
+let form = document.querySelector('#add-todo');
+let todos = signal([]);
+  
+function getHTML () {
+	if (!todos.value.length) {return html`<p><em>You don't have any todos yet.</em></p>`;}
+
+	return html`
+		<ul>
+			${todos.value.map(function (todo, index) {
+				return html`<li>${todo} <button data-delete="${index}">Delete</button></li>`;
+			})}
+		</ul>`;
+}
+
+render(html`<${getHTML} />`, app);
+
+effect(function () {
+    console.log(todos.value);
+});
+
+
+const getInfo=()=>{
+    let u = "http://192.168.31.145/info/?info=info";
+    fetch(u)
+    .then(r => {return r.json()})
+    .then(o => {        
+        console.log(o);
+        let bar="";
+        if (o.PlayingTime){
+            bar = Math.ceil((o.PlayingTime/o.FileDuration)/10);
+            console.log("bar=",bar);
+        }
+        //todos.value = [...todos.value, o.TITLE];
+        todos.value = [bar+"::"+o.TITLE];
+    }).catch(e => {console.log(e)})
+}
+
+getInfo();
+info.addEventListener('click', getInfo);
+
+setInterval(()=>{
+    getInfo();
+},10000);
+
+</script>
+</body>
+</html>
