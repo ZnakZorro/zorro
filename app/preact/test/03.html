@@ -41,19 +41,22 @@ effect(function () {
 
 
 const getInfo=()=>{
-    let u = "http://192.168.31.145/info/?info=info";
-    fetch(u)
-    .then(r => {return r.json()})
-    .then(o => {        
-        console.log(o);
-        let bar="";
-        if (o.PlayingTime){
-            bar = Math.ceil((o.PlayingTime/o.FileDuration)/10);
-            console.log("bar=",bar);
-        }
-        //todos.value = [...todos.value, o.TITLE];
-        todos.value = [bar+"::"+o.TITLE];
-    }).catch(e => {console.log(e)})
+    //let u = "http://192.168.31.145/info/?info=info";
+	let u = "https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+	    fetch(u)
+	    .then(r => {return r.json()})
+	    .then(o => {        
+	        console.log(o);
+		todos.value = [temp+":"+o.temperature.value+"&deg;C"];    
+		    //feelsLike
+	        //let bar="";
+	        /*if (o.PlayingTime){
+	            bar = Math.ceil((o.PlayingTime/o.FileDuration)/10);
+	            console.log("bar=",bar);
+	        }*/
+	        //todos.value = [...todos.value, o.TITLE];
+	        //todos.value = [bar+"::"+o.TITLE];
+	    }).catch(e => {console.log(e)})
 }
 
 getInfo();
