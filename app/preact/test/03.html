@@ -42,12 +42,15 @@ effect(function () {
 
 const getInfo=()=>{
     //let u = "http://192.168.31.145/info/?info=info";
-	let u = "https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+	//let u = "https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+	let u = "https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15";
 	    fetch(u)
 	    .then(r => {return r.json()})
 	    .then(o => {        
-	        console.log(o);
-		todos.value = [temp+":"+o.temperature.value+"&deg;C"];    
+	       	console.log(o);
+		console.log(o.properties.timeseries[0].data.instant.details);
+		let temp = o.properties.timeseries[0].data.instant.details.air_temperature;
+		todos.value = [temp+":"+temp+"&deg;C"];    
 		    //feelsLike
 	        //let bar="";
 	        /*if (o.PlayingTime){
