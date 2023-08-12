@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <title>ToDo-Signal</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#800">
+   <link rel="icon" type="image/svg+xml"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/%3E%3C/svg%3E" />
+
+<style>
+     *, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin:0;
+    padding:0;
+    }
+    body {
+    font-family: Verdana, sans-serif;
+    font-size:22px; 
+    background:#fff;
+    padding:0;
+    margin: 0px auto;
+    width: 96%;
+    max-width: 40em;
+    }
+button {
+    font-size:1.1em; 
+    padding: 2px 15px;
+    border-width: 1px;
+    box-shadow: 0px 2px 5px rgb(0 0 0 / 20%);
+    cursor: pointer;
+    margin: 0.2em;
+    border-color: #aaa;
+    background: #ccc;
+    border-radius: 0.5em;
+    min-width: 36px;
+    
+}
+.r {float: right;}
+.grid {
+    display: grid;
+    /*grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));*/
+    gap: 5px;
+}
+.active{background:#c40!important;color: white!important;}
+.ready {text-decoration: line-through; opacity:0.5}
+ul {width:100%;}
+ul>li{ width:100%;list-style-type:none;padding-top: 4px;}
+li {background:#eee; padding-left:5px;}
+li:nth-child(odd) {background-color: #ddd;}
+#todo {max-width:300px;font-size:1.1em;}
+</style>
+<script type="module" src='https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js'></script>
+</head>
+<body>
+
+<h3>jjPlayer</h3>
+<div id="app"></div>
+<progress id="bar" value="0" max="100"></progress>
+<button id="info">Info</button>
+
+
+<script type="module" >
+import {html, render, signal, effect} from 'https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js';
+
+let app = document.querySelector('#app');
+let bar = document.querySelector('#bar');
+let info = document.querySelector('#info');
+let form = document.querySelector('#add-todo');
+//let todos = signal(JSON.parse(localStorage.getItem('todos-preact')) || []);
+let todos = signal({"bar":0, "time":0, "text":"start"});
+
+function getHTML() {
+    if (!todos.value.bar) {return html`<p><em>You don't have any todos yet.</em></p>`;}
+	return html`
+        <progress value="${todos.value.bar}" max="100"></progress>
+		<p id="${todos.value.time}">${todos.value.bar}% - ${todos.value.text} <button data-delete="${todos.value.time}">X</button></p>
+    `;
+}
+
+effect(function () {
+    console.log("effect=",todos.value);
+    bar.value=todos.value.bar;
+	//localStorage.setItem('todos-preact', JSON.stringify(todos.value));
+});
+
+const getRemoteInfo=()=>{
+    let u = "http://192.168.31.145/info/?info=info";
+    fetch(u)
+    .then(r => {return r.json()})
+    .then(o => {        
+        //console.log(o);
+        let bar=0;
+        if (o.PlayingTime){
+            bar = Math.ceil((o.PlayingTime/(o.FileDuration+1))/10);
+        }
+        let oo = {}
+        oo.bar   = bar;
+        oo.time  = Date.now();
+        oo.text  = o.TITLE;
+        todos.value = oo;
+    }).catch(e => {console.log(e)})
+}
+
+render(html`<${getHTML} />`, app);
+
+info.addEventListener('click', getRemoteInfo);
+
+getRemoteInfo();
+
+setInterval(()=>{
+    getRemoteInfo();
+},5000);
+
+</script>
+</body>
+</html>
