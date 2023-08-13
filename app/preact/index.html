@@ -38,27 +38,31 @@
 <!-- DEMO -->
 <!-- DEMO -->
 <!-- DEMO -->
-<h1> Demo counter - Hello World!</h1>
+<h1> Demo counter <span id ="counter">-</span> Hello World!</h1>
 <div id="app"></div>
+
 <script type="module" src='https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js'></script>
 <script type="module">
-  import {html,render,signal} from "https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js";
+  import {html, render, signal, effect} from "https://cdn.jsdelivr.net/npm/preact-htm-signals-standalone/dist/standalone.js";
 
   const count = signal(0);
 
   function App() {
     return html`
       <div>
-        <button onClick=${() => (count.value += 1)}>
-          Increment with signal
-        </button>
-        <p>Counter: ${count}</p>
+        <button onClick=${() => (count.value += 1)}>Increment with signal</button>
+        <h3>Counter: ${count}</h3>
       </div>
     `;
   }
 
+  effect(function () {
+    console.log("effect=",count.value);
+    document.querySelector("#counter").textContent = count.value;
+});
+
   render(html`<${App} />`, document.getElementById("app"));
-</script>	    
+</script>
 <!-- DEMO -->   
    
 </body>
