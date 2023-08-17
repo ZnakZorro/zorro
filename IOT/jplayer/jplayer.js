@@ -1,9 +1,8 @@
 console.log("git iot jpayer");
+
+
 let app = document.querySelector("#app");
 app.innerHTML += `
-
-<button onclick="outURL='./'">/self</button>
-<button onclick="outURL='http://192.168.31.145/'">/jPlayer</button>
 `;
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
@@ -19,7 +18,7 @@ fetch(u)
 })
 //---DOM READY----------------------------------
 
-
+/*
 function loadScript(src) {
   return new Promise(function(resolve, reject) {
     let script = document.createElement('script');
@@ -33,3 +32,4 @@ function loadScript(src) {
 loadScript("https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js")
 .then(script => console.log(`${script.src} is loaded!`))
 .catch(error => console.log(`Error: ${error.message}`));
+*/
