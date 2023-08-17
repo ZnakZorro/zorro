@@ -18,3 +18,18 @@ fetch(u)
     
 })
 //---DOM READY----------------------------------
+
+
+function loadScript(src) {
+  return new Promise(function(resolve, reject) {
+    let script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+    document.head.append(script);
+  });
+}
+
+loadScript("https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js")
+.then(script => console.log(`${script.src} is loaded!`))
+.catch(error => console.log(`Error: ${error.message}`));
