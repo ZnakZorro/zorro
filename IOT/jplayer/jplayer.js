@@ -7,7 +7,7 @@ app.innerHTML = `
 `;
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-let u="https://znakzorro.github.io/zorro/IOT/jpalayer/index.html"    
+let u="https://znakzorro.github.io/zorro/IOT/jplayer/index.html"    
 fetch(u)
 .then(r => {return r.text()})
 .then(o => {
