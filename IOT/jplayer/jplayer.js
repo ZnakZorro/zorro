@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded",function(){
     outURL='./';
     installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/upload.html","app");
     installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/index.html","app");
-    installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/edit.html","app");
+    //installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/edit.html","app");
     /*
     let u="https://znakzorro.github.io/zorro/IOT/jplayer/index.html"    
     fetch(u)
