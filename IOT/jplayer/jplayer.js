@@ -27,6 +27,15 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 //---DOM READY----------------------------------
 
+const edit=(ten)=>{
+    console.log(ten);
+}
+
+const save=(ten)=>{
+    console.log(ten);
+}
+
+
 /*
 function loadScript(src) {
   return new Promise(function(resolve, reject) {
