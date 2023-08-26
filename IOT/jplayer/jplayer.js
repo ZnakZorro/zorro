@@ -22,7 +22,7 @@ document.addEventListener("DOMContentLoaded",function(){
     .then(o => {
         console.log(o)
         $("#app").innerHTML+=o;
-        installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/index.html","app");
+        installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/edit.html","app");
     })
     .catch(e => {console.log(e)})    
     
