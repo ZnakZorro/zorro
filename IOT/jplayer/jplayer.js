@@ -1,4 +1,4 @@
-console.log("git iot jpayer");
+console.log("git iot goPayer 1");
 
 const installHTML=(u,id)=>{
     console.log(outURL,id,u);
