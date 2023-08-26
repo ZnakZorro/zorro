@@ -1,11 +1,12 @@
 <div>
-  <button onclick="edit(this)">index.html</button>
-  <button onclick="edit(this)">script.js</button>
-  <button onclick="edit(this)">style.css</button>
+  <button class="btn" onclick="edit(this)">index.html</button>
+  <button class="btn" onclick="edit(this)">script.js</button>
+  <button class="btn" onclick="edit(this)">style.css</button>
 </div>
 <div>
-  <textarea id="editor"></textarea>
+  <textarea id="editor" style="width: 96%;min-height: 5em;"></textarea>
 </div>
 <div>
-  <button onclick="save(this)">Save</button>
+  <button class="btn" onclick="save(null)">Clear</button>
+  <button class="btn" onclick="save(this)">Save</button>
 </div>
