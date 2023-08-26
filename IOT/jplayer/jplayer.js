@@ -16,6 +16,7 @@ let app = document.querySelector("#app");
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
     outURL='./';
+    installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/upload.html","app");
     installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/index.html","app");
     installHTML("https://znakzorro.github.io/zorro/IOT/jplayer/edit.html","app");
     /*
