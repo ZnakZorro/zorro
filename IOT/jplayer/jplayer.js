@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 const edit=(ten)=>{
     console.log(ten.textContent);
-    postData("./load", {file: "index.html" }).then((data) => {
+    postData("./load", {file: ten.textContent}).then((data) => {
       console.log(data); // JSON data parsed by `data.json()` call
     });
 
