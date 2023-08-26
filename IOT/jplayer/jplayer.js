@@ -1,20 +1,29 @@
 console.log("git iot jpayer");
 
+const installHTML=(u,id)=>{
+    fetch(u)
+    .then(r => {return r.text()})
+    .then(o => {
+        console.log(o)
+        $("#"+id).innerHTML+=o;
+    })
+    .catch(e => {console.log(e)})    
+}
 
 let app = document.querySelector("#app");
 app.innerHTML += `
 `;
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-let u="https://znakzorro.github.io/zorro/IOT/jplayer/index.html"    
-fetch(u)
-.then(r => {return r.text()})
-.then(o => {
-    console.log(o)
-    $("#app").innerHTML+=o;
-})
-.catch(e => {console.log(e)})    
-    
+    let u="https://znakzorro.github.io/zorro/IOT/jplayer/index.html"    
+    fetch(u)
+    .then(r => {return r.text()})
+    .then(o => {
+        console.log(o)
+        $("#app").innerHTML+=o;
+    })
+    .catch(e => {console.log(e)})    
+    installHTML=("https://znakzorro.github.io/zorro/IOT/jplayer/index.html","app");
 })
 //---DOM READY----------------------------------
 
