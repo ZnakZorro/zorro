@@ -24,6 +24,7 @@ const $$=e=>document.querySelectorAll(e);
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
 	let u ="https://jsonplaceholder.typicode.com/todos/1";
+	u="https://jsonplaceholder.typicode.com/photos";
 	fetch(u)
 	.then(r => {return r.json()})
 	.then(o => {
