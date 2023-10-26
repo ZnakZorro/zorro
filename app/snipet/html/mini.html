@@ -23,7 +23,13 @@ const $$=e=>document.querySelectorAll(e);
 
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-   
+	let u ="https://jsonplaceholder.typicode.com/todos/1";
+	fetch(u)
+	.then(r => {return r.json()})
+	.then(o => {
+		console.log(o)
+	})
+	.catch(e => {console.log(e)})
 })
 //---DOM READY----------------------------------
    
