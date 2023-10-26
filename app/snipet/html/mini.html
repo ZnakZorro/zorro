@@ -4,37 +4,41 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="theme-color" content="#369">
-   <title>miniApp</title>  
+   <title>mini</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <style>   
       body {normal 16pt/22pt Verdana; margin:0; padding:0;}
       .content {max-width:600px;margin:auto; padding:0.5em;}
    </style>
-</head>
-<body>
-   <div class="content">
-   </div>
-
-   
 <script>
-const $=e=>document.querySelector(e);
-const $$=e=>document.querySelectorAll(e);
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+        let u ="https://jsonplaceholder.typicode.com/todos/1";
+        u="https://jsonplaceholder.typicode.com/photos/1";
+        fetch(u)
+        .then(r => {return r.json()})
+        .then(obj => {
+            console.log(obj);
+            $(".info").innerHTML=`<img src="${obj.url}">`;
+            //obj.forEach(o => {
+                //$(".info").innerHTML=`<img src="${o.url}">`;
+            //});            
+        })
+        .catch(e => {console.log(e)})
+    })
+    //---DOM READY----------------------------------
+       
+</script>    
+</head>
 
-//---dom ready--------------------------------
-document.addEventListener("DOMContentLoaded",function(){
-	let u ="https://jsonplaceholder.typicode.com/todos/1";
-	u="https://jsonplaceholder.typicode.com/photos";
-	fetch(u)
-	.then(r => {return r.json()})
-	.then(o => {
-		console.log(o)
-	})
-	.catch(e => {console.log(e)})
-})
-//---DOM READY----------------------------------
-   
-</script> 
+<body>
+   <div class="content"></div>
+   <div class="info"></div>
+   <pre class="log"></pre>
    
 </body>
 </html>
