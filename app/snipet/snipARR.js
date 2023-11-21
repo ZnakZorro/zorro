@@ -20,6 +20,7 @@ const snipARR = [
     {n:"git",             f:"html",       u:"git.html"},
     {n:"BIP",         f:"html",       u:"BIP.html"},
     {n:"arrows",          f:"html",       u:"arrows.htm"},
+    {n:"CSS",          f:"html",       u:"css.html"},
 
     {n:"local",           f:"js",         u:"local.js"},
     {n:"JS",              f:"js",         u:"js.js"},
