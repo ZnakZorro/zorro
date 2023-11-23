@@ -36,17 +36,16 @@ const snipARR = [
     {n:"saveFile",        f:"js",         u:"saveFile.js"},
     {n:"Copy",            f:"js",         u:"copy_paste.html"},
     {n:"Date",            f:"js",         u:"date.html"},
+    {n:"String",          f:"js",         u:"string.js"},
+    
     
     
     {n:"md",              f:"code",       u:"md.md"},
     {n:"console",         f:"code",       u:"console.js"},
-
     {n:"AVG",             f:"ele",        u:"avg.htm"},
-
     {n:"ESP",             f:"esp",        u:"boards.md"},
     {n:"split",           f:"py",         u:"split.txt"},   
-    {n:"file",            f:"py",         u:"file.txt"},   
-
+    {n:"file",            f:"py",         u:"file.txt"},
     {n:"Borówki",         f:"580",        u:"borowki.txt"},
     {n:"Drożdże",         f:"580",        u:"drozdze.htm"},
     {n:"Okno",            f:"580",        u:"okno.htm"},
