@@ -39,6 +39,7 @@ const snipARR = [
     {n:"Copy",            f:"js",         u:"copy_paste.html"},
     {n:"Date",            f:"js",         u:"date.html"},
     {n:"String",          f:"js",         u:"string.js"},
+    {n:"PL",          f:"js",         u:"pl.js"},
     
     
     
