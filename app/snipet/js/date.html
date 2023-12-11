@@ -1,4 +1,8 @@
 
+let czas =   (new Date().toLocaleTimeString('pl-PL'));
+let termin = (new Date().toLocaleString('pl-PL'));
+let milis = Date.now();
+
 const getNow=()=>(new Intl.DateTimeFormat('pl-PL', {timeStyle: 'medium'}).format(new Date()));
 
 
