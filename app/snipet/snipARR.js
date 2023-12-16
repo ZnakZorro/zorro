@@ -27,6 +27,7 @@ const snipARR = [
     {n:"local",           f:"js",         u:"local.js"},
     {n:"JS",              f:"js",         u:"js.js"},
     {n:"async",           f:"js",         u:"async.html"},
+    {n:"form",           f:"js",         u:"form.html"},
     {n:"fetch",           f:"js",         u:"fetch.js"},
     {n:"createElement",   f:"js",         u:"createElement.js"},
     {n:"active",          f:"js",         u:"active.js"},
