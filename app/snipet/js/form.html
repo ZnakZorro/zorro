@@ -1,0 +1,30 @@
+<main>
+  <form action="/login" method="get" id="loginForm">
+    <div>
+      <label for="username">Username</label>
+      <input type="text" name="username" id="username" required />
+    </div>
+    
+    <div>
+      <label for="password">Password</label>
+      <input type="password" name="password" id="password" required />
+    </div>
+  </form>
+  
+  <!-- Buttons outside the form -->
+  <div>
+      <button type="reset" form="loginForm">Reset</button>
+      <button type="submit" form="loginForm">Submit</button>
+  </div>
+</main>
+
+<script>
+    let loginForm = document.getElementById("loginForm");
+
+    loginForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        e.target.querySelectorAll("input").forEach((ii)=>{
+            console.log(ii.name,"=",ii.value)
+        })
+    });
+</script>
