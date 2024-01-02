@@ -240,6 +240,7 @@ document.addEventListener("DOMContentLoaded",function(){
       <button onclick='CopyTXT()'>Copy</button>   
       <span style="float:right;">
          <button onclick='document.getElementById("txtx").value="";'>Clear</button>
+         <button onclick='PasteFB()'>FB</button>
          <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
           
       </span>
@@ -255,6 +256,14 @@ document.addEventListener("DOMContentLoaded",function(){
 </body>
    
 <script>
+   const PasteFB=()=>{
+      document.getElementById("txtx").value=`Poproszę zamówić:
+1x chleb Ziarmix
+2x bułki z sezamem
+--
+Zbigniew Sz`;
+   }
+   
     const PasteTXT=async()=>{
         let txtx = document.getElementById("txtx");
         txtx.value="";
