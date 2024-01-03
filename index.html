@@ -236,15 +236,19 @@ document.addEventListener("DOMContentLoaded",function(){
   
   
 <div class="container">
+   
       <button onclick='PasteTXT()'>Paste</button> 
       <button onclick='CopyTXT()'>Copy</button>   
       <span style="float:right;">
-         <button onclick='document.getElementById("txtx").value="";'>Clear</button>
-         <button onclick='PasteFB()'>FB</button>
-         <a href="https://znakzorro.github.io/zorro/magic/" class="btn mini minii">Magic</a>
-          
+         <button onclick='document.getElementById("txtx").value="";'>Clear</button>           
       </span>
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
+      <span style="float:right;">
+         <button onclick='PasteFB(1)'>FB1</button>
+         <button onclick='PasteFB(2)'>FB2</button>
+         <button onclick='PasteFB(3)'>FB3</button>
+      </span>
+   
 </div>
 <div class="container"></div>
       
@@ -256,8 +260,11 @@ document.addEventListener("DOMContentLoaded",function(){
 </body>
    
 <script>
-   const PasteFB=()=>{
-      document.getElementById("txtx").value=`Poproszę zamówić:
+   const PasteFB=(nr=1)=>{
+   let txtx = document.getElementById("txtx");
+   if(nr===1) txtx.value=`Poproszę zamówić:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
+   if(nr===3) txtx.value=`Zamawiam na piątek:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
+   if(nr===2) txtx.value=`Poproszę zamówić:
 1x chleb Ziarmix
 2x bułki z sezamem
 --
