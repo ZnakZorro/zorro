@@ -83,10 +83,10 @@ h1,h2,h3 {margin: 0.25em 0;}
 .yellow   {background: #ffff00;color:black;}
 .green {background: #228b22; color:white;}
 .blue  {background: #69f; color:white;}
-.navy  {background: #026; color:white;}
+.navy  {background: #128; color:white;}
 .white  {background: #fff; color:black;}
 .gray  {background: #666; color:white;}
-.silver  {background: #eee; color:black;}
+.silver  {background: #ddd; color:black;}
 
 .main  {background: #126;}
 .adm   {background: #9bf; color:black;}
