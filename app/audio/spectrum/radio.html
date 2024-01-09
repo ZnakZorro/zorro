@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#369">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>RadioMo</title>
+	
+	<link href="styles.css" rel="stylesheet">
+	<style>
+        body {font-size:12pt;}
+		header.plus a {font-size:1.2em; padding:0.5em; text-decoration: none;}
+		.hide {display:none;}
+		.show {display:initial;}
+        .active {background: red;}
+        .box {margin:1em;}
+	</style>
+</head>
+
+<body>
+	<div id="container"></div>
+    <div id="audio-container"></div>    
+    <div class="box">
+        <button id="astop">STOP</button>
+        <button class="inis" data-url="http://pl-play.adtonos.com/tok-fm">TOK-FM</button>
+        <button class="inis" data-url="http://stream.rcs.revma.com/ypqt40u0x1zuv">RNŚ</button>
+        <button class="inis" data-url="http://stream.rcs.revma.com/ye5kghkgcm0uv">357</button>
+    </div>
+    <div id="message" class="box"></div>
+
+	<script type="module">
+
+                        const setActive=(ten)=>{
+                            let parent = ten.parentElement;
+                            let keys   = parent.querySelectorAll("button");
+                            keys.forEach(key=>key.classList.remove("active"));
+                            ten.classList.add("active");
+                        }
+
+		import AudioMotionAnalyzer from './audioMotion-analyzer.js';
+
+        const audioContainer = document.getElementById('audio-container');
+        const messageDiv     = document.getElementById('message');
+
+        let radioURL = "http://pl-play.adtonos.com/tok-fm";
+
+        let audioEl, audioMotion;
+        let options = {
+            alphaBars: false,
+            ansiBands: false,
+            audioCtx: undefined, // constructor only
+            barSpace: 0.1,
+            bgAlpha: 0.7
+        }
+        const initialize=(e)=> {
+            deinitialize(e);
+            let rURL = (e.target.dataset.url) ? e.target.dataset.url : radioURL;
+            let rTitle = (e.target.textContent) ? e.target.textContent : "Radio";
+            console.log("initialize",rURL);
+			audioEl = new Audio(rURL);
+			audioEl.controls = true;
+			audioEl.crossOrigin = 'anonymous';
+			audioEl.onloadstart  = () => messageDiv.innerText = 'Buffering audio... please wait...';
+			audioEl.onloadeddata = () => {
+				messageDiv.innerHTML = "<b>"+rTitle+"</b>: "+rURL;
+				audioEl.play();
+			}
+			audioContainer.append( audioEl ); 
+
+			audioMotion = new AudioMotionAnalyzer( container, {
+				source: audioEl,
+				
+			});
+            setActive(e.target)
+		}
+
+        const deinitialize=(e)=>{
+            if (audioEl){
+                audioEl.pause();
+                audioEl.remove();
+                audioMotion.destroy();
+                audioMotion = null;
+                audioEl = null;
+            }
+        }
+        document.getElementById("astop").addEventListener( 'click',deinitialize ); 
+        document.querySelectorAll(".inis").forEach((e)=>{
+            e.addEventListener( 'click', initialize );
+        })
+
+	</script>
+<hr />
+<a href="https://audiomotion.dev" target="_blank">Audiomotion</a>
+
+
+<script>
+let ooptions = {
+alphaBars: false,
+ansiBands: false,
+audioCtx: undefined, // constructor only
+barSpace: 0.1,
+bgAlpha: 0.7,
+channelLayout: "single",
+colorMode: "gradient",
+connectSpeakers: true, // constructor only
+fftSize: 8192,
+fillAlpha: 1,
+frequencyScale: "log",
+fsElement: undefined, // constructor only
+gradient: "classic",
+gradientLeft: undefined,
+gradientRight: undefined,
+height: undefined,
+ledBars: false,
+linearAmplitude: false,
+linearBoost: 1,
+lineWidth: 0,
+loRes: false,
+lumiBars: false,
+maxDecibels: -25,
+maxFPS: 0,
+maxFreq: 22000,
+minDecibels: -85,
+minFreq: 20,
+mirror: 0,
+mode: 0,
+noteLabels: false,
+onCanvasDraw: undefined,
+onCanvasResize: undefined,
+outlineBars: false,
+overlay: false,
+peakLine: false,
+radial: false,
+reflexAlpha: 0.15,
+reflexBright: 1,
+reflexFit: true,
+reflexRatio: 0,
+roundBars: false,
+showBgColor: true,
+showFPS: false,
+showPeaks: true,
+showScaleX: true,
+showScaleY: false,
+smoothing: 0.5,
+source: undefined, 
+spinSpeed: 0,
+splitGradient: false,
+start: true,
+trueLeds: false,
+useCanvas: true,
+volume: 1,
+weightingFilter: "",
+width: undefined
+}
+//console.log(ooptions)
+//console.log(JSON.stringify(ooptions,null,2))
+let xoptions=
+{
+    "alphaBars": false,
+    "ansiBands": false,
+    "barSpace": 0.1,
+    "bgAlpha": 0.7,
+    "channelLayout": "single",
+    "colorMode": "gradient",
+    "connectSpeakers": true,
+    "fftSize": 8192,
+    "fillAlpha": 1,
+    "frequencyScale": "log",
+    "gradient": "classic",
+    "ledBars": false,
+    "linearAmplitude": false,
+    "linearBoost": 1,
+    "lineWidth": 0,
+    "loRes": false,
+    "lumiBars": false,
+    "maxDecibels": -25,
+    "maxFPS": 0,
+    "maxFreq": 22000,
+    "minDecibels": -85,
+    "minFreq": 20,
+    "mirror": 0,
+    "mode": 0,
+    "noteLabels": false,
+    "outlineBars": false,
+    "overlay": false,
+    "peakLine": false,
+    "radial": false,
+    "reflexAlpha": 0.15,
+    "reflexBright": 1,
+    "reflexFit": true,
+    "reflexRatio": 0,
+    "roundBars": false,
+    "showBgColor": true,
+    "showFPS": false,
+    "showPeaks": true,
+    "showScaleX": true,
+    "showScaleY": false,
+    "smoothing": 0.5,
+    "spinSpeed": 0,
+    "splitGradient": false,
+    "start": true,
+    "trueLeds": false,
+    "useCanvas": true,
+    "volume": 1,
+    "weightingFilter": ""
+}
+</script>
+</body>
+</html>
