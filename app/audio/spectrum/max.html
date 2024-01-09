@@ -1,0 +1,179 @@
+
+
+
+<style>
+  body {
+  font: 13px sans-serif;
+  margin: 0;
+}
+
+audio {
+  display: inline-block;
+  height: 40px;
+  width: 50%;
+}
+
+label, button {
+  background: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 5px;
+  display: inline-block;
+  margin: 5px 10px;
+  padding: 8px 40px;
+  vertical-align: top;
+}
+
+label input {
+  display: none;
+}
+
+select {
+  margin: 5px;
+  padding: 8px;
+}
+
+.flex {
+  display: flex;
+  justify-content: space-between;
+}
+
+.info {
+  display: inline-block;
+  float: right;
+  margin: 15px 20px 0;
+}
+
+#container {
+  background: #222;
+  display: flex;
+  height: calc( 100vh - 45px );
+  transform: rotate(180deg) scaleX(-1);
+}
+
+.bar {
+  background: #fff;
+  margin: 0 2px;
+  position: relative;
+  width: 100%;
+}
+
+#fps {
+  color: #ff0;
+  font-size: 2em;
+  top: 10px;
+  position: fixed;
+  right: 20px;
+}
+.peak {
+  background: #f00;
+  height: 2px;
+  width: 100%;
+  position: absolute;
+}
+</style>
+
+
+
+
+
+<!-- analyzer container -->
+<div id="container"></div>
+
+<div class="flex">
+  <!-- audio element -->
+  <audio id="audio" controls crossorigin></audio>
+
+  <div id="fps"></div>
+  
+  <div>
+    Mode:
+    <select id="mode">
+      <option value="1">1/24th octave bands</option>
+      <option value="2">1/12th octave bands</option>
+      <option value="3">1/8th octave bands</option>
+      <option value="4">1/6th octave bands</option>
+      <option value="5">1/4th octave bands</option>
+      <option value="6">1/3rd octave bands</option>
+      <option value="7">half octave bands</option>
+      <option value="8">full octave bands</option>
+    </select>
+  </div>
+
+  <label>Upload audio file
+    <input id="upload" type="file" accept="audio/*">
+  </label>
+
+  <button id="live">Play live stream</button>
+
+  <div class="info"><a href="https://audiomotion.dev">audioMotion-analyzer</a> <span id="version"></span></div>
+</div>
+
+
+<script type="module">
+/**
+ * for documentation and more demos,
+ * visit https://audiomotion.dev
+ */
+
+// load module from Skypack CDN
+import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+
+// container element
+const container = document.getElementById('container');
+
+// audio source
+const audioEl = document.getElementById('audio');
+
+// instantiate analyzer
+const audioMotion = new AudioMotionAnalyzer( null, {
+  source: audioEl,
+  mode: 2,
+  useCanvas: false, // don't use the canvas
+  onCanvasDraw: instance => {
+    const maxHeight = container.clientHeight;
+    
+    let html = '';
+
+    // get analyzer bars data
+    for ( const bar of instance.getBars() ) {
+
+      const value    = bar.value[0],
+            peak     = bar.peak[0],
+            hold     = bar.hold[0],
+            isPeakUp = hold > 0 && peak > 0; // if hold < 0 the peak is falling down
+
+      // build our visualization using only DIVs
+      html += `<div class="bar" style="height: ${ value * 100 }%; background: rgba( 255, 255, 255, ${ value } )">
+								<div class="peak" style="bottom: ${ ( peak - value ) * -maxHeight }px; ${ isPeakUp ? 'box-shadow: 0 0 10px 1px #f00' : 'opacity: ' + ( peak > 0 ? .7 : 0 ) }"></div>
+							 </div>`;
+    }
+    container.innerHTML = html;
+    document.getElementById('fps').innerText = instance.fps.toFixed(1);
+  }
+});
+
+// visualization mode selection
+const elMode = document.getElementById('mode');
+elMode.value = audioMotion.mode;
+elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
+
+// display module version
+document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+
+// play stream
+document.getElementById('live').addEventListener( 'click', () => {
+  audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv';
+  audioEl.play();
+});
+
+// file upload
+document.getElementById('upload').addEventListener( 'change', e => {
+	const fileBlob = e.target.files[0];
+
+	if ( fileBlob ) {
+		audioEl.src = URL.createObjectURL( fileBlob );
+		audioEl.play();
+	}
+});
+
+</script>
