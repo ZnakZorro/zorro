@@ -85,6 +85,8 @@ h1,h2,h3 {margin: 0.25em 0;}
 .blue  {background-color: #69f; color:white;}
 .navy  {background-color: #004; color:white;}
 .white  {background-color: #fff; color:#000;}
+.gray  {background-color: #666; color:#fff;}
+.silver  {background-color: #eee; color:#000;}
 
 .main  {background-color: #126;}
 .adm   {background-color: #9bf; color:black;}
