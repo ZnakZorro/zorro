@@ -25,7 +25,7 @@ body,button {
     font-size: 14pt;
     font-weight: 300;
     line-height: 1.3;
-    background-color: #f4f4f4;
+    background: #f4f4f4;
 }
 button {
     margin: 0.2em;
@@ -79,20 +79,20 @@ h1,h2,h3 {margin: 0.25em 0;}
     min-width: 57px !important;
 }
 .btn.big:active {background:red;}
-.red   {background-color: #d3004e; color:white;}
-.yellow   {background-color: #ffff00;color:black;}
-.green {background-color: #228b22; color:white;}
-.blue  {background-color: #69f; color:white;}
-.navy  {background-color: #004; color:white;}
-.white  {background-color: #fff; color:#000;}
-.gray  {background-color: #666; color:#fff;}
-.silver  {background-color: #eee; color:#000;}
+.red   {background: #d3004e; color:white;}
+.yellow   {background: #ffff00;color:black;}
+.green {background: #228b22; color:white;}
+.blue  {background: #69f; color:white;}
+.navy  {background: #026; color:white;}
+.white  {background: #fff; color:#000;}
+.gray  {background: #666; color:#fff;}
+.silver  {background: #eee; color:#000;}
 
-.main  {background-color: #126;}
-.adm   {background-color: #9bf; color:black;}
-.adm0   {background-color: #e9967a; color:black;}
-.adm1   {background-color: #9fb; color:black;}
-.adm2   {background-color: #9bf; color:black;}
+.main  {background: #126;}
+.adm   {background: #9bf; color:black;}
+.adm0   {background: #e9967a; color:black;}
+.adm1   {background: #9fb; color:black;}
+.adm2   {background: #9bf; color:black;}
 
 .shadow {box-shadow: 0px 4px 8px rgb(0 0 0 / 20%);}
 
@@ -108,38 +108,38 @@ button:focus, button:active {outline:none;}
     margin: 0;
     padding: 5px;
 }
-tr:nth-child(even){background-color: #f2f2f2;}
-tr:hover {background-color: #ddd;}
+tr:nth-child(even){background: #f2f2f2;}
+tr:hover {background: #ddd;}
 th {
-  background-color: #666;
+  background: #666;
   color: white;
 }
 
 
-.c0 	{background-color:#FDAC53;color:#000;}
-.c1 	{background-color:#9BB7D4;color:#000;}
-.c2 	{background-color:#B55A30;color:#fff;}
-.c3 	{background-color:#F5DF4D;color:#000;}
-.c4 	{background-color:#0072B5;color:#fff;}
-.c5 	{background-color:#A0DAA9;color:#000;}
-.c6 	{background-color:#E9897E;color:#000;}
-.c7 	{background-color:#00A170;color:#fff;}
-.c8 	{background-color:#926AA6;color:#fff;}
-.c9 	{background-color:#D2386C;color:#fff;}
+.c0 	{background:#FDAC53;color:#000;}
+.c1 	{background:#9BB7D4;color:#000;}
+.c2 	{background:#B55A30;color:#fff;}
+.c3 	{background:#F5DF4D;color:#000;}
+.c4 	{background:#0072B5;color:#fff;}
+.c5 	{background:#A0DAA9;color:#000;}
+.c6 	{background:#E9897E;color:#000;}
+.c7 	{background:#00A170;color:#fff;}
+.c8 	{background:#926AA6;color:#fff;}
+.c9 	{background:#D2386C;color:#fff;}
 
-.c10 	{background-color:#CD212A;color:#fff;}
-.c11 	{background-color:#FFA500;color:#000;}
-.c12 	{background-color:#56C6A9;color:#000;}
-.c13 	{background-color:#4B5335;color:#fff;}
-.c14 	{background-color:#798EA4;color:#fff;}
-.c15 	{background-color:#FA7A35;color:#000;}
-.c16 	{background-color:#00758F;color:#fff;}
-.c17 	{background-color:#EDD59E;color:#000;}
-.c18 	{background-color:#E8A798;color:#000;}
-.c19 	{background-color:#9C4722;color:#fff;}
+.c10 	{background:#CD212A;color:#fff;}
+.c11 	{background:#FFA500;color:#000;}
+.c12 	{background:#56C6A9;color:#000;}
+.c13 	{background:#4B5335;color:#fff;}
+.c14 	{background:#798EA4;color:#fff;}
+.c15 	{background:#FA7A35;color:#000;}
+.c16 	{background:#00758F;color:#fff;}
+.c17 	{background:#EDD59E;color:#000;}
+.c18 	{background:#E8A798;color:#000;}
+.c19 	{background:#9C4722;color:#fff;}
 
-.c20 	{background-color:#6B5876;color:#fff;}
-.c21 	{background-color:#34568B;color:#fff;}
+.c20 	{background:#6B5876;color:#fff;}
+.c21 	{background:#34568B;color:#fff;}
 
 
 
