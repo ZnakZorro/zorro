@@ -1,0 +1,293 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#369">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>www</title>
+
+    <link href="styles.css" rel="stylesheet">
+<style>
+body {font-size:12pt;}
+		header.plus a {font-size:1.2em; padding:0.5em; text-decoration: none;}
+		.hide {display:none;}
+div {margin-bottom:1em;}
+label, button {
+    background: #f0f0f0;
+    color:black;
+    border: 1px solid #999;
+    border-radius: 0.25em;
+    display: inline-block;
+    margin: 5px 10px;
+    padding: 8px 2px;
+    text-align: center;
+}
+
+label input {display: none;}
+
+
+
+
+.highcharts-figure,.highcharts-data-table table {
+    min-width: 320px;
+    max-width: 800px;
+    margin: 1em auto;
+}
+
+#container {
+    height: 400px;
+}
+
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
+</style>
+
+<script>
+    const setActive=(ten)=>{
+        if(!ten?.parentElement) return;
+        let parent = ten.parentElement;
+        let keys   = parent.querySelectorAll("button");
+        keys.forEach(key=>key.classList.remove("active"));
+        ten.classList.add("active");
+    }
+    </script>
+
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.highcharts.com/modules/accessibility.js"></script>
+
+<figure class="highcharts-figure">
+    <div id="container"></div>
+    <p class="highcharts-description"></p>
+</figure>
+
+
+
+
+<script>
+window.dataMax =64;
+
+const getCategory=(b)=>{
+    let a=[]
+    for (let i=0; i<b; i++) a.push(i);//a.push(16*Math.pow(2, i));
+    return a;
+}
+const getData=(b)=>{
+    let a=[]
+    for (let i=0; i<b; i++) a.push(Math.random());
+    return a;
+}
+
+window.categories = getCategory(window.dataMax);
+window.data       = getData(window.dataMax);
+
+
+window.wykres=Highcharts.chart('container', {
+    chart: {animation: false,type: 'spline'},
+    title: {text: 'Spectrum'},
+    subtitle: {text: null},
+    yAxis: {
+        title: {text: 'dB'},
+        min:0, 
+        max:1,
+        //type: 'logarithmic',
+    },
+    xAxis: {
+        categories: window.categories,
+        title: {text: 'Hz'},
+        //type: 'logarithmic',
+    },
+    plotOptions: {
+        series: {
+            label: {connectorAllowed: false}
+        }
+    },
+    series: [{
+        name: 'FRQ',
+        data: window.data
+    }],
+    responsive: {
+        rules: [{
+            condition: {
+                maxWidth: 500
+            },
+            chartOptions: {
+                legend: {
+                    layout: 'horizontal',
+                    align: 'center',
+                    verticalAlign: 'bottom'
+                }
+            }
+        }]
+    }
+
+});
+/*
+console.log(window.wykres.series[0])
+setInterval(()=>{
+    //console.log(window.wykres.series[0])
+    window.wykres.series[0].setData(getData(window.dataMax));
+    //window.wykres.redraw(); 
+},9000)
+*/
+
+
+
+</script>
+<div>
+<audio id="audio" controls crossorigin></audio>
+
+<!--select id="mode">
+    <option value="1">1/24th oct.</option>
+    <option value="2">1/12th oct.</option>
+    <option value="3">1/8th oct.</option>
+    <option value="4">1/6th oct.</option>
+    <option value="5">1/4th oct.</option>
+    <option value="6">1/3rd oct.</option>
+    <option value="7">half oct.</option>
+    <option value="8">full oct.</option>
+  </select-->
+
+</div>
+
+  <div class="grid grid4">
+      <label>Audio file
+          <input id="upload" type="file" accept="audio/*">
+      </label>
+      <button id="livestop">Stop</button>
+      <button id="livetok">TOK-FM</button>
+      <button id="liverns">RNŚ</button>
+      <button id="clear">Clear</button>
+  </div>
+
+  <br /><br /><br />
+
+
+<script type="module">
+    import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+    const audioEl = document.getElementById('audio');
+
+    let count=0;
+    let arr=Array(64).fill(0,0,64);
+    
+    const audioMotion = new AudioMotionAnalyzer( null, {
+      source: audioEl,
+      mode: 4,
+      weightingFilter: "486",
+      useCanvas: false, // don't use the canvas
+        onCanvasDraw: instance => {
+            count++;
+            let i=0;
+            
+            for ( const bar of instance.getBars() ) {
+            arr[i]=Math.max(arr[i],bar.value[0]);                
+                let value    = arr[i],
+                peak     = bar.peak[0],
+                hold     = bar.hold[0],
+                isPeakUp = hold > 0 && peak > 0; // if hold < 0 the peak is falling down
+                i++;        
+            }
+            //if (count %1024 ===0) console.log(arr);
+
+
+            window.wykres.series[0].setData(arr);
+
+
+
+
+
+
+        }
+    });
+
+
+    
+    // visualization mode selection
+    //const elMode = document.getElementById('mode');
+    //elMode.value = audioMotion.mode;
+    //elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
+    
+
+    document.getElementById('clear').addEventListener( 'click', (e) => {
+        arr=Array(64).fill(0,0,64);
+        setActive(e.target);
+    });
+    // play stream
+    document.getElementById('liverns').addEventListener( 'click', (e) => {
+        audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv';
+        audioEl.play();
+        setActive(e.target);
+    });
+    document.getElementById('livetok').addEventListener( 'click', (e) => {
+        audioEl.src = 'http://pl-play.adtonos.com/tok-fm';
+        audioEl.play();
+        setActive(e.target);
+    });
+    document.getElementById('livestop').addEventListener( 'click', (e) => {    
+        //audioEl.stop();
+        deinitialize();
+    });
+    
+    // file upload
+    document.getElementById('upload').addEventListener( 'change', e => {
+        const fileBlob = e.target.files[0];
+    
+        if ( fileBlob ) {
+            audioEl.src = URL.createObjectURL( fileBlob );
+            audioEl.play();
+        }
+    });
+    
+    
+    const deinitialize=(e)=>{
+        if (audioEl){
+            audioEl.pause();
+            //audioEl.remove();
+            //audioMotion.destroy();
+            //audioMotion = null;
+            //audioEl = null;
+        }
+    }
+
+    
+    </script>
+    
+    
