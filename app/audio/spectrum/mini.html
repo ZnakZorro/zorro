@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="HandheldFriendly" content="true">
    	<meta name="mobile-web-app-capable" content="yes"> 
-	<title>MAX</title>
+	<title>mini</title>
 
 
 <style>
@@ -86,44 +86,40 @@ select {margin: 5px;padding: 8px;}
 .grid3 {grid-template-columns: 1fr 1fr 1fr;}
 .grid4 {grid-template-columns: 1fr 1fr  1fr 1fr;column-gap: 0;}
 </style>
-
 </head>
-
 <body>
-
 
 <!-- analyzer container -->
 <div id="container"></div>
-<div id="fps"></div>
-<div class="grid grid2">
+
+<div class="flex">
   <!-- audio element -->
   <audio id="audio" controls crossorigin></audio>
+
+  <div id="fps"></div>
+  
   <div>
-   
+    Mode:
     <select id="mode">
-      <option value="1">1/24th oct.</option>
-      <option value="2">1/12th oct.</option>
-      <option value="3">1/8th oct.</option>
-      <option value="4">1/6th oct.</option>
-      <option value="5">1/4th oct.</option>
-      <option value="6">1/3rd oct.</option>
-      <option value="7">half oct.</option>
-      <option value="8">full oct.</option>
+      <option value="1">1/24th octave bands</option>
+      <option value="2">1/12th octave bands</option>
+      <option value="3">1/8th octave bands</option>
+      <option value="4">1/6th octave bands</option>
+      <option value="5">1/4th octave bands</option>
+      <option value="6">1/3rd octave bands</option>
+      <option value="7">half octave bands</option>
+      <option value="8">full octave bands</option>
     </select>
   </div>
-</div>
-    <div class="grid grid4">
-        <label>Audio file
-            <input id="upload" type="file" accept="audio/*">
-        </label>
-        <button id="livestop">Stop</button>
-        <button id="livetok">TOK-FM</button>
-        <button id="liverns">RNŚ</button>
-    </div>
 
-    <br /><br /><br />
+  <label>Upload audio file
+    <input id="upload" type="file" accept="audio/*">
+  </label>
+
+  <button id="live">Play live stream</button>
+
   <div class="info"><a href="https://audiomotion.dev">audioMotion-analyzer</a> <span id="version"></span></div>
-
+</div>
 </body>
 
 <script type="module">
@@ -142,46 +138,30 @@ const container = document.getElementById('container');
 const audioEl = document.getElementById('audio');
 
 // instantiate analyzer
-let count=0;
-let arr=Array(128).fill(0,0,128);
-
 const audioMotion = new AudioMotionAnalyzer( null, {
   source: audioEl,
-  mode: 4,
-  weightingFilter: "486",
+  mode: 2,
   useCanvas: false, // don't use the canvas
   onCanvasDraw: instance => {
     const maxHeight = container.clientHeight;
     
     let html = '';
-    //count++;    //if (count>500) return;
-   
-     // get analyzer bars data
-    let i=0;
-    
+
+    // get analyzer bars data
     for ( const bar of instance.getBars() ) {
-        
-        arr[i]=Math.max(arr[i],bar.value[0]);
-        
-      let value    = arr[i],//bar.value[0],
+
+      const value    = bar.value[0],
             peak     = bar.peak[0],
             hold     = bar.hold[0],
             isPeakUp = hold > 0 && peak > 0; // if hold < 0 the peak is falling down
-            i++;
-      // build our visualization using only DIVs
-    /*html += `
-    <div class="bar" style="height: ${ value * 100 }%; background: rgba( 255, 255, 255, ${ value } )">
-        <div class="peak" style="bottom: ${ ( peak - value ) * -maxHeight }px; ${ isPeakUp ? 'box-shadow: 0 0 10px 1px #f00' : 'opacity: ' + ( peak > 0 ? .7 : 0 ) }"></div>
-    </div>`;*/
-    html += `
-    <div class="bar" style="height:0%; background: transparent">
-        <div class="peak" style="top: ${ ( value*maxHeight)-10 }px;}"></div>
-    </div>`;
 
+      // build our visualization using only DIVs
+      html += `<div class="bar" style="height: ${ value * 100 }%; background: rgba( 255, 255, 255, ${ value } )">
+								<div class="peak" style="bottom: ${ ( peak - value ) * -maxHeight }px; ${ isPeakUp ? 'box-shadow: 0 0 10px 1px #f00' : 'opacity: ' + ( peak > 0 ? .7 : 0 ) }"></div>
+							 </div>`;
     }
-    //console.log(arr)
     container.innerHTML = html;
-    //document.getElementById('fps').innerText = instance.fps.toFixed(1);
+    document.getElementById('fps').innerText = instance.fps.toFixed(1);
   }
 });
 
@@ -194,17 +174,9 @@ elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
 document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
 
 // play stream
-document.getElementById('liverns').addEventListener( 'click', () => {
-    audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv';
-    audioEl.play();
-});
-document.getElementById('livetok').addEventListener( 'click', () => {
-    audioEl.src = 'http://pl-play.adtonos.com/tok-fm';
-    audioEl.play();
-});
-document.getElementById('livestop').addEventListener( 'click', () => {    
-    //audioEl.stop();
-    deinitialize();
+document.getElementById('live').addEventListener( 'click', () => {
+  audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv';
+  audioEl.play();
 });
 
 // file upload
@@ -217,17 +189,6 @@ document.getElementById('upload').addEventListener( 'change', e => {
 	}
 });
 
-
-const deinitialize=(e)=>{
-            if (audioEl){
-                audioEl.pause();
-                //audioEl.remove();
-                //audioMotion.destroy();
-                //audioMotion = null;
-                //audioEl = null;
-            }
-        }
 </script>
-
 
 </html>
