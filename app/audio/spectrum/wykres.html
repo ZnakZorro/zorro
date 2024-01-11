@@ -124,7 +124,7 @@ const getData=(b)=>{
 }
 
 //window.categories = getCategory(window.dataMax);
-window.data  = Array(window.dataMax).fill(0,0,window.dataMax);   //getData(window.dataMax);
+window.data  = Array(window.dataMax).fill(-60,0,window.dataMax);   //getData(window.dataMax);
 
 
 window.wykres=Highcharts.chart('container', {
@@ -133,8 +133,8 @@ window.wykres=Highcharts.chart('container', {
     subtitle: {text: null},
     yAxis: {
         title: {text: 'dB'},
-        min:0, 
-        max:1,
+        min:-60, 
+        max:0
         //type: 'logarithmic',
     },
     xAxis: {
@@ -153,7 +153,7 @@ window.wykres=Highcharts.chart('container', {
     tooltip: {
         crosshairs: true,
         formatter: function () {
-            return '<b>'+Math.round(this.x) +' Hz </b><br />' + Math.round(100*this.y)+' %';
+            return '<b>'+Math.round(this.x) +' Hz </b><br />' + Math.round(this.y)+' dB';
         }
     },
 
@@ -230,17 +230,24 @@ setInterval(()=>{
 </body>
 <script type="module">
     import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+    const setTitle=(t)=>{document.getElementById("title").innerHTML=t;}
+    const clearARR=()=>{arr=Array(window.dataMax).fill(-60,0,window.dataMax);}
+
     const audioEl = document.getElementById('audio');
 
     let count=0;
-    let arr=Array(window.dataMax).fill(0,0,window.dataMax);
+    let arr=[];
     let frq=[];
+    clearARR();
 // mode:2   =   120    
 // mode:3   =   80    
 // mode:4   =   60    
+
 const audioMotion = new AudioMotionAnalyzer( null, {
       source: audioEl,
       mode: 4,
+      //maxDecibels: -25,
+      //minDecibels: -85,
       fftSize:16384,
       weightingFilter: "",//"486",
       useCanvas: false, // don't use the canvas
@@ -249,21 +256,25 @@ const audioMotion = new AudioMotionAnalyzer( null, {
             let i=0;
             
             for ( const bar of instance.getBars() ) {
-                arr[i]=Math.max(arr[i],bar.value[0]);                
+                let dB = ((bar.value[0]*60))-60
+                //if (count %1024 ===200) console.log(dB)
+                arr[i]=Math.max(arr[i],dB); 
+            //arr[i]=dB
+                //if (count %1024 ===201) console.log(arr[i])               
                 let value    = arr[i],
                 peak     = bar.peak[0],
                 hold     = bar.hold[0],
                 isPeakUp = hold > 0 && peak > 0; // if hold < 0 the peak is falling down
                    
                 //if (count %1024 ===0) console.log(bar.freq); 
-                frq[i]=bar.freq;
+                //frq[i]=bar.freq;
                 i++; 
             }
             
-            /*if (count %1024 ===200) {
-                console.log(frq); 
-                console.log(JSON.stringify(frq)); 
-            }*/
+            //if (count %1024 ===200) {
+                //console.log(arr); 
+                //console.log(JSON.stringify(frq)); 
+            //}
 
             window.wykres.series[0].setData(arr);
 
@@ -282,9 +293,7 @@ const audioMotion = new AudioMotionAnalyzer( null, {
     //elMode.value = audioMotion.mode;
     //elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
     
-    const setTitle=(t)=>{document.getElementById("title").innerHTML=t;}
-    const clearARR=()=>{arr=Array(window.dataMax).fill(0,0,window.dataMax);}
-
+    
     document.getElementById('clear').addEventListener( 'click', (e) => {
         clearARR();
         setActive(e.target);
