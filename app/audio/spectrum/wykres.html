@@ -14,14 +14,14 @@
 body {font-size:12pt;}
 		header.plus a {font-size:1.2em; padding:0.5em; text-decoration: none;}
 		.hide {display:none;}
-div {margin-bottom:1em;}
+div {margin-bottom:1em; margin-left:0.5em;}
 label, button {
     background: #f0f0f0;
     color:black;
     border: 1px solid #999;
     border-radius: 0.25em;
     display: inline-block;
-    margin: 5px 10px;
+    margin: 6px;
     padding: 8px;
     text-align: center;
     min-width:3em;
@@ -40,6 +40,9 @@ label input {display: none;}
 
 #container {
     height: 400px;
+    width:99%;
+    margin:0;
+    display:block;
 }
 
 .highcharts-data-table table {
@@ -76,6 +79,19 @@ label input {display: none;}
 
 .highcharts-data-table tr:hover {
     background: #f1f7ff;
+}
+input[type="checkbox"] {
+    /* appearance: none; */
+    background-color: #fff;
+    margin: 0;
+    /* font: inherit; */
+    color: currentColor;
+    width: 1.5em;
+    height: 1.5em;
+    border: 0.15em solid currentColor;
+    border-radius: 0.5em;
+    transform: translateY(-0.075em);
+    font-size: 1.5em;
 }
 </style>
 
@@ -210,19 +226,22 @@ setInterval(()=>{
 
 </div>
 
-  <div class="grid grid4">
-      <label>Audio file
-          <input id="upload" type="file" accept="audio/*">
-      </label>
-      <button id="livestop">Stop</button>
-      <button id="livetok">TOK-FM</button>
-      <button id="liverns">RNŚ</button>
-      <button id="live357">357</button>
-      
-      <br />
-      <button id="clear">Clear</button>
-  </div>
-  <div id="title"></div>
+    <div class="grid grid4">
+    <label>Audio file
+        <input id="upload" type="file" accept="audio/*">
+    </label>
+        <button id="livestop">Stop</button>
+        <button id="livetok">TOK-FM</button>
+        <button id="liverns">RNŚ</button>
+        <button id="live357">357</button>
+    </div>
+    <div id="title" style="min-height: 1.2em"></div>
+    <div>
+        <button id="clear" style="width:10em">Clear</button>
+        Obrys: <input type="checkbox" checked name="obrys" id="obrys" />
+        <button id="btn_mic" title="Microphone ON/OFF">🎙️</button>
+    </div>
+    
 
   <br /><br /><br />
   <br />
@@ -238,6 +257,7 @@ setInterval(()=>{
     let count=0;
     let arr=[];
     let frq=[];
+    let obrys = true;
     clearARR();
 // mode:2   =   120    
 // mode:3   =   80    
@@ -258,7 +278,8 @@ const audioMotion = new AudioMotionAnalyzer( null, {
             for ( const bar of instance.getBars() ) {
                 let dB = ((bar.value[0]*60))-60
                 //if (count %1024 ===200) console.log(dB)
-                arr[i]=Math.max(arr[i],dB); 
+                if (obrys) arr[i]=Math.max(arr[i],dB); 
+                else arr[i]=dB; 
             //arr[i]=dB
                 //if (count %1024 ===201) console.log(arr[i])               
                 let value    = arr[i],
@@ -277,23 +298,58 @@ const audioMotion = new AudioMotionAnalyzer( null, {
             //}
 
             window.wykres.series[0].setData(arr);
-
-
-
-
-
-
         }
     });
-
-
     
     // visualization mode selection
     //const elMode = document.getElementById('mode');
     //elMode.value = audioMotion.mode;
     //elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
-    
-    
+
+    //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+ // Microphone and disconnectOutput (mute) buttons
+const micButton  = document.getElementById('btn_mic'),
+	  muteButton = document.getElementById('btn_mute');
+
+let micStream,
+	isMute = false;
+
+   
+    // Connect or disconnect output to speakers
+    function toggleMute( status ) {
+        isMute = ( status === undefined ) ? ! isMute : !! status;
+        if ( isMute )
+            audioMotion.disconnectOutput();
+        else
+            audioMotion.connectOutput();
+        muteButton.classList.toggle( 'active', isMute );
+    }
+
+
+    micButton.addEventListener( 'click', () => {
+	if ( micStream ) {
+		audioMotion.disconnectInput( micStream, true ); // disconnect mic stream and release audio track
+		toggleMute( false );
+		micButton.className = '';
+		micStream = null;
+	}
+	else {
+		navigator.mediaDevices.getUserMedia( { audio: true } )
+		.then( stream => {
+			micStream = audioMotion.audioCtx.createMediaStreamSource( stream );
+			toggleMute( true ); // mute the speakers to avoid feedback loop from the microphone
+			audioMotion.connectInput( micStream );
+			micButton.className = 'active';
+		})
+		.catch( err => console.log('Error accessing user microphone.') );
+	}
+});
+//mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
+    document.getElementById('obrys').addEventListener( 'change', (e) => {
+        obrys=e.target.checked;
+        clearARR();
+        setActive(e.target);
+    });    
     document.getElementById('clear').addEventListener( 'click', (e) => {
         clearARR();
         setActive(e.target);
