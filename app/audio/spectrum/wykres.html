@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="HandheldFriendly" content="true">
    	<meta name="mobile-web-app-capable" content="yes"> 
-	<title>www</title>
+	<title>WyKres</title>
 
     <link href="styles.css" rel="stylesheet">
 <style>
@@ -22,8 +22,9 @@ label, button {
     border-radius: 0.25em;
     display: inline-block;
     margin: 5px 10px;
-    padding: 8px 2px;
+    padding: 8px;
     text-align: center;
+    min-width:3em;
 }
 
 label input {display: none;}
@@ -33,7 +34,7 @@ label input {display: none;}
 
 .highcharts-figure,.highcharts-data-table table {
     min-width: 320px;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 1em auto;
 }
 
@@ -94,6 +95,8 @@ label input {display: none;}
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script src="https://code.highcharts.com/modules/accessibility.js"></script>
 
+</head>
+<body>
 <figure class="highcharts-figure">
     <div id="container"></div>
     <p class="highcharts-description"></p>
@@ -103,21 +106,25 @@ label input {display: none;}
 
 
 <script>
-window.dataMax =64;
+window.dataMax =61;
+window.frq60=[20.6,23.12,25.96,29.14,32.7,36.71,41.2,46.25,51.91,58.27,65.41,73.42,82.41,92.5,103.8,116.5,130.8,146.8,164.8,185,207.7,233.1,261.6,293.7,329.6,370,415.3,466.2,523.3,587.3,659.3,740,830.6,932.3,1047,1175,1319,1480,1661,1865,2093,2349,2637,2960,3322,3729,4186,4699,5274,5920,6645,7459,8372,9397,10548,11840,13290,14917,16744,18795,21096];
+//console.log(frq60)
 
-const getCategory=(b)=>{
+//???????????????????????????????????
+/*const getCategory=(b)=>{
     let a=[]
     for (let i=0; i<b; i++) a.push(i);//a.push(16*Math.pow(2, i));
     return a;
-}
+}*/
+//???????????????????????????????
 const getData=(b)=>{
     let a=[]
-    for (let i=0; i<b; i++) a.push(Math.random());
+    for (let i=0; i<b; i++) a.push(0);
     return a;
 }
 
-window.categories = getCategory(window.dataMax);
-window.data       = getData(window.dataMax);
+//window.categories = getCategory(window.dataMax);
+window.data  = Array(window.dataMax).fill(0,0,window.dataMax);   //getData(window.dataMax);
 
 
 window.wykres=Highcharts.chart('container', {
@@ -131,10 +138,25 @@ window.wykres=Highcharts.chart('container', {
         //type: 'logarithmic',
     },
     xAxis: {
-        categories: window.categories,
+        categories: window.frq60,   //window.categories,
         title: {text: 'Hz'},
         //type: 'logarithmic',
     },
+    /*tooltip: {
+			shared: true,
+			crosshairs: true,
+            headerFormat: '<b>{series.name}: {point.x}</b><br>',
+            pointFormat: '{point.y}',
+			//headerFormat: '<b>{point.x:%A, %b %e, %H:%M}</b><br>',
+			//headerFormat: '<b>{point.x=point.y}</b>',
+	},*/
+    tooltip: {
+        crosshairs: true,
+        formatter: function () {
+            return '<b>'+Math.round(this.x) +' Hz </b><br />' + Math.round(100*this.y)+' %';
+        }
+    },
+
     plotOptions: {
         series: {
             label: {connectorAllowed: false}
@@ -195,38 +217,53 @@ setInterval(()=>{
       <button id="livestop">Stop</button>
       <button id="livetok">TOK-FM</button>
       <button id="liverns">RNŚ</button>
+      <button id="live357">357</button>
+      
+      <br />
       <button id="clear">Clear</button>
   </div>
+  <div id="title"></div>
 
   <br /><br /><br />
-
-
+  <br />
+  <div class="info"><a href="https://audiomotion.dev" target="_blank"> &nbsp; audioMotion-analyzer</a> <span id="version"></span></div>
+</body>
 <script type="module">
     import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
     const audioEl = document.getElementById('audio');
 
     let count=0;
-    let arr=Array(64).fill(0,0,64);
-    
-    const audioMotion = new AudioMotionAnalyzer( null, {
+    let arr=Array(window.dataMax).fill(0,0,window.dataMax);
+    let frq=[];
+// mode:2   =   120    
+// mode:3   =   80    
+// mode:4   =   60    
+const audioMotion = new AudioMotionAnalyzer( null, {
       source: audioEl,
       mode: 4,
-      weightingFilter: "486",
+      fftSize:16384,
+      weightingFilter: "",//"486",
       useCanvas: false, // don't use the canvas
         onCanvasDraw: instance => {
             count++;
             let i=0;
             
             for ( const bar of instance.getBars() ) {
-            arr[i]=Math.max(arr[i],bar.value[0]);                
+                arr[i]=Math.max(arr[i],bar.value[0]);                
                 let value    = arr[i],
                 peak     = bar.peak[0],
                 hold     = bar.hold[0],
                 isPeakUp = hold > 0 && peak > 0; // if hold < 0 the peak is falling down
-                i++;        
+                   
+                //if (count %1024 ===0) console.log(bar.freq); 
+                frq[i]=bar.freq;
+                i++; 
             }
-            //if (count %1024 ===0) console.log(arr);
-
+            
+            /*if (count %1024 ===200) {
+                console.log(frq); 
+                console.log(JSON.stringify(frq)); 
+            }*/
 
             window.wykres.series[0].setData(arr);
 
@@ -245,32 +282,36 @@ setInterval(()=>{
     //elMode.value = audioMotion.mode;
     //elMode.addEventListener( 'change', () => audioMotion.mode = elMode.value );
     
+    const setTitle=(t)=>{document.getElementById("title").innerHTML=t;}
+    const clearARR=()=>{arr=Array(window.dataMax).fill(0,0,window.dataMax);}
 
     document.getElementById('clear').addEventListener( 'click', (e) => {
-        arr=Array(64).fill(0,0,64);
+        clearARR();
         setActive(e.target);
     });
     // play stream
-    document.getElementById('liverns').addEventListener( 'click', (e) => {
-        audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv';
-        audioEl.play();
-        setActive(e.target);
-    });
     document.getElementById('livetok').addEventListener( 'click', (e) => {
-        audioEl.src = 'http://pl-play.adtonos.com/tok-fm';
-        audioEl.play();
-        setActive(e.target);
+        audioEl.src = 'http://pl-play.adtonos.com/tok-fm';audioEl.play(); setActive(e.target);clearARR();setTitle("TOK-FM");
     });
-    document.getElementById('livestop').addEventListener( 'click', (e) => {    
-        //audioEl.stop();
-        deinitialize();
+    document.getElementById('liverns').addEventListener( 'click', (e) => {
+        audioEl.src = 'http://stream.rcs.revma.com/ypqt40u0x1zuv'; audioEl.play();  setActive(e.target);clearARR();setTitle("Radio Nowy Świat");
     });
+    document.getElementById('live357').addEventListener( 'click', (e) => {
+        audioEl.src = 'http://stream.rcs.revma.com/ye5kghkgcm0uv'; audioEl.play();  setActive(e.target);clearARR();setTitle("Radio 357");
+    });
+
+    document.getElementById('livestop').addEventListener( 'click', (e) => {deinitialize(); setTitle("---Stop---");});
+
+
     
     // file upload
     document.getElementById('upload').addEventListener( 'change', e => {
         const fileBlob = e.target.files[0];
     
         if ( fileBlob ) {
+            console.log(fileBlob)
+            setTitle(fileBlob.type+": "+fileBlob.name+" ["+fileBlob.size+"b]");
+            clearARR();
             audioEl.src = URL.createObjectURL( fileBlob );
             audioEl.play();
         }
@@ -290,4 +331,4 @@ setInterval(()=>{
     
     </script>
     
-    
+</html>
