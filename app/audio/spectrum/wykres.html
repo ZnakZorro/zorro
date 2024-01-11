@@ -342,7 +342,10 @@ let micStream,
 			audioMotion.connectInput( micStream );
 			micButton.className = 'active';
 		})
-		.catch( err => console.log('Error accessing user microphone.') );
+		.catch( err => {
+	            console.log('Error accessing user microphone.');
+	            setTitle('Error accessing user microphone.')
+	        });
 	}
 });
 //mmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmmm
