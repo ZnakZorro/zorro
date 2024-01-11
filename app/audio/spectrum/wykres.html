@@ -317,6 +317,7 @@ let micStream,
    
     // Connect or disconnect output to speakers
     function toggleMute( status ) {
+	    return;
         isMute = ( status === undefined ) ? ! isMute : !! status;
         if ( isMute )
             audioMotion.disconnectOutput();
