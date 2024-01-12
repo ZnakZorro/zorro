@@ -13,24 +13,26 @@ body {
   margin: 0;
 }
 button {
-  display: block;
-  margin: 25px;
-  padding: 10px 40px;
+  display: inline-block;
+  margin: 15px;
+  padding: 10px;
+  vertical-align: top;
 }
 #analyzer {
- height: calc( 100vh - 160px ); 
+ height: calc( 100vh - 360px ); 
 }
 .controls {
-  display: flex;
+  /*display: flex;*/
 }
 .eqband {
-  margin: 10px;
+  margin: 5px;
   text-align: center;
+  display: inline-block;
 }
 .equalizer {
   display: block;
   height: 100px;
-  width: 80px;
+  width: 72px;
   -webkit-appearance: slider-vertical;
 }
 </style>
@@ -41,7 +43,7 @@ button {
     <audio id="audio" src="http://stream.rcs.revma.com/ypqt40u0x1zuv" crossorigin="anonymous"></audio>
     
     <div id="controls" class="controls">
-      <div>
+      <div style="display: inline-block;vertical-align: top;">
         <button id="play">Play</button>
         <button id="stop">Stop</button>
       </div>
