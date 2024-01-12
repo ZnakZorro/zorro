@@ -61,7 +61,7 @@ import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?mi
 
 // create icecast-metadata player
 const player = new IcecastMetadataPlayer(
-  "http://stream.rcs.revma.com/ypqt40u0x1zuv",
+  "https://stream.rcs.revma.com/ypqt40u0x1zuv",
   {
     onMetadata: metadata => {
       document.getElementById("metadata").innerHTML = metadata.StreamTitle;
