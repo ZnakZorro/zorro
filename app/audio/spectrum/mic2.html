@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#3a6">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>mic-2</title>
+
+
+
+
+<style>
+    body {
+  font: 13px sans-serif;
+  margin: 0;
+}
+
+button {
+  background: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  line-height: 1.6;
+  margin: 5px 10px 0 10px;
+  padding: 5px 20px;
+}
+button[data-active="1"] {
+  background: #444;
+  color: #f0f0f0;
+}
+
+label input {
+  display: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+}
+
+p {
+  display: inline;
+  margin: 0 5px;
+}
+
+select {
+  padding: 6px;
+}
+
+.info {
+  display: inline-block;
+  float: right;
+  margin: 10px 20px 0;
+}
+</style>
+</head>
+<body>
+
+<!-- analyzer container -->
+<div id="container"></div>
+<!-- on/off button -->
+<button id="mic" data-active="0">🎤 ON/OFF</button>
+
+<select id="peak-count">
+  <option>1</option>
+  <option>2</option>
+  <option>3</option>
+  <option>4</option>
+</select> peaks
+
+<button id="scaleX" data-active="1">Hz</button><button id="scaleY" data-active="1">dB</button>
+<button id="freeze" data-active="0">  Freeze</button>
+<p>Frequency range: <span id="minFreq"></span> to <span id="maxFreq"></span> Hz</p>
+<button id="reset">Reset</button>
+<!--p>(Use the mouse scroll wheel over the analyzer to zoom in/out; click and drag to move)</p-->
+<!-- module info -->
+<div class="info"><a href="https://audiomotion.dev">audioMotion-analyzer</a> <span id="version"></span></div>
+
+<script type="module">
+    /**
+ * This pen demonstrates how to use audioMotion's getData() method to
+ * detect fundamental frequencies (works best for single instruments).
+ *
+ * It also shows how to implement a way to interactively change
+ * the selected frequency range, using the mouse wheel and drag.
+ *
+ * For documentation and more demos visit https://audiomotion.dev
+ */
+
+// load module from Skypack CDN
+import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+
+let micStream;
+
+const micButton = document.getElementById('mic'),
+      scaleX = document.getElementById('scaleX'),
+      scaleY = document.getElementById('scaleY'),
+      freezeButton = document.getElementById('freeze'),
+      resetButton = document.getElementById('reset');
+
+const initialMinFreq = 10,
+      initialMaxFreq = 2100;
+
+// instantiate analyzer
+const audioMotion = new AudioMotionAnalyzer(
+  document.getElementById('container'),
+  {
+    gradient: 'rainbow',
+    height: window.innerHeight - 200,
+    showScaleX: +scaleX.dataset.active,
+    showScaleY: +scaleY.dataset.active,
+    showPeaks: false,
+    mode: 10,    
+    fillAlpha: .2,
+    lineWidth: 1.5,
+    minFreq: initialMinFreq,
+    maxFreq: initialMaxFreq,
+    fftSize: 32768, // best resolution
+    smoothing: .8,
+    maxDecibels: -15,
+    minDecibels: -125,
+    onCanvasDraw: analyzeData
+  }
+);
+
+// display module version
+document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+
+// toggle microphone on/off
+micButton.addEventListener( 'click', () => {
+  micButton.dataset.active = +!+micButton.dataset.active;
+  if ( micButton.dataset.active == '1' ) {
+    if ( navigator.mediaDevices ) {
+      navigator.mediaDevices.getUserMedia( { audio: true, video: false } )
+      .then( stream => {
+        // create stream using audioMotion audio context
+        micStream = audioMotion.audioCtx.createMediaStreamSource( stream );
+        // connect microphone stream to analyzer
+        audioMotion.connectInput( micStream );
+        // mute output to prevent feedback loops from the speakers
+        audioMotion.volume = 0;
+      })
+      .catch( err => {
+        alert('Microphone access denied by user');
+      });
+    }
+    else {
+      alert('User mediaDevices not available');
+    }
+  }
+  else {
+    // disconnect and release microphone stream
+    audioMotion.disconnectInput( micStream, true );
+  }
+});
+
+// toggle scales on/off
+scaleX.addEventListener( 'click', () => {
+  scaleX.dataset.active = audioMotion.showScaleX = +!+scaleX.dataset.active;
+});
+scaleY.addEventListener( 'click', () => {
+  scaleY.dataset.active = audioMotion.showScaleY = +!+scaleY.dataset.active;
+});
+
+// toggle analyzer on/off
+freezeButton.addEventListener( 'click', () => {
+  freezeButton.dataset.active = +!+freezeButton.dataset.active;
+  audioMotion.toggleAnalyzer( !+freezeButton.dataset.active );
+});
+
+// reset frequency range
+resetButton.addEventListener( 'click', () => {
+  audioMotion.setFreqRange( initialMinFreq, initialMaxFreq );
+  updateFreqRange();
+});
+
+// minimum distance (in Hz) between two data points for them to be considered different peaks
+const minDistance = 3;
+
+// display peak frequencies
+const elPeakSelect = document.getElementById('peak-count'),
+      ctx      = audioMotion.canvasCtx,
+      canvas   = ctx.canvas,
+      fontSize = 16;
+
+function analyzeData() {
+  const bars = audioMotion.getBars();
+  
+  // sort bars by value (amplitude)
+  bars.sort( ( a, b ) => b.value - a.value );
+  
+  if ( bars[0].value == 0 )
+    return;
+  
+  ctx.fillStyle = '#fff';
+  ctx.font = `${fontSize}px sans-serif`;
+
+  for ( let i = 0, peaks = [], peakCount = elPeakSelect.value; i < peakCount; i++ ) {
+    const peak = bars[ i ];
+
+    // check if data points are not too close
+    if ( peaks.find( f => Math.abs( peak.freqLo - f ) < minDistance ) ) {
+      if ( peakCount < bars.length )
+        peakCount++;
+      continue; // skip this peak
+    }
+
+    // save this peak
+    peaks.push( peak.freqLo );
+
+    ctx.textAlign = peak.posX < canvas.width * .9 ? 'left' : 'right';
+    const posY = Math.max( fontSize, canvas.height * ( 1 - peak.value ) );
+    ctx.fillText( peak.freqLo.toFixed(2) + 'Hz', peak.posX, posY );
+  }
+}
+
+// limit mouse wheel / touchpad sensitivity
+let wheelDelay    = 50,
+    wheelUpdating = false;
+
+// zoom horizontal scale in/out
+canvas.addEventListener( 'wheel', e => {
+	e.preventDefault();
+	if ( wheelUpdating )
+		return;
+	wheelUpdating = true;
+	setTimeout( () => wheelUpdating = false, wheelDelay );
+
+  const minFreq = audioMotion.minFreq,
+        maxFreq = audioMotion.maxFreq,
+        incr    = e.deltaY < 0 ? .8 : 1.25;
+  
+  // limit max zoom-in
+  if ( e.deltaY < 0 && Math.log10( maxFreq ) - Math.log10( minFreq ) < .778 )
+    return;
+  
+  audioMotion.setFreqRange(
+    Math.max( 10, minFreq * 1 / incr | 0 ),
+    Math.min( 20000, maxFreq * incr | 0 )
+  );
+  
+  updateFreqRange();
+});
+
+// click+drag on canvas moves the analyzer window
+let scaleDragX, isScaleDrag = false;
+canvas.addEventListener( 'mousedown', e => {
+	scaleDragX = e.offsetX;
+	isScaleDrag = true;
+});
+
+canvas.addEventListener( 'mousemove', e => {
+	if ( ! isScaleDrag )
+		return;
+
+	const dragRatio = ( e.offsetX - scaleDragX ) / audioMotion.canvas.width,
+		    minFreq   = audioMotion.minFreq,
+		    maxFreq   = audioMotion.maxFreq;
+
+	scaleDragX = e.offsetX;
+
+	if (
+		( dragRatio >= 0 && minFreq <= 10 ) ||
+		( dragRatio < 0  && maxFreq >= 22000 )
+	)
+		return;
+
+	const minLog  = Math.log10( minFreq ),
+			  diffLog = Math.log10( maxFreq ) - minLog,
+			  newMin  = minLog * ( 1 + dragRatio * -1 ),
+			  newMax  = newMin + diffLog;
+
+	audioMotion.setFreqRange(
+    Math.max( 10, 10 ** newMin ),
+	  Math.min( 22000, 10 ** newMax )
+  );
+  
+  updateFreqRange();
+});
+
+window.addEventListener( 'mouseup', e => {
+	isScaleDrag = false;
+});
+
+function updateFreqRange() {
+  document.getElementById('minFreq').innerText = audioMotion.minFreq | 0;
+  document.getElementById('maxFreq').innerText = audioMotion.maxFreq | 0;
+}
+
+updateFreqRange();
+</script>
+
+</body>
+</html>
