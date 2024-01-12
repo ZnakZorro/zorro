@@ -1,0 +1,93 @@
+
+
+<script src="https://unpkg.com/icecast-metadata-player@1.14.4"></script>
+
+
+<style>
+body {
+  font: 13px sans-serif;
+  margin: 0;
+}
+
+button {
+  background: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px 10px 0;
+  padding: 8px 40px;
+  vertical-align: top;
+}
+
+p {
+  display: inline-block;
+  font-size: 1.2rem;
+  margin: 12px;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+}
+
+.info {
+  display: inline-block;
+  float: right;
+  margin: 15px 20px 0;
+}
+</style>
+
+
+<!-- analyzer container -->
+<div id="container"></div>
+
+<button id="play">Play</button>
+<button id="stop">Stop</button>
+<p>Now Playing: <span id="metadata"></span></p>
+
+<div class="info"><a href="https://audiomotion.dev">audioMotion-analyzer</a> <span id="version"></span></div>
+
+<script type="module">
+/**
+ * For audioMotion-analyzer documentation and
+ * more demos, visit https://audiomotion.dev
+ */
+
+// icecast-metadata-player library is loaded in the HTML head
+
+// load module from Skypack CDN
+import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+
+// create icecast-metadata player
+const player = new IcecastMetadataPlayer(
+  "http://stream.rcs.revma.com/ypqt40u0x1zuv",
+  {
+    onMetadata: metadata => {
+      document.getElementById("metadata").innerHTML = metadata.StreamTitle;
+    }
+  }
+);
+
+// use player.audioElement as the audio source
+// when creating the audioMotion-analyzer object
+const audioMotion = new AudioMotionAnalyzer(
+  document.getElementById('container'),
+  {
+    source: player.audioElement,
+    height: window.innerHeight - 50,
+    gradient: 'prism',
+    mode: 3,
+    barSpace: .6,
+    ledBars: true
+  }
+);
+
+// play / stop
+document.getElementById('play').addEventListener( 'click', () => player.play() );
+document.getElementById('stop').addEventListener( 'click', () => player.stop() );
+
+// display module version
+document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+
+</script>
