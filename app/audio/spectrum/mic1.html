@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#3a6">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>mic</title>
+<style>
+body {
+  font: 13px sans-serif;
+  margin: 0;
+}
+
+label {
+  background: #f0f0f0;
+  border: 1px solid #999;
+  border-radius: 5px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px 0 0 10px;
+  padding: 5px 20px;
+}
+
+label input {
+  display: none;
+}
+
+canvas {
+  display: block;
+  width: 100%;
+}
+
+.info {
+  display: inline-block;
+  float: right;
+  margin: 10px 20px 0;
+}
+</style>
+</head>
+<body>
+
+ <!-- analyzer container -->
+<div id="container"></div>
+<!-- on/off button -->
+<label>
+  <input type="checkbox" id="mic">
+  🎤 ON/OFF
+</label>
+<!-- module info -->
+<div class="info"><a href="https://audiomotion.dev">audioMotion-analyzer</a> <span id="version"></span></div>
+</body>
+
+
+<script type="module">
+/**
+ * for documentation and more demos,
+ * visit https://audiomotion.dev
+ */
+
+// load module from Skypack CDN
+import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+
+// global variable to save microphone stream
+let micStream;
+
+// instantiate analyzer
+const audioMotion = new AudioMotionAnalyzer(
+  document.getElementById('container'),
+  {
+    gradient: 'rainbow',
+    height: window.innerHeight - 40,
+    showScaleY: true
+  }
+);
+
+// display module version
+document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
+
+// toggle microphone on/off
+const micButton = document.getElementById('mic');
+
+micButton.addEventListener( 'change', () => {
+  if ( micButton.checked ) {
+    if ( navigator.mediaDevices ) {
+      navigator.mediaDevices.getUserMedia( { audio: true, video: false } )
+      .then( stream => {
+        // create stream using audioMotion audio context
+        micStream = audioMotion.audioCtx.createMediaStreamSource( stream );
+        // connect microphone stream to analyzer
+        audioMotion.connectInput( micStream );
+        // mute output to prevent feedback loops from the speakers
+        audioMotion.volume = 0;
+      })
+      .catch( err => {
+        alert('Microphone access denied by user');
+      });
+    }
+    else {
+      alert('User mediaDevices not available');
+    }
+  }
+  else {
+    // disconnect and release microphone stream
+    audioMotion.disconnectInput( micStream, true );
+  }
+});
+
+</script>
+
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#3a6">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>eq</title>
+<style>
+body {
+  font-family: monospace;
+  margin: 0;
+}
+button {
+  display: block;
+  margin: 25px;
+  padding: 10px 40px;
+}
+#analyzer {
+ height: calc( 100vh - 160px ); 
+}
+.controls {
+  display: flex;
+}
+.eqband {
+  margin: 10px;
+  text-align: center;
+}
+.equalizer {
+  display: block;
+  height: 100px;
+  width: 80px;
+  -webkit-appearance: slider-vertical;
+}
+</style>
+</head>
+<body>
+
+    <div id="analyzer"></div>
+    <audio id="audio" src="http://stream.rcs.revma.com/ypqt40u0x1zuv" crossorigin="anonymous"></audio>
+    
+    <div id="controls" class="controls">
+      <div>
+        <button id="play">Play</button>
+        <button id="stop">Stop</button>
+      </div>
+    </div>
+    
+    <datalist id="tickmarks">
+      <option value="-12" label="-12"></option>
+      <option value="-8"></option>
+      <option value="-4"></option>
+      <option value="0" label="0"></option>
+      <option value="4"></option>
+      <option value="8"></option>
+      <option value="12" label="12"></option>
+    </datalist>
+</body>
+
+
+<script type="module">
+/**
+ * This pen implements a frequency equalizer
+ * connected to audioMotion-analyzer
+ *
+ * Original equalizer code by Osman Colakoglu
+ *
+ * For audioMotion-analyzer documentation and
+ * more demos, visit https://audiomotion.dev
+ */
+
+ import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+
+const ctx = window.AudioContext || window.webkitAudioContext;
+const context = new ctx();
+const mediaElement = document.getElementById('audio');
+const sourceNode = context.createMediaElementSource( mediaElement );
+const controls = document.getElementById('controls');
+
+const filters = [];
+
+// create filters for each desired frequency band
+[63, 125, 250, 500, 1000, 2000, 4000, 8000, 16000].forEach( ( freq, i ) => {
+  const eq = context.createBiquadFilter();
+  eq.frequency.value = freq;
+  eq.type = 'peaking';
+  eq.gain.value = 0;
+  filters.push( eq );
+  
+  // add HTML elements for this band
+  controls.innerHTML += `
+  <div class="eqband">
+    <label>${ freq < 1000 ? freq : freq / 1000 + 'k' }Hz</label>
+    <input class="equalizer" type="range" value="0" step="1" min="-12" max="12" list="tickmarks" orient="vertical" data-filter="${i}">
+    <output id="gain${i}">0 dB</output>
+  </div>`;
+});
+
+// connect the source audio node to the first filter
+sourceNode.connect( filters[0] );
+
+// connect each filter to the next one
+for ( let i = 0; i < filters.length - 1; i++ ) {
+  filters[ i ].connect( filters[ i + 1 ] );
+}
+
+// instantiate the analyzer and connect the last filter to it
+const audioMotion = new AudioMotionAnalyzer(
+  document.getElementById('analyzer'),
+  {
+    source: filters[ filters.length - 1 ]
+  }
+);
+
+// add event listeners for playback and equalizer control
+
+document.getElementById('play').addEventListener( 'click', () => mediaElement.play() );
+document.getElementById('stop').addEventListener( 'click', () => mediaElement.pause() );
+
+document.querySelectorAll('.equalizer').forEach( el => {
+  el.addEventListener( 'input', changeGain );
+});
+
+function changeGain( event ) {
+  console.log( event );
+  
+  const target   = event.target,
+        value    = parseFloat( target.value ),
+        nbFilter = target.dataset.filter,
+        output   = document.querySelector( '#gain' + nbFilter );
+  
+  filters[ nbFilter ].gain.value = value;
+  output.value = ( value > 0 ? '+' : '' ) + value + ' dB';
+}
+
+</script>
+
+</html>
