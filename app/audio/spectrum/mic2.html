@@ -65,6 +65,7 @@ select {
 <button id="mic" data-active="0">🎤 ON/OFF</button>
 
 <select id="peak-count">
+  <option>0</option>
   <option>1</option>
   <option>2</option>
   <option>3</option>
@@ -101,7 +102,7 @@ const micButton = document.getElementById('mic'),
       freezeButton = document.getElementById('freeze'),
       resetButton = document.getElementById('reset');
 
-const initialMinFreq = 20,
+const initialMinFreq = 10,
       initialMaxFreq = 16000;
 
 // instantiate analyzer
@@ -120,8 +121,8 @@ const audioMotion = new AudioMotionAnalyzer(
     maxFreq: initialMaxFreq,
     fftSize: 32768, // best resolution
     smoothing: .8,
-    maxDecibels: -15,
-    minDecibels: -125,
+    maxDecibels: -20,
+    minDecibels: -120,
     onCanvasDraw: analyzeData
   }
 );
@@ -184,9 +185,10 @@ const minDistance = 3;
 const elPeakSelect = document.getElementById('peak-count'),
       ctx      = audioMotion.canvasCtx,
       canvas   = ctx.canvas,
-      fontSize = 16;
+      fontSize = 22;//16;
 
 function analyzeData() {
+    return;
   const bars = audioMotion.getBars();
   
   // sort bars by value (amplitude)
