@@ -1,4 +1,12 @@
-
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#369">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>playER</title>
 
 <script src="https://unpkg.com/icecast-metadata-player@1.14.4"></script>
 
@@ -37,7 +45,8 @@ canvas {
   margin: 15px 20px 0;
 }
 </style>
-
+</head>
+<body>
 
 <!-- analyzer container -->
 <div id="container"></div>
@@ -91,3 +100,5 @@ document.getElementById('stop').addEventListener( 'click', () => player.stop() )
 document.getElementById('version').innerText = `v${AudioMotionAnalyzer.version}`;
 
 </script>
+</body>
+</html>
