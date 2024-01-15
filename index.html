@@ -86,10 +86,10 @@
    const imgReady=()=>{
       console.log("imgready");
    }
-   const jutro=()=>{
+   const jutro=(ile=1)=>{
    	const weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
    	let tomorrow = new Date();
-   	tomorrow.setDate(tomorrow.getDate() + 1);
+   	tomorrow.setDate(tomorrow.getDate() + ile);
    	let dw = tomorrow.getDay();
    	return weekdays[dw]
    }
@@ -251,10 +251,9 @@ document.addEventListener("DOMContentLoaded",function(){
          <button onclick='document.getElementById("txtx").value="";'>Clear</button>           
       </span>
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
-      <span style="float:right;">
-         <button onclick='PasteFB(1)'>FB1</button>
-         <button onclick='PasteFB(2)'>FB2</button>
-         <button onclick='PasteFB(3)'>Jutro</button>
+      <span style="float:right;">         
+         <button onclick='PasteFB(2)'>Po jutrze</button>
+         <button onclick='PasteFB(1)'>Jutro</button>
       </span>
    
 </div>
@@ -270,9 +269,8 @@ document.addEventListener("DOMContentLoaded",function(){
 <script>
    const PasteFB=(nr=1)=>{
    let txtx = document.getElementById("txtx");
-   if(nr===1) txtx.value=`Poproszę zamówić:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
-   if(nr===2) txtx.value=`Zamawiam na piątek:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
-   if(nr===3) txtx.value=`Poproszę na jutro (${jutro()}):
+   if(nr===2) txtx.value=`Poproszę na pojutrze (${jutro(nr)}):\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
+   if(nr===1) txtx.value=`Poproszę na jutro (${jutro(nr)}):
 1x chleb Ziarmix
 2x bułki z sezamem
 --
