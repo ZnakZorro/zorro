@@ -86,6 +86,14 @@
    const imgReady=()=>{
       console.log("imgready");
    }
+   const jutro=()=>{
+   	const weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+   	let tomorrow = new Date();
+   	tomorrow.setDate(tomorrow.getDate() + 1);
+   	let dw = tomorrow.getDay();
+   	return weekdays[dw]
+   }
+
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){        
     //_$("#modalyrnomodal").src= "https://www.yr.no/en/content/"+APPid+"/meteogram.svg";
@@ -246,7 +254,7 @@ document.addEventListener("DOMContentLoaded",function(){
       <span style="float:right;">
          <button onclick='PasteFB(1)'>FB1</button>
          <button onclick='PasteFB(2)'>FB2</button>
-         <button onclick='PasteFB(3)'>FB3</button>
+         <button onclick='PasteFB(3)'>Jutro</button>
       </span>
    
 </div>
@@ -263,8 +271,8 @@ document.addEventListener("DOMContentLoaded",function(){
    const PasteFB=(nr=1)=>{
    let txtx = document.getElementById("txtx");
    if(nr===1) txtx.value=`Poproszę zamówić:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
-   if(nr===3) txtx.value=`Zamawiam na piątek:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
-   if(nr===2) txtx.value=`Poproszę zamówić:
+   if(nr===2) txtx.value=`Zamawiam na piątek:\n1x chleb Ziarmix\n2x bułki z sezamem\n--\nZbigniew Sz`;
+   if(nr===3) txtx.value=`Poproszę na jutro (${jutro()}):
 1x chleb Ziarmix
 2x bułki z sezamem
 --
