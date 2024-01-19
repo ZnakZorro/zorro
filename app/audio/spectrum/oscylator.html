@@ -1,0 +1,597 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#369">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>oScylaTOR</title>
+
+    <link href="styles.css" rel="stylesheet">
+<style>
+
+    /*.oktawa {width:22%;}
+
+    #f69.oktawa,
+    #f73.oktawa,
+    #f77.oktawa,
+    #f81.oktawa,
+    #f85.oktawa,
+    #f89.oktawa,
+    #f93.oktawa,
+    #f97.oktawa
+    {background: #777;}*/
+    
+    .blue {background: darkblue; color:white;}
+    .red {background: darkred; color:white;}
+    .gray {background: #666; color:white;}
+    .silver {background: darkgray; color:#444; min-width:2.7em;}
+    .active {background: silver; color:red;}
+    #container {
+        width: 100%;
+        max-width:1200px;
+        height: 320px;
+        position: fixed;
+        top: 0;
+        margin:0;
+        padding:0;
+        z-index: 5;
+    }
+    
+    body {font-size:12pt; padding-top:340px; margin:0;padding:0}
+    header.plus a {font-size:1.2em; padding:0.5em; text-decoration: none;}
+    .hide {display:none;}
+    div {margin: 0 0.3em;padding:0.3em;}
+    label, button {
+        background: #f0f0f0;
+        color:black;
+        border: 1px solid #999;
+        border-radius: 0.25em;
+        display: inline-block;
+        margin: 6px 4px;
+        padding: 6px;
+        text-align: center;
+        min-width:4em;
+    }
+
+    label input {display: none;}
+
+
+    input[type="checkbox"] {
+        /* appearance: none; */
+        /*background-color: #fff;*/
+        margin: 0.3em;
+        /* font: inherit; */
+        /*color: currentColor;*/
+        width: 1.5em;
+        height: 1.5em;
+        /*border: 0.15em solid currentColor;*/
+        /*border-radius: 0.5em;*/
+        transform: translateY(0.22em);
+        font-size: 1.35em;
+    }
+    select {transform: translateY(-0.42em);}
+
+    .grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 0.25em;
+        row-gap: 0.25em;
+    }
+    .grid0 {column-gap:0;row-gap:0;}
+    .grid2 {grid-template-columns: 1fr 1fr;}
+    .grid3 {grid-template-columns: 1fr 1fr 1fr;}
+    .grid4 {grid-template-columns: 1fr 1fr  1fr 1fr;}
+    .grid5 {grid-template-columns: 1fr 1fr  1fr  1fr 1fr;}
+    .grid6 {grid-template-columns: 1fr 1fr  1fr  1fr  1fr 1fr;}
+    .grid7 {grid-template-columns: 1fr 1fr  1fr  1fr  1fr  1fr 1fr;}
+    .grid77 {
+        display: grid;
+        column-gap: 0.25em;
+        row-gap: 0.25em;
+        justify-items: center;
+        grid-template-columns: 1fr 1fr  1fr  1fr  1fr  1fr 1fr;
+    }
+    .oktawa {
+        width: 100%;
+        min-width: auto;
+        overflow: hidden;
+        background: #136;
+        color: #fff;
+        border-color: darkcyan;
+    }
+
+    div#spec:has(> :nth-child(122)) {
+        background: rgb(211, 210, 210);
+    }
+</style>
+
+<script>
+    const setActive=(ten)=>{
+        if(!ten?.parentElement) return;
+        let parent = ten.parentElement;
+        let keys   = parent.querySelectorAll("button");
+        keys.forEach(key=>key.classList.remove("active"));
+        ten.classList.add("active");
+    }
+</script>
+
+
+</head>
+    <body style="padding-top:330px; margin:auto;">
+
+<div id="container">
+    <div style="position:absolute; opacity:0.7; top:12px; left:12px; z-index:9; background: black;font-family: monospace;"><span id="sweepVal" style="color:#fff; font-size:2.5em;"></span>Hz</div>
+</div>
+
+        <div style="background: #555;">
+            <button id="btn_sweepStart" class="red" >START</button>
+            <button id="btn_sweepPause" class="gray" > | | </button>
+            <button id="btn_sweepStop"  class="blue">STOP</button>
+            L:<input type="checkbox" id="loopa" />
+            
+            
+            <select id="gammy">
+                <option value="224steps">224 steps</option>                
+                <option value="Sweep100">Sweep100</option>
+                <option value="Sweep200">Sweep200</option>
+                <option value="Sweep400">Sweep400</option>
+                <option value="Sweep32">Sweep32</option>
+                <option value="bass">Bass</option>
+                <option value="middle">Middle</option>
+                <option value="treble">Treble</option>
+                <option value="cdur">White keys</option>
+                <option value="gama">White & black</option>
+                <option value="sweeplog">SweepLOG</option>
+                
+            </select>
+
+            <!--Okw.:<input type="checkbox" id="oktawa" /--> 
+        </div>
+        <div>
+            <button id="btn_soundreset" class="gray">RESET</button>
+            <button class="timeFactor silver" data-factor="1">1/4</button>
+            <button class="timeFactor silver active" data-factor="2">1/2</button>
+            <button class="timeFactor silver" data-factor="4">1</button>
+            <button class="timeFactor silver" data-factor="8">2</button>
+            <button class="timeFactor silver" data-factor="16">4</button>s.
+            <!--
+            <button id="genFreq">~All</button>
+            <button id="genBass">~Bass</button>  
+            -->
+            
+            
+        </div>
+        <div id="spec"></div>
+        <!--div>
+            <button id="btn_play220">220Hz</button>
+            <button id="btn_play440">440Hz</button>
+            <button id="btn_play880">880Hz</button>            
+        </div-->
+        <script type="module">
+
+            import AudioMotionAnalyzer from 'https://cdn.skypack.dev/audiomotion-analyzer?min';
+let GAMMA = {
+  "C0": 16.35,
+  "D0": 18.35,
+  "E0": 20.60,
+  "F0": 21.83,
+  "G0": 24.50,
+  "A0": 27.50,
+  "B0": 30.87,
+  "C1": 32.70,
+  "D1": 36.71,
+  "E1": 41.20,
+  "F1": 43.65,
+  "G1": 49.00,
+  "A1": 55.00,
+  "B1": 61.74,
+  "C2": 65.41,
+  "D2": 73.42,
+  "E2": 82.41,
+  "F2": 87.31,
+  "G2": 98.00,
+  "A2": 110.00,
+  "B2": 123.47,
+  "C3": 130.81,
+  "D3": 146.83,
+  "E3": 164.81,
+  "F3": 174.61,
+  "G3": 196.00,
+  "A3": 220.00,
+  "B3": 246.94,
+  "C4": 261.63,
+  "D4": 293.66,
+  "E4": 329.63,
+  "F4": 349.23,
+  "G4": 392.00,
+  "A4": 440.00,
+  "B4": 493.88,
+  "C5": 523.25,
+  "D5": 587.33,
+  "E5": 659.26,
+  "F5": 698.46,
+  "G5": 783.99,
+  "A5": 880.00,
+  "B5": 987.77,
+  "C6": 1046.50,
+  "D6": 1174.66,
+  "E6": 1318.51,
+  "F6": 1396.91,
+  "G6": 1567.98,
+  "A6": 1760.00,
+  "B6": 1975.53,
+  "C7": 2093.00,
+  "D7": 2349.32,
+  "E7": 2637.02,
+  "F7": 2793.83,
+  "G7": 3135.96,
+  "A7": 3520.00,
+  "B7": 3951.07,
+  "C8": 4186.01,
+  "D8": 4698.64,
+  "E8": 5274.04,
+  "F8": 5587.65,
+  "G8": 6271.93,
+  "A8": 7040.00,
+  "B8": 7902.13,
+  "C9": 8372.02,
+  "D9": 9397.27,
+  "E9": 10548.08,
+  "F9": 11175.30,
+  "G9": 12543.85,
+  "A9": 14080.00,
+  "B9": 15804.27,
+  "C10": 16744.04,
+  "D10": 18794.55,
+  "E10": 21096.16
+}
+
+let GAMA  = [16.35,18.35,20.6,21.83,24.5,27.5,30.87,32.7,36.71,41.2,43.65,49,55,61.74,65.41,73.42,82.41,87.31,98,110,123.47,130.81,146.83,164.81,174.61,196,220,246.94,261.63,293.66,329.63,349.23,392,440,493.88,523.25,587.33,659.26,698.46,783.99,880,987.77,1046.5,1174.66,1318.51,1396.91,1567.98,1760,1975.53,2093,2349.32,2637.02,2793.83,3135.96,3520,3951.07,4186.01,4698.64,5274.04,5587.65,6271.93,7040,7902.13,8372.02,9397.27,10548.08,11175.3,12543.85,14080,15804.27,16744.04,18794.55,21096.16];
+//GAMA243= 243
+//NOTEall=125
+let NOTEall = [16.35,17.32,18.35,19.45,20.6,21.83,23.12,24.5,25.96,27.5,29.14,30.87,32.7,34.65,36.71,38.89,41.2,43.65,46.25,49,51.91,55,58.27,61.74,65.41,69.3,73.42,77.78,82.41,87.31,92.5,98,103.83,110,116.54,123.47,130.81,138.59,146.83,155.56,164.81,174.61,185,196,207.65,220,233.08,246.94,261.63,277.18,293.66,311.13,329.63,349.23,369.99,392,415.3,440,466.16,493.88,523.25,554.37,587.33,622.25,659.26,698.46,739.99,783.99,830.61,880,932.33,987.77,1046.5,1108.73,1174.66,1244.51,1318.51,1396.91,1479.98,1567.98,1661.22,1760,1864.66,1975.53,2093,2217.46,2349.32,2489.02,2637.02,2793.83,2959.96,3135.96,3322.44,3520,3729.31,3951.07,4186.01,4434.92,4698.64,4978.03,5274.04,5587.65,5919.91,6271.93,6644.88,7040,7458.62,7902.13,8372.02,8869.84,9397.27,9956.06,10548.08,11175.3,11839.82,12543.85,13289.75,14080,14917.24,15804.27,16744.04,17739.69,18794.55,19912.13,21096.16];
+//console.log("NOTEall=",NOTEall.length)
+
+
+//let GAMA243 = [20.02,20.6,21.21,21.83,22.47,23.12,23.8,24.5,25.22,25.96,26.72,27.5,28.31,29.14,29.99,30.87,31.77,32.7,33.66,34.65,35.66,36.71,37.78,38.89,40.03,41.2,42.41,43.65,44.93,46.25,47.6,49,50.44,51.91,53.43,55,56.61,58.27,59.98,61.74,63.54,65.41,67.32,69.3,71.33,73.42,75.57,77.78,80.06,82.41,84.82,87.31,89.87,92.5,95.21,98,100.9,103.8,106.9,110,113.2,116.5,120,123.5,127.1,130.8,134.6,138.6,142.7,146.8,151.1,155.6,160.1,164.8,169.6,174.6,179.7,185,190.4,196,201.7,207.7,213.7,220,226.4,233.1,239.9,246.9,254.2,261.6,269.3,277.2,285.3,293.7,302.3,311.1,320.2,329.6,339.3,349.2,359.5,370,380.8,392,403.5,415.3,427.5,440,452.9,466.2,479.8,493.9,508.4,523.3,538.6,554.4,570.6,587.3,604.5,622.3,640.5,659.3,678.6,698.5,718.9,740,761.7,784,807,830.6,854.9,880,905.8,932.3,959.6,987.8,1017,1047,1077,1109,1141,1175,1209,1245,1281,1319,1357,1397,1438,1480,1523,1568,1614,1661,1710,1760,1812,1865,1919,1976,2033,2093,2154,2217,2282,2349,2418,2489,2562,2637,2714,2794,2876,2960,3047,3136,3228,3322,3420,3520,3623,3729,3839,3951,4067,4186,4309,4435,4565,4699,4836,4978,5124,5274,5429,5588,5751,5920,6093,6272,6456,6645,6840,7040,7246,7459,7677,7902,8134,8372,8617,8870,9130,9397,9673,9956,10248,10548,10857,11175,11503,11840,12187,12544,12911,13290,13679,14080,14493,14917,15354,15804,16267,16744,17235,17740,18260,18795,19345,19912,20496,21096,21714];
+//console.log("GAMA243=",GAMA243.length)
+//frQQ= 224
+const frQQ224=[20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,55,57,60,62,64,67,69,71,73,75,78,80,82,85,87,90,93,95,98,101,104,107,110,113,117,120,124,127,131,135,139,143,147,151,156,160,165,170,175,180,185,190,196,202,208,214,220,226,233,240,247,254,261.63,269,277,285,293.66,302,311,320,329.63,334,339,342,349.23,360,370,381,392.00,404,415,428,440.00,453,466,480,493.88,505,510,520,523.25,540,550,570,590,610,620,640,660,680,700,720,740,760,780,810,830,860,880,910,930,960,990,1020,1050,1080,1110,1140,1180,1210,1250,1280,1320,1360,1400,1440,1480,1520,1570,1610,1660,1710,1760,1810,1870,1920,1980,2030,2090,2150,2220,2280,2350,2420,2490,2560,2640,2710,2790,2880,2960,3050,3140,3230,3320,3420,3520,3620,3730,3840,3950,4070,4190,4310,4440,4570,4700,4840,4980,5120,5270,5430,5590,5750,5920,6090,6270,6460,6650,6840,7040,7250,7460,7680,7900,8130,8370,8620,8870,9130,9400,9670,9960,10250,10550,10860,11180,11500,11840,12190,12540,12910,13290,13680,14080,14490,14920,15350,15800,16270,16740,17240,17740,18260,18800,19350,20000];
+//console.log("GAMA=",GAMA.length)
+//console.log("frQQ=",frQQ.length)
+
+//frQQ120= 121
+//const frQQ120=[20.6,21.83,23.12,24.5,25.96,27.5,29.14,30.87,32.7,34.65,36.71,38.89,41.2,43.65,46.25,49,51.91,55,58.27,61.74,65.41,69.3,73.42,77.78,82.41,87.31,92.5,98,103.8,110,116.5,123.5,130.8,138.6,146.8,155.6,164.8,174.6,185,196,207.7,220,233.1,246.9,261.6,277.2,293.7,311.1,329.6,349.2,370,392,415.3,440,466.2,493.9,523.3,554.4,587.3,622.3,659.3,698.5,740,784,830.6,880,932.3,987.8,1047,1109,1175,1245,1319,1397,1480,1568,1661,1760,1865,1976,2093,2217,2349,2489,2637,2794,2960,3136,3322,3520,3729,3951,4186,4435,4699,4978,5274,5588,5920,6272,6645,7040,7459,7902,8372,8870,9397,9956,10548,11175,11840,12544,13290,14080,14917,15804,16744,17740,18795,19912,21096];
+//frQQ060= 61
+//const frQQ060=[20.6,23.12,25.96,29.14,32.7,36.71,41.2,46.25,51.91,58.27,65.41,73.42,82.41,92.5,103.8,116.5,130.8,146.8,164.8,185,207.7,233.1,261.6,293.7,329.6,370,415.3,466.2,523.3,587.3,659.3,740,830.6,932.3,1047,1175,1319,1480,1661,1865,2093,2349,2637,2960,3322,3729,4186,4699,5274,5920,6645,7459,8372,9397,10548,11840,13290,14917,16744,18795,21096];
+//console.log("frQQ120=",frQQ120.length)
+//console.log("frQQ060=",frQQ060.length)
+let frQQ = frQQ224
+                const audioMotion = new AudioMotionAnalyzer( document.getElementById('container') ),
+                audioCtx    = audioMotion.audioCtx,
+                oscillator  = audioCtx.createOscillator(),
+                gainNode    = audioCtx.createGain();
+
+                //document.getElementById('btn_play220').addEventListener( 'click', () => playTone(220) );
+                //document.getElementById('btn_play440').addEventListener( 'click', () => playTone(440) );
+                //document.getElementById('btn_play880').addEventListener( 'click', () => playTone(880) );
+
+                document.getElementById('btn_soundreset').addEventListener( 'click', () => SweepReset());
+                document.getElementById('btn_sweepStart').addEventListener('click',()=> SeepPlay() );
+                document.getElementById('btn_sweepPause').addEventListener('click',()=> SeepPause() );
+                document.getElementById('btn_sweepStop').addEventListener('click',()=> SeepStop() );
+                document.getElementById('loopa').addEventListener('change',()=> Loopa(event) );
+                const Loopa=(e,a)=>{ LOOPA=(e.target.checked);}
+
+//GAMA= 73
+//NOTEall=125
+//frQQ224= 224
+//frQQ120= 121
+//frQQ060= 61
+//GAMA= 73
+//oooooooooooooooooooooooooooooooooooooooooooooooo
+                document.getElementById('gammy').addEventListener('change',(e)=> {                   
+                    let selVal = e.target.value;
+                    console.log(selVal)
+                    
+                    if (selVal==="224steps") Oktawa(2); // white
+                    if (selVal==="cdur") Oktawa(0); // white
+                    if (selVal==="gama") Oktawa(1); //white&black
+                    if (selVal==="sweeplog") sweepLOG(e);
+                    if (selVal==="Sweep32")  makeSweepTone(32);
+                    if (selVal==="Sweep100") makeSweepTone(100);
+                    if (selVal==="Sweep200") makeSweepTone(200);
+                    if (selVal==="Sweep400") makeSweepTone(400);
+                    if (selVal==="bass")     makeSweepTone(100,20,600);
+                    if (selVal==="middle")   makeSweepTone(100,500,5000);
+                    if (selVal==="treble")   makeSweepTone(100,4000,20000);
+                    
+                    
+                } );
+
+
+                const makeSweepTone=(count=100,min=20,max=20000)=>{
+                    let scale = (Math.log(max) - Math.log(min)) / (max - min);
+                    let minv = Math.log(min); 
+                    let step = Math.floor(max/count);
+                    let i=0;
+                    let html="";
+                    let lastF=0;
+                    frQQ.length=0;
+                    for (let f=min; f<max; f+=step){
+                        let  ff =  Math.exp(minv + scale*(f-min));
+                             ff =  Math.round(ff*100)/100;
+                        let fff =  Math.round(ff);
+                        if (fff != lastF) {
+                            html +=`<button id="f${i}" data-frq="f${ff}" title="${ff}Hz">${fff}</button>`;
+                            frQQ.push(ff);
+                            i++;
+                        }
+                        lastF=fff;
+                    }
+                    document.getElementById("spec").innerHTML = html;
+                    document.querySelectorAll("div#spec button").forEach((b,c)=>{
+                        b.addEventListener("click",function(e){
+                            let f = parseInt(e.target.textContent)
+                            playTone(f);
+                            sweepCounter=c;
+                            setActive(e.target)
+                        });                
+                    });
+                    sweepCounter=0;
+                    maxi=frQQ.length;
+                    console.log(frQQ.length,frQQ)
+                }
+
+//oooooooooooooooooooooooooooooooooooooooooooooooo
+
+                //document.getElementById('oktawa').addEventListener('change',()=> Oktawa(event) );
+                const Oktawa=(type=0)=>{
+                    if (type===0) frQQ=GAMA;
+                    if (type===1) frQQ=NOTEall; 
+                    if (type===2) frQQ=frQQ224;
+                    //console.log(frQQ.length)
+                    let html="";
+                    let i=0;
+                    for (let g in frQQ){
+                        //console.log(g,GAMA[g])
+                        let f=frQQ[g];
+                        let ff=Math.round(f)
+                        html +=`<button class="oktawa" data-frq="${f}" title="${f}" id="f${i}">${ff}</button>`;
+                        i++;
+                    }
+                    document.getElementById("spec").innerHTML = html;
+                    document.getElementById("spec").classList.add("grid77");
+                    document.querySelectorAll("div#spec button").forEach((b,c)=>{
+                        b.addEventListener("click",function(e){
+                            let f = parseInt(e.target.dataset.frq)
+                            playTone(f);
+                            sweepCounter=c;
+                            setActive(e.target)
+                        })                    
+                    })                    
+                    /*
+                    let specs = document.querySelectorAll("#spec button");
+                    if(e.target.checked){
+                        specs.forEach((b)=>{b.classList.add("oktawa")});
+                    } else {
+                        specs.forEach((b)=>{b.classList.remove("oktawa")});
+                    }
+                    */
+                }
+                
+                document.querySelectorAll(".timeFactor").forEach((b)=>{
+                    b.addEventListener("click",(e)=>{
+                        let dataFcator = parseFloat(e.target.dataset.factor);
+                        console.log(dataFcator,typeof dataFcator)
+                        timeFactor=dataFcator
+                        setActive(e.target)
+                    })
+                })
+
+                const clearActive=(ifFFF=true)=>{
+                    //document.querySelectorAll("div#spec button").forEach((b)=>{b.classList.remove("active")});
+                    document.querySelectorAll(".active").forEach((d)=>{d.classList.remove("active")})
+                    if (ifFFF) document.getElementById("sweepVal").textContent = "";
+                }
+
+                oscillator.connect( gainNode );
+                audioMotion.connectInput( gainNode )
+                oscillator.start();
+                gainNode.gain.value = 0;
+                let lastFreq=0;
+                //pppppppppppppppppppppppppppppppppppppppppppp
+                const playTone=(freq)=>{
+                    if (lastFreq===freq) freq=0;
+                    lastFreq=freq;
+                    document.getElementById("sweepVal").textContent = Math.round(freq);
+                    if (freq){
+                        oscillator.frequency.value = freq; 
+                        gainNode.gain.value = .75;
+                    } else {
+                        gainNode.gain.value = 0;
+                        //clearActive(false);                        
+                    }
+                }
+                let timeStamp    = 250;
+                let timeFactor   = 2 ;
+                let sweepTimer   = null;
+                let sweepCounter = 0;
+                let LOOPA=false;
+               
+
+                //sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+                let lastKey=null;
+
+                const SeepPlay=()=>{
+                    let fff= frQQ[sweepCounter];
+                    document.getElementById("sweepVal").textContent = fff;
+                    if (document.getElementById("f"+sweepCounter)){
+                        let actualKey = document.getElementById("f"+sweepCounter);
+                        actualKey.classList.add("active");
+                        if (lastKey) lastKey.classList.remove("active")
+                        lastKey = actualKey;
+                    }
+                    playTone(fff);
+                    sweepCounter++;
+                    if (sweepCounter<maxi) {
+                        sweepTimer = setTimeout(SeepPlay,timeStamp*timeFactor);
+                    } else {
+                        sweepCounter=0;
+                        //clearActive(false);
+                        if (LOOPA) {
+                            sweepTimer = setTimeout(SeepPlay,timeStamp*timeFactor);
+                        } else {
+                            clearTimeout(sweepTimer);
+                            sweepTimer = null;     
+                        }                        
+                    }
+                }
+                
+                const SeepStop=()=>{
+                    clearTimeout(sweepTimer)                    
+                    sweepTimer = null;
+                    playTone(0);                     
+                    //clearActive();                   
+                }
+                const SweepReset=()=>{
+                    playTone(0);
+                    sweepCounter=0;
+                    timeFactor=1;
+                    clearActive();
+                }
+                const SeepPause=()=>{
+                    clearTimeout(sweepTimer)
+                    
+                }
+               
+                let maxi = frQQ.length
+                let html="";
+                frQQ.forEach((f,i)=>{
+                    //console.log(f)
+                    let ff=f;//Math.round(f);
+                    html +=`<button id="f${i}">${ff}</button>`;
+                })
+                document.getElementById("spec").innerHTML = html;
+                document.querySelectorAll("div#spec button").forEach((b,c)=>{
+                    b.addEventListener("click",function(e){
+                        let f = parseInt(e.target.textContent)
+                        playTone(f);
+                        sweepCounter=c;
+                        setActive(e.target)
+                    })                    
+                })
+
+                //ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff
+                //document.getElementById('genFreq').addEventListener( 'click', () => genFreq());
+                //document.getElementById('genBass').addEventListener( 'click', () => genBass());
+
+
+                let scale = (Math.log(20000) - Math.log(20)) / (20000 - 20);
+                let minv = Math.log(20); 
+
+                const logFFF=(value)=> {
+                    return Math.round(Math.exp(minv + scale*(value-20)));
+                }
+                const sweepLOG=()=>{
+                    genFreq();
+                    //frQQ.length=0;
+                    /*for(let f=20; f<20000;f++){
+                        let logfff = logFFF(f);
+                        console.log(logfff)
+                    }*/
+                }
+                const genFreq=(f=0)=>{
+                    let fff = GAMA[f];
+                    playTone(fff);
+                    if (fff<20000) sweepTimer = setTimeout(()=>{genFreq(f+1)},1000*timeFactor); else playTone(0);                    
+                }
+                /*const genFreq=(f=20)=>{
+                    let logfff = logFFF(f);
+                    playTone(logfff);
+                    if (logfff<20000) sweepTimer = setTimeout(()=>{genFreq(f+3)},3*timeFactor); else playTone(0);                    
+                }*/
+                const genBass=(f=20)=>{
+                    let logfff = logFFF(f);
+                    playTone(logfff);
+                    if (logfff<1000) sweepTimer = setTimeout(()=>{genBass(f+1)},5*timeFactor); else playTone(0);               
+                }
+                let gama = [261.63,
+                            293.66,
+                            329.63,
+                            349.23,
+                            392.00,
+                            440.00,
+                            493.88,
+                            523.25];
+                /*gama.forEach((g)=>{
+                    console.log(g)
+                })*/
+
+        </script>
+
+<script>
+/*    
+    // nuty gamma
+    let a = Math.pow(2,1/12)
+    //console.log(a)
+    let n=0;
+    let j=0;
+    let skala=0;
+    let nuta=0;
+    let NUTY=["C","D","E","F","G","A","B"];
+    let NOTACJA = {}
+    let arka=[];
+    let NOTEall=[];
+    for (i=-57; i<68; i++){
+        let n  = 440 * Math.pow(a,i);
+        let nn= Math.round(n*100)/100;
+        NOTEall.push(nn)
+        if (
+               n%12===0
+            || n%12===2
+            || n%12===4
+            || n%12===5
+            || n%12===7
+            || n%12===9
+            || n%12===11
+            )
+            {
+                let f  = 440 * Math.pow(a,i);
+                let ff = Math.round(f*100)/100;;
+                console.log(NUTY[nuta%7],skala,j++,n,f);
+                NOTACJA[NUTY[nuta%7]+skala.toString()]= ff;
+                nuta++;
+                arka.push(ff)
+            }
+            if (n%12===11) skala++;
+        n++;
+    }
+    console.log(NOTACJA)
+    console.log(JSON.stringify(NOTACJA,null,2))
+    console.log(arka)
+    console.log(JSON.stringify(arka))
+    console.log(NOTEall)
+    console.log(JSON.stringify(NOTEall))
+    
+ */   
+
+</script>
+
+    </body>   
+</html>
+
+<script>
+
+//for (n in GAMA) console.log(n,GAMA[n])
+</script>
+
+
+
+
+
+<br />
+  <div class="info"><a href="https://audiomotion.dev" target="_blank"> &nbsp; audioMotion-analyzer</a> <span id="version"></span></div>
