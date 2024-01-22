@@ -81,3 +81,19 @@ export const frQQ224   = [20,22,24,26,28,30,32,34,36,38,40,42,44,46,48,50,52,55,
   "D10": 18794.55,
   "E10": 21096.16
 }
+
+
+export const sweepToneGenerator=(count=100,min=20,max=20000)=>{
+  let scale = (Math.log(max) - Math.log(min)) / (max - min);
+  let minv = Math.log(min); 
+  let step = Math.floor(max/count);
+  let lastF=0;
+  let sarr=[]
+  for (let f=min; f<max; f+=step){
+      let ff =  Math.exp(minv + scale*(f-min));
+          ff =  Math.round(ff*100)/100;
+      if (ff != lastF) sarr.push(ff);
+      lastF=ff;
+  }
+  return sarr;
+}
