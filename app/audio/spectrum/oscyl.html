@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta name="theme-color" content="#369">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="HandheldFriendly" content="true">
+   	<meta name="mobile-web-app-capable" content="yes"> 
+	<title>OSYL</title>
+    <!--link href="styles.css" rel="stylesheet"-->
+<style>
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    border-collapse: collapse;
+    margin:0;
+    padding:0;
+}
+body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:0;padding-top:284px; margin:auto; background:#888;}
+    .fixa {
+        width: 100%;
+        max-width:1200px;
+        position: fixed;
+        top: 0;
+        margin:0;
+        padding:0;
+        z-index: 4;
+    }
+    #container {
+        height: 240px;
+    }
+    #keys {
+        height: 44px;        
+        top: 240px;
+        background:#444;
+        padding-left:0.5em;
+        color:#ddd;
+    }
+    .gridbtn {
+        padding-top:0.3em;
+        display: grid;
+        column-gap: 0.2em;
+        row-gap: 0.1em;
+        justify-items: center;
+        grid-template-columns:  repeat(7,1fr);
+    }
+    button {
+        margin: 0.2em;
+        padding: 0.3em;
+        min-width: 3em;
+        border-radius: 0.33em;
+        font-size: 0.9em;
+    }
+    .gridbtn button {
+        width: 100%;
+        margin:4px;
+        min-width: auto;
+        overflow: hidden;
+        background: #136;
+        color: #fff;        
+        border: 1px solid #999;
+        
+    }
+    .gridbtn button.active, .active {background:darkred; border-color: orange;}
+    .blue {background: darkblue; color:white;}
+    .red {background: darkred; color:white;}
+    .gray {background: #666; color:white;}
+    .silver {background: darkgray; color:#444; min-width:2.7em;}
+    .hide {display:none;}
+    .show {display:initial;}
+
+    input[type="checkbox"] {
+        margin: 0.3em;
+        width: 1.25em;
+        height: 1.25em;
+        transform: translateY(0.22em);
+        font-size: 1.25em;
+    }
+    
+
+    @media only screen and (max-width: 600px) {
+        
+    }
+    @media only screen and (min-width: 800px) {
+        .gridbtn {grid-template-columns:  repeat(9,1fr);}
+    }
+    @media only screen and (min-width: 1024px) {
+        .gridbtn {grid-template-columns: repeat(12,1fr);}
+    }
+</style>
+</head>
+
+<body>
+    <div id="container" class="fixa">
+        <div style="position:absolute; opacity:0.7; top:12px; left:12px; z-index:9; background: black;font-family: monospace;"><span id="sweepVal" style="color:#fff; font-size:2.5em;"></span>Hz</div>
+    </div>
+    <div id="keys" class="fixa">
+        <span>
+            <button class="blue" id="sweep10">1/4</button>
+            <button class="blue" id="sweep100">1/2</button>
+            <button class="blue" id="sweep1000">1</button>
+        </span>
+        <span>
+            <button class="gray" id="sweep0">Stop</button>
+            <button class="red" id="sweepreset">Reset</button>
+        </span>
+        <select id="gammy">
+            <option value="224steps">224</option>                
+            <option value="Sweep100">S100</option>
+            <option value="Sweep200">S200</option>
+            <option value="Sweep400">S400</option>
+            <option value="Sweep32">S32</option>
+            <option value="bass">Bass</option>
+            <option value="middle">Mid</option>
+            <option value="m800">M800</option>
+            <option value="treble">Treb</option>
+            <option value="cdur">White</option>
+            <option value="gama">W&B</option>
+            <!--option value="sweeplog">LOG</option-->            
+        </select>
+    </div>
+    <div id="spec" class="gridbtn"></div>
+    Loop:<input type="checkbox" id="loopa" />
+</body>
+
+<script type="module">
+    import AudioMotionAnalyzer from './modules/audioMotion-analyzer.js';
+    import {setBtnActive, clearAllActive,setBtnsEvent,setBTNstyle, installButtono} from "./modules/buttons.js";
+    import {GAMMA,NOTEwhite,NOTEall,frQQ224} from "./modules/tones.js";
+    
+    let frQQ = [...frQQ224];
+
+        const audioMotion = new AudioMotionAnalyzer( document.getElementById('container') ),
+        audioCtx    = audioMotion.audioCtx,
+        oscillator  = audioCtx.createOscillator(),
+        gainNode    = audioCtx.createGain();
+
+
+        oscillator.connect( gainNode );
+        audioMotion.connectInput( gainNode )
+        oscillator.start();
+        gainNode.gain.value = 0;
+        let lastFreq=0;
+        let timeStamp = null;
+        let sweepNr     = 0;
+        let sweepTrigger=true;
+        let LOOPA=false;
+
+    //pppppppppppppppppppppppppppppppppppppppppppp
+
+    const playTone=(freq)=>{
+        if (lastFreq===freq) freq=0;
+        lastFreq=freq;
+        document.getElementById("sweepVal").textContent = Math.round(freq);
+        if (freq){
+            oscillator.frequency.value = freq; 
+            gainNode.gain.value = .75;
+        } else {
+            gainNode.gain.value = 0;
+            //clearActive(false);                        
+        }
+    }
+
+    const playNOTE=(ten,val)=>{
+        //console.log(ten,val);
+        sweepNr = parseInt(ten.id.split("-")[1]);
+        console.log(sweepNr);
+        setBtnActive(ten);
+        playTone(val)
+    }
+
+    //console.time("installButtono")
+     installButtono(frQQ,"spec",playNOTE,Math.round);
+    //console.timeEnd("installButtono");
+
+    const sweep=(tim)=>{
+        if (!sweepTrigger) tim=0;
+        console.log(tim,sweepNr);
+        sweepTrigger = !sweepTrigger;
+        if (tim === 0) {clearTimeout(timeStamp); playTone(0); return;}
+        let arr = []
+        document.querySelectorAll("#spec button").forEach((btn,nr)=>{arr.push(btn);});
+        let lastNr = arr.length;        
+        const timeFN=()=>{   
+            arr[sweepNr].click();
+            sweepNr++;
+            if (sweepNr<lastNr) {
+                timeStamp = setTimeout(()=>{timeFN()},tim);
+            } else  {
+                if (LOOPA) {sweepNr=0;timeStamp = setTimeout(()=>{timeFN()},tim);}
+                else {playTone(0);sweepNr=0;sweepTrigger=true;}
+            }         
+        }
+        timeFN(sweepNr);
+    }
+
+    document.getElementById("sweep10" ).addEventListener("click",  (e)=>{sweep(250);   setBtnActive(e.target);});
+    document.getElementById("sweep100").addEventListener("click",  (e)=>{sweep(500);  setBtnActive(e.target);});
+    document.getElementById("sweep1000").addEventListener("click", (e)=>{sweep(1000); setBtnActive(e.target);});
+    document.getElementById("sweep0"  ).addEventListener("click",  (e)=>{sweep(0);    setBtnActive(e.target);});
+    document.getElementById("sweepreset").addEventListener("click",(e)=>{sweepNr=0;   setBtnActive(e.target);});
+    document.getElementById('loopa').addEventListener('change',()=> Loopa(event) );
+    const Loopa=(e,a)=>{ LOOPA=(e.target.checked);}
+//oooooooooooooooooooooooooooooooooooooooooooooooo
+    document.getElementById('gammy').addEventListener('change',(e)=> {                   
+        let selVal = e.target.value;
+        console.log(selVal)
+        
+        if (selVal==="224steps") Oktawa(2); // white
+        if (selVal==="cdur")     Oktawa(0); // white
+        if (selVal==="gama")     Oktawa(1); //white&black
+        if (selVal==="Sweep32")  makeSweepTone(32);
+        if (selVal==="Sweep100") makeSweepTone(100);
+        if (selVal==="Sweep200") makeSweepTone(200);
+        if (selVal==="Sweep400") makeSweepTone(400);
+        if (selVal==="bass")     makeSweepTone(100,20,500);
+        if (selVal==="middle")   makeSweepTone(100,400,3000);
+        if (selVal==="m800")     makeSweepTone(100,600,1000);
+        if (selVal==="treble")   makeSweepTone(100,3000,20000);
+    });
+    //GAMMA,NOTEwhite,NOTEall,frQQ224
+    const Oktawa=(type=0)=>{
+        if (type===0) frQQ=[...NOTEwhite];
+        if (type===1) frQQ=[...NOTEall]; 
+        if (type===2) frQQ=[...frQQ224];
+        installButtono(frQQ,"spec",playNOTE,Math.round);
+        console.log("type=",type,"length=",frQQ.length)
+    }
+    
+    const makeSweepTone=(count=100,min=20,max=20000)=>{
+        let scale = (Math.log(max) - Math.log(min)) / (max - min);
+        let minv = Math.log(min); 
+        let step = Math.floor(max/count);
+        let i=0;
+        let html="";
+        let lastF=0;
+        frQQ.length=0;
+        for (let f=min; f<max; f+=step){
+            let ff =  Math.exp(minv + scale*(f-min));
+                ff =  Math.round(ff*100)/100;
+            let fff =  Math.round(ff);
+            if (fff != lastF) {
+                html +=`<button id="f${i}" data-frq="f${ff}" title="${ff}Hz">${fff}</button>`;
+                frQQ.push(ff);
+                i++;
+            }
+            lastF=fff;
+        }
+        installButtono(frQQ,"spec",playNOTE,Math.round);
+        /*
+        document.getElementById("spec").innerHTML = html;
+        document.querySelectorAll("div#spec button").forEach((b,c)=>{
+            b.addEventListener("click",function(e){
+                let f = parseInt(e.target.textContent)
+                playTone(f);
+                //sweepCounter=c;
+                setBtnActive(e.target)
+                
+            });                
+        });**/
+        sweepNr=0;
+        //maxi=frQQ.length;
+        //console.log(frQQ.length,frQQ)
+    }
+
+//oooooooooooooooooooooooooooooooooooooooooooooooo
+
+
+</script>
+
+
+</html>
