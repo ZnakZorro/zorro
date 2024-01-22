@@ -109,7 +109,7 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
             <option value="Sweep100">S100</option>
             <option value="Sweep200">S200</option>
             <option value="Sweep400">S400</option>
-            <option value="Sweep32">S32</option>
+            <option value="Sweep32" selected>S32</option>
             <option value="bass">Bass</option>
             <option value="middle">Mid</option>
             <option value="m800">M800</option>
@@ -122,12 +122,20 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
     <div id="spec" class="gridbtn"></div>
     Loop:<input type="checkbox" id="loopa" />
 </body>
+<script>
 
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+
+})
+//---DOM READY----------------------------------    
+</script>
 <script type="module">
     import AudioMotionAnalyzer from './modules/audioMotion-analyzer.js';
     import {setBtnActive, clearAllActive,setBtnsEvent,setBTNstyle, installButtono} from "./modules/buttons.js";
-    import {GAMMA,NOTEwhite,NOTEall,frQQ224} from "./modules/tones.js";
-    
+    import {NOTEwhite,NOTEall,frQQ224,sweepToneGenerator} from "./modules/tones.js";    //GAMMA,
+    //document.getElementById('gammy').change()
+
     let frQQ = [...frQQ224];
 
         const audioMotion = new AudioMotionAnalyzer( document.getElementById('container') ),
@@ -170,7 +178,7 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
     }
 
     //console.time("installButtono")
-     installButtono(frQQ,"spec",playNOTE,Math.round);
+     //installButtono(frQQ,"spec",playNOTE,Math.round);
     //console.timeEnd("installButtono");
 
     const sweep=(tim)=>{
@@ -202,10 +210,10 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
     document.getElementById('loopa').addEventListener('change',()=> Loopa(event) );
     const Loopa=(e,a)=>{ LOOPA=(e.target.checked);}
 //oooooooooooooooooooooooooooooooooooooooooooooooo
-    document.getElementById('gammy').addEventListener('change',(e)=> {                   
+    document.getElementById('gammy').addEventListener('change',(e)=> {                  
         let selVal = e.target.value;
-        console.log(selVal)
-        
+        localStorage.setItem("selectedToneTable", selVal);
+        console.log("#gammy=",selVal)        
         if (selVal==="224steps") Oktawa(2); // white
         if (selVal==="cdur")     Oktawa(0); // white
         if (selVal==="gama")     Oktawa(1); //white&black
@@ -219,16 +227,22 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
         if (selVal==="treble")   makeSweepTone(100,3000,20000);
     });
     //GAMMA,NOTEwhite,NOTEall,frQQ224
+
     const Oktawa=(type=0)=>{
         if (type===0) frQQ=[...NOTEwhite];
         if (type===1) frQQ=[...NOTEall]; 
         if (type===2) frQQ=[...frQQ224];
         installButtono(frQQ,"spec",playNOTE,Math.round);
-        console.log("type=",type,"length=",frQQ.length)
+        console.log("OCTAWA type=",type,"length=",frQQ.length)
     }
     
     const makeSweepTone=(count=100,min=20,max=20000)=>{
-        let scale = (Math.log(max) - Math.log(min)) / (max - min);
+        let frQQ = [...sweepToneGenerator(count,min,max)];
+        console.log("makeSweepTone=",count,frQQ.length)
+        installButtono(frQQ,"spec",playNOTE,Math.round);
+        sweepNr=0;
+        return;
+        /*let scale = (Math.log(max) - Math.log(min)) / (max - min);
         let minv = Math.log(min); 
         let step = Math.floor(max/count);
         let i=0;
@@ -247,6 +261,7 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
             lastF=fff;
         }
         installButtono(frQQ,"spec",playNOTE,Math.round);
+        */
         /*
         document.getElementById("spec").innerHTML = html;
         document.querySelectorAll("div#spec button").forEach((b,c)=>{
@@ -258,13 +273,25 @@ body {max-width:1200px; color:white;font:normal 14pt Verdana; margin:0; padding:
                 
             });                
         });**/
-        sweepNr=0;
+        //sweepNr=0;
         //maxi=frQQ.length;
         //console.log(frQQ.length,frQQ)
     }
 
 //oooooooooooooooooooooooooooooooooooooooooooooooo
 
+
+
+
+
+    let selectedToneTable = localStorage.getItem("selectedToneTable") ? localStorage.getItem("selectedToneTable") : "224steps";
+    document.querySelectorAll('select#gammy option').forEach((o)=>{
+        if (o.value === selectedToneTable) o.selected=true;
+        else o.selected=false;
+    })
+
+    let event = new Event('change');
+    document.getElementById('gammy').dispatchEvent(event);
 
 </script>
 
