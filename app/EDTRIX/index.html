@@ -1,0 +1,138 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#369">
+   <title>EDTRIX</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+   <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+   <style>
+	*, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}
+	body {font:normal 15pt Verdana; margin:0; padding:0;}
+	.content {max-width:960px;margin:auto; padding:0.25em;}
+	div {margin:0.25em; padding:0.25em;}
+	button {
+		font-size:15pt;
+		margin: 8px 4px;
+		border: none;
+		overflow: visible;
+		font: inherit;
+		background-color: #0f7ae5;
+		color: #fff;
+		text-transform: none;
+		min-width: 64px;
+		-webkit-appearance: none;
+		appearance: none;
+		border-radius: 5px;
+		display: inline-block;
+		box-sizing: border-box;
+		padding: 0 2px;
+		vertical-align: middle;
+		font-size: 16px;
+		line-height: 40px;
+		text-align: center;
+		text-decoration: none;
+		text-transform: none;
+		transition: .1s ease-in-out;
+		transition-property: color, background-color, border-color;
+	}
+	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
+	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
+	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	
+	.active {
+		background-color: red;
+		color: white;
+	}
+	trix-editor {
+		border: 1px solid #ddd;
+		border-radius: none;
+		margin: 0;
+		padding: 0.3em;
+		min-height: 12em;
+	}
+   </style>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+
+	const setActive=(ten=null)=>{
+		if (!ten) return;
+		let parent = ten.parentElement;
+		if (parent){
+			let keys   = parent.querySelectorAll("button");
+			keys.forEach(key=>key.classList.remove("active"));
+			ten.classList.add("active");
+		}
+	}  
+
+</script>    
+</head>
+
+<body>
+   <div class="content">
+	<form>
+		<input id="x" type="hidden" name="content">
+		<trix-editor input="x"></trix-editor>
+	  </form>  
+	  	<div>
+			<button onclick="saveTX(this)">Save</button> 
+			<button onclick="loadTX(this)">Load</button> 
+			<button onclick="clearTX(this)">Clear</button> 
+		</div>
+   </div>
+   <div class="info"></div>
+   <pre class="log"></pre>
+   
+  
+  
+  
+  
+  <script>
+  const eleTX = document.querySelector("trix-editor");
+  const clearTX=(t)=> {setActive(t); eleTX.innerHTML=""; }
+  const loadTX=(t)=>  {setActive(t); eleTX.editor.loadJSON(JSON.parse(localStorage["editorState"]));}
+  const saveTX=(t)=>{
+	setActive(t); 
+	  //eleTX.editor.insertHTML("<strong>Hello</strong>")
+	  //console.log(eleTX.editor)
+	  let doc = eleTX.editor.getDocument();
+	  let txt = doc.toString();
+	  console.log(doc)
+	  console.log(eleTX.editor.getSelectedRange())
+	  localStorage["editorState"] = JSON.stringify(eleTX.editor)
+	  console.log(eleTX.innerHTML)
+	  
+  }
+  // Save editor state to local storage
+  //localStorage["editorState"] = JSON.stringify(eleTX.editor)
+  
+  // Restore editor state from local storage
+  
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+		loadTX();
+        /*
+		let u ="1.tx";
+        u="https://jsonplaceholder.typicode.com/photos/1";
+        fetch(u)
+        .then(r => {return r.json()})
+        .then(obj => {
+            console.log(obj);
+        })
+        .catch(e => {console.log(e)})
+		*/
+    })
+    //---DOM READY----------------------------------
+         
+  </script>   
+</body>
+</html>
+
+
+<!--
+<a href="https://github.com/basecamp/trix">https://github.com/basecamp/trix</a>
+-->
