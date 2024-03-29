@@ -22,6 +22,7 @@ class NavBarNavigator extends HTMLElement {
 		.header * {
 			font-family: 'Roboto', "Verdana", sans-serif; 
 		}  
+  		.line {display:inline;}
 		
 		</style>		
 		 <header class="header hidenow" style="background:${color}">
@@ -35,7 +36,7 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}nav/index.html" class="nav-link">NAV</a></li>
 					 <li class="nav-item"><a href="${link}html/index.html" class="nav-link">Inne</a></li>					 
 					 <li class="nav-item"><a href="${link}app/EDEK/" class="nav-link">ED</a></li>
-      					<li class="nav-item"><a href="${link}app/EDTRIX/" class="nav-link">EX</a></li>
+      					 <li class="nav-item line"><a href="${link}app/EDTRIX/" class="nav-link">EX</a></li>
 					 <li class="nav-item"><a href="${link}app/snipet/" class="nav-link">SNIPET</a></li>					 
 					 <li class="nav-item"><a href="${link}app/radio/index.html" class="nav-link">LINKI</a></li>					 
 					 <li class="nav-item"><a href="${link}app/ele/index.html" class="nav-link">Ele</a></li>
