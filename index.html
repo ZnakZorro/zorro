@@ -87,7 +87,7 @@
       console.log("imgready");
    }
    const jutro=(ile=1)=>{
-   	const weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+   	const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
    	let tomorrow = new Date();
    	tomorrow.setDate(tomorrow.getDate() + ile);
    	let dw = tomorrow.getDay();
@@ -270,7 +270,7 @@ document.addEventListener("DOMContentLoaded",function(){
    const PasteFB=(nr=1)=>{
    let txtx = document.getElementById("txtx");
    if(nr===2) txtx.value=`Poproszę na pojutrze (${jutro(nr)}):\n1x chleb Ziarmix\n2x bułki zwykłe\n--\nZbigniew Sz`;
-   if(nr===1) txtx.value=`Poproszę na jutro (${jutro(nr)}):
+   if(nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
 1x chleb Ziarmix
 2x bułki zwykłe
 --
