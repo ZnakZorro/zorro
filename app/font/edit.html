@@ -4,7 +4,7 @@
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 	<meta name="theme-color" content="#369">
-   <title>FONT 5x7</title>  
+   <title>edit 5x7</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
    <style>
@@ -52,6 +52,7 @@
 
    <div id="info"></div>
    <br />
+   <button onclick="clearBTNS()" style="float:right; width:8em; background:orange; color:white">Clear</button>
    <pre id="fonts"></pre>
    
 <script>
@@ -93,6 +94,16 @@ const createEdit=()=>{
         hh+='<br />';
     }
     $("#info").innerHTML = hh
+}
+
+const clearBTNS=()=>{
+    let btns = document.querySelectorAll("#info button");
+    //console.log(btns)
+    btns.forEach((b,i)=>{
+        //console.log(b,b.classList)
+        b.classList.remove("active");
+        opisz(null)
+    })
 }
 createEdit();
 opisz(null)
