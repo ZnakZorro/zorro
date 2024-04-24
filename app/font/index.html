@@ -9,21 +9,34 @@
    <meta name="mobile-web-app-capable" content="yes"> 
    <style>
 	/**, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}*/
-	body {font:normal 12px Verdana; margin:1em; padding:1em;line-height: 12px;}
+	body {font:normal 12px Verdana; margin:1em; padding:1em;line-height: 9px;}
 	.content {max-width:800px;margin:auto; padding:0.5em;}
 	div {
     margin: 0.25em;
     padding: 0.25em;
     display: inline-block;
     border: 1px solid gray;
+    min-width: 12em;
 }
 	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
 	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
 	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	
    span {border:none;}
-   zero, one {width:12px; height:12px; display: inline-block; line-height: 12px;}  
+   zero, one {width:12px; height:12px; display: inline-block; line-height: 12px; border: 1px solid #ccc;}  
    zero {background: #eee;} 
    one {background: #444;}
+   note {line-height: 15px;}
+   bity {
+      display: block;
+      rotate: 270deg;
+      text-align: right;
+      float: right;
+      margin-top:3em
+   }
+   div#fonts div {
+      height: 14em;
+      min-width: 10em;
+   }
    /*div  {border:1px solid gray;}*/
    </style>
    <script src="./font.js"></script>
@@ -41,6 +54,7 @@
 </head>
 
 <body>
+   <a href="./edit.html">Edytor fontów</a><br />
    <div class="content">
 	   
    </div>
@@ -54,16 +68,19 @@
 
    const byte2bits=(b)=>{
       let ret = b.toString(2);
-      //var result = (((byteA & 0xFF) << 8) | (byteB & 0xFF));
-      //return ret;
       return ret.padStart(8, '0').replaceAll("0","<zero> </zero>").replaceAll("1","<one> </one>");
    }
    const drawChart=(i,arr)=>{
       let hh="";
+      let xx=[]
       arr.forEach((c)=>{
          hh += `<span>${byte2bits(c)}</span><br />`;
-      })
-      $("#fonts").innerHTML += `<div>[${Math.floor(i/5)}]<br />${hh}</div>`;
+         let xeh = c.toString(16);
+        if (c<15) xeh="0"+xeh;
+         xx.push(xeh)
+      });
+      console.log(xx)
+      $("#fonts").innerHTML += `<div><note>#${Math.floor(i/5)}</note><br /><note>[${xx.join(",")}]</note><br /><bity>${hh}</bity></div>`;
     }
 
     //console.log(font);

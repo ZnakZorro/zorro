@@ -49,7 +49,7 @@
 </head>
 
 <body>
-
+    <a href="./index.html">Przegląd fontów</a><br />
    <div id="info"></div>
    <br />
     <pre id="fonts"></pre>
@@ -63,6 +63,10 @@
    </div>
    
 <script>
+const byte2bits=(b)=>{
+    let ret = b.toString(2);
+    return ret.padStart(8, '0').replaceAll("0","<zero> </zero>").replaceAll("1","<one> </one>");
+}
 const reverseString=(str) =>{
     return str.split("").reverse().join("");
 }
@@ -93,6 +97,7 @@ const opisz=(t)=>{
         //console.log(j,ar,dec,dec.toString(16))        
         hexarr.push(hex)
     });
+    hexarr = hexarr.reverse();
     $("#fonts").textContent = hexarr.join(", ")
 }
 const pixel=(t)=>{
