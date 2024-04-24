@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#369">
+   <title>edit 5x7</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>
+	/**, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}*/
+	body {font:normal 15px Verdana; margin:1em; padding:1em;}
+	.content {max-width:800px;margin:auto; padding:0.5em;}
+	div {
+    margin: 0.25em;
+    padding: 0.25em;
+    display: inline-block;
+    border: 1px solid gray;
+}
+	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
+	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
+	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	
+   span {border:none;}
+   zero, one {width:12px; height:12px; display: inline-block; line-height: 12px;}  
+   zero {background: #eee;} 
+   one {background: #444;}
+
+   button {color:#888;font-size: 1rem;}
+   .active {background: #444;}
+   /*div  {border:1px solid gray;}*/
+   </style>
+   <script src="./font.js"></script>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+        
+    })
+    //---DOM READY----------------------------------
+       
+</script>    
+</head>
+
+<body>
+
+   <div id="info"></div>
+   <pre id="fonts"></pre>
+   
+<script>
+const pixel=(t)=>{
+    console.log(t)
+    t.classList.toggle("active")
+}
+const createEdit=()=>{
+    let hh=""
+    for (let r=0; r<7; r++){
+        for (let k=0; k<5; k++){
+            hh +=`<button onclick="pixel(this)">x</button>`;
+        }
+        hh+='<br />';
+    }
+    $("#info").innerHTML = hh
+}
+createEdit();
+
+
+/*for (let c=0; c<256; c++){
+   $("#info").textContent += c+"="+String.fromCharCode(c)+"\n"
+}*/
+/*
+   const byte2bits=(b)=>{
+      let ret = b.toString(2);
+      //var result = (((byteA & 0xFF) << 8) | (byteB & 0xFF));
+      //return ret;
+      return ret.padStart(8, '0').replaceAll("0","<zero> </zero>").replaceAll("1","<one> </one>");
+   }
+   const drawChart=(i,arr)=>{
+      let hh="";
+      arr.forEach((c)=>{
+         hh += `<span>${byte2bits(c)}</span><br />`;
+      })
+      $("#fonts").innerHTML += `<div>[${Math.floor(i/5)}]<br />${hh}</div>`;
+    }
+
+    //console.log(font);
+    let arr=[];
+    font.forEach((f,i) => {
+      
+      arr.push(f);
+      if (i%5==4){
+         drawChart(i,arr);
+         arr.length=0;
+      }
+      
+    });
+
+*/
+</script>
+</body>
+</html>
