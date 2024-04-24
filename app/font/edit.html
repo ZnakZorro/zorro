@@ -54,31 +54,45 @@
    <br />
    <button onclick="clearBTNS()" style="float:right; width:8em; background:orange; color:white">Clear</button>
    <pre id="fonts"></pre>
+
+   <div style="width:100%; clear:both; border:none;">
+    <input id="from" onchange="drawfrom()" style="font-size:20px;width:20em; font-family:monospace;">
+    <button onclick="drawfrom()" style="width:4em; background: #ddd; color:black">0x00 ?</button>
+    To jeszcze nie działa
+   </div>
    
 <script>
+const reverseString=(str) =>{
+    return str.split("").reverse().join("");
+}
 
 const opisz=(t)=>{
     let btns = document.querySelectorAll("#info button");
     //console.log(btns);
-    let arr=[]
-    for (let a=0; a<5; a++) arr[a]="";
+    let arrrr=[]
+    for (let a=0; a<5; a++) arrrr[a]="";
     btns.forEach((b,i)=>{
         let s = b.className === "active" ? 1:0;
-        arr[i%5]+=String(s);
+        arrrr[i%5]+=String(s);
         //console.log(i,s)
     });
-    console.log(arr)
+
+    console.log("0x06, 0x09, 0x09, 0x06, 0x00, = 011 degree");
+    console.log(arrrr);
+    let arr = arrrr.reverse();
+    console.log(arr);
     let hexarr=[]
     arr.forEach((ar,j)=>{
+        arr=reverseString(ar)
+        console.log(ar)
         let dec=parseInt(ar, 2);
         let xeh = dec.toString(16);
         if (dec<15) xeh="0"+xeh;
-        let hex = "0x"+xeh
-        console.log(j,ar,dec,dec.toString(16))
-        
+        let hex = "0x"+xeh.toUpperCase();
+        //console.log(j,ar,dec,dec.toString(16))        
         hexarr.push(hex)
     });
-    $("#fonts").textContent = hexarr.join(",")
+    $("#fonts").textContent = hexarr.join(", ")
 }
 const pixel=(t)=>{
     console.log(t)
@@ -87,7 +101,7 @@ const pixel=(t)=>{
 }
 const createEdit=()=>{
     let hh=""
-    for (let r=0; r<7; r++){
+    for (let r=0; r<8; r++){
         for (let k=0; k<5; k++){
             hh +=`<button onclick="pixel(this)">x</button>`;
         }
@@ -104,6 +118,11 @@ const clearBTNS=()=>{
         b.classList.remove("active");
         opisz(null)
     })
+}
+
+const drawfrom=()=>{
+    let vals = $("#from").value;
+    console.log(vals)
 }
 createEdit();
 opisz(null)
