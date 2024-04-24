@@ -12,12 +12,37 @@
 	body {font:normal 12px Verdana; margin:1em; padding:1em;line-height: 9px;}
 	.content {max-width:800px;margin:auto; padding:0.5em;}
 	div {
-    margin: 0.25em;
-    padding: 0.25em;
-    display: inline-block;
-    border: 1px solid gray;
-    min-width: 12em;
-}
+      margin: 0.25em;
+      padding: 0.25em;
+      display: inline-block;
+      border: 1px solid gray;
+      min-width: 12em;
+   }
+   .btn {
+      margin: 8px 4px;
+      border: 1px solid gray;
+      overflow: visible;
+      font: inherit;
+      background: #444;
+      color: #fff;
+      text-transform: none;
+      min-width: 46px;
+      -webkit-appearance: none;
+      appearance: none;;
+      border-radius: 5px;
+      display: inline-block;
+      box-sizing: border-box;
+      padding: 2px 6px;
+      vertical-align: middle;
+      font-size: 16px;
+      line-height: 30px;
+      text-align: center;
+      text-decoration: none;
+      text-transform: none;
+      transition: .1s ease-in-out;
+      transition-property: color,background;
+   }
+   .active {background:red; color:white;}
 	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
 	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
 	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	
@@ -34,68 +59,95 @@
       margin-top:3em
    }
    div#fonts div {
-      height: 14em;
-      min-width: 10em;
+      height: 13.2em;
+      min-width: 9.2em;
    }
    /*div  {border:1px solid gray;}*/
    </style>
    <script src="./font.js"></script>
+   <script src="./fonten.js"></script>
 <script>
     const $=e=>document.querySelector(e);
     const $$=e=>document.querySelectorAll(e);
     
-    //---dom ready--------------------------------
-    document.addEventListener("DOMContentLoaded",function(){
-        
-    })
-    //---DOM READY----------------------------------
        
 </script>    
 </head>
 
 <body>
    <a href="./edit.html" style="font-size:20px; margin:20px; text-decoration: none;">Edytor fontów</a><br />
-   <div class="content">
-	   
-   </div>
-   <div id="info"></div>
+   <br />
+   <p>
+      <button onclick="changeFont(this,0)" class="btn active">Font glcdfont.c</button> 
+      <button onclick="changeFont(this,1)" class="btn">glcdfont_EN.c</button>
+   </p>  
    <div id="fonts"></div>
-   
+
 <script>
 /*for (let c=0; c<256; c++){
    $("#info").textContent += c+"="+String.fromCharCode(c)+"\n"
 }*/
-
+const setActive=(ten)=>{
+  let parent = ten.parentElement;
+  if (parent){
+    let keys   = parent.querySelectorAll("button");
+    keys.forEach(key=>key.classList.remove("active"));
+    ten.classList.add("active");
+  }
+}
    const byte2bits=(b)=>{
       let ret = b.toString(2);
       return ret.padStart(8, '0').replaceAll("0","<zero> </zero>").replaceAll("1","<one> </one>");
    }
-   const drawChart=(i,arr)=>{
+   const drawChar=(i,arr)=>{
       let hh="";
-      let xx=[]
+      let xx=[];
+
       arr.forEach((c)=>{
          hh += `<span>${byte2bits(c)}</span><br />`;
          let xeh = c.toString(16);
-        if (c<15) xeh="0"+xeh;
+         if (c<15) xeh="0"+xeh; 
          xx.push(xeh)
       });
-      console.log(xx)
-      $("#fonts").innerHTML += `<div><note>#${Math.floor(i/5)}</note><br /><note>[${xx.join(",")}]</note><br /><bity>${hh}</bity></div>`;
+      //console.log(xx)
+      let nrr = Math.floor(i/5);
+      let oct = nrr.toString(8);
+      $("#fonts").innerHTML += `<div><note>#${nrr}, <b>%${oct}</b></note><br /><note>[${xx.join(",")}]</note><br /><bity>${hh}</bity></div>`;
     }
 
-    //console.log(font);
-    let arr=[];
-    font.forEach((f,i) => {
-      
-      arr.push(f);
-      if (i%5==4){
-         drawChart(i,arr);
-         arr.length=0;
-      }
-      
-    });
+   //console.log(font);
+   const drawFONT=()=>{
+      let arr=[];
+      $("#fonts").innerHTML = ""
+      font.forEach((f,i) => {
+         
+         arr.push(f);
+         if (i%5==4){
+            drawChar(i,arr);
+            arr.length=0;
+         }
+         
+      });
+    }
 
 
+   const changeFont=(ten,nr=0)=>{
+      if (nr===0) font = fonttt;
+      if (nr===1) font = fonten;
+      $("#fonts").innerHTML = "<h1>Czekamy</h1>";
+      setTimeout(()=>{drawFONT(); },333)
+      if (ten) setActive(ten);
+   }
+    let font=[];
+    let fontName=""
+   //---dom ready--------------------------------
+   document.addEventListener("DOMContentLoaded",function(){
+      $("#fonts").innerHTML = "<h1>Czekamy</h1>";
+       font=fonttt; 
+       setTimeout(()=>{drawFONT(); },333)
+   })
+   //---DOM READY----------------------------------
+   
 </script>
 </body>
 </html>
