@@ -49,7 +49,7 @@
 </head>
 
 <body>
-    <a href="./index.html">Przegląd fontów</a><br />
+    <a href="./index.html" style="font-size:20px; margin:20px; text-decoration: none;">Przegląd fontów</a><br />
    <div id="info"></div>
    <br />
     <pre id="fonts"></pre>
@@ -83,8 +83,9 @@ const opisz=(t)=>{
     });
 
     console.log("0x06, 0x09, 0x09, 0x06, 0x00, = 011 degree");
+    console.log("0x7C, 0x12, 0x11, 0x12, 0x7C  = #65  A")
     console.log(arrrr);
-    let arr = arrrr.reverse();
+    let arr = arrrr;//.reverse();
     console.log(arr);
     let hexarr=[]
     arr.forEach((ar,j)=>{
@@ -97,7 +98,7 @@ const opisz=(t)=>{
         //console.log(j,ar,dec,dec.toString(16))        
         hexarr.push(hex)
     });
-    hexarr = hexarr.reverse();
+    hexarr = hexarr;//.reverse();
     $("#fonts").textContent = hexarr.join(", ")
 }
 const pixel=(t)=>{
