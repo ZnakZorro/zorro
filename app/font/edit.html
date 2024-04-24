@@ -73,6 +73,10 @@ const reverseString=(str) =>{
 
 const opisz=(t)=>{
     let btns = document.querySelectorAll("#info button");
+    let bbb=[]
+    btns.forEach(b=>bbb.push(b));
+    console.log(bbb)
+    btns = bbb.reverse();
     //console.log(btns);
     let arrrr=[]
     for (let a=0; a<5; a++) arrrr[a]="";
@@ -85,7 +89,7 @@ const opisz=(t)=>{
     console.log("0x06, 0x09, 0x09, 0x06, 0x00, = 011 degree");
     console.log("0x7C, 0x12, 0x11, 0x12, 0x7C  = #65  A")
     console.log(arrrr);
-    let arr = arrrr;//.reverse();
+    let arr = arrrr.reverse(); // odwraca kolejność kolumn
     console.log(arr);
     let hexarr=[]
     arr.forEach((ar,j)=>{
