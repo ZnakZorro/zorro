@@ -9,14 +9,14 @@
    <meta name="mobile-web-app-capable" content="yes"> 
    <style>
 	/**, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}*/
-	body {font:normal 15px Verdana; margin:1em; padding:1em;}
+	body {font:normal 20px Verdana; margin:1em; padding:1em;}
 	.content {max-width:800px;margin:auto; padding:0.5em;}
 	div {
-    margin: 0.25em;
-    padding: 0.25em;
-    display: inline-block;
-    border: 1px solid gray;
-}
+        margin: 0.25em;
+        padding: 0.25em;
+        display: inline-block;
+        border: 1px solid gray;
+    }
 	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
 	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
 	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	
@@ -25,9 +25,14 @@
    zero {background: #eee;} 
    one {background: #444;}
 
-   button {color:#888;font-size: 1rem;}
+   button {color:#888;font-size: 1rem; width:40px; height:40px; margin:0; padding:0;}
    .active {background: #444;}
-   /*div  {border:1px solid gray;}*/
+   #fonts {
+        background: #eee;
+        margin: 0;
+        padding: 1em;
+        display: inline-block;
+    }
    </style>
    <script src="./font.js"></script>
 <script>
@@ -46,12 +51,38 @@
 <body>
 
    <div id="info"></div>
+   <br />
    <pre id="fonts"></pre>
    
 <script>
+
+const opisz=(t)=>{
+    let btns = document.querySelectorAll("#info button");
+    //console.log(btns);
+    let arr=[]
+    for (let a=0; a<5; a++) arr[a]="";
+    btns.forEach((b,i)=>{
+        let s = b.className === "active" ? 1:0;
+        arr[i%5]+=String(s);
+        //console.log(i,s)
+    });
+    console.log(arr)
+    let hexarr=[]
+    arr.forEach((ar,j)=>{
+        let dec=parseInt(ar, 2);
+        let xeh = dec.toString(16);
+        if (dec<15) xeh="0"+xeh;
+        let hex = "0x"+xeh
+        console.log(j,ar,dec,dec.toString(16))
+        
+        hexarr.push(hex)
+    });
+    $("#fonts").textContent = hexarr.join(",")
+}
 const pixel=(t)=>{
     console.log(t)
-    t.classList.toggle("active")
+    t.classList.toggle("active");
+    opisz(t)
 }
 const createEdit=()=>{
     let hh=""
@@ -64,6 +95,7 @@ const createEdit=()=>{
     $("#info").innerHTML = hh
 }
 createEdit();
+opisz(null)
 
 
 /*for (let c=0; c<256; c++){
