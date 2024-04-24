@@ -43,6 +43,7 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/covid/index.html" class="nav-link">COVID</a></li>
 					 <li class="nav-item"><a href="${link}app/hash/index.html" class="nav-link red">#</a></li>
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
+      					 <li class="nav-item"><a href="${link}app/font/edit.html" class="nav-link">Font</a></li>
 					 
 					 <!--
 					 <li class="nav-item"><a href="${link}app/dustin/" class="nav-link">dustIN</a></li>
