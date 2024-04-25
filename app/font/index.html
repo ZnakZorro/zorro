@@ -18,6 +18,7 @@
       border: 1px solid gray;
       min-width: 12em;
    }
+   div.norma {display:block; border:none; line-height:0.9rem;}
    .btn {
       margin: 8px 4px;
       border: 1px solid gray;
@@ -66,6 +67,7 @@
    </style>
    <script src="./font.js"></script>
    <script src="./fonten.js"></script>
+   <script src="./fontpl.js"></script>
 <script>
     const $=e=>document.querySelector(e);
     const $$=e=>document.querySelectorAll(e);
@@ -78,8 +80,9 @@
    <a href="./edit.html" style="font-size:20px; margin:20px; text-decoration: none;">Edytor fontów</a><br />
    <br />
    <p>
-      <button onclick="changeFont(this,0)" class="btn active">Font glcdfont.c</button> 
+      Font: <button onclick="changeFont(this,0)" class="btn active">glcdfont.c</button> 
       <button onclick="changeFont(this,1)" class="btn">glcdfont_EN.c</button>
+      <button onclick="changeFont(this,2)" class="btn">glcdfont_PL.c</button>
    </p>  
    <div id="fonts"></div>
 
@@ -120,13 +123,14 @@ const setActive=(ten)=>{
       let arr=[];
       $("#fonts").innerHTML = ""
       font.forEach((f,i) => {
-         
-         arr.push(f);
-         if (i%5==4){
-            drawChar(i,arr);
-            arr.length=0;
+         //if (i<50) 
+         {
+            arr.push(f);
+            if (i%5==4){
+               drawChar(i,arr);
+               arr.length=0;
+            }
          }
-         
       });
     }
 
@@ -134,6 +138,7 @@ const setActive=(ten)=>{
    const changeFont=(ten,nr=0)=>{
       if (nr===0) font = fonttt;
       if (nr===1) font = fonten;
+      if (nr===2) font = fontpl;
       $("#fonts").innerHTML = "<h1>Czekamy</h1>";
       setTimeout(()=>{drawFONT(); },333)
       if (ten) setActive(ten);
@@ -144,10 +149,93 @@ const setActive=(ten)=>{
    document.addEventListener("DOMContentLoaded",function(){
       $("#fonts").innerHTML = "<h1>Czekamy</h1>";
        font=fonttt; 
-       setTimeout(()=>{drawFONT(); },333)
+       //setTimeout(()=>{drawFONT(); },333)
    })
    //---DOM READY----------------------------------
    
 </script>
+
+
+
+
+<div class="norma">
+   <input type="file" id="fileInput" />
+   
+   <pre id="fileContent"></pre>
+</div>
+
+<script>
+
+const extractFont=(contents)=>{
+   let arr = contents.split("\n");
+   let arra = [];
+   arr.forEach((a,i)=>{
+      a=a.trim();
+      //console.log(a.indexOf("0x00,"),a)
+      if (a.indexOf("0x")===0) {
+         //console.log(i,a)
+         a=a.replace(/(\/\/.*?$)/gi,"")
+         a=a.replaceAll(" ","")
+         arra.push(a);
+      }
+   });
+
+   let fontArr=[];
+   arra.forEach((a,i)=>{
+      //let a=a.replace(/(\/\/.*?$)/gi,"")
+      let harr = a.split(",")
+      let pop = harr.pop();
+      if (pop) harr.push(pop)
+      console.log(i,harr)
+      fontArr = [...fontArr, ...harr];
+   });
+
+   fontArr.forEach((f,i)=>{
+      fontArr[i] = parseInt(f,16)
+   });
+
+   console.log(fontArr);
+   console.log(JSON.stringify(fontArr));
+
+   font=fontArr; 
+   setTimeout(()=>{drawFONT(); },333)
+}
+
+
+const readSingleFile=(e) =>{
+  var file = e.target.files[0];
+  if (!file) {
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    var contents = e.target.result;
+    displayContents(contents);
+  };
+  reader.readAsText(file);
+}
+
+const displayContents=(contents) =>{
+   extractFont(contents)
+  //var element = document.getElementById('fileContent');
+  //element.textContent = contents;
+}
+
+document.getElementById('fileInput')
+  .addEventListener('change', readSingleFile, false);
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
 </body>
 </html>
