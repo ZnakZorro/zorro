@@ -80,7 +80,8 @@
    <a href="./edit.html" style="font-size:20px; margin:20px; text-decoration: none;">Edytor fontów</a><br />
    <br />
    <p>
-      Font: <button onclick="changeFont(this,0)" class="btn active">glcdfont.c</button> 
+      Font: 
+      <button onclick="changeFont(this,0)" class="btn">glcdfont.c</button> 
       <button onclick="changeFont(this,1)" class="btn">glcdfont_EN.c</button>
       <button onclick="changeFont(this,2)" class="btn">glcdfont_PL.c</button>
    </p>  
@@ -147,7 +148,7 @@ const setActive=(ten)=>{
     let fontName=""
    //---dom ready--------------------------------
    document.addEventListener("DOMContentLoaded",function(){
-      $("#fonts").innerHTML = "<h1>Czekamy</h1>";
+      $("#fonts").innerHTML = "<h1>???</h1>";
        font=fonttt; 
        //setTimeout(()=>{drawFONT(); },333)
    })
@@ -186,7 +187,7 @@ const extractFont=(contents)=>{
       let harr = a.split(",")
       let pop = harr.pop();
       if (pop) harr.push(pop)
-      console.log(i,harr)
+      //console.log(i,harr)
       fontArr = [...fontArr, ...harr];
    });
 
@@ -194,8 +195,8 @@ const extractFont=(contents)=>{
       fontArr[i] = parseInt(f,16)
    });
 
-   console.log(fontArr);
-   console.log(JSON.stringify(fontArr));
+   //console.log(fontArr);
+   //console.log(JSON.stringify(fontArr));
 
    font=fontArr; 
    setTimeout(()=>{drawFONT(); },333)
@@ -216,7 +217,9 @@ const readSingleFile=(e) =>{
 }
 
 const displayContents=(contents) =>{
-   extractFont(contents)
+   $("#fonts").innerHTML = "<h1>Czkamy !!!!!!!</h1>";
+   setTimeout(()=>{extractFont(contents); },333)
+   
   //var element = document.getElementById('fileContent');
   //element.textContent = contents;
 }
