@@ -133,7 +133,8 @@ document.addEventListener("DOMContentLoaded",function(){
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
 <div class="klawisze">
 	<button onclick="getYrno21('Szczn')">Yrno21-Szczn</button>
-	<button onclick="getYrno21('Wawa')">Yrno21-Wawa</button>
+	<button onclick="getYrno21('Gdańsk')">Gdańsk</button>
+	<button onclick="getYrno21('Między')">Między</button>
 </div>
 <div id="yrno21"></div>	
   
@@ -931,7 +932,7 @@ const dnigodziny=(created)=>{
   return termin;
 }
 const getYrno21=(city="Szczn")=>{
-	let citys = {"Szczn":"2-3083828","Wawa":"2-7531926"}
+	let citys = {"Szczn":"2-3083828","Gdańsk":"2-3099434","Między":"2-3091961"}
 	console.log(city)
 	console.log(city)
 	let u= `https://www.yr.no/api/v0/locations/${citys[city]}/subseasonalforecast`;
