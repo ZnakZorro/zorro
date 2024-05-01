@@ -119,14 +119,14 @@ document.addEventListener("DOMContentLoaded",function(){
 <a href="./radar/" class="btn btn-info">Radar</a>
 <a href="./burze/" class="btn btn-info">Burze</a>
 <a href="./windy/" class="btn btn-info">Windy</a>
-	
+
 
     <br />
     <button id="meteoMaxDays0" class="btn btn-info" onclick="meteoSetDay(0)">3 dni</button>
     <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10 dni</button>
 </div>  
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
-
+<button onclick="getYrno21()">getYrno21</button>
 <div id="yrno21"></div>	
   
 <script>
@@ -907,7 +907,7 @@ Highcharts.ajax({
   
 //---dom ready--------------------------------
 document.addEventListener("DOMContentLoaded",function(){
-	getYrno21();
+	//getYrno21();
   //document.getElementById("info").textContent=lastCity;
 })
 //---DOM READY----------------------------------  
