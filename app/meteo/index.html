@@ -23,6 +23,9 @@
 <!--link rel="stylesheet" type="text/css" href="../../css/normalize.css" /-->
 <!--script src="./lib/dark-unica.js"></script-->
 <style>
+	
+small {font-size: 74%;}
+td {padding:2px!important;text-align:center;}
 tr:nth-child(even) {background: #444;}
 tr:hover {background: #666;}
   body {  
@@ -946,6 +949,7 @@ const getYrno21=()=>{
 	*/
     }    
 
+
    const describeYrno21=(data)=>{
         /*console.log("dddddddddddddddddddddddddddddddddd")
         console.log(data)
@@ -955,25 +959,30 @@ const getYrno21=()=>{
         console.log(data.sevenDayIntervals)*/
         //console.log(JSON.stringify(data))
         let html='<div class="uk-overflow-auto"><table class="uk-table uk-table-small uk-table-striped yrno22">';
-            html += '<tr><td>lp</td><td>Data</td><td>Tmin</td><td>Tmax</td><td>Deszcz</td><td>Opad%</td></tr>';
+            html += '<tr><td>lp</td><td>Data</td><td>Tmin<br />&deg;C</td><td>Tmax<br />&deg;C</td><td><small>Deszcz</small><br />mm</td><td>Opad<br />%</td></tr>';
         let i=1;
         data.sevenDayIntervals.forEach((week,w)=>{
             //console.log(i,week.dayIntervals);
             week.dayIntervals.forEach((d)=>{
-                console.log(d)
+                //console.log(d)
                 let temu = dnigodziny(d.time).split(", ")[0]
                 //console.log(d.time,temu);
+                console.log((d.precipitationAmount75Percentile),pdd(d.precipitationAmount75Percentile))
                 html += `<tr class="week${w}">`;
                     html += `<td>${i++}</td><td>${temu}</td>`;
-                    html += `<td>${d.airTemperatureMin}&deg;C</td><td>${d.airTemperatureMax}&deg;C</td>`;
-                    html += `<td><small>(~${pdd(d.precipitationAmount90Percentile)})</small> ${pdd(d.precipitationAmount75Percentile)}mm </td><td>${d.probabilityOfPrecipitation}%</td>`;
+                    html += `<td>${pdd(d.airTemperatureMin)}</td><td>${pdd(d.airTemperatureMax)}</td>`;
+                    html += `<td>${pdd(d.precipitationAmount75Percentile)}</td><td><small>(~${pdd(Math.round(d.precipitationAmount90Percentile))}) ${Math.round(d.probabilityOfPrecipitation)}%</small></td>`;
                     //html += `<td>${d.precipitationAmount75Percentile}</td><td>${d.probabilityOfPrecipitation}%</td>`;
                 html += '</tr>';
             })
         });
         html += '</table></div>';
         document.querySelector("#yrno21").innerHTML = html;
-   }     
+   }  
+
+
+
+	
 /*
 let colorsArr = "#2b908f #90ee7e #f45b5b #7798BF #aaeeee #ff0066 #eeaaee #55BF3B #DF5353 #7798BF #aaeeee #ffffff".split(" ");
 let t=""
