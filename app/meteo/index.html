@@ -932,8 +932,10 @@ const dnigodziny=(created)=>{
 }
 const getYrno21=(city="Szczn")=>{
 	let citys = {"Szczn":"2-3083828","Wawa":"2-7531926"}
-	
+	console.log(city)
+	console.log(city)
 	let u= `https://www.yr.no/api/v0/locations/${citys[city]}/subseasonalforecast`;
+	console.log(u)
 	u="https://corsproxy.io/?"+u;
 	 
 	  fetch(u)
