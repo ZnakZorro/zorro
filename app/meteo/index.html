@@ -962,7 +962,7 @@ const getYrno21=(city="Szczn")=>{
 		    console.log(dt,dw)
 		let day = weekd[dw];
                 html += `<tr class="week${w}">`;
-                    html += `<td>${i++}</td><td>${dw} ${temu}</td>`;
+                    html += `<td>${i++}</td><td>${day} ${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMin)}</td><td>${pdd(d.airTemperatureMax)}</td>`;
                     html += `<td>${pdd(d.precipitationAmount75Percentile)}</td><td><small>${pdd(Math.round(d.precipitationAmount90Percentile))} (${Math.round(d.probabilityOfPrecipitation)}%)</small></td>`;
                 html += '</tr>';
