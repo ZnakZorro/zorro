@@ -960,6 +960,9 @@ const getYrno21=(city="Szczn")=>{
 //yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 	
       const describeYrno21=(data,city="Szczn")=>{
+		let weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+		let weekd = ["Nie", "Pon", "Wto", "Śro", "Czw", "Pią", "Sob"];		
+	      
         let html='<div class="uk-overflow-auto"><table class="uk-table uk-table-small uk-table-striped yrno22">';
             html += `<tr><td>lp</td><td id="city">${city}</td><td>Tmin<br />&deg;C</td><td>Tmax<br />&deg;C</td><td><small>Deszcz</small><br />mm</td><td>Opad<br /><small>mm (%)</small></td></tr>`;
         let i=1;
@@ -967,8 +970,12 @@ const getYrno21=(city="Szczn")=>{
             week.dayIntervals.forEach((d)=>{
                 //console.log(d)
                 let temu = dnigodziny(d.time).split(", ")[0];
+		var dt = new Date(d.time);
+		let dw      = dt.getDay();
+		    console.log(dt,dw)
+		let day = weekd[dw];
                 html += `<tr class="week${w}">`;
-                    html += `<td>${i++}</td><td>${temu}</td>`;
+                    html += `<td>${i++}</td><td>${dw} ${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMin)}</td><td>${pdd(d.airTemperatureMax)}</td>`;
                     html += `<td>${pdd(d.precipitationAmount75Percentile)}</td><td><small>${pdd(Math.round(d.precipitationAmount90Percentile))} (${Math.round(d.probabilityOfPrecipitation)}%)</small></td>`;
                 html += '</tr>';
