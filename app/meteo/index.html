@@ -916,15 +916,15 @@ const getYrno21=()=>{
 	let u= "https://www.yr.no/api/v0/locations/2-3083828/subseasonalforecast";
 	console.log(u)
 	 
-  fetch(u)
-    .then(function(response) {
-          if (!response.ok) {throw Error(response.statusText);}
-          return response.json();
-    })
-    .then(obj => {
-        describeYrno21(obj);
-    })
-    .catch(e => {console.log(e)})
+	  fetch(u)
+	    .then(function(response) {
+	          if (!response.ok) {throw Error(response.statusText);}
+	          return response.json();
+	    })
+	    .then(obj => {
+	        describeYrno21(obj);
+	    })
+	    .catch(e => {console.log(e)})
 
         /*
 	fetch(u)
