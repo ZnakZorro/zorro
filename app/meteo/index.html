@@ -914,7 +914,7 @@ document.addEventListener("DOMContentLoaded",function(){
 
 const getYrno21=()=>{
 	let u= "https://www.yr.no/api/v0/locations/2-3083828/subseasonalforecast";
-	console.log(u)
+	u="https://corsproxy.io/?"+u;
 	 
 	  fetch(u)
 	    .then(function(response) {
