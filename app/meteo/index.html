@@ -131,7 +131,10 @@ document.addEventListener("DOMContentLoaded",function(){
     <button id="meteoMaxDays1" class="btn btn-info" onclick="meteoSetDay(1)">10 dni</button>
 </div>  
 <div class="klawisze" id="klawisze" class="col" style="max-width:100vw;"></div>  
-<button onclick="getYrno21()">getYrno21</button>
+<div class="klawisze">
+	<button onclick="getYrno21(0)">Yrno21-Szczn</button>
+	<button onclick="getYrno21(1)">Yrno21-Wawa</button>
+</div>
 <div id="yrno21"></div>	
   
 <script>
@@ -927,10 +930,10 @@ const dnigodziny=(created)=>{
   let termin = (new Date(dateCreat).toLocaleString('pl-PL'));
   return termin;//pad(hh)+"h "+pad(mm)+"m";
 }
-const getYrno21=()=>{
-	let citys = {Szczecin":"2-3083828"}
+const getYrno21=(nr=0)=>{
+	let citys = {Szczn":"2-3083828","Wawa":"2-7531926"}
 	
-	let u= "https://www.yr.no/api/v0/locations/2-3083828/subseasonalforecast";
+	let u= `https://www.yr.no/api/v0/locations/${citys[nr]}/subseasonalforecast`;
 	u="https://corsproxy.io/?"+u;
 	 
 	  fetch(u)
