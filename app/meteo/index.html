@@ -912,6 +912,16 @@ document.addEventListener("DOMContentLoaded",function(){
 })
 //---DOM READY----------------------------------  
 
+const pdd =(s)=>{
+	let ret = parseFloat(s).toFixed(1);
+	return ret;
+}
+const dnigodziny=(created)=>{
+  let dateCreat = Date.parse(created);
+  let time = (new Date(dateCreat)).getTime();
+  let termin = (new Date(dateCreat).toLocaleString('pl-PL'));
+  return termin;//pad(hh)+"h "+pad(mm)+"m";
+}
 const getYrno21=()=>{
 	let u= "https://www.yr.no/api/v0/locations/2-3083828/subseasonalforecast";
 	u="https://corsproxy.io/?"+u;
