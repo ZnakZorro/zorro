@@ -955,7 +955,7 @@ const getYrno21=(city="Szczn")=>{
         let i=1;
         data.sevenDayIntervals.forEach((week,w)=>{
             week.dayIntervals.forEach((d)=>{
-                //console.log(d)
+                console.log(d)
                 let temu = dnigodziny(d.time).split(", ")[0];
 		var dt = new Date(d.time);
 		let dw      = dt.getDay();
@@ -1012,7 +1012,7 @@ const setCurrentYrno=(div)=>{
     fetch(u).then(r => {return r.json()}).then(o => {describeYrno(o)}).catch(e => {console.log(e)})
 
     const describeYrno=(d)=>{
-        console.log(d.status.code,d)
+        //console.log(d.status.code,d)
         let html =""
         let teraz = (new Date(d.created).toLocaleString('pl-PL'));
         let symbole = d.symbolCode.next1Hour.split("_")[0];
