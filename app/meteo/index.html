@@ -999,10 +999,33 @@ console.log(beaufortName)
 	
 </script>  
 <script src="../../appMenu.js"></script>
-	
+<div id="curyrno"></div>	
 <a href="humi.html" class="btn">HUMI</a>
 <a href="deszcze.html" class="btn">Deszcze</a>
 <a href="sun.html" class="btn">SUN</a>
+
+<script>
+const setCurrentYrno=(div)=>{
+    let u="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+    u="https://corsproxy.io/?"+u;
+
+    fetch(u).then(r => {return r.json()}).then(o => {describeYrno(o)}).catch(e => {console.log(e)})
+
+    const describeYrno=(d)=>{
+        console.log(d.status.code,d)
+        let html =""
+        let teraz = (new Date(d.created).toLocaleString('pl-PL'));
+        let symbole = d.symbolCode.next1Hour.split("_")[0];
+        symbole = symbole.charAt(0).toUpperCase() + symbole.slice(1);
+        html += `<b>${teraz}<br />${symbole}</b><br />`;
+        html += `${d.temperature.value}&deg;C {${d.temperature.feelsLike}&deg;C}<br />`;
+        html += `${d.precipitation.value}mm, ${d.wind.speed}m/s<br />`;
+        document.querySelector("#"+div).innerHTML = html;
+    }
+}
+setCurrentYrno("curyrno");
+</script>
+
 	
 </body>
 </html>
