@@ -932,8 +932,9 @@ const dnigodziny=(created)=>{
   return termin;
 }
 const getYrno21=(city="Szczn")=>{
+	let uid = "?id=" + Math.random().toString(16).slice(2)
 	let citys = {"Szczn":"2-3083828","Gdańsk":"2-3099434","Między":"2-3091961"}
-	let u= `https://www.yr.no/api/v0/locations/${citys[city]}/subseasonalforecast`;
+	let u= `https://www.yr.no/api/v0/locations/${citys[city]}/subseasonalforecast${uid}`;
 	u="https://corsproxy.io/?"+u;	 
 	fetch(u)
 	.then(function(response) {
@@ -1006,7 +1007,9 @@ console.log(beaufortName)
 
 <script>
 const setCurrentYrno=(div)=>{
-    let u="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+	let uid = "?id=" + Math.random().toString(16).slice(2)
+    let u="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour"+uid;
+	
     u="https://corsproxy.io/?"+u;
 
     fetch(u).then(r => {return r.json()}).then(o => {describeYrno(o)}).catch(e => {console.log(e)})
