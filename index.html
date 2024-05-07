@@ -101,6 +101,12 @@ document.addEventListener("DOMContentLoaded",function(){
     //_$("#modalyrnoimage").style.display="block";   
     _$("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;
     //_$("app-menu").title = APPcity; //===> to jest w shadow dom
+   document.getElementById("txtx").addEventListener('input', function(e){
+      console.log(e,e.target)
+      console.log(e.target.value)
+      let val = e.target.value;
+      document.getElementById("ddddd").innerHTML = val;
+   }, false); 
 })
 //---DOM READY----------------------------------
         
@@ -120,7 +126,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </div>
       </div>
    
-   <div class="container" style="position: relative;">
+   <div class="container" id="ccccc" style="position: relative;">
      
      <!-- modal --> 
      <div class="menumodal" id="menumodal">
@@ -257,7 +263,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </span>
    
 </div>
-<div class="container"></div>
+<div class="container" id="ddddd"></div>
       
   <a href="#" class="top">Back to Top &#8593;</a>  
   
@@ -269,12 +275,12 @@ document.addEventListener("DOMContentLoaded",function(){
 <script>
    const PasteFB=(nr=1)=>{
    let txtx = document.getElementById("txtx");
-   if(nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Ziarmix\n2x bułki zwykłe\n--\nZbigniew`;
+   if(nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Ziarmix\n2x bułki zwykłe\n--\nZbigniew Sz`;
    if(nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
 1x chleb Ziarmix
 2x bułki zwykłe
 --
-Zbigniew`;
+Zbigniew Sz`;
    }
    
     const PasteTXT=async()=>{
