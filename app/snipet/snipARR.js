@@ -18,7 +18,6 @@ const snipARR = [
 
     {n:"mini",            f:"html",       u:"mini.html"},
     {n:"index",           f:"html",       u:"index.html"},
-    {n:"wykres",           f:"html",       u:"wykres.htm"},
     {n:"wykresy",           f:"html",       u:"wykres.html"},
     {n:"grid",           f:"html",       u:"grid.html"},
     {n:"git",             f:"html",       u:"git.html"},
