@@ -105,17 +105,46 @@ input[type="range" i] {
 <div id="gold"></div>
 
 <script>
-    let apiGold90 = "https://api.nbp.pl/api/cenyzlota/last/90/?format=json";
-    let apiGold01 = "https://api.nbp.pl/api/cenyzlota?format=json";
+    Highcharts.setOptions({
+        time: {
+            timezoneOffset: 2 * 60,
+            useUTC:false
+        },
+        lang:{
+            shortWeekdays:  ['Nie', 'Pon', 'Wto', 'Śro', 'Czw', 'Pnt', 'Sob'],
+            weekdays:       ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"],
+            shortMonths:    ["Sty","Lut","Mar","Kwi","Maj","Cze","Lip","Sie","Wrz","Paź","Lis","Gru"],
+            months:         ["Styczeń","Luty","Marzec","Kwiecień","Maj","Czerwiec","Lipiec","Sierpień","Wrzesień","Październik","Listopad","Grudzień"]
+        }	
+    });
 
-   /* axios.get(apiGold90)
-        .then((response) => {
-            console.log(response.data);
-            console.log(response.status);
-            console.log(response.statusText);
-            console.log(response.headers);
-            console.log(response.config);
-        });*/
+
+const rysujWykres=(id,data)=>{
+        Highcharts.chart(id, {
+            title: {text: 'GOLD'},
+            subtitle: {text: null},
+            xAxis: {
+                type: 'datetime',
+                title: {text: 'Dni'},
+                dateTimeLabelFormats: {day: '%e  %b'},
+                categories: categories,
+                labels: {align: 'left',formatter: function() {return Highcharts.dateFormat("%e  %b", this.value)}},
+                dateTimeLabelFormats: {month: '%e. %b',year: '%b'},
+            },
+            yAxis: {
+                title: {text: 'PLN'},                    
+            },
+            tooltip: {
+                shared: true,
+                crosshairs: true,
+                headerFormat: '<b>{point.x:%e. %b. %Y}</b><br>',
+            },
+            series : data,
+        });
+    }
+
+    let apiGold90 = "https://api.nbp.pl/api/cenyzlota/last/180/?format=json";
+    let apiGold01 = "https://api.nbp.pl/api/cenyzlota?format=json";
 
     let dane = []
     let daty =[]
@@ -125,17 +154,11 @@ input[type="range" i] {
     .then((response) => {
             let obj = response.data.reverse();
             let h = "<ul>"
-            obj.forEach((o,i)=>{
-                
+            obj.forEach((o,i)=>{                
                 h += `<li>${o.data} = ${o.cena}</li>\n`;
-                //let time = (new Date(o.data)).getTime();
-                let time = Date.parse(o.data);
+                let time = (new Date(o.data)).getTime();
                 let cena = o.cena;
-                categories.push(time)
-                //console.log(time,cena)
-                daty.push(time)
-                ceny.push(cena)
-                dane.push([new Date(time),cena])
+                dane.push([time,cena]);
             })
             h += "</ul>"
             
@@ -143,24 +166,16 @@ input[type="range" i] {
         console.log(dane);
         document.querySelector("#gold").innerHTML = h;
         console.log(response.status);
-        console.log(response.statusText);
-        console.log(response.headers);
-        console.log(response.config);
-
-        //wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
-        console.log(categories)
-        console.log(ceny)
-        Highcharts.chart('cgold', {
-        title: {text: 'GOLD'},
-        type: 'datetime',
-		subtitle: {text: null},
-        categories: categories,
-        series : [{"name":"gold","data":dane}],
+        //console.log(response.statusText);
+        //console.log(response.headers);
+        //console.log(response.config);
+        let data = [{"name":"gold", data:dane}]
+        rysujWykres("cgold",data)
     });
 
 
 
-    });
+    
 
 </script>
 
