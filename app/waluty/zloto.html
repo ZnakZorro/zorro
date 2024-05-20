@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="refresh" content="3600">
+<title>@GOLD</title>
+<link rel="manifest" href="./waluty.web.json"> 
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#033500">
+<link rel="shortcut icon" type="image/svg+xml" size="any" href="dolar.svg"> 
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/locale/pl.min.js" integrity="sha512-4Hra0ugHwC1jKVrS6cwYQu47pRQxNoZZNT/KKLraGJb4csT6rxfba0jpIxKE1O7N5ImwPKqbYv875hXN5h0tqA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>	
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/series-label.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>  
+<!-- optional -->  
+<script src="https://code.highcharts.com/modules/offline-exporting.js"></script>  
+<script src="https://code.highcharts.com/modules/export-data.js"></script>  
+
+<style>
+.highcharts-container {margin-left:-12px;}
+.highcharts-data-table{width:100%; position:relative;}
+td,th {padding:4px;}
+table {margin:auto;}
+
+/*
+body {
+    font-family: 'Roboto', "Verdana", sans-serif;
+    /*font-family: 'PT Sans Narrow', sans-serif;*/
+    font-size: 14pt;
+    font-weight: 300;
+    background-color: #f4f4f4;
+}
+
+.wrapper {
+    padding: 0;
+    margin: 0;
+}
+ .container {
+    padding: 0.3em;
+    margin: 0.3em;
+    display: flow-root;
+}
+button {
+    font-size:0.85rem;
+    margin: 0.25em 0.18em;
+    min-width: 3em;
+}
+.active {
+    color: red;
+    text-shadow: 1px 1px #888;
+    /*box-shadow: inset 0 0 3px tomato, 0 0 3px blue;
+    opacity: 2.4;
+    filter: sepia(0.1);*/
+}
+#container {width:100%;}
+div.col {
+    box-sizing: border-box;
+    max-width: 640px;
+    margin: auto;
+}
+#klawiszePlus button {font-size:0.93em;margin: 0.12em;}
+
+div#info {margin:auto; background-color: #eee;}
+div#info div {background-color: #ddd;}
+div#info div span {background-color: #aaa;}
+div.info {padding:0.2em;}
+	
+*/
+	
+input[type="range" i] {
+    width: 88%;
+    padding: 1%;
+    margin: 1%;
+}
+.check span {
+    width: 6.5em;
+    border: 1px solid #ddd;
+    background-color: #f4f4f4;
+    display: inline-block;
+    margin: 0.35em 0.1em;
+}
+.check span:nth-child(1){
+    border: none;
+    background-color: #f8f8f8;
+    width:4em;
+}
+
+</style> 
+
+</head>
+<body>
+
+
+
+
+
+<figure class="highcharts-figure" style="max-width:640px; margin:auto;">
+    <div id="cgold"></div>
+</figure>
+<div id="gold"></div>
+
+<script>
+    let apiGold90 = "https://api.nbp.pl/api/cenyzlota/last/90/?format=json";
+    let apiGold01 = "https://api.nbp.pl/api/cenyzlota?format=json";
+
+   /* axios.get(apiGold90)
+        .then((response) => {
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.headers);
+            console.log(response.config);
+        });*/
+
+    let dane = []
+    let daty =[]
+    let ceny=[]
+    let categories = [];
+    axios.get(apiGold90)
+    .then((response) => {
+            let obj = response.data.reverse();
+            let h = "<ul>"
+            obj.forEach((o,i)=>{
+                
+                h += `<li>${o.data} = ${o.cena}</li>\n`;
+                //let time = (new Date(o.data)).getTime();
+                let time = Date.parse(o.data);
+                let cena = o.cena;
+                categories.push(time)
+                //console.log(time,cena)
+                daty.push(time)
+                ceny.push(cena)
+                dane.push([new Date(time),cena])
+            })
+            h += "</ul>"
+            
+        console.log("=======================================================");
+        console.log(dane);
+        document.querySelector("#gold").innerHTML = h;
+        console.log(response.status);
+        console.log(response.statusText);
+        console.log(response.headers);
+        console.log(response.config);
+
+        //wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+        console.log(categories)
+        console.log(ceny)
+        Highcharts.chart('cgold', {
+        title: {text: 'GOLD'},
+        type: 'datetime',
+		subtitle: {text: null},
+        categories: categories,
+        series : [{"name":"gold","data":dane}],
+    });
+
+
+
+    });
+
+</script>
+
+</body>
+</html>
