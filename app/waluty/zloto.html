@@ -26,7 +26,7 @@
 .highcharts-data-table{width:100%; position:relative;}
 td,th {padding:4px;}
 table {margin:auto;}
-
+li {font-family: monospace; font-size: 0.9rem;}
 /*
 body {
     font-family: 'Roboto', "Verdana", sans-serif;
@@ -119,7 +119,7 @@ input[type="range" i] {
     });
 
 
-const rysujWykres=(id,data)=>{
+const rysujWykres=(id,data,categories)=>{
         Highcharts.chart(id, {
             title: {text: 'GOLD'},
             subtitle: {text: null},
@@ -146,9 +146,7 @@ const rysujWykres=(id,data)=>{
     let apiGold90 = "https://api.nbp.pl/api/cenyzlota/last/180/?format=json";
     let apiGold01 = "https://api.nbp.pl/api/cenyzlota?format=json";
 
-    let dane = []
-    let daty =[]
-    let ceny=[]
+    let dane = [];
     let categories = [];
     axios.get(apiGold90)
     .then((response) => {
@@ -165,12 +163,12 @@ const rysujWykres=(id,data)=>{
         console.log("=======================================================");
         console.log(dane);
         document.querySelector("#gold").innerHTML = h;
-        console.log(response.status);
+        //console.log(response.status);
         //console.log(response.statusText);
         //console.log(response.headers);
         //console.log(response.config);
         let data = [{"name":"gold", data:dane}]
-        rysujWykres("cgold",data)
+        rysujWykres("cgold",data,categories)
     });
 
 

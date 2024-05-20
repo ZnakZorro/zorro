@@ -15,6 +15,7 @@
     .highcharts-data-table{width:100%; position:relative;}
     td,th {padding:4px;}
     table {margin:auto;}
+    li {font-family: monospace; font-size: 0.9rem;}
 </style> 
 
 </head>
@@ -32,7 +33,8 @@
         Highcharts.chart(id, {
             title: {text: 'WYKRESY'},
             subtitle: {text: null},
-            xAxis: {type: 'datetime'},
+            xAxis: {type: 'datetime',title: {text: 'Dni'}},
+            yAxis: {title: {text: 'PLN'}},
             series : data,
         });
     }
@@ -49,21 +51,6 @@
     console.log(data)
 
     rysujWykres("wykres",data);
-
-
-    /*
-    let cats = [...Array(10).keys()];
-    cats.map((x) => x * x);
-    console.log(cats)
-    ca
-    let rar1 = [...Array(10)].map(e=>~~(Math.random()*100));
-    let rar2 = [...Array(10)].map(e=>~~(Math.random()*100));
-    let data = [{"name":"wykres1", "data":rar1},{"name":"wykres2", "data":rar2}];
-*/
-
-
-
-    
 
 </script>
 
