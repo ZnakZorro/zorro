@@ -28,25 +28,42 @@
 
 <script>
 
-    const rysujWykres=(id,categories,data)=>{
+    const rysujWykres=(id,data)=>{
         Highcharts.chart(id, {
             title: {text: 'WYKRESY'},
-            type: 'datetime',
             subtitle: {text: null},
-            categories: categories,
+            xAxis: {type: 'datetime'},
             series : data,
         });
     }
 
+    let dane=[]
+    for (let i=0;i<10; i++){
+        let val = ~~(Math.random()*100);
+        let d = new Date();
+        d.setDate(d.getDate() + i);
+        let time = d.getTime();
+        dane.push([time,val])
+    }
+    let data = [{"name":"wykres1", data:dane}]
+    console.log(data)
 
-    let id = "wykres"
+    rysujWykres("wykres",data);
+
+
+    /*
     let cats = [...Array(10).keys()];
+    cats.map((x) => x * x);
+    console.log(cats)
+    ca
     let rar1 = [...Array(10)].map(e=>~~(Math.random()*100));
     let rar2 = [...Array(10)].map(e=>~~(Math.random()*100));
     let data = [{"name":"wykres1", "data":rar1},{"name":"wykres2", "data":rar2}];
+*/
 
-    let name = "wykres";
-    rysujWykres(id,cats,data);
+
+
+    
 
 </script>
 
