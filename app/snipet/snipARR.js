@@ -42,10 +42,10 @@ const snipARR = [
     {n:"Copy",            f:"js",         u:"copy_paste.html"},
     {n:"Date",            f:"js",         u:"date.html"},
     {n:"String",          f:"js",         u:"string.js"},
-    {n:"PL",          f:"js",         u:"pl.js"},
-     {n:"Proxy",          f:"js",         u:"proxy.html"},
+    {n:"PL",              f:"js",         u:"pl.js"},
+    {n:"Proxy",           f:"js",         u:"proxy.html"},
     {n:"Observ",          f:"js",         u:"observator.html"},
-    
+    {n:"Signal",          f:"js",         u:"signal.html"},
     
     
     {n:"md",              f:"code",       u:"md.md"},
