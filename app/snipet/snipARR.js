@@ -43,6 +43,7 @@ const snipARR = [
     {n:"Date",            f:"js",         u:"date.html"},
     {n:"String",          f:"js",         u:"string.js"},
     {n:"PL",          f:"js",         u:"pl.js"},
+     {n:"Proxy",          f:"js",         u:"proxy.html"},
     
     
     
