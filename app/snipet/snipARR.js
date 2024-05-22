@@ -44,6 +44,7 @@ const snipARR = [
     {n:"String",          f:"js",         u:"string.js"},
     {n:"PL",          f:"js",         u:"pl.js"},
      {n:"Proxy",          f:"js",         u:"proxy.html"},
+    {n:"Observ",          f:"js",         u:"observator.html"},
     
     
     
