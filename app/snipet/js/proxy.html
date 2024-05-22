@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+	<head>
+		<meta charset="utf-8">
+		<title>Proxy</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	</head>
+
+	<body>
+
+
+<script>
+
+const akcja=(prop, value)=>{
+    console.log("Akcja=",prop, value);
+    if (prop==="children") console.log("name=",value[0].name);
+}
+
+const trap = {
+  set(target, prop, value) {
+    akcja(prop, value)
+    return Reflect.set(...arguments);
+  },
+};
+
+const poj = { name: "David", value: 100, arr:[1,2,3], children: [{ name: "Oliver" }]};
+
+
+const data = new Proxy(poj, trap);
+data.name = "fred";
+data.value = 88;
+data.arr=[11,22,33];
+data.children = [{ name: "John" }];
+
+setTimeout(()=>{
+    data.name ="abc"; 
+    data.value =99; 
+    data.arr[0]=7;
+    data.arr=[111,222,333];
+    data.children = [{ name: "Bob" }];
+},2000)
+
+setTimeout(()=>{
+    data.name ="zxc"; 
+    data.value =98; 
+    data.arr[1]=7;
+    data.arr=[1111,2222,3333];
+    data.children = [{ name: "Glorian" }];
+},3000)
+
+setInterval(()=>{
+    data.name ="zxc"; 
+    data.value =98; 
+    data.arr[1]=7;
+    data.arr=[1111,2222,3333];
+    let id = "id" + Math.random().toString(16).slice(2)
+    data.children = [{ name: id }];
+},5000)
+</script>
+
+
+
+
+	</body>
+</html>
