@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#369">
+   <title>Observator</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>
+	*, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}
+	body {font:normal 15pt Verdana; margin:0; padding:0;}
+	.content {max-width:800px;margin:auto; padding:0.5em;}
+	div {margin:0.25em; padding:0.25em;}
+	.grid {display: grid;grid-template-columns: 1fr 1fr;}
+   </style>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    const lostr=x=>"Los" + Math.random().toString(16).slice(2)
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+    })
+    //---DOM READY----------------------------------
+       
+</script>    
+</head>
+
+<body>
+<div class="content grid">
+    <pre id="info"></pre>
+    <pre id="log"></pre>
+</div>
+
+<script>
+    
+
+let handlers = Symbol('handlers');
+
+function makeObservable(target) {
+  // 1. Initialize handlers store
+  target[handlers] = [];
+
+  // Store the handler function in array for future calls
+  target.observe = function(handler) {
+    this[handlers].push(handler);
+  };
+
+  // 2. Create a proxy to handle changes
+  return new Proxy(target, {
+    set(target, property, value, receiver) {
+      let success = Reflect.set(...arguments); // forward the operation to object
+      if (success) { // if there were no error while setting the property
+        // call all handlers
+        target[handlers].forEach(handler => handler(property, value));
+      }
+      return success;
+    }
+  });
+}
+
+let user = {};
+
+user = makeObservable(user);
+
+user.observe((key, value) => {
+  console.log(`SET ${key}=${value}`);
+  $("#info").innerHTML += `<p>SET ${key}=${value}</p>`;
+  if (key==="log") $("#log").innerHTML += `<p>LOG ${key}=${value}</p>`;
+});
+
+user.name = lostr();
+
+setInterval(()=>{
+    user.name = lostr();
+    user.log = lostr();
+},5000);
+
+</script>
+
+</body>
+</html>
