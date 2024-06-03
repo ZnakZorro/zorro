@@ -94,6 +94,7 @@ a.btn-info, button.btn-info, .btn-info {
 #yr {width:100%; max-width:800px;}
 #yr img {width:100%;}
 .highcharts-scrolling{}
+tr.active {background:#600!important; color:white!important;}
 </style>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
@@ -962,10 +963,12 @@ const getYrno21=(city="Szczn")=>{
 		let dw      = dt.getDay();
 		    //console.log(dt,dw)
 		let day = weekd[dw];
-                html += `<tr class="week${w}">`;
+		let perrain = Math.round(d.probabilityOfPrecipitation);
+		let klasa = (perrain > 60) klasa="active" : "aa";
+                html += `<tr class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMax)}</td><td>${pdd(d.airTemperatureMin)}</td>`;
-                    html += `<td>${pdd(d.precipitationAmount90Percentile)}</td><td>${Math.round(d.probabilityOfPrecipitation)}%</td>`;
+                    html += `<td>${pdd(d.precipitationAmount90Percentile)}</td><td>${perrain}%</td>`;
                 html += '</tr>';
             })
         });
