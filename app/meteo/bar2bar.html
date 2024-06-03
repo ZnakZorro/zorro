@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#369">
+   <title>bar</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+
 
 <style>
     .highcharts-figure,
@@ -50,53 +60,117 @@
 
 <script src="https://code.highcharts.com/highcharts.js"></script>
 
-<!--script src="https://code.highcharts.com/modules/exporting.js"></script-->
-<!--script src="https://code.highcharts.com/modules/export-data.js"></script-->
-<!--script src="https://code.highcharts.com/modules/accessibility.js"></script-->
-
 <figure class="highcharts-figure">
     <div id="container"></div>
 </figure>
 
-
+<div class="klawisze">
+	<button onclick="readYrno21('Szczn')">Yrno21-Szczn</button>
+	<button onclick="readYrno21('Gdańsk')">Gdańsk</button>
+	<button onclick="readYrno21('Między')">Między</button>
+</div>
 
 <script>
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
-Highcharts.chart('container', {
-    chart: {type: 'column'},
-    title: {text: 'Prognoza - Szczecin'},
-    subtitle: {
-        text:
-            'Source: <a target="_blank" ' +
-            'href="https://yr.no">yr.no</a>'
-    },
-    xAxis: {
-        categories: ['21.06.2024', '22.06.2024', '23.06.2024', '24.06.2024'],
-        crosshair: true,
-        accessibility: {description: 'Dni'}
-    },
-    yAxis: {
-        min: 0,
-        title: {text: 'Temp.'}
-    },
-    tooltip: {valueSuffix: '&deg;C'},
-    plotOptions: {
-        column: {
-            pointPadding: 0.2,
-            borderWidth: 0
-        }
-    },
-    series: [
-        {
-            name: 'Max',
-            data: [20,22,24,18]
-        },
-        {
-            name: 'Min',
-            data: [8,9,10,6]
-        }
-    ]
-});
+const pdd =(s)=>{
+	let ret = parseFloat(s).toFixed(1);
+	return ret;
+}
+
+const dnigodziny=(created)=>{
+  let dateCreat = Date.parse(created);
+  let time = (new Date(dateCreat)).getTime();
+  let termin = (new Date(dateCreat).toLocaleString('pl-PL'));
+  return termin;
+}
+const readYrno21=(city="Szczn")=>{
+	let uid = "?id=" + Math.random().toString(16).slice(2)
+	let citys = {"Szczn":"2-3083828","Gdańsk":"2-3099434","Między":"2-3091961"}
+	let u= `https://www.yr.no/api/v0/locations/${citys[city]}/subseasonalforecast${uid}`;
+	u="https://corsproxy.io/?"+u;	 
+	fetch(u)
+	.then(function(response) {
+		if (!response.ok) {throw Error(response.statusText);}
+		return response.json();
+	})
+	.then(obj => {chartYrno21(obj,city); })
+	.catch(e => {console.log(e)})
+    }    
+
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
+	
+      const chartYrno21=(data,city="Szczn")=>{
+		let weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
+		let weekd = ["Nie", "Pon", "Wto", "Śro", "Czw", "Pią", "Sob"];		
+	      
+        
+
+	count = 0;
+    let categories = [];
+    let catdw = [];
+    let dataMin = [];
+    let dataMax = [];
+
+    data.sevenDayIntervals.forEach((week,w)=>{
+        week.dayIntervals.forEach((d)=>{
+            let temu = dnigodziny(d.time).split(", ")[0];
+            let dt  = new Date(d.time);
+            let dw  = dt.getDay();
+            let day = weekd[dw];
+            let arr = temu.split(".");
+            arr.pop()
+            temu = arr.join(".")
+            categories.push(temu+"-"+day);
+            dataMin.push(d.airTemperatureMin);
+            dataMax.push(d.airTemperatureMax);
+        });
+    });
+
+    Highcharts.chart('container', {
+            chart: {type: 'column'},
+            title: {text: 'Prognoza - Szczecin'},
+            subtitle: {
+                text:
+                    'Source: <a target="_blank" ' +
+                    'href="https://yr.no">yr.no</a>'
+            },
+            xAxis: {
+                categories: categories,
+                crosshair: true,
+                accessibility: {description: 'Dni'}
+            },
+            yAxis: {
+                min: 0,
+                title: {text: 'Temp.'}
+            },
+            tooltip: {valueSuffix: '&deg;C'},
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [
+                {
+                    name: 'Max',
+                    data: dataMax
+                },
+                {
+                    name: 'Min',
+                    data: dataMin
+                }
+            ]
+        });
+}
+//yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
 
 
+    
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){
+	readYrno21();
+  //document.getElementById("info").textContent=lastCity;
+})
+//---DOM READY----------------------------------  
 </script>
