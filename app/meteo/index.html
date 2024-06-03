@@ -972,8 +972,8 @@ const getYrno21=(city="Szczn")=>{
 		let klasa = (perrain > 60) ? "active" : "aa";
 		midMin += parseFloat(d.airTemperatureMin);
 		midMax += parseFloat(d.airTemperatureMax);
-		minMin += Math.min(minMin, d.airTemperatureMin);
-		maxMax += Math.max(maxMax, d.airTemperatureMax);
+		minMin += Math.min(minMin,  parseFloat(d.airTemperatureMin));
+		maxMax += Math.max(maxMax,  parseFloat(d.airTemperatureMax));
 		count++;
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
