@@ -985,8 +985,8 @@ const getYrno21=(city="Szczn")=>{
 		let day = weekd[dw];
 		let perrain = Math.round(d.probabilityOfPrecipitation);
 		let klasa = (perrain > 60) ? "active" : "aa";
-		klasa += (d.airTemperatureMin <= minMin+0.5) ? " zimno" : "";
-		klasa += (d.airTemperatureMax >= maxMax-0.5) ? " cieplo" : "";
+		klasa += (d.airTemperatureMin <= minMin+0.6) ? " zimno" : "";
+		klasa += (d.airTemperatureMax >= maxMax-1.1) ? " cieplo" : "";
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
