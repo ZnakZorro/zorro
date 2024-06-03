@@ -94,7 +94,7 @@ a.btn-info, button.btn-info, .btn-info {
 #yr img {width:100%;}
 .highcharts-scrolling{}
 tr.active {background:#b00!important; color:white!important;}
-.yrno21 {margin:0.2em 0.4em;}	
+.divv {margin:0.2em 0.4em;}	
 </style>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
@@ -137,7 +137,7 @@ document.addEventListener("DOMContentLoaded",function(){
 	<button onclick="getYrno21('Gdańsk')">Gdańsk</button>
 	<button onclick="getYrno21('Między')">Między</button>
 </div>
-<div id="yrno21"></div>	
+<div id="yrno21" class="divv"></div>	
   
 <script>
 let meteoMaxDays = 0;
@@ -972,8 +972,8 @@ const getYrno21=(city="Szczn")=>{
 		let klasa = (perrain > 60) ? "active" : "aa";
 		midMin += parseFloat(d.airTemperatureMin);
 		midMax += parseFloat(d.airTemperatureMax);
-		minMin += Math.min(minMin,  parseFloat(d.airTemperatureMin));
-		maxMax += Math.max(maxMax,  parseFloat(d.airTemperatureMax));
+		minMin = Math.min(minMin,  parseFloat(d.airTemperatureMin));
+		maxMax = Math.max(maxMax,  parseFloat(d.airTemperatureMax));
 		
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
