@@ -959,7 +959,7 @@ const getYrno21=(city="Szczn")=>{
 	let maxMax = -100;
 	let midMin = 0;
 	let midMax = 0;
-	let count  = 1;
+	let count  = 0;
         data.sevenDayIntervals.forEach((week,w)=>{
             week.dayIntervals.forEach((d)=>{
                 console.log(d)
@@ -974,13 +974,14 @@ const getYrno21=(city="Szczn")=>{
 		midMax += parseFloat(d.airTemperatureMax);
 		minMin += Math.min(minMin,  parseFloat(d.airTemperatureMin));
 		maxMax += Math.max(maxMax,  parseFloat(d.airTemperatureMax));
-		count++;
+		
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMax)}</td><td>${pdd(d.airTemperatureMin)}</td>`;
                     html += `<td>${pdd(d.precipitationAmount90Percentile)}</td><td>${perrain}%</td>`;
                 html += '</tr>';
+		count++;
             })
         });
         html += '</table>';
