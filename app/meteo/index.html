@@ -962,7 +962,7 @@ const getYrno21=(city="Szczn")=>{
 	let count  = 0;
         data.sevenDayIntervals.forEach((week,w)=>{
             week.dayIntervals.forEach((d)=>{
-                console.log(d)
+                //console.log(d)
                 let temu = dnigodziny(d.time).split(", ")[0];
 		var dt = new Date(d.time);
 		let dw      = dt.getDay();
