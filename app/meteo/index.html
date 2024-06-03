@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pl">
 <head>
@@ -964,7 +963,7 @@ const getYrno21=(city="Szczn")=>{
 		    //console.log(dt,dw)
 		let day = weekd[dw];
 		let perrain = Math.round(d.probabilityOfPrecipitation);
-		let klasa = (perrain > 60) "active" : "aa";
+		let klasa = (perrain > 60) ? "active" : "aa";
                 html += `<tr class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMax)}</td><td>${pdd(d.airTemperatureMin)}</td>`;
