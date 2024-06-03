@@ -969,8 +969,9 @@ const getYrno21=(city="Szczn")=>{
 		let klasa = (perrain > 60) ? "active" : "aa";
 		midMin += parseFloat(d.airTemperatureMin);
 		midMax += parseFloat(d.airTemperatureMax);
-		    count++;
-                html += `<tr class="week${w} ${klasa}">`;
+		count++;
+		let id=`day${count}`;
+                html += `<tr id="${id}" class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
                     html += `<td>${pdd(d.airTemperatureMax)}</td><td>${pdd(d.airTemperatureMin)}</td>`;
                     html += `<td>${pdd(d.precipitationAmount90Percentile)}</td><td>${perrain}%</td>`;
