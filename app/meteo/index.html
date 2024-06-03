@@ -94,6 +94,7 @@ a.btn-info, button.btn-info, .btn-info {
 #yr img {width:100%;}
 .highcharts-scrolling{}
 tr.active {background:#b00!important; color:white!important;}
+.yrno21 {margin:0.2em 0.4em;}	
 </style>
 <script>
 document.addEventListener("DOMContentLoaded",function(){
@@ -954,6 +955,8 @@ const getYrno21=(city="Szczn")=>{
         let html='<div class="uk-overflow-auto"><table class="uk-table uk-table-small uk-table-striped yrno22">';
             html += `<tr><td>dw</td><td id="city">${city}</td><td>Tmax<br />&deg;C</td><td>Tmin<br />&deg;C</td><td><small>Deszcz</small><br />mm</td><td>Opad<br /><small> (%)</small></td></tr>`;
         let i=1;
+	let minMin = 100;
+	let maxMax = -100;
 	let midMin = 0;
 	let midMax = 0;
 	let count  = 1;
@@ -969,6 +972,8 @@ const getYrno21=(city="Szczn")=>{
 		let klasa = (perrain > 60) ? "active" : "aa";
 		midMin += parseFloat(d.airTemperatureMin);
 		midMax += parseFloat(d.airTemperatureMax);
+		minMin += Math.min(minMin, d.airTemperatureMin);
+		maxMax += Math.max(maxMax, d.airTemperatureMax);
 		count++;
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
@@ -979,8 +984,10 @@ const getYrno21=(city="Szczn")=>{
             })
         });
         html += '</table>';
-      	html += `<p>mid MIN = ${Math.round(midMin/count)}&deg;C</p>`;
-	html += `<p>mid MAX = ${Math.round(midMax/count)}&deg;C</p>`;
+	      	html += `<p>mid MIN = ${Math.round(midMin/count)}&deg;C</p>`;
+		html += `<p>mid MAX = ${Math.round(midMax/count)}&deg;C</p>`;      	
+		html += `<p>MIN = ${minMin}&deg;C</p>`;
+		html += `<p>MAX = ${maxMax}&deg;C</p>`;
       	html += '</div>';
         document.querySelector("#yrno21").innerHTML = html;
    }
