@@ -94,6 +94,8 @@ a.btn-info, button.btn-info, .btn-info {
 #yr img {width:100%;}
 .highcharts-scrolling{}
 tr.active {background:#b00!important; color:white!important;}
+tr.zimno {color:blue;}
+tr.cieplo {color:yellow;}
 .divv {margin:0.2em 0.4em;}	
 </style>
 <script>
@@ -963,6 +965,19 @@ const getYrno21=(city="Szczn")=>{
         data.sevenDayIntervals.forEach((week,w)=>{
             week.dayIntervals.forEach((d)=>{
                 //console.log(d)
+		midMin += parseFloat(d.airTemperatureMin);
+		midMax += parseFloat(d.airTemperatureMax);
+		minMin = Math.min(minMin,  parseFloat(d.airTemperatureMin));
+		maxMax = Math.max(maxMax,  parseFloat(d.airTemperatureMax));		
+		count++;
+            }); // week
+        }); //data
+	//**************************************************************************************************************************
+	      
+	count = 0;
+        data.sevenDayIntervals.forEach((week,w)=>{
+            week.dayIntervals.forEach((d)=>{
+                //console.log(d)
                 let temu = dnigodziny(d.time).split(", ")[0];
 		var dt = new Date(d.time);
 		let dw      = dt.getDay();
@@ -970,11 +985,8 @@ const getYrno21=(city="Szczn")=>{
 		let day = weekd[dw];
 		let perrain = Math.round(d.probabilityOfPrecipitation);
 		let klasa = (perrain > 60) ? "active" : "aa";
-		midMin += parseFloat(d.airTemperatureMin);
-		midMax += parseFloat(d.airTemperatureMax);
-		minMin = Math.min(minMin,  parseFloat(d.airTemperatureMin));
-		maxMax = Math.max(maxMax,  parseFloat(d.airTemperatureMax));
-		
+		klasa += (d.airTemperatureMin <= minMin) ? " zimno" : "";
+		klasa += (d.airTemperatureMax >= maxMax) ? " cieplo" : "";
 		let id=`day${count}`;
                 html += `<tr id="${id}" class="week${w} ${klasa}">`;
                     html += `<td>${day}</td><td>${temu}</td>`;
@@ -982,8 +994,9 @@ const getYrno21=(city="Szczn")=>{
                     html += `<td>${pdd(d.precipitationAmount90Percentile)}</td><td>${perrain}%</td>`;
                 html += '</tr>';
 		count++;
-            })
-        });
+            }); // week
+        }); //data
+
         html += '</table>';
 	      	html += `<p>mid MIN = ${Math.round(midMin/count)}&deg;C</p>`;
 		html += `<p>mid MAX = ${Math.round(midMax/count)}&deg;C</p>`;      	
