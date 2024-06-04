@@ -139,7 +139,9 @@ document.addEventListener("DOMContentLoaded",function(){
 	<button onclick="getYrno21('Gdańsk')">Gdańsk</button>
 	<button onclick="getYrno21('Między')">Między</button>
 </div>
-<div id="yrno21" class="divv"></div>	
+<div id="yrno21" class="divv"></div>
+<div id="containerbar" class="divv"></div>
+	
   
 <script>
 let meteoMaxDays = 0;
@@ -975,6 +977,10 @@ const getYrno21=(city="Szczn")=>{
 	//**************************************************************************************************************************
 	      
 	count = 0;
+	    let categories = [];
+	    let catdw = [];
+	    let dataMin = [];
+	    let dataMax = [];
         data.sevenDayIntervals.forEach((week,w)=>{
             week.dayIntervals.forEach((d)=>{
                 //console.log(d)
@@ -983,6 +989,12 @@ const getYrno21=(city="Szczn")=>{
 		let dw      = dt.getDay();
 		    //console.log(dt,dw)
 		let day = weekd[dw];
+			    let arr = temu.split(".");
+		            arr.pop()
+		            temu = arr.join(".")
+		            categories.push(temu+"-"+day);
+		            dataMin.push(d.airTemperatureMin);
+		            dataMax.push(d.airTemperatureMax);
 		let perrain = Math.round(d.probabilityOfPrecipitation);
 		let klasa = (perrain > 60) ? "active" : "aa";
 		klasa += (d.airTemperatureMin <= minMin+0.6) ? " zimno" : "";
@@ -1004,6 +1016,48 @@ const getYrno21=(city="Szczn")=>{
 		html += `<p>MAX = ${maxMax}&deg;C</p>`;
       	html += '</div>';
         document.querySelector("#yrno21").innerHTML = html;
+
+//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+
+Highcharts.chart('containerbar', {
+            chart: {type: 'column'},
+            title: {text: 'Prognoza - Szczecin'},
+            subtitle: {
+                text:
+                    'Source: <a target="_blank" ' +
+                    'href="https://yr.no">yr.no</a>'
+            },
+            xAxis: {
+                categories: categories,
+                crosshair: true,
+                accessibility: {description: 'Dni'}
+            },
+            yAxis: {
+                min: 0,
+                title: {text: 'Temp.'}
+            },
+            tooltip: {valueSuffix: '&deg;C'},
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+            series: [
+                {
+                    name: 'Max',
+                    data: dataMax
+                },
+                {
+                    name: 'Min',
+                    data: dataMin
+                }
+            ]
+        });
+
+//wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww
+
+	      
    }
 	
 //yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy
