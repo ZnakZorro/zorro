@@ -956,7 +956,10 @@ const getYrno21=(city="Szczn")=>{
 	
       const describeYrno21=(data,city="Szczn")=>{
 		let weekdays = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
-		let weekd = ["Nie", "Pon", "Wto", "Śro", "Czw", "Pią", "Sob"];		
+		let weekd = ["Nie", "Pon", "Wto", "Śro", "Czw", "Pią", "Sob"];	
+	      	let citycity = city;
+	      	if (city==="Szczn") citycity = "Szczecin";
+	        if (city==="Między") citycity = "Międzyzdroje";
 	      
         let html='<div class="uk-overflow-auto"><table class="uk-table uk-table-small uk-table-striped yrno22">';
             html += `<tr><td>dw</td><td id="city">${city}</td><td>Tmax<br />&deg;C</td><td>Tmin<br />&deg;C</td><td><small>Deszcz</small><br />mm</td><td>Opad<br /><small> (%)</small></td></tr>`;
@@ -1023,7 +1026,7 @@ const getYrno21=(city="Szczn")=>{
 
 Highcharts.chart('containerbar', {
             chart: {type: 'column'},
-            title: {text: 'Prognoza - Szczecin'},
+            title: {text: 'Prognoza - '+citycity},
             subtitle: {
                 text:
                     'Source: <a target="_blank" ' +
