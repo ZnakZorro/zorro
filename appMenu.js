@@ -43,7 +43,7 @@ class NavBarNavigator extends HTMLElement {
 					 <li class="nav-item"><a href="${link}app/covid/index.html" class="nav-link">COVID</a></li>
 					 <li class="nav-item"><a href="${link}app/hash/index.html" class="nav-link red">#</a></li>
 					 <li class="nav-item"><a href="${link}app/admin/index.html" class="nav-link">Admin</a></li>
-      					 <li class="nav-item"><a href="${link}app/radio/index.html" class="nav-link">Radio</a></li>
+      					 <li class="nav-item"><a href="${link}app/audio/radio/index.html" class="nav-link">Radio</a></li>
 	    				
 					 
 					 <!--
