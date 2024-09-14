@@ -1,0 +1,24 @@
+{
+	"name": "Radio bum",
+	"short_name": "Radio bum",
+	"description": "Radio bum",
+	"start_url": "index.html",
+	"display": "standalone",
+
+	"theme_color": "#646",
+	"background_color": "#969",
+	"icons": [
+		{
+			"src": "./radio.svg",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	],
+	"screenshots": [		
+		{
+			"src": "./radio.svg",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	]
+}

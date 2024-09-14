@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <link rel="manifest" href="radio.web.json">  
+  <link rel="shortcut icon" type="image/svg+xml" size="any" href="radio.svg">
+  <title>Radio bum</title>
+    <style>
+    *, :after, :before {
+	    -webkit-box-sizing: border-box;
+	    box-sizing: border-box;
+	    border-collapse: collapse;
+	    
+	    font-weight: 200;
+	    font-size:13pt;
+	}
+ 
+        body {
+            font-family: Verdana,Arial, sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin-top: 10px;
+        }
+        #audioPlayer {
+            width: 370px;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+        button {
+            padding: 0.85em 0.2em;
+            margin: 0.85em 0.2em;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-radius: 0.5em;
+        }
+        /*button:hover {background-color: #0056b3;}*/
+        h1 {font-size:1.5rem; padding:0.2em 0}
+        h3 {font-size:1.2rem; padding:1em 0; color:navy;font-weight:bold;}
+        #radia button {background-color:#666;}
+        .active {background: red!important; color:white!important;}
+        .red {background-color:red;}
+        .green {background-color:green;}
+        .navy {background-color:navy;}
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 0.5em;
+            row-gap: 0.5em;
+            align-items: baseline;
+        }	
+        .grid2 {grid-template-columns: 1fr 1fr;}
+        .grid3 {grid-template-columns: 1fr 1fr 1fr;}
+        .grid4 {grid-template-columns: 1fr 1fr 1fr 1fr;}
+    </style>
+</head>
+<body>
+
+    <div id="audioPlayer">
+    	<h1> Radio bum</h1>
+        <h3>Radio TOK-FM</h3>
+        <audio id="player" controls>
+            <source src="https://25493.live.streamtheworld.com/RADIO_TOKFM.mp3" type="audio/mpeg">
+            Twoja przeglądarka nie obsługuje elementu audio.
+        </audio>
+        <div id="kontrola" class="grid grid3">
+            <button class="green" onclick="playAudio()">Graj</button>
+            <button onclick="pauseAudio()">Pauza</button>
+            <button class="navy" onclick="stopAudio()">Stop</button>
+        </div>
+        <div id="radia" class="grid grid4">
+            <button onclick="radioSet(this,0)">TOK-FM</button>
+            <button onclick="radioSet(this,1)">RNŚ</button>
+            <button onclick="radioSet(this,2)">357</button>
+            <button onclick="radioSet(this,3)">PR-3</button>
+        </div>
+    </div>
+
+    <script>
+    const radios=
+    	[
+	    {
+		"name": "TOK-FM",
+		"stream": "https://25493.live.streamtheworld.com/RADIO_TOKFM.mp3"
+	    },
+	    {
+		"name": "RNŚ",
+		"stream": "https://stream.nowyswiat.online/mp3"
+	    },
+	    {
+		"name": "357",
+		"stream": "https://stream.radio357.pl"
+	    },
+	    {
+		"name": "PR-3",
+		"stream": "http://mp3.polskieradio.pl:8904/;"
+	    }
+	]
+    
+    //const radio="https://25493.live.streamtheworld.com/RADIO_TOKFM.mp3";
+    
+ const setActiv=(ten)=>{
+  let parent = ten.parentElement;
+  if (parent){
+    let keys   = parent.querySelectorAll("*");
+    keys.forEach(key=>key.classList.remove("active"));
+    ten.classList.add("active");
+  }
+}
+   
+    
+    
+    
+	let audio = document.getElementById("player");
+
+	const playAudio=()=> {
+	    audio.play();
+	}
+
+	const pauseAudio=()=> {
+	    audio.pause();
+	}
+
+	const stopAudio=()=> {
+	    audio.pause();
+	    audio.currentTime = 0;
+	}
+
+	const radioSet=(ten,nr)=>{
+		if (ten) setActiv(ten);
+		console.log(radios[nr]);
+		document.querySelector("h3").innerHTML = radios[nr].name;
+		document.querySelector("#player").src = radios[nr].stream;
+		playAudio();
+	}
+
+</script>
+
+
+<script>
+/*
+<div class="box">
+        <button id="astop">STOP</button>
+        <button class="inis" data-url="http://pl-play.adtonos.com/tok-fm">TOK-FM</button>
+        <button class="inis" data-url="http://stream.rcs.revma.com/ypqt40u0x1zuv">RNŚ</button>
+        <button class="inis" data-url="http://stream.rcs.revma.com/ye5kghkgcm0uv">357</button>
+    </div>
+    
+    
+    
+    */
+</script>
+</body>
+</html>
