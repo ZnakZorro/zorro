@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="theme-color" content="#369">
+   <title>miniTODO</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <style>
+	*, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}
+	body {font:normal 15pt Verdana; margin:0; padding:0;}
+	.content {max-width:800px;margin:auto; padding:0.5em;}
+	div {margin:0.25em; padding:0.25em;}
+	.grid {display: grid;grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));gap: 3px; justify-content: center;}
+	.grid3 {display: grid;grid-template-columns: repeat(auto-fill, minmax(26%, 1fr));gap: 2%;}
+	.grid4 {display:grid;grid-template-columns: auto auto auto auto; gap:5px;}	   
+   </style>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){     
+       
+    })
+    //---DOM READY----------------------------------
+       
+</script> 
+
+<script>
+    const targetNode = document.querySelector('ol');
+    
+    const config = {
+      attributes: true, 
+      childList: true, 
+      characterData: true
+    };
+      
+    const callback = mutations => {  
+      mutations.forEach(mutation => {
+        if (mutation.type === 'childList') {
+          const listValues = Array.from(targetNode.children)
+              .map(node => node.innerHTML)
+              .filter(html => html !== '<br>');
+          console.log(listValues);
+        }
+      });
+    }
+    
+    const observer = new MutationObserver(callback);
+    
+    observer.observe(targetNode, config);
+    
+    // Later, you can stop observing
+    //observer.disconnect();
+    
+    </script>
+</head>
+
+<body>
+   <div class="content">
+    <ol contenteditable>
+        <li>Jeden</li>
+        <li>Dwa</li>
+        <li>Trzy</li>
+      </ol>
+   </div>
+   <div class="info"></div>
+   <pre class="log"></pre>
+   
+</body>
+</html>
