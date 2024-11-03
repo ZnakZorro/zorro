@@ -153,19 +153,29 @@ th {
 .s13{font-size:13pt;}
 .s14{font-size:14pt;}
 
-   .form-control {
-      font-family: system-ui, sans-serif;
-      font-size: 1.25rem;
-      font-weight: bold;
-      line-height: 1.5;
-      display: grid;
-      grid-template-columns: 1em auto;
-      gap: 0.65em;
-   } 
-    .b {font-weight:bold;} 
-    .line {margin:0.2em 0;}
-    .em3,.em4,.em5,.em6 {display: inline-block;}
-    .em3 {width: 3em;}
-    .em4 {width: 4em;}
-    .em5 {width: 5em;}
-    .em6 {width: 6em;}
+.form-control {
+  font-family: system-ui, sans-serif;
+  font-size: 1.25rem;
+  font-weight: bold;
+  line-height: 1.5;
+  display: grid;
+  grid-template-columns: 1em auto;
+  gap: 0.65em;
+} 
+.b {font-weight:bold;} 
+.line {margin:0.2em 0;}
+.em3,.em4,.em5,.em6 {display: inline-block;}
+.em3 {width: 3em;}
+.em4 {width: 4em;}
+.em5 {width: 5em;}
+.em6 {width: 6em;}
+
+
+@media (prefers-color-scheme: dark) {
+  body, .theme {
+    color: #FFFFFF,
+    background-color: #000000
+  }
+}
+
+
