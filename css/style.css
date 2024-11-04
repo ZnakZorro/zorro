@@ -16,8 +16,8 @@ div.pogoda {
   cursor:pointer;
 }
 div.pogoda div { 
-    border: 1px solid #ddd;
-    background-color: #ffffff;
+    border: 1px solid #888;
+    background-color: #000;
     padding: 0.5em 0.1em 0.1em 0.1em;
     word-break: break-all;
     border-radius: 0.2em;
