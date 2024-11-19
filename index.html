@@ -20,7 +20,7 @@
    <link rel="stylesheet" href="./css/all.css" />
    
 <style>
-	h1 {font-size:1.2rem}
+	h1 {font-size:1.33rem}
  .icon1 {max-width:32px; cursor:pointer;}
  div.pogoda div.active {color:black; background-color:lightgoldenrodyellow;}
  div#sun  {}
@@ -124,9 +124,19 @@ const markdownParser = (text) => {
     fetch("./data/todo.md")
       .then(r => {return r.text()})
       .then(md => {
-         console.log(md)
+	console.log(md);
+         let html = markdownParser(md);
+	console.log(html);
+	      let arr = htm.split("<h1>");
+	      console.log(arr);
+	      let i=1;
+	      let h=""
+	      for (let a in arr){
+		      h+="<h1>"+i+". "+arr[a];
+	      }
          document.getElementById("txtx").value=md;
-         document.getElementById("idtxtx").innerHTML = markdownParser(md);
+         document.getElementById("idtxtx").innerHTML = html;
+	      document.getElementById("idtxtx").innerHTML += h;
       })
       .catch(e => {console.log(e)})
  }
