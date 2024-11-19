@@ -126,15 +126,13 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
       .then(r => {return r.text()})
       .then(md => {
 	console.log(md);
-	let htm = mdToDo(md);
-	console.log(htm);
-	let html = markdownParser(md);
-	console.log(html);
+	let html = mdToDo(md);	
+	console.log(2,html);
 	let arr = html.split("<h1>");
 	console.log(arr);
 	let i=1;
 	let h=""
-	for (let a in arr){
+	for (let a of arr){
 		h+="<h1>"+i.toString()+". "+arr[a];
 		i++
 	}
