@@ -107,13 +107,25 @@ document.addEventListener("DOMContentLoaded",function(){
    }, false); 
 })
 //---DOM READY----------------------------------
+
+
+const markdownParser = (text) => {
+	const toHTML = text
+		.replace(/^### (.*$)/gim, '<h3>$1</h3>') // h3 tag
+		.replace(/^## (.*$)/gim, '<h2>$1</h2>') // h2 tag
+		.replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1 tag
+		.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>') // bold text
+		.replace(/\*(.*)\*/gim, '<i>$1</i>'); // italic text
+	return toHTML.trim(); // using trim method to remove whitespace
+}
+   
  const todoNow=()=>{
     fetch("./data/todo.md")
       .then(r => {return r.text()})
       .then(md => {
          console.log(md)
          document.getElementById("txtx").value=md;
-         document.getElementById("idtxtx").innerHTML = md;
+         document.getElementById("idtxtx").innerHTML = markdownParser(md);
       })
       .catch(e => {console.log(e)})
  }
@@ -256,7 +268,7 @@ document.addEventListener("DOMContentLoaded",function(){
   
 </div>
   
-<div class="container" id="idtxtx"></div>  
+
 <div class="container">
    
       <button onclick='PasteTXT()'>Paste</button> 
@@ -267,7 +279,7 @@ document.addEventListener("DOMContentLoaded",function(){
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
       <span style="float:left;">         
          <button onclick='todoNow()' class="btn btn-primary">ToDo</button>
-         <a href='./data/todo.md' class="btn btn-primary">td.md</a>
+         
       </span>
        <span style="float:right;">         
          <button onclick='PasteFB(2)'>Po jutrze</button>
@@ -275,6 +287,7 @@ document.addEventListener("DOMContentLoaded",function(){
       </span>
    
 </div>
+   <div class="container" id="idtxtx"></div>  
 <div class="container" id="cytcyt"></div>
       
   <a href="#" class="top">Back to Top &#8593;</a>  
