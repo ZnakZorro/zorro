@@ -137,8 +137,8 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
 		i++
 	}
 	document.getElementById("txtx").value=md;
-	document.getElementById("idtxtx").innerHTML = html;
-	document.getElementById("idtxtx").innerHTML += h;
+	//document.getElementById("idtxtx").innerHTML = html;
+	document.getElementById("idtxtx").innerHTML = h;
 	      console.log(h)
       })
       .catch(e => {console.log(e)})
