@@ -125,11 +125,8 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
     fetch("./data/todo.md")
       .then(r => {return r.text()})
       .then(md => {
-	console.log(md);
-	let html = mdToDo(md);	
-	console.log(2,html);
+	let html = mdToDo(md);
 	let arr = html.split("<h1>");
-	console.log(arr);
 	let i=1;
 	let h=""
 	for (let a of arr){
@@ -139,9 +136,7 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
 			i++;
 		}
 	}
-	console.log(h)
 	document.getElementById("txtx").value=md;
-	//document.getElementById("idtxtx").innerHTML = html;
 	document.getElementById("idtxtx").innerHTML = h;	      
       })
       .catch(e => {console.log(e)})
