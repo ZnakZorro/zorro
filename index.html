@@ -119,24 +119,27 @@ const markdownParser = (text) => {
 		.replace(/\*(.*)\*/gim, '<i>$1</i>'); // italic text
 	return toHTML.trim(); // using trim method to remove whitespace
 }
+const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim(); }
    
  const todoNow=()=>{
     fetch("./data/todo.md")
       .then(r => {return r.text()})
       .then(md => {
 	console.log(md);
-         let html = markdownParser(md);
+	let htm = mdToDo(md);
+	console.log(htm);
+	let html = markdownParser(md);
 	console.log(html);
-	      let arr = html.split("<h1>");
-	      console.log(arr);
-	      let i=1;
-	      let h=""
-	      for (let a in arr){
-		      h+="<h1>"+i+". "+arr[a];
-	      }
-         document.getElementById("txtx").value=md;
-         document.getElementById("idtxtx").innerHTML = html;
-	      document.getElementById("idtxtx").innerHTML += h;
+	let arr = html.split("<h1>");
+	console.log(arr);
+	let i=1;
+	let h=""
+	for (let a in arr){
+		h+="<h1>"+i+". "+arr[a];
+	}
+	document.getElementById("txtx").value=md;
+	document.getElementById("idtxtx").innerHTML = html;
+	document.getElementById("idtxtx").innerHTML += h;
       })
       .catch(e => {console.log(e)})
  }
