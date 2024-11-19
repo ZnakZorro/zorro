@@ -107,7 +107,17 @@ document.addEventListener("DOMContentLoaded",function(){
    }, false); 
 })
 //---DOM READY----------------------------------
-        
+ const todoNow=()=>{
+    fetch("./data/todo.md")
+      .then(r => {return r.text()})
+      .then(md => {
+         console.log(md)
+         document.getElementById("txtx").value=md;
+         document.getElementById("idtxtx").innerHTML = md;
+      })
+      .catch(e => {console.log(e)})
+ }
+    
 </script>
 </head>
 
@@ -255,7 +265,11 @@ document.addEventListener("DOMContentLoaded",function(){
          <button onclick='document.getElementById("txtx").value="";'>Clear</button>           
       </span>
       <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
-      <span style="float:right;">         
+      <span style="float:left;">         
+         <button onclick='todoNow()'>ToDo</button>
+         <button onclick='PasteFB(1)'>Jutro</button>
+      </span>
+       <span style="float:right;">         
          <button onclick='PasteFB(2)'>Po jutrze</button>
          <button onclick='PasteFB(1)'>Jutro</button>
       </span>
