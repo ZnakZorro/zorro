@@ -133,7 +133,7 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
 	let i=1;
 	let h=""
 	for (let a of arr){
-		h+="<h1>"+i.toString()+". "+arr[a];
+		if (arr[a]) h+="<h1>"+i.toString()+". "+arr[a];
 		i++
 	}
 	document.getElementById("txtx").value=md;
