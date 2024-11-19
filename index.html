@@ -133,9 +133,9 @@ const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim
 	let i=1;
 	let h=""
 	for (let a of arr){
-		console.log(arr[a]) 
-		{
-			h+="<h1>"+i.toString()+". "+arr[a];
+		console.log(a) 
+		if (a) {
+			h+="<h1>"+i.toString()+". "+a;
 			i++;
 		}
 	}
