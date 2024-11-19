@@ -173,7 +173,7 @@ let cacheTimeMinutes=99;
 
 
 const refresh=()=>{
-  document.getElementById("logo").classList.add("loader");
+  //document.getElementById("logo").classList.add("loader");
    console.log("refresh()");
    document.location.reload();
 }
@@ -232,7 +232,7 @@ const windChillCelsius = (temperature, windSpeed) =>
     w.humid  = data.relative_humidity;
     w.rain  = tosm(rain,"mm");
     w.rain01  = rain01;
-console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.wind, w.humid, w.press)          
+//console.log("235 apparentTemperature(w.t, w.wind, w.humid, w.press)=",w.t, w.wind, w.humid, w.press)          
     w.chill = tosm(apparentTemperature(w.t, w.wind, w.humid, w.press).toFixed(1));
     w.info  = obj[nr].data.next_1_hours.summary.symbol_code;
     w.pl    = symbolTR(obj[nr].data.next_1_hours.summary.symbol_code);
@@ -413,7 +413,7 @@ document.addEventListener("visibilitychange", function() {
       //_$("#licznik").textContent = licznik;
         console.log("visibilityState cacheTimeMinutes=====",cacheTimeMinutes);
         if (cacheTimeMinutes>30) {
-          _$("#logo").classList.add("loader");
+          //_$("#logo").classList.add("loader");
           getYRNO();
         };       
     }
