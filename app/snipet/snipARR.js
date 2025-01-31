@@ -17,6 +17,7 @@ const snipARR = [
     {n:"OpAmp",           f:"audio",      u:"opamp.htm"},
     {n:"Vinyl",           f:"audio",      u:"Vinyl.htm"},
 
+    {n:"empty",            f:"html",       u:"empty.html"},
     {n:"mini",            f:"html",       u:"mini.html"},
     {n:"index",           f:"html",       u:"index.html"},
     {n:"wykresy",         f:"html",       u:"wykres.html"},
