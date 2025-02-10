@@ -20,11 +20,11 @@
        return server.getPrimaryService('battery_service');
      })
      .then(service => {
-       // Getting Battery Level Characteristic…
+       console.log(service)
        return service.getCharacteristic('battery_level');
      })
      .then(characteristic => {
-       // Reading Battery Level…
+        console.log(characteristic)
        return characteristic.readValue();
      })
      .then(value => {
