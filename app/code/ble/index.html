@@ -17,8 +17,33 @@
    </style>
    
    <script>
+
+	function log() {
+		var line = Array.prototype.slice.call(arguments).map(function(argument) {
+			return typeof argument === 'string' ? argument : JSON.stringify(argument);
+		}).join(' ');
+		console.log(line);
+		document.querySelector('#log').textContent += line + '\n';
+	}
+	
+	function availability(){
+		navigator.bluetooth.getAvailability()
+		.then(isBluetoothAvailable => {
+		  log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
+		});
+	
+		if ('onavailabilitychanged' in navigator.bluetooth) {
+		  navigator.bluetooth.addEventListener('availabilitychanged', function(event) {
+		    log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+		  });
+		}
+	}
+
+
+
+	   
        document.addEventListener("DOMContentLoaded",function(){
-           
+           availability()
        });
     
    </script>
@@ -39,7 +64,7 @@
 		<a href="./test1.html" class="btn navy">test1</a>
 		<a href="./test2.html" class="btn navy">test2</a>
 	</div>
-	
+	<pre id="log"></pre>
 	
 	<div class="container">
 		<button onclick="bbb()">bbb</button>
