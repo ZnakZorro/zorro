@@ -1,3 +1,7 @@
+<link rel="icon" type="image/x-icon" href="./favicon.ico">
+<a href="./">__BACK</a>
+<hr />
+<h3>BLE scan???</h3>
 
 
 <script>
@@ -18,6 +22,10 @@
   };
   await navigator.bluetooth.requestLEScan(options);
 }
+  
+  async function scaner(){
+    await scan();
+  }
 </script>
 
-<button onclick="scan()">SCAN</button>
+<button onclick="scan()">scaner</button>
