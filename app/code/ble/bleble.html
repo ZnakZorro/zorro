@@ -1,3 +1,13 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>BLE</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#880">
 
 
 
@@ -23,7 +33,8 @@
   .catch(error => { console.error(error); });
   }
 
-
+</head>
+  <body>
 
 async testBattery(){
   await getBattery();
@@ -33,3 +44,5 @@ async testBattery(){
 
 <button onclick="getBattery()">getBattery</button>
 <button onclick="testBattery()">testBattery</button>
+</body>
+</html>
