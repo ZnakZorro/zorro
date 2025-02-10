@@ -229,7 +229,7 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
 function ccc(){
 navigator.bluetooth
   .requestDevice({
-    filters: [{ services: [0x2a6e, 0x2a6f] }, { namePrefix: "Ambient" }],
+    filters: [{ services: [0x2a6e, 0x2a6f] }, { namePrefix: "ZL02D" }],
   })
   .then((device) => {
     console.log("> Requested " + device.name);
