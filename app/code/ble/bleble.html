@@ -32,17 +32,15 @@
   })
   .catch(error => { console.error(error); });
   }
-
-</head>
-  <body>
-
 async testBattery(){
   await getBattery();
 }
   
 </script>
 
-<button onclick="getBattery()">getBattery</button>
-<button onclick="testBattery()">testBattery</button>
+</head>
+<body>
+      <button onclick="getBattery()">getBattery</button>
+      <button onclick="testBattery()">testBattery</button>
 </body>
 </html>
