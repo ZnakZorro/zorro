@@ -18,6 +18,14 @@ name: "ZL02D"
 onadvertisementreceived
 uuid: "0000180f-0000-1000-8000-00805f9b34fb"
 */
+
+function log() {
+	var line = Array.prototype.slice.call(arguments).map(function(argument) {
+		return typeof argument === 'string' ? argument : JSON.stringify(argument);
+	}).join(' ');
+	console.log(line);
+	document.querySelector('#log').textContent += line + '\n';
+}
    
   async function getBattery(){
        navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
@@ -27,15 +35,15 @@ uuid: "0000180f-0000-1000-8000-00805f9b34fb"
        return server.getPrimaryService('battery_service');
      })
      .then(service => {
-       console.log(service)
+       log(service)
        return service.getCharacteristic('battery_level');
      })
      .then(characteristic => {
-        console.log(characteristic)
+        log(characteristic)
        return characteristic.readValue();
      })
      .then(value => {
-       console.log(`Battery percentage is ${value.getUint8(0)}`);
+       log(`Battery percentage is ${value.getUint8(0)}`);
      })
      .catch(error => { console.error(error); });
 }
@@ -52,5 +60,6 @@ async function testBattery(){
       <button onclick="testBattery()">testBattery</button>
 <hr />
    <a href="https://developer.chrome.com/docs/capabilities/bluetooth?hl=pl">devBlue</a>
+   <pre id="log"></pre>
 </body>
 </html>
