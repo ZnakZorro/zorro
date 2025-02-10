@@ -18,8 +18,23 @@
    </style>
    
    <script>
+function availability(){
+   navigator.bluetooth.getAvailability()
+   .then(isBluetoothAvailable => {
+     console.log(`> Bluetooth is ${isBluetoothAvailable ? 'available' : 'unavailable'}`);
+   });
+   
+   if ('onavailabilitychanged' in navigator.bluetooth) {
+     navigator.bluetooth.addEventListener('availabilitychanged', function(event) {
+       console.log(`> Bluetooth is ${event.value ? 'available' : 'unavailable'}`);
+     });
+   }
+}
+
+
+      
        document.addEventListener("DOMContentLoaded",function(){
-           
+           availability()
        });
    
    </script>
