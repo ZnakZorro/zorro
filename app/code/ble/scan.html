@@ -1,0 +1,23 @@
+
+
+<script>
+  async function scan() {
+  navigator.bluetooth.addEventListener("advertisementreceived", (event) => {
+    console.log(
+      `Advertisement received, device: ${event.name}, RSSI: ${event.rssi}dB`
+    );
+    event.manufacturerData.forEach((valueDataView, key) => {
+      console.log("Manufacturer data:", `0x${valueDataView.getUint16().toString(16)}`);
+    });
+    event.serviceData.forEach((valueDataView, key) => {
+      console.log("Service data:", `0x${valueDataView.getUint16().toString(16)}`);
+    });
+  });
+  const options = {
+    filters: [{ namePrefix: "1-800" }],
+  };
+  await navigator.bluetooth.requestLEScan(options);
+}
+</script>
+
+<button onclick="scan()">SCAN</button>
