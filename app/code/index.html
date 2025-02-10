@@ -1,0 +1,238 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>CODE</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#808">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
+   <style>   
+      
+   </style>
+   
+   <script>
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+    const getAVG=()=>{
+      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
+      .then(r => {return r.text()})
+      .then(o => {document.getElementById("avg").innerHTML = o;})
+      .catch(e => {console.log(e)})
+   }
+   </script>
+          
+</head>
+
+<body>
+    <div class="wrapper">
+        <app-menu title="Code" name="CODE" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+       
+        <div class="container">
+           <a href="./ble/index.html" class="btn red">BLE</a>
+              
+       </div>
+      <div>
+<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
+    <button id="startNotifications" disabled="">Start Notifications</button>
+    <button id="stopNotifications" disabled="">Stop Notifications</button>
+    <button id="reset">Reset Bluetooth Device</button>
+      </div
+       
+       <div class="container">
+        <h3>Linki</h3>
+            
+
+       </div>       
+   
+    <div class="container small" id="avg"></div>
+    </div><!-- wraper-->
+
+<script>
+
+      var ChromeSamples = {
+        log: function() {
+          var line = Array.prototype.slice.call(arguments).map(function(argument) {
+            return typeof argument === 'string' ? argument : JSON.stringify(argument);
+          }).join(' ');
+    
+          document.querySelector('#log').textContent += line + '\n';
+        },
+    
+        clearLog: function() {
+          document.querySelector('#log').textContent = '';
+        },
+    
+        setStatus: function(status) {
+          document.querySelector('#status').textContent = status;
+        },
+    
+        setContent: function(newContent) {
+          var content = document.querySelector('#content');
+          while(content.hasChildNodes()) {
+            content.removeChild(content.lastChild);
+          }
+          content.appendChild(newContent);
+        }
+      };
+    </script>
+
+
+
+
+
+
+
+<script>
+let info = document.getElementById("info");
+ 
+
+var bluetoothDevice;
+var batteryLevelCharacteristic;
+
+function onReadBatteryLevelButtonClick() {
+  return (bluetoothDevice ? Promise.resolve() : requestDevice())
+  .then(connectDeviceAndCacheCharacteristics)
+  .then(_ => {
+    log('Reading Battery Level...');
+    return batteryLevelCharacteristic.readValue();
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+function requestDevice() {
+  log('Requesting any Bluetooth Device...');
+  return navigator.bluetooth.requestDevice({
+   // filters: [...] <- Prefer filters to save energy & show relevant devices.
+      acceptAllDevices: true,
+      optionalServices: ['battery_service']})
+  .then(device => {
+    bluetoothDevice = device;
+    bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+  });
+}
+
+function connectDeviceAndCacheCharacteristics() {
+  if (bluetoothDevice.gatt.connected && batteryLevelCharacteristic) {
+    return Promise.resolve();
+  }
+
+  log('Connecting to GATT Server...');
+  return bluetoothDevice.gatt.connect()
+  .then(server => {
+    log('Getting Battery Service...');
+    return server.getPrimaryService('battery_service');
+  })
+  .then(service => {
+    log('Getting Battery Level Characteristic...');
+    return service.getCharacteristic('battery_level');
+  })
+  .then(characteristic => {
+    batteryLevelCharacteristic = characteristic;
+    batteryLevelCharacteristic.addEventListener('characteristicvaluechanged',
+        handleBatteryLevelChanged);
+    document.querySelector('#startNotifications').disabled = false;
+    document.querySelector('#stopNotifications').disabled = true;
+  });
+}
+
+/* This function will be called when `readValue` resolves and
+ * characteristic value changes since `characteristicvaluechanged` event
+ * listener has been added. */
+function handleBatteryLevelChanged(event) {
+  let batteryLevel = event.target.value.getUint8(0);
+  log('> Battery Level is ' + batteryLevel + '%');
+}
+
+function onStartNotificationsButtonClick() {
+  log('Starting Battery Level Notifications...');
+  batteryLevelCharacteristic.startNotifications()
+  .then(_ => {
+    log('> Notifications started');
+    document.querySelector('#startNotifications').disabled = true;
+    document.querySelector('#stopNotifications').disabled = false;
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+function onStopNotificationsButtonClick() {
+  log('Stopping Battery Level Notifications...');
+  batteryLevelCharacteristic.stopNotifications()
+  .then(_ => {
+    log('> Notifications stopped');
+    document.querySelector('#startNotifications').disabled = false;
+    document.querySelector('#stopNotifications').disabled = true;
+  })
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+function onResetButtonClick() {
+  if (batteryLevelCharacteristic) {
+    batteryLevelCharacteristic.removeEventListener('characteristicvaluechanged',
+        handleBatteryLevelChanged);
+    batteryLevelCharacteristic = null;
+  }
+  // Note that it doesn't disconnect device.
+  bluetoothDevice = null;
+  log('> Bluetooth Device reset');
+}
+
+function onDisconnected() {
+  log('> Bluetooth Device disconnected');
+  connectDeviceAndCacheCharacteristics()
+  .catch(error => {
+    log('Argh! ' + error);
+  });
+}
+
+
+
+navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
+.then(device => device.gatt.connect())
+.then(server => {
+  // Getting Battery Service…
+  return server.getPrimaryService('battery_service');
+})
+.then(service => {
+  // Getting Battery Level Characteristic…
+  return service.getCharacteristic('battery_level');
+})
+.then(characteristic => {
+  // Reading Battery Level…
+  return characteristic.readValue();
+})
+.then(value => {
+  console.log(`Battery percentage is ${value.getUint8(0)}`);
+})
+.catch(error => { console.error(error); });
+  
+</script>
+    
+<h3>Live Output</h3>
+<div id="output" class="output">
+  <div id="content"></div>
+  <div id="status"></div>
+  <pre id="log"></pre>
+</div>  
+    
+ 
+	<p><a href="https://web.dev/bluetooth/" class="btn">https://web.dev/bluetooth</a></p>
+   	<p><a href="https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html" class="btn">https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html</a></p>
+   
+   
+</body>
+</html>
