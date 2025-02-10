@@ -24,4 +24,12 @@
   }
 
 await getBattery();
+
+async testBattery(){
+  await getBattery();
+}
+  
 </script>
+
+<button onclick="getBattery()">getBattery</button>
+<button onclick="testBattery()">testBattery</button>
