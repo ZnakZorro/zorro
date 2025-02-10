@@ -18,14 +18,9 @@
    
    <script>
        document.addEventListener("DOMContentLoaded",function(){
-           //document.getElementById("info").textContent = "info";
+           
        });
-    const getAVG=()=>{
-      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
-      .then(r => {return r.text()})
-      .then(o => {document.getElementById("avg").innerHTML = o;})
-      .catch(e => {console.log(e)})
-   }
+    
    </script>
           
 </head>
@@ -47,6 +42,7 @@
 
 	    
       <div class="container">
+	<button onclick="bbb()">bbb</button>
 	<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
 	<button id="startNotifications" disabled="">Start Notifications</button>
 	<button id="stopNotifications" disabled="">Stop Notifications</button>
@@ -206,7 +202,7 @@ function onDisconnected() {
 }
 
 
-
+function bbb(){
 navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }] })
 .then(device => device.gatt.connect())
 .then(server => {
@@ -225,7 +221,7 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
   console.log(`Battery percentage is ${value.getUint8(0)}`);
 })
 .catch(error => { console.error(error); });
-  
+} 
 </script>
     
 <h3>Live Output</h3>
