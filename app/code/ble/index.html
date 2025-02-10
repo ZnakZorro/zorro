@@ -1,64 +1,63 @@
+
+
 <!DOCTYPE html>
 <html lang="pl">
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
    <meta http-equiv="x-ua-compatible" content="ie=edge" />
-   <title>BLE-1</title>
+   <title>BLE</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
-   <meta name="theme-color" content="#214960">
-<style>
-*,*::before,*::after {box-sizing: border-box;}    
-* {
-    -webkit-print-color-adjust: exact !important;   /* Chrome, Safari, Edge */
-    color-adjust: exact !important;                 /*Firefox*/
-}
-button:focus, button:active, .btn:focus, .btn:active {outline: none; border-color:white;}
-button:focus, .btn:focus {opacity:0.65}
-button,.btn {
-    display: inline-block;
-    background:#369;
-    color:white;
-	padding: 0.2em 0.4em;
-	font-size: 1.0em;
-    margin: 0.333em;
-    line-height: 1.35;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    -ms-touch-action: manipulation;
-    touch-action: manipulation;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-image: none;
-    border: 2px solid transparent;
-    border-radius: 0.35em;
-	box-shadow: 1px 2px 3px #000;	
-	white-space: normal;
-}
-.btn {background:#258;}
-.btn-lg {padding: 0.4em 0.8em;font-size: 1.1em;}
-</style>
-	
+   <meta name="theme-color" content="#880">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="../../img/dom.svg"> 
+   <link rel="manifest" href="../../zorro.web.json"> 
+   <link rel="stylesheet" href="../../css/style.css" />
+   <link rel="stylesheet" href="../../css/all.css" />
+   <style>   
+      
+   </style>
+   
+   <script>
+       document.addEventListener("DOMContentLoaded",function(){
+           //document.getElementById("info").textContent = "info";
+       });
+    const getAVG=()=>{
+      fetch("https://raw.githubusercontent.com/ZnakZorro/zorro/main/app/snipet/ele/avg.htm")
+      .then(r => {return r.text()})
+      .then(o => {document.getElementById("avg").innerHTML = o;})
+      .catch(e => {console.log(e)})
+   }
+   </script>
+          
 </head>
-  
+
 <body>
-
-
-    <a href="../">_Back</a>
-    <div id="info"></div>
-
-
-    <button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
+    <div class="wrapper">
+        <app-menu title="BLE" name="BLE" link="../../"></app-menu>
+        <script src="../../appMenu.js"></script>
+       
+        <div class="container">
+           <a href="../index.html" class="btn red">CODE</a>
+              
+       </div>
+      <div>
+<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
     <button id="startNotifications" disabled="">Start Notifications</button>
     <button id="stopNotifications" disabled="">Stop Notifications</button>
     <button id="reset">Reset Bluetooth Device</button>
-    
-    <script>
+      </div
+       
+       <div class="container">
+        <h3>Linki</h3>
+            
+
+       </div>       
+   
+    <div class="container small" id="avg"></div>
+    </div><!-- wraper-->
+
+<script>
 
       var ChromeSamples = {
         log: function() {
@@ -235,6 +234,6 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
 	<p><a href="https://web.dev/bluetooth/" class="btn">https://web.dev/bluetooth</a></p>
    	<p><a href="https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html" class="btn">https://googlechrome.github.io/samples/web-bluetooth/read-characteristic-value-changed.html</a></p>
    
-    
-  </body>
+   
+</body>
 </html>
