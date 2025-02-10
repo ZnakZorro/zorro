@@ -39,22 +39,23 @@
 		<a href="./test1.html" class="btn navy">test1</a>
 		<a href="./test2.html" class="btn navy">test2</a>
 	</div>
-
-
-	    
-      <div class="container">
-	<button onclick="bbb()">bbb</button>
-	<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
-	<button id="startNotifications" disabled="">Start Notifications</button>
-	<button id="stopNotifications" disabled="">Stop Notifications</button>
-	<button id="reset">Reset Bluetooth Device</button>
-      </div
-       
-       <div class="container">
-        <h3>Linki</h3>
-            
-
-       </div>       
+	
+	
+	<div class="container">
+		<button onclick="bbb()">bbb</button>
+		<button onclick="ccc()">ccc</button>
+	</div>
+	
+	<div class="container">      
+		<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
+		<button id="startNotifications" disabled="">Start Notifications</button>
+		<button id="stopNotifications" disabled="">Stop Notifications</button>
+		<button id="reset">Reset Bluetooth Device</button>
+	</div>       
+	<div class="container">
+		<h3>Linki</h3>
+		<a href="https://medium.com/byborg-engineering/experimenting-with-web-bluetooth-advertisement-packets-662c7090e07b">Medium-ble</a>
+	</div>       
    
     <div class="container small" id="avg"></div>
     </div><!-- wraper-->
@@ -223,6 +224,40 @@ navigator.bluetooth.requestDevice({ filters: [{ services: ['battery_service'] }]
 })
 .catch(error => { console.error(error); });
 } 
+
+
+function ccc(){
+navigator.bluetooth
+  .requestDevice({
+    filters: [{ services: [0x2a6e, 0x2a6f] }, { namePrefix: "Ambient" }],
+  })
+  .then((device) => {
+    console.log("> Requested " + device.name);
+
+    device.addEventListener("advertisementreceived", (event) => {
+      console.log("Advertisement received. Device Name: " + event.device.name);
+      console.log("  RSSI: " + event.rssi);
+      console.log("  TX Power: " + event.txPower);
+
+      event.serviceData.forEach((valueDataView, key) => {
+        console.log(`Service (${key}) data: ${valueDataView.getUint8()}`);
+      });
+    });
+    device.watchAdvertisements().catch((error) => {
+      console.log("Error:" + error);
+    });
+  })
+  .catch((error) => {
+    console.log("Error" + error);
+  });
+}
+
+
+
+
+
+
+	
 </script>
     
 <h3>Live Output</h3>
