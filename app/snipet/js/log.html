@@ -5,3 +5,13 @@ function log() {
 	console.log(line);
 	document.querySelector('#log').textContent += line + '\n';
 }
+
+//=======================================
+
+const logo=(...arg)=>{
+	console.log(arg);
+	let line=arg.join("; ");
+	document.querySelector('#log').textContent += line + '\n';
+}
+logo(1,2,3,"nic");
+
