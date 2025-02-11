@@ -17,6 +17,11 @@ body {
     margin: auto;
     max-width:1024px;
 }
+wrap {
+    padding: 0.2em;
+    margin: auto;
+    max-width:1200px;
+}
  .container {
     padding: 0.25em;
     margin: 0.25em;
