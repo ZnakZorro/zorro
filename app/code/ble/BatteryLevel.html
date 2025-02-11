@@ -1,14 +1,21 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sample illustrating the use of Web Bluetooth / Read Characteristic Value Changed (Async Await).">
-    <meta name="viewport" content="width=device-width, initial-scale=1">    
-    <title>BatteryLevel</title>
-    <link rel="icon" href="icon.png">    
-    <link rel="stylesheet" href="main.css">
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge" />
+  <meta name="HandheldFriendly" content="true">
+  <meta name="mobile-web-app-capable" content="yes"> 
+  <meta name="theme-color" content="#880">
+  <link rel="icon" type="image/x-icon" href="./favicon.ico">
+  <link rel="icon" href="icon.png">    
+  <link rel="stylesheet" href="main.css">
+  <link rel="manifest" href="../../../zorro.web.json"> 
+  <link rel="stylesheet" href="../../../css/style.css" />
+  <link rel="stylesheet" href="../../../css/all.css" />
+  <title>BatteryLevel</title>
+
+</head>
 
   <body>
     <img class="pageIcon" src="icon.png">
@@ -67,11 +74,11 @@
 
 
 <button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
-<!--
+
 <button id="startNotifications" disabled>Start Notifications</button>
 <button id="stopNotifications" disabled>Stop Notifications</button>
 <button id="reset">Reset Bluetooth Device</button>
--->
+
 <script>
   var ChromeSamples = {
     log: function() {
