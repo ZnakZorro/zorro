@@ -14,14 +14,14 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 -->
-<html lang="pl">
+<html lang="en">
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Sample illustrating the use of Web Bluetooth / Watch Advertisements.">
+    <meta name="description" content="Sample illustrating the use of Web Bluetooth / Read Characteristic Value Changed (Async Await).">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
-    <title>BatteryLevel</title>
+    <title>Web Bluetooth / Read Characteristic Value Changed (Async Await) Sample</title>
     <script>
       // Add a global error event listener early on in the page load, to help ensure that browsers
       // which don't support specific functionality still end up displaying a meaningful message.
@@ -46,10 +46,10 @@ limitations under the License.
 
   <body>
     <img class="pageIcon" src="icon.png">
-    <h1>Web Bluetooth / Watch Advertisements Sample</h1>
+    <h1>Web Bluetooth / Read Characteristic Value Changed (Async Await) Sample</h1>
     <p class="availability">
-      Available in <a target="_blank" href="https://www.chromestatus.com/feature/5180688812736512">Chrome 87+</a> |
-      <a target="_blank" href="https://github.com/googlechrome/samples/blob/gh-pages/web-bluetooth/watch-advertisements.html">View on GitHub</a> |
+      Available in <a target="_blank" href="https://www.chromestatus.com/feature/5264933985976320">Chrome 55+</a> |
+      <a target="_blank" href="https://github.com/googlechrome/samples/blob/gh-pages/web-bluetooth/read-characteristic-value-changed-async-await.html">View on GitHub</a> |
       <a  href="index.html">Browse Samples</a>
     </p>
     <p>The <a href="https://developers.google.com/web/updates/2015/07/interact-with-ble-devices-on-the-web">Web Bluetooth
@@ -105,12 +105,14 @@ currently partially implemented in Android M, Chrome OS, Mac, and Windows 10.</p
 </script>
 
 
-<p>This sample illustrates the use of the Web Bluetooth API to read out
-advertisement data from nearby Bluetooth devices. You may want to check out the <a
-href="watch-advertisements-async-await.html">Watch Advertisements (Async Await)</a> sample.</p>
 
-<button id="watchAdvertisements">Watch Advertisements</button>
 
+<button id="readBatteryLevel">Read Bluetooth Device's Battery Level</button>
+<!--
+<button id="startNotifications" disabled>Start Notifications</button>
+<button id="stopNotifications" disabled>Stop Notifications</button>
+<button id="reset">Reset Bluetooth Device</button>
+-->
 <script>
   var ChromeSamples = {
     log: function() {
@@ -151,8 +153,8 @@ href="watch-advertisements-async-await.html">Watch Advertisements (Async Await)<
   if (/Chrome\/(\d+\.\d+.\d+.\d+)/.test(navigator.userAgent)){
     // Let's log a warning if the sample is not supposed to execute on this
     // version of Chrome.
-    if (87 > parseInt(RegExp.$1)) {
-      ChromeSamples.setStatus('Warning! Keep in mind this sample has been tested with Chrome ' + 87 + '.');
+    if (55 > parseInt(RegExp.$1)) {
+      ChromeSamples.setStatus('Warning! Keep in mind this sample has been tested with Chrome ' + 55 + '.');
     }
   }
 </script>
@@ -162,106 +164,143 @@ href="watch-advertisements-async-await.html">Watch Advertisements (Async Await)<
 
   
     
-      <script>function onWatchAdvertisementsButtonClick() {
-  log('Requesting any Bluetooth device...');
-  navigator.bluetooth.requestDevice({
-// filters: [...] <- Prefer filters to save energy & show relevant devices.
-    acceptAllDevices: true
-  })
-  .then(device => {
-    log('> Requested ' + device.name);
+      <script>var bluetoothDevice;
+var batteryLevelCharacteristic;
 
-    device.addEventListener('advertisementreceived', (event) => {
-      log('Advertisement received.');
-      log('  Device Name: ' + event.device.name);
-      log('  Device ID: ' + event.device.id);
-      log('  RSSI: ' + event.rssi);
-      log('  TX Power: ' + event.txPower);
-      log('  UUIDs: ' + event.uuids);
-      event.manufacturerData.forEach((valueDataView, key) => {
-        logDataView('Manufacturer', key, valueDataView);
-      });
-      event.serviceData.forEach((valueDataView, key) => {
-        logDataView('Service', key, valueDataView);
-      });
-    });
+async function onReadBatteryLevelButtonClick() {
+  try {
+    if (!bluetoothDevice) {
+      await requestDevice();
+    }
+    await connectDeviceAndCacheCharacteristics();
 
-    log('Watching advertisements from "' + device.name + '"...');
-    return device.watchAdvertisements();  
-  })
-  .catch(error => {
+    log('Reading Battery Level...');
+    await batteryLevelCharacteristic.readValue();
+  } catch(error) {
     log('Argh! ' + error);
-  });
+  }
 }
 
-/* Utils */
 
-const logDataView = (labelOfDataSource, key, valueDataView) => {
-  const hexString = [...new Uint8Array(valueDataView.buffer)].map(b => {
-    return b.toString(16).padStart(2, '0');
-  }).join(' ');
-  const textDecoder = new TextDecoder('ascii');
-  const asciiString = textDecoder.decode(valueDataView.buffer);
-  log(`  ${labelOfDataSource} Data: ` + key +
-      '\n    (Hex) ' + hexString +
-      '\n    (ASCII) ' + asciiString);
-};
+        
+async function requestDevice() {
+  log('Requesting any Bluetooth Device...');
+  bluetoothDevice = await navigator.bluetooth.requestDevice({
+   // filters: [...] <- Prefer filters to save energy & show relevant devices.
+      acceptAllDevices: true,
+      optionalServices: ['battery_service']});
+  bluetoothDevice.addEventListener('gattserverdisconnected', onDisconnected);
+}
+
+async function connectDeviceAndCacheCharacteristics() {
+  if (bluetoothDevice.gatt.connected && batteryLevelCharacteristic) {
+    return;
+  }
+
+  log('Connecting to GATT Server...');
+  const server = await bluetoothDevice.gatt.connect();
+
+  log('Getting Battery Service...');
+  const service = await server.getPrimaryService('battery_service');
+
+  log('Getting Battery Level Characteristic...');
+  batteryLevelCharacteristic = await service.getCharacteristic('battery_level');
+
+  batteryLevelCharacteristic.addEventListener('characteristicvaluechanged',
+      handleBatteryLevelChanged);
+  document.querySelector('#startNotifications').disabled = false;
+  document.querySelector('#stopNotifications').disabled = true;
+}
+
+/* This function will be called when `readValue` resolves and
+ * characteristic value changes since `characteristicvaluechanged` event
+ * listener has been added. */
+function handleBatteryLevelChanged(event) {
+  let batteryLevel = event.target.value.getUint8(0);
+  log('> Battery Level is ' + batteryLevel + '%');
+}
+
+async function onStartNotificationsButtonClick() {
+  try {
+    log('Starting Battery Level Notifications...');
+    await batteryLevelCharacteristic.startNotifications();
+
+    log('> Notifications started');
+    document.querySelector('#startNotifications').disabled = true;
+    document.querySelector('#stopNotifications').disabled = false;
+  } catch(error) {
+    log('Argh! ' + error);
+  }
+}
+
+async function onStopNotificationsButtonClick() {
+  try {
+    log('Stopping Battery Level Notifications...');
+    await batteryLevelCharacteristic.stopNotifications();
+
+    log('> Notifications stopped');
+    document.querySelector('#startNotifications').disabled = false;
+    document.querySelector('#stopNotifications').disabled = true;
+  } catch(error) {
+    log('Argh! ' + error);
+  }
+}
+
+function onResetButtonClick() {
+  if (batteryLevelCharacteristic) {
+    batteryLevelCharacteristic.removeEventListener('characteristicvaluechanged',
+        handleBatteryLevelChanged);
+    batteryLevelCharacteristic = null;
+  }
+  // Note that it doesn't disconnect device.
+  bluetoothDevice = null;
+  log('> Bluetooth Device reset');
+}
+
+async function onDisconnected() {
+  log('> Bluetooth Device disconnected');
+  try {
+    await connectDeviceAndCacheCharacteristics()
+  } catch(error) {
+    log('Argh! ' + error);
+  }
+}
 </script>
     
   
 
   
-    <h3>JavaScript Snippet</h3>
-  
-
-  
-    <figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">function</span> <span class="nx">onWatchAdvertisementsButtonClick</span><span class="p">()</span> <span class="p">{</span>
-  <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Requesting any Bluetooth device...</span><span class="dl">'</span><span class="p">);</span>
-  <span class="nb">navigator</span><span class="p">.</span><span class="nx">bluetooth</span><span class="p">.</span><span class="nx">requestDevice</span><span class="p">({</span>
-<span class="c1">// filters: [...] &lt;- Prefer filters to save energy &amp; show relevant devices.</span>
-    <span class="na">acceptAllDevices</span><span class="p">:</span> <span class="kc">true</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">device</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">&gt; Requested </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">device</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-
-    <span class="nx">device</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="dl">'</span><span class="s1">advertisementreceived</span><span class="dl">'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Advertisement received.</span><span class="dl">'</span><span class="p">);</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">  Device Name: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">  Device ID: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">device</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">  RSSI: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">rssi</span><span class="p">);</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">  TX Power: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">txPower</span><span class="p">);</span>
-      <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">  UUIDs: </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">event</span><span class="p">.</span><span class="nx">uuids</span><span class="p">);</span>
-      <span class="nx">event</span><span class="p">.</span><span class="nx">manufacturerData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">valueDataView</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">logDataView</span><span class="p">(</span><span class="dl">'</span><span class="s1">Manufacturer</span><span class="dl">'</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">valueDataView</span><span class="p">);</span>
-      <span class="p">});</span>
-      <span class="nx">event</span><span class="p">.</span><span class="nx">serviceData</span><span class="p">.</span><span class="nx">forEach</span><span class="p">((</span><span class="nx">valueDataView</span><span class="p">,</span> <span class="nx">key</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-        <span class="nx">logDataView</span><span class="p">(</span><span class="dl">'</span><span class="s1">Service</span><span class="dl">'</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">valueDataView</span><span class="p">);</span>
-      <span class="p">});</span>
-    <span class="p">});</span>
-
-    <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Watching advertisements from "</span><span class="dl">'</span> <span class="o">+</span> <span class="nx">device</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="dl">'</span><span class="s1">"...</span><span class="dl">'</span><span class="p">);</span>
-    <span class="k">return</span> <span class="nx">device</span><span class="p">.</span><span class="nx">watchAdvertisements</span><span class="p">();</span>  
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">Argh! </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">error</span><span class="p">);</span>
-  <span class="p">});</span>
-<span class="p">}</span>
-
-<span class="cm">/* Utils */</span>
-
-<span class="kd">const</span> <span class="nx">logDataView</span> <span class="o">=</span> <span class="p">(</span><span class="nx">labelOfDataSource</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">valueDataView</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
-  <span class="kd">const</span> <span class="nx">hexString</span> <span class="o">=</span> <span class="p">[...</span><span class="k">new</span> <span class="nb">Uint8Array</span><span class="p">(</span><span class="nx">valueDataView</span><span class="p">.</span><span class="nx">buffer</span><span class="p">)].</span><span class="nx">map</span><span class="p">(</span><span class="nx">b</span> <span class="o">=&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nx">b</span><span class="p">.</span><span class="nx">toString</span><span class="p">(</span><span class="mi">16</span><span class="p">).</span><span class="nx">padStart</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="dl">'</span><span class="s1">0</span><span class="dl">'</span><span class="p">);</span>
-  <span class="p">}).</span><span class="nx">join</span><span class="p">(</span><span class="dl">'</span><span class="s1"> </span><span class="dl">'</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">textDecoder</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TextDecoder</span><span class="p">(</span><span class="dl">'</span><span class="s1">ascii</span><span class="dl">'</span><span class="p">);</span>
-  <span class="kd">const</span> <span class="nx">asciiString</span> <span class="o">=</span> <span class="nx">textDecoder</span><span class="p">.</span><span class="nx">decode</span><span class="p">(</span><span class="nx">valueDataView</span><span class="p">.</span><span class="nx">buffer</span><span class="p">);</span>
-  <span class="nx">log</span><span class="p">(</span><span class="s2">`  </span><span class="p">${</span><span class="nx">labelOfDataSource</span><span class="p">}</span><span class="s2"> Data: `</span> <span class="o">+</span> <span class="nx">key</span> <span class="o">+</span>
-      <span class="dl">'</span><span class="se">\n</span><span class="s1">    (Hex) </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">hexString</span> <span class="o">+</span>
-      <span class="dl">'</span><span class="se">\n</span><span class="s1">    (ASCII) </span><span class="dl">'</span> <span class="o">+</span> <span class="nx">asciiString</span><span class="p">);</span>
-<span class="p">};</span></code></pre></figure>
+    
   
 
 
+
+<script>
+  document.querySelector('#readBatteryLevel').addEventListener('click', function() {
+    if (isWebBluetoothEnabled()) {
+      onReadBatteryLevelButtonClick();
+    }
+  });
+
+  document.querySelector('#startNotifications').addEventListener('click', function(event) {
+    if (isWebBluetoothEnabled()) {
+      onStartNotificationsButtonClick();
+    }
+  });
+
+  document.querySelector('#stopNotifications').addEventListener('click', function(event) {
+    if (isWebBluetoothEnabled()) {
+      onStopNotificationsButtonClick();
+    }
+  });
+
+  document.querySelector('#reset').addEventListener('click', function(event) {
+    if (isWebBluetoothEnabled()) {
+      ChromeSamples.clearLog();
+      onResetButtonClick();
+    }
+  });
+</script>
 
 <script>
   log = ChromeSamples.log;
@@ -278,14 +317,5 @@ const logDataView = (labelOfDataSource, key, valueDataView) => {
 </script>
 
 
-<script>
-  if (isWebBluetoothEnabled()) {
-    document.querySelector('#watchAdvertisements').addEventListener('click', function() {
-        onWatchAdvertisementsButtonClick();
-    });
-  }
-</script>
-
- 
   </body>
 </html>
