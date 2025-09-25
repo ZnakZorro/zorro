@@ -1,5 +1,2 @@
-# Jajcarka
-# Herbata zielona
-# Sok
-# Ser
-# auto
+# Próbnik
+# Pigment
