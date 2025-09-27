@@ -1,4 +1,3 @@
-Próbnik Nap.
-Pigment czarny
-# Próbnik
+nic
+
 # Pigment
