@@ -155,7 +155,8 @@ console.log("yrno.js");
 //console.log("https://api.met.no/weatherapi/weathericon/2.0/documentation");
 
 //let gfxSVG = "https://api.met.no/images/weathericons/svg/clearsky_day.svg";
-let gfxSVG = "https://api.met.no/images/weathericons/svg/";
+//let gfxSVG = "https://api.met.no/images/weathericons/svg/";
+let gfxSVG = "https://raw.githubusercontent.com/metno/weathericons/refs/heads/main/weather/svg/";
 
 //let dataType = "compact"; //  compact  complete   classic
 let dataType = localStorage.getItem("yrnoTYPE") || "???";
