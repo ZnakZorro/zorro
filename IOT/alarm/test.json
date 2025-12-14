@@ -1,0 +1,9 @@
+{
+  "device_id": 12345,
+  "location": "Szczecin",
+  "is_active": true,
+  "sensor_thresholds": {
+    "temp_max": 25.5,
+    "humidity_min": 40
+  }
+}
