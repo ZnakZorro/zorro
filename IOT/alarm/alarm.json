@@ -1,1 +1,20 @@
-{"A0":{"name":"Amber","nr":14,"start":"10:00","stop":"11:00"},"A1":{"name":"Holl","nr":11,"start":"10:05","stop":"11:05"},"A3":{"name":"Usb","nr":17,"start":"10:15","stop":"10:30"}}
+{
+	"A0": {
+		"name": "Amber",
+		"nr": 14,
+		"start": "08:00",
+		"stop": "16:00"
+	},
+	"A1": {
+		"name": "Holl",
+		"nr": 11,
+		"start": "08:00",
+		"stop": "16:00"
+	},
+	"A3": {
+		"name": "Usb",
+		"nr": 17,
+		"start": "08:00",
+		"stop": "16:00"
+	}
+}
