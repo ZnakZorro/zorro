@@ -44,21 +44,37 @@ textarea#kod2{min-height:25em;}
         <h2>Panel Sterowania</h2>
         <div id="timers-form">
             <script>
+const LAMPY=[
+"1-WC lampka",
+"2-Wtyczka biuro",
+"3-Biuro lampa",
+"4-Salon E14",
+"6-Dimmable light 1 mini",
+"7-Kuchnia R14",
+"9-Kuchnia LED pasek",
+"11-Hol up",
+"14-Amber",
+"15-Reflektor sypialnia",
+"16-Ściemniacz tuya",
+"17-USB Dimmable"
+];
+//console.log(LAMPY);
                 const lamps = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
                 const names = ["Amber","Holl", "Usb"];
+                let wybrane = [14,11,17];
                 for(let i=0; i<=2; i++) {
                     document.write(`
                         <div class="timer-block" id="block-${i}">
                             <h3>Urządzenie ${i}</h3>
                             <div class="row">
-                                <div class="col">
+                                <!--div class="col">
                                     <label>Name</label>
                                     <input type="text" class="dev-name" value="${names[i]}">
-                                </div>
+                                </div-->
                                 <div class="col">
                                     <label>Lamp nr</label>
                                     <select class="dev-gpio">
-                                        ${lamps.map(g => `<option value="${g}" ${g==[14,11,17][i] ? 'selected':''}>Lampa ${g}</option>`).join('')}
+                                        ${LAMPY.map((g,j) => `<option title="${g}" value="${parseInt(g.split("-")[0])}" ${parseInt(g.split("-")[0])==wybrane[i] ? 'selected':''}>${g}</option>`).join('')}
                                     </select>
                                 </div>
                             </div>
@@ -107,13 +123,17 @@ const $$=e=>document.querySelectorAll(e);
         const config = {
             timers: Array.from(blocks).map((block, index) => ({
                 //id: index,
-                name: block.querySelector('.dev-name').value,
+                //name: block.querySelector('.dev-name').value,
+                //name: block.querySelector('.dev-gpio').selectedIndex,
+                name: (block.querySelector('.dev-gpio').options[block.querySelector('.dev-gpio').selectedIndex].text).split("-")[1],
                 nr: parseInt(block.querySelector('.dev-gpio').value),
                 start: block.querySelector('.dev-start').value,
                 stop: block.querySelector('.dev-stop').value
             }))
         };
-console.log(config);
+//var skillsSelect = document.getElementById("newSkill");
+//var selectedText = skillsSelect.options[skillsSelect.selectedIndex].text;
+//console.log(config);
 $("#kod").value=JSON.stringify(config);
 
 
@@ -121,10 +141,13 @@ let data={};
 let keys = ["A0","A1","A3"]
 config.timers.forEach((c,i)=>{
 	data[keys[i]]=c;
-	console.log(c);
+	//console.log(c);
 });
-console.log(data);
+//console.log(data);
 $("#kod2").value=JSON.stringify(data,null,"\t");
+
+localStorage.setItem("esp32alarms", JSON.stringify(data));
+
 
 		
 		if ($("#save").checked)
@@ -170,7 +193,26 @@ $("#kod2").value=JSON.stringify(data,null,"\t");
             textarea.value = "";
             textarea.focus(); // Ustawia kursor z powrotem w polu
         }    
-    
+
+
+	if (localStorage.getItem("esp32alarms")){
+		let data = JSON.parse(localStorage.getItem("esp32alarms"));
+		//console.log(data);
+		let i=0;
+		for (let d in data){			
+			let blok = $("#block-"+i);
+			    let _nr    = blok.querySelector('.dev-gpio').value=data[d].nr;
+                let _start = blok.querySelector('.dev-start').value=data[d].start;
+                let _stop  = blok.querySelector('.dev-stop').value=data[d].stop;
+
+			//console.log(_nr);
+			//console.log(_start);
+			//console.log(_stop);
+			//console.log(i,d,data[d]);
+			i++;
+		}
+	}
+   
 </script>
 
 </body>
