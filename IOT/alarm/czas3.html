@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="mobile-web-app-capable" content="yes"> 
+<meta name="theme-color" content="#369">
+<title>ESP32 Timers</title>
+<style>
+body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; display: flex; justify-content: center; padding:5px; margin:0;}
+.container { width: 100%; max-width: 500px; }
+.card { background: white; padding:10px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 20px; }
+h2 { color: #1a73e8; text-align: center; margin-top: 0; }        
+.timer-block {border: 1px solid #ddd; padding: 15px; border-radius: 8px; margin-bottom: 15px; background: #fafafa;}
+.timer-block h3 { margin-top: 0; font-size: 1rem; color: #555; border-bottom: 1px solid #eee; padding-bottom: 5px; }        
+.row { display: flex; gap:6px; margin-bottom:6px; flex-wrap: wrap; }
+.col { flex: 1; min-width: 140px; }        
+label { display: block; font-size: 0.8rem; color: #777; margin-bottom: 4px; }
+input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }        
+button { 
+width: 100%; padding: 15px; background: #1a73e8; color: white; border: none; 
+border-radius: 8px; cursor: pointer; font-size: 1.1rem; transition: 0.2s;
+}
+button:hover { background: #1557b0; }        
+#status { margin-top: 15px; text-align: center; font-weight: 500; }
+.success { color: #28a745; }
+.error { color: #dc3545; }
+textarea{width:100%;min-height:9em;}
+textarea#kod2{min-height:25em;}
+
+       .buttons { display: flex; gap: 10px; }
+        button { padding: 10px 20px; cursor: pointer; border: none; border-radius: 4px; transition: 0.3s; }
+        .btn-copy { background-color: #4CAF50; color: white; }
+        .btn-copy:hover { background-color: #45a049; }
+        .btn-clear { background-color: #f44336; color: white; }
+        .btn-clear:hover { background-color: #da190b; }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card">
+        <h2>Panel Sterowania</h2>
+        <div id="timers-form">
+            <script>
+                const lamps = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17];
+                const names = ["Amber","Holl", "Usb"];
+                for(let i=0; i<=2; i++) {
+                    document.write(`
+                        <div class="timer-block" id="block-${i}">
+                            <h3>Urządzenie ${i}</h3>
+                            <div class="row">
+                                <div class="col">
+                                    <label>Name</label>
+                                    <input type="text" class="dev-name" value="${names[i]}">
+                                </div>
+                                <div class="col">
+                                    <label>Lamp nr</label>
+                                    <select class="dev-gpio">
+                                        ${lamps.map(g => `<option value="${g}" ${g==[14,11,17][i] ? 'selected':''}>Lampa ${g}</option>`).join('')}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    <label>Start</label>
+                                    <input type="time" class="dev-start" value="08:00">
+                                </div>
+                                <div class="col">
+                                    <label>Stop</label>
+                                    <input type="time" class="dev-stop" value="16:00">
+                                </div>
+                            </div>
+                        </div>
+                    `);
+                }
+            </script>
+        </div>
+        <div>
+        	Save to server: <input type="checkbox" id="save" style="width: initial;" />
+        </div>
+        <button onclick="saveAll()">Zapisz wszystkie ustawienia</button>
+        <div id="status"></div>
+        <textarea id="kod2"></textarea>
+            <div class="buttons">
+        <button class="btn-copy" onclick="copyText()">Kopiuj</button>
+        <button class="btn-clear" onclick="clearText()">Kasuj</button>
+    </div>
+
+        <textarea id="kod"></textarea>
+        <br /><br /><br />
+    </div>
+</div>
+
+<script>
+const $=e=>document.querySelector(e);
+const $$=e=>document.querySelectorAll(e);
+
+    async function saveAll() {
+        const status = document.getElementById('status');
+        status.innerText = "Wysyłanie...";
+        status.className = "";
+
+        // Pobieranie danych ze wszystkich bloków
+        const blocks = $$('.timer-block');
+        const config = {
+            timers: Array.from(blocks).map((block, index) => ({
+                //id: index,
+                name: block.querySelector('.dev-name').value,
+                nr: parseInt(block.querySelector('.dev-gpio').value),
+                start: block.querySelector('.dev-start').value,
+                stop: block.querySelector('.dev-stop').value
+            }))
+        };
+console.log(config);
+$("#kod").value=JSON.stringify(config);
+
+
+let data={};
+let keys = ["A0","A1","A3"]
+config.timers.forEach((c,i)=>{
+	data[keys[i]]=c;
+	console.log(c);
+});
+console.log(data);
+$("#kod2").value=JSON.stringify(data,null,"\t");
+
+		
+		if ($("#save").checked)
+		{
+				try {
+				    // Zmień na IP Twojego ESP32 (np. 192.168.1.50)
+				    const response = await fetch('192.168.1.100', {
+				        method: 'PUT',
+				        headers: { 'Content-Type': 'application/json' },
+				        body: JSON.stringify(config)
+				    });
+
+				    if (response.ok) {
+				        status.innerText = "✓ Zapisano pomyślnie!";
+				        status.className = "success";
+				    } else {
+				        status.innerText = "✕ Błąd serwera: " + response.status;
+				        status.className = "error";
+				    }
+				} catch (err) {
+				    status.innerText = "✕ Brak połączenia z ESP32";
+				    status.className = "error";
+				}
+        }
+    }
+    
+    
+        const textarea = document.getElementById('kod2');
+
+        // Funkcja kopiowania tekstu
+        function copyText() {
+            if (textarea.value) {
+                navigator.clipboard.writeText(textarea.value)
+                    .then(() => alert("Tekst skopiowany do schowka!"))
+                    .catch(err => console.error("Błąd kopiowania: ", err));
+            } else {
+                alert("Pole jest puste!");
+            }
+        }
+
+        // Funkcja kasowania tekstu
+        function clearText() {
+            textarea.value = "";
+            textarea.focus(); // Ustawia kursor z powrotem w polu
+        }    
+    
+</script>
+
+</body>
+</html>
+
