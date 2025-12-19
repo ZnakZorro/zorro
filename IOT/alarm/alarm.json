@@ -1,20 +1,20 @@
 {
 	"A0": {
-		"name": "Salon E14",
-		"nr": 4,
-		"start": "14:35",
-		"stop": "14:40"
+		"name": "Biuro lampa",
+		"nr": 3,
+		"start": "15:35",
+		"stop": "15:40"
 	},
 	"A1": {
-		"name": "Salon E14",
-		"nr": 4,
-		"start": "14:45",
-		"stop": "14:50"
+		"name": "Biuro lampa",
+		"nr": 3,
+		"start": "15:45",
+		"stop": "15:50"
 	},
 	"A2": {
-		"name": "Salon E14",
-		"nr": 4,
-		"start": "14:55",
-		"stop": "15:30"
+		"name": "Biuro lampa",
+		"nr": 3,
+		"start": "15:55",
+		"stop": "16:30"
 	}
 }
