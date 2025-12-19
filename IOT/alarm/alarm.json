@@ -1,20 +1,20 @@
 {
 	"A0": {
-		"name": "USB Dimmable",
-		"nr": 17,
-		"start": "12:10",
-		"stop": "12:20"
+		"name": "Salon E14",
+		"nr": 4,
+		"start": "14:15",
+		"stop": "14:20"
 	},
 	"A1": {
-		"name": "Amber",
-		"nr": 14,
-		"start": "12:15",
-		"stop": "12:25"
+		"name": "Salon E14",
+		"nr": 4,
+		"start": "14:25",
+		"stop": "14:30"
 	},
 	"A2": {
-		"name": "Hol up",
-		"nr": 11,
-		"start": "12:20",
-		"stop": "12:30"
+		"name": "Salon E14",
+		"nr": 4,
+		"start": "14:35",
+		"stop": "15:30"
 	}
 }
