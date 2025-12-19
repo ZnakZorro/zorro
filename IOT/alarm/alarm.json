@@ -1,19 +1,19 @@
 {
 	"A0": {
-		"name": "Biuro lampa",
-		"nr": 3,
+		"name": "Amber",
+		"nr": 14,
 		"start": "15:35",
 		"stop": "15:40"
 	},
 	"A1": {
-		"name": "Biuro lampa",
-		"nr": 3,
+		"name": "Amber",
+		"nr": 14,
 		"start": "15:45",
 		"stop": "15:50"
 	},
 	"A2": {
-		"name": "Biuro lampa",
-		"nr": 3,
+		"name": "Amber",
+		"nr": 14,
 		"start": "15:55",
 		"stop": "16:30"
 	}
