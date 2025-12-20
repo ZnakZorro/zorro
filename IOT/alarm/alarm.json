@@ -3,18 +3,18 @@
 		"name": "Reflektor sypialnia",
 		"nr": 15,
 		"start": "20:00",
-		"stop": "21:30"
+		"stop": "22:00"
 	},
 	"A1": {
 		"name": "Hol up",
 		"nr": 11,
-		"start": "06:30",
-		"stop": "07:30"
+		"start": "07:59",
+		"stop": "08:15"
 	},
 	"A2": {
 		"name": "Kuchnia LED pasek",
 		"nr": 9,
-		"start": "05:45",
+		"start": "06:00",
 		"stop": "08:30"
 	}
 }
