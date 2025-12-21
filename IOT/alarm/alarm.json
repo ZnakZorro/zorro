@@ -2,19 +2,19 @@
 	"A0": {
 		"name": "Dimmable light 1 mini",
 		"nr": 6,
-		"start": "14:30",
-		"stop": "14:45"
+		"start": "17:30",
+		"stop": "17:45"
 	},
 	"A1": {
-		"name": "Hol up up up",
+		"name": "Hol up",
 		"nr": 11,
-		"start": "14:40",
-		"stop": "14:50"
+		"start": "17:40",
+		"stop": "17:50"
 	},
 	"A2": {
-		"name": "Hol up new",
+		"name": "Hol up",
 		"nr": 11,
-		"start": "15:00",
-		"stop": "15:30"
+		"start": "17:00",
+		"stop": "17:30"
 	}
 }
