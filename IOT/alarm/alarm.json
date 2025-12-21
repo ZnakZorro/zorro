@@ -12,8 +12,8 @@
 		"stop": "08:15"
 	},
 	"A2": {
-		"name": "Kuchnia LED pasek",
-		"nr": 9,
+		"name": "Amber",
+		"nr": 14,
 		"start": "06:00",
 		"stop": "08:30"
 	}
