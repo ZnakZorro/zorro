@@ -1,20 +1,20 @@
 {
 	"A0": {
-		"name": "Dimmable light 1 MINI",
-		"nr": 6,
-		"start": "17:30",
-		"stop": "17:45"
+		"name": "Reflektor sypialnia",
+		"nr": 15,
+		"start": "20:00",
+		"stop": "22:00"
 	},
 	"A1": {
-		"name": "Hol up",
-		"nr": 11,
-		"start": "17:40",
-		"stop": "17:50"
+		"name": "Reflektor sypialnia",
+		"nr": 15,
+		"start": "08:00",
+		"stop": "08:45"
 	},
 	"A2": {
-		"name": "Hol up",
-		"nr": 11,
-		"start": "17:00",
-		"stop": "17:30"
+		"name": "Kuchnia LED pasek",
+		"nr": 9,
+		"start": "06:00",
+		"stop": "09:00"
 	}
 }
