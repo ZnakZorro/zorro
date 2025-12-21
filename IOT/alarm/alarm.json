@@ -1,20 +1,20 @@
 {
 	"A0": {
-		"name": "Reflektor sypialnia",
-		"nr": 15,
-		"start": "13:30",
-		"stop": "13:45"
+		"name": "USB Dimmable",
+		"nr": 17,
+		"start": "14:30",
+		"stop": "14:45"
 	},
 	"A1": {
 		"name": "Hol up",
 		"nr": 11,
-		"start": "13:40",
-		"stop": "13:50"
+		"start": "14:40",
+		"stop": "14:50"
 	},
 	"A2": {
 		"name": "Amber",
 		"nr": 14,
-		"start": "14:00",
-		"stop": "14:30"
+		"start": "15:00",
+		"stop": "15:30"
 	}
 }
