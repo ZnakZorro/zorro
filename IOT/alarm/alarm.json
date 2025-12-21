@@ -1,7 +1,7 @@
 {
 	"A0": {
-		"name": "USB",
-		"nr": 17,
+		"name": "Amber",
+		"nr": 14,
 		"start": "14:30",
 		"stop": "14:45"
 	},
@@ -12,8 +12,8 @@
 		"stop": "14:50"
 	},
 	"A2": {
-		"name": "Amber",
-		"nr": 14,
+		"name": "Hol up",
+		"nr": 11,
 		"start": "15:00",
 		"stop": "15:30"
 	}
