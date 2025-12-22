@@ -2,8 +2,8 @@
 	"A0": {
 		"name": "Reflektor sypialnia",
 		"nr": 15,
-		"start": "20:00",
-		"stop": "22:00"
+		"start": "19:50",
+		"stop": "21:45"
 	},
 	"A1": {
 		"name": "Reflektor sypialnia",
@@ -15,6 +15,6 @@
 		"name": "Kuchnia LED pasek",
 		"nr": 9,
 		"start": "06:00",
-		"stop": "09:00"
+		"stop": "10:00"
 	}
 }
