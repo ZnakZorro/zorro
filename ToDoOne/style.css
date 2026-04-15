@@ -1,0 +1,187 @@
+
+:root {
+    --bg-color: #f4f7f6;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #eeeeee;
+    --item-border: #f0f0f0;
+}
+
+/* Kolory dla trybu ciemnego */
+[data-theme="dark"] {
+    --bg-color: #181a1b;
+    --container-bg: #242729;
+    --text-color: #e8e6e3;
+    --border-color: #3e4446;
+    --item-border: #313537;
+}
+
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    transition: background 0.3s, color 0.3s;
+}
+
+.container {
+    background: var(--container-bg);
+    color: var(--text-color);
+}
+
+input {
+    background: var(--container-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+}
+
+li {
+    border-bottom: 1px solid var(--item-border);
+}
+
+/* Styl przycisku przełącznika */
+.theme-switch {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+
+
+
+
+
+
+
+
+/* Podstawowe resetowanie i centrowanie */
+* {
+    box-sizing: border-box; /* Ważne: padding nie powiększa szerokości elementu */
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f4f7f6;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Zmienione z center, by na telefonach lista mogła rosnąć w dół */
+    min-height: 100vh;
+    padding: 20px;
+}
+
+/* Elastyczny kontener */
+.container {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 500px; /* Maksymalna szerokość na komputerze */
+    margin-top: 50px;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    color: #333;
+}
+
+/* Responsywny wiersz wpisywania */
+.input-row {
+    display: flex;
+    gap: 5px; /* Odstęp między inputem a przyciskiem */
+    margin-bottom: 25px;
+}
+
+input {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    outline: none;
+    font-size: 16px; /* Zapobiega auto-zoomowaniu na iPhone'ach */
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: #28a745;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    background: #28a745;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s;
+}
+
+button:hover {
+    background: #218838;
+}
+
+/* Lista i elementy responsywne */
+ul {
+    list-style: none;
+}
+
+li {
+    padding: 12px;
+    background: #fff;
+    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+li p {
+    margin: 0;
+    flex: 1;
+    word-break: break-word; /* Długie słowa nie rozwalą layoutu */
+    font-size: 16px;
+}
+
+li.checked p {
+    text-decoration: line-through;
+    color: #888;
+}
+
+/* Przyciski wewnątrz listy */
+.edit-btn, span {
+    font-size: 20px;
+    cursor: pointer;
+    padding: 5px;
+    user-select: none;
+}
+
+.edit-btn {
+    color: #007bff;
+    background: none;
+    border: none;
+}
+
+span {
+    color: #dc3545;
+}
+
+/* MEDIA QUERIES - dla bardzo małych ekranów */
+@media (max-width: 400px) {
+    .container {
+        padding: 15px;
+        margin-top: 20px;
+    }
+    
+    h2 {
+        font-size: 1.2rem;
+    }
+
+    button {
+        padding: 12px 15px; /* Mniejszy padding przycisku */
+    }
+}
+
