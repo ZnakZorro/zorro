@@ -49,6 +49,51 @@ const setNote=(nota)=>{
 		}
     })
     //---DOM READY----------------------------------
+ 
+/////////////////////
+        const jutro=(ile=1)=>{
+               const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+               let tomorrow = new Date();
+               tomorrow.setDate(tomorrow.getDate() + ile);
+               let dw = tomorrow.getDay();
+               return weekdays[dw]
+        }
+        
+let pasteNR=0; 
+const setINFO=()=>{
+	return "info INFO ???"
+};      
+const PasteFB=(nr=1)=>{
+    console.log("pasteNR=",pasteNR)
+    let txtx = document.getElementById("txtx");
+    if (pasteNR===1) {txtx.value=setINFO();}
+    if (pasteNR===2) {txtx.value=`Jeśli dziś ${jutro(0)} to idę do piekarni: "Mąka i woda" po chleb i bułki`;}
+    if (pasteNR===0 && nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Żytni\n2x bułki zwykłe\n--\nZbigniew Sz`;
+    if (pasteNR===0 && nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
+1x chleb żytni
+2x bułki zwykłe
+1x bułka z sezamem
+--
+Zbigniew Sz`;
+pasteNR++;
+if (pasteNR>2)pasteNR=0;
+}
+            
+ const PasteTXT=async()=>{
+     let txtx = document.getElementById("txtx");
+     txtx.value="";
+     //txtx.style.height="20em";
+     const text = await navigator.clipboard.readText();
+     txtx.value = text;
+ }
+ const CopyTXT=()=>{
+     let txtx = document.getElementById("txtx");
+     txtx.select();
+     navigator.clipboard.writeText(txtx.value);
+ }
+//////////////////////////////////              
+ 
+ 
        
 </script>    
 </head>
@@ -62,15 +107,15 @@ const setNote=(nota)=>{
 	<div class="theme-switch" id="mama-btn">🧑‍🦳</div>
 
 		<div id="copykeys" class="container center">
-            <button onclick="PasteTXT()" class="button">Paste</button> 
-            <button onclick="CopyTXT()" class="button">Copy</button> 
-            <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
-            <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
+                <button onclick="PasteTXT()" class="button">Paste</button> 
+                <button onclick="CopyTXT()" class="button">Copy</button> 
+                <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
+                <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
         </div>
 
    <div class="container notop">
    <h2>Note</h2>
-	   <textarea></textarea>
+<textarea translate="no" id="txtx" onclick="$('#txtx').style.height='16em';"></textarea>
    </div>
    <div id="note" class="container notop"></div>
    <pre class="log"></pre>
