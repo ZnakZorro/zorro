@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>📝</text></svg>" />
+	<meta name="theme-color" content="#369">
+   <title>mini</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+    <script>const storageName = "Note";</script>
+    <link rel="stylesheet" href="style.css">
+
+   <style>
+ 
+   </style>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+        let u ="note.txt";
+        fetch(u)
+        .then(r => {return r.text()})
+        .then(txt => {
+            console.log(txt);
+        })
+        .catch(e => {console.log(e)})
+    })
+    //---DOM READY----------------------------------
+       
+</script>    
+</head>
+
+<body>
+
+	<div class="theme-switch" id="home-btn">🏠</div>
+	<div class="theme-switch" id="note-btn">📝</div>
+	<div class="theme-switch" id="theme-toggle">🌙</div>
+	<div class="theme-switch" id="zorro-btn">🧔</div>
+	<div class="theme-switch" id="mama-btn">🧑‍🦳</div>
+
+		<div id="copykeys" class="container center">
+            <button onclick="PasteTXT()" class="button">Paste</button> 
+            <button onclick="CopyTXT()" class="button">Copy</button> 
+            <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
+            <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
+        </div>
+
+   <div class="container notop">
+   <h2>Note</h2>
+	   <textarea></textarea>
+   </div>
+   <div class="info"></div>
+   <pre class="log"></pre>
+   <script src="mini.js"></script>
+</body>
+</html>
