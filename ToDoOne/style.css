@@ -4,6 +4,7 @@
     --bg-gray: #ddd;
     --container-bg: #ffffff;
     --text-color: #333333;
+    --text-color-check: #777;
     --border-color: #eeeeee;
     --item-border: #f0f0f0;
 }
@@ -11,9 +12,10 @@
 /* Kolory dla trybu ciemnego */
 [data-theme="dark"] {
     --bg-color: #181a1b;
-    --bg-gray: #444;
+    --bg-gray: #2a2a2a;
     --container-bg: #242729;
-    --text-color: #e8e6e3;
+    --text-color: #fff;
+    --text-color-check : #ccc;
     --border-color: #3e4446;
     --item-border: #313537;
 }
@@ -38,14 +40,12 @@ input {
 ul#list-container{
     background: var(--bg-gray);
     color: var(--text-color);
-
 }
 
 li {
     border-bottom: 1px solid var(--item-border);
     background: var(--bg-gray);
     color: var(--text-color);
-
 }
 
 /* Styl przycisku przełącznika */
@@ -56,12 +56,11 @@ li {
     cursor: pointer;
     font-size: 24px;
 }
+#zorro-btn {right: 80px;}
+#mama-btn {right: 140px;}
 
 
-
-
-
-
+span {color: var(--text-color);}
 
 
 
@@ -97,6 +96,10 @@ h2 {
     text-align: center;
     color: var(--text-color);
 }
+
+li p {color: var(--text-color);}
+
+
 
 /* Responsywny wiersz wpisywania */
 .input-row {
@@ -158,14 +161,14 @@ li p {
 
 li.checked p {
     text-decoration: line-through;
-    color: #888;
+    color: var(--text-color-check);
 }
 
 /* Przyciski wewnątrz listy */
 .edit-btn, span {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
     cursor: pointer;
-    padding: 5px;
+    padding: 0 5px;
     user-select: none;
 }
 
@@ -175,9 +178,7 @@ li.checked p {
     border: none;
 }
 
-span {
-    color: #dc3545;
-}
+
 
 /* MEDIA QUERIES - dla bardzo małych ekranów */
 @media (max-width: 400px) {

@@ -1,3 +1,4 @@
+
 const inputBox = document.getElementById("todo-input");
 const listContainer = document.getElementById("list-container");
 
@@ -88,13 +89,22 @@ listContainer.addEventListener("click", function(e) {
     }
 }, false);
 
+
+
 function saveData() {
-    localStorage.setItem("todoData", listContainer.innerHTML);
+    localStorage.setItem(storageName, listContainer.innerHTML);
 }
 
 function showTask() {
-    listContainer.innerHTML = localStorage.getItem("todoData") || "";
+    listContainer.innerHTML = localStorage.getItem(storageName) || "";
 }
 
 showTask();
 
+
+document.querySelector("#zorro-btn").addEventListener("click", ()=>{location.href="index.html"});
+document.querySelector("#mama-btn").addEventListener("click", ()=>{location.href="mama.html"});
+
+
+document.title=storageName;
+document.querySelector("h2").textContent = "Lista "+storageName
