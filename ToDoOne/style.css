@@ -58,6 +58,8 @@ li {
 }
 #zorro-btn {right: 80px;}
 #mama-btn {right: 140px;}
+#home-btn {left: 10px;}
+#note-btn {left: 60px;}
 
 
 span {color: var(--text-color);}
