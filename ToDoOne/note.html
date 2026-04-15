@@ -3,10 +3,14 @@
 <head>
    <meta charset="UTF-8" />
    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>📝</text></svg>" />
 	<meta name="theme-color" content="#369">
    <title>mini</title>  
    <meta name="HandheldFriendly" content="true">
    <meta name="mobile-web-app-capable" content="yes"> 
+    <script>const storageName = "Note";</script>
+    <link rel="stylesheet" href="style.css">
+
    <style>
 	*, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}
 	body {font:normal 15pt Verdana; margin:0; padding:0;}
@@ -37,11 +41,19 @@
 </head>
 
 <body>
-   <div class="content">
+
+	<div class="theme-switch" id="home-btn">🏠</div>
+	<div class="theme-switch" id="note-btn">📝</div>
+	<div class="theme-switch" id="theme-toggle">🌙</div>
+	<div class="theme-switch" id="zorro-btn">🧔</div>
+	<div class="theme-switch" id="mama-btn">🧑‍🦳</div>
+
+   <div class="container">
+   <h2>Note</h2>
 	   <textarea></textarea>
    </div>
    <div class="info"></div>
    <pre class="log"></pre>
-   
+   <script src="mini.js"></script>
 </body>
 </html>
