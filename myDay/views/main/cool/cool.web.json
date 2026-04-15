@@ -1,0 +1,25 @@
+{
+	"name": "COOL",
+	"short_name": "COOL",
+	"description": "COOL",
+	"start_url": "/cron/cool/index.html",
+	"display": "standalone",
+
+	"theme_color": "darkgray",
+	"background_color": "darkgray",
+	"icons": [
+		{
+			"src": "/cron/cool/img/odra512.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	],
+	"screenshots": [		
+		{
+			"src": "/cron/cool/img/odra512.webp",
+			"sizes": "512x512",
+			"type": "image/webp"
+		}
+	]
+}
+

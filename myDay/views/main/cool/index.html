@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<link rel="manifest" href="./cool.web.json"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+		<meta name="theme-color" content="#369">
+		<meta name="HandheldFriendly" content="true">
+		<meta name="mobile-web-app-capable" content="yes"> 
+		<title>Cool</title>
+		<!--meta name="color-scheme" content="light dark"-->
+		<meta name="color-scheme" content="dark">
+		<link rel="shortcut icon" type="image/webp" size="512x512" href="./img/odra512.webp">
+		<link rel="stylesheet" href="./css/cool.css">
+		<script src="./js/mini.js"></script>  
+		<script src="./js/suncalc.js"></script>  
+		<style>
+		</style>
+	</head>
+  <body>
+  
+    <div class="container">
+      <h1>Cool <span id="czas"></span></h1>
+      <nav>
+    	<a class="btn btn-nav" href="../">Home</a> 
+    	<a class="btn btn-nav" href="../dom.html">Yama</a> 
+    	<a class="btn btn-nav" href="../../">.SAN</a>
+    	<span id="teraz" class="btn btn-nav"></span>
+      </nav>
+      <p>
+          <div id="sun" class="grid pogoda field"></div>
+          <div id="sunplus" class="grid pogoda field"></div>
+
+      </p>
+
+      <!-- Example 1: Simple Dialog -->
+      <div class="demo-section">
+
+        <button commandfor="my-dialog" command="show-modal">Sun Up, Sun Down: The Story of Day and Night
+</button>
+
+        <dialog id="my-dialog">
+          <div class="dialog-content">
+            <h2 class="left">Sun day & night</h2>
+            <button commandfor="my-dialog" command="close" class="close-button right"> Close </button>
+            <textarea id="sunTEXT">This dialog opened without a single line of JavaScript.</textarea>
+            <nav>
+            
+            <button onclick='copySun()'> COPY </button>
+            <button onclick='copySun2()'>cop2 </button>
+            <button onclick='copyOnIpAddress("text 3")'>cop3 </button>
+            <button onclick='CopyTXT()'>CopyTXT</button>
+            </nav>
+            
+            
+          </div>
+        </dialog>
+      </div>
+
+      <!-- Example 2: Settings Popover -->
+      <div class="demo-section">
+        <h2>2. Settings Menu</h2>
+        <p>A popover menu that toggles with one attribute.</p>
+
+        <button
+          commandfor="settings-menu"
+          command="toggle-popover"
+          class="settings-button"
+        >
+          ⚙️ Settings
+        </button>
+
+        <div id="settings-menu" popover>
+          <h3>Settings</h3>
+          <label> <input type="checkbox" onchange="modeView(this)" /> Dark Mode </label>
+          <label> <input type="checkbox" checked /> Notifications </label>
+          <label> <input type="checkbox" /> Auto-save </label>
+          <button
+            commandfor="settings-menu"
+            command="hide-popover"
+            class="close-button"
+            style="margin-top: 16px; width: 100%"
+          >
+            Done
+          </button>
+        </div>
+      </div>
+
+      <!-- Example 3: Photo Transform (Custom Commands) -->
+      <div class="demo-section">
+        <h2>3. Photo Transform</h2>
+        <p>Custom commands with minimal JavaScript handling.</p>
+
+        <div class="photo-controls">
+          <button commandfor="photo" command="--flip-horizontal">
+            Flip Horizontal
+          </button>
+          <button commandfor="photo" command="--rotate-90">Rotate 90°</button>
+          <button commandfor="photo" command="--reset">Reset</button>
+        </div>
+
+        <canvas id="photo" width="600" height="400"></canvas>
+      </div>
+
+      <!-- Example 4: Image Gallery -->
+      <div class="demo-section">
+        <h2>4. Image Gallery</h2>
+        <p>Complete gallery with navigation using custom commands.</p>
+
+        <button commandfor="gallery-dialog" command="show-modal">
+          View Gallery
+        </button>
+
+        <dialog id="gallery-dialog">
+          <div class="gallery-content">
+        	
+            <canvas id="current-image" width="600" height="400"></canvas>
+			<!--div  id="galla"></div-->
+            <div class="controls">
+              <button commandfor="current-image" command="--previous">
+                ← Prev
+              </button>
+              <button commandfor="current-image" command="--next">
+                Next →
+              </button>
+              <button
+                commandfor="gallery-dialog"
+                command="close"
+                class="close-button"
+              >
+                ✕ Close
+              </button>
+            </div>
+          </div>
+        </dialog>
+      </div>
+    </div>
+    
+<div class="container">
+	<button id="theme-toggle">Toggle Dark Mode</button>
+</div>
+
+<hr />
+
+<hr />
+
+
+  </body>
+  
+<script src="./js/cool.js"></script>  
+<script src="./js/sun.js"></script>  
+  <script>
+document.addEventListener("DOMContentLoaded",function(){
+		const sunINFO = getSUN();
+		$("#sunTEXT").innerHTML = sunINFO;
+});
+const copySun=()=>{
+	let text = $("#sunTEXT").textContent;
+	console.log(text)
+	fallbackCopy(text);
+}
+const copySun2=()=>{
+	let text = $("#sunTEXT").textContent;
+	console.log(2,text)
+	//copyInput(text);
+	copyToClipboard(text)
+	.then((x)=>x)
+	.then((y)=>{
+		console.log(y);
+	});
+}
+
+
+function cccc4(){
+	var text = "Example text to appear on clipboard";
+	navigator.clipboard.writeText(text).then(function() {
+	  console.log('Async: Copying to clipboard was successful!');
+	}, function(err) {
+	  console.error('Async: Could not copy text: ', err);
+	});
+}
+
+function copyOnIpAddress(text) {
+  // Tworzymy ukryty element textarea
+  const textArea = document.createElement("textarea");
+  textArea.value = text;
+  // Ważne: element musi być w DOM, ale niewidoczny dla użytkownika
+  textArea.style.position = "fixed";
+  textArea.style.left = "-9999px";
+  textArea.style.top = "0";
+  document.body.appendChild(textArea);
+ 
+  // Zaznaczamy tekst
+  textArea.focus();
+  textArea.select();
+  textArea.setSelectionRange(0, 99999); // Dla urządzeń mobilnych
+
+try {
+		const successful = document.execCommand('copy');
+		if (successful) {
+			console.log('Skopiowano pomyślnie!');
+		}
+	} catch (err) {
+	console.error('Błąd kopiowania:', err);
+	}
+
+	document.body.removeChild(textArea);
+}
+
+             const CopyTXT=()=>{
+                 let txtx = document.getElementById("sunTEXT");
+                 txtx.select();
+                 navigator.clipboard.writeText(txtx.value);
+             }
+
+
+    </script>
+
+  
+</html>
+

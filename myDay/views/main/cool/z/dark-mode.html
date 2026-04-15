@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light"> <!-- data-theme or class for JS toggling -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark"> <!-- Hints theme support -->
+    <title>Matatag Dark Mode</title>
+    <style>
+        /* Default Light Theme */
+        body {
+            background-color: #ffffff;
+            color: #000000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Theme (activated by JS or media query) */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        /* System Preference Match */
+        @media (prefers-color-scheme: dark) {
+            html:not([data-theme="light"]) body { /* Apply if not forced light */
+                background-color: #121212;
+                color: #ffffff;
+            }
+        }
+    </style
+</head>
+<body>
+    <h1>Welcome to Matatag</h1>
+    <p>This content changes with dark mode.</p>
+    <button id="theme-toggle">Toggle Dark Mode</button>
+
+    <script>
+        // JavaScript for Toggling
+        const toggleButton = document.getElementById('theme-toggle');
+        const html = document.documentElement; // Get the <html> element
+
+        toggleButton.addEventListener('click', () => {
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.setAttribute('data-theme', 'light');
+                document.body.classList.remove('dark-mode');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+</body>
+</html>
+

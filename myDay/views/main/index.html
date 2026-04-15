@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="HandheldFriendly" content="true">
+    <meta name="mobile-web-app-capable" content="yes"> 
+    <meta name="theme-color" content="#214960">
+    <link rel="shortcut icon" type="image/png" size="any" href="../../assets/icon/courses-icon-10.png">
+    <title>myDay</title>
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'> 
+    <link rel="stylesheet" href="../../assets/css/main.css">
+    <link rel="stylesheet" href="../../assets/css/mdb.css">
+    <link rel="stylesheet" href="../../assets/css/btn.css">
+    <link rel="stylesheet" href="../../assets/css/grid.css">
+    
+    <style>
+        body {font-family: roboto, Verdana, sans-serif;}
+        body {background: #16151b;}
+        #pobrane h1 {font-size:1.1rem; line-height:1.6rem}
+        .b88 .button{min-width:82px;}
+        pre {font-size: 0.7em;}
+        #pobrane {font-size:0.9em; min-height: 3em;}
+        #pobrane div {font-size:0.9em; border-bottom:1px solid gray; margin-bottom: 0.3em;grid-template-columns: 1fr 1fr;}
+        /*#pobrane span {background: #eee;}*/
+        #img {max-width:400px; width:100%; margin:auto;}
+        #img img {width:100%;}
+        .active, .btn.active, button.active, button:active {background:initial !important;color: gold !important;}
+        .grid112 {grid-template-columns: 1fr 1fr 2fr;}
+        .grid11 {grid-template-columns: 1fr 1fr ;}
+        .crdownload {color:orange}
+        .part {color:yellow}
+        .reda {background:red;} 
+        .maxa {width:98%}
+    </style>
+<style>
+    /**,*:before,*:after {  box-sizing: border-box;}
+    body {
+      height: 100vh;
+      background: #ccc;
+      overflow: hidden;
+      font-family:Verdana;
+      font-size:14pt;
+    }*/
+    
+    .modal-container {
+      margin: 30px auto;
+      padding-top: 0px;
+      /*position: relative;*/
+      width: 160px;
+      .modal-btn {
+        display: block;
+        margin: 0 auto;
+        color: #fff;
+        width: 160px;
+        height: 50px;
+        line-height: 50px;
+        background: #446cb3;
+        font-size: 22px;
+        border: 0;
+        border-radius: 3px;
+        cursor: pointer;
+        text-align: center;
+        box-shadow: 0 5px 5px -5px #333;
+        transition: background 0.3s ease-in;
+                    /*
+                    position:absolute;
+                    bottom:0;
+                    right:0;
+                    font-size: 1rem;
+                    line-height: 1.2rem;
+                    width: 8rem;
+                    */
+        &:hover {
+          background: #365690;
+        }
+      }
+      .modal-content,
+      .modal-backdrop {
+        height: 0;
+        width: 0;
+        opacity: 0;
+        visibility: hidden;
+        overflow: hidden;
+        cursor: pointer;
+        transition: opacity 0.2s ease-in;
+      }
+      .modal-close {
+        color: #aaa;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        padding-top: 3px;
+        background: #fff;
+        font-size: 16px;
+        width: 25px;
+        height: 25px;
+        font-weight: bold;
+        text-align: center;
+        cursor: pointer;
+        &:hover {
+          color: #333;
+        }
+      }
+      .modal-content-btn {
+        position: absolute;
+        text-align: center;
+        cursor: pointer;
+        bottom: 20px;
+        right: 30px;
+        background: #446cb3;
+        color: #fff;
+        width: 50px;
+        border-radius: 2px;
+        font-size: 14px;
+        height: 32px;
+        padding-top: 9px;
+        font-weight: normal;
+        &:hover {
+          color: #fff;
+          background: #365690;
+        }
+      }
+      #modal-toggle {
+        display: none;
+        &.active ~ .modal-backdrop,
+        &:checked ~ .modal-backdrop {
+          background-color: rgba(0, 0, 0, 0.6);
+          width: 100vw;
+          height: 100vh;
+          position: fixed;
+          left: 0;
+          top: 0;
+          z-index: 9;
+          visibility: visible;
+          opacity: 1;
+          transition: opacity 0.2s ease-in;
+        }
+        &.active ~ .modal-content,
+        &:checked ~ .modal-content {
+          opacity: 1;
+          background-color: #fff;
+          max-width: 388px;
+          width: 388px;
+          height: 428px;
+          padding: 10px 10px;
+          position: fixed;
+          left: calc(50% - 202px);
+          top: 12%;
+          border-radius: 4px;
+          z-index: 999;
+          pointer-events: auto;
+          cursor: auto;
+          visibility: visible;
+          box-shadow: 0 3px 7px rgba(0, 0, 0, 0.6);
+            color:black;
+            font-size:15pt;
+          @media (max-width: 400px) {
+            left: 0;
+          }
+        }
+      }
+    }
+    
+    h2 {margin:0;font-family: roboto, Verdana, sans-serif;font-size: 1.1rem;}
+    p {margin:0;}
+    .active {background:red!important;color:white!important;}
+    /*.hide {display: none!important;}*/
+    .gridd {display: grid;gap:0px;justify-items: start;align-items: center;grid-template-columns: 1fr 1fr 2fr 1fr;}
+    .iii {max-width: 52px;}
+    .jutro {
+        background: #ffc;
+        border:1px solid silver; 
+        margin-top:2px;
+    }
+    
+    </style>
+
+
+    <link rel="stylesheet" href="../../assets/css/dark.css">
+    <script src="../../assets/js/main.js"></script>
+    <script src="../../assets/js/suncalc.js"></script>
+    <script src="../../assets/js/sun.js"></script>
+    <script src="./yrnoopis.js"></script>
+   
+    <script type="text/javascript" src="../../node_modules/androidjs/lib/androidjs.js"></script>
+    <script>
+        const ro=(v)=>Math.round(parseFloat(v));
+        const oo=(v)=>(parseFloat(v)===0) ? "0.0" : v;
+
+        const getYRNO=()=>{
+            let yrno="https://api.met.no/weatherapi/locationforecast/2.0/compact?lat=53.3788&lon=14.666&altitude=15";
+            let u=yrno;
+            fetch(u)
+            .then(r => {return r.json()})
+            .then(o => {
+                            let opisarr=[];
+            opisarr.push("Prognoza pogody:")
+
+                //console.log(o)
+                //document.querySelector("#info2").innerHTML=JSON.stringify(o,null,2);
+                let data = o.properties.timeseries;
+                let h="";
+                
+                data.forEach((d,i)=>{
+                    if (i<70) {
+                        //console.log(d)
+                        //let czas =   (new Date(d.time).toLocaleTimeString('pl-PL'));
+                        let czas =   (new Date(d.time).toLocaleString('pl-PL'));
+                        czas = czas.replace(/\.....,/,",").replace(/\:00$/,"");
+                        let godz = czas.split(", ")[1];
+                        let temp = d.data.instant.details.air_temperature.toFixed(1);
+                        let wind = d.data.instant.details.wind_speed.toFixed(1);
+                        let rain="?";
+                        let symbol="??"
+                                if (d.data.next_1_hours){
+                                    rain = d.data.next_1_hours.details.precipitation_amount;
+                                    symbol = d.data.next_1_hours.summary.symbol_code;
+                                }
+                                else if (d.data.next_6_hours){
+                                    rain = d.data.next_6_hours.details.precipitation_amount;
+                                    symbol = d.data.next_6_hours.summary.symbol_code;
+                                }
+                                else if (d.data.next_12_hours){
+                                    rain = d.data.next_12_hours.details.precipitation_amount;
+                                    symbol = d.data.next_12_hours.summary.symbol_code;
+                                }
+                        //rain = rain ? rain:0
+                        symbol = symbol.replace("_day","").replace("_night","")
+                        //console.log(i,czas,rain,symbol)
+                        h+="<p>";
+                            h+= `${zeroPad(i+1)}. ${dw(d.time)}. ${czas}`;
+                            h+= ` &bull; ${temp}℃`;
+                            h+= ` &bull; ${wind}m/s`;
+                            h+= ` &bull; ${rain}mm`;
+                            h+= ` &bull; ${symbol}`;
+                        h+="</p>";
+                        
+                        
+                        if (i==2 || i==6 || i===10) {
+                            let znak = parseFloat(temp)>=0 ? "+" : "";
+                            let ymbol= opisYrno(symbol);
+                            console.log("ymbol=",ymbol)
+                            let opis ="";
+                            //opis+= `${zeroPad(i+1)}. ${dw(d.time)}. ${czas}`;
+                            opis+= `${godz}`;
+                            opis+= `, ${znak}${temp}℃`;
+                            opis+= `, ${ro(wind)}m/s`;
+                            opis+= `, ${oo(rain)}mm`;
+                            opis+= `, ${ymbol}`;
+                            //opis+= `, ${symbol}`;
+                            opisarr.push(opis)
+                        }
+                    }
+                });
+                console.log(opisarr);
+                let opistxt = opisarr.join("\n");
+                console.log(opistxt)
+                document.querySelector("#info").innerHTML=h;
+                document.querySelector("#txtx").value=opistxt;
+            })
+            .catch(e => {console.log(e)})
+        }
+
+
+/*********************************************************************************/
+let audio=null;
+
+const fileAction=(t,path)=>{
+    if (t) setActive(t);
+    document.querySelector("#stop").classList.remove("hide");
+    //console.log(path);
+    let music = encodeURIComponent(path);
+    let api="http://192.168.50.9:3009/api/play/"+music;
+    if (audio) audio.pause();
+        audio = new Audio(api);        
+        audio.play();
+    
+}
+
+const imgAction=(t,path)=>{
+    if (t) setActive(t);
+    //document.querySelector("#stop").classList.remove("hide");
+    //
+    let imgpath = encodeURIComponent(path);
+    console.log(imgpath);
+    let api="http://192.168.50.9:3009/api/img/"+imgpath;
+    $("#img").innerHTML = `<img src="${api}" />`;
+    //setTimeout(fotobottom,300)
+    //document.documentElement.scrollTop = document.documentElement.scrollHeight;
+}
+
+const installPlayer=(dane)=>{    
+        //console.log(dane)
+        let h="";
+        if (dane.length===0) h='Brak plików';
+        dane.forEach((d,i)=>{
+            //console.log(d)
+            let size= Math.round(d.size/1000);
+            let play="";
+            if (isAudio(d.path)) play = `title="PLAY: ${d.name}" onclick="fileAction(this,'${d.path}')"`;
+            if (isImage(d.path)) play = `title="SHOW: ${d.name}" onclick="imgAction(this,'${d.path}')"`;
+            let hour = d.date.split(", ")[1];
+            h+=`<div  title="${d.date}" class='grid grid1 play ${d.ext}' ${play}>`;
+                h+=`<span>${i+1}. ${d.name}</span>`;
+                h+=`<span> &nbsp; <b>[${formatBytes(d.size)}]</b>`;
+                h+=` &bull; ${hour}</span>`;
+            h+="</div>";            
+        });
+        //console.log(h)
+        document.querySelector("#pobrane").innerHTML = h+"<br /><br />";
+        setTimeout(fotobottom,300)
+}
+
+
+const pobrane=(t=null)=>{
+    document.querySelector("#stop").classList.add("hide");
+    /*let pobrane = document.querySelector("#pobrane");
+    if (pobrane.innerHTML && hidePobrane){
+        pobrane.innerHTML="";
+        return; 
+    }*/
+    fetch("http://192.168.50.9:3009/pobrane")
+    .then(r => {return r.json()})
+    .then(o => {installPlayer(o)})
+    .catch(e => {console.log(e)})
+    }    
+
+    const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim(); }
+   
+   const todoNow=()=>{
+      fetch("https://znakzorro.github.io/zorro/data/todo.md")
+        .then(r => {return r.text()})
+        .then(md => {
+      let html = mdToDo(md);
+      let arr = html.split("<h1>");
+      let i=1;
+      let h=""
+      for (let a of arr){
+          console.log(a) 
+          if (a) {
+              h+="<h1>"+i.toString()+". "+a;
+              i++;
+          }
+      }
+      document.getElementById("txtx").value=md;
+      document.getElementById("pobrane").innerHTML = h;	      
+        })
+        .catch(e => {console.log(e)})
+   }
+  
+  
+   const unlink=async(ten, point1,point2)=>{
+    	if (ten) setActive(ten);
+        let ret = await asyncFetchJson("http://192.168.50.117:7000/unlink/yamaha/yama");
+        console.log(ret);
+    }
+
+    const setlink=async(ten, point1,point2)=>{
+    	if (ten) setActive(ten);
+        let ret = await asyncFetchJson("http://192.168.50.117:7000/link/yamaha/yama");
+        console.log(ret);
+    }
+
+
+
+
+</script>
+</head>
+<body>
+    <app-menu top="Szczecin" title="myDay" name="myDay" link="../../" color="#16151b" hover="#bbf"></app-menu>
+    <script src="../../assets/appMenu.js"></script>
+
+    <main>
+        <article>
+            <div id="copykeys" class="grid grid4 b88">
+                <a href="../audio/audacious/index.html" class="button gold">Auda</a>
+                <!--a href="../audio/index.html" class="button red">AUDIO</a-->
+                <a href="../wifi/index.html" class="button navy">WiFi</a>
+                <a href="http://192.168.50.9:8087/" class="button red">MQTT</a>
+                <a href="../hue/index.html" class="button navy">HUE</a>
+            </div>
+            <div id="copykeys" class="grid grid4 b88">
+                
+                <a href="../dom/doc/index.html" class="button gold">DOC</a>
+                <a href="../dom/index.html" class="button blue">DOM</a>
+                <a href="http://192.168.50.9:3009/" class="button red">Home</a>
+                <a href="http://192.168.50.117:3333/index.html" class="button navy">apiSAN</a>
+                
+                
+            </div>
+          </article>
+          <div id="aktualne" style="padding:0.4em 0;"></div>
+        <article class="container" style="min-height:354px; width:100%!important; margin-bottom: 1em;  overflow:auto; background-size: 782px 374px; background-image: url('../../assets/css/icon/meteo4.jpg');background-repeat: no-repeat;">
+            <img id="modalyrnomodal" src="https://www.yr.no/en/content/2-3083828/meteogram.svg" style="margin-top:-55px;" class="img-fluid img-modal" onload="imgReadyLocal(this)">
+            
+        </article>
+        
+        <article>
+            <div id="copykeys" class="grid grid4 b88">
+                <button onclick="PasteTXT()" class="button" >Paste</button> 
+                <button onclick="CopyTXT()" class="button">Copy</button> 
+                <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
+                <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
+            </div>            
+            <textarea translate="no" id="txtx" onclick="$('#txtx').style.height='16em';"></textarea>
+            <div class="grid grid4 b88">
+                <button onclick="getYRNO()"    class="button reda">Yr-7d</button>  
+                <!--a href="https://www.rainviewer.com/map.html?loc=53.1,13,5&oFa=0&oC=0&oU=0&oCS=1&oF=0&oAP=1&rmt=0&c=1&o=83&lm=1&th=0&sm=1&sn=1" class="button blue">Radar</a-->
+                <a href="../pogoda/yrno.html"  class="button green">Yrno</a>                
+                              
+                <a href="../todomama/index.html"   class="button navy">MaMa</a>
+                <a href="../todo/index.html"   class="button navy">ToDo</a>
+            </div>                
+      </article>
+      
+    <article style="margin:0.5em 0;">        
+        <div class="grid grid112">
+            <a href="../dom/odra/index.html" class="button purple">ODRA</a>
+            <button class="button navy" onclick="todoNow()">td.md</button>
+            <button class="button navy" onclick="pobrane()">Pobrane</button>            
+            <button id="stop" class="uk-button uk-button-default hide" onclick="audio.pause()">Stop</button>
+        </div>
+        <div class="grid grid11" style="margin-top:1em;">        
+            <button onclick='unlink(this,"yamaha","yama")'  class="button red">UNLINK</button>
+            <button onclick='setlink(this,"yamaha","yama")' class="button navy">LINK</button>
+        </div>
+        <div id="pobrane"></div>
+        <div id="img"></div>
+    </article>
+
+    <label id="modalOpen" class="button reda hide" for="modal-toggle">Prognoza</label>
+
+      <article>
+ 
+        <pre id="info"></pre>
+        <pre id="info2"></pre>
+      </article>
+
+
+ 
+    
+
+        <div class="modal-container">
+            <input id="modal-toggle" type="checkbox">
+            
+            
+            
+            <label class="modal-backdrop" for="modal-toggle"></label>
+            <div class="modal-content">
+                <label class="modal-close" for="modal-toggle">&#x2715;</label>
+                <h2 id="modalTitle">Modal title</h2>
+                <div id="modalBody">
+                    <hr />
+                    <p>Hello from inside the modal!</p>
+                </div>
+                <label class="modal-content-btn" for="modal-toggle">OK</label>
+            </div>
+        </div>
+
+</main>
+
+
+
+
+
+
+
+    <script type="text/javascript" src = "../../assets/script.js"></script>
+    <script>
+
+        const jutro=(ile=1)=>{
+               const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+               let tomorrow = new Date();
+               tomorrow.setDate(tomorrow.getDate() + ile);
+               let dw = tomorrow.getDay();
+               return weekdays[dw]
+        }
+        
+let pasteNR=0;       
+const PasteFB=(nr=1)=>{
+    console.log("pasteNR=",pasteNR)
+    let txtx = document.getElementById("txtx");
+    if (pasteNR===1) {setSUN();}
+    if (pasteNR===2) {txtx.value=`Jeśli dziś ${jutro(0)} to idę do piekarni: "Mąka i woda" po chleb i bułki`;}
+    if (pasteNR===0 && nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Żytni\n2x bułki zwykłe\n--\nZbigniew Sz`;
+    if (pasteNR===0 && nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
+1x chleb żytni
+1x bułka z sezamem
+2x bułki zwykłe
+--
+Zbigniew Sz`;
+pasteNR++;
+if (pasteNR>2)pasteNR=0;
+}
+            
+             const PasteTXT=async()=>{
+                 let txtx = document.getElementById("txtx");
+                 txtx.value="";
+                 //txtx.style.height="20em";
+                 const text = await navigator.clipboard.readText();
+                 txtx.value = text;
+             }
+             const CopyTXT=()=>{
+                 let txtx = document.getElementById("txtx");
+                 txtx.select();
+                 navigator.clipboard.writeText(txtx.value);
+             }
+         </script> 
+<script>
+
+
+function getBase64Image(img) {
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+}
+
+
+
+    const imgReadyLocal=(ten)=>{
+        //console.log(ten);
+        //saveIMGlocal();
+    }
+    const saveIMGlocal=()=>{
+        let bannerImage = document.getElementById('modalyrnomodal');
+        console.log(bannerImage)
+        let imgData = getBase64Image(bannerImage);
+        localStorage.setItem("imgData", imgData);
+    }
+    const loadIMGlocal=()=>{
+        let dataImage = localStorage.getItem('imgData');
+        let bannerImg = document.getElementById('modalyrnomodal');
+        bannerImg.src = "data:image/png;base64," + dataImage;
+    }
+    
+</script>       
+<br /> <br /> <br /> <br />    
+
+</body>
+<script>
+    const setCurrentYrno=(div)=>{
+        let uid = "?id=" + Math.random().toString(16).slice(2)
+        let u="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour"+uid;
+        
+        u="https://corsproxy.io/?"+u;
+    
+        fetch(u).then(r => {return r.json()}).then(o => {describeYrno(o)}).catch(e => {console.log(e)})
+    
+        const describeYrno=(d)=>{
+            //console.log(d.status.code,d)
+            //console.log(d)
+            let html =""
+                let ppp = (new Date(d.created)).getTime();
+                let nnn = (new Date()).getTime();
+                let ddd = Math.round(Math.abs(ppp-nnn)/(1000*60)); // w minutach
+                //console.log(ppp,nnn,ddd);
+            if (ddd<90){
+                let teraz = (new Date(d.created).toLocaleString('pl-PL'));
+                let symbole = d.symbolCode.next1Hour.split("_")[0];
+                symbole = symbole.charAt(0).toUpperCase() + symbole.slice(1);
+                //html += `<b>${teraz} - ${symbole}</b><br />`;
+                //html += `<small>${teraz}</small> - <b>${symbole}</b><br />`;
+                html += `<b>${symbole}</b> ${d.temperature.value}&deg;C {${d.temperature.feelsLike}&deg;C}, `;
+                html += `${d.precipitation.value}mm, ${d.wind.speed}m/s<br />`;
+                document.querySelector("#"+div).innerHTML = html;
+            }
+        }
+    }
+    setCurrentYrno("aktualne");
+    </script>
+
+
+
+
+
+
+
+
+<script>
+
+
+        const asyncFetchJson_____ = async (u) => {	    const headers = {
+            "timeout": 15000,
+            "sec-ch-ua-platform":"Linux",
+            "User-Agent":"Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+        };
+        const r = await axios.get(u,headers);
+        //console.log(r)
+        return (r.data)
+	  }
+
+      const asyncFetchJson = async (u) => {
+        //console.log(u)
+        const r = await fetch(u);
+        //console.log(r);
+        const o = await r.json();
+        return (o)
+	  }
+      const asyncFetchText = async (u) => {
+        const r = await fetch(u);
+        //console.log(r);
+        const o = await r.text();
+        return (o)
+	  }
+
+    const prepareURL=async(url)=>{
+        let eurl = encodeURIComponent(url);        
+        let corurl = "http://192.168.50.117:3333/cor/cors/"+eurl
+        return corurl;
+    }
+
+    const paa=(t)=>{
+        return t;
+      if (t===0) return "0";
+      let ret = String(t)
+      if (parseFloat(t)<10) ret="0"+ret;
+      if (Math.round(t) === t) ret = ret+".0";
+      return ret;
+    }
+    const deszczeRUN=async()=>{
+        let a = await asyncFetchJson(await prepareURL("http://www.yr.no/api/v0/locations/2-3083828/forecast"));
+        let html ="";
+        let teraz=(new Date()).getDate();
+        [0,3,6,12,24,27].forEach((i,n)=>{
+            t=a.shortIntervals[i];
+            let aktual = (new Date(t.start)).getDate();
+            let termin = (new Date(t.start).toLocaleTimeString('pl-PL'));
+            let arr=termin.split(":");
+            termin=arr[0]+":"+arr[1];
+            let symbol = t.symbolCode.next1Hour;
+            let klasa="";
+            let icon = `<img src="../../assets/svg/${symbol}.svg" class="iii" />`;
+            //let icon = `<img src="https://api.met.no/images/weathericons/svg/${symbol}.svg" class="iii" />`;
+            ///home/znak/node/SERVER/HOME/public/androidJS/myDay/assets/svg/fog.svg
+            if (aktual-teraz>0) {klasa="jutro";}
+            html += `<p class="gridd ${klasa}">${icon}<span>${termin}</span> <span>${paa(t.temperature.value)} {${(t.feelsLike.value)}℃},</span> <span>${paa(t.precipitation.value)}mm</span></p>`;  //㍱
+            //html += `W=${t.wind.speed}m/s, P=${t.pressure.value}hPa, H=${t.humidity.value}%, D=${t.dewPoint.value}°C`;
+        });
+        document.querySelector("#modalTitle").textContent = "Prognoza";
+        document.querySelector("#modalBody").innerHTML = html;
+        document.querySelector("#modalOpen").classList.remove('hide');
+        
+       
+    }
+
+
+const getToDo=async()=>{
+    let todourl = "https://znakzorro.github.io/zorro/data/todo.md";
+    let rtodo = await asyncFetchText((todourl));
+    //console.log(rtodo);
+    $("#info").innerHTML = rtodo;
+    $("#info").classList.add("big");
+}
+const setSUN=()=>{
+  		const sunINFO = getSUN("text");
+        //console.log(sunINFO);
+        let txtx = document.getElementById("txtx");
+		txtx.value = sunINFO;
+}
+
+//---dom ready-----domready---------------------------
+document.addEventListener("DOMContentLoaded",function(){
+  deszczeRUN();
+  getToDo();
+    //setSUN();
+});
+//---DOM READY----------------------------------
+
+</script>
+</html>
