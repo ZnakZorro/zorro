@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="HandheldFriendly" content="true">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#008">
+	<link rel="shortcut icon" type="image/png" size="any" href="./todo.png">	
+
+    <meta charset="UTF-8">
+    <title>ToDoOne</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="theme-switch" id="theme-toggle">🌙</div>
+    <div class="container">
+        <h2>Lista zadań</h2>
+        <div class="input-row">
+            <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie...">
+            <button onclick="addTask()">Dodaj</button>
+        </div>
+        <ul id="list-container">
+            <!-- Tutaj będą pojawiać się zadania -->
+        </ul>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
