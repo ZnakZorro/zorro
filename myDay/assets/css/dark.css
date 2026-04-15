@@ -1,0 +1,23 @@
+body {
+  background-color:#16151b!important;
+  background:#16151b!important;
+  color:#fff!important;
+}
+.dark,div.pogoda div {
+   background:#222!important;
+  color:#eee!important;
+}
+button, .button {
+    box-shadow: none;
+}
+
+
+.blue, .green, .purple, .red, .gold, .yellow{
+    background-color: #333;
+    border-bottom: 3px solid #666;
+    box-shadow: none;
+}
+.red {background:#777;}
+.gold {background:#bbb;}
+.yellow {background:#ccc; color:black;}
+.bar {background-color: #ddd!important;}

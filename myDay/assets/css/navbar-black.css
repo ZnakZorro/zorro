@@ -1,0 +1,14 @@
+/*.nav-logo {color: #ffffff;}*/
+/*.bar {background-color: #eee;}*/
+/*.nav-link {color: #fff;}*/
+@media only screen and (max-width: 768px){
+    .nav-menu {background-color: #445; border-color:#008;}
+    .header {background-color: #445; border-color:#444;}
+}
+
+.header {background-color: #445; border-color:#444;}
+.nav-menu {background-color: #445; border-color:#000;}
+
+.nav-logo {color: #eee;}
+.bar {background-color: #f7f4f4;}
+.nav-link {color: #f1f2f5;}

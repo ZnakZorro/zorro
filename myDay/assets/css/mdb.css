@@ -1,0 +1,134 @@
+body {margin:0; padding:0;}
+.top {
+    width: 100%;
+    margin: 0;
+    display: block;
+    height: 1.75em;
+    padding: 0.2em 0.5em 0;
+    /*box-shadow: inset 0px 0px 0.75em 0px #555;*/
+    color: white;
+    
+        background-color: #33b5e5;
+        border-bottom: 3px solid #aaa;
+        box-shadow: 0px 4px 4px #ccc;
+        font-size:1em;
+
+}
+.content {
+    background: white;
+    box-shadow: 0px 0px 10px #555;
+    width: 94%;
+    display: block;
+    padding: 0.5em;
+    /* margin: -200px auto 20px auto; */
+    margin: auto;
+}
+.circle-button {
+    background-color: #ffbb33;
+    width: 50px;
+    height: 50px;
+    position: fixed;
+    right: 3%;
+    bottom: 5px;
+    border-radius: 50%;
+    box-shadow: 0px 0px 7px #555;
+    color: #fff;
+    font-size: 36px;
+    line-height: 48px;
+    text-align: center;
+    transition: 300ms ease;
+}
+.wrap {
+  display: block;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+a {
+  text-decoration: none;
+}
+
+button, .button {
+    display: inline-block;
+    border: none;
+    text-align: center;
+    padding: 0.4em 0.2em 0.2em;
+    color: white;
+    /*transition: 300ms ease-in-out;*/
+    /*box-shadow: 0px 4px 10px #ccc;*/
+    font-size: 18px;
+    margin: 0.2em;
+    min-width: 72px;
+    background: #777;
+    border-bottom: 3px solid #666;
+    /*height:36px;*/
+}
+  .button:hover {
+    transform: translateY(-3px);
+    /*box-shadow: 0px 2px 10px #777;*/
+  }
+
+.red {
+  background: #ff4444;
+  border-bottom: 3px solid #cc0000;
+}
+.yellow {
+  background-color: #ffaa22;
+  border-bottom: 3px solid #ff8800;
+}
+.green {
+  background-color: #99cc00;
+  border-bottom: 3px solid #669900;
+}
+.purple {
+  background-color: #aa66cc;
+  border-bottom: 3px solid #9933cc;
+}
+.navy {
+  background-color: #125;
+  border-bottom: 3px solid #369;
+}
+.blue {
+  background-color: #33b5e5;
+  border-bottom: 3px solid #0099cc;
+}
+.opal {
+  background-color: #97DFC6;
+  border-bottom: 3px solid #719d8e;
+  color:black!important;
+}
+.gold {
+  background-color: gold;
+  border-bottom: 3px solid red;
+  color:black!important;
+}
+.dark {
+  background-color: #704264;
+  border-bottom: 3px solid #49243E;
+  color:white!important;
+}
+
+.ral {
+    background-color: #006A93;
+    border-left: 3px solid #69b;
+    border-right: 3px solid #69b;
+    border-bottom: 3px solid #036;
+    color: white;
+}
+.rala {
+    font-family: system-ui;
+    font-size: 1.2em;
+    padding: 2px !important;
+}
+
+.blue-top {
+  background-color: #33b5e5;
+}
+
+.big{
+  font-size: 1.2em;
+  margin: 0.5em 0.22em;
+  padding: 0.3em;
+}
+
+/*.grid .button {min-width: auto;}*/

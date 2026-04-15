@@ -1,0 +1,60 @@
+button {
+background: linear-gradient(135deg, #ff7eb3, #ff758c);
+padding: 0.25em;
+border-radius: 0.4em;
+transition: all 0.3s ease-in-out;
+}
+button:hover {
+transform: scale(1.05);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+a.btn {font-size: 1em;}
+.btn.long {min-width:120px;}
+.btn.big{
+    font-size: 1.1em;
+    margin: 0.75em 0.4em;
+    padding: 0.5em;
+}
+.btn.mini {
+    margin: 0.25em;
+    padding: 0.33em;
+    font-size: 0.9em;
+    min-width: 74px;
+}
+.btn.minii {
+    /*margin: 0.15em 0.07em;*/
+    padding: 0.25em 0.1em;
+    font-size: 0.8em;
+    min-width: 57px !important;
+}
+.btn.big:active {background:red;}
+
+button:focus, button:active {outline:none;}
+
+.active, btn.active, button.active, button:active {background:#222!important; color:orange!important;}
+.active1 {background:#ddd!important; color:navy!important;}
+
+
+.rm-togglebutton, .menu-back {font-weight:bold; }
+
+
+.b   {background:#666!important; color:white!important;}
+.bb  {background:#aaa!important;}
+.bbb {background:#eee!important; color:black!important; width:100%;}
+
+.toggle, #keys button {
+    border: 0;
+    width: 12%;
+    max-width: 72px;
+    min-width: 36px;
+}
+
+
+
+.b44 {min-width: 72px!important; margin: 4px;padding: 6px 3px;}
+.b88 .button {min-width: 82px; margin: 4px;padding: 6px 3px;}
+.b76 .button {min-width: 76px; margin: 4px;padding: 6px 3px;}
+.opa30 .button {opacity:0.3}
+.opa50 .button {opacity:0.5}
+.opa70 .button {opacity:0.7}

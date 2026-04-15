@@ -1,0 +1,146 @@
+*, :after, :before {-webkit-box-sizing:border-box;box-sizing:border-box;border-collapse:collapse;margin:0;padding:0;}
+body {font:normal 17pt Verdana; line-height:2; margin:0; padding:0; background:#7fffd4;}
+nav {padding:0.5em;}
+wrap {display:block; padding:0.33rem;margin: 0.33rem auto;max-width: 1200px;}
+.content {max-width:800px;margin:auto; padding:0.25em;}
+h2 {font-size:1.3rem; display:inline-block;}
+h3 {font-size:1.2rem; display:inline-block;}
+h4 {line-height: 1em; max-width: 600px;margin:auto;}
+
+div {padding:0.2rem;}
+.info, .temp, #info {padding-left:0.5rem;font-size:11pt; font-family:monospace;line-height: 12pt;}
+.head {display:block; padding:0.33rem;margin: 0.33rem auto;max-width: 1200px;}
+.head * {}
+.play {cursor:pointer;}
+.show {display:block}
+.hide {display: none;}
+.false {background:gray;}
+.true {background:#eee;}
+
+.grid {
+	display: grid;	
+	grid-template-columns: 1fr; 
+	row-gap: 0em;
+	justify-content: space-between;
+	margin: auto;
+	width:100%;
+	max-width: 1200px;
+}
+.grid1 {grid-template-columns: 1fr; row-gap: 0em;}
+.grid2 {grid-template-columns: 1fr 1fr;}
+.grid3 {grid-template-columns: repeat(3,1fr);}
+.grid4 {grid-template-columns: 1fr 1fr 1fr 1fr;}
+.grid5 {grid-template-columns: repeat(5,1fr);}
+.grid6 {grid-template-columns: repeat(6,1fr);}
+.grid7 {grid-template-columns: repeat(7, 1fr);}
+
+
+button, .btn {display: inline-block;font-size:1rem; padding:0.25rem; margin:0.15rem; 
+min-width:3.5rem; border-width:1px;border-radius:0.45em; 
+background: #bbb; color:black;text-align: center; text-decoration: none;}	 
+button.on  {width:69%; background:orange; text-align:left;max-width: 25rem;}
+button.off {width:21%; background:navy; color:white; min-width:auto;}
+button.op {width:auto; background:darkred; color:white; min-width:auto;}
+
+
+.link {background: #69b; color:black;}
+.home {background: #3249a3; color:white;}
+.black {background: #444; color: white;}
+.red {background: darkred; color: white;}
+.btn.blue {background:rgb(19, 61, 201); color:white;}
+.amber button.op {background:#FFBF00; color:black}
+.navy { background:navy; color:white; min-width:auto;}
+.orange { background:orange; color:black; min-width:auto;}
+.green {background: green; color:white}
+.blue {background: blueviolet; color:white}
+.redi {background: red; color:white}
+    
+
+button.active {background: #a80!important; color:white!important; border-color:#ccc;}
+
+div#keys {text-align:center;}
+.highcharts-credits {display: none;}
+  
+  
+.ai { background:navy!important; color:white!important; min-width:auto!important;}  
+/*#trening input {font-size:0.9rem; padding-left:0.05em; max-width:3.4rem;} */
+#trening button {font-size:0.9rem; margin:2px; padding:4px 0;min-width: auto;} 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  color:#222;
+  margin: auto;
+  padding: 0.25em;
+  border: 5px solid #bbb;
+  width: 50%;
+  min-width:360px;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/*Spiner loader*/
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 999999;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 12px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 12px solid #004C91;
+  width: 75px;
+  height: 75px;
+  -webkit-animation: spin .9s linear infinite;
+  animation: spin 1s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+

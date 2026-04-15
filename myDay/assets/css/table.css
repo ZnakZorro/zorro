@@ -1,0 +1,17 @@
+ table,th,td {
+    border: 1px solid #eee!important;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 5px;
+    text-align: left;
+    background:#444;
+    border:2px solid white;
+}
+
+.table th, .table tr.th td {
+    font-weight: bold;
+    background: #444;
+}
