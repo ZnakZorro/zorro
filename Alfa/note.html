@@ -93,7 +93,18 @@ if (pasteNR>2)pasteNR=0;
  }
 //////////////////////////////////              
  
- 
+const locsave=()=>{
+	console.log("Local Save");
+	console.log(document.getElementById('txtx').value);
+}
+const locload=()=>{
+	console.log("Load Local");
+	let tx = document.getElementById('txtx').value
+	console.log(tx);
+	tx = tx.replaceAll("\n","<br>");
+	document.getElementById('noteall').innerHTML = tx;
+	
+}
        
 </script>    
 </head>
@@ -113,17 +124,23 @@ if (pasteNR>2)pasteNR=0;
                 <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
                 <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
         </div>
-
+<!--⭕✅☑️✔️❌-->
    <div class="container notop">
-   <h2>Note</h2>
-<textarea translate="no" id="txtx" onclick="$('#txtx').style.height='16em';"></textarea>
+   <span onclick="locsave()" title="Local Save">✔️</span>
+   <span onclick="locload()" title="Load Local">⭕</span>
+   &nbsp;
+   <h2 style="display: inline-block;">Note</h2>  
+	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
-   <div id="note" class="container notop"></div>
-   <div class="container notop">    
-        <button class="big" onclick="zapisz(document.getElementById('list-container').innerHTML,storageName+'.html');">Zapisz</button>
+    
+       <div class="container notop">    
+        <button class="big" onclick="zapisz(document.getElementById('txtx').value,storageName+'.txt');">Zapisz</button>
         <button class="big" onclick="wczytajPlik()">Wczytaj</button>
     </div>
+
+    <div id="noteall" class="container notop nota"></div>
    <pre class="log"></pre>
+   <div id="note" class="container notop nota"></div>
    <script src="./add/mini.js"></script>
    <script src="./add/save.js"></script>
 </body>
