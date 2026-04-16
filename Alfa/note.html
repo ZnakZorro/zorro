@@ -10,10 +10,10 @@
    <meta name="mobile-web-app-capable" content="yes"> 
     <script>const storageName = "Note";</script>
     <link rel="stylesheet" href="./add/style.css">
-
    <style>
  	body {background:#444;}
    </style>
+   <script src="./add/db.js"></script>
 <script>
     const $=e=>document.querySelector(e);
     const $$=e=>document.querySelectorAll(e);
@@ -91,20 +91,44 @@ if (pasteNR>2)pasteNR=0;
      txtx.select();
      navigator.clipboard.writeText(txtx.value);
  }
-//////////////////////////////////              
- 
+//////////  Dbase  /////////////              
+// 1. Inicjalizacja "tabeli" 
+const dbName = storageName+"DB";
+const notesDB = new SimpleDB(dbName);
+
+const uid=()=>Math.random().toString(16).slice(8);
+
 const locsave=()=>{
-	console.log("Local Save");
-	console.log(document.getElementById('txtx').value);
-}
-const locload=()=>{
-	console.log("Load Local");
-	let tx = document.getElementById('txtx').value
-	console.log(tx);
-	tx = tx.replaceAll("\n","<br>");
-	document.getElementById('noteall').innerHTML = tx;
+console.log("Load Save",dbName);
+	const content = document.getElementById('txtx').value;
+	const title   = document.getElementById('title').value;
+	console.log(title,content);
+	// 2. Dodawanie danych
+	notesDB.create({ title: title, content: content });
+	// 3. Pobieranie i wyświetlanie
 	
+
 }
+
+const locload=()=>{
+	//console.log("Load Local",dbName);
+	//let tx = document.getElementById('txtx').value
+	//console.log(tx);
+	//tx = tx.replaceAll("\n","<br>");
+	//document.getElementById('noteall').innerHTML = tx;
+	console.table(notesDB.getAll());
+}
+
+const locshow=()=>{
+	console.log("View",dbName);
+	console.table(notesDB.getAll());
+}
+
+
+document.addEventListener("DOMContentLoaded",function(){
+	document.getElementById('title').value = "Zapis_"+uid();
+});
+
        
 </script>    
 </head>
@@ -129,7 +153,9 @@ const locload=()=>{
    <span onclick="locsave()" title="Local Save">✔️</span>
    <span onclick="locload()" title="Load Local">⭕</span>
    &nbsp;
-   <h2 style="display: inline-block;">Note</h2>  
+   <h2 style="display: inline-block;">Note</h2> 
+   <span onclick="locshow()" title="Show">👁️</span>
+   	<input type="text" id="title" value="Zapis" /> 
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
     
