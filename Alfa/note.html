@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>📝</text></svg>" />
+	<meta name="theme-color" content="#369">
+   <title>Note</title>  
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+    <script>const storageName = "Note";</script>
+    <link rel="stylesheet" href="./add/style.css">
+
+   <style>
+ 	body {background:#444;}
+   </style>
+<script>
+    const $=e=>document.querySelector(e);
+    const $$=e=>document.querySelectorAll(e);
+    let note = `
+klucz 1
+klucz 2
+klucz 3
+`;
+  
+const setNote=(nota)=>{
+	let arr = nota.split("\n");
+	let html ='';
+	arr.forEach((n)=>{
+		html += '<p>'+n+'<p>'
+	});
+	document.querySelector("#note").innerHTML = html;
+}  
+    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",function(){
+    	setNote(note);
+        let u ="note.txt";
+        try {
+				fetch(u)
+				.then(r => {return r.text()})
+				.then(txt => {
+				    console.log("txt=",txt);
+				    setNote(txt);
+				})
+				.catch(e => {console.log(e)});
+		}
+		catch (err) {
+			console.log(err)
+		}
+    })
+    //---DOM READY----------------------------------
+ 
+/////////////////////
+        const jutro=(ile=1)=>{
+               const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+               let tomorrow = new Date();
+               tomorrow.setDate(tomorrow.getDate() + ile);
+               let dw = tomorrow.getDay();
+               return weekdays[dw]
+        }
+        
+let pasteNR=0; 
+const setINFO=()=>{
+	return "info INFO ???"
+};      
+const PasteFB=(nr=1)=>{
+    console.log("pasteNR=",pasteNR)
+    let txtx = document.getElementById("txtx");
+    if (pasteNR===1) {txtx.value=setINFO();}
+    if (pasteNR===2) {txtx.value=`Jeśli dziś ${jutro(0)} to idę do piekarni: "Mąka i woda" po chleb i bułki`;}
+    if (pasteNR===0 && nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Żytni\n2x bułki zwykłe\n--\nZbigniew Sz`;
+    if (pasteNR===0 && nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
+1x chleb żytni
+2x bułki zwykłe
+1x bułka z sezamem
+--
+Zbigniew Sz`;
+pasteNR++;
+if (pasteNR>2)pasteNR=0;
+}
+            
+ const PasteTXT=async()=>{
+     let txtx = document.getElementById("txtx");
+     txtx.value="";
+     //txtx.style.height="20em";
+     const text = await navigator.clipboard.readText();
+     txtx.value = text;
+ }
+ const CopyTXT=()=>{
+     let txtx = document.getElementById("txtx");
+     txtx.select();
+     navigator.clipboard.writeText(txtx.value);
+ }
+//////////////////////////////////              
+ 
+ 
+       
+</script>    
+</head>
+
+<body>
+
+	<div class="theme-switch" id="home-btn">🏠</div>
+	<div class="theme-switch active" id="note-btn">📝</div>
+	<div class="theme-switch" id="theme-toggle">🌙</div>
+	<div class="theme-switch" id="gamma-btn">👫</div>
+	<div class="theme-switch" id="beta-btn">🧔</div>
+	<div class="theme-switch" id="alfa-btn">🧑‍🦳</div>
+
+		<div id="copykeys" class="container center">
+                <button onclick="PasteTXT()" class="button">Paste</button> 
+                <button onclick="CopyTXT()" class="button">Copy</button> 
+                <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
+                <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
+        </div>
+
+   <div class="container notop">
+   <h2>Note</h2>
+<textarea translate="no" id="txtx" onclick="$('#txtx').style.height='16em';"></textarea>
+   </div>
+   <div id="note" class="container notop"></div>
+   <div class="container notop">    
+        <button class="big" onclick="zapisz(document.getElementById('list-container').innerHTML,storageName+'.html');">Zapisz</button>
+        <button class="big" onclick="wczytajPlik()">Wczytaj</button>
+    </div>
+   <pre class="log"></pre>
+   <script src="./add/mini.js"></script>
+   <script src="./add/save.js"></script>
+</body>
+</html>

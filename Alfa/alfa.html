@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="HandheldFriendly" content="true">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#008">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>🧑‍🦳</text></svg>"/>
+    <meta charset="UTF-8">
+    <title>Alfa</title>
+    <script>const storageName = "Alfa";</script>
+    <link rel="stylesheet" href="./add/style.css">
+</head>
+<body>
+	<div class="theme-switch" id="home-btn">🏠</div>
+	<div class="theme-switch" id="note-btn">📝</div>
+	<div class="theme-switch" id="theme-toggle">🌙</div>
+	<div class="theme-switch" id="gamma-btn">👫</div>
+	<div class="theme-switch" id="beta-btn">🧔</div>
+	<div class="theme-switch active" id="alfa-btn">🧑‍🦳</div>
+    <div class="container">
+        <h2>Lista zadań</h2>
+        <div class="input-row">
+            <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie...">
+            <button onclick="addTask()">Dodaj</button>
+        </div>
+        <ul id="list-container">
+            <!-- Tutaj będą pojawiać się zadania -->
+        </ul>
+    </div>
+    
+    <div class="container notop">    
+        <button class="big" onclick="zapisz(document.getElementById('list-container').innerHTML,'todoMama.html');">Zapisz</button>
+        <button class="big"  onclick="wczytajPlik()">Wczytaj</button>        
+    </div>
+    
+    <script src="./add/script.js"></script>
+    <script src="./add/save.js"></script>
+    
+</body>
+</html>
