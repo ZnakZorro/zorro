@@ -10,6 +10,7 @@
     <title>ToDoOne</title>
     <script>const storageName = "ToDoZorro";</script>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 	<div class="theme-switch" id="home-btn">🏠</div>
@@ -28,9 +29,13 @@
             <!-- Tutaj będą pojawiać się zadania -->
         </ul>
     </div>
-    
+    <div class="container __web-inspector-hide-shortcut__" id="edits">    
+        <button class="adm0" onclick="zapisz(document.getElementById('list-container').innerHTML,'todoZorro.html');">Zapisz</button>
+        <br /><br /><hr /><br />
+        <input type="file" id="wybierzPlik">
+    </div>
     <script src="script.js"></script>
-    
+    <script src="./js/save.js"></script>
     
 </body>
 </html>
