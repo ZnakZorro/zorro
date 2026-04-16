@@ -2,6 +2,7 @@
 :root {
     --bg-color: #f4f7f6;
     --bg-gray: #ddd;
+    --bg-dark: #eee;
     --container-bg: #ffffff;
     --text-color: #333333;
     --text-color-check: #777;
@@ -13,13 +14,23 @@
 [data-theme="dark"] {
     --bg-color: #181a1b;
     --bg-gray: #2a2a2a;
+    --bg-dark: #444;
     --container-bg: #242729;
     --text-color: #fff;
     --text-color-check : #ccc;
     --border-color: #3e4446;
     --item-border: #313537;
 }
-
+.nota {font-family: monospace;font-size: 0.8rem;background: var(--bg-gray);}
+textarea {
+	font-family: monospace;
+    background: var(--bg-dark);
+    color: var(--text-color);
+    width: 100%;    
+    font-size: 0.9rem;
+    padding: 0.3em;
+    min-height:12em; 
+}
 body {
     background: var(--bg-gray);
     color: var(--text-color);
@@ -201,15 +212,6 @@ li.checked p {
     background: none;
     border: none;
     padding-right: 8px;
-}
-textarea {
-font-family: monospace;
-    background: #222;
-    color: #fff;
-    width: 100%;    
-    font-size: 0.9rem;
-    padding: 0.3em;
-    min-height:15em; 
 }
 
 input[type="file" i] {
