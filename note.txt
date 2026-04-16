@@ -1,3 +1,0 @@
-klucz 1
-klucz 2
-klucz 3
