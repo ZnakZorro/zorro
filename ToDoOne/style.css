@@ -79,7 +79,7 @@ body {
     justify-content: space-evenly;*/
     min-height: 100vh;
     padding: 0px;
-    font-size: 18px;
+    font-size: 21px;
 }
 
 /* Elastyczny kontener */
@@ -100,6 +100,11 @@ h2 {
     margin-bottom: 12px;
     text-align: center;
     color: var(--text-color);
+    font-size:24px;
+}
+h3 {
+    color: var(--text-color);
+    font-size:22px;
 }
 
 li p {color: var(--text-color);}
@@ -148,8 +153,8 @@ ul {
 }
 
 li {
-    padding:5px;
-    border-bottom: 1px solid #f0f0f0;
+    padding:3px;
+    border-bottom: 0.5px solid #f0f0f0;
     display: flex;
     align-items: center;
     justify-content: space-between;
