@@ -8,16 +8,18 @@
 	<link rel="shortcut icon" type="image/png" size="any" href="./todo.png">	
     <meta charset="UTF-8">
     <title>ToDoOne</title>
-    <script>const storageName = "ToDoMama";</script>
+    <script>const storageName = "ToDoInne";</script>
     <link rel="stylesheet" href="style.css">
+    
 </head>
 <body>
 	<div class="theme-switch" id="home-btn">🏠</div>
 	<div class="theme-switch" id="note-btn">📝</div>
-	<div class="theme-switch" id="theme-toggle">🌙</div>
+	<div class="theme-switch" id="theme-toggle">🌙</div>	
 	<div class="theme-switch" id="inne-btn">👫</div>
 	<div class="theme-switch" id="zorro-btn">🧔</div>
 	<div class="theme-switch" id="mama-btn">🧑‍🦳</div>
+	
     <div class="container">
         <h2>Lista zadań</h2>
         <div class="input-row">
@@ -29,9 +31,9 @@
         </ul>
     </div>
     
-        <div class="container">    
-        <button class="adm0" onclick="zapisz(document.getElementById('list-container').innerHTML,'todoMama.html');">Zapisz</button>
-         <button onclick="wczytajPlik()">Wczytaj</button>
+    <div class="container">    
+        <button class="adm0" onclick="zapisz(document.getElementById('list-container').innerHTML,'todoInne.html');">Zapisz</button>
+        <button onclick="wczytajPlik()">Wczytaj</button>
         <br /><br /><hr /><br />
         <input type="file" id="wybierzPlik">
     </div>

@@ -56,10 +56,11 @@ li {
     cursor: pointer;
     font-size: 24px;
 }
-#zorro-btn {right: 80px;}
-#mama-btn {right: 140px;}
-#home-btn {left: 10px;}
-#note-btn {left: 80px;}
+#inne-btn  {right: 80px;}
+#zorro-btn {right:130px;}
+#mama-btn  {right:180px;}
+#home-btn  {left: 10px;}
+#note-btn  {left: 80px;}
 
 
 span {color: var(--text-color);}
