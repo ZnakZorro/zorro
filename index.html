@@ -1,44 +1,429 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-	<meta name="HandheldFriendly" content="true">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="theme-color" content="#008">
-	<link rel="shortcut icon" type="image/png" size="any" href="./todo.png">	
-    <meta charset="UTF-8">
-    <title>ToDoOne</title>
-    <script>const storageName = "ToDoZorro";</script>
-    <link rel="stylesheet" href="style.css">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+   <meta http-equiv="refresh" content="18000">
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+   <meta http-equiv="x-ua-compatible" content="ie=edge" />
+   <title>git::zorro</title>
+   <script type="text/javascript" src="./js/yrnoGET.js?id=1"></script>
+   <meta name="HandheldFriendly" content="true">
+   <meta name="mobile-web-app-capable" content="yes"> 
+   <meta name="theme-color" content="#214960">
+   <link rel="shortcut icon" type="image/svg+xml" size="any" href="./img/dom.svg"> 
+   <link rel="manifest" href="./zorro.web.json"> 
+   <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900italic,900' rel='stylesheet' type='text/css'>   
+   <link rel="stylesheet" href="./css/style.css" />
+   <link rel="stylesheet" href="./css/all.css" />
+   
+<style>
+	h1 {font-size:1.33rem;line-height: 1.33rem;}
+ .icon1 {max-width:32px; cursor:pointer;}
+ div.pogoda div.active {color:black; background-color:lightgoldenrodyellow;}
+ div#sun  {}
+ div#sun div span {}
+ div.row  {}
+ div.fild { }
+  div.fild div {
+    border: 1px solid #ddd;
+    background-color: #ffffff;
+    padding: 0.5em 0.1em 0.1em 0.1em;
+    word-break: break-all;
+    border-radius: 0.2em;
+    margin: 0.2em 0;
+    text-align: center;
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .fild div span:nth-child(1) {
+      display: grid;
+      justify-content: space-around;
+      justify-items: center;
+    }
+}  
+.bum-trans {
+    cursor: pointer;
+    width: 175%!important;
+    max-width: 782px!important;
+    transition-property: width;
+    transition-duration: 1s;
+    overflow-x: scroll;
+    display: flex!important;
+    float: none!important;
+}
+.re-trans {
+   width: initial;
+  transition-property: width;
+  transition-duration: 1s;  
+ }   
+.bum-trans img {   
+   margin-top: -6%;
+ }
+   #modal {width:100%!important; overflow: auto;}
+   #modal img {
+      /*width:175%;*/
+   }
+   .img-modal {padding:0}  
+        
+.supermodal {position:relative;}
+.menumodal {
+    position: absolute;
+    top: 10px;
+    left: 5px;
+}
+</style>
+<link rel="stylesheet" href="./css/dark.css" />
+<script src="./js/all.js"></script>
+<script>
+    let APPcity = localStorage.getItem("APPcity") ? localStorage.getItem("APPcity") : _APPcity;
+    let APPid   = localStorage.getItem("APPid")   ? localStorage.getItem("APPid")   : _APPid;
+    console.log("=======================");
+    console.log(APPcity,APPid);
+    console.log("=======================");
+   const imgReady=()=>{
+      console.log("imgready");
+   }
+   const jutro=(ile=1)=>{
+   	const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+   	let tomorrow = new Date();
+   	tomorrow.setDate(tomorrow.getDate() + ile);
+   	let dw = tomorrow.getDay();
+   	return weekdays[dw]
+   }
+
+//---dom ready--------------------------------
+document.addEventListener("DOMContentLoaded",function(){        
+    //_$("#modalyrnomodal").src= "https://www.yr.no/en/content/"+APPid+"/meteogram.svg";
+    //_$("#modalyrnomodal").style.display="block";   
+    //_$("#modalyrnoimage").style.display="block";   
+    _$("#modalyrnoimage").innerHTML=`<img id="modalyrnomodal" src="https://www.yr.no/en/content/${APPid}/meteogram.svg" class="img-fluid img-modal" onload="imgReady()">`;
+    //_$("app-menu").title = APPcity; //===> to jest w shadow dom
+   document.getElementById("txtx").addEventListener('input', function(e){
+      let val = e.target.value.replaceAll("\n","<br />");
+      document.getElementById("idtxtx").innerHTML = val;
+   }, false); 
+})
+//---DOM READY----------------------------------
+
+
+const markdownParser = (text) => {
+	const toHTML = text
+		.replace(/^### (.*$)/gim, '<h3>$1</h3>') // h3 tag
+		.replace(/^## (.*$)/gim, '<h2>$1</h2>') // h2 tag
+		.replace(/^# (.*$)/gim, '<h1>$1</h1>') // h1 tag
+		.replace(/\*\*(.*)\*\*/gim, '<b>$1</b>') // bold text
+		.replace(/\*(.*)\*/gim, '<i>$1</i>'); // italic text
+	return toHTML.trim(); // using trim method to remove whitespace
+}
+const mdToDo = (text) => {return text.replace(/^# (.*$)/gim, '<h1>$1</h1>').trim(); }
+   
+ const todoNow=()=>{
+    fetch("./data/todo.md")
+      .then(r => {return r.text()})
+      .then(md => {
+	let html = mdToDo(md);
+	let arr = html.split("<h1>");
+	let i=1;
+	let h=""
+	for (let a of arr){
+		console.log(a) 
+		if (a) {
+			h+="<h1>"+i.toString()+". "+a;
+			i++;
+		}
+	}
+	document.getElementById("txtx").value=md;
+	document.getElementById("idtxtx").innerHTML = h;	      
+      })
+      .catch(e => {console.log(e)})
+ }
     
+</script>
 </head>
+
 <body>
-	<div class="theme-switch" id="home-btn">🏠</div>
-	<div class="theme-switch" id="note-btn">📝</div>
-	<div class="theme-switch" id="theme-toggle">🌙</div>
-	<div class="theme-switch" id="zorro-btn">🧔</div>
-	<div class="theme-switch" id="mama-btn">🧑‍🦳</div>
-	
-    <div class="container">
-        <h2>Lista zadań</h2>
-        <div class="input-row">
-            <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie...">
-            <button onclick="addTask()">Dodaj</button>
+<app-menu title="gitZorro" name="ZnakZorro" link="./"></app-menu>
+<script src="./appMenu.js"></script>   
+  
+ <div class="wrapper">
+      <div class="container">
+        <div class="row">
+          <div id="sun" class="grid pogoda field"></div>
+          <div id="sunplus" class="grid pogoda field"></div>
+        <span id="flag2"></span>
+      </div>
+      </div>
+   
+   <div class="container" id="ccccc" style="position: relative;">
+     
+     <!-- modal --> 
+     <div class="menumodal" id="menumodal">
+        <a href="https://znakzorro.github.io/zorro/app/meteo/radar/" class="btn mini minii">Radar</a>
+        <a href="https://znakzorro.github.io/zorro/html/rss.html" class="btn mini minii">RSS</a>
+        <a href="./app/kalendarz/index.html" class="btn navy mini minii">Kal</a>
+        <button onclick="ccc()" class="btn mini minii">CC</button>
+        <a href="./nav" class="btn navy mini minii">NAV</a>
+        <a href="./app/todo/index.html" class="btn navy mini minii">ToDo</a>
+                  
+     </div>  
+           
+     <div class="supermodal">        
+        <div id="modal">
+            <div id="modalyrnoimage" class="bg-image hover-overlay ripple" data-mdb-ripple-color="light"></div>
         </div>
-        <ul id="list-container">
-            <!-- Tutaj będą pojawiać się zadania -->
-        </ul>
+     </div>
+         
+  <!--card-->
+    <!--
+    <div class="card" id="yrnoCard">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="#" onClick="pogoda_YRNO()">
+          <img id="pogodayrno" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Wykres pogody</h5>
+        <p class="card-text">YrNo</p>
+        <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
     </div>
-    
-    <div class="container">    
-        <button class="adm0" onclick="zapisz(document.getElementById('list-container').innerHTML,'todoZorro.html');">Zapisz</button>
-        <button onclick="wczytajPlik()">Wczytaj</button>
-        <br /><br /><hr /><br />
-        <input type="file" id="wybierzPlik">
+   -->
+  <!--card-->         
+         
+  <!--card-->
+    <div class="card" id="druga">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="./app/meteo/index.html">
+          <img id="pogoda" src="./img/meteo/pogoda.jpg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Prognoza pogody</h5>
+        <p class="card-text">Wykresy i radary</p>
+        <a href="./app/meteo/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
+    </div> 
+  <!--card-->
+         
+   <!--card-->
+       <div class="card">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <a href="./app/audio/index.html">
+            <img src="./img/menu/yamaha.jpg" class="img-fluid" />
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Audio</h5>
+          <p class="card-text">Słucham, bo muszę...</p>
+          <a href="./app/audio/spectrum/wykres.html" class="btn btn-primary">Wykres</a>
+        </div>
+      </div> 
+  <!--card-->
+         
+  <!--card-->
+    <div class="card">
+      <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+        <a href="./app/bus/index.html">
+          <img src="./img/menu/bus.jpg" class="img-fluid" />
+          <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+        </a>
+      </div>
+      <div class="card-body">
+        <h5 class="card-title">Autobusy i tramwaje</h5>
+        <p class="card-text">Tablice odjazdów</p>
+        <a href="./app/bus/index.html" class="btn btn-primary">Otwórz</a>
+      </div>
+    </div> 
+  <!--card-->
+
+  <!--card-->
+       <div class="card">
+        <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+          <a href="./app/580/index.html">
+            <img src="./img/menu/czeresnie.jpg" class="img-fluid" />
+            <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+          </a>
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">580 w Terenie</h5>
+          <p class="card-text">Obok Puszczy</p>
+          <a href="./app/580/index.html" class="btn btn-primary">Otwórz</a>
+        </div>
+      </div> 
+  <!--card-->
+
+ 
+  <!--card-->
+  
+  <!--div class="card">
+    <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+      <a href="./app/puszcza/index.html">
+        <img src="./img/menu/puszcza.jpg" class="img-fluid" />
+        <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+      </a>
     </div>
-    
-    <script src="script.js"></script>
-    <script src="./js/save.js"></script>
-    
+    <div class="card-body">
+        <h5 class="card-title">ToDo.md</h5>
+        <p class="card-text">ToDo.md</p>
+      <a href="./data/todo.md" class="btn btn-primary">Otwórz</a>
+    </div>
+   </div--> 
+
+<!--card-->
+  
+</div>
+  
+
+<div class="container">
+   
+      <button onclick='PasteTXT()'>Paste</button> 
+      <button onclick='CopyTXT()'>Copy</button>   
+      <span style="float:right;">
+         <button onclick='document.getElementById("txtx").value="";'>Clear</button>           
+      </span>
+      <textarea id="txtx" style="width:100%;min-height:9em;font-size:1.1rem; padding:0.3em;"></textarea>
+      <span style="float:left;">         
+         <button onclick='todoNow()' class="btn btn-primary">ToDo</button>
+         
+      </span>
+       <span style="float:right;">         
+         <button onclick='PasteFB(2)'>Po jutrze</button>
+         <button onclick='PasteFB(1)'>Jutro</button>
+      </span>
+   
+</div>
+   <div class="container" id="idtxtx"></div>  
+<div class="container" id="cytcyt"></div>
+      
+  <a href="#" class="top">Back to Top &#8593;</a>  
+  
+ </div>
+
+  
 </body>
+   
+<script>
+   const PasteFB=(nr=1)=>{
+   let txtx = document.getElementById("txtx");
+   if(nr===2) txtx.value=`Poproszę na pojutrze - ${jutro(nr)}:\n1x chleb Ziarmix\n2x bułki zwykłe\n--\nZbigniew Sz`;
+   if(nr===1) txtx.value=`Poproszę na jutro - ${jutro(nr)}:
+1x chleb Ziarmix
+2x bułki zwykłe
+--
+Zbigniew Sz`;
+   }
+   
+    const PasteTXT=async()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.value="";
+        txtx.style.height="20em";
+        const text = await navigator.clipboard.readText();
+        txtx.value = text;
+    }
+    const CopyTXT=()=>{
+        let txtx = document.getElementById("txtx");
+        txtx.select();
+        navigator.clipboard.writeText(txtx.value);
+    }
+</script>    
+   
+   
+
+<!--script src="./js/navbar.js?v=1"></script-->
+<script type="text/javascript" src="./js/yrno.js"></script> 
+
+<script>
+if (location.protocol==="file:") {
+  document.title="FILE::git";
+  
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+      link = document.createElement('link');
+      link.rel = 'icon';
+      document.getElementsByTagName('head')[0].appendChild(link);
+  }
+  link.href = './css/icon/red.ico';
+}
+</script>				  
+
+<script src="./js/suncalc.js"></script>
+<script>
+console.log(APPconfig);
+console.log(APPconfig.city[APPcity]);
+
+//https://github.com/mourner/suncalc
+let SUNdata = SunCalc.getTimes(new Date(), APPconfig.city[APPcity].lat,APPconfig.city[APPcity].lon);
+  //console.log(SUNdata)
+  //console.log(SUNdata.sunrise)
+  //console.log(SUNdata.sunset)
+      let dSunrise = new Date(SUNdata.sunrise);
+      let dSunset  = new Date(SUNdata.sunset);
+      let dateSunrise = dSunrise.getTime();
+      let dateSunset  = dSunset.getTime();
+      let dateDelta = dateSunset - dateSunrise;
+      //console.log("date=",  dateSunrise,dateSunset,dateDelta)
+      let sunrise = dSunrise.toLocaleString('pl-PL').split(" ").pop();
+      let sunset  = dSunset.toLocaleString('pl-PL').split(" ").pop();
+      sunrise = sunrise.replace(/(\:\d\d)$/,"");
+      sunset  =  sunset.replace(/(\:\d\d)$/,"");
+      //console.log(sunrise,sunset)
+      let dayLen  = dayL(dateDelta/1000);
+        _$("#sun").innerHTML  = `<div><span class="s1">Wsch.:</span> <span class="s2">${sunrise}</span></div>`;
+        _$("#sun").innerHTML += `<div><span class="s1">Zach.:</span> <span class="s2">${sunset}</span></div>`;
+        _$("#sun").innerHTML += `<div><span class="s1">Dzień:</span> <span class="s2">${dayLen}</span></div>`;
+      let longest  = (17*60*60)+( 1*60); //17:01
+      let shortest = ( 7*60*60)+(29*60); //7:29
+        longest  *= 1000;
+        shortest *= 1000;
+      let dayShortes  = dayL((longest - dateDelta)/1000);
+      let dayLongest  = dayL((dateDelta - shortest)/1000);
+      console.log("sssssssssssss",longest,shortest);
+      console.log("sssssssssssss",dateSunset,dateSunrise,dateDelta,dayLongest,dayShortes);  
+        _$("#sunplus").innerHTML  = `<div><span class="s1">Dłu.:</span> <span class="s2">${dayLongest}</span></div>`;
+        _$("#sunplus").innerHTML += `<div><span class="s1">Krót.:</span> <span class="s2">${dayShortes}</span></div>`;
+        _$("#sunplus").innerHTML += `<div><span class="s1"></span> <span class="s2">7:30 / 17:01</span></div>`;
+
+        
+   
+let pogoda_YRNO_modal=()=>{
+   console.log("pogoda_YRNO++++++++++++++++++++++++++++++++++++++++"); 
+   let moda = document.getElementById("modal");
+   moda.innerHTML = '<img id="modalyrno" src="https://www.yr.no/en/content/2-3083829/meteogram.svg" class="img-fluid img-modal" />';
+   moda.classList.add("bum-trans");
+   setTimeout(()=>{
+      moda.classList.add("re-trans");
+      setTimeout(()=>{moda.innerHTML = "";},2000);
+   },20000);
+   
+}
+
+let pogoda_YRNO = () =>{
+   pogoda_YRNO_modal();
+   return;
+   console.log("pogoda_YRNO----------------");  
+   if (document.getElementById("yrnoCard").classList.contains("bum-trans")){
+      console.log("contains-bum-trans-");
+      document.getElementById("yrnoCard").classList.remove("bum-trans");
+      document.getElementById("yrnoCard").classList.add("re-trans");
+   } else {
+      console.log("no");
+      document.getElementById("yrnoCard").classList.remove("re-trans");
+      document.getElementById("yrnoCard").classList.add("bum-trans");
+   }
+   //document.getElementById("pogodayrno").addEventListener("click", close_YRNO, false);
+}
+   
+</script>
+   
+   <script src="./js/cytaty.js"></script>
+   <script>
+   //navigator.serviceWorker.register('sw3.js?v=v3', {scope: './'});
+   </script>   
 </html>
