@@ -116,14 +116,28 @@ const DBLoad=(ten)=>{
 	let html="";
 	DBarr.forEach((obj)=>{
 		//console.log(obj);
-		html += `<div><span onclick="deleteRow(this)" id="${obj.id}" title="${obj.title}"> ❌ </span><h3 class="line">${obj.title}</h3><p>${obj.content}</p></div>`;
+		html += `<div>
+			<div class="show" id="${obj.id}">
+			<span onclick="deleteRow(this)" data-id="${obj.id}" title="Delete ${obj.title}">❌ </span>
+			<span onclick="editRow(this)"   data-id="${obj.id}" title="Edit ${obj.title}">↩️ </span>
+			</div>			
+			<h3 class="line">${obj.title}</h3>
+			<div class="content over" onclick="resizefull(this)">${obj.content}</div>
+		</div>`;
 	});
 	document.getElementById('noteall').innerHTML = html;
 	akcja("Pokaz");
 }
 
+
+const resizefull=(ten)=>{
+console.log("re",ten.classList);	
+	ten.classList.remove("over")
+	ten.classList.add("block")
+}
+
 const deleteRow=(ten)=>{	
-	const id=ten.id;
+	const id=ten.dataset.id;
 	const title=ten.title;
 	//console.log(id,ten);
 	if (confirm("Czy kasować ✳️ "+title+" ✳️") == true) {
@@ -131,8 +145,7 @@ const deleteRow=(ten)=>{
 		DBLoad();
 	} else {
 	  console.log("Nie teraz");
-	}
-	
+	}	
 }
 
 document.addEventListener("DOMContentLoaded",function(){
