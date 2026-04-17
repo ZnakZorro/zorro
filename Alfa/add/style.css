@@ -140,7 +140,9 @@ div.block {display:contents;}
 
 li p {color: var(--text-color);}
 .line {display:inline-block;}
-#noteall span {font-size:20px;}
+#noteall span {
+	/*font-size:20px;*/
+}
 
 /* Responsywny wiersz wpisywania */
 .input-row {
