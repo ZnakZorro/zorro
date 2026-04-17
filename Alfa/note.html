@@ -96,7 +96,16 @@ if (pasteNR>2)pasteNR=0;
 const dbName = storageName+"DB";
 const notesDB = new SimpleDB(dbName);
 
+const aktualizajca=(ten)=>{
+	const content = document.getElementById('txtx').value;
+	const title   = document.getElementById('title').value;
+	const dbid   = document.getElementById('txtx').dataset.dbid;
+	
+	console.log(dbid,title,content);
 
+	notesDB.update(dbid, { title: title, content: content });
+	DBLoad();
+}
 const DBSave=(ten)=>{
 	console.log("Load Save",dbName);
 	const content = document.getElementById('txtx').value;
@@ -120,10 +129,12 @@ const DBLoad=(ten)=>{
 		html += `<div>
 			<div class="show">
 			<span onclick="deleteRow(this)" data-id="${obid}" title="Delete ${obj.title}">❌ </span>
-			<span onclick="editRow(this)"   data-id="${obid}" title="Edit ${obj.title}">📝 </span>
+			<span onclick="editRow(this,'id${obid}')"   data-id="${obid}" title="${obj.title}">📝 </span>
 			
 			<span onclick="zwin('id${obid}',1)"   data-id="${obid}" title="Zwiń ${obj.title}">⬇️ </span>
 			<span onclick="zwin('id${obid}',-1)"   data-id="${obid}" title="Rozwiń ${obj.title}">⬆️ </span>
+			
+			
 			
 			</div>			
 			<h3 class="line">${obj.title}</h3>
@@ -133,6 +144,8 @@ const DBLoad=(ten)=>{
 	document.getElementById('noteall').innerHTML = html;
 	akcja("Pokaz");
 }
+
+
 
 
 const resizefull=(ten)=>{
@@ -151,6 +164,17 @@ let ten = document.querySelector("#"+id);
 		ten.classList.add("over")
 		ten.classList.remove("block")
 	}
+}
+
+
+const editRow=(ten,id)=>{	
+	const dbid=ten.dataset.id;
+	const title=ten.title;
+	const content = document.querySelector("#"+id).textContent;
+	//console.log(id,title,content);
+	document.querySelector("#title").value=title;
+	document.querySelector("#txtx").value=content;
+	document.querySelector("#txtx").dataset.dbid=dbid;	
 }
 
 const deleteRow=(ten)=>{	
@@ -197,6 +221,7 @@ document.addEventListener("DOMContentLoaded",function(){
    &nbsp;
    <h2 style="display: inline-block;">Note</h2>
    	<input type="text" id="title" value="Zapis" /> 
+   	<span onclick="aktualizajca(this)" title="Aktualizacja"> 🔃 </span>
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
     
