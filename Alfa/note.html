@@ -106,6 +106,7 @@ const DBSave=(ten)=>{
 	notesDB.create({ title: title, content: content });
 	// 3. Pobieranie i wyświetlanie
 	akcja("Zapisano");
+	DBLoad();
 }
 
 const DBLoad=(ten)=>{
