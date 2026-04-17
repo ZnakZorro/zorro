@@ -116,13 +116,18 @@ const DBLoad=(ten)=>{
 	let html="";
 	DBarr.forEach((obj)=>{
 		//console.log(obj);
+		let obid=obj.id.trim()
 		html += `<div>
-			<div class="show" id="${obj.id}">
-			<span onclick="deleteRow(this)" data-id="${obj.id}" title="Delete ${obj.title}">❌ </span>
-			<span onclick="editRow(this)"   data-id="${obj.id}" title="Edit ${obj.title}">↩️ </span>
+			<div class="show">
+			<span onclick="deleteRow(this)" data-id="${obid}" title="Delete ${obj.title}">❌ </span>
+			<span onclick="editRow(this)"   data-id="${obid}" title="Edit ${obj.title}">📝 </span>
+			
+			<span onclick="zwin('id${obid}',1)"   data-id="${obid}" title="Zwiń ${obj.title}">⬇️ </span>
+			<span onclick="zwin('id${obid}',-1)"   data-id="${obid}" title="Rozwiń ${obj.title}">⬆️ </span>
+			
 			</div>			
 			<h3 class="line">${obj.title}</h3>
-			<div class="content over" onclick="resizefull(this)">${obj.content}</div>
+			<div class="content over" onclick="resizefull(this)"  id="id${obid}">${obj.content}</div>
 		</div>`;
 	});
 	document.getElementById('noteall').innerHTML = html;
@@ -131,9 +136,21 @@ const DBLoad=(ten)=>{
 
 
 const resizefull=(ten)=>{
-console.log("re",ten.classList);	
+	console.log("re",ten.classList);	
 	ten.classList.remove("over")
 	ten.classList.add("block")
+}
+
+const zwin=(id,direction)=>{
+let ten = document.querySelector("#"+id);
+	console.log("re",ten.classList);
+	if (direction===1){	
+		ten.classList.remove("over")
+		ten.classList.add("block")
+	} else {
+		ten.classList.add("over")
+		ten.classList.remove("block")
+	}
 }
 
 const deleteRow=(ten)=>{	
