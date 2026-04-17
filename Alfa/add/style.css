@@ -126,9 +126,17 @@ h2 {
 }
 h3 {
     color: var(--text-color);
-    font-size:18px;
-    margin: 12px 0 6px;
+    font-size:17px;
+    
 }
+div.show {display:flex;margin: 6px;}
+div.show span {margin: 0 12px;}
+
+
+div.content {margin-bottom:1.5rem;border-bottom: 2px solid #aaa; padding-bottom:4px; max-height:5em;background: var(--bg-gray);}
+div.over {overflow-y: auto;}
+div.block {display:contents;}
+
 
 li p {color: var(--text-color);}
 .line {display:inline-block;}
