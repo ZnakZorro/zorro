@@ -207,7 +207,7 @@ li.checked p {
 .edit-btn, span {
     font-size: 1.5rem;
     cursor: pointer;
-    padding: 0 5px;
+    padding: 0 8px;
     user-select: none;
 }
 
@@ -227,3 +227,40 @@ input[type="file" i] {
     
 }
 
+
+
+/* BADGET */
+  #key-notifier-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column-reverse; /* Nowe klawisze na dole */
+    gap: 8px;
+    pointer-events: none; /* Nie blokuje kliknięć w inne elementy */
+    z-index: 9999;
+  }
+
+  .key-badge {
+    background: rgba(0, 0, 0, 0.8);
+    color: #f7df1e; /* Kolor JavaScript */
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    font-weight: bold;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 2px solid #f7df1e;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    min-width: 50px;
+    text-align: center;
+    animation: slideIn 0.2s ease-out, fadeOut 0.5s ease-in 1.5s forwards;
+  }
+
+  @keyframes slideIn {
+    from { transform: translateX(50px); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+  }
+
+  @keyframes fadeOut {
+    to { opacity: 0; transform: translateY(-20px); }
+  }

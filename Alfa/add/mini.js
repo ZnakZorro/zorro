@@ -43,6 +43,26 @@ const getIdDate=()=>{
 }
 
 
+const akcja=(keyName)=>{
+    // 2. Tworzenie elementu badge
+    const container = document.getElementById('key-notifier-container');
+    const badge = document.createElement('div');
+    badge.className = 'key-badge';
+    badge.textContent = keyName;
+
+    // 3. Dodanie do DOM
+    container.appendChild(badge);
+
+    // 4. Automatyczne usuwanie po zakończeniu animacji (2 sekundy)
+    setTimeout(() => {
+        badge.remove();
+    }, 3000);
+}
+
+
+
+
+
 document.querySelector("#home-btn").addEventListener("click", ()=>{location.href="../"});
 document.querySelector("#note-btn").addEventListener("click", ()=>{location.href="note.html"});
 document.querySelector("#gamma-btn").addEventListener("click", ()=>{location.href="gamma.html"});
