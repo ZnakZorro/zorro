@@ -97,7 +97,7 @@ const dbName = storageName+"DB";
 const notesDB = new SimpleDB(dbName);
 
 
-const locsave=()=>{
+const DBSave=(ten)=>{
 	console.log("Load Save",dbName);
 	const content = document.getElementById('txtx').value;
 	const title   = document.getElementById('title').value;
@@ -105,20 +105,20 @@ const locsave=()=>{
 	// 2. Dodawanie danych
 	notesDB.create({ title: title, content: content });
 	// 3. Pobieranie i wyświetlanie
-	
-
+	akcja("Zapisano");
 }
 
-const DBLoad=()=>{
+const DBLoad=(ten)=>{
 	const DBarr = notesDB.getAll();
 	//console.table(DBarr);
 	DBarr.reverse();
 	let html="";
 	DBarr.forEach((obj)=>{
 		//console.log(obj);
-		html += `<div><span onclick="deleteRow(this)" id="${obj.id}" title="${obj.title}">❌</span><h3 class="line">${obj.title}</h3><p>${obj.content}</p></div>`;
+		html += `<div><span onclick="deleteRow(this)" id="${obj.id}" title="${obj.title}"> ❌ </span><h3 class="line">${obj.title}</h3><p>${obj.content}</p></div>`;
 	});
 	document.getElementById('noteall').innerHTML = html;
+	akcja("Pokaz");
 }
 
 const deleteRow=(ten)=>{	
@@ -136,7 +136,7 @@ const deleteRow=(ten)=>{
 
 document.addEventListener("DOMContentLoaded",function(){
 	document.getElementById('title').value = "Zapis_"+uid();
-	DBLoad();
+	DBLoad(null);
 });
 
        
@@ -144,7 +144,7 @@ document.addEventListener("DOMContentLoaded",function(){
 </head>
 
 <body>
-
+<div id="key-notifier-container"></div>
 	<div class="theme-switch" id="home-btn">🏠</div>
 	<div class="theme-switch active" id="note-btn">📝</div>
 	<div class="theme-switch" id="theme-toggle">🌙</div>
@@ -161,11 +161,10 @@ document.addEventListener("DOMContentLoaded",function(){
 <!--⭕✅☑️✔️❌👁️-->
 
    <div class="container notop">
-   <span onclick="locsave()" title="Local Save">✔️</span>
-   <span onclick="DBLoad()" title="Load Local">👁️</span>
+   <span onclick="DBSave(this)" title="Local Save"> ✅ </span>
+   <span onclick="DBLoad(this)" title="Load Local"> 👁️ </span>
    &nbsp;
-   <h2 style="display: inline-block;">Note</h2> 
-   <!--span onclick="DBLoad()" title="Show">⭕</span-->
+   <h2 style="display: inline-block;">Note</h2>
    	<input type="text" id="title" value="Zapis" /> 
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
