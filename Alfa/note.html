@@ -96,10 +96,9 @@ if (pasteNR>2)pasteNR=0;
 const dbName = storageName+"DB";
 const notesDB = new SimpleDB(dbName);
 
-const uid=()=>Math.random().toString(16).slice(8);
 
 const locsave=()=>{
-console.log("Load Save",dbName);
+	console.log("Load Save",dbName);
 	const content = document.getElementById('txtx').value;
 	const title   = document.getElementById('title').value;
 	console.log(title,content);
@@ -110,23 +109,34 @@ console.log("Load Save",dbName);
 
 }
 
-const locload=()=>{
-	//console.log("Load Local",dbName);
-	//let tx = document.getElementById('txtx').value
-	//console.log(tx);
-	//tx = tx.replaceAll("\n","<br>");
-	//document.getElementById('noteall').innerHTML = tx;
-	console.table(notesDB.getAll());
+const DBLoad=()=>{
+	const DBarr = notesDB.getAll();
+	//console.table(DBarr);
+	DBarr.reverse();
+	let html="";
+	DBarr.forEach((obj)=>{
+		//console.log(obj);
+		html += `<div><span onclick="deleteRow(this)" id="${obj.id}" title="${obj.title}">❌</span><h3 class="line">${obj.title}</h3><p>${obj.content}</p></div>`;
+	});
+	document.getElementById('noteall').innerHTML = html;
 }
 
-const locshow=()=>{
-	console.log("View",dbName);
-	console.table(notesDB.getAll());
+const deleteRow=(ten)=>{	
+	const id=ten.id;
+	const title=ten.title;
+	//console.log(id,ten);
+	if (confirm("Czy kasować ✳️ "+title+" ✳️") == true) {
+	  	notesDB.delete(id);
+		DBLoad();
+	} else {
+	  console.log("Nie teraz");
+	}
+	
 }
-
 
 document.addEventListener("DOMContentLoaded",function(){
 	document.getElementById('title').value = "Zapis_"+uid();
+	DBLoad();
 });
 
        
@@ -148,13 +158,14 @@ document.addEventListener("DOMContentLoaded",function(){
                 <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
                 <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
         </div>
-<!--⭕✅☑️✔️❌-->
+<!--⭕✅☑️✔️❌👁️-->
+
    <div class="container notop">
    <span onclick="locsave()" title="Local Save">✔️</span>
-   <span onclick="locload()" title="Load Local">⭕</span>
+   <span onclick="DBLoad()" title="Load Local">👁️</span>
    &nbsp;
    <h2 style="display: inline-block;">Note</h2> 
-   <span onclick="locshow()" title="Show">👁️</span>
+   <!--span onclick="DBLoad()" title="Show">⭕</span-->
    	<input type="text" id="title" value="Zapis" /> 
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
