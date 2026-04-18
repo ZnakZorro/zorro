@@ -96,6 +96,24 @@ if (pasteNR>2)pasteNR=0;
 const dbName = storageName+"DB";
 const notesDB = new SimpleDB(dbName);
 
+const toggleDIV=(id)=>{
+	const area = document.querySelector("#"+id);
+	console.log(area)
+    const minHeight = "55px";
+    if (area.style.height === minHeight || !area.style.height) {
+		area.style.height = area.scrollHeight + "px";
+		area.classList.remove("over");
+		area.classList.add("block");
+    } else {
+		area.style.height = minHeight;
+		area.classList.remove("block");
+		area.classList.add("over");
+    }
+    console.log(area)
+
+  }
+  
+
 const aktualizajca=(ten)=>{
 	const content = document.getElementById('txtx').value;
 	const title   = document.getElementById('title').value;
@@ -125,24 +143,30 @@ const DBLoad=(ten)=>{
 	let html="";
 	DBarr.forEach((obj)=>{
 		//console.log(obj);
-		let obid=obj.id.trim()
+		let obid=obj.id.trim();
 		html += `<div>
 			<div class="show">
 			<span onclick="deleteRow(this)" data-id="${obid}" title="Delete ${obj.title}">❌ </span>
 			<span onclick="editRow(this,'id${obid}')"   data-id="${obid}" title="${obj.title}">📝 </span>
 			
-			<span onclick="zwin('id${obid}',1)"   data-id="${obid}" title="Zwiń ${obj.title}">⬇️ </span>
-			<span onclick="zwin('id${obid}',-1)"   data-id="${obid}" title="Rozwiń ${obj.title}">⬆️ </span>
-			
-			
+			<!--span onclick="zwin('id${obid}',1)"   data-id="${obid}" title="Zwiń ${obj.title}">⬇️ </span>
+			<span onclick="zwin('id${obid}',-1)"   data-id="${obid}" title="Rozwiń ${obj.title}">⬆️ </span-->
+			<span onclick="toggleDIV('id${obid}')"  id="tog${obid}" data-id="${obid}" title="Rozwiń ${obj.title}">🤏</span>
 			
 			</div>			
 			<h3 class="line">${obj.title}</h3>
-			<div class="content over" onclick="resizefull(this)"  id="id${obid}">${obj.content}</div>
+			<div class="content over base-style" onclick="resizefull(this)"  id="id${obid}">${obj.content}</div>
 		</div>`;
 	});
 	document.getElementById('noteall').innerHTML = html;
 	akcja("Pokaz");
+	const contenty = document.querySelectorAll(".content");
+	//console.log(contenty);
+	contenty.forEach((c)=>{		
+		let togid = c.id.replace("id","tog");
+		//console.log(c.id,togid);
+		if (c.scrollHeight<55) document.getElementById(togid).classList.add("hide");
+	});
 }
 
 
@@ -150,12 +174,19 @@ const DBLoad=(ten)=>{
 
 const resizefull=(ten)=>{
 	console.log("re",ten.classList);	
-	ten.classList.remove("over")
-	ten.classList.add("block")
+	ten.classList.remove("over");
+	ten.classList.add("block");
+	ten.style.height = area.scrollHeight + "px";
+}
+
+const przewin=(id)=>{
+	let ten = document.querySelector("#"+id);
+	console.log("re",ten.classList);
+	ten.classList.toggle("over");
 }
 
 const zwin=(id,direction)=>{
-let ten = document.querySelector("#"+id);
+	let ten = document.querySelector("#"+id);
 	console.log("re",ten.classList);
 	if (direction===1){	
 		ten.classList.remove("over")
@@ -167,6 +198,21 @@ let ten = document.querySelector("#"+id);
 }
 
 
+const toggleFit_____=()=>{
+    const area = document.getElementById('txtx');
+    const minHeight = "45px"; // Tyle samo co w CSS
+
+    // Jeśli aktualna wysokość jest równa minimalnej (lub nieustawiona inline)
+    if (area.style.height === minHeight || !area.style.height) {
+      // Rozwiń do wysokości zawartości (scrollHeight)
+      // Dodajemy 2px na obramowanie, jeśli box-sizing jest użyty
+      area.style.height = area.scrollHeight + "px";
+    } else {
+      // Zwiń do minimum
+      area.style.height = minHeight;
+    }
+  }
+  
 const editRow=(ten,id)=>{	
 	const dbid=ten.dataset.id;
 	const title=ten.title;
