@@ -11,9 +11,10 @@
     <script>const storageName = "Note";</script>
     <link rel="stylesheet" href="./add/style.css">
    <style>
- 	body {background:#444;}
+ 	
    </style>
    <script src="./add/db.js"></script>
+   <script src="./add/server.js"></script>
 <script>
     const $=e=>document.querySelector(e);
     const $$=e=>document.querySelectorAll(e);
@@ -154,7 +155,7 @@ const DBLoad=(ten)=>{
 			<span onclick="toggleDIV('id${obid}')"  id="tog${obid}" data-id="${obid}" title="Rozwiń ${obj.title}">🤏</span>
 			
 			</div>			
-			<h3 class="line">${obj.title}</h3>
+			<h3>${obj.title}</h3>
 			<div class="content over base-style" onclick="resizefull(this)"  id="id${obid}">${obj.content}</div>
 		</div>`;
 	});
@@ -268,6 +269,8 @@ document.addEventListener("DOMContentLoaded",function(){
    <h2 style="display: inline-block;">Note</h2>
    	<input type="text" id="title" value="Zapis" /> 
    	<span onclick="aktualizajca(this)" title="Aktualizacja"> 🔃 </span>
+   	<span onclick="serverSave(this)" title="serverSave">ServSave</span>
+   	
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
     
