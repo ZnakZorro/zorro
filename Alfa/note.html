@@ -252,6 +252,10 @@ const deleteRow=(ten)=>{
    </div>
     
        <div class="container notop">    
+		    <!--button onclick="getServer(this);">getDir</button-->
+		    <div id="dir"></div>
+    </div>
+       <div class="container notop">    
         <button class="big" onclick="zapisz(document.getElementById('txtx').value,storageName+'.txt');">Zapisz na dysk</button>
         <button class="big" onclick="wczytajPlik()">Wczytaj z dysku</button>
     </div>
@@ -263,6 +267,9 @@ const deleteRow=(ten)=>{
    <script src="./add/save.js"></script>
    
    <script>
+   
+   
+   
    //---dom ready domready--------------------------------
    document.addEventListener("DOMContentLoaded",function(){
    		document.getElementById('title').value = "Zapis_"+uid();
