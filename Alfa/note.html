@@ -116,12 +116,11 @@ const toggleDIV=(id)=>{
   
 
 const aktualizajca=(ten)=>{
+	akcja("Aktualizacja");
 	const content = document.getElementById('txtx').value;
 	const title   = document.getElementById('title').value;
 	const dbid   = document.getElementById('txtx').dataset.dbid;
-	
 	console.log(dbid,title,content);
-
 	notesDB.update(dbid, { title: title, content: content });
 	DBLoad();
 }
@@ -152,6 +151,7 @@ const DBLoad=(ten)=>{
 			
 			<!--span onclick="zwin('id${obid}',1)"   data-id="${obid}" title="Zwiń ${obj.title}">⬇️ </span>
 			<span onclick="zwin('id${obid}',-1)"   data-id="${obid}" title="Rozwiń ${obj.title}">⬆️ </span-->
+			
 			<span onclick="toggleDIV('id${obid}')"  id="tog${obid}" data-id="${obid}" title="Rozwiń ${obj.title}">🤏</span>
 			
 			</div>			
@@ -260,11 +260,12 @@ document.addEventListener("DOMContentLoaded",function(){
                 <button onclick="document.getElementById('txtx').value='';" class="button">Clear</button> 
                 <button onclick="PasteFB(1)" class="button navy">Chleb</button> 
         </div>
-<!--⭕✅☑️✔️❌👁️-->
+<!--⭕✅☑️✔️❌👁️📤📥-->
 
    <div class="container notop">
    <span onclick="DBSave(this)" title="Local Save"> ✅ </span>
-   <span onclick="DBLoad(this)" title="Load Local"> 👁️ </span>
+   <!--span onclick="DBLoad(this)" title="Load Local"> 👁️ </span-->
+   <span onclick="getServer(this)" title="Get from server"> 📤 </span>
    &nbsp;
    <h2 style="display: inline-block;">Note</h2>
    	<input type="text" id="title" value="Zapis" /> 
