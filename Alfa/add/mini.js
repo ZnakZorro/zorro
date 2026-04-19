@@ -58,8 +58,7 @@ const akcja=(keyName)=>{
         badge.remove();
     }, 3000);
 }
-
-
+const message=akcja;
 
 
 

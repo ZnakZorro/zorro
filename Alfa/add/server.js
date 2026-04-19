@@ -1,7 +1,4 @@
     const save2server=async(dir,name,content)=>{  
-        //console.log("=================================================")      
-        //console.log("dir="+dir, "name="+name);
-        //console.log("ppppppppost fetch post");
         fetch('http://192.168.50.117:3333/cdn/doc2abc', {
               method: 'POST',
               headers: {
@@ -15,9 +12,6 @@
             })
             .then(response => response.json())
             .then(data => {
-              //console.log("post ret");
-              //console.log(data);
-              //console.log(data.status+" - "+data.name)
               message(`${data.status}:${data.dir}/${data.name}`);
             })
             .catch(error => console.error(error));
@@ -28,12 +22,11 @@ const serverSave=()=>{
 	const name   = document.getElementById('title').value;
 	const key = "Nota";
 	console.log(key,name,content);
-	//save2server(key,name+'_'+dateDayName(true)+ext,content);
 	save2server(key,name+'.txt',content);
 	akcja("Server Save");
 }
 
-    const saveAll=async(ten=null,item=null)=>{
+    const saveAll__________=async(ten=null,item=null)=>{
         console.log("=====saveAll===================")
         document.querySelectorAll("#btn button").forEach(async(b)=>{
             let ext = ".txt";
@@ -53,16 +46,10 @@ const serverSave=()=>{
 	
 const showNota=(data)=>{
 	console.log(data);
-	//console.log(JSON.stringify(data,null,4));
-	//console.log(data.tree.children);
-	//console.log(data.tree.children[0]);
 	let arr=[];
 	data.tree.children.forEach((t)=>{
-		//console.log(t.path);
-		//console.log(t.relativePath);
 		arr.push(t.relativePath);
-	});
-	//console.log(arr);
+	});	
 	document.querySelector("#txtx").value=arr.join("\n");
 }	
 	
@@ -76,8 +63,7 @@ const showNota=(data)=>{
               }
             })
             .then(response => response.json())
-            .then(data => {
-              
+            .then(data => {              
               showNota(data);
             })
             .catch(error => console.error(error));

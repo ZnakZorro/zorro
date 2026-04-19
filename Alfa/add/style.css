@@ -9,6 +9,7 @@
     --text-color-check: #777;
     --border-color: #eeeeee;
     --item-border: #f0f0f0;
+    --color-blind: #ccc;
 }
 
 /* Kolory dla trybu ciemnego */
@@ -22,8 +23,8 @@
     --text-color-check : #ccc;
     --border-color: #3e4446;
     --item-border: #313537;
+    --color-blind: #777;
 }
-.nota {font-family: monospace;font-size: 0.9rem;background: var(--bg-gray);}
 
 input {
     background: var(--container-bg);
@@ -280,6 +281,9 @@ input[type="file" i] {
     text-align: center;
     animation: slideIn 0.2s ease-out, fadeOut 0.5s ease-in 1.5s forwards;
   }
+  .nota {font-family: monospace;font-size: 0.9rem;}
+  .notka {font-family: monospace;font-size: 0.9rem;background: var(--bg-gray); color:var(--color-blind); cursor:pointer;}
+
 
   @keyframes slideIn {
     from { transform: translateX(50px); opacity: 0; }
