@@ -26,10 +26,11 @@
 const serverSave=()=>{
 	const content = document.getElementById('txtx').value;
 	const name   = document.getElementById('title').value;
-	const key = "Dom";
+	const key = "Nota";
 	console.log(key,name,content);
 	//save2server(key,name+'_'+dateDayName(true)+ext,content);
 	save2server(key,name+'.txt',content);
+	akcja("Server Save");
 }
 
     const saveAll=async(ten=null,item=null)=>{
@@ -47,3 +48,40 @@ const serverSave=()=>{
         })
     }
 
+
+
+	
+const showNota=(data)=>{
+	console.log(data);
+	//console.log(JSON.stringify(data,null,4));
+	//console.log(data.tree.children);
+	//console.log(data.tree.children[0]);
+	let arr=[];
+	data.tree.children.forEach((t)=>{
+		//console.log(t.path);
+		//console.log(t.relativePath);
+		arr.push(t.relativePath);
+	});
+	//console.log(arr);
+	document.querySelector("#txtx").value=arr.join("\n");
+}	
+	
+    const getServer=async(dir,name,content)=>{  
+    //const u="http://192.168.50.117:3333/dir/qqq/DOC";
+    const u="http://192.168.50.117:3333/dir/Nota";
+        fetch(u, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
+              
+              showNota(data);
+            })
+            .catch(error => console.error(error));
+    }
+	
+	
+	
