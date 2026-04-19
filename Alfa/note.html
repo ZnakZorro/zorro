@@ -32,25 +32,7 @@ const setNote=(nota)=>{
 	});
 	document.querySelector("#note").innerHTML = html;
 }  
-    //---dom ready--------------------------------
-    document.addEventListener("DOMContentLoaded",function(){
-    	setNote(note);
-        let u ="note.txt";
-        try {
-				fetch(u)
-				.then(r => {return r.text()})
-				.then(txt => {
-				    console.log("txt=",txt);
-				    setNote(txt);
-				})
-				.catch(e => {console.log(e)});
-		}
-		catch (err) {
-			console.log(err)
-		}
-    })
-    //---DOM READY----------------------------------
- 
+
 /////////////////////
         const jutro=(ile=1)=>{
                const weekdays = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
@@ -235,12 +217,6 @@ const deleteRow=(ten)=>{
 	  console.log("Nie teraz");
 	}	
 }
-
-document.addEventListener("DOMContentLoaded",function(){
-	document.getElementById('title').value = "Zapis_"+uid();
-	DBLoad(null);
-});
-
        
 </script>    
 </head>
@@ -264,13 +240,13 @@ document.addEventListener("DOMContentLoaded",function(){
 
    <div class="container notop">
    <span onclick="DBSave(this)" title="Local Save"> ✅ </span>
-   <!--span onclick="DBLoad(this)" title="Load Local"> 👁️ </span-->
-   <span onclick="getServer(this)" title="Get from server"> 📤 </span>
+   <span onclick="serverSave(this)" title="Server Save"> 📥 </span>  
+   <span onclick="aktualizajca(this)" title="Aktualizacja"> 🔃 </span> 
    &nbsp;
    <h2 style="display: inline-block;">Note</h2>
    	<input type="text" id="title" value="Zapis" /> 
-   	<span onclick="aktualizajca(this)" title="Aktualizacja"> 🔃 </span>
-   	<span onclick="serverSave(this)" title="Server Save"> 📥 </span>
+   	
+   	<span onclick="getServer(this)" title="Get from server"> 📤 </span>  	
    	
 	<textarea spellcheck="false"   autocorrect="off"   autocapitalize="off"   autocomplete="off" translate="no" id="txtx" onclick="$('#txtx').style.height='20em';"></textarea>
    </div>
@@ -282,8 +258,35 @@ document.addEventListener("DOMContentLoaded",function(){
 
     <div id="noteall" class="container notop nota"></div>
    <pre class="log"></pre>
-   <div id="note" class="container notop nota"></div>
+   <div id="note" class="container notop notka"></div>
    <script src="./add/mini.js"></script>
    <script src="./add/save.js"></script>
+   
+   <script>
+   //---dom ready domready--------------------------------
+   document.addEventListener("DOMContentLoaded",function(){
+   		document.getElementById('title').value = "Zapis_"+uid();
+		DBLoad(null);
+       	setNote(note);
+       	console.log(location)
+        let u ="note.txt";
+		if (location.protocol !="file:"){
+		    try {
+					fetch(u)
+					.then(r => {return r.text()})
+					.then(txt => {
+						console.log("txt=",txt);
+						setNote(txt);
+					})
+					.catch(e => {console.log(e)});
+			}
+			catch (err) {
+				console.log(err)
+			}
+		}
+   		$("h2").textContent = storageName;
+   		$("#note").addEventListener("click", ()=>{$("#note").classList.remove("notka");});
+   	})
+   </script>
 </body>
 </html>
