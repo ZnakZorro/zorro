@@ -42,15 +42,32 @@ const serverSave=()=>{
     }
 
 
+const loadServ=(path)=>{
+	//console.log(path);
+	//http://192.168.50.117:3333/abc/DOC/Nota/Godmother%20of%20Silicon%20Valley.txt
+	const u = "http://192.168.50.117:3333/abc/DOC/Nota/"+path;
+	fetch(u)
+		.then(r => {return r.text()})
+		.then(tx => {
+			//console.log(tx);
+			$("#txtx").value=tx;
+		})
+		.catch(e => {console.log(e)})
 
+}
 	
 const showNota=(data)=>{
 	console.log(data);
-	let arr=[];
+	//let arr=[];
+	let html="<ol class='dir'>";
 	data.tree.children.forEach((t)=>{
-		arr.push(t.relativePath);
+		//arr.push(t.relativePath);
+		//html +=`<li><a class="btn" href="">${t.relativePath}</a></li>`;
+		html +=`<li><button class="btn" onclick="loadServ('${t.relativePath}')">${t.name}</button></li>`;
 	});	
-	document.querySelector("#txtx").value=arr.join("\n");
+	html +="</ol>";
+	$("#dir").innerHTML=html;
+	
 }	
 	
     const getServer=async(dir,name,content)=>{  

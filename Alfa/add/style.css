@@ -10,6 +10,7 @@
     --border-color: #eeeeee;
     --item-border: #f0f0f0;
     --color-blind: #ccc;
+    --bg-btn:#568;
 }
 
 /* Kolory dla trybu ciemnego */
@@ -24,6 +25,7 @@
     --border-color: #3e4446;
     --item-border: #313537;
     --color-blind: #777;
+    --bg-btn:#568;
 }
 
 input {
@@ -191,6 +193,7 @@ button {
     cursor: pointer;
     border-radius: 6px;
     transition: background 0.3s;
+    text-decoration:none;
 }
 
 button:hover {
@@ -201,6 +204,7 @@ button.big {
 	background: #258;
 	font-weight:bold;
 }
+
 
 /* Lista i elementy responsywne */
 ul {
@@ -247,6 +251,33 @@ li.checked p {
 input[type="file" i] {
 	font-size:15px;
 }
+
+.btn {
+	background:var(--bg-btn);
+	color:  var(--text-color);
+	text-decoration:none;
+	padding:3px 6px;
+	display: inline-block;
+	width: 100%;
+	text-align: left;
+}
+ol.dir {
+	font-size:0.95rem;
+	border:none;
+	display: inline-block;
+	margin-left: 2em; 
+}
+
+ol.dir li {
+	border:none;
+	display: list-item; 
+	list-style: decimal;
+	margin:2px;
+}
+
+
+
+
 /* MEDIA QUERIES - dla bardzo małych ekranów */
 @media (max-width: 460px) {
     .container {padding: 5px;}    
