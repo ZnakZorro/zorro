@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="mobile-web-app-capable" content="yes">
+  <link rel="shortcut icon" type="image/png" size="192x192" href="icon-192.png">
+  <title>PWA1</title>
+  <link rel="manifest" href="./manifest.json">
+  <meta name="theme-color" content="#2196f3">
+  <link rel="stylesheet" href="./css/ssl.css"/>
+  <style>
+
+  	
+  </style>
+ <script>
+ // Funkcja usuwająca wszystkie magazyny cache
+async function clearServiceWorkerCache() {
+  if ('caches' in window) {
+    const cacheNames = await caches.keys();
+    await Promise.all(
+      cacheNames.map(name => caches.delete(name))
+    );
+    console.log('Cache Service Workera został wyczyszczony.');
+    
+    // Opcjonalnie: odśwież stronę, aby pobrać nowe zasoby
+    window.location.reload();
+  }
+}
+
+// Wywołanie
+//clearServiceWorkerCache();
+
+
+	const $=e=>document.querySelector(e);
+	const $$=e=>document.querySelectorAll(e);
+
+	const loadData=async(u)=> {
+		  let response = await fetch(u);
+		  let data = await response.json();
+		  return data;
+	}
+	
+	const setData=async()=>{
+		let nr = Math.round(100*Math.random())
+		let data = await loadData('https://jsonplaceholder.typicode.com/todos/'+nr);
+		console.log(data);		
+		$("#info").textContent += nr+". "+data.title+"\n";
+	}
+	
+	const getAktualYRNO=async()=>{
+		const u="https://www.yr.no/api/v0/locations/2-3083828/forecast/currenthour";
+		let data = await loadData(u);
+		console.log(data);		
+
+	}
+	const getFetch=async(u)=>{
+		let data = await loadData(u);
+		console.log(data);		
+
+	}
+	
+	    //---dom ready--------------------------------
+    document.addEventListener("DOMContentLoaded",async()=>{
+    	setData();
+	});
+</script>
+
+</head>
+<body>
+  
+  <h3>Witaj w SSL1</h3>
+  
+
+  <hr />
+  <a href="./meteogram.html" class="btn">Meteogram</a>
+  <button onclick="setData()">setData</button>
+  <button onclick="getAktualYRNO();">getAktualYRNO</button>
+  <button onclick="getFetch('https://192.168.50.155/httpapi.asp?command=getStatusEx');">getWIIM</button>
+  
+  
+  
+  
+  <pre id="info"></pre>
+  
+  
+  <br /> <br /> <br /> 
+  <hr />
+  <button onclick="clearServiceWorkerCache();">clearServiceWorkerCache</button>
+  <a href="./data/server.cert">cert</a>
+
+  <script>
+    // Rejestracja Service Workera
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+          .then(reg => console.log('Service Worker zarejestrowany!', reg))
+          .catch(err => console.log('Błąd rejestracji:', err));
+      });
+    }
+  </script>
+</body>
+</html>

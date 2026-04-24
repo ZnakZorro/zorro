@@ -1,0 +1,20 @@
+  	body {font-size:16pt; font-family:Verdana;}
+  	       /* Formularze i Tabele */
+        input, select, button, .btn {
+            font-size: 1rem;
+            background: #666;
+            border: 1px solid #444;
+            color: white;
+            padding: 8px;
+            border-radius: 4px;
+            margin: 4px;
+            text-decoration:none;
+        }
+
+        button, .btn {
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover { filter: brightness(1.2); }
+
