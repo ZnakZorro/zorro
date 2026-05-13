@@ -245,7 +245,7 @@ li.checked p {
     color: #007bff;
     background: none;
     border: none;
-    padding-right: 8px;
+    padding-right: 16px;
 }
 
 input[type="file" i] {
