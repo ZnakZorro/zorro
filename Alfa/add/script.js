@@ -26,7 +26,14 @@ themeToggle.addEventListener("click", function() {
     }
 });
 
-
+const revert=()=>{
+    console.log("revert");
+        const ul = document.getElementById('list-container');
+        const liElements = ul.querySelectorAll('li'); 
+        for (let i = liElements.length - 1; i >= 0; i--) {
+            ul.appendChild(liElements[i]);
+        }
+}
 
 
 // Obsługa Entera
