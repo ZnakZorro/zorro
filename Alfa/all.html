@@ -1,0 +1,128 @@
+
+
+<style>
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #000;
+    font-family: 'Inter', sans-serif;
+    color: #fff;
+    overflow: hidden; /* Blokujemy domyślny scrollbar */
+}
+
+.swiper {
+    width: 100vw;
+    height: 100vh;
+}
+
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 40px;
+}
+
+/* Przykładowe zróżnicowanie tła sekcji dla testu (wszystkie ciemne) */
+.section-home { background: #000000; }
+.section-about { background: #050505; border-top: 1px solid #111; }
+.section-contact { background: #0a0a0a; }
+
+.content h1, .content h2 {
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-weight: 900;
+    color: #3b82f6; /* Twój błękitny akcent */
+    margin-bottom: 20px;
+}
+
+.content p {
+    font-size: 1.2rem;
+    color: #888;
+}
+
+/* Customizacja kropek nawigacji pod Dark Mode */
+.swiper-pagination-bullet {
+    background: #555 !important;
+    opacity: 1;
+}
+.swiper-pagination-bullet-active {
+    background: #3b82f6 !important; /* Aktywna kropka świeci na niebiesko */
+}
+</style>
+
+
+<!-- Główny kontener Swipera -->
+<div class="swiper">
+    <!-- Kontener na slajdy (podstrony) -->
+    <div class="swiper-wrapper">
+        
+        <!-- Sekcja 1: Home / Start -->
+        <section class="swiper-slide section-home">
+            <div class="content">
+                <h1>STRONA GŁÓWNA</h1>
+                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
+            </div>
+        </section>
+
+        <!-- Sekcja 2: O nas / Galeria -->
+        <section class="swiper-slide section-about">
+            <div class="content">
+                <h2>O PROJEKCIE</h2>
+                <p>Tutaj możesz umieścić swoją kontrastową tabelę lub galerię zdjęć.</p>
+            </div>
+        </section>
+
+        <!-- Sekcja 3: Kontakt -->
+        <section class="swiper-slide section-contact">
+            <div class="content">
+                <h2>KONTAKT</h2>
+                <p>Napisz do nas lub sprawdź widget pogodowy.</p>
+            </div>
+        </section>
+
+    </div>
+    
+    <!-- Opcjonalnie: Kropki nawigacyjne po boku -->
+    <div class="swiper-pagination"></div>
+</div>
+
+<!-- Dołączamy pliki SwiperJS z CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+
+
+<script>
+
+const swiper = new Swiper('.swiper', {
+    // Kierunek przewijania: 'vertical' (pionowo) lub 'horizontal' (poziomo)
+    direction: 'vertical', 
+    
+    // Płynność i szybkość przejścia (w milisekundach)
+    speed: 800,
+    
+    // Włączamy obsługę kółka myszy
+    mousewheel: {
+        forceToAxis: true,
+        sensitivity: 1,
+    },
+    
+    // Włączamy obsługę strzałek na klawiaturze
+    keyboard: {
+        enabled: true,
+        onlyInViewport: true,
+    },
+    
+    // Kropki nawigacyjne po boku strony
+    pagination: {
+        el: '.swiper-pagination',
+        clickable: true, // Pozwala klikać w kropki, by skakać do sekcji
+    },
+    
+    // Efekt przejścia (opcjonalnie: 'slide', 'fade', 'cube', 'flip')
+    effect: 'slide',
+});
+
+</script>
