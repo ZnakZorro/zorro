@@ -201,7 +201,14 @@ button {
     transition: background 0.3s;
     text-decoration:none;
 }
-.btno {background:transparent; min-width:initial;}
+button.btno, .btno {
+	background:transparent; 
+	min-width:initial;
+	float: right;
+    background: transparent;
+    min-width: initial;
+    margin-right: 1em;
+}
 button:hover {
     background: #218838;
 }
