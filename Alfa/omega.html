@@ -41,16 +41,18 @@
     <script src="./add/script.js"></script>
     <script src="./add/save.js"></script>
     <script>
+		
 		fetch("./omega.txt")
 			.then(r => {return r.text()})
 			.then(tx => {
-				//console.log(tx);
-				const arr = tx.split("\n")
-				//console.log(arr);
+				const arr = tx.split("\n");
+				let html = "<ul class='omega'>";
 				arr.forEach((a)=>{
 					console.log(a);
-					document.querySelector("#omega").innerHTML+="<p>"+a+"</p>";
+					html +="<li>"+a+"</li>";					
 				});
+				html += "</ul>";
+				document.querySelector("#omega").innerHTML = html;
 			})
 			.catch(e => {console.log(e)})
 	</script>
