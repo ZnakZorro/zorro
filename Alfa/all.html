@@ -1,3 +1,14 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+	<meta name="HandheldFriendly" content="true">
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="theme-color" content="#008">
+	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>📺</text></svg>"/>
+    <meta charset="UTF-8">
+    <title>All</title>
+    <script>const storageName = "All";</script>
 
 
 <style>
@@ -14,8 +25,8 @@ body, html {
 .swiper {
     width: 100vw;
     height: 100vh;
+    position: relative;
 }
-
 .swiper-slide {
     display: flex;
     justify-content: center;
@@ -50,8 +61,29 @@ body, html {
 .swiper-pagination-bullet-active {
     background: #3b82f6 !important; /* Aktywna kropka świeci na niebiesko */
 }
-</style>
 
+/* Styl dla kontenera kropek na dole ekranu */
+.swiper-pagination {
+    bottom: 30px !important; /* Odstęp od dolnej krawędzi ekranu */
+}
+
+.swiper-pagination-bullet {
+    background: #333 !important;
+    opacity: 1;
+    width: 12px;
+    height: 12px;
+    margin: 0 6px !important;
+    transition: all 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+    background: #3b82f6 !important; /* Aktywny slajd świeci na niebiesko */
+    width: 30px; /* Efektowna podłużna kropka dla aktywnego slajdu */
+    border-radius: 6px;
+}
+</style>
+</head>
+<body>
 
 <!-- Główny kontener Swipera -->
 <div class="swiper">
@@ -59,7 +91,7 @@ body, html {
     <div class="swiper-wrapper">
         
         <!-- Sekcja 1: Home / Start -->
-        <section class="swiper-slide section-home">
+        <section class="swiper-slide section-home" data-name="Home">
             <div class="content">
                 <h1>STRONA GŁÓWNA</h1>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
@@ -67,7 +99,7 @@ body, html {
         </section>
 
         <!-- Sekcja 2: O nas / Galeria -->
-        <section class="swiper-slide section-about">
+        <section class="swiper-slide section-about" data-name="Galeria">
             <div class="content">
                 <h2>O PROJEKCIE</h2>
                 <p>Tutaj możesz umieścić swoją kontrastową tabelę lub galerię zdjęć.</p>
@@ -75,7 +107,7 @@ body, html {
         </section>
 
         <!-- Sekcja 3: Kontakt -->
-        <section class="swiper-slide section-contact">
+        <section class="swiper-slide section-contact" data-name="Kontakt">
             <div class="content">
                 <h2>KONTAKT</h2>
                 <p>Napisz do nas lub sprawdź widget pogodowy.</p>
@@ -95,20 +127,27 @@ body, html {
 
 
 <script>
+let aktualnyIndeks = 0;
 
 const swiper = new Swiper('.swiper', {
     // Kierunek przewijania: 'vertical' (pionowo) lub 'horizontal' (poziomo)
-    direction: 'vertical', 
+    direction: 'horizontal', 
     
     // Płynność i szybkość przejścia (w milisekundach)
     speed: 800,
-    
+    loop: true,
     // Włączamy obsługę kółka myszy
+// Kompleksowa konfiguracja myszy
     mousewheel: {
-        forceToAxis: true,
+        enabled: true,
+        // forceToAxis: false pozwala na to, by zwykły scroll góra/dół myszy 
+        // przesuwał slajdy w bok (w lewo/prawo)
+        forceToAxis: false, 
+        // Zapobiega blokowaniu strony, gdy dotrzesz do pierwszego/ostatniego slajdu
+        releaseOnEdges: true,
+        // Czułość przewijania (możesz zwiększyć, jeśli przewija za wolno)
         sensitivity: 1,
-    },
-    
+    },    
     // Włączamy obsługę strzałek na klawiaturze
     keyboard: {
         enabled: true,
@@ -123,6 +162,39 @@ const swiper = new Swiper('.swiper', {
     
     // Efekt przejścia (opcjonalnie: 'slide', 'fade', 'cube', 'flip')
     effect: 'slide',
+    
+    
+    // TUTAJ DODAJEMY WYKRYWANIE ZMIANY STRONY
+    on: {
+        slideChange: function () {
+            // 'this.activeIndex' zwraca numer aktualnego slajdu (od 0)
+            aktualnyIndeks = this.activeIndex;  
+            console.log("Użytkownik przeszedł do slajdu numer: " + aktualnyIndeks);
+            
+            // W JS wewnątrz slideChange:
+			const activeSlideElement = this.slides[this.activeIndex];
+			const nazwaStrony = activeSlideElement.getAttribute('data-name');
+			console.log("Aktualna sekcja to: " + nazwaStrony);
+            
+            
+            
+            
+            
+            // Przykład wykonania akcji w zależności od strony:
+            if (aktualnyIndeks === 0) {
+                console.log("Wyświetlam: Strona główna");
+            } else if (aktualnyIndeks === 1) {
+                console.log("Wyświetlam: Pogoda (uruchamiam odświeżenie danych)");
+                // Tutaj możesz np. wywołać funkcję pobierającą pogodę, żeby dane były świeże:
+                // getFullWeather(); 
+            } else if (aktualnyIndeks === 2) {
+                console.log("Wyświetlam: Wyszukiwarka JSON");
+            }
+        },
+    },
 });
 
 </script>
+
+</body>
+</html>
