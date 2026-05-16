@@ -96,6 +96,9 @@ nav {
 foo,bar {display: flex;}
 foo {display: flex;}
 bar {display: flex;}
+.theme-switch {
+    cursor: pointer;
+}
 </style>
 <script>
 	const $=e=>document.querySelector(e);
@@ -156,6 +159,16 @@ bar {display: flex;}
             <div class="content">
                 <h2>Omega</h2>
                 <p>Napisz do nas lub sprawdź widget pogodowy.</p>
+            </div>
+        </section>
+        
+        <!-- Sekcja 5: Nota -->
+        <section class="swiper-slide section-contact" data-name="Nota">
+        	<foo></foo>
+			<bar></bar>
+            <div class="content">
+                <h2>Nota</h2>
+                <p>Tu będą zapiski</p>
             </div>
         </section>
 
@@ -239,12 +252,12 @@ const swiper = new Swiper('.swiper', {
 const pageINI=()=>{
 	const navy=$$("nav");
 	let html = `
-	<div class="theme-switch" id="home-btn">🏠</div>
-	<div class="theme-switch" id="note-btn">📝</div>	
-	<div class="theme-switch" id="omega-btn">🗳️</div>
-	<div class="theme-switch" id="gamma-btn">👫</div>
-	<div class="theme-switch active" id="beta-btn">🧔</div>
-	<div class="theme-switch" id="alfa-btn">🧑‍🦳</div>	
+	<div class="theme-switch home-btn" >🏠</div>
+	<div class="theme-switch alfa-btn" >🧑‍🦳</div>
+	<div class="theme-switch beta-btn" >🧔</div>
+	<div class="theme-switch gamma-btn">👫</div>	
+	<div class="theme-switch omega-btn">🗳️</div>
+	<div class="theme-switch note-btn" >📝</div>	
 	`;
 	navy.forEach((n,i)=>{
 		n.innerHTML=html;
@@ -255,6 +268,12 @@ const pageINI=()=>{
 		const name = s.dataset.name;
 		s.querySelector("div.content h2").innerHTML=name;
 	});
+document.querySelector(".home-btn").addEventListener("click",  ()=>{location.href="../../index.html"});
+document.querySelector(".alfa-btn").addEventListener("click",  ()=>{swiper.slideToLoop(0, 800);});
+document.querySelector(".beta-btn").addEventListener("click",  ()=>{swiper.slideToLoop(1, 800);});
+document.querySelector(".gamma-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
+document.querySelector(".omega-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
+document.querySelector(".note-btn").addEventListener("click",  ()=>{swiper.slideToLoop(4, 800);});
 
 }
 
