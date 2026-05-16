@@ -79,7 +79,12 @@ li {
     font-size: 24px;
     width: 34px;
 }
-#theme-toggle {top: inherit;bottom: 20px;}
+#theme-toggle {
+    top: inherit;
+    position: inherit;
+    float: right;
+    margin: 1em;
+}
 .active {
 	background:darkred;    
 	border: solid 3px red;
