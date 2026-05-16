@@ -79,6 +79,7 @@ li {
     font-size: 24px;
     width: 34px;
 }
+#theme-toggle {top: inherit;bottom: 20px;}
 .active {
 	background:darkred;    
 	border: solid 3px red;
