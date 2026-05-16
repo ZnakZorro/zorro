@@ -107,6 +107,7 @@ document.querySelector("#gamma-btn").addEventListener("click", ()=>{location.hre
 document.querySelector("#note-btn").addEventListener("click", ()=>{location.href="note.html"});
 document.querySelector("#beta-btn").addEventListener("click", ()=>{location.href="index.html"});
 document.querySelector("#alfa-btn").addEventListener("click", ()=>{location.href="alfa.html"});
+document.querySelector("#omega-btn").addEventListener("click", ()=>{location.href="omega.html"});
 
 
 document.title=storageName;
