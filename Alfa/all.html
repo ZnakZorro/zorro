@@ -17,7 +17,8 @@ body, html {
     padding: 0;
     height: 100%;
     background-color: #000;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Verdana', 'Inter', sans-serif;
+    font-size:13pt;
     color: #fff;
     overflow: hidden; /* Blokujemy domyślny scrollbar */
 }
@@ -33,7 +34,7 @@ body, html {
     align-items: center;
     text-align: center;
     box-sizing: border-box;
-    padding: 40px;
+    padding: 5px;
 }
 
 /* Przykładowe zróżnicowanie tła sekcji dla testu (wszystkie ciemne) */
@@ -42,15 +43,15 @@ body, html {
 .section-contact { background: #0a0a0a; }
 
 .content h1, .content h2 {
-    font-size: clamp(2rem, 8vw, 5rem);
+    font-size: clamp(1.2rem, 3vw, 2rem);
     font-weight: 900;
     color: #3b82f6; /* Twój błękitny akcent */
     margin-bottom: 20px;
 }
 
 .content p {
-    font-size: 1.2rem;
-    color: #888;
+    font-size: 1.0rem;
+    color: #ddd;
 }
 
 /* Customizacja kropek nawigacji pod Dark Mode */
@@ -81,25 +82,57 @@ body, html {
     width: 30px; /* Efektowna podłużna kropka dla aktywnego slajdu */
     border-radius: 6px;
 }
+
+/*===========================*/
+nav {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    font-size: 2em;
+    margin-top:0.5em;
+}
+foo,bar {display: flex;}
+foo {display: flex;}
+bar {display: flex;}
 </style>
+<script>
+	const $=e=>document.querySelector(e);
+	const $$=e=>document.querySelectorAll(e);
+	const upFirst=(str)=>str.charAt(0).toUpperCase() + str.slice(1);
+	const setActive=(ten)=>{
+		  let parent = ten.parentElement;
+		  let keys   = parent.querySelectorAll("button");
+		  keys.forEach(key=>key.classList.remove("active"));
+		  ten.classList.add("active");
+	}
+
+</script>
+
 </head>
 <body>
 
 <!-- Główny kontener Swipera -->
 <div class="swiper">
+<nav> </nav>
     <!-- Kontener na slajdy (podstrony) -->
     <div class="swiper-wrapper">
         
         <!-- Sekcja 1: Home / Start -->
-        <section class="swiper-slide section-home" data-name="Home">
+        <section class="swiper-slide section-home" data-name="Alfa">
+        	<foo></foo>
+			<bar></bar>
             <div class="content">
-                <h1>STRONA GŁÓWNA</h1>
+                <h2>STRONA GŁÓWNA</h2>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
             </div>
         </section>
 
         <!-- Sekcja 2: O nas / Galeria -->
-        <section class="swiper-slide section-about" data-name="Galeria">
+        <section class="swiper-slide section-about" data-name="Beta">
+        	<foo></foo>
+			<bar></bar>
             <div class="content">
                 <h2>O PROJEKCIE</h2>
                 <p>Tutaj możesz umieścić swoją kontrastową tabelę lub galerię zdjęć.</p>
@@ -107,9 +140,21 @@ body, html {
         </section>
 
         <!-- Sekcja 3: Kontakt -->
-        <section class="swiper-slide section-contact" data-name="Kontakt">
+        <section class="swiper-slide section-contact" data-name="Gamma">
+        	<foo></foo>
+			<bar></bar>
             <div class="content">
                 <h2>KONTAKT</h2>
+                <p>Napisz do nas lub sprawdź widget pogodowy.</p>
+            </div>
+        </section>
+        
+        <!-- Sekcja 4: Omega -->
+        <section class="swiper-slide section-contact" data-name="Omega">
+        	<foo></foo>
+			<bar></bar>
+            <div class="content">
+                <h2>Omega</h2>
                 <p>Napisz do nas lub sprawdź widget pogodowy.</p>
             </div>
         </section>
@@ -161,39 +206,65 @@ const swiper = new Swiper('.swiper', {
     },
     
     // Efekt przejścia (opcjonalnie: 'slide', 'fade', 'cube', 'flip')
-    effect: 'slide',
-    
+    effect: 'slide',    
     
     // TUTAJ DODAJEMY WYKRYWANIE ZMIANY STRONY
     on: {
         slideChange: function () {
             // 'this.activeIndex' zwraca numer aktualnego slajdu (od 0)
             aktualnyIndeks = this.activeIndex;  
-            console.log("Użytkownik przeszedł do slajdu numer: " + aktualnyIndeks);
+            //console.log("Użytkownik przeszedł do slajdu numer: " + aktualnyIndeks);
             
             // W JS wewnątrz slideChange:
 			const activeSlideElement = this.slides[this.activeIndex];
 			const nazwaStrony = activeSlideElement.getAttribute('data-name');
-			console.log("Aktualna sekcja to: " + nazwaStrony);
-            
-            
-            
-            
-            
+			console.log(aktualnyIndeks,"Aktualna sekcja to: " + nazwaStrony);
             // Przykład wykonania akcji w zależności od strony:
             if (aktualnyIndeks === 0) {
-                console.log("Wyświetlam: Strona główna");
+                //console.log("Wyświetlam: Strona główna");
             } else if (aktualnyIndeks === 1) {
-                console.log("Wyświetlam: Pogoda (uruchamiam odświeżenie danych)");
+                //console.log("Wyświetlam: Pogoda (uruchamiam odświeżenie danych)");
                 // Tutaj możesz np. wywołać funkcję pobierającą pogodę, żeby dane były świeże:
                 // getFullWeather(); 
             } else if (aktualnyIndeks === 2) {
-                console.log("Wyświetlam: Wyszukiwarka JSON");
+                //console.log("Wyświetlam: Wyszukiwarka JSON");
             }
         },
     },
 });
 
+
+
+//========================================
+const pageINI=()=>{
+	const navy=$$("nav");
+	let html = `
+	<div class="theme-switch" id="home-btn">🏠</div>
+	<div class="theme-switch" id="note-btn">📝</div>	
+	<div class="theme-switch" id="omega-btn">🗳️</div>
+	<div class="theme-switch" id="gamma-btn">👫</div>
+	<div class="theme-switch active" id="beta-btn">🧔</div>
+	<div class="theme-switch" id="alfa-btn">🧑‍🦳</div>	
+	`;
+	navy.forEach((n,i)=>{
+		n.innerHTML=html;
+	});
+	
+	const swipery = $$(".swiper-slide");
+	swipery.forEach((s,i)=>{
+		const name = s.dataset.name;
+		s.querySelector("div.content h2").innerHTML=name;
+	});
+
+}
+
+document.addEventListener("DOMContentLoaded",function(){
+	pageINI();
+});
+	/*fetch(u)
+      .then(r => {return r.json()})
+      .then(o => {console.log(o)})
+      .catch(e => {console.log(e)})*/
 </script>
 
 </body>
