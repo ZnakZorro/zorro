@@ -26,16 +26,6 @@ themeToggle.addEventListener("click", function() {
     }
 });
 
-const revert=()=>{
-    console.log("revert");
-        const ul = document.getElementById('list-container');
-        const liElements = ul.querySelectorAll('li'); 
-        for (let i = liElements.length - 1; i >= 0; i--) {
-            ul.appendChild(liElements[i]);
-        }
-}
-
-
 // Obsługa Entera
 inputBox.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
@@ -119,3 +109,13 @@ document.querySelector("#omega-btn").addEventListener("click", ()=>{location.hre
 
 document.title=storageName;
 document.querySelector("h2").textContent = "Lista "+storageName
+
+const revert=()=>{
+    console.log("revert");
+        const ul = document.getElementById('list-container');
+        const liElements = ul.querySelectorAll('li'); 
+        for (let i = liElements.length - 1; i >= 0; i--) {
+            ul.appendChild(liElements[i]);
+        }
+    saveData();
+}
