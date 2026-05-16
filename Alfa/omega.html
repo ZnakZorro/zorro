@@ -46,7 +46,7 @@
 		fetch("./omega.txt")
 			.then(r => {return r.text()})
 			.then(tx => {
-				const arr = tx.split("\n");
+				const arr = tx.trim().split("\n");
 				let html = "<ul class='omega'>";
 				arr.forEach((a)=>{
 					console.log(a);
