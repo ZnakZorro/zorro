@@ -232,18 +232,6 @@ li {
 
 </style>
 
-<script>
-	const $=e=>document.querySelector(e);
-	const $$=e=>document.querySelectorAll(e);
-	const upFirst=(str)=>str.charAt(0).toUpperCase() + str.slice(1);
-	const setActive=(ten)=>{
-		  let parent = ten.parentElement;
-		  let keys   = parent.querySelectorAll("button");
-		  keys.forEach(key=>key.classList.remove("active"));
-		  ten.classList.add("active");
-	}
-</script>
-
 </head>
 <body>
 
@@ -271,7 +259,7 @@ li {
             <div class="content">
                 <h2>O PROJEKCIE</h2>
                 <main></main>
-                <p>Tutaj możesz umieścić swoją kontrastową tabelę lub galerię zdjęć.</p>
+                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
             </div>
         </section>
 
@@ -282,7 +270,7 @@ li {
             <div class="content">            	
                 <h2>KONTAKT</h2>
                 <main></main>
-                <p>Napisz do nas lub sprawdź widget pogodowy.</p>
+                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
             </div>
         </section>
         
@@ -293,7 +281,7 @@ li {
             <div class="content">
                 <h2>Omega</h2>
                 <main></main>
-                <p>Napisz do nas lub sprawdź widget pogodowy.</p>
+                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
             </div>
         </section>
         
@@ -321,6 +309,16 @@ li {
 
 
 <script>
+    const $=e=>document.querySelector(e);
+	const $$=e=>document.querySelectorAll(e);
+	const upFirst=(str)=>str.charAt(0).toUpperCase() + str.slice(1);
+	const setActive=(ten)=>{
+		  let parent = ten.parentElement;
+		  let keys   = parent.querySelectorAll("button");
+		  keys.forEach(key=>key.classList.remove("active"));
+		  ten.classList.add("active");
+	}
+
 let aktualnyIndeks = 0;
 let firstRun=0;
 const setActivePage=(aktualnyIndeks,nazwaStrony)=>{
@@ -448,22 +446,30 @@ const pageINI=()=>{
 
     listsContainer.forEach(list=>{
         list.addEventListener("click", function(e) {
-            console.log("click",e.target.id);
+            const px = e.target.parentElement.parentElement.querySelector("p");
+            //console.log("click e.target.id=",e);
             if (e.target.tagName === "P") {
                 e.target.parentElement.classList.toggle("checked");
                 saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
             } 
             else if (e.target.tagName === "SPAN") {
-                e.target.parentElement.parentElement.remove();
-                saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+                const newDelete = prompt("Usuń wpis:", px.innerHTML);
+                const idd = e.target.dataset.id;
+                //console.log(idd,"newDelete=",newDelete);   
+                if (newDelete !== null && newDelete.trim() !== "") {        
+                    e.target.parentElement.parentElement.remove();
+                    //saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+                    saveData(idd+"_list");   
+                }
             }
             else if (e.target.classList.contains("edit-btn")) {
-                let p = e.target.parentElement.parentElement.querySelector("p");
-                let newText = prompt("Edytuj zadanie:", p.innerHTML);
-                
+                let newText = prompt("Edytuj zadanie:", px.innerHTML); 
+                const idd = e.target.dataset.id;
+                //console.log(idd,"newText=",newText);               
                 if (newText !== null && newText.trim() !== "") {
-                    p.innerHTML = newText;
-                    saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+                    px.innerHTML = newText;
+                    //saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+                    saveData(idd+"_list");
                 }
             }
         }, false);
@@ -485,7 +491,7 @@ const pageINI=()=>{
       
 
 const addTask=(id)=> {
-    console.log("addTask=",id);
+    //console.log("addTask=",id);
     const inputBox = document.querySelector("#"+id);
     if (inputBox.value.trim() === '') {
         alert("Musisz coś wpisać!");
@@ -497,12 +503,14 @@ const addTask=(id)=> {
 }
 
 const createTaskElement=(id, text, isChecked)=> {
-    console.log(id);
+    const idd = id.replace("_list","");
+    //console.log(id,idd);
     let li = document.createElement("li");
     if (isChecked) li.classList.add("checked");
 
     let textSpan = document.createElement("p");
     textSpan.innerHTML = text;
+    textSpan.className = idd+"_text";
     li.appendChild(textSpan);
 
     let btnContainer = document.createElement("div");
@@ -510,10 +518,12 @@ const createTaskElement=(id, text, isChecked)=> {
     let editBtn = document.createElement("button");
     editBtn.innerHTML = "✎";
     editBtn.className = "edit-btn";
+    editBtn.dataset.id = idd;
     btnContainer.appendChild(editBtn);
 
     let deleteBtn = document.createElement("span");
     deleteBtn.innerHTML = "\u00d7";
+    deleteBtn.dataset.id = idd;
     btnContainer.appendChild(deleteBtn);
 
     li.appendChild(btnContainer);
@@ -529,7 +539,7 @@ function saveData(id) {
     //console.log("saveData=",id);
     const listId=id.replace("_input","_list");
     const listContainer=$("#"+listId);
-    //console.log("saveData=",id,listId,listContainer);
+    //console.log("saveData=",listId,listContainer);
     //console.log("listContainer=",listContainer);
     localStorage.setItem(listId, listContainer.innerHTML);
 }
