@@ -324,7 +324,7 @@ li {
 let aktualnyIndeks = 0;
 let firstRun=0;
 const setActivePage=(aktualnyIndeks,nazwaStrony)=>{
-	console.log(firstRun,aktualnyIndeks,nazwaStrony,"."+nazwaStrony+"-btn");
+	//console.log(firstRun,aktualnyIndeks,nazwaStrony,"."+nazwaStrony+"-btn");
 	$$(".theme-switch").forEach(b=>b.classList.remove("active"));
 	if (firstRun != 0) $("."+nazwaStrony+"-btn").classList.add("active");
 	firstRun++
@@ -404,8 +404,9 @@ const templeta=(nr,name)=> {
 	`;
 }
 
-let inputBox      = null;
-let listContainer = null;
+
+let inputBoxs      = null;
+let listsContainer = null;
 
 const pageINI=()=>{
     $("nav").innerHTML=`
@@ -420,49 +421,53 @@ const pageINI=()=>{
 	const swipery = $$(".swiper-slide");
 	swipery.forEach((s,i)=>{
 		const name = s.dataset.name;
+        //console.log(name);
 		s.querySelector("div.content h2").innerHTML=name;
 		s.querySelector("main").innerHTML=templeta(i,name);
 		s.id=name;
+        showTask(name+"_input");
 	});
-	document.querySelector(".Home-btn").addEventListener("click",  ()=>{location.href="../../index.html"});
+	document.querySelector(".Home-btn").addEventListener("click",  ()=>{location.href="../index.html"});
 	document.querySelector(".Alfa-btn").addEventListener("click",  ()=>{swiper.slideToLoop(0, 800);});
 	document.querySelector(".Beta-btn").addEventListener("click",  ()=>{swiper.slideToLoop(1, 800);});
 	document.querySelector(".Gamma-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
 	document.querySelector(".Omega-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
 	document.querySelector(".Nota-btn").addEventListener("click",  ()=>{swiper.slideToLoop(4, 800);});
 	
+    inputBoxs      = $$(".todo-input");
+	listsContainer = $$(".list-container");
+    //console.log(listsContainer);
 	
-	inputBox      = document.querySelector(".todo-input");
-	listContainer = document.querySelector(".list-container");
+    inputBoxs.forEach(input=>{
+        input.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                addTask(event.target.id);
+            }
+        });
+    });
 
-	
-	// Obsługa Entera
-	inputBox.addEventListener("keypress", function(event) {
-		if (event.key === "Enter") {
-		    addTask();
-		}
-	});
-
-	listContainer.addEventListener("click", function(e) {
-		if (e.target.tagName === "P") {
-		    e.target.parentElement.classList.toggle("checked");
-		    saveData();
-		} 
-		else if (e.target.tagName === "SPAN") {
-		    e.target.parentElement.parentElement.remove();
-		    saveData();
-		}
-		else if (e.target.classList.contains("edit-btn")) {
-		    let p = e.target.parentElement.parentElement.querySelector("p");
-		    let newText = prompt("Edytuj zadanie:", p.innerHTML);
-		    
-		    if (newText !== null && newText.trim() !== "") {
-		        p.innerHTML = newText;
-		        saveData();
-		    }
-		}
-	}, false);
-	
+    listsContainer.forEach(list=>{
+        list.addEventListener("click", function(e) {
+            console.log("click",e.target.id);
+            if (e.target.tagName === "P") {
+                e.target.parentElement.classList.toggle("checked");
+                saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+            } 
+            else if (e.target.tagName === "SPAN") {
+                e.target.parentElement.parentElement.remove();
+                saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+            }
+            else if (e.target.classList.contains("edit-btn")) {
+                let p = e.target.parentElement.parentElement.querySelector("p");
+                let newText = prompt("Edytuj zadanie:", p.innerHTML);
+                
+                if (newText !== null && newText.trim() !== "") {
+                    p.innerHTML = newText;
+                    saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
+                }
+            }
+        }, false);
+    });
 
 } // eof page ini
 
@@ -479,18 +484,20 @@ const pageINI=()=>{
       
       
 
-const addTask=()=> {
-	console.log(inputBox.value);
+const addTask=(id)=> {
+    console.log("addTask=",id);
+    const inputBox = document.querySelector("#"+id);
     if (inputBox.value.trim() === '') {
         alert("Musisz coś wpisać!");
     } else {
-        createTaskElement(inputBox.value, false);
-        saveData();
+        createTaskElement(id.replace("_input","_list"),inputBox.value, false);
+        saveData(id);
     }
     inputBox.value = "";
 }
 
-const createTaskElement=(text, isChecked)=> {
+const createTaskElement=(id, text, isChecked)=> {
+    console.log(id);
     let li = document.createElement("li");
     if (isChecked) li.classList.add("checked");
 
@@ -510,16 +517,30 @@ const createTaskElement=(text, isChecked)=> {
     btnContainer.appendChild(deleteBtn);
 
     li.appendChild(btnContainer);
-    listContainer.appendChild(li);
+    listsContainer.forEach(container => {
+        if (container.id === id) {
+            container.appendChild(li);
+        }
+    });
 }
 
 
-function saveData() {
-    //localStorage.setItem(storageName, listContainer.innerHTML);
+function saveData(id) {
+    //console.log("saveData=",id);
+    const listId=id.replace("_input","_list");
+    const listContainer=$("#"+listId);
+    //console.log("saveData=",id,listId,listContainer);
+    //console.log("listContainer=",listContainer);
+    localStorage.setItem(listId, listContainer.innerHTML);
 }
 
-function showTask() {
-    //listContainer.innerHTML = localStorage.getItem(storageName) || "";
+function showTask(id) {
+    if (id) {        
+        //console.log("showTask=",id);
+        const listId=id.replace("_input","_list");
+        const listContainer=$("#"+listId);
+        listContainer.innerHTML = localStorage.getItem(listId) || "";
+    }
 }
 
 
