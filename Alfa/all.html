@@ -5,6 +5,7 @@
 	<meta name="HandheldFriendly" content="true">
 	<meta name="mobile-web-app-capable" content="yes">
 	<meta name="theme-color" content="#008">
+	<meta name="color-scheme" content="dark" />
 	<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 18 18'><text x='-1' y='14'>📺</text></svg>"/>
     <meta charset="UTF-8">
     <title>All</title>
@@ -12,6 +13,40 @@
 
 
 <style>
+:root {
+    --bg-black: #f8f8f8;
+    --bg-color: #f4f7f6;
+    --bg-gray: #eee;
+    --bg-dark: #ddd;
+    --container-bg: #ffffff;
+    --text-color: #333333;
+    --text-color-check: #777;
+    --border-color: #eeeeee;
+    --item-border: #f0f0f0;
+    --color-blind: #ccc;
+    --bg-btn:#568;
+}
+
+/* Kolory dla trybu ciemnego */
+[data-theme="dark"] {
+	--bg-black: #000;
+    --bg-color: #181a1b;
+    --bg-gray: #444;
+    --bg-dark: #222;
+    --container-bg: #333;
+    --text-color: #fff;
+    --text-color-check : #678;
+    --border-color: #3e4446;
+    --item-border: #313537;
+    --color-blind: #777;
+    --bg-btn:#568;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 body, html {
     margin: 0;
     padding: 0;
@@ -103,7 +138,100 @@ bar {display: flex;}
     background: darkred;
     border: solid 3px red;
 }
+
+.input-row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+main {
+    padding: 5px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 712px;
+    margin: 6px auto 5px auto;
+}
+
+input {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #eee;
+    border-radius: 6px;
+    outline: none;
+    font-size: 21px;
+    transition: border-color 0.3s;
+    background: var(--container-bg);
+    color: var(--text-color);
+    border: 2px solid var(--border-color);
+    font-size: 0.95rem !important;
+}
+input:focus {
+    border-color: #28a745;
+}
+
+button {
+    padding: 8px;
+    font-size:1rem;
+    border: none;
+    background: #28a745;
+    color: white;
+    min-width: 4rem;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.3s;
+    text-decoration:none;
+}
+button.btno, .btno {
+	background:transparent; 
+	min-width:initial;
+	float: right;
+    background: transparent;
+    min-width: initial;
+    margin-right: 1em;
+}
+button:hover {
+    background: #218838;
+}
+button.big {
+	min-width: 6rem;
+	background: #258;
+	font-weight:bold;
+}
+button:hover {
+    background: #218838;
+}
+.edit-btn {
+    color: #007bff;
+    background: none;
+    border: none;
+    padding-right: 16px;
+}
+.edit-btn, span {
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0 8px;
+    user-select: none;
+}
+
+li {
+        border-bottom: 1px solid var(--item-border);
+    background: var(--bg-gray);
+    color: var(--text-color);
+    padding: 3px;
+    border-bottom: 0.5px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    /* font-size: 1rem; */
+
+
+}
+
 </style>
+
 <script>
 	const $=e=>document.querySelector(e);
 	const $$=e=>document.querySelectorAll(e);
@@ -114,7 +242,6 @@ bar {display: flex;}
 		  keys.forEach(key=>key.classList.remove("active"));
 		  ten.classList.add("active");
 	}
-
 </script>
 
 </head>
@@ -122,7 +249,7 @@ bar {display: flex;}
 
 <!-- Główny kontener Swipera -->
 <div class="swiper">
-<nav> </nav>
+    <nav> </nav>
     <!-- Kontener na slajdy (podstrony) -->
     <div class="swiper-wrapper">
         
@@ -211,7 +338,7 @@ const swiper = new Swiper('.swiper', {
     speed: 800,
     loop: true,
     // Włączamy obsługę kółka myszy
-// Kompleksowa konfiguracja myszy
+    // Kompleksowa konfiguracja myszy
     mousewheel: {
         enabled: true,
         // forceToAxis: false pozwala na to, by zwykły scroll góra/dół myszy 
@@ -267,9 +394,21 @@ const swiper = new Swiper('.swiper', {
 
 
 //========================================
+const templeta=(nr,name)=> {
+	return `
+	<div class="input-row">
+            <input type="text" id="${name}_input" class="todo-input" placeholder="Dodaj nowe zadanie...">
+            <button onclick='addTask("${name}_input")'>Dodaj</button>
+        </div>
+        <ul id="${name}_list" class="list-container"></ul>
+	`;
+}
+
+let inputBox      = null;
+let listContainer = null;
+
 const pageINI=()=>{
-	const navy=$$("nav");
-	let html = `
+    $("nav").innerHTML=`
 	<div class="theme-switch Home-btn" >🏠</div>
 	<div class="theme-switch Alfa-btn" >🧑‍🦳</div>
 	<div class="theme-switch Beta-btn" >🧔</div>
@@ -277,22 +416,12 @@ const pageINI=()=>{
 	<div class="theme-switch Omega-btn">🗳️</div>
 	<div class="theme-switch Nota-btn" >📝</div>	
 	`;
-	navy.forEach((n,i)=>{
-		n.innerHTML=html;
-	});
 	
-	let templeta=`
-	<div class="input-row">
-            <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie...">
-            <button onclick="addTask()">Dodaj</button>
-        </div>
-        <ul id="list-container"></ul>
-	`;
 	const swipery = $$(".swiper-slide");
 	swipery.forEach((s,i)=>{
 		const name = s.dataset.name;
 		s.querySelector("div.content h2").innerHTML=name;
-		s.querySelector("main").innerHTML=templeta;
+		s.querySelector("main").innerHTML=templeta(i,name);
 		s.id=name;
 	});
 	document.querySelector(".Home-btn").addEventListener("click",  ()=>{location.href="../../index.html"});
@@ -301,17 +430,112 @@ const pageINI=()=>{
 	document.querySelector(".Gamma-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
 	document.querySelector(".Omega-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
 	document.querySelector(".Nota-btn").addEventListener("click",  ()=>{swiper.slideToLoop(4, 800);});
+	
+	
+	inputBox      = document.querySelector(".todo-input");
+	listContainer = document.querySelector(".list-container");
 
-}
+	
+	// Obsługa Entera
+	inputBox.addEventListener("keypress", function(event) {
+		if (event.key === "Enter") {
+		    addTask();
+		}
+	});
+
+	listContainer.addEventListener("click", function(e) {
+		if (e.target.tagName === "P") {
+		    e.target.parentElement.classList.toggle("checked");
+		    saveData();
+		} 
+		else if (e.target.tagName === "SPAN") {
+		    e.target.parentElement.parentElement.remove();
+		    saveData();
+		}
+		else if (e.target.classList.contains("edit-btn")) {
+		    let p = e.target.parentElement.parentElement.querySelector("p");
+		    let newText = prompt("Edytuj zadanie:", p.innerHTML);
+		    
+		    if (newText !== null && newText.trim() !== "") {
+		        p.innerHTML = newText;
+		        saveData();
+		    }
+		}
+	}, false);
+	
+
+} // eof page ini
 
 
-document.addEventListener("DOMContentLoaded",function(){
-	pageINI();
-});
 	/*fetch(u)
       .then(r => {return r.json()})
       .then(o => {console.log(o)})
       .catch(e => {console.log(e)})*/
+      
+      
+      
+      
+      
+      
+      
+
+const addTask=()=> {
+	console.log(inputBox.value);
+    if (inputBox.value.trim() === '') {
+        alert("Musisz coś wpisać!");
+    } else {
+        createTaskElement(inputBox.value, false);
+        saveData();
+    }
+    inputBox.value = "";
+}
+
+const createTaskElement=(text, isChecked)=> {
+    let li = document.createElement("li");
+    if (isChecked) li.classList.add("checked");
+
+    let textSpan = document.createElement("p");
+    textSpan.innerHTML = text;
+    li.appendChild(textSpan);
+
+    let btnContainer = document.createElement("div");
+
+    let editBtn = document.createElement("button");
+    editBtn.innerHTML = "✎";
+    editBtn.className = "edit-btn";
+    btnContainer.appendChild(editBtn);
+
+    let deleteBtn = document.createElement("span");
+    deleteBtn.innerHTML = "\u00d7";
+    btnContainer.appendChild(deleteBtn);
+
+    li.appendChild(btnContainer);
+    listContainer.appendChild(li);
+}
+
+
+function saveData() {
+    //localStorage.setItem(storageName, listContainer.innerHTML);
+}
+
+function showTask() {
+    //listContainer.innerHTML = localStorage.getItem(storageName) || "";
+}
+
+
+
+
+
+
+
+
+document.addEventListener("DOMContentLoaded",function(){
+    document.documentElement.setAttribute("data-theme", "dark");
+	pageINI();
+    showTask();
+});
+      
+      
 </script>
 
 </body>
