@@ -30,6 +30,7 @@ class NavBarNavigator extends HTMLElement {
 				 <img src="https://znakzorro.github.io/zorro/css/icon/back.svg" width="32" onclick="history.back();" class="icon1">
 				 <a href="https://znakzorro.github.io/zorro/" class="nav-logo">${title}<span id="licznik"></span><span id="flag"></span></a>
 					 <ul class="nav-menu">					 
+					 <li class="nav-item"><a href="${link}Alfa/all.html" class="nav-link">All</a></li>
 					 <li class="nav-item"><a href="${link}Alfa/index.html" class="nav-link">Alfa</a></li>
 					 <li class="nav-item"><a href="${link}app/todo/index.html" class="nav-link">todo</a></li>
       					<li class="nav-item"><a href="${link}app/waluty/index.html" class="nav-link">WALUTY</a></li>
