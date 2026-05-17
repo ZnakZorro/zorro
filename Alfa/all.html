@@ -99,6 +99,10 @@ bar {display: flex;}
 .theme-switch {
     cursor: pointer;
 }
+.active {
+    background: darkred;
+    border: solid 3px red;
+}
 </style>
 <script>
 	const $=e=>document.querySelector(e);
@@ -128,6 +132,7 @@ bar {display: flex;}
 			<bar></bar>
             <div class="content">
                 <h2>STRONA GŁÓWNA</h2>
+                <main></main>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
             </div>
         </section>
@@ -138,6 +143,7 @@ bar {display: flex;}
 			<bar></bar>
             <div class="content">
                 <h2>O PROJEKCIE</h2>
+                <main></main>
                 <p>Tutaj możesz umieścić swoją kontrastową tabelę lub galerię zdjęć.</p>
             </div>
         </section>
@@ -146,8 +152,9 @@ bar {display: flex;}
         <section class="swiper-slide section-contact" data-name="Gamma">
         	<foo></foo>
 			<bar></bar>
-            <div class="content">
+            <div class="content">            	
                 <h2>KONTAKT</h2>
+                <main></main>
                 <p>Napisz do nas lub sprawdź widget pogodowy.</p>
             </div>
         </section>
@@ -158,6 +165,7 @@ bar {display: flex;}
 			<bar></bar>
             <div class="content">
                 <h2>Omega</h2>
+                <main></main>
                 <p>Napisz do nas lub sprawdź widget pogodowy.</p>
             </div>
         </section>
@@ -168,6 +176,7 @@ bar {display: flex;}
 			<bar></bar>
             <div class="content">
                 <h2>Nota</h2>
+                <main></main>
                 <p>Tu będą zapiski</p>
             </div>
         </section>
@@ -186,6 +195,13 @@ bar {display: flex;}
 
 <script>
 let aktualnyIndeks = 0;
+let firstRun=0;
+const setActivePage=(aktualnyIndeks,nazwaStrony)=>{
+	console.log(firstRun,aktualnyIndeks,nazwaStrony,"."+nazwaStrony+"-btn");
+	$$(".theme-switch").forEach(b=>b.classList.remove("active"));
+	if (firstRun != 0) $("."+nazwaStrony+"-btn").classList.add("active");
+	firstRun++
+}
 
 const swiper = new Swiper('.swiper', {
     // Kierunek przewijania: 'vertical' (pionowo) lub 'horizontal' (poziomo)
@@ -226,12 +242,14 @@ const swiper = new Swiper('.swiper', {
         slideChange: function () {
             // 'this.activeIndex' zwraca numer aktualnego slajdu (od 0)
             aktualnyIndeks = this.activeIndex;  
+            
             //console.log("Użytkownik przeszedł do slajdu numer: " + aktualnyIndeks);
             
             // W JS wewnątrz slideChange:
 			const activeSlideElement = this.slides[this.activeIndex];
 			const nazwaStrony = activeSlideElement.getAttribute('data-name');
-			console.log(aktualnyIndeks,"Aktualna sekcja to: " + nazwaStrony);
+			setActivePage(aktualnyIndeks,nazwaStrony);
+			//console.log(aktualnyIndeks,"Aktualna sekcja to: " + nazwaStrony);
             // Przykład wykonania akcji w zależności od strony:
             if (aktualnyIndeks === 0) {
                 //console.log("Wyświetlam: Strona główna");
@@ -252,30 +270,40 @@ const swiper = new Swiper('.swiper', {
 const pageINI=()=>{
 	const navy=$$("nav");
 	let html = `
-	<div class="theme-switch home-btn" >🏠</div>
-	<div class="theme-switch alfa-btn" >🧑‍🦳</div>
-	<div class="theme-switch beta-btn" >🧔</div>
-	<div class="theme-switch gamma-btn">👫</div>	
-	<div class="theme-switch omega-btn">🗳️</div>
-	<div class="theme-switch note-btn" >📝</div>	
+	<div class="theme-switch Home-btn" >🏠</div>
+	<div class="theme-switch Alfa-btn" >🧑‍🦳</div>
+	<div class="theme-switch Beta-btn" >🧔</div>
+	<div class="theme-switch Gamma-btn">👫</div>	
+	<div class="theme-switch Omega-btn">🗳️</div>
+	<div class="theme-switch Nota-btn" >📝</div>	
 	`;
 	navy.forEach((n,i)=>{
 		n.innerHTML=html;
 	});
 	
+	let templeta=`
+	<div class="input-row">
+            <input type="text" id="todo-input" placeholder="Dodaj nowe zadanie...">
+            <button onclick="addTask()">Dodaj</button>
+        </div>
+        <ul id="list-container"></ul>
+	`;
 	const swipery = $$(".swiper-slide");
 	swipery.forEach((s,i)=>{
 		const name = s.dataset.name;
 		s.querySelector("div.content h2").innerHTML=name;
+		s.querySelector("main").innerHTML=templeta;
+		s.id=name;
 	});
-document.querySelector(".home-btn").addEventListener("click",  ()=>{location.href="../../index.html"});
-document.querySelector(".alfa-btn").addEventListener("click",  ()=>{swiper.slideToLoop(0, 800);});
-document.querySelector(".beta-btn").addEventListener("click",  ()=>{swiper.slideToLoop(1, 800);});
-document.querySelector(".gamma-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
-document.querySelector(".omega-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
-document.querySelector(".note-btn").addEventListener("click",  ()=>{swiper.slideToLoop(4, 800);});
+	document.querySelector(".Home-btn").addEventListener("click",  ()=>{location.href="../../index.html"});
+	document.querySelector(".Alfa-btn").addEventListener("click",  ()=>{swiper.slideToLoop(0, 800);});
+	document.querySelector(".Beta-btn").addEventListener("click",  ()=>{swiper.slideToLoop(1, 800);});
+	document.querySelector(".Gamma-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
+	document.querySelector(".Omega-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
+	document.querySelector(".Nota-btn").addEventListener("click",  ()=>{swiper.slideToLoop(4, 800);});
 
 }
+
 
 document.addEventListener("DOMContentLoaded",function(){
 	pageINI();
