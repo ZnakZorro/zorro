@@ -101,11 +101,12 @@ body, html {
 /* Styl dla kontenera kropek na dole ekranu */
 .swiper-pagination {
     bottom: 30px !important; /* Odstęp od dolnej krawędzi ekranu */
+    
 }
 
 .swiper-pagination-bullet {
-    background: #333 !important;
-    opacity: 1;
+    background: #ddd !important;
+    opacity: 0.85!important;
     width: 12px;
     height: 12px;
     margin: 0 6px !important;
@@ -117,7 +118,7 @@ body, html {
     width: 30px; /* Efektowna podłużna kropka dla aktywnego slajdu */
     border-radius: 6px;
 }
-
+.swiper-pagination-bullet{opacity:0.5;}
 /*===========================*/
 nav {
     display: flex;
@@ -216,7 +217,7 @@ button:hover {
 }
 
 li {
-        border-bottom: 1px solid var(--item-border);
+    border-bottom: 1px solid var(--item-border);
     background: var(--bg-gray);
     color: var(--text-color);
     padding: 3px;
@@ -225,9 +226,6 @@ li {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    /* font-size: 1rem; */
-
-
 }
 
 </style>
@@ -322,7 +320,6 @@ li {
 let aktualnyIndeks = 0;
 let firstRun=0;
 const setActivePage=(aktualnyIndeks,nazwaStrony)=>{
-	//console.log(firstRun,aktualnyIndeks,nazwaStrony,"."+nazwaStrony+"-btn");
 	$$(".theme-switch").forEach(b=>b.classList.remove("active"));
 	if (firstRun != 0) $("."+nazwaStrony+"-btn").classList.add("active");
 	firstRun++
@@ -335,7 +332,6 @@ const swiper = new Swiper('.swiper', {
     // Płynność i szybkość przejścia (w milisekundach)
     speed: 800,
     loop: true,
-    // Włączamy obsługę kółka myszy
     // Kompleksowa konfiguracja myszy
     mousewheel: {
         enabled: true,
@@ -351,40 +347,22 @@ const swiper = new Swiper('.swiper', {
     keyboard: {
         enabled: true,
         onlyInViewport: true,
-    },
-    
+    },    
     // Kropki nawigacyjne po boku strony
     pagination: {
         el: '.swiper-pagination',
         clickable: true, // Pozwala klikać w kropki, by skakać do sekcji
-    },
-    
+    },    
     // Efekt przejścia (opcjonalnie: 'slide', 'fade', 'cube', 'flip')
     effect: 'slide',    
-    
     // TUTAJ DODAJEMY WYKRYWANIE ZMIANY STRONY
     on: {
         slideChange: function () {
             // 'this.activeIndex' zwraca numer aktualnego slajdu (od 0)
-            aktualnyIndeks = this.activeIndex;  
-            
-            //console.log("Użytkownik przeszedł do slajdu numer: " + aktualnyIndeks);
-            
-            // W JS wewnątrz slideChange:
+            aktualnyIndeks = this.activeIndex;
 			const activeSlideElement = this.slides[this.activeIndex];
 			const nazwaStrony = activeSlideElement.getAttribute('data-name');
 			setActivePage(aktualnyIndeks,nazwaStrony);
-			//console.log(aktualnyIndeks,"Aktualna sekcja to: " + nazwaStrony);
-            // Przykład wykonania akcji w zależności od strony:
-            if (aktualnyIndeks === 0) {
-                //console.log("Wyświetlam: Strona główna");
-            } else if (aktualnyIndeks === 1) {
-                //console.log("Wyświetlam: Pogoda (uruchamiam odświeżenie danych)");
-                // Tutaj możesz np. wywołać funkcję pobierającą pogodę, żeby dane były świeże:
-                // getFullWeather(); 
-            } else if (aktualnyIndeks === 2) {
-                //console.log("Wyświetlam: Wyszukiwarka JSON");
-            }
         },
     },
 });
@@ -419,7 +397,6 @@ const pageINI=()=>{
 	const swipery = $$(".swiper-slide");
 	swipery.forEach((s,i)=>{
 		const name = s.dataset.name;
-        //console.log(name);
 		s.querySelector("div.content h2").innerHTML=name;
 		s.querySelector("main").innerHTML=templeta(i,name);
 		s.id=name;
@@ -434,7 +411,6 @@ const pageINI=()=>{
 	
     inputBoxs      = $$(".todo-input");
 	listsContainer = $$(".list-container");
-    //console.log(listsContainer);
 	
     inputBoxs.forEach(input=>{
         input.addEventListener("keypress", function(event) {
@@ -447,7 +423,6 @@ const pageINI=()=>{
     listsContainer.forEach(list=>{
         list.addEventListener("click", function(e) {
             const px = e.target.parentElement.parentElement.querySelector("p");
-            //console.log("click e.target.id=",e);
             if (e.target.tagName === "P") {
                 e.target.parentElement.classList.toggle("checked");
                 saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
@@ -455,20 +430,16 @@ const pageINI=()=>{
             else if (e.target.tagName === "SPAN") {
                 const newDelete = prompt("Usuń wpis:", px.innerHTML);
                 const idd = e.target.dataset.id;
-                //console.log(idd,"newDelete=",newDelete);   
                 if (newDelete !== null && newDelete.trim() !== "") {        
                     e.target.parentElement.parentElement.remove();
-                    //saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
                     saveData(idd+"_list");   
                 }
             }
             else if (e.target.classList.contains("edit-btn")) {
                 let newText = prompt("Edytuj zadanie:", px.innerHTML); 
-                const idd = e.target.dataset.id;
-                //console.log(idd,"newText=",newText);               
+                const idd = e.target.dataset.id;         
                 if (newText !== null && newText.trim() !== "") {
                     px.innerHTML = newText;
-                    //saveData(e.target.parentElement.parentElement.id.replace("_list","_input"));
                     saveData(idd+"_list");
                 }
             }
@@ -476,35 +447,29 @@ const pageINI=()=>{
     });
 
 } // eof page ini
-
-
-	/*fetch(u)
-      .then(r => {return r.json()})
-      .then(o => {console.log(o)})
-      .catch(e => {console.log(e)})*/
-      
-      
-      
-      
-      
-      
-      
+   
 
 const addTask=(id)=> {
-    //console.log("addTask=",id);
     const inputBox = document.querySelector("#"+id);
     if (inputBox.value.trim() === '') {
         alert("Musisz coś wpisać!");
     } else {
-        createTaskElement(id.replace("_input","_list"),inputBox.value, false);
-        saveData(id);
+        const listId = id.replace("_input","_list");
+        const text = inputBox.value.trim();
+        if (text==="delete666") {
+            console.log("Usuwam listę:",listId);
+            localStorage.removeItem(listId);
+            showTask(listId);
+        } else{   
+            createTaskElement(id.replace("_input","_list"),inputBox.value, false);
+            saveData(id);
+        }
     }
     inputBox.value = "";
 }
 
 const createTaskElement=(id, text, isChecked)=> {
     const idd = id.replace("_list","");
-    //console.log(id,idd);
     let li = document.createElement("li");
     if (isChecked) li.classList.add("checked");
 
@@ -536,17 +501,13 @@ const createTaskElement=(id, text, isChecked)=> {
 
 
 function saveData(id) {
-    //console.log("saveData=",id);
     const listId=id.replace("_input","_list");
     const listContainer=$("#"+listId);
-    //console.log("saveData=",listId,listContainer);
-    //console.log("listContainer=",listContainer);
     localStorage.setItem(listId, listContainer.innerHTML);
 }
 
 function showTask(id) {
-    if (id) {        
-        //console.log("showTask=",id);
+    if (id) {
         const listId=id.replace("_input","_list");
         const listContainer=$("#"+listId);
         listContainer.innerHTML = localStorage.getItem(listId) || "";
@@ -556,17 +517,18 @@ function showTask(id) {
 
 
 
-
-
-
-
 document.addEventListener("DOMContentLoaded",function(){
     document.documentElement.setAttribute("data-theme", "dark");
 	pageINI();
     showTask();
 });
+  
+	/*fetch(u)
+      .then(r => {return r.json()})
+      .then(o => {console.log(o)})
+      .catch(e => {console.log(e)})*/
       
-      
+
 </script>
 
 </body>
