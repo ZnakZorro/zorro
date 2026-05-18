@@ -256,7 +256,8 @@ li {
     }
 #Nota_input {background: var(--color-navy);color: var(--text-color-yellow);}
 
-
+#notatki {color:#777; margin-top:2em;}
+#notatki p{color:#777;}
 
 
 </style>
@@ -469,7 +470,12 @@ const pageINI=()=>{
             }
         }, false);
     });
-zamienNaTextarea("Nota_input")
+    zamienNaTextarea("Nota_input");
+
+    const lastSlide = $("[data-name='Nota']");
+    const lastSection = lastSlide.querySelector("section") || lastSlide.querySelector("main");
+    console.log(lastSection);
+    lastSection.innerHTML += `<div id="notatki"></div>`;
 
 } // eof page ini
    
@@ -560,19 +566,42 @@ function showTask(id) {
     }
 }
 
+const setNote=(nota)=>{
+	let arr = nota.split("\n");
+	let html ='';
+	arr.forEach((n)=>{
+		html += '<p>'+n+'<p>'
+	});
+	document.querySelector("#notatki").innerHTML = html;
+}  
 
+const getNotatki=(u="nota.txt")=>{
+    if (location.protocol !="file:"){
+		    try {
+					fetch(u)
+					.then(r => {return r.text()})
+					.then(txt => {
+						console.log("txt=",txt);
+						setNote(txt);
+					})
+					.catch(e => {console.log(e)});
+			}
+			catch (err) {
+				console.log(err)
+			}
+		}
+    
+}
 
 
 document.addEventListener("DOMContentLoaded",function(){
     document.documentElement.setAttribute("data-theme", "dark");
 	pageINI();
     showTask();
+    getNotatki("nota.txt");
 });
   
-	/*fetch(u)
-      .then(r => {return r.json()})
-      .then(o => {console.log(o)})
-      .catch(e => {console.log(e)})*/
+	/**/
       
 
 </script>
