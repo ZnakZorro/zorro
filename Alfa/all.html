@@ -287,6 +287,66 @@ li {
     border-color: #f59e0b;
 }
 
+
+
+/*console.log*/
+.console-wrapper {
+    background: #050505;
+    border: 3px solid #aaa;
+    border-radius: 6px;
+    max-width: 600px;
+    margin: 2px auto;
+    overflow: auto;
+}
+
+.console-header {
+    background: #111;
+    padding: 5px;
+    color: #aaa;
+    font-size: 0.75rem;
+    font-family: monospace;
+    font-weight: bold;
+    border-bottom: 1px solid #222;
+}
+
+#wirtualnaKonsola {
+    margin: 0;
+    padding: 15px;
+    height: 250px;
+    overflow-y: auto; /* Przewijanie pionowe */
+    background: #000;
+    color: #fff; /* Twój błękitny akcent (lub #22c55e dla klasycznej zieleni) */
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    white-space: pre-wrap; /* Zawijanie zbyt długich linii tekstu */
+}
+
+/* Stylizacja suwaka (scrollbar) dla konsoli */
+#wirtualnaKonsola::-webkit-scrollbar {
+    width: 6px;
+}
+#wirtualnaKonsola::-webkit-scrollbar-thumb {
+    background: #222;
+    border-radius: 3px;
+}
+
+.modal {
+    position: fixed;
+    top: 0;
+    left: 2%;
+    width: 96%;
+    height: 100%;
+    background: rgba(0,0,0,0.7);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 200;
+    text-align: left;
+    opacity: 0.8;
+}
+
+
 </style>
 
 </head>
@@ -351,6 +411,14 @@ li {
                 <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button> 
                 <p>Tu będą zapiski</p>
                 <div id="notatki"></div>
+                        <!-- Twój element na logi, np. na osobnym slajdzie Swipera -->
+                         <div class="modal">
+                            <button class="close-btn" onclick="document.querySelector('.modal').style.display='none';">✖</button>
+                            <div class="console-wrapper">
+                                <div class="console-header">SYSTEM LOGS</div>
+                                <pre id="wirtualnaKonsola"></pre>
+                            </div>
+                        </div>
             </div>
         </section>
     </div>
@@ -684,15 +752,53 @@ const startstop=()=>{
 }
 
 const revert=()=>{    
-    const currentId = sliderNames[aktualnyIndeks % sliderNames.length]+'_list';
-    //console.log("revert",aktualnyIndeks,currentId,sliderNames);
-    const ul = document.getElementById('Alfa_list');
+    //const currentId = sliderNames[aktualnyIndeks % sliderNames.length]+'_list';
+    const currentId = sliderNames[aktualnyIndeks]+'_list';
+    console.log("757 revert=",aktualnyIndeks,currentId);
+    const ul = document.getElementById(currentId);
     const liElements = ul.querySelectorAll('li'); 
     for (let i = liElements.length - 1; i >= 0; i--) {
         ul.appendChild(liElements[i]);
     }        
     saveData(currentId);
 }
+
+
+/*
+
+// 1. Zapisujemy oryginalną funkcję console.log, żeby jej nie zgubić
+const oryginalnyLog = console.log;
+
+// 2. Nadpisujemy console.log własną funkcją
+console.log = function (...args) {
+    // Wywołujemy oryginalny log, aby komunikaty nadal trafiały do devtoolsów (F12)
+    oryginalnyLog.apply(console, args);
+
+    // Znajdujemy nasz element <pre>
+    const pre = document.getElementById('wirtualnaKonsola');
+    if (pre) {
+        // Łączymy wszystkie przekazane argumenty w jeden ciąg tekstowy
+        const wiadomosc = args.map(arg => {
+            // Jeśli logujemy obiekt lub tablicę, ładnie ją formatujemy do JSON
+            if (typeof arg === 'object') {
+                return JSON.stringify(arg, null, 2);
+            }
+            return arg;
+        }).join(' ');
+
+        // Pobieramy aktualny czas, żeby log wyglądał profesjonalnie
+        const czas = new Date().toLocaleTimeString();
+
+        // Doklejamy nową linię na sam koniec elementu <pre>
+        pre.textContent += `[${czas}] ${wiadomosc}\n`;
+
+        // Automatyczny scroll na sam dół, gdy logów przybywa
+        pre.scrollTop = pre.scrollHeight;
+        $(".modal").style.display = "block"; // Pokazujemy modal z logami, gdy pojawia się nowy wpis
+    }
+};
+*/
+
 
 
 </script>
