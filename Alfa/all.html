@@ -59,7 +59,8 @@ body, html {
     color: #fff;
     overflow: hidden; /* Blokujemy domyślny scrollbar */
 }
-
+ p {word-break: break-word;}
+ 
 .swiper {
     width: 100vw;
     height: 100vh;
@@ -85,12 +86,18 @@ body, html {
     color: #3b82f6; /* Twój błękitny akcent */
     margin-bottom: 20px;
 }
-
+.content {    
+    padding: 1vw; 
+    max-width: 720px; 
+    width: 90%;
+    margin: 0 auto;
+}
 .content p {
     font-size: 1.0rem;
     color: #eee;
     text-align: left;
     white-space: pre;
+    word-break: break-word;
 }
 
 /* Customizacja kropek nawigacji pod Dark Mode */
@@ -277,6 +284,7 @@ li {
                 <h2></h2>
                 <main></main>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
+                <button class="big btno" onclick="revert()" style="float:right;">🔃</button> 
             </div>
         </section>
 
@@ -286,6 +294,7 @@ li {
                 <h2>Beta</h2>
                 <main></main>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
+                <button class="big btno" onclick="revert()" style="float:right;">🔃</button> 
             </div>
         </section>
 
@@ -295,6 +304,7 @@ li {
                 <h2></h2>
                 <main></main>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
+                <button class="big btno" onclick="revert()" style="float:right;">🔃</button>     
             </div>
         </section>
         
@@ -304,6 +314,7 @@ li {
                 <h2>Omega</h2>
                 <main></main>
                 <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
+                <button class="big btno" onclick="revert()" style="float:right;">🔃</button> 
             </div>
         </section>
         
@@ -312,6 +323,7 @@ li {
             <div class="content">
                 <h2>Nota</h2>
                 <main></main>
+                <button class="big btno" onclick="revert()" style="float:right;">🔃</button> 
                 <p>Tu będą zapiski</p>
             </div>
         </section>
@@ -553,6 +565,7 @@ const createTaskElement=(id, text, isChecked)=> {
 
 
 function saveData(id) {
+    if (!id) return;
     const listId=id.replace("_input","_list");
     const listContainer=$("#"+listId);
     localStorage.setItem(listId, listContainer.innerHTML);
@@ -575,7 +588,8 @@ const setNote=(nota)=>{
 	document.querySelector("#notatki").innerHTML = html;
 }  
 
-const getNotatki=(u="nota.txt")=>{
+
+const getNotatki___=(u="nota.txt")=>{
     if (location.protocol !="file:"){
 		    try {
 					fetch(u)
@@ -592,13 +606,33 @@ const getNotatki=(u="nota.txt")=>{
 		}
     
 }
+const getNotatki=async (u="nota.txt")=>{
+    if (location.protocol !="file:"){
+		    try {
+					fetch(u)
+					.then(r => {return r.text()})
+					.then(txt => {
+						console.log("txt=",txt);
+						setNote(txt);
+					})
+					.catch(e => {console.log(e)});
+			}
+			catch (err) {
+				console.log(err);
+			}
+		}
+    
+}
 
 
 document.addEventListener("DOMContentLoaded",function(){
     document.documentElement.setAttribute("data-theme", "dark");
 	pageINI();
     showTask();
-    getNotatki("nota.txt");
+    async function init() {
+        await getNotatki("nota.txt");
+    }
+    init();
 });
   
 	/**/
@@ -616,6 +650,20 @@ function OnInput() {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + 'px';
 }
+
+
+const revert=()=>{    
+    const currentId = sliderNames[aktualnyIndeks % sliderNames.length]+'_list';
+    //console.log("revert",aktualnyIndeks,currentId,sliderNames);
+    const ul = document.getElementById('Alfa_list');
+    const liElements = ul.querySelectorAll('li'); 
+    for (let i = liElements.length - 1; i >= 0; i--) {
+        ul.appendChild(liElements[i]);
+    }        
+    saveData(currentId);
+}
+
+
 </script>
 
 </body>
