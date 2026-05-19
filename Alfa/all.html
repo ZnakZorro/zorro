@@ -92,6 +92,8 @@ body, html {
 .content p {
     text-align: left;
     padding: 0 0.5em;
+    max-height: 5em;
+    overflow: auto;
 }
 
 /* Customizacja kropek nawigacji pod Dark Mode */
@@ -271,8 +273,8 @@ li {
     }
 #Nota_input {background: var(--color-navy);color: var(--text-color-yellow);}
 
-#notatki {color:#777; margin-top:2em;}
-#notatki p{color:#777;}
+.szare {color:#aaa; margin-top:2em;}
+.szare p{color:#aaa;}
 
 .lockBtn {
     z-index: 100;
@@ -368,7 +370,7 @@ li {
             <div class="content">
                 <h2></h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem</p>
+                <p>🧑‍🦳 Damskie</p>
             </div>
         </section>
 
@@ -377,7 +379,7 @@ li {
             <div class="content">
                 <h2>Beta</h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem</p>
+                <p>🧔 Męskie</p>
             </div>
         </section>
 
@@ -386,7 +388,7 @@ li {
             <div class="content">            	
                 <h2></h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem</p>
+                <p>👥 Grupowe</p>
             </div>
         </section>
         
@@ -395,7 +397,7 @@ li {
             <div class="content">
                 <h2>Zapiski</h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem</p>
+                <p>📝 Drobne zapiski</p>
             </div>
         </section>
         
@@ -404,8 +406,18 @@ li {
             <div class="content">
                 <h2>Notatki</h2>
                 <main></main>
-                <p>Tu będą zapiski</p>
-                <div id="notatki"></div>
+                <p>📄 Długie teksty</p>
+                
+            </div>
+        </section>
+
+        <!-- Sekcja 5: Kosz -->
+        <section class="swiper-slide section-contact" data-name="Kosz">
+            <div class="content">
+                <h2>Kosz</h2>
+                <main></main>
+                <p>🗑️ Usunięte elementy</p>
+                <div id="kosz" class="szare"></div>
                         <!-- Twój element na logi, np. na osobnym slajdzie Swipera -->
                          <div class="modal">
                             <button class="close-btn" onclick="document.querySelector('.modal').style.display='none';">✖</button>
@@ -416,6 +428,9 @@ li {
                         </div>
             </div>
         </section>
+        
+   
+
     </div>
     
     <!-- Opcjonalnie: Kropki nawigacyjne po boku -->
@@ -529,7 +544,8 @@ const pageINI=()=>{
 	<div class="theme-switch ${sliderNames[1]}-btn">🧔</div>
 	<div class="theme-switch ${sliderNames[2]}-btn">👫</div>	
 	<div class="theme-switch ${sliderNames[3]}-btn">📝</div>
-	<div class="theme-switch ${sliderNames[4]}-btn">📒</div>	
+	<div class="theme-switch ${sliderNames[4]}-btn">📒</div>
+    <div class="theme-switch ${sliderNames[5]}-btn">🗑️</div>
 	`;
 	
 	document.querySelector(".Home-btn").addEventListener("click",  ()=>{location.href="../index.html"});
@@ -538,7 +554,7 @@ const pageINI=()=>{
 	document.querySelector("."+sliderNames[2]+"-btn").addEventListener("click", ()=>{swiper.slideToLoop(2, 800);});
 	document.querySelector("."+sliderNames[3]+"-btn").addEventListener("click", ()=>{swiper.slideToLoop(3, 800);});
 	document.querySelector("."+sliderNames[4]+"-btn").addEventListener("click", ()=>{swiper.slideToLoop(4, 800);});
-	
+	document.querySelector("."+sliderNames[5]+"-btn").addEventListener("click", ()=>{swiper.slideToLoop(5, 800);});
     inputBoxs      = $$(".todo-input");
 	listsContainer = $$("ul.list-container");
 	
@@ -686,7 +702,7 @@ const setNote=(nota)=>{
 	arr.forEach((n)=>{
 		html += '<p>'+n+'<p>'
 	});
-	document.querySelector("#notatki").innerHTML = html;
+	document.querySelector("#kosz").innerHTML = html;
 }  
 
 const getNotatki=async (u="nota.txt")=>{
