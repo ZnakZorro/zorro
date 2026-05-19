@@ -72,7 +72,6 @@ body, html {
     align-items: center;
     text-align: center;
     box-sizing: border-box;
-    padding: 5px;
 }
 
 /* Przykładowe zróżnicowanie tła sekcji dla testu (wszystkie ciemne) */
@@ -83,21 +82,16 @@ body, html {
 .content h1, .content h2 {
     font-size: clamp(1.2rem, 3vw, 2rem);
     font-weight: 900;
-    color: #3b82f6; /* Twój błękitny akcent */
-    margin-bottom: 20px;
+    color: #3b82f6;
+    padding: 0.5em;
 }
-.content {    
-    padding: 1vw; 
-    max-width: 720px; 
-    /*width: 90%;*/
+.content {
+    max-width: 720px;
     margin: 0 auto;
 }
 .content p {
-    font-size: 1.0rem;
-    color: #eee;
     text-align: left;
-    /*white-space: pre;
-    word-break: break-word;*/
+    padding: 0 0.5em;
 }
 
 /* Customizacja kropek nawigacji pod Dark Mode */
@@ -111,7 +105,8 @@ body, html {
 
 /* Styl dla kontenera kropek na dole ekranu */
 .swiper-pagination {
-    bottom: 30px !important; /* Odstęp od dolnej krawędzi ekranu */
+    display: none; /* Ukrywa domyślną paginację, jeśli chcesz użyć własnej */
+    bottom: 5dvh !important; /* Odstęp od dolnej krawędzi ekranu */
     
 }
 
@@ -131,18 +126,32 @@ body, html {
 }
 .swiper-pagination-bullet{opacity:0.5;}
 /*===========================*/
-nav {
+
+nav, footer {
     display: flex;
     justify-content: space-evenly;
     align-items: flex-start;
     flex-direction: row;
     flex-wrap: nowrap;
     font-size: 2em;
-    margin-top:0.5em;
+    padding-top: 0.5em;
+    background: var(--bg-gray);
+    z-index: 10;
+    width: 100%;
 }
+footer {
+    padding:0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: transparent;
+}
+/**    
 foo,bar {display: flex;}
 foo {display: flex;}
 bar {display: flex;}
+*/
+
 .theme-switch {
     cursor: pointer;
 }
@@ -158,12 +167,9 @@ bar {display: flex;}
 }
 
 main {
-    padding: 5px;
-    border-radius: 12px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     width: 100%;
     max-width: 712px;
-    margin: 6px auto 5px auto;
+    margin: auto;
 }
 
 input {
@@ -248,10 +254,9 @@ li {
         width: 100%;
         height: 5em;
         padding: 5px;
-        background: #111;
-        border: 2px solid #222;
+        background: var(--container-bg);
+        border: 2px solid #666;
         border-radius: 4px;
-        color: #3b82f6; /* Twój błękitny akcent dla tekstu */
         font-size: 0.95rem;
         font-family: inherit; /* Dziedziczy czcionkę po body */
         box-sizing: border-box;
@@ -363,9 +368,7 @@ li {
             <div class="content">
                 <h2></h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
-                <button class="big btno" onclick="revert()" style="float:right;">🔃</button>
-                <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button> 
+                <p>Użyj kółka myszy lub przesuń palcem</p>
             </div>
         </section>
 
@@ -374,9 +377,7 @@ li {
             <div class="content">
                 <h2>Beta</h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
-                <button class="big btno" onclick="revert()" style="float:right;">🔃</button>
-                <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button>  
+                <p>Użyj kółka myszy lub przesuń palcem</p>
             </div>
         </section>
 
@@ -385,20 +386,16 @@ li {
             <div class="content">            	
                 <h2></h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
-                <button class="big btno" onclick="revert()" style="float:right;">🔃</button>
-                <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button>     
+                <p>Użyj kółka myszy lub przesuń palcem</p>
             </div>
         </section>
         
-        <!-- Sekcja 4: Omega -->
-        <section class="swiper-slide section-contact" data-name="Omega">
+        <!-- Sekcja 4: Zapiski -->
+        <section class="swiper-slide section-contact" data-name="Zapiski">
             <div class="content">
-                <h2>Omega</h2>
+                <h2>Zapiski</h2>
                 <main></main>
-                <p>Użyj kółka myszy lub przesuń palcem, aby przejść dalej.</p>
-                <button class="big btno" onclick="revert()" style="float:right;">🔃</button>
-                <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button> 
+                <p>Użyj kółka myszy lub przesuń palcem</p>
             </div>
         </section>
         
@@ -407,8 +404,6 @@ li {
             <div class="content">
                 <h2>Notatki</h2>
                 <main></main>
-                <button class="big btno" onclick="revert()" style="float:right;" title="Revert order">🔃</button> 
-                <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button> 
                 <p>Tu będą zapiski</p>
                 <div id="notatki"></div>
                         <!-- Twój element na logi, np. na osobnym slajdzie Swipera -->
@@ -427,6 +422,11 @@ li {
     <div class="swiper-pagination"></div>
 </div>
 
+<footer>    
+    <button class="big btno" onclick="revert()" style="float:right;">🔃</button>
+    <button class="big btno lockBtn" onclick="startstop()" style="float:right;" title="Start stop slider">🚧</button> 
+    <button class="big btno" onclick="editing()" style="float:right;">🤙</button>    
+</footer>
 <!-- Dołączamy pliki SwiperJS z CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -500,7 +500,7 @@ const swiper = new Swiper('.swiper', {
 const templeta=(nr,name)=> {
 	return `
 	<div class="input-row">
-            <input type="text" id="${name}_input" class="todo-input" placeholder="Dodaj nowe zadanie...">
+            <input type="text" id="${name}_input" class="todo-input" placeholder="Dodaj wpis...">
             <button onclick='addTask("${name}_input")'>Dodaj</button>
         </div>
         <ul id="${name}_list" class="list-container"></ul>
@@ -763,6 +763,25 @@ const revert=()=>{
     saveData(currentId);
 }
 
+const editing___=()=>{
+    const currentId = sliderNames[aktualnyIndeks]+'_list';
+    const ul = document.getElementById(currentId);
+    const liElements = ul.querySelectorAll('li'); 
+    liElements.forEach(li=>{
+        const px = li.querySelector("p");
+        const idd = px.className.replace("_text","");
+        let newText = prompt("Edytuj zadanie:", px.innerHTML);          
+        if (newText !== null && newText.trim() !== "") {
+            px.innerHTML = newText;
+            saveData(idd+"_list");
+        }
+    });
+}
+
+const editing=()=>{
+    const currentId = sliderNames[aktualnyIndeks]+'_list';
+    console.log("editing=",aktualnyIndeks,currentId);
+}
 
 /*
 
