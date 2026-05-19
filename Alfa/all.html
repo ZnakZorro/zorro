@@ -172,6 +172,7 @@ main {
     width: 100%;
     max-width: 712px;
     margin: auto;
+    overflow: auto;
 }
 
 input {
@@ -248,8 +249,12 @@ li {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
+    cursor: pointer;
 }
-
+li.checked p {
+    text-decoration: line-through;
+    color: var(--text-color-check);
+}
 
    /* Stylizacja wielolinijkowego pola */
     textarea {
